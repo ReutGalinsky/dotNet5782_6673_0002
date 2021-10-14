@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace IDAL.DO
 {
-    public enum Weight { Light,Middle,Heavy}//האם אות גדולה או לא ולבדוק איך כותבים
+    public enum Weight { Light,Middle,Heavy}
+    public enum Priority { Regular,Speed,Emergency}
+
 
 }
