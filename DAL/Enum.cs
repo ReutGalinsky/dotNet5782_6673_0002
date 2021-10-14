@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace IDAL.DO
 {
-    public enum Weight { Light,Middle,Heavy}
-    public enum Priority { Regular,Speed,Emergency}
+    public enum WeightCategories { Light,Middle,Heavy}
+    public enum Priorities { Regular,Speed,Emergency}
+    public enum DroneStatus { Available, Maintenance, Shipping }
+
 
 
 }
