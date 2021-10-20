@@ -9,17 +9,17 @@ namespace DalObject
     class DataSource
     {
         internal static List<BaseStation> stations = new List<BaseStation>();
-            //BaseStation[] Stations= new BaseStation[5];
-        internal static Drone[] Drones = new Drone[10];
-        internal static Customer[] Customers= new Customer[100];
-        internal static Parcel[] Parcels = new Parcel[1000];
+        internal static List<Drone> Drones = new List <Drone>();
+        internal static List<Customer> Customers= new List<Customer>();
+        internal static List<Parcel> Parcels = new List<Parcel>();
+        internal static List<DroneCharge> Charges = new List<DroneCharge>();
+
         internal class Config
         {
-            internal static int FirstCustomer=0;
-            internal static int FirstParcel=0;
-            internal static int FirstDrone = 0;
-            //internal static int FirstBaseStation=0;
-
+            //internal static int FirstCustomer=0;
+            //internal static int FirstParcel=0;
+            //internal static int FirstDrone = 0;
+            ////internal static int FirstBaseStation=0;
             internal static int RunningNumber=0;// האם מתחיל מאפס?
         }   
         internal static void Initialize()///////////////////////////////////////////

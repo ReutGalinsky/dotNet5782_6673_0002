@@ -15,7 +15,9 @@ namespace IDAL.DO
         public double Latitude { get; set; }
         public override string ToString()
         {
-            return string.Format("Customer");///האם צריך גם את המילה פורמט?
+            return string.Format($@"the customer {Name} with the id of {Id}
+phone num. {Phone}
+Address: {Longitude} ,{Latitude}");///האם צריך גם את המילה פורמט?
         }
 
     }

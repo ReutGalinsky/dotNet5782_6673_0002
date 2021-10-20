@@ -19,9 +19,11 @@ namespace IDAL.DO
         public System.DateTime collectingDroneTime { get; set; }
         public System.DateTime ArrivingDroneTime { get; set; }
 
-        public override string ToString()
+        public override string ToString()//האם להדפיס גם את הזמנים?
         {
-            return "Parcel";
+            return string.Format($@"parcel number {IdNumber}
+was sent to customer num. {ClientSendName} to customer num. {ClientGetName}
+weight: {Weight}. priority:{Priority}");
         }
     }
 }
