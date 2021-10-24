@@ -202,9 +202,9 @@ namespace DalObject
                     break;
                 }
             }
-            temp2.Status = (DroneStatus.Shipping);
-           //זמן שיוך חבילה?
-           //מזהה רחפן מבצע?
+           temp2.Status = (DroneStatus.Shipping);
+           temp1.CreateParcelTime=DateTime.Now();
+           temp1.DroneId=temp2.IdNumber;
         }
         public void ParcelToCollecting()
         {
@@ -231,8 +231,8 @@ namespace DalObject
                 }
             }
             temp2.Status = (DroneStatus.Shipping);
-            //זמן איסוף חבילה?
-            //מזהה רחפן מבצע?
+            temp1.MatchForDroneTime=DateTime.Now();
+           temp1.DroneId=temp2.IdNumber;
         }
         public void ParcelToCustomer()
         {
@@ -260,8 +260,8 @@ namespace DalObject
             }
             temp2.Status = (DroneStatus.Available);
             DataSource.Parcels.Remove(temp1);
-            //זמן איסוף חבילה?
-            //מזהה רחפן מבצע?
+            temp1.collectingDroneTime=DateTime.Now();
+           temp1.DroneId=temp2.IdNumber;
         }
         public void SendToCharge()//האם צריך בדיקת תקינות? צריך לייעל יותר!
         {
