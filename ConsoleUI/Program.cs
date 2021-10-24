@@ -84,13 +84,30 @@ namespace ConsoleUI
                                 break;
                             case States.Parcel:
                                 break;
-                            case States.Unmatched:
                             default:
                                 break;
                         }
                         break;
                     case Options.ShowList:
                         Console.WriteLine("1. show the list of base stations \n 2. show the list of the drones \n 3.shoe the list of the customer \n 4. shoe the list of the parcel \n 5. show the list of the unmatched percels \n 6. show the list of base stations with availible charge slots");
+                        internalChoose = (States)Console.Read();
+                        switch (internalChoose)
+                        {
+                            case States.BaseStation:
+                                break;
+                            case States.Drone:
+                                break;
+                            case States.Customer:
+                                break;
+                            case States.Parcel:
+                                break;
+                            case States.Unmatched:
+                                break;
+                            case States.Available:
+                                break;
+                            default:
+                                break;
+                        }
                         break;
                     case Options.exit:
                         break;
