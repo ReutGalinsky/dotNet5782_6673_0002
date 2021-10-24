@@ -10,6 +10,4 @@ namespace IDAL.DO
     public enum Priorities { Regular=1,Speed,Emergency}
     public enum DroneStatus { Available=1, Maintenance, Shipping }
 
-
-
 }
