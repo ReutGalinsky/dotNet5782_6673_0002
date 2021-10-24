@@ -13,18 +13,18 @@ namespace DalObject
         internal static List<Customer> Customers = new List<Customer>();
         internal static List<Parcel> Parcels = new List<Parcel>();
         internal static List<DroneCharge> Charges = new List<DroneCharge>();
-
+        internal static int NumberParcel = 0;
         internal class Config
         {
-            //internal static int FirstCustomer=0;
-            //internal static int FirstParcel=0;
-            //internal static int FirstDrone = 0;
-            ////internal static int FirstBaseStation=0;
+
+            internal static int FirstCustomer = 0;
+            internal static int FirstParcel = 0;
+            internal static int FirstDrone = 0;
+            internal static int FirstBaseStation = 0;
             internal static int RunningNumber = 0;// האם מתחיל מאפס?
         }
         internal static void Initialize()///////////////////////////////////////////
         {
-            //int minimumClient=10,minimumDrone=5,minimumParcel=10,minimumBaseStation=2;
             Random rand = new Random(DateTime.Now.Millisecond);
             int amount = rand.Next(2, 5);
             {//base stations://לבדוק את התחום של קווי רוחב ואורך ואיך מציגים בבסיס 60-----------------------------
@@ -76,6 +76,53 @@ namespace DalObject
                     drone.Battery = rand.Next(0, 100) + rand.NextDouble();
                     drone.Status = (DroneStatus)(rand.Next(1, 4));
                     Drones.Add(drone);
+
+                }
+            }
+            {//customers:----------------------------------
+                amount = rand.Next(10, 100);
+                for (int i = 0; i < amount; i++)
+                {
+                    Customer customer = new Customer();
+                    customer.Id = rand.Next();
+                    bool falg = true;
+                    while (falg)
+                    {
+                        falg = false;
+                        foreach (var item in Customers)
+                        {
+                            if (item.Id == customer.Id)
+                            {
+                                falg = true;
+                                break;
+                            }
+                        }
+                    }
+                    customer.Name = string.Format("name" + (char)(rand.Next(0, 23) + 97));
+                    customer.Phone = string.Format("050" +);//how ??
+                    customer.Latitude = rand.Next(0, 180) + rand.NextDouble();
+                    customer.Longitude = rand.Next(0, 180) + rand.NextDouble();
+                    Customers.Add(customer);
+                }
+            }
+            {
+                //parcels:--------------------------
+
+                amount = rand.Next(10, 1000);
+                for (int i = 0; i < amount; i++)
+                {
+                    Parcel parcel = new Parcel();
+                    parcel.IdNumber = NumberParcel++;
+                    parcel.ClientSendName = rand.Next();
+                    parcel.ClientGetName = rand.Next();
+                    parcel.Weight = (WeightCategories)(rand.Next(1, 4));
+                    parcel.Priority = (Priorities)(rand.Next(1, 4));
+                    parcel.DroneId = rand.Next();
+                    parcel.CreateParcelTime = DateTime.Now; 
+                    parcel.MatchForDroneTime = DateTime.Now;
+                    parcel.collectingDroneTime = DateTime.Now;
+                    parcel.ArrivingDroneTime = DateTime.Now;
+                    Parcels.Add(parcel);
 
                 }
             }

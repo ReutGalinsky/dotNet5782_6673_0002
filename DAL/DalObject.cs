@@ -64,7 +64,32 @@ namespace DalObject
         //האם יש דרך לקצר את כל השאלות?
         //לשאול איזה מצב הרחפן או פשוט לרשום זמין?
         //מאיפה ההדפסות: מתוך המחלקה הזו?
-       public List<Parcel> AddingParcel()
+
+
+        public List<Customer> addingCustomer()
+        {
+            Console.WriteLine("please enter id number for the new customer");
+            Customer Customer1 = new Customer();
+            Customer1.Id = Console.Read();
+            Console.WriteLine("please enter the name of customer");
+            Customer1.Name = Console.ReadLine();
+            Console.WriteLine("plesae enter the phone number of the new customer");
+            Customer1.Phone = Console.ReadLine();
+            Console.WriteLine("please enter the location of your base station (longitude,latitude)");
+            Customer1.Longitude = Console.Read();
+            Customer1.Latitude = Console.Read();
+            DataSource.Customers.Add(Customer1);
+            List<Customer> newCustomers = new List<Customer>();
+            foreach (var item in DataSource.Customers)
+            {
+                var temp = item.Clone();
+                newCustomers.Add(temp);
+            }
+            return newCustomers;
+
+
+        }
+        public List<Parcel> AddingParcel()
         {
             Parcel Parcel1 = new Parcel();
             Parcel1.IdNumber = DataSource.Config.RunningNumber++;
@@ -100,12 +125,39 @@ namespace DalObject
                 Console.WriteLine("\n");
             }
         }
+        public void ShowDrones()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        {
+            foreach (var item in DataSource.Drones)
+            {
+                Console.WriteLine("*" + item);
+                Console.WriteLine("\n");
+            }
+        }
+        public void ShowBaseStations()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        {
+            foreach (var item in DataSource.stations)
+            {
+                Console.WriteLine("*" + item);
+                Console.WriteLine("\n");
+            }
+        }
         public void ShowParcels()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
         {
             foreach (var item in DataSource.Parcels)
             {
                 Console.WriteLine("*" + item);
                 Console.WriteLine("\n");
+            }
+        }
+        public void ShowEmptyBaseStations()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        {
+            foreach (var item in DataSource.stations)
+            {
+                if (!(item.ChargeSlots==0))//איך בודקים אם יש לו עמדות פנויות?
+                {
+                    Console.WriteLine("*" + item);
+                    Console.WriteLine("\n");
+                }
             }
         }
         public void ShowNonMatchPacels()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
@@ -125,7 +177,92 @@ namespace DalObject
         {
 
         }
+        public void ParcelToDrone()
+        {
+            Console.WriteLine("please enter the number of parcel you want to connect with drone");
+            int numP = Console.Read();
+            Parcel temp1 = new Parcel();
+            foreach (var item in DataSource.Parcels)
+            {
+                if (item.IdNumber == numP)
+                {
+                    temp1 = item;
+                    break;
+                }
+            }
 
+            Console.WriteLine("please enter the number of the wanted drone");
+            int numD = Console.Read();
+            Drone temp2 = new Drone();
+            foreach (var item in DataSource.Drones)
+            {
+                if (item.IdNumber == numD)
+                {
+                    temp2 = item;
+                    break;
+                }
+            }
+            temp2.Status = (DroneStatus.Shipping);
+           //זמן שיוך חבילה?
+           //מזהה רחפן מבצע?
+        }
+        public void ParcelToCollecting()
+        {
+            Console.WriteLine("please enter the number of parcel you want to collect");
+            int numP = Console.Read();
+            Parcel temp1 = new Parcel();
+            foreach (var item in DataSource.Parcels)
+            {
+                if (item.IdNumber == numP)
+                {
+                    temp1 = item;
+                    break;
+                }
+            }
+            Console.WriteLine("please enter the number of the wanted drone");
+            int numD = Console.Read();
+            Drone temp2 = new Drone();
+            foreach (var item in DataSource.Drones)
+            {
+                if (item.IdNumber == numD)
+                {
+                    temp2 = item;
+                    break;
+                }
+            }
+            temp2.Status = (DroneStatus.Shipping);
+            //זמן איסוף חבילה?
+            //מזהה רחפן מבצע?
+        }
+        public void ParcelToCustomer()
+        {
+            Console.WriteLine("please enter the number of parcel you get");
+            int numP = Console.Read();
+            Parcel temp1 = new Parcel();
+            foreach (var item in DataSource.Parcels)
+            {
+                if (item.IdNumber == numP)
+                {
+                    temp1 = item;
+                    break;
+                }
+            }
+            Console.WriteLine("please enter the number of the wanted customer");
+            int numD = Console.Read();
+            Drone temp2 = new Drone();
+            foreach (var item in DataSource.Drones)
+            {
+                if (item.IdNumber == numD)
+                {
+                    temp2 = item;
+                    break;
+                }
+            }
+            temp2.Status = (DroneStatus.Available);
+            DataSource.Parcels.Remove(temp1);
+            //זמן איסוף חבילה?
+            //מזהה רחפן מבצע?
+        }
         public void SendToCharge()//האם צריך בדיקת תקינות? צריך לייעל יותר!
         {
             Console.WriteLine("please enter the number of the wanted drone");
@@ -143,6 +280,7 @@ namespace DalObject
                     break;
                 }    
             }
+
 
             foreach (var item in DataSource.stations)
             {
