@@ -15,167 +15,126 @@ namespace DalObject
         {
             DataSource.Initialize();
         }
-        //מותר להשתמש בפונקציה של דן?
-        public List<BaseStation> AddingBaseStation()
+        /// <summary>
+        /// function for adding new base station to the data base
+        /// </summary>
+        /// <param name="station">the new station the being added</param>
+        /// <returns></returns>
+        public void AddingBaseStation(BaseStation station)//צריך בכלל להחזיר רשימה? 
         {
-            Console.WriteLine("please enter id number for the new base station");//האם צריך לבדוק שאכן ייחודי?
-            BaseStation base1 = new BaseStation();
-            base1.IdNumber = Console.Read();
-            Console.WriteLine("please enter the name of the station");
-            base1.Name = Console.ReadLine();
-            Console.WriteLine("please enter the amount of charge slots in your base station");
-            base1.ChargeSlots = Console.Read();
-            Console.WriteLine("please enter the location of your base station (longitude,latitude)");
-            base1.Longitude = Console.Read();
-            base1.Latitude = Console.Read();
-            DataSource.stations.Add(base1);
-            List<BaseStation> newStations = new List<BaseStation>();
-            foreach (var item in DataSource.stations)
-            {
-                var temp = item.Clone();
-                newStations.Add(temp);
-            }
-            return newStations;
-           // return (List<BaseStation>) DataSource.stations.cloneColection<BaseStation>();
+            DataSource.stations.Add(station);
         }
-        public List<Drone> AddingDrone()
+        /// <summary>
+        /// add new drone to the data base
+        /// </summary>
+        /// <param name="NewDrone">the new drone</param>
+        /// <returns></returns>
+        public void AddingDrone(Drone NewDrone)
         {
-            Console.WriteLine("please enter id number for the new drone");//האם צריך לבדוק שאכן ייחודי?
-            Drone Drone1 = new Drone();
-            Drone1.IdNumber = Console.Read();
-            Console.WriteLine("please enter the model of the drone");
-            Drone1.Model = Console.ReadLine();
-            Console.WriteLine("please enter the weight of your drone: 1 for light, 2 for middle and 3 for heavy");
-            Drone1.MaxWeight = (WeightCategories)(Console.Read());
-            Console.WriteLine("please enter the battary status of the drone");//האם צריך לאתחל ישר ל100? האם לבדוק תקינות?
-            Drone1.Battery = Console.Read();
-            Console.WriteLine("please enter the status of your drone: 1 for availible, 2 for maintence and 3 for shipping");
-            Drone1.Status = (DroneStatus)(Console.Read());
-            DataSource.Drones.Add(Drone1);
-            List<Drone> newDrones = new List<Drone>();
-            foreach (var item in DataSource.Drones)
-            {
-                var temp = item.Clone();
-                newDrones.Add(temp);
-            }
-            return newDrones;
-            // return (List<BaseStation>) DataSource.stations.cloneColection<BaseStation>();
+            DataSource.Drones.Add(NewDrone);
         }
-        //האם יש דרך לקצר את כל השאלות?
-        //לשאול איזה מצב הרחפן או פשוט לרשום זמין?
-        //מאיפה ההדפסות: מתוך המחלקה הזו?
-
-
-        public List<Customer> addingCustomer()
+        /// <summary>
+        /// add new customer to the data base
+        /// </summary>
+        /// <param name="NewCustomer"></param>
+        /// <returns></returns>
+        public void addingCustomer(Customer NewCustomer)
         {
-            Console.WriteLine("please enter id number for the new customer");
-            Customer Customer1 = new Customer();
-            Customer1.Id = Console.Read();
-            Console.WriteLine("please enter the name of customer");
-            Customer1.Name = Console.ReadLine();
-            Console.WriteLine("plesae enter the phone number of the new customer");
-            Customer1.Phone = Console.ReadLine();
-            Console.WriteLine("please enter the location of your base station (longitude,latitude)");
-            Customer1.Longitude = Console.Read();
-            Customer1.Latitude = Console.Read();
-            DataSource.Customers.Add(Customer1);
-            List<Customer> newCustomers = new List<Customer>();
-            foreach (var item in DataSource.Customers)
-            {
-                var temp = item.Clone();
-                newCustomers.Add(temp);
-            }
-            return newCustomers;
-
-
+            DataSource.Customers.Add(NewCustomer);
         }
-        public List<Parcel> AddingParcel()
+        /// <summary>
+        /// add new Parcel to the data base
+        /// </summary>
+        /// <param name="NewParcel"></param>
+        /// <returns></returns>
+        public void AddingParcel(Parcel NewParcel)
         {
-            Parcel Parcel1 = new Parcel();
-            Parcel1.IdNumber = DataSource.Config.RunningNumber++;
-            Console.WriteLine("please enter the id of the sender customer");
-            Parcel1.ClientSendName = Console.Read();
-            Console.WriteLine("please enter the id of the reciever customer");
-            Parcel1.ClientGetName = Console.Read();
-            Console.WriteLine("please enter the weight of your Parcel: 1 for light, 2 for middle and 3 for heavy");
-            Parcel1.Weight = (WeightCategories)(Console.Read());
-            Console.WriteLine("please enter the priority of your Parcel: 1 for Regular, 2 for Speed and 3 for Emergency");
-            Parcel1.Priority = (Priorities)(Console.Read());
-            Parcel1.DroneId = 0;
-            Parcel1.CreateParcelTime = DateTime.Now;
-            Parcel1.collectingDroneTime = new DateTime();//האם באמת צריך לאתחל ככה ל0?
-            Parcel1.MatchForDroneTime = new DateTime();
-            Parcel1.ArrivingDroneTime= new DateTime();
-            DataSource.Parcels.Add(Parcel1);
-            List<Parcel> newParcels = new List<Parcel>();
-            foreach (var item in DataSource.Parcels)
-            {
-                var temp = item.Clone();
-                newParcels.Add(temp);
-            }
-            return newParcels;
-            // return (List<BaseStation>) DataSource.stations.cloneColection<BaseStation>();
+            NewParcel.IdNumber = DataSource.Config.RunningNumber++;
+            DataSource.Parcels.Add(NewParcel);
         }
-
-       public void ShowCustomers()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+      
+        /// <summary>
+        /// function that return the customers list
+        /// </summary>
+        /// <returns></returns>
+        public List<Customer> GetCustomers()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
         {
+            List<Customer> returnCustomer = new List<Customer>();
             foreach(var item in DataSource.Customers)
             {
-                Console.WriteLine("*"+item);
-                Console.WriteLine("\n");
+                returnCustomer.Add(item);
             }
+            return returnCustomer;
         }
-        public void ShowDrones()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        /// <summary>
+        /// function that return list of drones
+        /// </summary>
+        /// <returns></returns>
+        public List<Drone> GetDrones()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
         {
+            List<Drone> returnDrone = new List<Drone>();
             foreach (var item in DataSource.Drones)
             {
-                Console.WriteLine("*" + item);
-                Console.WriteLine("\n");
+                returnDrone.Add(item);
             }
+            return returnDrone;
         }
-        public void ShowBaseStations()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        /// <summary>
+        /// /return list of the stations that are in the data base
+        /// </summary>
+        /// <returns></returns>
+        public List<BaseStation> GetBaseStations()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
         {
+            List<BaseStation> returnStation = new List<BaseStation>();
             foreach (var item in DataSource.stations)
             {
-                Console.WriteLine("*" + item);
-                Console.WriteLine("\n");
-            }
-        }
-        public void ShowParcels()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
-        {
-            foreach (var item in DataSource.Parcels)
-            {
-                Console.WriteLine("*" + item);
-                Console.WriteLine("\n");
-            }
-        }
-        public void ShowEmptyBaseStations()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
-        {
-            foreach (var item in DataSource.stations)
-            {
-                if (!(item.ChargeSlots==0))//איך בודקים אם יש לו עמדות פנויות?
-                {
-                    Console.WriteLine("*" + item);
-                    Console.WriteLine("\n");
-                }
-            }
-        }
-        public void ShowNonMatchPacels()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
-        {
-            foreach (var item in DataSource.Parcels)
-            {
-                if(!(item.MatchForDroneTime.Day==0&&item.MatchForDroneTime.Month==0&&item.MatchForDroneTime.Year==0))//האם יש דרך יותר יפה ומדוייקת?
-                
-                {
-                    Console.WriteLine("*" + item);
-                    Console.WriteLine("\n"); 
-                }
-            }
-        }
-        //האם טעינה צריכה להחזיר רשימה כל שהיא?
-        public void ShowAvailibeStation()//פה הפונקציה שמדפיסה את כל התחנות עם הטענה פנויה.
-        {
+                returnStation.Add(item);
 
+            }
+            return returnStation;
+        }
+        /// <summary>
+        /// function that return copy of the parcels
+        /// </summary>
+        /// <returns></returns>
+        public List<Parcel> GetParcels()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        {
+            List<Parcel> returnParcel = new List<Parcel>();
+            foreach (var item in DataSource.Parcels)
+            {
+                returnParcel.Add(item);
+            }
+            return returnParcel;
+        }
+        /// <summary>
+        /// return list of the non matched parcels
+        /// </summary>
+        /// <returns></returns>
+        public List<Parcel> GetNonMatchParcels()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        {
+            List<Parcel> NonMatch = new List<Parcel>();
+            foreach (var item in DataSource.Parcels)
+            {
+                if(item.DroneId==0)//האם יש דרך יותר יפה ומדוייקת?
+                {
+                    NonMatch.Add(item);
+                }
+            }
+            return NonMatch;
+        }
+        /// <summary>
+        /// return list of the stations with availible charge slots
+        /// </summary>
+        /// <returns></returns>
+        public List<BaseStation> GetAvailibeStation()
+        {
+            List<BaseStation> Availible = new List<BaseStation>();
+            foreach(var item in DataSource.stations)
+            {
+                if (item.ChargeSlots != 0)
+                    Availible.Add(item);
+            }
+            return Availible;
         }
         public void ParcelToDrone()
         {
@@ -205,35 +164,44 @@ namespace DalObject
            temp2.Status = (DroneStatus.Shipping);
            temp1.CreateParcelTime=DateTime.Now();
            temp1.DroneId=temp2.IdNumber;
-        }
-        public void ParcelToCollecting()
+        }//!!!!!
+        public void ParcelToCollecting(Parcel p)
         {
-            Console.WriteLine("please enter the number of parcel you want to collect");
-            int numP = Console.Read();
-            Parcel temp1 = new Parcel();
             foreach (var item in DataSource.Parcels)
             {
-                if (item.IdNumber == numP)
+                if(item.Equals(p))
                 {
-                    temp1 = item;
-                    break;
+                    
                 }
+
             }
-            Console.WriteLine("please enter the number of the wanted drone");
-            int numD = Console.Read();
-            Drone temp2 = new Drone();
-            foreach (var item in DataSource.Drones)
-            {
-                if (item.IdNumber == numD)
-                {
-                    temp2 = item;
-                    break;
-                }
-            }
-            temp2.Status = (DroneStatus.Shipping);
-            temp1.MatchForDroneTime=DateTime.Now();
-           temp1.DroneId=temp2.IdNumber;
-        }
+
+           // Console.WriteLine("please enter the number of parcel you want to collect");
+           // int numP = Console.Read();
+           // Parcel temp1 = new Parcel();
+           // foreach (var item in DataSource.Parcels)
+           // {
+           //     if (item.IdNumber == numP)
+           //     {
+           //         temp1 = item;
+           //         break;
+           //     }
+           // }
+           // Console.WriteLine("please enter the number of the wanted drone");
+           // int numD = Console.Read();
+           // Drone temp2 = new Drone();
+           // foreach (var item in DataSource.Drones)
+           // {
+           //     if (item.IdNumber == numD)
+           //     {
+           //         temp2 = item;
+           //         break;
+           //     }
+           // }
+           // temp2.Status = (DroneStatus.Shipping);
+           // temp1.MatchForDroneTime=DateTime.Now();
+           //temp1.DroneId=temp2.IdNumber;
+        }//!!!!
         public void ParcelToCustomer()
         {
             Console.WriteLine("please enter the number of parcel you get");
@@ -262,8 +230,8 @@ namespace DalObject
             DataSource.Parcels.Remove(temp1);
             temp1.collectingDroneTime=DateTime.Now();
            temp1.DroneId=temp2.IdNumber;
-        }
-        public void SendToCharge()//האם צריך בדיקת תקינות? צריך לייעל יותר!
+        }//!!!!!
+        public void SendToCharge()//!!!! !
         {
             Console.WriteLine("please enter the number of the wanted drone");
             int numD = Console.Read();
@@ -297,41 +265,61 @@ namespace DalObject
             newCharge.StationId = numS;
             DataSource.Charges.Add(newCharge);
         }
-        public void releaseCharge()
+        public void releaseCharge(int d1)///!!!!
         {
-            Console.WriteLine("please enter the number of the wanted drone");
-            int numD = Console.Read();
-            DroneCharge temp = new DroneCharge();
-            foreach(var item in DataSource.Charges)
+
+        }
+        public T getItem<T> (T itemp)
+        {
+            PropertyInfo help = itemp.GetType().GetProperties()[0];
+            if (itemp is BaseStation)
             {
-                if(item.DroneId==numD)
+                foreach(var item in DataSource.stations)
                 {
-                    temp = item;
-                    break;
+                    if(item.IdNumber==(int)help.GetValue(item,null))
+                    {
+                        T ret = itemp;
+                        return ret;
+                    }
                 }
             }
-            DataSource.Charges.Remove(temp);
-            Drone temp1 = new Drone();
-            foreach (var item in DataSource.Drones)
+            if (itemp is Drone)
             {
-                if (item.IdNumber == numD)
+                foreach (var item in DataSource.Drones)
                 {
-                    temp1 = item;
-                    break;
+                    if (item.IdNumber == (int)help.GetValue(item, null))
+                    {
+                        T ret = itemp;
+                        return ret;
+                    }
                 }
             }
-            temp1.Status = (DroneStatus.Available);
-            BaseStation temp2 = new BaseStation();
-            foreach (var item in DataSource.stations)
+            if (itemp is Customer)
             {
-                if (item.IdNumber == temp.StationId)
+                foreach (var item in DataSource.Customers)
                 {
-                    temp2 = item;
-                    break;
+                    if (item.Id == (int)help.GetValue(item, null))
+                    {
+                        T ret = itemp;
+                        return ret;
+                    }
                 }
             }
-            temp2.ChargeSlots++;
-        }//לייעל הרבה!
+            if (itemp is Parcel)
+            {
+                foreach (var item in DataSource.Parcels)
+                {
+                    if (item.IdNumber == (int)help.GetValue(item, null))
+                    {
+                        T ret = itemp;
+                        return ret;
+                    }
+                }
+            }
+            help.SetValue(itemp, 0);
+            return itemp;//?
+
+        }
     }
 
 }

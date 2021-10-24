@@ -13,15 +13,9 @@ namespace DalObject
         internal static List<Customer> Customers = new List<Customer>();
         internal static List<Parcel> Parcels = new List<Parcel>();
         internal static List<DroneCharge> Charges = new List<DroneCharge>();
-        internal static int NumberParcel = 0;
         internal class Config
         {
-
-            internal static int FirstCustomer = 0;
-            internal static int FirstParcel = 0;
-            internal static int FirstDrone = 0;
-            internal static int FirstBaseStation = 0;
-            internal static int RunningNumber = 0;// האם מתחיל מאפס?
+            internal static int RunningNumber = 1;// האם מתחיל מאפס?
         }
         internal static void Initialize()///////////////////////////////////////////
         {
@@ -99,9 +93,9 @@ namespace DalObject
                         }
                     }
                     customer.Name = string.Format("name" + (char)(rand.Next(0, 23) + 97));
-                    customer.Phone = string.Format("050" +);//how ??
-                    customer.Latitude = rand.Next(0, 180) + rand.NextDouble();
-                    customer.Longitude = rand.Next(0, 180) + rand.NextDouble();
+                    customer.Phone = string.Format("050" + (char)(rand.Next(1111111, 9999999)));
+                    customer.Latitude = rand.Next(31, 33) + rand.NextDouble();
+                    customer.Longitude = rand.Next(33, 35) + rand.NextDouble();
                     Customers.Add(customer);
                 }
             }
@@ -112,7 +106,7 @@ namespace DalObject
                 for (int i = 0; i < amount; i++)
                 {
                     Parcel parcel = new Parcel();
-                    parcel.IdNumber = NumberParcel++;
+                    parcel.IdNumber = Config.RunningNumber++;
                     parcel.ClientSendName = rand.Next();
                     parcel.ClientGetName = rand.Next();
                     parcel.Weight = (WeightCategories)(rand.Next(1, 4));

@@ -10,7 +10,9 @@ namespace IDAL.DO
         public double Latitude { get; set; }
         public override string ToString()
         {
-            return "BaseStation";
+            return string.Format(@$"station number {IdNumber}, name: {Name}
+number of charge slots: {ChargeSlots}
+Location: {Longitude},{Latitude}");
         }
     }
 }

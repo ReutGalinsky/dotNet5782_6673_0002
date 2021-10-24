@@ -12,7 +12,8 @@ namespace IDAL.DO
         public int StationId { get; set; }
         public override string ToString()
         {
-            return string.Format("DroneCharge");///האם צריך גם את המילה פורמט?
+            return string.Format($"Drone number: {DroneId}" +
+                $"in statation number {StationId}");///האם צריך גם את המילה פורמט?
         }
 
     }

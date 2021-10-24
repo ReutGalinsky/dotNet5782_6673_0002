@@ -15,7 +15,9 @@ namespace IDAL.DO
         public DroneStatus Status { get; set; }
         public override string ToString()
         {
-            return "Drone";
+            return string.Format($@"Drone number:{IdNumber}
+model: {Model}, Weight: {MaxWeight}
+Battery {Battery}%, status: {Status}");
         }
     }
 }
