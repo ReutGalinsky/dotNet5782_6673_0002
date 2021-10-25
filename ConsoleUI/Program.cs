@@ -32,21 +32,21 @@ namespace ConsoleUI
         static public void AddBaseStation(DalObject.DalObject system)
         {
             Console.WriteLine("please enter id number for the new base station");//האם צריך לבדוק שאכן ייחודי?
-            BaseStation base1 = new BaseStation();
-            base1.IdNumber= Console.Read();
-            while(system.getItem<BaseStation>(base1).IdNumber==0 )
+            BaseStation Base1 = new BaseStation();
+            Base1.IdNumber= Console.Read();
+            while(system.getItem<BaseStation>(Base1).IdNumber==0 )
             {
                 Console.WriteLine("this id is already exist. please enter new one");
-                base1.IdNumber = Console.Read();
+                Base1.IdNumber = Console.Read();
             }
             Console.WriteLine("please enter the name of the station");
-            base1.Name = Console.ReadLine();
+            Base1.Name = Console.ReadLine();
             Console.WriteLine("please enter the amount of charge slots in your base station");
-            base1.ChargeSlots = Console.Read();
+            Base1.ChargeSlots = Console.Read();
             Console.WriteLine("please enter the location of your base station (longitude,latitude)");
-            base1.Longitude = Console.Read();
-            base1.Latitude = Console.Read();
-            system.AddingBaseStation(base1);
+            Base1.Longitude = Console.Read();
+            Base1.Latitude = Console.Read();
+            system.AddingBaseStation(Base1);
 
         }
         /// <summary>
@@ -58,6 +58,11 @@ namespace ConsoleUI
             Console.WriteLine("please enter id number for the new drone");//האם צריך לבדוק שאכן ייחודי?
             Drone Drone1 = new Drone();
             Drone1.IdNumber = Console.Read();
+            while (system.getItem<Drone>(Drone1).IdNumber == 0)
+            {
+                Console.WriteLine("this id is already exist. please enter new one");
+                Drone1.IdNumber = Console.Read();
+            }
             Console.WriteLine("please enter the model of the drone");
             Drone1.Model = Console.ReadLine();
             Console.WriteLine("please enter the weight of your drone: 1 for light, 2 for middle and 3 for heavy");
@@ -75,7 +80,7 @@ namespace ConsoleUI
         static public void AddCustomer(DalObject.DalObject system)
         {
             Console.WriteLine("please enter id number for the new customer");
-            Customer Customer1 = new Customer();
+            Customer Customer1 = new Customer(); //מה קורה במצב של 2 לקוחות עם ID זהה?
             Customer1.Id = Console.Read();
             Console.WriteLine("please enter the name of customer");
             Customer1.Name = Console.ReadLine();
@@ -95,7 +100,7 @@ namespace ConsoleUI
             Parcel Parcel1 = new Parcel();
             Parcel1.IdNumber = 0;
             Console.WriteLine("please enter the id of the sender customer");
-            Parcel1.ClientSendName = Console.Read();
+            Parcel1.ClientSendName = Console.Read(); //מה קורה במצב של 2 לקוחות עם ID זהה?
             Console.WriteLine("please enter the id of the reciever customer");
             Parcel1.ClientGetName = Console.Read();
             Console.WriteLine("please enter the weight of your Parcel: 1 for light, 2 for middle and 3 for heavy");
@@ -112,8 +117,7 @@ namespace ConsoleUI
         static public void MatchParcelToDrone(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the parcel code");
-            int num = Console.Read();
-            Parcel temp = new Parcel() { IdNumber = num };
+            Parcel temp = new Parcel() { IdNumber = Console.Read() }; //מה עם להתאים לה רחפן?
             //temp = system.getItem(temp);
             //if(temp.IdNumber==0)
             //{            system.ParcelToDrone(temp);
@@ -122,20 +126,17 @@ namespace ConsoleUI
             //    return;
             //}
         }
-
         static public void CollectingFromCustomer(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the parcel code");
-            int num = Console.Read();
-            Parcel temp = new Parcel() { IdNumber = num };
+            Parcel temp = new Parcel() { IdNumber=Console.Read() };
             system.ParcelToCollecting(temp);
 
         }
         static public void GivingToCustomer(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the parcel code");
-            int num = Console.Read();
-            Parcel temp = new Parcel() { IdNumber = num };
+            Parcel temp = new Parcel() { IdNumber =Console.Read() };
             system.ParcelToCustomer(temp);
 
         }
@@ -158,18 +159,17 @@ namespace ConsoleUI
             Dc.StationId = Console.Read();
             system.SendToCharge(Dc);
         }
-
         static void Main(string[] args)
         {
             DalObject.DalObject DeliverySystem = new DalObject.DalObject();
-            Console.WriteLine("hi, welcome to the new system of Drone's delivery");
+            Console.WriteLine("Hi, welcome to the new system of Drone's delivery");
             Options choose = (Options)(1);
             while (choose != Options.exit)
             {
                 PrintMenu();
                 choose = (Options)Console.Read();
                 States internalChoose=(States)0;
-                Update specialChoose =(Update) 0;
+                Update specialChoose =(Update)0;
                 switch (choose)
                 {
                     case Options.Adding:

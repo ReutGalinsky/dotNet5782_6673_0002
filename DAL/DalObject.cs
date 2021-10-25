@@ -87,10 +87,7 @@ namespace DalObject
         {
             List<BaseStation> returnStation = new List<BaseStation>();
             foreach (var item in DataSource.stations)
-            {
                 returnStation.Add(item);
-
-            }
             return returnStation;
         }
         /// <summary>
@@ -130,10 +127,8 @@ namespace DalObject
         {
             List<BaseStation> Availible = new List<BaseStation>();
             foreach(var item in DataSource.stations)
-            {
                 if (item.ChargeSlots != 0)
                     Availible.Add(item);
-            }
             return Availible;
         }
         public void ParcelToDrone(Parcel temp)
