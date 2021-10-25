@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using DalObject;
 using IDAL.DO;
 
-public enum Options { Adding, Updating, ShowItemp, ShowList,exit }
-public enum States { BaseStation, Drone, Customer,Parcel, Unmatched,Available }
-public enum Update { Match, Collect, Giving, Sending, Release }
+public enum Options { Adding=1, Updating, ShowItemp, ShowList,exit }
+public enum States { BaseStation=1, Drone, Customer,Parcel, Unmatched,Available }
+public enum Update { Match=1, Collect, Giving, Sending, Release }
 
 
 namespace ConsoleUI
@@ -18,7 +18,8 @@ namespace ConsoleUI
             Console.WriteLine(@"1. adding
                                 2. updating
                                 3. show single item
-                                4. show list");
+                                4. show list
+                                5. exit");
         }
         //static public bool check<T>(int i,List<T> l)
         //{
@@ -110,8 +111,54 @@ namespace ConsoleUI
         }
         static public void MatchParcelToDrone(DalObject.DalObject system)
         {
+            Console.WriteLine("please enter the parcel code");
+            int num = Console.Read();
+            Parcel temp = new Parcel() { IdNumber = num };
+            //temp = system.getItem(temp);
+            //if(temp.IdNumber==0)
+            //{            system.ParcelToDrone(temp);
+
+            //    Console.WriteLine("error-invalid input");
+            //    return;
+            //}
+        }
+
+        static public void CollectingFromCustomer(DalObject.DalObject system)
+        {
+            Console.WriteLine("please enter the parcel code");
+            int num = Console.Read();
+            Parcel temp = new Parcel() { IdNumber = num };
+            system.ParcelToCollecting(temp);
 
         }
+        static public void GivingToCustomer(DalObject.DalObject system)
+        {
+            Console.WriteLine("please enter the parcel code");
+            int num = Console.Read();
+            Parcel temp = new Parcel() { IdNumber = num };
+            system.ParcelToCustomer(temp);
+
+        }
+        static public void RelaseCharge(DalObject.DalObject system)
+        {
+            Console.WriteLine("please enter the Drone's code");
+            Drone Dc = new Drone() { IdNumber = Console.Read() };
+            system.releaseCharge(Dc);
+        }
+
+        static public void ChargeDrone(DalObject.DalObject system)
+        {
+            Console.WriteLine("please enter the Drone's code");
+            DroneCharge Dc = new DroneCharge() { DroneId = Console.Read() };
+            Console.WriteLine( "the list of the availible charge stations:");
+            List<BaseStation> availibles = system.GetAvailibeStation();
+            foreach (var item in availibles)
+                Console.WriteLine("*" + item + "\n");
+            Console.WriteLine("enter the code of the wanted station:");
+            Dc.StationId = Console.Read();
+            system.SendToCharge(Dc);
+        }
+
         static void Main(string[] args)
         {
             DalObject.DalObject DeliverySystem = new DalObject.DalObject();
@@ -153,16 +200,22 @@ namespace ConsoleUI
                         switch (specialChoose)
                         {
                             case Update.Match:
+                                MatchParcelToDrone(DeliverySystem);
                                 break;
                             case Update.Collect:
+                                CollectingFromCustomer(DeliverySystem);
                                 break;
                             case Update.Giving:
+                                GivingToCustomer(DeliverySystem);
                                 break;
                             case Update.Sending:
+                                ChargeDrone(DeliverySystem);
                                 break;
                             case Update.Release:
+
                                 break;
                             default:
+                                Console.WriteLine("error-invalid output");
                                 break;
                         }
                         break;

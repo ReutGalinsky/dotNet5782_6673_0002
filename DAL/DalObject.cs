@@ -136,138 +136,70 @@ namespace DalObject
             }
             return Availible;
         }
-        public void ParcelToDrone()
+        public void ParcelToDrone(Parcel temp)
         {
-            Console.WriteLine("please enter the number of parcel you want to connect with drone");
-            int numP = Console.Read();
-            Parcel temp1 = new Parcel();
-            foreach (var item in DataSource.Parcels)
-            {
-                if (item.IdNumber == numP)
-                {
-                    temp1 = item;
-                    break;
-                }
-            }
-
-            Console.WriteLine("please enter the number of the wanted drone");
-            int numD = Console.Read();
-            Drone temp2 = new Drone();
-            foreach (var item in DataSource.Drones)
-            {
-                if (item.IdNumber == numD)
-                {
-                    temp2 = item;
-                    break;
-                }
-            }
-           temp2.Status = (DroneStatus.Shipping);
-           temp1.CreateParcelTime=DateTime.Now();
-           temp1.DroneId=temp2.IdNumber;
+            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);
+            par.MatchForDroneTime = DateTime.Now;
+            var Dro = DataSource.Drones.FirstOrDefault(p => p.Status == IDAL.DO.DroneStatus.Available);
+            par.DroneId = Dro.IdNumber;
+            Dro.Status = DroneStatus.Shipping;
         }//!!!!!
-        public void ParcelToCollecting(Parcel p)
+        public void ParcelToCollecting(Parcel tem)
         {
-            foreach (var item in DataSource.Parcels)
-            {
-                if(item.Equals(p))
-                {
-                    
-                }
 
-            }
-
-           // Console.WriteLine("please enter the number of parcel you want to collect");
-           // int numP = Console.Read();
-           // Parcel temp1 = new Parcel();
-           // foreach (var item in DataSource.Parcels)
-           // {
-           //     if (item.IdNumber == numP)
-           //     {
-           //         temp1 = item;
-           //         break;
-           //     }
-           // }
-           // Console.WriteLine("please enter the number of the wanted drone");
-           // int numD = Console.Read();
-           // Drone temp2 = new Drone();
-           // foreach (var item in DataSource.Drones)
-           // {
-           //     if (item.IdNumber == numD)
-           //     {
-           //         temp2 = item;
-           //         break;
-           //     }
-           // }
-           // temp2.Status = (DroneStatus.Shipping);
-           // temp1.MatchForDroneTime=DateTime.Now();
-           //temp1.DroneId=temp2.IdNumber;
+            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == tem.IdNumber);
+            par.collectingDroneTime = DateTime.Now;
+            // Console.WriteLine("please enter the number of parcel you want to collect");
+            // int numP = Console.Read();
+            // Parcel temp1 = new Parcel();
+            // foreach (var item in DataSource.Parcels)
+            // {
+            //     if (item.IdNumber == numP)
+            //     {
+            //         temp1 = item;
+            //         break;
+            //     }
+            // }
+            // Console.WriteLine("please enter the number of the wanted drone");
+            // int numD = Console.Read();
+            // Drone temp2 = new Drone();
+            // foreach (var item in DataSource.Drones)
+            // {
+            //     if (item.IdNumber == numD)
+            //     {
+            //         temp2 = item;
+            //         break;
+            //     }
+            // }
+            // temp2.Status = (DroneStatus.Shipping);
+            // temp1.MatchForDroneTime=DateTime.Now();
+            //temp1.DroneId=temp2.IdNumber;
         }//!!!!
-        public void ParcelToCustomer()
+        public void ParcelToCustomer(Parcel temp)
         {
-            Console.WriteLine("please enter the number of parcel you get");
-            int numP = Console.Read();
-            Parcel temp1 = new Parcel();
-            foreach (var item in DataSource.Parcels)
-            {
-                if (item.IdNumber == numP)
-                {
-                    temp1 = item;
-                    break;
-                }
-            }
-            Console.WriteLine("please enter the number of the wanted customer");
-            int numD = Console.Read();
-            Drone temp2 = new Drone();
-            foreach (var item in DataSource.Drones)
-            {
-                if (item.IdNumber == numD)
-                {
-                    temp2 = item;
-                    break;
-                }
-            }
-            temp2.Status = (DroneStatus.Available);
-            DataSource.Parcels.Remove(temp1);
-            temp1.collectingDroneTime=DateTime.Now();
-           temp1.DroneId=temp2.IdNumber;
-        }//!!!!!
-        public void SendToCharge()//!!!! !
+            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);
+            par.ArrivingDroneTime = DateTime.Now;
+            var Dro = DataSource.Drones.FirstOrDefault(p=>par.DroneId ==p.IdNumber );
+
+            Dro.Status = DroneStatus.Available;
+        }//האם צריך למחוק חבילה שהגיעה?
+        public void SendToCharge(DroneCharge D)//!!!! !
         {
-            Console.WriteLine("please enter the number of the wanted drone");
-            int numD = Console.Read();
-            ShowAvailibeStation();
-            Console.WriteLine("please enter the number of the wanted base station from those above");
-            int numS = Console.Read();
-            Drone temp1=new Drone();
-            BaseStation temp2 = new BaseStation();
-            foreach (var item in DataSource.Drones)
-            {
-                if(item.IdNumber==numD)
-                {
-                    temp1 = item;
-                    break;
-                }    
-            }
-
-
-            foreach (var item in DataSource.stations)
-            {
-                if (item.IdNumber == numS)
-                {
-                    temp2 = item;
-                    break;
-                }
-            }
-            temp1.Status = (DroneStatus.Maintenance);
-            temp2.ChargeSlots--;
-            DroneCharge newCharge = new DroneCharge();
-            newCharge.DroneId = numD;
-            newCharge.StationId = numS;
-            DataSource.Charges.Add(newCharge);
+            DataSource.Charges.Add(D);
+            var Dro = DataSource.Drones.FirstOrDefault(P => P.IdNumber == D.DroneId);
+            var Bas = DataSource.stations.FirstOrDefault(P => P.IdNumber == D.StationId);
+            Dro.Status = DroneStatus.Maintenance;
+            Bas.ChargeSlots--;
         }
-        public void releaseCharge(int d1)///!!!!
+        public void releaseCharge(Drone d)///!!!!
         {
-
+            var Dro = DataSource.Drones.FirstOrDefault(p => p.IdNumber == d.IdNumber);
+            Dro.Status = DroneStatus.Available;
+            Dro.Battery = 100;
+            var Char = DataSource.Charges.FirstOrDefault(p => p.DroneId == Dro.IdNumber);
+            var Bas = DataSource.stations.FirstOrDefault(p => p.IdNumber == Char.StationId);
+            Bas.ChargeSlots++;
+            DataSource.Charges.Remove(Char);
         }
         public T getItem<T> (T itemp)
         {

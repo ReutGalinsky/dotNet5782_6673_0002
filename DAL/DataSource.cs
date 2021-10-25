@@ -15,13 +15,13 @@ namespace DalObject
         internal static List<DroneCharge> Charges = new List<DroneCharge>();
         internal class Config
         {
-            internal static int RunningNumber = 1;// האם מתחיל מאפס?
+            internal static int RunningNumber = 1;
         }
-        internal static void Initialize()///////////////////////////////////////////
+        internal static void Initialize()
         {
             Random rand = new Random(DateTime.Now.Millisecond);
             int amount = rand.Next(2, 5);
-            {//base stations://לבדוק את התחום של קווי רוחב ואורך ואיך מציגים בבסיס 60-----------------------------
+            {//base stations://-----------------------------------------------------------
                 for (int i = 0; i < amount; i++)
                 {
                     BaseStation s = new BaseStation();
