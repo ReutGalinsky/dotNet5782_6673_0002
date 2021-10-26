@@ -16,10 +16,10 @@ namespace ConsoleUI
         static public void PrintMenu()
         {
             Console.WriteLine(@"1. adding
-                                2. updating
-                                3. show single item
-                                4. show list
-                                5. exit");
+2. updating
+3. show single item
+4. show list
+5. exit");
         }
         /// <summary>
         /// reading the new station's details
@@ -27,21 +27,33 @@ namespace ConsoleUI
         /// <param name="system"></param>
         static public void AddBaseStation(DalObject.DalObject system)
         {
-            Console.WriteLine("please enter id number for the new base station");//האם צריך לבדוק שאכן ייחודי?
+            Console.WriteLine("please enter id number for the new base station");
             BaseStation Base1 = new BaseStation();
-            Base1.IdNumber= Console.Read();
-            while(DalObject.DalObject.getItem<BaseStation>(Base1).IdNumber==0 )
+            Base1.IdNumber= int.Parse(Console.ReadLine());
+            while(system.getBase(Base1).IdNumber!=0 )
             {
                 Console.WriteLine("this id is already exist. please enter new one");
-                Base1.IdNumber = Console.Read();
+                Base1.IdNumber = int.Parse(Console.ReadLine());
             }
             Console.WriteLine("please enter the name of the station");
             Base1.Name = Console.ReadLine();
             Console.WriteLine("please enter the amount of charge slots in your base station");
-            Base1.ChargeSlots = Console.Read();
+            Base1.ChargeSlots = int.Parse(Console.ReadLine());
             Console.WriteLine("please enter the location of your base station (longitude,latitude)");
-            Base1.Longitude = Console.Read();
-            Base1.Latitude = Console.Read();
+            Base1.Longitude = double.Parse(Console.ReadLine());
+            while(Base1.Longitude<33||Base1.Longitude>35)
+            {
+                Console.WriteLine("error- out of jerusalem area, please enter again");
+                Base1.Longitude = double.Parse(Console.ReadLine());
+
+            }
+            Base1.Latitude = double.Parse(Console.ReadLine());
+            while (Base1.Latitude < 31 || Base1.Latitude > 33)
+            {
+                Console.WriteLine("error- out of jerusalem area, please enter again");
+                Base1.Latitude = double.Parse(Console.ReadLine());
+
+            }
             system.AddingBaseStation(Base1);
 
         }
@@ -51,22 +63,28 @@ namespace ConsoleUI
         /// <param name="system"></param>
         static public void AddDrone(DalObject.DalObject system)
         {
-            Console.WriteLine("please enter id number for the new drone");//האם צריך לבדוק שאכן ייחודי?
+            Console.WriteLine("please enter id number for the new drone (must be different from zero)");//האם צריך לבדוק שאכן ייחודי?
             Drone Drone1 = new Drone();
-            Drone1.IdNumber = Console.Read();
-            while (DalObject.DalObject.getItem<Drone>(Drone1).IdNumber == 0)
+            Drone1.IdNumber = int.Parse(Console.ReadLine());
+            while(Drone1.IdNumber==0)
+            {
+                Console.WriteLine("zero is illegal. please enter different one");
+                Drone1.IdNumber = int.Parse(Console.ReadLine());
+            }
+            Drone temp=system.getDrone(Drone1);
+            while (temp.IdNumber != 0)
             {
                 Console.WriteLine("this id is already exist. please enter new one");
-                Drone1.IdNumber = Console.Read();
+                Drone1.IdNumber = int.Parse(Console.ReadLine());
             }
             Console.WriteLine("please enter the model of the drone");
             Drone1.Model = Console.ReadLine();
             Console.WriteLine("please enter the weight of your drone: 1 for light, 2 for middle and 3 for heavy");
-            Drone1.MaxWeight = (WeightCategories)(Console.Read());
+            Drone1.MaxWeight = (WeightCategories)(int.Parse(Console.ReadLine()));
             Console.WriteLine("please enter the battary status of the drone");//האם צריך לאתחל ישר ל100? האם לבדוק תקינות?
-            Drone1.Battery = Console.Read();
+            Drone1.Battery = double.Parse(Console.ReadLine());
             Console.WriteLine("please enter the status of your drone: 1 for availible, 2 for maintence and 3 for shipping");
-            Drone1.Status = (DroneStatus)(Console.Read());
+            Drone1.Status = (DroneStatus)(int.Parse(Console.ReadLine()));
             system.AddingDrone(Drone1);
         }
         /// <summary>
@@ -76,15 +94,32 @@ namespace ConsoleUI
         static public void AddCustomer(DalObject.DalObject system)
         {
             Console.WriteLine("please enter id number for the new customer");
-            Customer Customer1 = new Customer(); //מה קורה במצב של 2 לקוחות עם ID זהה?
-            Customer1.Id = Console.Read();
+            Customer Customer1 = new Customer(); 
+            Customer1.Id = int.Parse(Console.ReadLine());
+            while (system.getCustomer(Customer1).Id != 0)
+            {
+                Console.WriteLine("this id is already exist. please enter new one");
+                Customer1.Id = int.Parse(Console.ReadLine());
+            }
             Console.WriteLine("please enter the name of customer");
             Customer1.Name = Console.ReadLine();
             Console.WriteLine("plesae enter the phone number of the new customer");
             Customer1.Phone = Console.ReadLine();
             Console.WriteLine("please enter the location of your base station (longitude,latitude)");
-            Customer1.Longitude = Console.Read();
-            Customer1.Latitude = Console.Read();
+            Customer1.Longitude = double.Parse(Console.ReadLine());
+            while (Customer1.Longitude < 33 || Customer1.Longitude > 35)
+            {
+                Console.WriteLine("error- out of jerusalem area, please enter again");
+                Customer1.Longitude = double.Parse(Console.ReadLine());
+
+            }
+            Customer1.Latitude = double.Parse(Console.ReadLine());
+            while (Customer1.Latitude < 31 || Customer1.Latitude > 33)
+            {
+                Console.WriteLine("error- out of jerusalem area, please enter again");
+                Customer1.Latitude = double.Parse(Console.ReadLine());
+
+            }
             system.addingCustomer(Customer1);
         }
         /// <summary>
@@ -93,16 +128,25 @@ namespace ConsoleUI
         /// <param name="system"></param>
         static public void AddParcel(DalObject.DalObject system)
         {
+            List<Parcel> Parcels = system.GetParcels();
+            Parcel temp = new Parcel();
+            foreach (var item in Parcels)
+            {
+                if(item.ArrivingDroneTime.Day<DateTime.Now.Day-7&&item.ArrivingDroneTime!=(temp.ArrivingDroneTime))
+                {
+                    system.RemovePar(item);
+                }
+            }
             Parcel Parcel1 = new Parcel();
             Parcel1.IdNumber = 0;
             Console.WriteLine("please enter the id of the sender customer");
-            Parcel1.ClientSendName = Console.Read(); //מה קורה במצב של 2 לקוחות עם ID זהה?
+            Parcel1.ClientSendName = int.Parse(Console.ReadLine());
             Console.WriteLine("please enter the id of the reciever customer");
-            Parcel1.ClientGetName = Console.Read();
+            Parcel1.ClientGetName = int.Parse(Console.ReadLine());
             Console.WriteLine("please enter the weight of your Parcel: 1 for light, 2 for middle and 3 for heavy");
-            Parcel1.Weight = (WeightCategories)(Console.Read());
+            Parcel1.Weight = (WeightCategories)(int.Parse(Console.ReadLine()));
             Console.WriteLine("please enter the priority of your Parcel: 1 for Regular, 2 for Speed and 3 for Emergency");
-            Parcel1.Priority = (Priorities)(Console.Read());
+            Parcel1.Priority = (Priorities)(int.Parse(Console.ReadLine()));
             Parcel1.DroneId = 0;
             Parcel1.CreateParcelTime = DateTime.Now;
             Parcel1.collectingDroneTime = new DateTime();//האם באמת צריך לאתחל ככה ל0?
@@ -117,33 +161,62 @@ namespace ConsoleUI
         static public void MatchParcelToDrone(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the parcel code");
-            Parcel temp = new Parcel() { IdNumber = Console.Read() }; //מה עם להתאים לה רחפן?
-            //temp = system.getItem(temp);
-            //if(temp.IdNumber==0)
-            //{            system.ParcelToDrone(temp);
+            Parcel temp = new Parcel() { IdNumber = int.Parse(Console.ReadLine()) };
+            if (system.getParcel(temp).IdNumber == 0)
+            {
+                Console.WriteLine("error-invalid input");
+                return;
+            }
+            system.ParcelToDrone(temp);
 
-            //    Console.WriteLine("error-invalid input");
-            //    return;
-            //}
         }
+        /// <summary>
+        /// collecting parcel from the customer by drone
+        /// </summary>
+        /// <param name="system"></param>
         static public void CollectingFromCustomer(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the parcel code");
-            Parcel temp = new Parcel() { IdNumber=Console.Read() };
+            Parcel temp = new Parcel() { IdNumber= int.Parse(Console.ReadLine()) };
+            if (system.getParcel(temp).IdNumber == 0)
+            {
+                Console.WriteLine("error-invalid input");
+                return;
+            }
             system.ParcelToCollecting(temp);
-
         }
         static public void GivingToCustomer(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the parcel code");
-            Parcel temp = new Parcel() { IdNumber =Console.Read() };
+            Parcel temp = new Parcel() { IdNumber = int.Parse(Console.ReadLine()) };
+            if (system.getParcel(temp).IdNumber == 0)
+            {
+                Console.WriteLine("error-invalid input");
+                return;
+            }
             system.ParcelToCustomer(temp);
+            Console.WriteLine("would you agree to remove your parcel from the data base? press y or n");
+            char tav = char.Parse(Console.ReadLine());
+            switch(tav)
+            {
+                case 'y':system.RemovePar(temp);
+                    break;
+                case 'n':
+                default:
+                    break;
+            }
 
         }
         static public void RelaseCharge(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the Drone's code");
-            Drone Dc = new Drone() { IdNumber = Console.Read() };
+            Drone Dc = new Drone() { IdNumber = int.Parse(Console.ReadLine()) };
+            if (system.getDrone(Dc).IdNumber == 0)
+            {
+                Console.WriteLine("error-invalid input");
+                return;
+            }
+
             system.releaseCharge(Dc);
         }
 
@@ -151,6 +224,12 @@ namespace ConsoleUI
         {
             Console.WriteLine("please enter the Drone's code");
             DroneCharge Dc = new DroneCharge() { DroneId = int.Parse(Console.ReadLine()) };
+            Drone temp = system.getDrone(new Drone { IdNumber=Dc.DroneId});
+            while (temp.IdNumber != 0)
+            {
+                Console.WriteLine("this id is already exist. please enter new one");
+                Dc.DroneId = int.Parse(Console.ReadLine());
+            }
             Console.WriteLine( "the list of the availible charge stations:");
             List<BaseStation> availibles = system.GetAvailibeStation();
             foreach (var item in availibles)
@@ -162,170 +241,159 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             DalObject.DalObject DeliverySystem = new DalObject.DalObject();
-            List<Drone> Drones = DeliverySystem.GetDrones();
-            foreach (var item in Drones)
-                Console.WriteLine("*" + item + "\n");
-            ChargeDrone(DeliverySystem);
-            foreach (var item in Drones)
-                Console.WriteLine("*" + item + "\n");
-
-
-            // Console.WriteLine("Hi, welcome to the new system of Drone's delivery");
-            //    Options choose = (Options)(1);
-            //    while (choose != Options.exit)
-            //    {
-            //        PrintMenu();
-            //       // choose = (Options)(Console.Read()-'0');
-            //        States internalChoose=(States)0;
-            //        string internalChoo = "";
-            //       // Update specialChoose =(Update)0;
-            //        switch ((Options)(Console.Read() - '0'))
-            //        {
-            //            case Options.Adding:
-            //                Console.WriteLine("1. adding new base station \n 2.adding drone \n 3.adding new customer \n 4.adding new parcel");
-            //                internalChoose = (States)(Console.Read()-'0');
-            //                    switch (internalChoose)
-            //                    {
-            //                        case States.BaseStation:
-            //                        AddBaseStation(DeliverySystem);
-            //                            break;
-            //                        case States.Drone:
-            //                        AddDrone(DeliverySystem);
-            //                            break;
-            //                        case States.Customer:
-            //                        AddCustomer(DeliverySystem);
-            //                            break;
-            //                        case States.Parcel:
-            //                        AddParcel(DeliverySystem);
-            //                            break;
-            //                    default:
-            //                        Console.WriteLine("error-invalid input");
-            //                            break;
-            //                    }
-            //                break;
-            //            case Options.Updating:
-            //                Console.WriteLine("1. match parcel to a drone \n 2.collecting parcel by a drone \n 3.giving parcel to a customer \n 4.sending a dorne to be charged \n 5. release drone from charging");
-            //                //specialChoose = (Update)Console.Read();
-            //                switch ((Update)(Console.Read()-'0'))
-            //                {
-            //                    case Update.Match:
-            //                        MatchParcelToDrone(DeliverySystem);
-            //                        break;
-            //                    case Update.Collect:
-            //                        CollectingFromCustomer(DeliverySystem);
-            //                        break;
-            //                    case Update.Giving:
-            //                        GivingToCustomer(DeliverySystem);
-            //                        break;
-            //                    case Update.Sending:
-            //                        ChargeDrone(DeliverySystem);
-            //                        break;
-            //                    case Update.Release:
-            //                        RelaseCharge(DeliverySystem);
-            //                        break;
-            //                    default:
-            //                        Console.WriteLine("error-invalid output");
-            //                        break;
-            //                }
-            //                break;
-            //            case Options.ShowItemp:
-            //                Console.WriteLine("1. show base station \n 2.show drone \n 3.show customer \n 4.show parcel");
-            //                internalChoose = (States)(Console.Read()-'0');
-            //                Console.WriteLine("please enter the id number");
-            //                int num = Console.Read();
-            //                switch (internalChoose)
-            //                {
-            //                    case States.BaseStation:
-            //                        BaseStation help = new BaseStation() { IdNumber = num };
-            //                        help = DalObject.DalObject.getItem<BaseStation>(help);
-            //                        if(help.IdNumber==0)
-            //                        {
-            //                            Console.WriteLine("not exist");
-            //                        }
-            //                        else
-            //                            Console.WriteLine(help);
-            //                        break;
-            //                    case States.Drone:
-            //                        Drone Dront = new Drone() { IdNumber = num };
-            //                        Dront = DalObject.DalObject.getItem<Drone>(Dront);
-            //                        if (Dront.IdNumber == 0)
-            //                        {
-            //                            Console.WriteLine("not exist");
-            //                        }
-            //                        else
-            //                            Console.WriteLine(Dront);
-            //                        break;
-            //                    case States.Customer:
-            //                        Customer cust = new Customer() { Id = num };
-            //                        cust = DalObject.DalObject.getItem<Customer>(cust);
-            //                        if (cust.Id == 0)
-            //                        {
-            //                            Console.WriteLine("not exist");
-            //                        }
-            //                        else
-            //                            Console.WriteLine(cust);
-            //                        break;
-            //                    case States.Parcel:
-            //                        Parcel parc = new Parcel() { IdNumber = num };
-            //                        parc = DalObject.DalObject.getItem<Parcel>(parc);
-            //                        if (parc.IdNumber == 0)
-            //                        {
-            //                            Console.WriteLine("not exist");
-            //                        }
-            //                        else
-            //                            Console.WriteLine(parc);
-            //                        break;
-            //                    default:
-            //                        Console.WriteLine("error-invalid input");
-            //                        break;
-            //                }
-            //                break;
-            //            case Options.ShowList:
-            //                Console.WriteLine("1. show the list of base stations \n 2. show the list of the drones \n 3.shoe the list of the customer \n 4. shoe the list of the parcel \n 5. show the list of the unmatched percels \n 6. show the list of base stations with availible charge slots");
-            //                internalChoo = Console.ReadLine();
-            //                switch (internalChoo)
-            //                {
-            //                    case "BaseStation":
-            //                        List < BaseStation > bases= DeliverySystem.GetBaseStations();
-            //                        foreach(var item in bases)
-            //                            Console.WriteLine("*"+item+"\n");
-            //                        break;
-            //                    case "Drone":
-            //                        List<Drone> Drones = DeliverySystem.GetDrones();
-            //                        foreach (var item in Drones)
-            //                            Console.WriteLine("*" + item + "\n");
-            //                        break;
-            //                    case "Customer":
-            //                        List<Customer> Customers = DeliverySystem.GetCustomers();
-            //                        foreach (var item in Customers)
-            //                            Console.WriteLine("*" + item + "\n");
-            //                        break;
-            //                    case "Parcel":
-            //                        List<Parcel> Parcels = DeliverySystem.GetParcels();
-            //                        foreach (var item in Parcels)
-            //                            Console.WriteLine("*" + item + "\n");
-            //                        break;
-            //                    case "Unmatched":
-            //                        List<Parcel> NoMatches = DeliverySystem.GetNonMatchParcels();
-            //                        foreach (var item in NoMatches)
-            //                            Console.WriteLine("*" + item + "\n");
-            //                        break;
-            //                    case "Available":
-            //                        List<BaseStation> availibles = DeliverySystem.GetAvailibeStation();
-            //                        foreach (var item in availibles)
-            //                            Console.WriteLine("*" + item + "\n");
-            //                        break;
-            //                    default:
-            //                        Console.WriteLine("error- invalid input");
-            //                        break;
-            //                }
-            //                break;
-            //            case Options.exit:
-            //                break;
-            //            default:
-            //                break;
-            //        }
-            //    }
+            Console.WriteLine("Hi, welcome to the new system of Drone's delivery");
+            Options choose = (Options)(1);
+            while (choose != Options.exit)
+            {
+                PrintMenu();
+                 choose = (Options)(int.Parse(Console.ReadLine()));
+                States internalChoose = (States)0;
+                switch (choose)
+                {
+                    case Options.Adding:
+                        Console.WriteLine("1. adding new base station \n 2.adding drone \n 3.adding new customer \n 4.adding new parcel");
+                        internalChoose = (States)(int.Parse(Console.ReadLine()));
+                        switch (internalChoose)
+                        {
+                            case States.BaseStation:
+                                AddBaseStation(DeliverySystem);
+                                break;
+                            case States.Drone:
+                                AddDrone(DeliverySystem);
+                                break;
+                            case States.Customer:
+                                AddCustomer(DeliverySystem);
+                                break;
+                            case States.Parcel:
+                                AddParcel(DeliverySystem);
+                                break;
+                            default:
+                                Console.WriteLine("error-invalid input");
+                                break;
+                        }
+                        break;
+                    case Options.Updating:
+                        Console.WriteLine("1. match parcel to a drone \n 2.collecting parcel by a drone \n 3.giving parcel to a customer \n 4.sending a dorne to be charged \n 5. release drone from charging");
+                        switch ((Update)(int.Parse(Console.ReadLine())))
+                        {
+                            case Update.Match:
+                                MatchParcelToDrone(DeliverySystem);
+                                break;
+                            case Update.Collect:
+                                CollectingFromCustomer(DeliverySystem);
+                                break;
+                            case Update.Giving:
+                                GivingToCustomer(DeliverySystem);
+                                break;
+                            case Update.Sending:
+                                ChargeDrone(DeliverySystem);
+                                break;
+                            case Update.Release:
+                                RelaseCharge(DeliverySystem);
+                                break;
+                            default:
+                                Console.WriteLine("error-invalid output");
+                                break;
+                        }
+                        break;
+                    case Options.ShowItemp:
+                        Console.WriteLine("1. show base station \n 2.show drone \n 3.show customer \n 4.show parcel");
+                        internalChoose = (States)(int.Parse(Console.ReadLine()));
+                        Console.WriteLine("please enter the id number");
+                        int num = int.Parse(Console.ReadLine());
+                        switch (internalChoose)
+                        {
+                            case States.BaseStation:
+                                BaseStation help = new BaseStation() { IdNumber = num };
+                                help = DeliverySystem.getBase(help);
+                                if (help.IdNumber == 0)
+                                {
+                                    Console.WriteLine("not exist");
+                                }
+                                else
+                                    Console.WriteLine(help);
+                                break;
+                            case States.Drone:
+                                Drone Dront = new Drone() { IdNumber = num };
+                                Dront = DeliverySystem.getDrone(Dront);
+                                if (Dront.IdNumber == 0)
+                                {
+                                    Console.WriteLine("not exist");
+                                }
+                                else
+                                    Console.WriteLine(Dront);
+                                break;
+                            case States.Customer:
+                                Customer cust = new Customer() { Id = num };
+                                cust = DeliverySystem.getCustomer(cust);
+                                if (cust.Id == 0)
+                                {
+                                    Console.WriteLine("not exist");
+                                }
+                                else
+                                    Console.WriteLine(cust);
+                                break;
+                            case States.Parcel:
+                                Parcel parc = new Parcel() { IdNumber = num };
+                                parc =DeliverySystem.getParcel(parc);
+                                if (parc.IdNumber == 0)
+                                {
+                                    Console.WriteLine("not exist");
+                                }
+                                else
+                                    Console.WriteLine(parc);
+                                break;
+                            default:
+                                Console.WriteLine("error-invalid input");
+                                break;
+                        }
+                        break;
+                    case Options.ShowList:
+                        Console.WriteLine("1. show the list of base stations \n 2. show the list of the drones \n 3.shoe the list of the customer \n 4. shoe the list of the parcel \n 5. show the list of the unmatched percels \n 6. show the list of base stations with availible charge slots");
+                        switch ((States)(int.Parse(Console.ReadLine())))
+                        {
+                            case States.BaseStation:
+                                List<BaseStation> bases = DeliverySystem.GetBaseStations();
+                                foreach (var item in bases)
+                                    Console.WriteLine("*" + item + "\n");
+                                break;
+                            case States.Drone:
+                                List<Drone> Drones = DeliverySystem.GetDrones();
+                                foreach (var item in Drones)
+                                    Console.WriteLine("*" + item + "\n");
+                                break;
+                            case States.Customer:
+                                List<Customer> Customers = DeliverySystem.GetCustomers();
+                                foreach (var item in Customers)
+                                    Console.WriteLine("*" + item + "\n");
+                                break;
+                            case States.Parcel:
+                                List<Parcel> Parcels = DeliverySystem.GetParcels();
+                                foreach (var item in Parcels)
+                                    Console.WriteLine("*" + item + "\n");
+                                break;
+                            case States.Unmatched:
+                                List<Parcel> NoMatches = DeliverySystem.GetNonMatchParcels();
+                                foreach (var item in NoMatches)
+                                    Console.WriteLine("*" + item + "\n");
+                                break;
+                            case States.Available:
+                                List<BaseStation> availibles = DeliverySystem.GetAvailibeStation();
+                                foreach (var item in availibles)
+                                    Console.WriteLine("*" + item + "\n");
+                                break;
+                            default:
+                                Console.WriteLine("error- invalid input");
+                                break;
+                        }
+                        break;
+                    case Options.exit:
+                        break;
+                    default:
+                        Console.WriteLine("error- invalid input");
+                        break;
+                }
+            }
 
         }
 

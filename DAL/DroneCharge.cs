@@ -13,7 +13,7 @@ namespace IDAL.DO
         public override string ToString()
         {
             return string.Format($"Drone number: {DroneId}" +
-                $"in statation number {StationId}");///האם צריך גם את המילה פורמט?
+                $"in statation number {StationId}");
         }
 
     }

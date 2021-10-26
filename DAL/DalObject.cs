@@ -20,7 +20,7 @@ namespace DalObject
         /// </summary>
         /// <param name="station">the new station the being added</param>
         /// <returns></returns>
-        public void AddingBaseStation(BaseStation station)//צריך בכלל להחזיר רשימה? 
+        public void AddingBaseStation(BaseStation station)
         {
             DataSource.stations.Add(station);
         }
@@ -57,7 +57,7 @@ namespace DalObject
         /// function that return the customers list
         /// </summary>
         /// <returns></returns>
-        public List<Customer> GetCustomers()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        public List<Customer> GetCustomers()
         {
             List<Customer> returnCustomer = new List<Customer>();
             foreach (var item in DataSource.Customers)
@@ -70,7 +70,7 @@ namespace DalObject
         /// function that return list of drones
         /// </summary>
         /// <returns></returns>
-        public List<Drone> GetDrones()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        public List<Drone> GetDrones()
         {
             List<Drone> returnDrone = new List<Drone>();
             foreach (var item in DataSource.Drones)
@@ -83,7 +83,7 @@ namespace DalObject
         /// /return list of the stations that are in the data base
         /// </summary>
         /// <returns></returns>
-        public List<BaseStation> GetBaseStations()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        public List<BaseStation> GetBaseStations()
         {
             List<BaseStation> returnStation = new List<BaseStation>();
             foreach (var item in DataSource.stations)
@@ -94,7 +94,7 @@ namespace DalObject
         /// function that return copy of the parcels
         /// </summary>
         /// <returns></returns>
-        public List<Parcel> GetParcels()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        public List<Parcel> GetParcels()
         {
             List<Parcel> returnParcel = new List<Parcel>();
             foreach (var item in DataSource.Parcels)
@@ -107,12 +107,12 @@ namespace DalObject
         /// return list of the non matched parcels
         /// </summary>
         /// <returns></returns>
-        public List<Parcel> GetNonMatchParcels()//האם יש דרך שתהיה פונקציה אחת לכל ההדפסות פה או בתוכנית הראשית?
+        public List<Parcel> GetNonMatchParcels()
         {
             List<Parcel> NonMatch = new List<Parcel>();
             foreach (var item in DataSource.Parcels)
             {
-                if (item.DroneId == 0)//האם יש דרך יותר יפה ומדוייקת?
+                if (item.DroneId == 0)
                 {
                     NonMatch.Add(item);
                 }
@@ -133,137 +133,90 @@ namespace DalObject
         }
         public void ParcelToDrone(Parcel temp)
         {
-            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);
-            par.MatchForDroneTime = DateTime.Now;
+            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);    
             var Dro = DataSource.Drones.FirstOrDefault(p => p.Status == IDAL.DO.DroneStatus.Available && p.MaxWeight == par.Weight);
             par.DroneId = Dro.IdNumber;
+            par.MatchForDroneTime = DateTime.Now;
+            var index = DataSource.Parcels.FindIndex(c => c.IdNumber == temp.IdNumber);
+            DataSource.Parcels[index] = par;
             Dro.Status = DroneStatus.Shipping;
-        }//!!!!!
-        public void ParcelToCollecting(Parcel tem)
+            var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
+            DataSource.Drones[index2] = Dro;
+        }
+        public void ParcelToCollecting(Parcel temp)
         {
-
-            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == tem.IdNumber);
+            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);
             par.collectingDroneTime = DateTime.Now;
-            // Console.WriteLine("please enter the number of parcel you want to collect");
-            // int numP = Console.Read();
-            // Parcel temp1 = new Parcel();
-            // foreach (var item in DataSource.Parcels)
-            // {
-            //     if (item.IdNumber == numP)
-            //     {
-            //         temp1 = item;
-            //         break;
-            //     }
-            // }
-            // Console.WriteLine("please enter the number of the wanted drone");
-            // int numD = Console.Read();
-            // Drone temp2 = new Drone();
-            // foreach (var item in DataSource.Drones)
-            // {
-            //     if (item.IdNumber == numD)
-            //     {
-            //         temp2 = item;
-            //         break;
-            //     }
-            // }
-            // temp2.Status = (DroneStatus.Shipping);
-            // temp1.MatchForDroneTime=DateTime.Now();
-            //temp1.DroneId=temp2.IdNumber;
-        }//!!!!
+            var index = DataSource.Parcels.FindIndex(c => c.IdNumber == temp.IdNumber);
+            DataSource.Parcels[index] = par;
+            
+        }
         public void ParcelToCustomer(Parcel temp)
         {
             var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);
             par.ArrivingDroneTime = DateTime.Now;
+            var index = DataSource.Parcels.FindIndex(c => c.IdNumber == temp.IdNumber);
+            DataSource.Parcels[index] = par;
             var Dro = DataSource.Drones.FirstOrDefault(p => par.DroneId == p.IdNumber);
-
             Dro.Status = DroneStatus.Available;
-        }//האם צריך למחוק חבילה שהגיעה?
-        public void SendToCharge(DroneCharge D)//!!!! !
+            var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
+            DataSource.Drones[index2] = Dro;
+        }
+        public void SendToCharge(DroneCharge D)
         {
             DataSource.Charges.Add(D);
             var Dro = DataSource.Drones.FirstOrDefault(P => P.IdNumber == D.DroneId);
-            var Bas = DataSource.stations.FirstOrDefault(P => P.IdNumber == D.StationId);
             Dro.Status = DroneStatus.Maintenance;
+            var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
+            DataSource.Drones[index2] = Dro;
+            var Bas = DataSource.stations.FirstOrDefault(P => P.IdNumber == D.StationId);
             Bas.ChargeSlots--;
+            var index1 = DataSource.stations.FindIndex(c => c.IdNumber == Dro.IdNumber);
+            DataSource.stations[index1] = Bas;
         }
-        public void releaseCharge(Drone d)///!!!!
+        public void releaseCharge(Drone d)
         {
             var Dro = DataSource.Drones.FirstOrDefault(p => p.IdNumber == d.IdNumber);
             Dro.Status = DroneStatus.Available;
             Dro.Battery = 100;
+            var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
+            DataSource.Drones[index2] = Dro;
             var Char = DataSource.Charges.FirstOrDefault(p => p.DroneId == Dro.IdNumber);
             var Bas = DataSource.stations.FirstOrDefault(p => p.IdNumber == Char.StationId);
             Bas.ChargeSlots++;
+            var index1 = DataSource.stations.FindIndex(c => c.IdNumber == Dro.IdNumber);
+            DataSource.stations[index1] = Bas;
             DataSource.Charges.Remove(Char);
         }
-        static public T getItem<T>(T itemp)
+        public void RemovePar(Parcel temp)
         {
-            PropertyInfo help = itemp.GetType().GetProperties()[0];
-            //if (itemp is BaseStation)
-            //{
-            //    foreach (var item in DataSource.stations)
-            //    {
-            //        if (item.IdNumber == (int)help.GetValue(itemp, null))
-            //        {
-            //            T ret = itemp;
-            //            //T copyToObject = (T)Activator.CreateInstance(original.GetType());
+            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);
+            DataSource.Parcels.Remove(par);
 
-            //            foreach (PropertyInfo sourcePropertyInfo in item.GetType().GetProperties())
-            //            {
-            //                //PropertyInfo destPropertyInfo = original.GetType().GetProperty(sourcePropertyInfo.Name);
-
-            //                sourcePropertyInfo.SetValue(ret, sourcePropertyInfo.GetValue(item, null), null);
-            //            }
-            //            return ret;
-            //        }
-            //    }
-            //}
-            //if (itemp is Drone)
-            //{
-            //    foreach (var item in DataSource.Drones)
-            //    {
-            //        if (item.IdNumber == (int)help.GetValue(itemp, null))
-            //        {
-            //            T ret = item;
-            //            return ret;
-            //        }
-            //    }
-            //}
-            //if (itemp is Customer)
-            //{
-            //    foreach (var item in DataSource.Customers)
-            //    {
-            //        if (item.Id == (int)help.GetValue(itemp, null))
-            //        {
-            //            T ret = item;
-            //            return ret;
-            //        }
-            //    }
-            //}
-            if (itemp is Parcel)
-            {
-                foreach (var item in DataSource.Parcels)
-                {
-                    if (item.IdNumber == (int)help.GetValue(itemp, null))
-                    {
-                        T copyToObject = (T)Activator.CreateInstance(item.GetType());
-
-                        foreach (PropertyInfo sourcePropertyInfo in item.GetType().GetProperties())
-                        {
-                            //PropertyInfo destPropertyInfo = item.GetType().GetProperty(sourcePropertyInfo.Name);
-
-                            sourcePropertyInfo.SetValue(itemp, sourcePropertyInfo.GetValue(item,null));
-                        }
-
-                        return itemp;
-                    }
-                }
-               
-
-            }
-            help.SetValue(itemp, 0);
-                return itemp;
         }
-
+        public Drone getDrone(Drone id)
+        {
+            var Dro = DataSource.Drones.FirstOrDefault(P => P.IdNumber == id.IdNumber);
+            if(Dro.IdNumber!=id.IdNumber)
+            {
+                Dro.IdNumber = 0;
+            }
+            return Dro;
+        }
+        public BaseStation getBase(BaseStation id)
+        {
+            var Dro = DataSource.stations.FirstOrDefault(P => P.IdNumber == id.IdNumber);
+            return Dro;
+        }
+        public Parcel getParcel(Parcel id)
+        {
+            var Dro = DataSource.Parcels.FirstOrDefault(P => P.IdNumber == id.IdNumber);
+            return Dro;
+        }
+        public Customer getCustomer(Customer id)
+        {
+            var Dro = DataSource.Customers.FirstOrDefault(P => P.Id == id.Id);
+            return Dro;
+        }
     }
 }
