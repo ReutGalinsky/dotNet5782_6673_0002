@@ -11,7 +11,7 @@ namespace DalObject
 
     public class DalObject
     {
-        public DalObject()
+        public DalObject()//ctor
         {
             DataSource.Initialize();
         }
@@ -120,7 +120,7 @@ namespace DalObject
             return NonMatch;
         }
         /// <summary>
-        /// return list of the stations with availible charge slots
+        /// returning list of the stations with availible charge slots
         /// </summary>
         /// <returns></returns>
         public List<BaseStation> GetAvailibeStation()
@@ -131,18 +131,28 @@ namespace DalObject
                     Availible.Add(item);
             return Availible;
         }
+        /// <summary>
+        /// matching the parcel for an availible drone
+        /// </summary>
+        /// <param name="temp"></param>
         public void ParcelToDrone(Parcel temp)
         {
-            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);    
+            var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber); //search for the correct parcel   
             var Dro = DataSource.Drones.FirstOrDefault(p => p.Status == IDAL.DO.DroneStatus.Available && p.MaxWeight == par.Weight);
+            //search for the first drone that is availible and proper in the weight-category
+            //assumption: there is such a drone
             par.DroneId = Dro.IdNumber;
             par.MatchForDroneTime = DateTime.Now;
             var index = DataSource.Parcels.FindIndex(c => c.IdNumber == temp.IdNumber);
-            DataSource.Parcels[index] = par;
+            DataSource.Parcels[index] = par;//update in the data base
             Dro.Status = DroneStatus.Shipping;
             var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.Drones[index2] = Dro;
         }
+        /// <summary>
+        /// updating when the drone collect the parcel
+        /// </summary>
+        /// <param name="temp"></param>
         public void ParcelToCollecting(Parcel temp)
         {
             var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);
@@ -151,6 +161,10 @@ namespace DalObject
             DataSource.Parcels[index] = par;
             
         }
+        /// <summary>
+        /// updating when the customer pick up the parcel
+        /// </summary>
+        /// <param name="temp"></param>
         public void ParcelToCustomer(Parcel temp)
         {
             var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);
@@ -162,6 +176,10 @@ namespace DalObject
             var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.Drones[index2] = Dro;
         }
+        /// <summary>
+        /// sending the drone for a charge slot
+        /// </summary>
+        /// <param name="D"></param>
         public void SendToCharge(DroneCharge D)
         {
             DataSource.Charges.Add(D);
@@ -170,30 +188,43 @@ namespace DalObject
             var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.Drones[index2] = Dro;
             var Bas = DataSource.stations.FirstOrDefault(P => P.IdNumber == D.StationId);
-            Bas.ChargeSlots--;
+            Bas.ChargeSlots--;//updating the availibale stations
             var index1 = DataSource.stations.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.stations[index1] = Bas;
         }
+        /// <summary>
+        /// releasing the charged drone
+        /// </summary>
+        /// <param name="d"></param>
         public void releaseCharge(Drone d)
         {
             var Dro = DataSource.Drones.FirstOrDefault(p => p.IdNumber == d.IdNumber);
             Dro.Status = DroneStatus.Available;
-            Dro.Battery = 100;
+            Dro.Battery = 100;//assumption: the drone is full-charged every time it leaving a charge slot
             var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.Drones[index2] = Dro;
             var Char = DataSource.Charges.FirstOrDefault(p => p.DroneId == Dro.IdNumber);
             var Bas = DataSource.stations.FirstOrDefault(p => p.IdNumber == Char.StationId);
-            Bas.ChargeSlots++;
+            Bas.ChargeSlots++;//updating the avilible stations
             var index1 = DataSource.stations.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.stations[index1] = Bas;
             DataSource.Charges.Remove(Char);
         }
+        /// <summary>
+        /// removing parcel from the data base
+        /// </summary>
+        /// <param name="temp"></param>
         public void RemovePar(Parcel temp)
         {
             var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber);
             DataSource.Parcels.Remove(par);
 
         }
+        /// <summary>
+        /// returning a single drone
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Drone getDrone(Drone id)
         {
             var Dro = DataSource.Drones.FirstOrDefault(P => P.IdNumber == id.IdNumber);
@@ -203,16 +234,31 @@ namespace DalObject
             }
             return Dro;
         }
+        /// <summary>
+        /// returning a single base station
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public BaseStation getBase(BaseStation id)
         {
             var Dro = DataSource.stations.FirstOrDefault(P => P.IdNumber == id.IdNumber);
             return Dro;
         }
+        /// <summary>
+        /// returning a single parcel
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Parcel getParcel(Parcel id)
         {
             var Dro = DataSource.Parcels.FirstOrDefault(P => P.IdNumber == id.IdNumber);
             return Dro;
         }
+        /// <summary>
+        /// returning a single customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Customer getCustomer(Customer id)
         {
             var Dro = DataSource.Customers.FirstOrDefault(P => P.Id == id.Id);

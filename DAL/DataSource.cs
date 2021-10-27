@@ -8,19 +8,31 @@ namespace DalObject
 {
     class DataSource
     {
+        /// <summary>
+        /// the data structs for out data base
+        /// </summary>
         internal static List<BaseStation> stations = new List<BaseStation>();
         internal static List<Drone> Drones = new List<Drone>();
         internal static List<Customer> Customers = new List<Customer>();
         internal static List<Parcel> Parcels = new List<Parcel>();
         internal static List<DroneCharge> Charges = new List<DroneCharge>();
+        /// <summary>
+        /// the inner class with the initialization
+        /// </summary>
         internal class Config
         {
-            internal static int RunningNumber = 1;
+            internal static int RunningNumber = 1;//unique number for the parcels
         }
+        /// <summary>
+        /// function that initialize the data structures
+        /// </summary>
         internal static void Initialize()
+        //assumption: the legal location is in israel:
+        //Longitude: between 33 to 35
+        //Latitude: between 31 to 33
         {
             Random rand = new Random(DateTime.Now.Millisecond);
-            int amount = rand.Next(2, 5);
+            int amount = rand.Next(2, 5);//random amount of any object
             {//base stations://-----------------------------------------------------------
                 for (int i = 0; i < amount; i++)
                 {
@@ -28,7 +40,8 @@ namespace DalObject
                     stations.Add(s);
                 }
             }
-            { //Drones:---------------------------------------------------------------------------------
+            { //Drones:--------------------------------------------------------------------
+              //all the drones are avalilible
                 amount = rand.Next(5, 10);
                 for (int i = 0; i < amount; i++)
                 {
@@ -47,14 +60,14 @@ namespace DalObject
             }
             {
                 //parcels:--------------------------
-
+                //all the parcels are not matched to a drone yet
                 amount = rand.Next(10, 100);
                 for (int i = 0; i < amount; i++)
                 {
                     Parcel parcel = new Parcel() { IdNumber = Config.RunningNumber++, ClientSendName = rand.Next(), ClientGetName = rand.Next(), Weight = (WeightCategories)(rand.Next(1, 4)), Priority = (Priorities)(rand.Next(1, 4)) };
                     parcel.DroneId = 0;
-                    parcel.CreateParcelTime = new DateTime(); 
-                    parcel.MatchForDroneTime = new DateTime();
+                    parcel.CreateParcelTime = new DateTime(); //zero
+                    parcel.MatchForDroneTime = new DateTime();//zero
                     parcel.collectingDroneTime = new DateTime();
                     parcel.ArrivingDroneTime = new DateTime();
                     Parcels.Add(parcel);

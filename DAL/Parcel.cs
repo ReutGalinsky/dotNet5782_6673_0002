@@ -11,7 +11,7 @@ namespace IDAL.DO
         public int IdNumber { get; set; }
         public int ClientSendName { get; set; }
         public int ClientGetName { get; set; }
-        public int DroneId { get; set; }        //o מזהה רחפן מבצע )0 אם לא הוקצה( 
+        public int DroneId { get; set; }   
         public WeightCategories Weight { get; set; }
         public Priorities Priority { get; set; }
         public System.DateTime CreateParcelTime { get; set; }
@@ -19,7 +19,8 @@ namespace IDAL.DO
         public System.DateTime collectingDroneTime { get; set; }
         public System.DateTime ArrivingDroneTime { get; set; }
 
-        public override string ToString()//האם להדפיס גם את הזמנים?
+        public override string ToString()
+            //assumption: the time shouldn't be printed
         {
             return string.Format($@"parcel number {IdNumber}
 was sent to customer num. {ClientSendName} to customer num. {ClientGetName}

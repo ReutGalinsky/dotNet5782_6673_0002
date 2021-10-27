@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using DalObject;
 using IDAL.DO;
 
-public enum Options { Adding=1, Updating, ShowItemp, ShowList,exit }
-public enum States { BaseStation=1, Drone, Customer,Parcel, Unmatched,Available }
-public enum Update { Match=1, Collect, Giving, Sending, Release }
+public enum Options { Adding=1, Updating, ShowItemp, ShowList,exit }//enum for optional actions
+public enum States { BaseStation=1, Drone, Customer,Parcel, Unmatched,Available }//enum for internal choices
+public enum Update { Match=1, Collect, Giving, Sending, Release }//enum for updating options
 
 
 namespace ConsoleUI
 {
     class Program
     {
-        static public void PrintMenu()
+        static public void PrintMenu()//the first menu for the user
         {
             Console.WriteLine(@"1. adding
 2. updating
@@ -132,7 +132,7 @@ namespace ConsoleUI
             Parcel temp = new Parcel();
             foreach (var item in Parcels)
             {
-                if(item.ArrivingDroneTime.Day<DateTime.Now.Day-7&&item.ArrivingDroneTime!=(temp.ArrivingDroneTime))
+                if(item.ArrivingDroneTime.Day<DateTime.Now.Day-7&&item.ArrivingDroneTime.Month<DateTime.Now.Month&&item.ArrivingDroneTime!=(temp.ArrivingDroneTime))
                 {
                     system.RemovePar(item);
                 }
@@ -185,6 +185,10 @@ namespace ConsoleUI
             }
             system.ParcelToCollecting(temp);
         }
+        /// <summary>
+        /// updating the time when the parcel arrived
+        /// </summary>
+        /// <param name="system"></param>
         static public void GivingToCustomer(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the parcel code");
@@ -207,6 +211,10 @@ namespace ConsoleUI
             }
 
         }
+        /// <summary>
+        ///releasing drone from a charge slot
+        /// </summary>
+        /// <param name="system"></param>
         static public void RelaseCharge(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the Drone's code");
@@ -219,7 +227,10 @@ namespace ConsoleUI
 
             system.releaseCharge(Dc);
         }
-
+        /// <summary>
+        /// sending drone for a charge slot
+        /// </summary>
+        /// <param name="system"></param>
         static public void ChargeDrone(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the Drone's code");
@@ -238,6 +249,7 @@ namespace ConsoleUI
             Dc.StationId = int.Parse(Console.ReadLine());
             system.SendToCharge(Dc);
         }
+
         static void Main(string[] args)
         {
             DalObject.DalObject DeliverySystem = new DalObject.DalObject();
@@ -246,7 +258,7 @@ namespace ConsoleUI
             while (choose != Options.exit)
             {
                 PrintMenu();
-                 choose = (Options)(int.Parse(Console.ReadLine()));
+                choose = (Options)(int.Parse(Console.ReadLine()));
                 States internalChoose = (States)0;
                 switch (choose)
                 {
