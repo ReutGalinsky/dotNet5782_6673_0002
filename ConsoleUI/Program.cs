@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using DalObject;
 using IDAL.DO;
 
-public enum Options { Adding=1, Updating, ShowItemp, ShowList,exit }//enum for optional actions
-public enum States { BaseStation=1, Drone, Customer,Parcel, Unmatched,Available }//enum for internal choices
-public enum Update { Match=1, Collect, Giving, Sending, Release }//enum for updating options
+public enum Options { Adding = 1, Updating, ShowItemp, ShowList, exit }//enum for optional actions
+public enum States { BaseStation = 1, Drone, Customer, Parcel, Unmatched, Available }//enum for internal choices
+public enum Update { Match = 1, Collect, Giving, Sending, Release }//enum for updating options
 
 
 namespace ConsoleUI
@@ -29,8 +29,8 @@ namespace ConsoleUI
         {
             Console.WriteLine("please enter id number for the new base station");
             BaseStation Base1 = new BaseStation();
-            Base1.IdNumber= int.Parse(Console.ReadLine());
-            while(system.getBase(Base1).IdNumber!=0 )
+            Base1.IdNumber = int.Parse(Console.ReadLine());
+            while (system.getBase(Base1).IdNumber != 0)
             {
                 Console.WriteLine("this id is already exist. please enter new one");
                 Base1.IdNumber = int.Parse(Console.ReadLine());
@@ -39,18 +39,18 @@ namespace ConsoleUI
             Base1.Name = Console.ReadLine();
             Console.WriteLine("please enter the amount of charge slots in your base station");
             Base1.ChargeSlots = int.Parse(Console.ReadLine());
-            Console.WriteLine("please enter the location of your base station (longitude,latitude)");
+            Console.WriteLine("please enter the location of your base station (longitude,latitude) in israel");
             Base1.Longitude = double.Parse(Console.ReadLine());
-            while(Base1.Longitude<33||Base1.Longitude>35)
+            while (Base1.Longitude < 33 || Base1.Longitude > 35)
             {
-                Console.WriteLine("error- out of jerusalem area, please enter again");
+                Console.WriteLine("error- out of israel's area, please enter again");
                 Base1.Longitude = double.Parse(Console.ReadLine());
 
             }
             Base1.Latitude = double.Parse(Console.ReadLine());
             while (Base1.Latitude < 31 || Base1.Latitude > 33)
             {
-                Console.WriteLine("error- out of jerusalem area, please enter again");
+                Console.WriteLine("error- out of israel's area, please enter again");
                 Base1.Latitude = double.Parse(Console.ReadLine());
 
             }
@@ -66,12 +66,12 @@ namespace ConsoleUI
             Console.WriteLine("please enter id number for the new drone (must be different from zero)");//האם צריך לבדוק שאכן ייחודי?
             Drone Drone1 = new Drone();
             Drone1.IdNumber = int.Parse(Console.ReadLine());
-            while(Drone1.IdNumber==0)
+            while (Drone1.IdNumber == 0)
             {
                 Console.WriteLine("zero is illegal. please enter different one");
                 Drone1.IdNumber = int.Parse(Console.ReadLine());
             }
-            Drone temp=system.getDrone(Drone1);
+            Drone temp = system.getDrone(Drone1);
             while (temp.IdNumber != 0)
             {
                 Console.WriteLine("this id is already exist. please enter new one");
@@ -81,7 +81,7 @@ namespace ConsoleUI
             Drone1.Model = Console.ReadLine();
             Console.WriteLine("please enter the weight of your drone: 1 for light, 2 for middle and 3 for heavy");
             Drone1.MaxWeight = (WeightCategories)(int.Parse(Console.ReadLine()));
-            Console.WriteLine("please enter the battary status of the drone");//האם צריך לאתחל ישר ל100? האם לבדוק תקינות?
+            Console.WriteLine("please enter the battary status of the drone");
             Drone1.Battery = double.Parse(Console.ReadLine());
             Console.WriteLine("please enter the status of your drone: 1 for availible, 2 for maintence and 3 for shipping");
             Drone1.Status = (DroneStatus)(int.Parse(Console.ReadLine()));
@@ -94,7 +94,7 @@ namespace ConsoleUI
         static public void AddCustomer(DalObject.DalObject system)
         {
             Console.WriteLine("please enter id number for the new customer");
-            Customer Customer1 = new Customer(); 
+            Customer Customer1 = new Customer();
             Customer1.Id = int.Parse(Console.ReadLine());
             while (system.getCustomer(Customer1).Id != 0)
             {
@@ -105,18 +105,18 @@ namespace ConsoleUI
             Customer1.Name = Console.ReadLine();
             Console.WriteLine("plesae enter the phone number of the new customer");
             Customer1.Phone = Console.ReadLine();
-            Console.WriteLine("please enter the location of your base station (longitude,latitude)");
+            Console.WriteLine("please enter the location of your base station (longitude,latitude)  in isearl");
             Customer1.Longitude = double.Parse(Console.ReadLine());
             while (Customer1.Longitude < 33 || Customer1.Longitude > 35)
             {
-                Console.WriteLine("error- out of jerusalem area, please enter again");
+                Console.WriteLine("error- out of israel's area, please enter again");
                 Customer1.Longitude = double.Parse(Console.ReadLine());
 
             }
             Customer1.Latitude = double.Parse(Console.ReadLine());
             while (Customer1.Latitude < 31 || Customer1.Latitude > 33)
             {
-                Console.WriteLine("error- out of jerusalem area, please enter again");
+                Console.WriteLine("error- out of israel's area, please enter again");
                 Customer1.Latitude = double.Parse(Console.ReadLine());
 
             }
@@ -130,9 +130,9 @@ namespace ConsoleUI
         {
             List<Parcel> Parcels = system.GetParcels();
             Parcel temp = new Parcel();
-            foreach (var item in Parcels)
+            foreach (var item in Parcels)//remove the parcels that arrieved the customer before more than a week
             {
-                if(item.ArrivingDroneTime.Day<DateTime.Now.Day-7&&item.ArrivingDroneTime.Month<DateTime.Now.Month&&item.ArrivingDroneTime!=(temp.ArrivingDroneTime))
+                if (item.ArrivingDroneTime.Day < DateTime.Now.Day - 7 && item.ArrivingDroneTime.Month < DateTime.Now.Month && item.ArrivingDroneTime != (temp.ArrivingDroneTime))
                 {
                     system.RemovePar(item);
                 }
@@ -149,7 +149,7 @@ namespace ConsoleUI
             Parcel1.Priority = (Priorities)(int.Parse(Console.ReadLine()));
             Parcel1.DroneId = 0;
             Parcel1.CreateParcelTime = DateTime.Now;
-            Parcel1.collectingDroneTime = new DateTime();//האם באמת צריך לאתחל ככה ל0?
+            Parcel1.collectingDroneTime = new DateTime();
             Parcel1.MatchForDroneTime = new DateTime();
             Parcel1.ArrivingDroneTime = new DateTime();
             system.AddingParcel(Parcel1);
@@ -177,7 +177,7 @@ namespace ConsoleUI
         static public void CollectingFromCustomer(DalObject.DalObject system)
         {
             Console.WriteLine("please enter the parcel code");
-            Parcel temp = new Parcel() { IdNumber= int.Parse(Console.ReadLine()) };
+            Parcel temp = new Parcel() { IdNumber = int.Parse(Console.ReadLine()) };
             if (system.getParcel(temp).IdNumber == 0)
             {
                 Console.WriteLine("error-invalid input");
@@ -199,11 +199,13 @@ namespace ConsoleUI
                 return;
             }
             system.ParcelToCustomer(temp);
+            //option to remove the parcel from the data base
             Console.WriteLine("would you agree to remove your parcel from the data base? press y or n");
             char tav = char.Parse(Console.ReadLine());
-            switch(tav)
+            switch (tav)
             {
-                case 'y':system.RemovePar(temp);
+                case 'y':
+                    system.RemovePar(temp);
                     break;
                 case 'n':
                 default:
@@ -235,13 +237,14 @@ namespace ConsoleUI
         {
             Console.WriteLine("please enter the Drone's code");
             DroneCharge Dc = new DroneCharge() { DroneId = int.Parse(Console.ReadLine()) };
-            Drone temp = system.getDrone(new Drone { IdNumber=Dc.DroneId});
-            while (temp.IdNumber != 0)
+
+            Drone temp = system.getDrone(new Drone { IdNumber = Dc.DroneId });
+            while (temp.IdNumber == 0)
             {
-                Console.WriteLine("this id is already exist. please enter new one");
+                Console.WriteLine("this id not already exist. please enter new one");
                 Dc.DroneId = int.Parse(Console.ReadLine());
             }
-            Console.WriteLine( "the list of the availible charge stations:");
+            Console.WriteLine("the list of the availible charge stations:");
             List<BaseStation> availibles = system.GetAvailibeStation();
             foreach (var item in availibles)
                 Console.WriteLine("*" + item + "\n");
@@ -253,18 +256,30 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             DalObject.DalObject DeliverySystem = new DalObject.DalObject();
+            string choise;
             Console.WriteLine("Hi, welcome to the new system of Drone's delivery");
             Options choose = (Options)(1);
             while (choose != Options.exit)
             {
                 PrintMenu();
-                choose = (Options)(int.Parse(Console.ReadLine()));
+                choise = (Console.ReadLine());
+                while ((choise == ""))//the program wont crash if it enter will be pressed
+                {
+                    choise = Console.ReadLine();
+                }
+                choose = (Options)int.Parse(choise);
                 States internalChoose = (States)0;
+                Update secondChoos = (Update)0;
                 switch (choose)
                 {
                     case Options.Adding:
-                        Console.WriteLine("1. adding new base station \n 2.adding drone \n 3.adding new customer \n 4.adding new parcel");
-                        internalChoose = (States)(int.Parse(Console.ReadLine()));
+                        Console.WriteLine("1.adding new base station \n2.adding drone \n3.adding new customer \n4.adding new parcel");
+                        choise = (Console.ReadLine());
+                        while ((choise == ""))//the program wont crash if it enter will be pressed
+                        {
+                            choise = Console.ReadLine();
+                        }
+                        internalChoose = (States)int.Parse(choise);
                         switch (internalChoose)
                         {
                             case States.BaseStation:
@@ -285,8 +300,14 @@ namespace ConsoleUI
                         }
                         break;
                     case Options.Updating:
-                        Console.WriteLine("1. match parcel to a drone \n 2.collecting parcel by a drone \n 3.giving parcel to a customer \n 4.sending a dorne to be charged \n 5. release drone from charging");
-                        switch ((Update)(int.Parse(Console.ReadLine())))
+                        Console.WriteLine("1.match parcel to a drone \n2.collecting parcel by a drone \n3.giving parcel to a customer \n4.sending a dorne to be charged \n5. release drone from charging");
+                        choise = (Console.ReadLine());
+                        while ((choise == ""))//the program wont crash if it enter will be pressed
+                        {
+                            choise = Console.ReadLine();
+                        }
+                        secondChoos = (Update)int.Parse(choise);
+                        switch (secondChoos)
                         {
                             case Update.Match:
                                 MatchParcelToDrone(DeliverySystem);
@@ -309,8 +330,13 @@ namespace ConsoleUI
                         }
                         break;
                     case Options.ShowItemp:
-                        Console.WriteLine("1. show base station \n 2.show drone \n 3.show customer \n 4.show parcel");
-                        internalChoose = (States)(int.Parse(Console.ReadLine()));
+                        Console.WriteLine("1.show base station \n2.show drone \n3.show customer \n4.show parcel");
+                        choise= (Console.ReadLine());
+                        while ((choise == ""))//the program wont crash if it enter will be pressed
+                        {
+                            choise = Console.ReadLine();
+                        }
+                        internalChoose = (States)int.Parse(choise);
                         Console.WriteLine("please enter the id number");
                         int num = int.Parse(Console.ReadLine());
                         switch (internalChoose)
@@ -347,7 +373,7 @@ namespace ConsoleUI
                                 break;
                             case States.Parcel:
                                 Parcel parc = new Parcel() { IdNumber = num };
-                                parc =DeliverySystem.getParcel(parc);
+                                parc = DeliverySystem.getParcel(parc);
                                 if (parc.IdNumber == 0)
                                 {
                                     Console.WriteLine("not exist");
@@ -361,8 +387,14 @@ namespace ConsoleUI
                         }
                         break;
                     case Options.ShowList:
-                        Console.WriteLine("1. show the list of base stations \n 2. show the list of the drones \n 3.shoe the list of the customer \n 4. shoe the list of the parcel \n 5. show the list of the unmatched percels \n 6. show the list of base stations with availible charge slots");
-                        switch ((States)(int.Parse(Console.ReadLine())))
+                        Console.WriteLine("1.show the list of base stations \n2.show the list of the drones \n3.show the list of the customer \n4.show the list of the parcel \n5.show the list of the unmatched percels \n6.show the list of base stations with availible charge slots");
+                        choise = (Console.ReadLine());
+                        while ((choise == ""))//the program wont crash if it enter will be pressed
+                        {
+                            choise = Console.ReadLine();
+                        }
+                        internalChoose = (States)int.Parse(choise);
+                        switch (internalChoose)
                         {
                             case States.BaseStation:
                                 List<BaseStation> bases = DeliverySystem.GetBaseStations();

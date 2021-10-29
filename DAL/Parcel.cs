@@ -24,7 +24,7 @@ namespace IDAL.DO
         {
             return string.Format($@"parcel number {IdNumber}
 was sent to customer num. {ClientSendName} to customer num. {ClientGetName}
-weight: {Weight}. priority:{Priority}");
+weight: {Weight}. priority:{Priority}"+'\n');
         }
     }
 }

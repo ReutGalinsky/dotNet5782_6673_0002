@@ -17,7 +17,7 @@ namespace IDAL.DO
         {
             return string.Format($@"Drone number:{IdNumber}
 model: {Model}, Weight: {MaxWeight}
-Battery {Battery}%, status: {Status}");
+Battery {Battery}%, status: {Status}"+'\n');
         }
     }
 }

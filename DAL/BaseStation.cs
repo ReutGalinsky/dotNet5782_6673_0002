@@ -13,7 +13,7 @@ namespace IDAL.DO
         {
             return string.Format(@$"station number {IdNumber}, name: {Name}
 number of charge slots: {ChargeSlots}
-Longitude: "+DalObject.Tools.sexagesimalFormat(Longitude,true)+'\n'+"Latitude: "+ DalObject.Tools.sexagesimalFormat(Latitude,false));
+Longitude: "+DalObject.Tools.sexagesimalFormat(Longitude,true)+'\n'+"Latitude: "+ DalObject.Tools.sexagesimalFormat(Latitude,false)+'\n');
         }
     }
 }

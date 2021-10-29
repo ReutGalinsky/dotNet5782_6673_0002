@@ -189,7 +189,7 @@ namespace DalObject
             DataSource.Drones[index2] = Dro;
             var Bas = DataSource.stations.FirstOrDefault(P => P.IdNumber == D.StationId);
             Bas.ChargeSlots--;//updating the availibale stations
-            var index1 = DataSource.stations.FindIndex(c => c.IdNumber == Dro.IdNumber);
+            var index1 = DataSource.stations.FindIndex(c => c.IdNumber == Bas.IdNumber);
             DataSource.stations[index1] = Bas;
         }
         /// <summary>
@@ -206,7 +206,7 @@ namespace DalObject
             var Char = DataSource.Charges.FirstOrDefault(p => p.DroneId == Dro.IdNumber);
             var Bas = DataSource.stations.FirstOrDefault(p => p.IdNumber == Char.StationId);
             Bas.ChargeSlots++;//updating the avilible stations
-            var index1 = DataSource.stations.FindIndex(c => c.IdNumber == Dro.IdNumber);
+            var index1 = DataSource.stations.FindIndex(c => c.IdNumber == Bas.IdNumber);
             DataSource.stations[index1] = Bas;
             DataSource.Charges.Remove(Char);
         }

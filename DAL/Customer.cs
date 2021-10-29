@@ -18,7 +18,7 @@ namespace IDAL.DO
             return string.Format($@"the customer {Name} with the id of {Id}
 phone num. {Phone}
 Address:
-Longitude: " + DalObject.Tools.sexagesimalFormat(Longitude, true) + '\n' + "Latitude: " + DalObject.Tools.sexagesimalFormat(Latitude, false));
+Longitude: " + DalObject.Tools.sexagesimalFormat(Longitude, true) + '\n' + "Latitude: " + DalObject.Tools.sexagesimalFormat(Latitude, false)+'\n');
         }
 
     }
