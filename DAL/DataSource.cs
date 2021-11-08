@@ -45,7 +45,7 @@ namespace DalObject
                 amount = rand.Next(5, 10);
                 for (int i = 0; i < amount; i++)
                 {
-                    Drone drone = new Drone() { IdNumber = rand.Next()+1, Model = string.Format("model" + (char)(rand.Next(0, 23) + 97)), MaxWeight = (WeightCategories)(rand.Next(1, 4)) , Battery = rand.Next(0, 101), Status = (DroneStatus.Available) };
+                    Drone drone = new Drone() { IdNumber = rand.Next()+1, Model = string.Format("model" + (char)(rand.Next(0, 23) + 97)), MaxWeight = (WeightCategories)(rand.Next(1, 4)) };
                     Drones.Add(drone);
 
                 }

@@ -84,9 +84,7 @@ namespace ConsoleUI
             Console.WriteLine("please enter the weight of your drone: 1 for light, 2 for middle and 3 for heavy");
             Drone1.MaxWeight = (WeightCategories)(int.Parse(Console.ReadLine()));
             Console.WriteLine("please enter the battary status of the drone");
-            Drone1.Battery = double.Parse(Console.ReadLine());
             Console.WriteLine("please enter the status of your drone: 1 for availible, 2 for maintence and 3 for shipping");
-            Drone1.Status = (DroneStatus)(int.Parse(Console.ReadLine()));
             system.AddingDrone(Drone1);
         }
         /// <summary>

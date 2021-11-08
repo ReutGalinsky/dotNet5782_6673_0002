@@ -138,14 +138,13 @@ namespace DalObject
         public void ParcelToDrone(Parcel temp)
         {
             var par = DataSource.Parcels.FirstOrDefault(p => p.IdNumber == temp.IdNumber); //search for the correct parcel   
-            var Dro = DataSource.Drones.FirstOrDefault(p => p.Status == IDAL.DO.DroneStatus.Available && p.MaxWeight == par.Weight);
+            var Dro = DataSource.Drones.FirstOrDefault(p => p.MaxWeight == par.Weight);
             //search for the first drone that is availible and proper in the weight-category
             //assumption: there is such a drone
             par.DroneId = Dro.IdNumber;
             par.MatchForDroneTime = DateTime.Now;
             var index = DataSource.Parcels.FindIndex(c => c.IdNumber == temp.IdNumber);
             DataSource.Parcels[index] = par;//update in the data base
-            Dro.Status = DroneStatus.Shipping;
             var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.Drones[index2] = Dro;
         }
@@ -172,7 +171,6 @@ namespace DalObject
             var index = DataSource.Parcels.FindIndex(c => c.IdNumber == temp.IdNumber);
             DataSource.Parcels[index] = par;
             var Dro = DataSource.Drones.FirstOrDefault(p => par.DroneId == p.IdNumber);
-            Dro.Status = DroneStatus.Available;
             var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.Drones[index2] = Dro;
         }
@@ -184,7 +182,6 @@ namespace DalObject
         {
             DataSource.Charges.Add(D);
             var Dro = DataSource.Drones.FirstOrDefault(P => P.IdNumber == D.DroneId);
-            Dro.Status = DroneStatus.Maintenance;
             var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.Drones[index2] = Dro;
             var Bas = DataSource.stations.FirstOrDefault(P => P.IdNumber == D.StationId);
@@ -199,8 +196,6 @@ namespace DalObject
         public void releaseCharge(Drone d)
         {
             var Dro = DataSource.Drones.FirstOrDefault(p => p.IdNumber == d.IdNumber);
-            Dro.Status = DroneStatus.Available;
-            Dro.Battery = 100;//assumption: the drone is full-charged every time it leaving a charge slot
             var index2 = DataSource.Drones.FindIndex(c => c.IdNumber == Dro.IdNumber);
             DataSource.Drones[index2] = Dro;
             var Char = DataSource.Charges.FirstOrDefault(p => p.DroneId == Dro.IdNumber);

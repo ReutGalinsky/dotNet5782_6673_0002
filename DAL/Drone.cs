@@ -11,13 +11,10 @@ namespace IDAL.DO
         public int IdNumber { get; set; }
         public string Model { get; set; }
         public WeightCategories MaxWeight { get; set; }
-        public double Battery { get; set; }
-        public DroneStatus Status { get; set; }
         public override string ToString()
         {
             return string.Format($@"Drone number:{IdNumber}
-model: {Model}, Weight: {MaxWeight}
-Battery {Battery}%, status: {Status}"+'\n');
+model: {Model}, Weight: {MaxWeight}"+'\n');
         }
     }
 }
