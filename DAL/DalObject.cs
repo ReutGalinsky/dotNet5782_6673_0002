@@ -5,34 +5,224 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using IDAL.DO;
+using DAL;
 
 namespace DalObject
 {
-
+    //איך נדע שלא קיים האיבר?
     public class DalObject
     {
         public DalObject()//ctor
         {
             DataSource.Initialize();
         }
-        /// <summary>
-        /// function for adding new base station to the data base
-        /// </summary>
-        /// <param name="station">the new station the being added</param>
-        /// <returns></returns>
+       
+        #region AddDrone
+        public void AddDrone(Drone drone)
+        {
+            if (DataSource.Drones.Find(d => d.IdNumber == drone.IdNumber).IdNumber!=0)//?
+                throw new ExistingException("the drone is already exist");
+            DataSource.Drones.Add(drone);
+        }
+        #endregion
+
+        #region GetDrone
+        public Drone GetDrone(int id)
+        {
+            Drone drone = DataSource.Drones.FirstOrDefault(d => d.IdNumber == id);
+            if (drone.IdNumber==0)
+                throw new NotExistingException("the drone is not exist");
+            return drone;
+        }
+        #endregion
+
+        #region DeleteDrone
+        public void DeleteDrone(int id)
+        {
+            Drone drone=DataSource.Drones.Find(d=>d.IdNumber==id);
+            if (drone.IdNumber==0)
+                throw new NotExistingException("the drone is not existing");
+            DataSource.Drones.Remove(drone);
+        }
+        #endregion
+
+        #region UpdateDrone
+        public void UpdateDrone(Drone toUpdate)
+        {
+            for (int i = 0; i < DataSource.Drones.Count; i++)
+            {
+                if (DataSource.Drones[i].IdNumber==toUpdate.IdNumber)
+                {
+                    Drone d=new Drone();
+                    d.Model = toUpdate.Model;
+                    d.MaxWeight= toUpdate.MaxWeight;
+                    d.IdNumber = toUpdate.IdNumber;
+                    DataSource.Drones[i]=d;
+                    return;
+                }
+            }
+            throw new NotExistingException("the drone is not exist");
+            //Drone drone = DataSource.Drones.Find(x => x.IdNumber == toUpdate.IdNumber);
+            //if (drone.IdNumber==0)
+            //    throw new NotExistingException("the drone is not exist");
+            //drone.Model = toUpdate.Model;
+            //drone.MaxWeight = toUpdate.MaxWeight;
+            //drone.IdNumber = toUpdate.IdNumber;
+        }
+        #endregion
+
+        #region AddDroneCharge
+        public void AddDroneCharge(DroneCharge dronecharge)///???האם יש אופציה שכבר קיים או שלא ייתכן
+        {
+            if (DataSource.Charges.Find(d => d.DroneId == dronecharge.DroneId).DroneId!=0)//?
+                throw new ExistingException("the charge slot is already exist");
+            DataSource.Charges.Add(dronecharge);
+        }
+        #endregion
+
+        #region GetDroneCharge
+        public DroneCharge GetDroneCharge(int id)
+        {
+            DroneCharge droneCharge = DataSource.Charges.FirstOrDefault(d => d.DroneId == id);
+            if (droneCharge.DroneId==0)
+                throw new NotExistingException("the charge slot is not exist");
+            return droneCharge;
+        }
+        #endregion
+
+        #region DeleteDroneCharge
+        public void DeleteDroneCharge(int id)
+        {
+            DroneCharge droneCharge = DataSource.Charges.Find(d => d.DroneId == id);
+            if (droneCharge.DroneId==0)
+                throw new NotExistingException("the charge slot is not existing");
+            DataSource.Charges.Remove(droneCharge);
+        }
+        #endregion
+
+        #region UpdateDroneCharge
+        public void UpdateDroneCharge(DroneCharge toUpdate)
+        {
+            for (int i = 0; i < DataSource.Charges.Count; i++)
+            {
+                if (DataSource.Charges[i].DroneId == toUpdate.DroneId)
+                {
+                    DroneCharge d = new DroneCharge();
+                    d.DroneId = toUpdate.DroneId;
+                    d.StationId = toUpdate.StationId;
+                    DataSource.Charges[i] = d;
+                    return;
+                }
+            }
+            throw new NotExistingException("the charge slot is not exist");
+            //DroneCharge droneCharge = DataSource.Charges.Find(x => x.DroneId == toUpdate.DroneId);
+            //if (droneCharge.DroneId==0)
+            //    throw new NotExistingException("the charge slot is not exist");
+            //droneCharge.DroneId = toUpdate.DroneId;
+            //droneCharge.StationId = toUpdate.StationId;
+        }
+        #endregion
+
+        #region AddParcel
+        public void AddParcel(Parcel parcel)
+        {
+            if (DataSource.Parcels.Find(d => d.IdNumber == parcel.IdNumber).IdNumber!=0)//?
+                throw new ExistingException("the parcel is already exist");
+            DataSource.Parcels.Add(parcel);
+        }
+        #endregion
+
+        #region GetParcel
+        public Parcel GetParcel(int id)
+        {
+            Parcel parcel = DataSource.Parcels.FirstOrDefault(d => d.IdNumber == id);
+            if (parcel.IdNumber==0)
+                throw new NotExistingException("the parcel is not exist");
+            return parcel;
+        }
+        #endregion
+
+        #region DeleteParcel
+        public void DeleteParcel(int id)
+        {
+            Parcel parcel = DataSource.Parcels.Find(d => d.IdNumber == id);
+            if (parcel.IdNumber==0)
+                throw new NotExistingException("the parcel is not existing");
+            DataSource.Parcels.Remove(parcel);
+        }
+        #endregion
+
+        #region UpdateParcel
+        public void UpdateParcel(Parcel toUpdate)
+        {
+            for (int i = 0; i < DataSource.Parcels.Count; i++)
+            {
+                if (DataSource.Parcels[i].IdNumber == toUpdate.IdNumber)
+                {
+                    Parcel d = new Parcel();
+                    d.ArrivingDroneTime = toUpdate.ArrivingDroneTime;
+                    d.ClientGetName = toUpdate.ClientGetName;
+                    d.ClientSendName = toUpdate.ClientSendName;
+                    d.collectingDroneTime = toUpdate.collectingDroneTime;
+                    d.CreateParcelTime = toUpdate.CreateParcelTime;
+                    d.DroneId = toUpdate.DroneId;
+                    d.IdNumber = toUpdate.IdNumber;
+                    d.MatchForDroneTime = toUpdate.MatchForDroneTime;
+                    d.Priority = toUpdate.Priority;
+                    d.Weight = toUpdate.Weight;
+                    DataSource.Parcels[i] = d;
+                    return;
+                }
+            }
+            throw new NotExistingException("the parcel is not exist");
+            //Parcel parcel = DataSource.Parcels.Find(x => x.IdNumber == toUpdate.IdNumber);
+            //if (parcel.IdNumber==0)
+            //    throw new NotExistingException("the parcel is not exist");
+            //parcel.ArrivingDroneTime = toUpdate.ArrivingDroneTime;
+            //parcel.ClientGetName = toUpdate.ClientGetName;
+            //parcel.ClientSendName = toUpdate.ClientSendName;
+            //parcel.collectingDroneTime = toUpdate.collectingDroneTime;
+            //parcel.CreateParcelTime = toUpdate.CreateParcelTime;
+            //parcel.DroneId = toUpdate.DroneId;
+            //parcel.IdNumber = toUpdate.IdNumber;
+            //parcel.MatchForDroneTime = toUpdate.MatchForDroneTime;
+            //parcel.Priority = toUpdate.Priority;
+            //parcel.Weight = toUpdate.Weight;
+        }
+        #endregion
+
+        #region GetDrones
+        public IEnumerable<Drone> GetDrones()
+        {
+            var Drones = from item in DataSource.Drones
+                       select item;
+            return Drones;
+        }
+        #endregion
+
+        #region GetDroneCharges
+        public IEnumerable<DroneCharge> GetDroneCharges()
+        {
+            var charges = from item in DataSource.Charges
+                         select item;
+            return charges;
+        }
+        #endregion
+
+        #region GetParcels
+        public IEnumerable<Parcel> GetParcels()
+        {
+            var parcels = from item in DataSource.Parcels
+                          select item;
+            return parcels;
+        }
+        #endregion
+        //**************************************************************
         public void AddingBaseStation(BaseStation station)
         {
             DataSource.stations.Add(station);
         }
-        /// <summary>
-        /// add new drone to the data base
-        /// </summary>
-        /// <param name="NewDrone">the new drone</param>
-        /// <returns></returns>
-        public void AddingDrone(Drone NewDrone)
-        {
-            DataSource.Drones.Add(NewDrone);
-        }
+
         /// <summary>
         /// add new customer to the data base
         /// </summary>
@@ -49,7 +239,7 @@ namespace DalObject
         /// <returns></returns>
         public void AddingParcel(Parcel NewParcel)
         {
-            NewParcel.IdNumber = DataSource.Config.RunningNumber++;
+            NewParcel.IdNumber = DataSource.Config.RunningNumber++;///?
             DataSource.Parcels.Add(NewParcel);
         }
 
@@ -70,7 +260,7 @@ namespace DalObject
         /// function that return list of drones
         /// </summary>
         /// <returns></returns>
-        public List<Drone> GetDrones()
+        public List<Drone> GetDroness()
         {
             List<Drone> returnDrone = new List<Drone>();
             foreach (var item in DataSource.Drones)
