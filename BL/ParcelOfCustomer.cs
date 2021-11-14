@@ -14,8 +14,5 @@ namespace IBL.BO
         public State State { set; get; }
         public CustomerOfParcel SourceOrDestinaton { set; get; }
 
-
-
-
     }
 }

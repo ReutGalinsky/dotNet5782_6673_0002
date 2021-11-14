@@ -13,16 +13,11 @@ namespace IBL.BO
         public CustomerOfParcel Get { set; get; }
         public WeightCategories Weight { set; get; }
         public Priorities Priority{ set; get; }
-        public DroneOfParcel Drone { set; get; }
+        public DroneInParcel Drone { set; get; }
         public DateTime CreateParcel { set; get; }
         public DateTime Matching { set; get; }
         public DateTime Picking { set; get; }
         public DateTime Supply { set; get; }
-
-
-
-
-
 
     }
 }
