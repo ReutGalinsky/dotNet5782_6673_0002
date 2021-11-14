@@ -22,6 +22,11 @@ namespace DalObject
         internal class Config
         {
             internal static int RunningNumber = 1;//unique number for the parcels
+            public static bool light { set; get; }
+            public static bool heavy { set; get; }
+            public static bool available { set; get; }
+            public static bool medium { set; get; }
+            public static double speed { set; get; }
         }
         /// <summary>
         /// function that initialize the data structures

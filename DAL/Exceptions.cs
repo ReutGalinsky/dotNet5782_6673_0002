@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
 
-namespace DAL
+namespace IDAL.DO
 {
     [Serializable]
     class ExistingException:Exception

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using IDAL.DO;
-using DAL;
+using IDAL;
 
 namespace DalObject
 {

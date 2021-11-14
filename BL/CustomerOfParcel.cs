@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    interface IBL
+    class CustomerOfParcel
     {
+        public int Id { set; get; }
+        public string Name { set; get; }
     }
 }

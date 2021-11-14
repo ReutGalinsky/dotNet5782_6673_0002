@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    interface IBL
+    class Location
     {
-    }
+        public double Longitude { set; get; }
+        public double Latitude { set; get; }
+
+}
 }
