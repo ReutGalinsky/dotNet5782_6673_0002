@@ -7,8 +7,9 @@ using IDAL.DO;
 
 namespace IDAL
 {
-    interface IDal
+    public interface IDal
     {
+        public double[] UsingElectricity();
         public void AddDrone(Drone drone);
         public Drone GetDrone(int id);
         public void DeleteDrone(int id);

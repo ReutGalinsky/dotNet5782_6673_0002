@@ -10,7 +10,7 @@ using IDAL;
 namespace DalObject
 {
     //איך נדע שלא קיים האיבר?
-    public class DalObject
+    public class DalObject:IDal
     {
         public DalObject()//ctor
         {
@@ -215,6 +215,14 @@ namespace DalObject
             var parcels = from item in DataSource.Parcels
                           select item;
             return parcels;
+        }
+        #endregion
+
+        #region UsingElectricity
+        public double[] UsingElectricity()
+        {
+            double[] arr = new double[5] {DataSource.Config.available, DataSource.Config.heavy, DataSource.Config.light, DataSource.Config.medium, DataSource.Config.speed };
+            return arr;
         }
         #endregion
         //**************************************************************
