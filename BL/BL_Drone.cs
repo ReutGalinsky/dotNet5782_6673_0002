@@ -51,7 +51,7 @@ namespace BL
             {
                 IDAL.DO.Drone d=new IDAL.DO.Drone() { IdNumber=droneToAdd.IdNumber, Model=droneToAdd.Model,MaxWeight=(IDAL.DO.WeightCategories)droneToAdd.MaxWeight};
                 dal.AddDrone(d);
-                Drones.Add(droneToAdd)
+                Drones.Add(droneToAdd);
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace BL
         #endregion
 
         #region GetDrones
-        public IEnumerable<IBL.BO.DroneToList> getDrones()
+        public IEnumerable<IBL.BO.DroneToList> GetDrones()
         {
             return Drones;
         }
