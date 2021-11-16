@@ -25,11 +25,7 @@ namespace BL
                 throw new AddingProblemException("the location is out of israel");
             try
             {
-
-                IDAL.DO.Customer c = new IDAL.DO.Customer() {Id=customerToAdd.Id,Phone=customerToAdd.Phone,Latitude=customerToAdd.Local.Latitude, Longitude = customerToAdd.Local.Longitude,Name=customerToAdd.Name };
-                dal.AddCustomer(c);
-          
-
+                dal.AddCustomer(customerToAdd);
             }
             catch(Exception e)
             {
@@ -40,18 +36,18 @@ namespace BL
         #region AddParcelToDelivery
         public void AddParcelToDelivery(IBL.BO.Parcel parcel)
     {
-            if (parcel.Send.Name == "")
+            if (parcel.Send.Name == "")//לבדוק את הקטע הזה
                 throw new AddingProblemException("invalid name of customer");
             if (parcel.Get.Name == "")
                 throw new AddingProblemException("invalid name of customer");
             if (parcel.Weight != IBL.BO.WeightCategories.Heavy && parcel.Weight != IBL.BO.WeightCategories.Middle && parcel.Weight != IBL.BO.WeightCategories.Light)
                 throw new AddingProblemException("This weight is not an option");
             if (parcel.Priority!= IBL.BO.Priorities.Emergency&& parcel.Priority!=IBL.BO.Priorities.Regular&&parcel.Priority!=IBL.BO.Priorities.Speed)
-                throw new AddingProblemException("This weight is not an option");
+                throw new AddingProblemException("This prioritie is not an option");
             try
             {
-                IDAL.DO.Parcel p = new IDAL.DO.Parcel() { IdNumber = parcel.Id, ClientSendName = (IDAL.DO.CustomerOfParcel).parcel.Send, ClientGetName = (IDAL.DO.CustomerOfParcel).parcel.get, Weight = (IDAL.DO.WeightCategories)parcel.Weight, Priority = (IDAL.DO.Priorities)parcel.Priority,CreateParcelTime=DateTime(0),collectingDroneTime=0,ArrivingDroneTime=0,MatchForDroneTime=DateTime.Now  };
-                //to initialize the drone with null             
+              parcel.Drone=null;
+              dal.AddParcel(parcel);
             }
             catch (Exception e)
             {
@@ -64,15 +60,12 @@ namespace BL
         #region UpdatingNameOfCustomer
         public void UpdatingNameOfCustomer( int id,string Name="",string phone="")
         {
-            if (Name == "")
-                throw new UpdatingException("the name is illegal");
-            IBL.BO.Customer d =Customer.Find(x => x.id == id);
-            if (d == null)
+            Customer updatedCustomer=dal.GetCustomers().Find(x => x.id == id);
+            if (updatedCustomer == null)
                 throw new UpdatingException("the customer is not existing");
-            if(Name != "")d.Name = Name;
-            if(phone != "") d.Phone = phone;
-            IDAL.DO.Customer updatedCustomer = new IDAL.DO.Customer() { Id = d.Id, Phone = d.Phone, Latitude = d.Local.Latitude, Longitude = d.Local.Longitude, Name = d.Name };
-            try
+            if(Name != "")updatedCustomer.Name = Name;
+            if(phone != "") updatedCustomer.Phone = phone;
+           try
             {
                 dal.UpdateCustomer(updatedCustomer);
             }
@@ -80,35 +73,22 @@ namespace BL
             {
                 throw new UpdatingException("can't update the customer", e);
             }
-
-            try
-            {
-
-                IDAL.DO.Customer c = new IDAL.DO.Customer() { Id = customerToAdd.Id, Phone = customerToAdd.Phone, Latitude = customerToAdd.Local.Latitude, Longitude = customerToAdd.Local.Longitude, Name = customerToAdd.Name };
-                dal.AddCustomer(c);
-
-
-            }
-            catch (Exception e)
-            {
-                throw new AddingProblemException("can't add the customer", e);
-            }
         }
         #endregion
         #region GetCustomers
         public IEnumerable<IBL.BO.CustomerToList> getCustomers()
         {
-            return Customers;
+            return Customers; //פונקציה גנרית
         }
         #endregion
 
         #region GetCustomer
         public IBL.BO.CustomerToList GetCustomer(int id)
         {
-            IBL.BO.CustomerToList c = Customer.Find(x => x.IdNumber == id);
-            if (c == null)
-                throw new GettingProblemException("the customer is not exist");
-            return c;
+                   IBL.BO.<CustomerToList> c = GetCustomers();
+            var Customer= from item in c
+                             where (item)//לבדוק 
+            return Customer;
         }
         #endregion
     }

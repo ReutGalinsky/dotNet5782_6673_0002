@@ -18,13 +18,13 @@ namespace BL
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if (d == null)
                 throw new ConnectionException("the drone is not existing");
-            if (d.State != State.Define)
+            if (d.StateDrone != StateDrone.Available)
                 throw new ConnectionException("the drone is not available");
             //to search parcel by: priority; weight, distance
             //the drone need to return to charge
-            d.State = State.match;
+            d.StateDrone = StateDrone.shipping;
             Parcel.matching = DateTime.Now;
-            Parcel.drone = (droneinparcel)d;
+            Parcel.drone = (droneinparcel)d; //פונקציה להכניס לחבילה לרחפן
         }
         #endregion
         #region PickingParcelByDrone
@@ -34,14 +34,16 @@ namespace BL
             if (d == null)
                 throw new ConnectionException("the drone is not existing");
             IBL.BO.ParcelToList p = Parcel.Find(x => x.IdNumber == d.NumberOfParcel);
-            if (p.State == Picking)
-                throw new ConnectionException("the parcel is already picking");
+            if (p.StateDrone == shipping)
+                throw new ConnectionException("the parcel is already shipping");
             throw new ConnectionException("the drone is not available");
             //to search parcel by: priority; weight, distance
-            //the drone need to return to charge
-            d.Battery = ;//by distance
+            //the drone need to return to a near charge
+            d.Battery = ;//down by distance
             d.Current = ()p.current;
+            d.StateDrone = available;
             p.pickingtime = DateTime.Now;
+
         }
         #endregion
 
@@ -51,11 +53,10 @@ namespace BL
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if (d == null)
                 throw new ConnectionException("the drone is not existing");
-            if (d.State != State.pick)
+            if (d.StateDrone != StateDrone.available)
                 throw new ConnectionException("the drone is not picking");
             d.Current =//by distance
                   d.Battery =//by distance
-              d.State = State.Define;
             Parcel.supplying = DateTime.Now;
         }
         #endregion

@@ -14,33 +14,36 @@ namespace BL
         #region GetBaseStations
         public IEnumerable<IBL.BO.BaseStationToList> GetBseStations()
         {
-            return BaseStation;
+            return BaseStation;//להוסיף על ידי פונקציה גנרית
+            //לטפל בחריגות
         }
         #endregion
         #region GetBaseStationsWithCharge
         public IBL.BO.BaseStationToList GetBaseStationsWithCharge()
         {
-            IBL.BO.<BaseStationToList> b = BaseStation.Find(x => x.IdNumber == id);
-            if (d == null)
-            return d;
+            IBL.BO.<BaseStationToList> b = GetBaseStations();
+            var baseStation= from item in b
+                             where (item)//לבדוק 
+            return baseStation;
         }
         #endregion
         #region AddBaseStation
         public void AddBaseStation(IBL.BO.BaseStation baseStationToAdd)
         {
-
             if (baseStationToAdd.Name == "")
                 throw new AddingProblemException("invalid name of base");
             if (baseStationToAdd.Local.Latitude > 35 || baseStationToAdd.Local.Latitude < 33)
                 throw new AddingProblemException("the location is out of israel");
             if (baseStationToAdd.Local.Longitude > 33 || baseStationToAdd.Local.Longitude < 31)
                 throw new AddingProblemException("the location is out of israel");
+            if (baseStationToAdd.slotCharge< 0)
+                throw new AddingProblemException("there is no charge slots");
             try
             {
 
                 IDAL.DO.BaseStation b = new IDAL.DO.BaseStation() { IdNumber = baseStationToAdd.Id, ChargeSlots=baseStationToAdd.ChargeSlots, Latitude = baseStationToAdd.Local.Latitude, Longitude = baseStationToAdd.Local.Longitude, Name = baseStationToAdd.Name };
                 dal.AddBaseStation(b);
-                b.list of drones = null;
+                b.list of drones = null;//לבדוק
             }
             catch (Exception ex)
             {
@@ -52,17 +55,14 @@ namespace BL
         #region UpdatingBaseStation
         public void UpdatingBaseStation(string id, string Name = "", int numberOfCharge = 0)
         {
-            if (Name == "")
-                throw new UpdatingException("the name is illegal");
-            IBL.BO.BaseStation b = BaseStation.Find(x => x.id == id);
+            IBL.BO.BaseStation b = dal.GetBaseStation(x => x.id == id);
             if (b == null)
                 throw new UpdatingException("the customer is not existing");
             if (Name != "") b.Name = Name;
             if (numberOfCharge != 0) b.ChargeSlots = numberOfCharge;
-            IDAL.DO.BaseStation updatedBaseStation = new IDAL.DO.BaseStation() { IdNumber = b.Id, Phone = d.Phone, Latitude = d.Local.Latitude, Longitude = d.Local.Longitude, Name = d.Name };
             try
             {
-                dal.UpdateBaseStation(updatedBaseStation);
+                dal.UpdateBaseStation.Func(b);//לא באמת קוראים לה ככה
             }
             catch (Exception e)
             {
@@ -71,10 +71,10 @@ namespace BL
 
         }
         #endregion
-        #region GetBaseStations
-        public IEnumerable<IBL.BO.BaseStationToList> GetBaseStations()
+        #region GetBaseStation
+        public <IBL.BO.BaseStationToList> GetBaseStation()
         {
-            return BaseStations;
+            return dal.GetBaseStations(); //להוסיף חריגות
         }
         #endregion
 

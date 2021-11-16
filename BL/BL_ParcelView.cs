@@ -15,10 +15,10 @@ namespace BL
         #region GetParcel
         public IBL.BO.ParcelOfList GetParcel(int id)
         {
-            IBL.BO.ParcelOfList p = Parcel.Find(x => x.IdNumber == id);
-            if (p == null)
-                throw new GettingProblemException("the parcel is not exist");
-            return p;
+            IBL.BO.<ParcelOfList> p = GetParcels();
+            var Parcel = from item in p
+                              where (item)//לבדוק 
+            return Parcel;
         }
         #endregion
         #region GetParcels
