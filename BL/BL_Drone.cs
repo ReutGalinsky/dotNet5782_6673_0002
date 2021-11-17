@@ -67,12 +67,15 @@ namespace BL
         #endregion
 
         #region GetDrone
-        public IBL.BO.DroneToList GetDrone(int id)
+        public IBL.BO.Drone GetDrone(int id)
         {
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if (d == null)
                 throw new GettingProblemException("the drone is not exist");
-            return d;
+            IBL.BO.Drone drone = (IBL.BO.Drone)d.CopyPropertiesToNew(typeof(IBL.BO.Drone));
+            drone.Current.Latitude = d.Current.Latitude;
+            drone.Current.Longitude = d.Current.Longitude;
+
         }
         #endregion
 

@@ -33,6 +33,10 @@ namespace BL
         public IEnumerable<IBL.BO.ParcelOfList> GetParcels()
         {
             var list=from item in dal.GetParcels() select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
+            foreach(var item in list)
+            {
+
+            }
             return list;
         }
         #endregion
@@ -40,8 +44,8 @@ namespace BL
         #region GetParcelsNotMatching
         public IEnumerable<IBL.BO.ParcelOfList> GetParcelsNotMatching()
         {
-            var list = from item in dal.GetParcels()
-                       where (item.DroneId==0)
+            var list = from item in GetParcels()
+                       where (item.State==State.Define)
                        select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
             return list;
         }

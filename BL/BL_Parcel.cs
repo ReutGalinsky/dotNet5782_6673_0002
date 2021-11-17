@@ -93,13 +93,17 @@ namespace BL
         #endregion
 
         #region GetCustomer
-        public IBL.BO.CustomerToList GetCustomer(int id)
+        public IBL.BO.Customer GetCustomer(int id)
         {
             try
             {
-                return (IBL.BO.CustomerToList)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.CustomerToList));
+                IDAL.DO.Customer c= dal.GetCustomer(id);
+                IBL.BO.Customer customer = (IBL.BO.Customer)c.CopyPropertiesToNew(typeof(IBL.BO.Customer));
+                customer.Local.Latitude = c.Latitude;
+                customer.Local.Longitude = c.Longitude;
+                var list.
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new GettingProblemException("the customer is not exist", e);
             }

@@ -10,7 +10,7 @@ namespace IBL.BO
     {
         public int IdNumber { set; get; }
         public string Name { set; get; }
-        public int AvailibleChargeSlots { set; get; }
+        public int ChargeSlots { set; get; }
         public int FullChargeSlots { set; get; }
 
     }

@@ -9,8 +9,8 @@ namespace IBL.BO
     class ParcelOfList
     {
         public int IdNumber { set; get; }
-        public string Send { set; get; }
-        public string Get { set; get; }
+        public string ClientSendName { set; get; }
+        public string ClientGetName { set; get; }
         public WeightCategories Weight { set; get; }
         public Priorities Priority { set; get; }
         public State State { set; get; }
