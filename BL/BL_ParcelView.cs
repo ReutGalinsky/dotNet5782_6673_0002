@@ -10,27 +10,40 @@ using IBL.BO;
 
 namespace BL
 {
-    class BL_ParcelView
+    partial class BL
     {
         #region GetParcel
         public IBL.BO.ParcelOfList GetParcel(int id)
         {
-            IBL.BO.<ParcelOfList> p = GetParcels();
-            var Parcel = from item in p
-                              where (item)//לבדוק 
-            return Parcel;
+            IBL.BO.ParcelOfList parcel;
+            try
+            {
+                parcel = (IBL.BO.ParcelOfList)dal.GetParcel(id).CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
+            }
+            catch(Exception e)
+            {
+                throw new GettingProblemException("the pacrel is not exist", e);
+            }
+            return parcel;
+           
         }
         #endregion
+
         #region GetParcels
         public IEnumerable<IBL.BO.ParcelOfList> GetParcels()
         {
-            return Parcel;
+            var list=from item in dal.GetParcels() select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
+            return list;
         }
         #endregion
+
         #region GetParcelsNotMatching
         public IEnumerable<IBL.BO.ParcelOfList> GetParcelsNotMatching()
         {
-            return Parcel;
+            var list = from item in dal.GetParcels()
+                       where (item.DroneId==0)
+                       select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
+            return list;
         }
         #endregion
     }

@@ -8,7 +8,7 @@ namespace IBL.BO
 {
     class DroneInParcel
     {
-        public int Id { set; get; }
+        public int IdNumber { set; get; }
         public double Battery { set; get; }
         public Location Current { set; get; }
 

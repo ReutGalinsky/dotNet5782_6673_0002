@@ -9,24 +9,24 @@ using IDAL;
 using IBL.BO;
 namespace BL
 {
-    class BL_BaseStation
+    partial class BL
     {
         #region GetBaseStations
         public IEnumerable<IBL.BO.BaseStationToList> GetBseStations()
         {
-            return BaseStation;//להוסיף על ידי פונקציה גנרית
-            //לטפל בחריגות
+            var list = from item in dal.GetBaseStations() select (IBL.BO.BaseStationToList)item.CopyPropertiesToNew(typeof(IBL.BO.BaseStationToList));
+            return list;
         }
         #endregion
+
         #region GetBaseStationsWithCharge
-        public IBL.BO.BaseStationToList GetBaseStationsWithCharge()
+        public IEnumerable<IBL.BO.BaseStationToList> GetBaseStationsWithCharge()
         {
-            IBL.BO.<BaseStationToList> b = GetBaseStations();
-            var baseStation= from item in b
-                             where (item)//לבדוק 
-            return baseStation;
+            var b = dal.GetBaseStations().Where(x=>x.ChargeSlots>0).Select(x=>(IBL.BO.BaseStationToList)x.CopyPropertiesToNew(typeof(IBL.BO.BaseStationToList)));
+            return b;
         }
         #endregion
+
         #region AddBaseStation
         public void AddBaseStation(IBL.BO.BaseStation baseStationToAdd)
         {
@@ -36,13 +36,12 @@ namespace BL
                 throw new AddingProblemException("the location is out of israel");
             if (baseStationToAdd.Local.Longitude > 33 || baseStationToAdd.Local.Longitude < 31)
                 throw new AddingProblemException("the location is out of israel");
-            if (baseStationToAdd.slotCharge< 0)
+            if (baseStationToAdd.ChargeSlots< 0)
                 throw new AddingProblemException("there is no charge slots");
             try
             {
 
-                IDAL.DO.BaseStation b = new IDAL.DO.BaseStation() { IdNumber = baseStationToAdd.Id, ChargeSlots=baseStationToAdd.ChargeSlots, Latitude = baseStationToAdd.Local.Latitude, Longitude = baseStationToAdd.Local.Longitude, Name = baseStationToAdd.Name };
-                dal.AddBaseStation(b);
+                dal.AddBaseStation((IDAL.DO.BaseStation)baseStationToAdd.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation)));
                 b.list of drones = null;//לבדוק
             }
             catch (Exception ex)
@@ -53,16 +52,16 @@ namespace BL
         #endregion
 
         #region UpdatingBaseStation
-        public void UpdatingBaseStation(string id, string Name = "", int numberOfCharge = 0)
+        public void UpdatingBaseStation(int id, string Name = "", int numberOfCharge = 0)
         {
-            IBL.BO.BaseStation b = dal.GetBaseStation(x => x.id == id);
+            IBL.BO.BaseStation b = (IBL.BO.BaseStation)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(IBL.BO.BaseStation));
             if (b == null)
                 throw new UpdatingException("the customer is not existing");
             if (Name != "") b.Name = Name;
             if (numberOfCharge != 0) b.ChargeSlots = numberOfCharge;
             try
             {
-                dal.UpdateBaseStation.Func(b);//לא באמת קוראים לה ככה
+                dal.UpdateBaseStation((IDAL.DO.BaseStation)b.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation));//לא באמת קוראים לה ככה
             }
             catch (Exception e)
             {
@@ -71,10 +70,11 @@ namespace BL
 
         }
         #endregion
+
         #region GetBaseStation
-        public <IBL.BO.BaseStationToList> GetBaseStation()
+        public IBL.BO.BaseStationToList GetBaseStation(int id)
         {
-            return dal.GetBaseStations(); //להוסיף חריגות
+            return (IBL.BO.BaseStationToList)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(IBL.BO.BaseStationToList)); //להוסיף חריגות
         }
         #endregion
 

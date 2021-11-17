@@ -8,7 +8,7 @@ using IDAL.DO;
 using IDAL;
 using IBL.BO;
 
-namespace BL
+namespace BL//לא עשינו
 {
     class BL_ParcelsDrones
     {
@@ -27,6 +27,7 @@ namespace BL
             Parcel.drone = (droneinparcel)d; //פונקציה להכניס לחבילה לרחפן
         }
         #endregion
+
         #region PickingParcelByDrone
         public void PickingParcelByDrone(int id)
         {

@@ -13,7 +13,7 @@ namespace BL
 {
     partial class BL
     {
-       public IDAL.IDal dal;
+        public IDAL.IDal dal;
         public List<IBL.BO.DroneToList> Drones;
         public double availible;
         public double heavy;
@@ -49,8 +49,7 @@ namespace BL
                 throw new AddingProblemException("A model wasn't entered");
             try
             {
-                IDAL.DO.Drone d=new IDAL.DO.Drone() { IdNumber=droneToAdd.IdNumber, Model=droneToAdd.Model,MaxWeight=(IDAL.DO.WeightCategories)droneToAdd.MaxWeight};
-                dal.AddDrone(d);
+                dal.AddDrone((IDAL.DO.Drone)droneToAdd.CopyPropertiesToNew(typeof(IDAL.DO.Drone)));
                 Drones.Add(droneToAdd);
             }
             catch (Exception ex)
@@ -90,6 +89,7 @@ namespace BL
             try
             {
                 dal.UpdateDrone(updatedDrone);
+                //לעדכן ברחפנים שבשכבה הלוגית?
             }
             catch(Exception e)
             {

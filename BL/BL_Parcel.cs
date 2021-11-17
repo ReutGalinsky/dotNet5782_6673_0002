@@ -25,7 +25,7 @@ namespace BL
                 throw new AddingProblemException("the location is out of israel");
             try
             {
-                dal.AddCustomer(customerToAdd);
+                dal.AddCustomer((IDAL.DO.Customer)customerToAdd.CopyPropertiesToNew(typeof(IDAL.DO.Customer)));
             }
             catch(Exception e)
             {
@@ -33,6 +33,7 @@ namespace BL
             }
         }
         #endregion
+
         #region AddParcelToDelivery
         public void AddParcelToDelivery(IBL.BO.Parcel parcel)
     {
@@ -47,7 +48,7 @@ namespace BL
             try
             {
               parcel.Drone=null;
-              dal.AddParcel(parcel);
+              dal.AddParcel((IDAL.DO.Parcel)parcel.CopyPropertiesToNew(typeof(IDAL.DO.Parcel)));
             }
             catch (Exception e)
             {
@@ -60,14 +61,20 @@ namespace BL
         #region UpdatingNameOfCustomer
         public void UpdatingNameOfCustomer( int id,string Name="",string phone="")
         {
-            Customer updatedCustomer=dal.GetCustomers().Find(x => x.id == id);
-            if (updatedCustomer == null)
-                throw new UpdatingException("the customer is not existing");
+            IBL.BO.Customer updatedCustomer;
+            try
+            {
+                updatedCustomer = (IBL.BO.Customer)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.Customer));
+            }
+            catch(Exception e)
+            {
+                throw new UpdatingException("the customer is not exist", e);
+            }
             if(Name != "")updatedCustomer.Name = Name;
             if(phone != "") updatedCustomer.Phone = phone;
            try
             {
-                dal.UpdateCustomer(updatedCustomer);
+                dal.UpdateCustomer((IDAL.DO.Customer)updatedCustomer.CopyPropertiesToNew(typeof(IDAL.DO.Customer)));
             }
             catch (Exception e)
             {
@@ -75,20 +82,27 @@ namespace BL
             }
         }
         #endregion
+
         #region GetCustomers
-        public IEnumerable<IBL.BO.CustomerToList> getCustomers()
+        public IEnumerable<IBL.BO.CustomerToList> GetCustomers()
         {
-            return Customers; //פונקציה גנרית
+            var list = from item in dal.GetCustomers() select (IBL.BO.CustomerToList)item.CopyPropertiesToNew(typeof(IBL.BO.CustomerToList));
+            return list;
+
         }
         #endregion
 
         #region GetCustomer
         public IBL.BO.CustomerToList GetCustomer(int id)
         {
-                   IBL.BO.<CustomerToList> c = GetCustomers();
-            var Customer= from item in c
-                             where (item)//לבדוק 
-            return Customer;
+            try
+            {
+                return (IBL.BO.CustomerToList)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.CustomerToList));
+            }
+            catch(Exception e)
+            {
+                throw new GettingProblemException("the customer is not exist", e);
+            }
         }
         #endregion
     }

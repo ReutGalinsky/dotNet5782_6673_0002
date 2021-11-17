@@ -12,7 +12,6 @@ namespace IBL.BO
         public string Phone { set; get; }
         public string Name { set; get; }
         public int ParcelSendAndGet { set; get; }
-
         public int ParcelSendAndNotGet { set; get; }
         public int ParcelOnTheWay { set; get; }
         public int ParcelGet { set; get; }
