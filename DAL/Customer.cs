@@ -8,7 +8,7 @@ namespace IDAL.DO
 {
     public struct Customer
     {
-        public int Id { get; set; }
+        public int IdNumber { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public double Longitude { get; set; }

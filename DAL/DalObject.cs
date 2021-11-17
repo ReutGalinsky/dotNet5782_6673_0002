@@ -5,18 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using IDAL.DO;
-using IDAL; //??
+using IDAL; 
 
 namespace DalObject
 {
-    //איך נדע שלא קיים האיבר?
     public class DalObject:IDal
     {
-        public DalObject()//ctor
-        {
-            DataSource.Initialize();
-        }
-       
+        #region Constractor
+        public DalObject(){DataSource.Initialize();} 
+        #endregion
+
         #region AddDrone
         public void AddDrone(Drone drone)
         {
@@ -62,12 +60,6 @@ namespace DalObject
                 }
             }
             throw new NotExistingException("the drone is not exist");
-            //Drone drone = DataSource.Drones.Find(x => x.IdNumber == toUpdate.IdNumber);
-            //if (drone.IdNumber==0)
-            //    throw new NotExistingException("the drone is not exist");
-            //drone.Model = toUpdate.Model;
-            //drone.MaxWeight = toUpdate.MaxWeight;
-            //drone.IdNumber = toUpdate.IdNumber;
         }
         #endregion
 
@@ -225,7 +217,148 @@ namespace DalObject
             return arr;
         }
         #endregion
+        
+        #region AddBaseStation
+        public void AddBaseStation(BaseStation baseStation)
+        {
+            if (DataSource.BaseStations.Find(d => d.IdNumber == baseStation.IdNumber).IdNumber!=0)//?
+                throw new ExistingException("the baseStation is already exist");
+            DataSource.BaseStations.Add(baseStation);
+        }
+        #endregion
+        
+        #region GetBaseStation
+        public BaseStation GetBaseStation(int id)
+        {
+            BaseStation baseStation = DataSource.BaseStations.FirstOrDefault(d => d.IdNumber == id);
+            if (baseStation.IdNumber==0)
+                throw new NotExistingException("the baseStation is not exist");
+            return baseStation;
+        }
+        #endregion
+
+        #region DeleteBaseStation
+        public void DeleteBaseStation(int id)
+        {
+            BaseStation baseStation=DataSource.BaseStations.Find(d=>d.IdNumber==id);
+            if (baseStation.IdNumber==0)
+                throw new NotExistingException("the baseStation is not existing");
+            DataSource.BaseStations.Remove(baseStation);
+        }
+        #endregion
+        
+        #region UpdateBaseStation
+        public void UpdateBaseStation(BaseStation toUpdate)
+        {
+            for (int i = 0; i < DataSource.BaseStations.Count; i++)
+            {
+                if (DataSource.BaseStations[i].IdNumber==toUpdate.IdNumber)
+                {
+                    BaseStation b=new BaseStation();
+                    b.ChargeSlots = toUpdate.ChargeSlots;
+                    b.Name= toUpdate.Name;
+                    b.IdNumber = toUpdate.IdNumber;
+                    b.Longitude=toUpdate.Longitude;
+                    b.Latitude=toUpdate.Latitude;
+                    DataSource.BaseStations[i]=b;
+                    return;
+                }
+            }
+            throw new NotExistingException("the base station is not exist");
+        #endregion
+
+        #region GetBaseStations
+        public IEnumerable<BaseStation> GetBaseStations()
+        {
+            var BaseStations = from item in DataSource.BaseStations
+                       select item;
+            return BaseStations;
+        }
+        #endregion
+        
+        #region AddCustomer
+        public void AddCustomer(Customer customer)
+        {
+            if (DataSource.Customers.Find(d => d.IdNumber == customer.IdNumber).IdNumber!=0)//?
+                throw new ExistingException("the customer is already exist");
+            DataSource.Customers.Add(customer);
+        }
+        #endregion
+        
+        #region GetCustomer
+        public Customer GetCustomer(int id)
+        {
+            Customer customer = DataSource.Customers.FirstOrDefault(d => d.IdNumber == id);
+            if (customer.IdNumber==0)
+                throw new NotExistingException("the customer is not exist");
+            return customer;
+        }
+        #endregion
+        
+        #region DeleteCustomer
+        public void DeleteCustomer(int id)
+        {
+            Customer customer=DataSource.Customers.Find(d=>d.IdNumber==id);
+            if (customer.IdNumber==0)
+                throw new NotExistingException("the customer is not existing");
+            DataSource.Customers.Remove(customer);
+        }
+        #endregion
+        
+        #region UpdateCustomer
+        public void UpdateCustomer(Customer toUpdate)
+        {
+            for (int i = 0; i < DataSource.Customers.Count; i++)
+            {
+                if (DataSource.Customers[i].IdNumber==toUpdate.IdNumber)
+                {
+                    Customer c=new Customer();
+                    c.IdNumber=toUpdate.IdNumber;
+                    c.Name=toUpdate.Name;
+                    c.Phone=toUpdate.Phone;
+                    c.Longitude=toUpdate.Longitude;
+                    c.Latitude=toUpdate.Latitude;
+                    DataSource.Customers[i]=c;
+                    return;
+                }
+            }
+            throw new NotExistingException("the customer is not exist");
+        }
+        #endregion
+        
+        #region GetCustomers
+        public IEnumerable<Customer> GetCustomers()
+        {
+            var Customers = from item in DataSource.Customers
+                       select item;
+            return Customers;
+        }
+        #endregion
+        
+        
         //**************************************************************
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         public void AddingBaseStation(BaseStation station)
         {
             DataSource.stations.Add(station);
