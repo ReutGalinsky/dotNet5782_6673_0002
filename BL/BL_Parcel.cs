@@ -25,7 +25,9 @@ namespace BL
                 throw new AddingProblemException("the location is out of israel");
             try
             {
-                dal.AddCustomer((IDAL.DO.Customer)customerToAdd.CopyPropertiesToNew(typeof(IDAL.DO.Customer)));
+                IDAL.DO.Customer c=(IDAL.DO.Customer)customerToAdd.CopyPropertiesToNew(typeof(IDAL.DO.Customer));
+                c.Location.longitude=customerToAdd.Local.Longitude;
+                c.Location.latitude=customerToAdd.Local.Latitude;
             }
             catch(Exception e)
             {
@@ -35,11 +37,11 @@ namespace BL
         #endregion
 
         #region AddParcelToDelivery
-        public void AddParcelToDelivery(IBL.BO.Parcel parcel)
+        public void AddParcelToDelivery(IBL.BO.ParcelOfList parcel)
     {
-            if (parcel.Send.Name == "")//לבדוק את הקטע הזה
+            if (parcel.ClientSendName == "")
                 throw new AddingProblemException("invalid name of customer");
-            if (parcel.Get.Name == "")
+            if (parcel.ClientGetName == "")
                 throw new AddingProblemException("invalid name of customer");
             if (parcel.Weight != IBL.BO.WeightCategories.Heavy && parcel.Weight != IBL.BO.WeightCategories.Middle && parcel.Weight != IBL.BO.WeightCategories.Light)
                 throw new AddingProblemException("This weight is not an option");
@@ -47,8 +49,13 @@ namespace BL
                 throw new AddingProblemException("This prioritie is not an option");
             try
             {
-              parcel.Drone=null;
-              dal.AddParcel((IDAL.DO.Parcel)parcel.CopyPropertiesToNew(typeof(IDAL.DO.Parcel)));
+            parcel.Drone=null;
+            IDAL.DO.Parcel p=(IDAL.DO.Parcel)parcel.CopyPropertiesToNew(typeof(IDAL.DO.Parcel));
+            p.CreateParcelTime=DateTime.Now;
+            p.MatchParcelTime= new DateTime;
+            p.ArrivingParcelTime= new DateTime;
+            p.collectingParcelTime= new DateTime;
+            dal.AddParcel(p);
             }
             catch (Exception e)
             {
@@ -61,16 +68,15 @@ namespace BL
         #region UpdatingNameOfCustomer
         public void UpdatingNameOfCustomer( int id,string Name="",string phone="")
         {
-            IBL.BO.Customer updatedCustomer;
             try
             {
-                updatedCustomer = (IBL.BO.Customer)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.Customer));
+               IBL.BO.Customer updatedCustomer = (IBL.BO.Customer)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.Customer));
             }
             catch(Exception e)
             {
                 throw new UpdatingException("the customer is not exist", e);
             }
-            if(Name != "")updatedCustomer.Name = Name;
+            if(Name != "") updatedCustomer.Name = Name;
             if(phone != "") updatedCustomer.Phone = phone;
            try
             {

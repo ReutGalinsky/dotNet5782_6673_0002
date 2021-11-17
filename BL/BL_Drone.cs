@@ -41,15 +41,16 @@ namespace BL
         {
             if (droneToAdd.MaxWeight!=IBL.BO.WeightCategories.Heavy && droneToAdd.MaxWeight != IBL.BO.WeightCategories.Middle&& droneToAdd.MaxWeight != IBL.BO.WeightCategories.Light)
                 throw new AddingProblemException("This weight is not an option");
-            //try
-            //{
-            //    dal.GetBaseStation(droneToAdd.s)
-            //}
             if (droneToAdd.Model=="")
                 throw new AddingProblemException("A model wasn't entered");
             try
             {
                 dal.AddDrone((IDAL.DO.Drone)droneToAdd.CopyPropertiesToNew(typeof(IDAL.DO.Drone)));
+                Random r= new Random();
+                droneToAdd.Battery=r.Next(20,40);
+                droneToAdd.State=DroneState.maintaince;
+                Location l=(Location)GetBaseStation(number).Local.CopyPropertiesToNew(typeof(Location));
+                droneToAdd.Current=l;
                 Drones.Add(droneToAdd);
             }
             catch (Exception ex)
@@ -87,12 +88,11 @@ namespace BL
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if(d==null)
                 throw new UpdatingException("the drone is not existing");
-            d.Model = Model;
-            IDAL.DO.Drone updatedDrone = new IDAL.DO.Drone() { IdNumber=d.IdNumber,MaxWeight=(IDAL.DO.WeightCategories)d.MaxWeight,Model=d.Model};
+            d.Model = Model; //לוודא ששינה בBL של רחפנים
+            IDAL.DO.Drone updatedDrone = (IDAL.DO.Drone)d.CopyPropertiesToNew(typeof(IDAL.DO.Drone));
             try
             {
                 dal.UpdateDrone(updatedDrone);
-                //לעדכן ברחפנים שבשכבה הלוגית?
             }
             catch(Exception e)
             {

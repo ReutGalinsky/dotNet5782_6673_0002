@@ -60,14 +60,14 @@ namespace BL
         #region UpdatingBaseStation
         public void UpdatingBaseStation(int id, string Name = "", int numberOfCharge = 0)
         {
-            IBL.BO.BaseStation b = (IBL.BO.BaseStation)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(IBL.BO.BaseStation));
+            IBL.BO.BaseStation b =(IBL.BO.BaseStation)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(IBL.BO.BaseStation));
             if (b == null)
                 throw new UpdatingException("the customer is not existing");
             if (Name != "") b.Name = Name;
             if (numberOfCharge != 0) b.ChargeSlots = numberOfCharge;
             try
             {
-                dal.UpdateBaseStation((IDAL.DO.BaseStation)b.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation));//לא באמת קוראים לה ככה
+                dal.UpdateBaseStation((IDAL.DO.BaseStation)b.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation));
             }
             catch (Exception e)
             {
