@@ -76,12 +76,22 @@ namespace BL
             IBL.BO.Drone drone = (IBL.BO.Drone)d.CopyPropertiesToNew(typeof(IBL.BO.Drone));
             drone.Current.Latitude = d.Current.Latitude;
             drone.Current.Longitude = d.Current.Longitude;
+            drone.PassedParcel = GetPIP(d.NumberOfParcel);
 
         }
         #endregion
+        private IBL.BO.ParcelInPassing GetPIP(int id)
+        {
+            IBL.BO.Parcel p= GetParcel(id);
+            IBL.BO.ParcelOfCustomer t = GetPOC(id.ToString,true);
 
-        #region UpdatingNameOfDrone
-        public void UpdatingModelOfDrone(string Model, int id)
+
+
+
+        }
+
+        #region UpdatingDetailsOfDrone
+        public void UpdatingDetailsOfDrone(string Model, int id)
         {
             if (Model == "")
                 throw new UpdatingException("the model is illegal");
@@ -89,10 +99,9 @@ namespace BL
             if(d==null)
                 throw new UpdatingException("the drone is not existing");
             d.Model = Model; //לוודא ששינה בBL של רחפנים
-            IDAL.DO.Drone updatedDrone = (IDAL.DO.Drone)d.CopyPropertiesToNew(typeof(IDAL.DO.Drone));
             try
             {
-                dal.UpdateDrone(updatedDrone);
+                dal.UpdateDrone((IDAL.DO.Drone)d.CopyPropertiesToNew(typeof(IDAL.DO.Drone)));
             }
             catch(Exception e)
             {

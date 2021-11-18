@@ -8,7 +8,7 @@ namespace IBL.BO
 {
     class CustomerToList
     {
-        public int Id { set; get; }
+        public int IdNumber { set; get; }
         public string Phone { set; get; }
         public string Name { set; get; }
         public int ParcelSendAndGet { set; get; }

@@ -11,6 +11,32 @@ namespace BL
 {
     partial class BL
     {
+        #region AddBaseStation
+        public void AddBaseStation(IBL.BO.BaseStation baseStationToAdd)
+        {
+            if (baseStationToAdd.Name == "")
+                throw new AddingProblemException("invalid name of base station");
+            if (baseStationToAdd.Local.Latitude > 33.3 || baseStationToAdd.Local.Latitude < 29.5)
+                throw new AddingProblemException("the location is out of israel");
+            if (baseStationToAdd.Local.Longitude > 35.6 || baseStationToAdd.Local.Longitude < 34.5)
+                throw new AddingProblemException("the location is out of israel");
+            if (baseStationToAdd.ChargeSlots< 0)
+                throw new AddingProblemException("there illegan amount of avilible charge slots");
+            try
+            {
+                IDAL.DO.BaseStation station = (IDAL.DO.BaseStation)baseStationToAdd.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation));
+                station.Latitude = baseStationToAdd.Local.Latitude;
+                station.Longitude = baseStationToAdd.Local.Longitude;
+                dal.AddBaseStation(station);
+               //לבדוק למה צריך לאתחל רשימה אם גם ככה אין בנתונים רשימת רחפנים.
+            }
+            catch (Exception ex)
+            {
+                throw new AddingProblemException("Can't add this base station", ex);
+            }
+        }
+        #endregion
+
         #region GetBaseStations
         public IEnumerable<IBL.BO.BaseStationToList> GetBseStations()
         {
@@ -31,49 +57,36 @@ namespace BL
         }
         #endregion
 
-        #region AddBaseStation
-        public void AddBaseStation(IBL.BO.BaseStation baseStationToAdd)
+        #region UpdatingDetailsOfBaseStation
+        public void UpdatingDetailsOfBaseStation(int id, string Name = "", int numberOfCharge = 0)
+            //מה עושים אם עדכנו למספר קטן יותר מכמות המוטענים?
         {
-            if (baseStationToAdd.Name == "")
-                throw new AddingProblemException("invalid name of base");
-            if (baseStationToAdd.Local.Latitude > 35 || baseStationToAdd.Local.Latitude < 33)//לוודא שזה באמת הערכים
-                throw new AddingProblemException("the location is out of israel");
-            if (baseStationToAdd.Local.Longitude > 33 || baseStationToAdd.Local.Longitude < 31)
-                throw new AddingProblemException("the location is out of israel");
-            if (baseStationToAdd.ChargeSlots< 0)
-                throw new AddingProblemException("there is no charge slots");
             try
             {
-                IDAL.DO.BaseStation station = (IDAL.DO.BaseStation)baseStationToAdd.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation));
-                station.Latitude = baseStationToAdd.Local.Latitude;
-                station.Longitude = baseStationToAdd.Local.Longitude;
-                dal.AddBaseStation(station);
-               // b.list of drones = null;//לבדוק
-            }
-            catch (Exception ex)
-            {
-                throw new AddingProblemException("Can't add this base station", ex);
-            }
-        }
-        #endregion
-
-        #region UpdatingBaseStation
-        public void UpdatingBaseStation(int id, string Name = "", int numberOfCharge = 0)
-        {
-            IBL.BO.BaseStation b =(IBL.BO.BaseStation)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(IBL.BO.BaseStation));
-            if (b == null)
-                throw new UpdatingException("the customer is not existing");
-            if (Name != "") b.Name = Name;
-            if (numberOfCharge != 0) b.ChargeSlots = numberOfCharge;
-            try
-            {
-                dal.UpdateBaseStation((IDAL.DO.BaseStation)b.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation));
+                IBL.BO.BaseStation b = (IBL.BO.BaseStation)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(IBL.BO.BaseStation));
+                if (Name != "") b.Name = Name;
+                if (numberOfCharge != 0) 
+                {
+                    if (b.Drones.Count() < numberOfCharge)
+                        throw new UpdatingException("the new amount of charge slots it's not fit to charging drones");
+                    b.ChargeSlots = numberOfCharge- b.Drones.Count(); 
+                }
+                try
+                {
+                    IDAL.DO.BaseStation station = (IDAL.DO.BaseStation)b.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation));
+                    station.Latitude = b.Local.Latitude;
+                    station.Longitude = b.Local.Longitude;
+                    dal.UpdateBaseStation(station);
+                }
+                catch (Exception e)
+                {
+                    throw new UpdatingException("can't update the base station", e);
+                }
             }
             catch (Exception e)
             {
-                throw new UpdatingException("can't update the base station", e);
+                throw new UpdatingException("the base Station is not existing",e);
             }
-
         }
         #endregion
 
@@ -89,7 +102,7 @@ namespace BL
                 var list = dal.GetDroneCharges().Where(x => x.StationId == id);
                 foreach(var item in list)//לחשוב סופית אם find יכול להחזיר null
                 {
-                    GetStation.Drones.Add(((IBL.BO.DroneInCharge)Drones.Find(x=>x.IdNumber==item.DroneId).CopyPropertiesToNew(typeof(IBL.BO.DroneInCharge))));
+                    GetStation.Drones.Add(GetDroneInCharge(item.DroneId));
                 }
                 return GetStation;
             }
@@ -100,5 +113,11 @@ namespace BL
         }
         #endregion
 
+        #region GetDroneInCharge
+        private IBL.BO.DroneInCharge GetDroneInCharge(int id)
+        {
+            return (IBL.BO.DroneInCharge)Drones.Find(x=>x.IdNumber==id).CopyPropertiesToNew(typeof(IBL.BO.DroneInCharge));
+        }
+        #endregion
     }
 }

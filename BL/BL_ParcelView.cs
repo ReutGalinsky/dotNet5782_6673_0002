@@ -13,29 +13,46 @@ namespace BL
     partial class BL
     {
         #region GetParcel
-        public IBL.BO.ParcelOfList GetParcel(int id)
+        public IBL.BO.Parcel GetParcel(int id)
         {
-            IBL.BO.ParcelOfList parcel;
             try
             {
-                parcel = (IBL.BO.ParcelOfList)dal.GetParcel(id).CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
+            IDAL.DO.Parcel p= dal.GetParcel(id);
+            IBL.BO.Parcel parcel= (IBL.BO.Parcel)p.CopyPropertiesToNew(typeof(IBL.BO.Parcel));
+            parcel.Sender = GetCustomerOfParcel(p.ClientSendName);
+            parcel.Sender = GetCustomerOfParcel(p.ClientGetName);
+            parcel.Drone = GetDroneInParcel(p.DroneId);
+            return parcel;
             }
             catch(Exception e)
             {
                 throw new GettingProblemException("the pacrel is not exist", e);
             }
-            return parcel;
-           
         }
         #endregion
+        private IBL.BO.DroneInParcel GetDroneInParcel(int id)
+        {
+            IBL.BO.Drone d = GetDrone(id);
+            IBL.BO.DroneInParcel dip = (IBL.BO.DroneInParcel)d.CopyPropertiesToNew(typeof(IBL.BO.DroneInParcel));
+            dip.Current.Latitude = d.Current.Latitude;
+            dip.Current.Longitude = d.Current.Longitude;
+            return dip;
 
+        }
         #region GetParcels
         public IEnumerable<IBL.BO.ParcelOfList> GetParcels()
         {
             var list=from item in dal.GetParcels() select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
             foreach(var item in list)
             {
-
+                IBL.BO.Parcel p = GetParcel(item.IdNumber);
+                if (p.MatchForDroneTime == default(DateTime))
+                    item.State = State.Define;
+                else if (p.collectingDroneTime == default(DateTime))
+                    item.State = State.match;
+                else if (p.ArrivingDroneTime == default(DateTime))
+                    item.State = State.pick;
+                else item.State = State.supply;
             }
             return list;
         }

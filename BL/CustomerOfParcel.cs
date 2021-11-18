@@ -8,7 +8,7 @@ namespace IBL.BO
 {
     class CustomerOfParcel
     {
-        public int Id { set; get; }
+        public int IdNumer { set; get; }
         public string Name { set; get; }
     }
 }

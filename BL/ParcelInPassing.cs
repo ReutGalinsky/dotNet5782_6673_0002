@@ -12,8 +12,8 @@ namespace IBL.BO
         public State State { set; get; }//?
         public Priorities Priority { set; get; }
         public WeightCategories Weight { set; get; }
-        public CustomerOfParcel Send { set; get; }
-        public CustomerOfParcel Get { set; get; }
+        public CustomerOfParcel Sender { set; get; }
+        public CustomerOfParcel Getter { set; get; }
         public Location Packing { set; get; }
         public Location Destination { set; get; }
         public double Distance { set; get; }
