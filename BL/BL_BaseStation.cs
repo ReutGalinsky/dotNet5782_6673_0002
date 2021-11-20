@@ -9,10 +9,10 @@ using IDAL;
 using IBL.BO;
 namespace BL
 {
-    partial class BL
+    public partial class BL
     {
         #region AddBaseStation
-        public void AddBaseStation(IBL.BO.BaseStation baseStationToAdd)
+        public void AddBaseStation(IBL.BO.BaseStation baseStationToAdd) 
         {
             if (baseStationToAdd.Name == "")
                 throw new AddingProblemException("invalid name of base station");

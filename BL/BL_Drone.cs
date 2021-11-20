@@ -11,7 +11,7 @@ using IBL.BO;
 
 namespace BL
 {
-    partial class BL
+   public partial class BL: IBL.IBL
     {
         public IDAL.IDal dal;
         public List<IBL.BO.DroneToList> Drones;

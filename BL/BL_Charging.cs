@@ -10,7 +10,7 @@ using IBL.BO;
 
 namespace BL
 {
-    partial class BL
+    public partial class BL
     {
         //לעבור בכללי על חריגות
         #region DistanceTo

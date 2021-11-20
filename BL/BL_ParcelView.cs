@@ -10,7 +10,7 @@ using IBL.BO;
 
 namespace BL
 {
-    partial class BL
+    public partial class BL
     {
         #region GetParcel
         public IBL.BO.Parcel GetParcel(int id)

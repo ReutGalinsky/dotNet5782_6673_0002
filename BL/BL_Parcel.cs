@@ -10,7 +10,7 @@ using IBL.BO;
 
 namespace BL
 {
-    partial class BL
+    public partial class BL
     {
         #region AddCustomer
         public void AddCustomer(IBL.BO.Customer customerToAdd)
