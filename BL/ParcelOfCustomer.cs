@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class ParcelOfCustomer
+    public class ParcelOfCustomer
     {
-        public int IdNumber { set; get; }
+        public string IdNumber { set; get; }
         public WeightCategories Weight { set; get; }
         public Priorities Priority { set; get; }
         public State State { set; get; }

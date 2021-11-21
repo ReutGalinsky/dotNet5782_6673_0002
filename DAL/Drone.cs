@@ -8,7 +8,7 @@ namespace IDAL.DO
 {
     public struct Drone
     {
-        public int IdNumber { get; set; }
+        public string IdNumber { get; set; }
         public string Model { get; set; }
         public WeightCategories MaxWeight { get; set; }
         public override string ToString()

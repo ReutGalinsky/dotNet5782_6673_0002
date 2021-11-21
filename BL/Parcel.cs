@@ -8,7 +8,7 @@ namespace IBL.BO
 {
     public class Parcel
     {
-        public int IdNumber { set; get; }
+        public string IdNumber { set; get; }
         public CustomerOfParcel Sender { set; get; }
         public CustomerOfParcel Geter { set; get; }
         public WeightCategories Weight { set; get; }

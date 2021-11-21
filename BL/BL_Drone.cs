@@ -37,7 +37,7 @@ namespace BL
             }
         }
 
-        private IBL.BO.DroneToList GetDroneToList(int id)
+        private IBL.BO.DroneToList GetDroneToList(string id)
         {
             Random rand = new Random();
             IBL.BO.DroneToList drone = (IBL.BO.DroneToList)dal.GetDrone(id).CopyPropertiesToNew(typeof(IBL.BO.DroneToList));

@@ -242,6 +242,16 @@ namespace ConsoleUI_BL
                             choise = Console.ReadLine();
                         }
                         secondChoos = (Update)int.Parse(choise);
+                        //secondChoos switch
+                        //{
+                        //    Update.Match => MatchParcelToDrone(system);
+                        //    Update.Collect => CollectingFromCustomer(system);
+                        //    Update.Giving=>GivingToCustomer(system);
+                        //    Update.Sending=> ChargeDrone(system);
+                        //    Update.Release=>RelaseCharge(system);
+                        //    _ => Console.WriteLine("error-invalid output");
+
+                        //}
                         switch (secondChoos)
                         {
                             case Update.Match:
@@ -257,7 +267,7 @@ namespace ConsoleUI_BL
                                 ChargeDrone(system);
                                 break;
                             case Update.Release:
-                                RelaseCharge(system);
+                                ;
                                 break;
                             default:
                                 Console.WriteLine("error-invalid output");

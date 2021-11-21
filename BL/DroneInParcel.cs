@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class DroneInParcel
+    public class DroneInParcel
     {
-        public int IdNumber { set; get; }
+        public string IdNumber { set; get; }
         public double Battery { set; get; }
         public Location Current { set; get; }
 

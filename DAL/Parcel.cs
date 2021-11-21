@@ -8,9 +8,9 @@ namespace IDAL.DO
 {
     public struct Parcel
     {
-        public int IdNumber { get; set; }
-        public string ClientSendName { get; set; }//?
-        public string ClientGetName { get; set; }//?
+        public string IdNumber { get; set; }
+        public string Sender { get; set; }//?
+        public string Geter { get; set; }//?
         public int DroneId { get; set; }   
         public WeightCategories Weight { get; set; }
         public Priorities Priority { get; set; }
@@ -23,7 +23,7 @@ namespace IDAL.DO
             //assumption: the time shouldn't be printed
         {
             return string.Format($@"parcel number {IdNumber}
-was sent to customer num. {ClientSendName} to customer num. {ClientGetName}
+was sent to customer num. {Sender} to customer num. {Geter}
 weight: {Weight}. priority:{Priority}"+'\n');
         }
     }

@@ -8,8 +8,8 @@ namespace IDAL.DO
 {
     public struct DroneCharge
     {
-        public int DroneId { get; set; }
-        public int StationId { get; set; }
+        public string DroneId { get; set; }
+        public string StationId { get; set; }
         public override string ToString()
         {
             return string.Format($"Drone number: {DroneId}" +

@@ -8,7 +8,7 @@ namespace IBL.BO
 {
     public class Drone
     {
-        public int IdNumber { set; get; }
+        public string IdNumber { set; get; }
         public string Model { set; get; }
         public WeightCategories MaxWeight { set; get; }
         public double Battery { set; get; }
