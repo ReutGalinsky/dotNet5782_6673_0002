@@ -77,8 +77,9 @@ namespace ConsoleUI_BL
             Console.WriteLine("plesae enter the phone number of the new customer");
             Customer1.Phone = Console.ReadLine();
             Console.WriteLine("please enter the location of your base station (longitude,latitude)  in isearl");
-            Customer1.Local.Longitude = double.Parse(Console.ReadLine());
+            Customer1.Local = new Location();
             Customer1.Local.Latitude = double.Parse(Console.ReadLine());
+            Customer1.Local.Longitude = double.Parse(Console.ReadLine());
             try
             {
             system.AddCustomer(Customer1);
