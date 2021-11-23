@@ -10,10 +10,10 @@ using IBL.BO;
 
 namespace BL
 {
-    public partial class BL
+    public partial class BL : IBL.IBL
     {
         #region MatchingParcelToDrone
-        public void MatchingParcelToDrone(int id)
+        public void MatchingParcelToDrone(string id)
         {
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if (d == null)
@@ -22,6 +22,7 @@ namespace BL
                 throw new ConnectionException("the drone is not available");
             var list = GetParcelsNotMatching().ToList();
             IBL.BO.ParcelOfList win = list.First();
+            bool flag = false;
             foreach (var item in list)
             {
                 if ((int)item.Priority > (int)win.Priority)
@@ -36,17 +37,54 @@ namespace BL
                         if ((int)item.Weight != (int)win.Weight) continue;
                         else
                         {
-                            Location a1 = new Location() { Latitude = dal.GetCustomer(int.Parse(item.ClientSendName)).Latitude, Longitude = dal.GetCustomer(int.Parse(item.ClientSendName)).Longitude };
-                            Location a2 = new Location() { Latitude = dal.GetCustomer(int.Parse(win.ClientSendName)).Latitude, Longitude = dal.GetCustomer(int.Parse(win.ClientSendName)).Longitude };
-                            if (DistanceTo(a1, d.Current) < DistanceTo(a2, d.Current))
+                            Location locationItemSender = new Location() { Latitude = dal.GetCustomer((item.Sender)).Latitude, Longitude = dal.GetCustomer((item.Sender)).Longitude };
+                            Location locationWinSender = new Location() { Latitude = dal.GetCustomer((win.Sender)).Latitude, Longitude = dal.GetCustomer((win.Sender)).Longitude };
+                            if (!(DistanceTo(locationItemSender, d.Current) <= DistanceTo(locationWinSender, d.Current)))
                             {
-                                Location a3 = new Location() { Latitude = dal.GetCustomer(int.Parse(item.ClientGetName)).Latitude, Longitude = dal.GetCustomer(int.Parse(item.ClientGetName)).Longitude };
-                                if (d.Battery -= () >= 0)//להמשיך את הפונקציה הזו
-                                    win = item;
+                                continue;
+                            }
+                            double temp = d.Battery;
+                            double TotalShipping = DistanceTo(new Location() { Latitude = dal.GetCustomer((item.Geter)).Latitude, Longitude = dal.GetCustomer((item.Geter)).Longitude }, locationItemSender);
+                            switch (d.MaxWeight)
+                            {
+                                case IBL.BO.WeightCategories.Heavy:
+                                    temp -= TotalShipping * heavy;
+                                    break;
+                                case IBL.BO.WeightCategories.Light:
+                                    temp -= TotalShipping * light;
+                                    break;
+                                case IBL.BO.WeightCategories.Middle:
+                                    temp -= TotalShipping * medium;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            //temp = d.MaxWeight switch
+                            //{
+                            //    IBL.BO.WeightCategories.Heavy => temp - TotalShipping * heavy,
+                            //    IBL.BO.WeightCategories.Light => temp - TotalShipping * light,
+                            //    IBL.BO.WeightCategories.Middle => temp - TotalShipping * medium,
+                            //    _ => throw new UpdatingException("Weight is invalid"),
+                            //};
+                            IDAL.DO.BaseStation help = ClosestStation(d.Current);
+                            locationWinSender.Latitude = help.Latitude;
+                            locationWinSender.Longitude = help.Longitude;
+                            TotalShipping = DistanceTo(locationWinSender, new Location() { Latitude = dal.GetCustomer((item.Geter)).Latitude, Longitude = dal.GetCustomer((item.Geter)).Longitude });
+                            temp -= TotalShipping * availible;
+                            if (temp <= 0)//להמשיך את הפונקציה הזו
+                                continue;
+                            else
+                            {
+                                win = item;
+                                flag = true;
                             }
                         }
                     }
                 }
+            }
+            if (!flag)
+            {
+                throw new UpdatingException("can't match to any parcel");
             }
             d.State = DroneState.shipping;
             d.NumberOfParcel = win.IdNumber;
@@ -59,7 +97,7 @@ namespace BL
         #endregion
 
         #region PickingParcelByDrone
-        public void PickingParcelByDrone(int id)
+        public void PickingParcelByDrone(string id)
         {
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if (d == null)
@@ -69,8 +107,8 @@ namespace BL
                 throw new ConnectionException("the drone is not shipping");
             if (!(p.MatchForDroneTime != default(DateTime) && p.collectingDroneTime == default(DateTime)))
                 throw new ConnectionException("the parcel is not match");
-            d.Battery -=DistanceTo(GetCustomer(p.Sender.IdNumer).Local,d.Current) * availible;
-            d.Current = (Location)GetCustomer(p.Sender.IdNumer).Local.CopyPropertiesToNew(typeof(Location));//לא בדקנו עדיין איך משיגים מיקום של חבילה
+            d.Battery -= DistanceTo(GetCustomer(p.SenderCustomer.IdNumer).Local, d.Current) * availible;
+            d.Current = (Location)GetCustomer(p.SenderCustomer.IdNumer).Local.CopyPropertiesToNew(typeof(Location));//לא בדקנו עדיין איך משיגים מיקום של חבילה
             IDAL.DO.Parcel dparcel = dal.GetParcel(p.IdNumber);
             dparcel.collectingDroneTime = DateTime.Now;
             dal.UpdateParcel(dparcel);
@@ -78,7 +116,7 @@ namespace BL
         #endregion
 
         #region SupplyingParcelByDrone
-        public void SupplyingParcelByDrone(int id)
+        public void SupplyingParcelByDrone(string id)
         {
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if (d == null)
@@ -86,17 +124,22 @@ namespace BL
             if (d.State != DroneState.Available)
                 throw new ConnectionException("the drone is not available");
             IBL.BO.Parcel p = GetParcel(d.NumberOfParcel);
-            if (!(p.collectingDroneTime!=default(DateTime)&&p.ArrivingDroneTime==default(DateTime)))
+            if (!(p.collectingDroneTime != default(DateTime) && p.ArrivingDroneTime == default(DateTime)))
                 throw new ConnectionException("the parcel is not picking");
-            d.Battery -= (DistanceTo(GetCustomer(p.Geter.IdNumer).Local, d.Current))*1;////;//תלוי במשקל!!
-            d.Current = (Location)GetCustomer(p.Geter.IdNumer).Local.CopyPropertiesToNew(typeof(Location));//לא בדקנו עדיין איך משיגים מיקום של חבילה
+            d.Battery = p.Weight switch
+            {
+                IBL.BO.WeightCategories.Heavy => d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumer).Local, d.Current)) * heavy,
+                IBL.BO.WeightCategories.Light => d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumer).Local, d.Current)) * light,
+                IBL.BO.WeightCategories.Middle => d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumer).Local, d.Current)) * medium,
+                _ => throw new UpdatingException("invalid Weight"),
+            };
+            d.Current = (Location)GetCustomer(p.GeterCustomer.IdNumer).Local.CopyPropertiesToNew(typeof(Location));//לא בדקנו עדיין איך משיגים מיקום של חבילה
             p.ArrivingDroneTime = DateTime.Now;
             d.State = DroneState.Available;
             //לבדוק שהרחפן מתעדכן באמת
             IDAL.DO.Parcel dparcel = dal.GetParcel(p.IdNumber);
             dparcel.ArrivingDroneTime = DateTime.Now;
             dal.UpdateParcel(dparcel);
-
         }
         #endregion
     }

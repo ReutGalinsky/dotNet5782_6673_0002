@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 namespace IBL.BO
 {
@@ -10,6 +11,9 @@ namespace IBL.BO
     {
         public string IdNumber { set; get; }
         public double Battery { set; get; }
-
+        public override string ToString()
+        {
+            return this.stringProperty();
+        }
     }
 }

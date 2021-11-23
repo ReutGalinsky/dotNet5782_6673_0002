@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 namespace IBL.BO
 {
@@ -14,7 +15,10 @@ namespace IBL.BO
         public string Name { set; get; }
         public  List<ParcelOfCustomer> FromCustomer { set; get; }
         public List<ParcelOfCustomer> ToCustomer { set; get; }
-
+        public override string ToString()
+        {
+            return this.stringProperty();
+        }
 
     }
 }

@@ -10,17 +10,17 @@ using IBL.BO;
 
 namespace BL
 {
-    public partial class BL
+    public partial class BL : IBL.IBL
     {
         #region GetParcel
-        public IBL.BO.Parcel GetParcel(int id)
+        public IBL.BO.Parcel GetParcel(string id)
         {
             try
             {
             IDAL.DO.Parcel p= dal.GetParcel(id);
             IBL.BO.Parcel parcel= (IBL.BO.Parcel)p.CopyPropertiesToNew(typeof(IBL.BO.Parcel));
-            parcel.Sender = GetCustomerOfParcel(p.ClientSendName);
-            parcel.Sender = GetCustomerOfParcel(p.ClientGetName);
+            parcel.SenderCustomer = GetCustomerOfParcel(p.Sender);
+            parcel.GeterCustomer = GetCustomerOfParcel(p.Geter);
             parcel.Drone = GetDroneInParcel(p.DroneId);
             return parcel;
             }
@@ -30,14 +30,14 @@ namespace BL
             }
         }
         #endregion
-        private IBL.BO.DroneInParcel GetDroneInParcel(int id)
+        private IBL.BO.DroneInParcel GetDroneInParcel(string id)
         {
             IBL.BO.Drone d = GetDrone(id);
             IBL.BO.DroneInParcel dip = (IBL.BO.DroneInParcel)d.CopyPropertiesToNew(typeof(IBL.BO.DroneInParcel));
+            dip.Current = new Location();
             dip.Current.Latitude = d.Current.Latitude;
             dip.Current.Longitude = d.Current.Longitude;
             return dip;
-
         }
         #region GetParcels
         public IEnumerable<IBL.BO.ParcelOfList> GetParcels()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 namespace IBL.BO
 {
@@ -15,5 +16,9 @@ namespace IBL.BO
         public DroneState State { set; get; }
         public Location Current { set; get; }
         public ParcelInPassing PassedParcel { set; get; }
+        public override string ToString()
+        {
+            return this.stringProperty();
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace IDAL.DO
         public string IdNumber { get; set; }
         public string Sender { get; set; }//?
         public string Geter { get; set; }//?
-        public int DroneId { get; set; }   
+        public string DroneId { get; set; }   
         public WeightCategories Weight { get; set; }
         public Priorities Priority { get; set; }
         public System.DateTime CreateParcelTime { get; set; }

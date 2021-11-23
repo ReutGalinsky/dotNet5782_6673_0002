@@ -10,7 +10,7 @@ using IBL.BO;
 
 namespace BL
 {
-    public partial class BL
+    public partial class BL : IBL.IBL
     {
         //לעבור בכללי על חריגות
         #region DistanceTo
@@ -31,7 +31,7 @@ namespace BL
         #endregion  
 
         #region DroneToCharging
-        public void DroneToCharging(int number)
+        public void DroneToCharging(string number)
         {
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == number);
             if (d == null)
@@ -74,7 +74,7 @@ namespace BL
 
         #region DroneFromCharging
         //להוסיף גם DATATIME בטעינת רחפן
-        public void DroneFromCharging(int number, TimeSpan charging)
+        public void DroneFromCharging(string number, TimeSpan charging)
         {
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == number);
             if (d == null)

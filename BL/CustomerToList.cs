@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 namespace IBL.BO
 {
@@ -15,8 +16,10 @@ namespace IBL.BO
         public int ParcelSendAndNotGet { set; get; }
         public int ParcelOnTheWay { set; get; }
         public int ParcelGet { set; get; }
-
-
+        public override string ToString()
+        {
+            return this.stringProperty();
+        }
 
 
     }

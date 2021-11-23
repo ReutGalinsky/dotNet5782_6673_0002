@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 namespace IBL.BO
 {
@@ -13,6 +14,9 @@ namespace IBL.BO
         public Priorities Priority { set; get; }
         public State State { set; get; }
         public CustomerOfParcel SourceOrDestinaton { set; get; }
-
+        public override string ToString()
+        {
+            return this.stringProperty();
+        }
     }
 }

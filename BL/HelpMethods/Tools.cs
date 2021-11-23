@@ -60,7 +60,19 @@ namespace BL
             return dist * 1.609344;
         }
         #endregion  
-
+        public static string stringProperty<T>(this T t)
+        {
+            Type Ttype = t.GetType();
+            PropertyInfo[] info = Ttype.GetProperties();
+            string temp="";
+            foreach (PropertyInfo item in info)
+            {
+                temp+=string.Format
+                ("{0,-10}:  {1,-10}+\n"
+                    , item.Name, item.GetValue(t, null));
+            }
+            return temp;
+        }
 
     }
 }

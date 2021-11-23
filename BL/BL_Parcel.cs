@@ -10,7 +10,7 @@ using IBL.BO;
 
 namespace BL
 {
-    public partial class BL
+    public partial class BL : IBL.IBL
     {
         #region AddCustomer
         public void AddCustomer(IBL.BO.Customer customerToAdd)
@@ -40,9 +40,9 @@ namespace BL
         #region AddParcelToDelivery
         public void AddParcelToDelivery(IBL.BO.ParcelOfList parcel)
         {
-            if (parcel.ClientSendName == "")
+            if (parcel.Sender == "")
                 throw new AddingProblemException("invalid name of customer");
-            if (parcel.ClientGetName == "")
+            if (parcel.Geter == "")
                 throw new AddingProblemException("invalid name of customer");
             if (parcel.Weight != IBL.BO.WeightCategories.Heavy && parcel.Weight != IBL.BO.WeightCategories.Middle && parcel.Weight != IBL.BO.WeightCategories.Light)
                 throw new AddingProblemException("This weight is not an option");
@@ -51,7 +51,7 @@ namespace BL
             try
             {
                 IDAL.DO.Parcel p = (IDAL.DO.Parcel)parcel.CopyPropertiesToNew(typeof(IDAL.DO.Parcel));
-                p.DroneId = default(int);
+                p.DroneId = default(string);
                 p.CreateParcelTime = DateTime.Now;
                 p.MatchForDroneTime = new DateTime();
                 p.ArrivingDroneTime = new DateTime();
@@ -67,7 +67,7 @@ namespace BL
         #endregion
 
         #region UpdatingDetailsOfCustomer
-        public void UpdatingDetailsOfCustomer(int id, string Name, string phone)//למה היו ערכי ברירת מחדל. איך נשלח את זה לפונקציה?
+        public void UpdatingDetailsOfCustomer(string id, string Name, string phone)//למה היו ערכי ברירת מחדל. איך נשלח את זה לפונקציה?
         {
             try
             {
@@ -116,20 +116,21 @@ namespace BL
         #endregion
 
         #region GetCustomer
-        public IBL.BO.Customer GetCustomer(int id)
+        public IBL.BO.Customer GetCustomer(string id)
         {
             try
             {
                 // GeoCoordinate
                 IDAL.DO.Customer c = dal.GetCustomer(id);
                 IBL.BO.Customer customer = (IBL.BO.Customer)c.CopyPropertiesToNew(typeof(IBL.BO.Customer));
+                customer.Local = new Location();
                 customer.Local.Latitude = c.Latitude;
                 customer.Local.Longitude = c.Longitude;
                 customer.FromCustomer = dal.GetParcels()
-                    .Where(p => int.Parse(p.ClientSendName) == id)
+                    .Where(p => (p.Sender) == id)
                     .Select(p => GetPOC(p.IdNumber, true)).ToList();
                 customer.ToCustomer = dal.GetParcels()
-                    .Where(p => int.Parse(p.ClientSendName) == id)
+                    .Where(p => (p.Geter) == id)
                     .Select(p => GetPOC(p.IdNumber, false)).ToList();
                 return customer;
             }
@@ -139,7 +140,7 @@ namespace BL
             }
         }
         #endregion
-        private IBL.BO.ParcelOfCustomer GetPOC(int id, bool senderOrReciever)
+        private IBL.BO.ParcelOfCustomer GetPOC(string id, bool senderOrReciever)
         {
             IDAL.DO.Parcel p = dal.GetParcel(id);
             IBL.BO.ParcelOfCustomer poc = (IBL.BO.ParcelOfCustomer)p.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfCustomer));
@@ -153,14 +154,14 @@ namespace BL
                 poc.State = State.pick;
             else
                 poc.State = State.supply;
-            if (senderOrReciever == true) poc.SourceOrDestinaton = GetCustomerOfParcel(p.ClientGetName);
-            else poc.SourceOrDestinaton = GetCustomerOfParcel(p.ClientSendName);
+            if (senderOrReciever == true) poc.SourceOrDestinaton = GetCustomerOfParcel(p.Geter);
+            else poc.SourceOrDestinaton = GetCustomerOfParcel(p.Sender);
             return poc;
         }
 
         private IBL.BO.CustomerOfParcel GetCustomerOfParcel(string id)
         {
-            return (IBL.BO.CustomerOfParcel)dal.GetCustomer(int.Parse(id)).CopyPropertiesToNew(typeof(IBL.BO.CustomerOfParcel));
+            return (IBL.BO.CustomerOfParcel)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.CustomerOfParcel));
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 namespace IBL.BO
 {
@@ -12,6 +13,9 @@ namespace IBL.BO
         public string Name { set; get; }
         public int ChargeSlots { set; get; }
         public int FullChargeSlots { set; get; }
-
+        public override string ToString()
+        {
+            return this.stringProperty();
+        }
     }
 }

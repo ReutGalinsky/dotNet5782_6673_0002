@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 namespace IBL.BO
 {
@@ -14,6 +15,10 @@ namespace IBL.BO
         public double Battery { set; get; }
         public DroneState State { set; get; }
         public Location Current { set; get; }
-        public int NumberOfParcel { set; get; }
+        public string NumberOfParcel { set; get; }
+        public override string ToString()
+        {
+            return this.stringProperty();
+        }
     }
 }

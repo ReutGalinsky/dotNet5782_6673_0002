@@ -9,7 +9,7 @@ using IDAL;
 using IBL.BO;
 namespace BL
 {
-    public partial class BL
+    public partial class BL: IBL.IBL
     {
         #region AddBaseStation
         public void AddBaseStation(IBL.BO.BaseStation baseStationToAdd) 
@@ -21,14 +21,13 @@ namespace BL
             if (baseStationToAdd.Local.Longitude > 35.6 || baseStationToAdd.Local.Longitude < 34.5)
                 throw new AddingProblemException("the location is out of israel");
             if (baseStationToAdd.ChargeSlots< 0)
-                throw new AddingProblemException("there illegan amount of avilible charge slots");
+                throw new AddingProblemException("there illegal amount of availible charge slots");
             try
             {
                 IDAL.DO.BaseStation station = (IDAL.DO.BaseStation)baseStationToAdd.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation));
                 station.Latitude = baseStationToAdd.Local.Latitude;
                 station.Longitude = baseStationToAdd.Local.Longitude;
                 dal.AddBaseStation(station);
-               //לבדוק למה צריך לאתחל רשימה אם גם ככה אין בנתונים רשימת רחפנים.
             }
             catch (Exception ex)
             {
@@ -58,7 +57,7 @@ namespace BL
         #endregion
 
         #region UpdatingDetailsOfBaseStation
-        public void UpdatingDetailsOfBaseStation(int id, string Name = "", int numberOfCharge = 0)
+        public void UpdatingDetailsOfBaseStation(string id, string Name = "", int numberOfCharge = 0)
             //מה עושים אם עדכנו למספר קטן יותר מכמות המוטענים?
         {
             try
@@ -91,14 +90,13 @@ namespace BL
         #endregion
 
         #region GetBaseStation
-        public IBL.BO.BaseStation GetBaseStation(int id)
+        public IBL.BO.BaseStation GetBaseStation(string id)
         {
             try
             {
                 IDAL.DO.BaseStation station = dal.GetBaseStation(id);
                 IBL.BO.BaseStation GetStation = (IBL.BO.BaseStation)station.CopyPropertiesToNew(typeof(IBL.BO.BaseStation));
-                GetStation.Local.Latitude = station.Latitude;
-                GetStation.Local.Longitude = station.Longitude;
+                GetStation.Local = new Location() { Latitude = station.Latitude, Longitude = station.Longitude };
                 var list = dal.GetDroneCharges().Where(x => x.StationId == id);
                 foreach(var item in list)//לחשוב סופית אם find יכול להחזיר null
                 {
@@ -114,7 +112,7 @@ namespace BL
         #endregion
 
         #region GetDroneInCharge
-        private IBL.BO.DroneInCharge GetDroneInCharge(int id)
+        private IBL.BO.DroneInCharge GetDroneInCharge(string id)
         {
             return (IBL.BO.DroneInCharge)Drones.Find(x=>x.IdNumber==id).CopyPropertiesToNew(typeof(IBL.BO.DroneInCharge));
         }

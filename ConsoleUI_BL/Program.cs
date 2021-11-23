@@ -7,7 +7,7 @@ namespace ConsoleUI_BL
 {
     public enum Options { Adding = 1, Updating, ShowItemp, ShowList, exit }//enum for optional actions
     public enum States { BaseStation = 1, Drone, Customer, Parcel, Unmatched, Available }//enum for internal choices
-    public enum Update { Match = 1, Collect, Giving, Sending, Release }//enum for updating options
+    public enum Update { Match = 1, Collect, Giving, Sending, Release,Drone,BaseStation,Customer }//enum for updating options
 
     class Program
     {
@@ -19,18 +19,20 @@ namespace ConsoleUI_BL
             4. show list
             5. exit");
         }
+        #region AddBaseStation
         static public void AddBaseStation(IBL.IBL system)
         {
             Console.WriteLine("please enter id number for the new base station");
             IBL.BO.BaseStation Base1 = new BaseStation();
-            Base1.IdNumber = int.Parse(Console.ReadLine());
+            Base1.IdNumber = Console.ReadLine();
             Console.WriteLine("please enter the name of the station");
             Base1.Name = Console.ReadLine();
             Console.WriteLine("please enter the amount of charge slots in your base station");
             Base1.ChargeSlots = int.Parse(Console.ReadLine());
             Console.WriteLine("please enter the location of your base station (longitude,latitude) in israel");
-            Base1.Local.Longitude = double.Parse(Console.ReadLine());
+            Base1.Local = new Location();
             Base1.Local.Latitude = double.Parse(Console.ReadLine());
+            Base1.Local.Longitude = double.Parse(Console.ReadLine());
             try
             {
                 system.AddBaseStation(Base1);
@@ -39,31 +41,37 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(e.Message);
             }
-
         }
+        #endregion
+        #region AddDrone
+
         static public void AddDrone(IBL.IBL system)
         {
-            Console.WriteLine("please enter id number for the new drone (must be different from zero)");//האם צריך לבדוק שאכן ייחודי?
-            Drone Drone1 = new Drone();
-            Drone1.IdNumber = int.Parse(Console.ReadLine());
+            Console.WriteLine("please enter id number for the new drone");//האם צריך לבדוק שאכן ייחודי?
+            IBL.BO.DroneToList Drone1 = new IBL.BO.DroneToList();
+            Drone1.IdNumber = Console.ReadLine();
             Console.WriteLine("please enter the model of the drone");
             Drone1.Model = Console.ReadLine();
             Console.WriteLine("please enter the weight of your drone: 1 for light, 2 for middle and 3 for heavy");
             Drone1.MaxWeight = (WeightCategories)(int.Parse(Console.ReadLine()));
+            Console.WriteLine("please enter id number of the base station for first charge");
+            string num = Console.ReadLine();
             try
             {
-                system.AddingDrone(Drone1);
+                system.AddDrone(Drone1,num);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-        static public void AddCustomer(DalObject.DalObject system)
+        #endregion
+        #region AddCustomer
+        static public void AddCustomer(IBL.IBL system)
         {
             Console.WriteLine("please enter id number for the new customer");
-            Customer Customer1 = new Customer();
-            Customer1.Id = int.Parse(Console.ReadLine());
+            IBL.BO.Customer Customer1 = new Customer();
+            Customer1.IdNumber = Console.ReadLine();
             Console.WriteLine("please enter the name of customer");
             Customer1.Name = Console.ReadLine();
             Console.WriteLine("plesae enter the phone number of the new customer");
@@ -73,121 +81,172 @@ namespace ConsoleUI_BL
             Customer1.Local.Latitude = double.Parse(Console.ReadLine());
             try
             {
-            system.addingCustomer(Customer1);
+            system.AddCustomer(Customer1);
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-        static public void AddParcel(DalObject.DalObject system)
+        #endregion
+        #region AddParcel
+        static public void AddParcel(IBL.IBL system)
         {
-            List<Parcel> Parcels = system.GetParcels();
-            Parcel temp = new Parcel();
-            foreach (var item in Parcels)//remove the parcels that arrieved the customer before more than a week
-            {
-                if (item.ArrivingDroneTime.Day < DateTime.Now.Day - 7 && item.ArrivingDroneTime.Month < DateTime.Now.Month && item.ArrivingDroneTime != (temp.ArrivingDroneTime))
-                {
-                    system.RemovePar(item);
-                }
-            }
-            Parcel Parcel1 = new Parcel();
-            Parcel1.IdNumber = 0;
+            IBL.BO.ParcelOfList Parcel1 = new IBL.BO.ParcelOfList();
+            Parcel1.IdNumber = default(string);
             Console.WriteLine("please enter the id of the sender customer");
-            Parcel1.ClientSendName = int.Parse(Console.ReadLine());
+            Parcel1.Sender = Console.ReadLine();
             Console.WriteLine("please enter the id of the reciever customer");
-            Parcel1.ClientGetName = int.Parse(Console.ReadLine());
+            Parcel1.Geter = Console.ReadLine();
             Console.WriteLine("please enter the weight of your Parcel: 1 for light, 2 for middle and 3 for heavy");
             Parcel1.Weight = (WeightCategories)(int.Parse(Console.ReadLine()));
             Console.WriteLine("please enter the priority of your Parcel: 1 for Regular, 2 for Speed and 3 for Emergency");
             Parcel1.Priority = (Priorities)(int.Parse(Console.ReadLine()));
             try
             {
-                system.AddingParcel(Parcel1);
+                system.AddParcelToDelivery(Parcel1);
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-        static public void MatchParcelToDrone(DalObject.DalObject system)
+        #endregion
+        # region MatchParcelToDrone
+        static public void MatchParcelToDrone(IBL.IBL system)
         {
             Console.WriteLine("please enter the parcel code");
-            Parcel temp = new Parcel() { IdNumber = int.Parse(Console.ReadLine()) };
-            if (system.getParcel(temp).IdNumber == 0)
+            string num=Console.ReadLine();
+            try
             {
-                Console.WriteLine("error-invalid input");
-                return;
+                system.MatchingParcelToDrone(num);
             }
-            system.ParcelToDrone(temp);
-
+            catch(Exception e)
+            { Console.WriteLine(e.Message); }
         }
-        static public void CollectingFromCustomer(DalObject.DalObject system)
+        #endregion
+        #region CollectingFromCustomer
+        static public void CollectingFromCustomer(IBL.IBL system)
         {
             Console.WriteLine("please enter the parcel code");
-            Parcel temp = new Parcel() { IdNumber = int.Parse(Console.ReadLine()) };
-            if (system.getParcel(temp).IdNumber == 0)
+            string num= Console.ReadLine();
+            try
             {
-                Console.WriteLine("error-invalid input");
-                return;
+                system.PickingParcelByDrone(num);
             }
-            system.ParcelToCollecting(temp);
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
-        static public void GivingToCustomer(DalObject.DalObject system)
+        #endregion
+        #region GivingToCustomer
+        static public void GivingToCustomer(IBL.IBL system)
         {
             Console.WriteLine("please enter the parcel code");
-            Parcel temp = new Parcel() { IdNumber = int.Parse(Console.ReadLine()) };
-            if (system.getParcel(temp).IdNumber == 0)
+            string num=Console.ReadLine();
+            try
             {
-                Console.WriteLine("error-invalid input");
-                return;
+                system.SupplyingParcelByDrone(num);
             }
-            system.ParcelToCustomer(temp);
-            //option to remove the parcel from the data base
-            Console.WriteLine("would you agree to remove your parcel from the data base? press y or n");
-            char tav = char.Parse(Console.ReadLine());
-            switch (tav)
+            catch(Exception e)
             {
-                case 'y':
-                    system.RemovePar(temp);
-                    break;
-                case 'n':
-                default:
-                    break;
+                Console.WriteLine(e.Message);
             }
-
         }
-        static public void RelaseCharge(DalObject.DalObject system)
+        #endregion
+        #region ReleaseCharge
+        static public void RelaseCharge(IBL.IBL system)
+        {
+            Console.WriteLine("please enter the Drone's id");
+            string num = Console.ReadLine();
+            Console.WriteLine("please enter the charging time");
+            TimeSpan t = new TimeSpan();
+            t = TimeSpan.Parse(Console.ReadLine());//?
+            try
+            {
+                system.DroneFromCharging(num,t);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        #endregion
+        #region ChargeDrone
+        static public void ChargeDrone(IBL.IBL system)
         {
             Console.WriteLine("please enter the Drone's code");
-            Drone Dc = new Drone() { IdNumber = int.Parse(Console.ReadLine()) };
-            if (system.getDrone(Dc).IdNumber == 0)
+            string num = Console.ReadLine();
+            try
             {
-                Console.WriteLine("error-invalid input");
-                return;
+                system.DroneToCharging(num);
             }
-
-            system.releaseCharge(Dc);
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
-        static public void ChargeDrone(DalObject.DalObject system)
+        #endregion
+        #region UpdatingDrone
+        static public void UpdatingDrone(IBL.IBL system)
         {
-            Console.WriteLine("please enter the Drone's code");
-            DroneCharge Dc = new DroneCharge() { DroneId = int.Parse(Console.ReadLine()) };
-
-            Drone temp = system.getDrone(new Drone { IdNumber = Dc.DroneId });
-            while (temp.IdNumber == 0)
+            Console.WriteLine("please enter the Drone's id");
+            string num=Console.ReadLine();
+            Console.WriteLine("please enter new model");
+            string model = Console.ReadLine();
+            try
             {
-                Console.WriteLine("this id not already exist. please enter new one");
-                Dc.DroneId = int.Parse(Console.ReadLine());
+                system.UpdatingDetailsOfDrone(model, num);
             }
-            Console.WriteLine("the list of the availible charge stations:");
-            List<BaseStation> availibles = system.GetAvailibeStation();
-            foreach (var item in availibles)
-                Console.WriteLine("*" + item + "\n");
-            Console.WriteLine("enter the code of the wanted station:");
-            Dc.StationId = int.Parse(Console.ReadLine());
-            system.SendToCharge(Dc);
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
+
+        #endregion
+        #region UpdatingBaseStation
+        static public void UpdatingBaseStation(IBL.IBL system)
+        {
+            Console.WriteLine("please enter the station's id");
+            string num = Console.ReadLine();
+            Console.WriteLine("please enter new model code");
+            string model = Console.ReadLine();
+            Console.WriteLine("please enter new amount if charge slots code");
+            int amount = int.Parse(Console.ReadLine());
+            try
+            {
+                system.UpdatingDetailsOfBaseStation(num, model,amount);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        #endregion
+        #region UpdatingCustomer
+        static public void UpdatingCustomer(IBL.IBL system)
+        {
+            Console.WriteLine("please enter the Customer's id");
+            string id = Console.ReadLine();
+            Console.WriteLine("please enter new name");
+            string name = Console.ReadLine();
+            Console.WriteLine("please enter new phone number");
+            string phone = Console.ReadLine();
+            try
+            {
+                system.UpdatingDetailsOfCustomer(id, name,phone);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        #endregion
+
         static void Main(string[] args)
         {
             IBL.IBL system = new BL.BL();
@@ -235,7 +294,7 @@ namespace ConsoleUI_BL
                         }
                         break;
                     case Options.Updating:
-                        Console.WriteLine("1.match parcel to a drone \n2.collecting parcel by a drone \n3.giving parcel to a customer \n4.sending a dorne to be charged \n5. release drone from charging");
+                        Console.WriteLine("1.match parcel to a drone \n2.collecting parcel by a drone \n3.giving parcel to a customer \n4.sending a dorne to be charged \n5. release drone from charging\n6. Updating Drone's name \n7. Updating model and charge slot of base station\n8. Updating name and phone of a customer");
                         choise = (Console.ReadLine());
                         while ((choise == ""))//the program wont crash if it enter will be pressed
                         {
@@ -244,14 +303,13 @@ namespace ConsoleUI_BL
                         secondChoos = (Update)int.Parse(choise);
                         //secondChoos switch
                         //{
-                        //    Update.Match => MatchParcelToDrone(system);
-                        //    Update.Collect => CollectingFromCustomer(system);
-                        //    Update.Giving=>GivingToCustomer(system);
-                        //    Update.Sending=> ChargeDrone(system);
-                        //    Update.Release=>RelaseCharge(system);
+                        //    Update.Match => MatchParcelToDrone(system),
+                        //    Update.Collect => CollectingFromCustomer(system),
+                        //    Update.Giving => GivingToCustomer(system),
+                        //    Update.Sending => ChargeDrone(system),
+                        //    Update.Release => RelaseCharge(system),
                         //    _ => Console.WriteLine("error-invalid output");
-
-                        //}
+                        //};
                         switch (secondChoos)
                         {
                             case Update.Match:
@@ -267,7 +325,16 @@ namespace ConsoleUI_BL
                                 ChargeDrone(system);
                                 break;
                             case Update.Release:
-                                ;
+                                RelaseCharge(system);
+                                break;
+                            case Update.Drone:
+                                UpdatingDrone(system);
+                                break;
+                            case Update.BaseStation:
+                                UpdatingBaseStation(system);
+                                break;
+                            case Update.Customer:
+                                UpdatingCustomer(system);
                                 break;
                             default:
                                 Console.WriteLine("error-invalid output");
@@ -283,48 +350,40 @@ namespace ConsoleUI_BL
                         }
                         internalChoose = (States)int.Parse(choise);
                         Console.WriteLine("please enter the id number");
-                        int num = int.Parse(Console.ReadLine());
+                        string num = Console.ReadLine();
                         switch (internalChoose)
                         {
                             case States.BaseStation:
-                                BaseStation help = new BaseStation() { IdNumber = num };
-                                help = system.getBase(help);
-                                if (help.IdNumber == 0)
+                                try
                                 {
-                                    Console.WriteLine("not exist");
+                                    Console.WriteLine(system.GetBaseStation(num));
                                 }
-                                else
-                                    Console.WriteLine(help);
+                                catch(Exception e)
+                                { Console.WriteLine(e.Message); }
                                 break;
                             case States.Drone:
-                                Drone Dront = new Drone() { IdNumber = num };
-                                Dront = system.getDrone(Dront);
-                                if (Dront.IdNumber == 0)
+                                try
                                 {
-                                    Console.WriteLine("not exist");
+                                    Console.WriteLine(system.GetDrone(num));
                                 }
-                                else
-                                    Console.WriteLine(Dront);
+                                catch (Exception e)
+                                { Console.WriteLine(e.Message); }
                                 break;
                             case States.Customer:
-                                Customer cust = new Customer() { Id = num };
-                                cust = system.getCustomer(cust);
-                                if (cust.Id == 0)
+                                try
                                 {
-                                    Console.WriteLine("not exist");
+                                    Console.WriteLine(system.GetCustomer(num));
                                 }
-                                else
-                                    Console.WriteLine(cust);
+                                catch (Exception e)
+                                { Console.WriteLine(e.Message); }
                                 break;
                             case States.Parcel:
-                                Parcel parc = new Parcel() { IdNumber = num };
-                                parc = system.getParcel(parc);
-                                if (parc.IdNumber == 0)
+                                try
                                 {
-                                    Console.WriteLine("not exist");
+                                    Console.WriteLine(system.GetParcel(num));
                                 }
-                                else
-                                    Console.WriteLine(parc);
+                                catch (Exception e)
+                                { Console.WriteLine(e.Message); }
                                 break;
                             default:
                                 Console.WriteLine("error-invalid input");
@@ -342,33 +401,27 @@ namespace ConsoleUI_BL
                         switch (internalChoose)
                         {
                             case States.BaseStation:
-                                List<BaseStation> bases = system.GetBaseStations();
-                                foreach (var item in bases)
+                                foreach (var item in system.GetBseStations())
                                     Console.WriteLine("*" + item + "\n");
                                 break;
                             case States.Drone:
-                                List<Drone> Drones = system.GetDrones();
-                                foreach (var item in Drones)
+                                foreach (var item in system.GetDrones())
                                     Console.WriteLine("*" + item + "\n");
                                 break;
                             case States.Customer:
-                                List<Customer> Customers = system.GetCustomers();
-                                foreach (var item in Customers)
+                                foreach (var item in system.GetCustomers())
                                     Console.WriteLine("*" + item + "\n");
                                 break;
                             case States.Parcel:
-                                List<Parcel> Parcels = system.GetParcels();
-                                foreach (var item in Parcels)
+                                foreach (var item in system.GetParcels())
                                     Console.WriteLine("*" + item + "\n");
                                 break;
                             case States.Unmatched:
-                                List<Parcel> NoMatches = system.GetNonMatchParcels();
-                                foreach (var item in NoMatches)
+                                foreach (var item in system.GetParcelsNotMatching())
                                     Console.WriteLine("*" + item + "\n");
                                 break;
                             case States.Available:
-                                List<BaseStation> availibles = system.GetAvailibeStation();
-                                foreach (var item in availibles)
+                                foreach (var item in system.GetBaseStationsWithCharge())
                                     Console.WriteLine("*" + item + "\n");
                                 break;
                             default:
@@ -389,6 +442,3 @@ namespace ConsoleUI_BL
     }
 }
 
-}
-    }
-}
