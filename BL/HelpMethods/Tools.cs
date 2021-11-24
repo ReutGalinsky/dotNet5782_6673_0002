@@ -67,9 +67,15 @@ namespace BL
             string temp="";
             foreach (PropertyInfo item in info)
             {
-                temp+=string.Format
-                ("{0,-10}:  {1,-10}+\n"
-                    , item.Name, item.GetValue(t, null));
+
+                var value = item.GetValue(t, null);//get the value of the prperty
+                if (value is ValueType || value is string)
+                temp += string.Format("{0,-10}:  {1,-10}\n", item.Name, item.GetValue(t, null)); 
+                else
+                {
+                    if (item.GetValue(t, null) == null) continue;
+                        temp += string.Format(item.Name+ ":\n{0}\n", item.GetValue(t, null)); 
+                } 
             }
             return temp;
         }

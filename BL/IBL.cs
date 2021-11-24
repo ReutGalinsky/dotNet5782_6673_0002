@@ -10,7 +10,7 @@ namespace IBL
    public interface IBL
     {
         public void AddBaseStation(BaseStation baseStationToAdd);
-        public IEnumerable<BaseStationToList> GetBseStations();
+        public IEnumerable<BaseStationToList> GetBaseStations();
         public IEnumerable<BaseStationToList> GetBaseStationsWithCharge();
         public void UpdatingDetailsOfBaseStation(string id, string Name, string numberOfCharge);
         public BaseStation GetBaseStation(string id);

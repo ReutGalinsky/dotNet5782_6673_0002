@@ -37,13 +37,9 @@ namespace BL
         #endregion
 
         #region GetBaseStations
-        public IEnumerable<IBL.BO.BaseStationToList> GetBseStations()
+        public IEnumerable<IBL.BO.BaseStationToList> GetBaseStations()
         {
-            var list = from item in dal.GetBaseStations() select (IBL.BO.BaseStationToList)item.CopyPropertiesToNew(typeof(IBL.BO.BaseStationToList));
-            foreach(var item in list)
-            {
-                item.FullChargeSlots = dal.GetDroneCharges().Count(x => x.StationId == item.IdNumber);
-            }
+            var list = from item in dal.GetBaseStations() select GetBaseStationOfList(item.IdNumber);
             return list;
         }
         #endregion
@@ -51,7 +47,7 @@ namespace BL
         #region GetBaseStationsWithCharge
         public IEnumerable<IBL.BO.BaseStationToList> GetBaseStationsWithCharge()
         {
-            var b = GetBseStations().Where(x=>x.ChargeSlots>0);
+            var b = GetBaseStations().Where(x=>x.ChargeSlots>0);
             return b;
         }
         #endregion
@@ -90,7 +86,15 @@ namespace BL
             }
         }
         #endregion
-
+        #region GetBaseStationOfList
+        private IBL.BO.BaseStationToList GetBaseStationOfList(string id)
+        {
+            IBL.BO.BaseStationToList b = (IBL.BO.BaseStationToList)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(IBL.BO.BaseStationToList));
+            var temp = from item in dal.GetDroneCharges() where (item.StationId == id) select item;
+            b.FullChargeSlots = temp.Count();
+            return b;
+        }
+        #endregion
         #region GetBaseStation
         public IBL.BO.BaseStation GetBaseStation(string id)
         {

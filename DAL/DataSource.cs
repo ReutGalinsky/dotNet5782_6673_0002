@@ -41,7 +41,7 @@ namespace DalObject
             Config.heavy = 0.05;
             Config.medium = 0.05;
             Config.light = 0.05;
-            Drones.Add(new Drone() { IdNumber = "555", MaxWeight = WeightCategories.Light, Model = "XP5H" });
+            Drones.Add(new Drone() { IdNumber = "555", MaxWeight = WeightCategories.Heavy, Model = "XP5H" });
             stations.Add(new BaseStation() { IdNumber = "222", ChargeSlots = 2, Latitude = 32, Longitude = 32, Name = "Herzelia" });
             stations.Add(new BaseStation() { IdNumber = "333", ChargeSlots = 2, Latitude = 33, Longitude = 33, Name = "jerusalem" });
             stations.Add(new BaseStation() { IdNumber = "444", ChargeSlots = 2, Latitude = 34, Longitude = 34, Name = "telAviv" });

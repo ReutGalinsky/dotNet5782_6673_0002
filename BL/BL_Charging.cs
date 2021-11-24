@@ -38,27 +38,25 @@ namespace BL
                 throw new ChargingException("the drone is not existing");
             if (d.State != DroneState.Available)
                 throw new ChargingException("the drone is not available");
-            var ListOfStation = dal.GetBaseStations().Where(x => x.ChargeSlots > 0).Select(x => (IBL.BO.BaseStation)x.CopyPropertiesToNew(typeof(IBL.BO.BaseStation))).ToList();
+            var ListOfStation = from item in dal.GetBaseStations()
+            where(item.ChargeSlots > 0) select(item);
             if (ListOfStation.Count()==0)
                 throw new ChargingException("there is no availible base station for charging");
-            IBL.BO.BaseStation b = ListOfStation.First();
+            IDAL.DO.BaseStation b = ListOfStation.First();
             foreach (var item in ListOfStation)
-                if (DistanceTo(b.Local,d.Current) > DistanceTo(item.Local,d.Current))
+                if (DistanceTo(new Location() { Latitude = b.Latitude,Longitude = b.Longitude },d.Current) > DistanceTo(new Location() { Latitude = item.Latitude,Longitude = item.Longitude },d.Current))
                     b = item;
             double temp = d.Battery;
-            temp -= availible * DistanceTo(b.Local,d.Current);
+            temp -= availible * DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Current);
             if (temp < 0)
                 throw new ChargingException("not enough battery to get the closest base station");
             d.Battery = temp;
             try
             {
                 d.State = DroneState.maintaince;//לבדוק אם שינה ברשימת רחפנים בשכבה הלוגית
-                d.Current = (Location)b.Local.CopyPropertiesToNew(typeof(Location));
+                d.Current = new Location() { Latitude = b.Latitude, Longitude = b.Longitude };
                 b.ChargeSlots--;
-                IDAL.DO.BaseStation station = (IDAL.DO.BaseStation)b.CopyPropertiesToNew(typeof(IDAL.DO.BaseStation));
-                station.Latitude = b.Local.Latitude;
-                station.Longitude = b.Local.Longitude;
-                dal.UpdateBaseStation(station);
+                dal.UpdateBaseStation(b);
                 IDAL.DO.DroneCharge charge = new DroneCharge() { DroneId = number, StationId = b.IdNumber };
                 dal.AddDroneCharge(charge);
             }

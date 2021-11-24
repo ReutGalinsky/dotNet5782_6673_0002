@@ -117,7 +117,7 @@ namespace ConsoleUI_BL
         # region MatchParcelToDrone
         static public void MatchParcelToDrone(IBL.IBL system)
         {
-            Console.WriteLine("please enter the parcel code");
+            Console.WriteLine("please enter the drone code");
             string num=Console.ReadLine();
             try
             {
@@ -130,7 +130,7 @@ namespace ConsoleUI_BL
         #region CollectingFromCustomer
         static public void CollectingFromCustomer(IBL.IBL system)
         {
-            Console.WriteLine("please enter the parcel code");
+            Console.WriteLine("please enter the drone code");
             string num= Console.ReadLine();
             try
             {
@@ -145,7 +145,7 @@ namespace ConsoleUI_BL
         #region GivingToCustomer
         static public void GivingToCustomer(IBL.IBL system)
         {
-            Console.WriteLine("please enter the parcel code");
+            Console.WriteLine("please enter the drone code");
             string num=Console.ReadLine();
             try
             {
@@ -396,7 +396,7 @@ namespace ConsoleUI_BL
                         switch (internalChoose)
                         {
                             case States.BaseStation:
-                                foreach (var item in system.GetBseStations())
+                                foreach (var item in system.GetBaseStations())
                                     Console.WriteLine("*" + item + "\n");
                                 break;
                             case States.Drone:

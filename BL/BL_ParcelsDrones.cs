@@ -147,11 +147,11 @@ namespace BL
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if (d == null)
                 throw new ConnectionException("the drone is not existing");
-            if (d.State != DroneState.Available)
-                throw new ConnectionException("the drone is not available");
+            if (d.State != DroneState.shipping)
+                throw new ConnectionException("the drone is not shipping");
             IBL.BO.Parcel p = GetParcel(d.NumberOfParcel);
             if (!(p.collectingDroneTime != default(DateTime) && p.ArrivingDroneTime == default(DateTime)))
-                throw new ConnectionException("the parcel is not picking");
+                throw new ConnectionException("the parcel is not picking yet");
             d.Battery = p.Weight switch
             {
                 IBL.BO.WeightCategories.Heavy => d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Local, d.Current)) * heavy,
@@ -161,8 +161,9 @@ namespace BL
             };
             d.Current = (Location)GetCustomer(p.GeterCustomer.IdNumber).Local.CopyPropertiesToNew(typeof(Location));//לא בדקנו עדיין איך משיגים מיקום של חבילה
             p.ArrivingDroneTime = DateTime.Now;
+            if (d == null)
+                throw new ConnectionException("the drone is not existing");
             d.State = DroneState.Available;
-            //לבדוק שהרחפן מתעדכן באמת
             IDAL.DO.Parcel dparcel = dal.GetParcel(p.IdNumber);
             dparcel.ArrivingDroneTime = DateTime.Now;
             dal.UpdateParcel(dparcel);

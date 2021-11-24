@@ -45,30 +45,25 @@ namespace BL
         #region GetParcels
         public IEnumerable<IBL.BO.ParcelOfList> GetParcels()
         {
-            var list = from item in dal.GetParcels() select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
-            foreach (var item in list)
-            {
-                IBL.BO.Parcel p = GetParcel(item.IdNumber);
-                if (p.MatchForDroneTime == default(DateTime))//לא שינה לdefine
-                    item.State = State.Define;
-                else if (p.collectingDroneTime == default(DateTime))
-                    item.State = State.match;
-                else if (p.ArrivingDroneTime == default(DateTime))
-                    item.State = State.pick;
-                else item.State = State.supply;
-            }
+            var list = from item in dal.GetParcels() select GetPOL(item.IdNumber);
             return list;
         }
         #endregion
         private IBL.BO.ParcelOfList GetPOL(string id)
         {
             IDAL.DO.Parcel P=dal.GetParcel(id);
-            IBL.BO.ParcelOfList  ofList = (IBL.BO.ParcelOfList)P.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
-            if (P.MatchForDroneTime==default(DateTime))
-            {
-                ofList.State = State.Define;
-            }
-            return ofList;
+            IBL.BO.ParcelOfList  pol = (IBL.BO.ParcelOfList)P.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
+            if (P.MatchForDroneTime == default(DateTime))
+                pol.State = State.Define;
+            else//צריך לבדוק אם לא נוצר ולזרוק חריגה?
+                if (P.collectingDroneTime == default(DateTime))
+                pol.State = State.match;
+            else
+                if (P.ArrivingDroneTime == default(DateTime))
+                pol.State = State.pick;
+            else
+                pol.State = State.supply;
+            return pol;
         }
         #region GetParcelsNotMatching
         public IEnumerable<IBL.BO.ParcelOfList> GetParcelsNotMatching()
