@@ -105,7 +105,8 @@ namespace ConsoleUI_BL
             Parcel1.Priority = (Priorities)(int.Parse(Console.ReadLine()));
             try
             {
-                system.AddParcelToDelivery(Parcel1);
+                string id=system.AddParcelToDelivery(Parcel1);
+                Console.WriteLine("your pacel's id is{0}",id);
             }
             catch(Exception e)
             {
@@ -161,9 +162,11 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("please enter the Drone's id");
             string num = Console.ReadLine();
-            Console.WriteLine("please enter the charging time");
-            TimeSpan t = new TimeSpan();
-            t = TimeSpan.Parse(Console.ReadLine());//?
+            Console.WriteLine("please enter the charging time in the Format: H:M:S");
+            int Hours = int.Parse(Console.ReadLine());
+            int Min = int.Parse(Console.ReadLine());
+            int Sec = int.Parse(Console.ReadLine());
+            TimeSpan t = new TimeSpan(Hours,Min,Sec);
             try
             {
                 system.DroneFromCharging(num,t);
@@ -213,10 +216,10 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("please enter the station's id");
             string num = Console.ReadLine();
-            Console.WriteLine("please enter new model code");
+            Console.WriteLine("please enter new name");
             string model = Console.ReadLine();
             Console.WriteLine("please enter new amount if charge slots code");
-            int amount = int.Parse(Console.ReadLine());
+            string amount = Console.ReadLine();
             try
             {
                 system.UpdatingDetailsOfBaseStation(num, model,amount);
@@ -302,15 +305,6 @@ namespace ConsoleUI_BL
                             choise = Console.ReadLine();
                         }
                         secondChoos = (Update)int.Parse(choise);
-                        //secondChoos switch
-                        //{
-                        //    Update.Match => MatchParcelToDrone(system),
-                        //    Update.Collect => CollectingFromCustomer(system),
-                        //    Update.Giving => GivingToCustomer(system),
-                        //    Update.Sending => ChargeDrone(system),
-                        //    Update.Release => RelaseCharge(system),
-                        //    _ => Console.WriteLine("error-invalid output");
-                        //};
                         switch (secondChoos)
                         {
                             case Update.Match:

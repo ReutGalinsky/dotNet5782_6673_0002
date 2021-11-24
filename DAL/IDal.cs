@@ -18,7 +18,7 @@ namespace IDAL
         public DroneCharge GetDroneCharge(string id);
         public void DeleteDroneCharge(string id);
         public void UpdateDroneCharge(DroneCharge toUpdate);
-        public void AddParcel(Parcel parcel);
+        public string AddParcel(Parcel parcel);
         public Parcel GetParcel(string id);
         public void DeleteParcel(string id);
         public void UpdateParcel(Parcel toUpdate);

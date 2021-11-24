@@ -112,11 +112,13 @@ namespace DalObject
         #endregion
 
         #region AddParcel
-        public void AddParcel(Parcel parcel)
+        public string AddParcel(Parcel parcel)
         {
+            parcel.IdNumber = DataSource.Config.RunningNumber++.ToString();
             if (DataSource.Parcels.Find(d => d.IdNumber == parcel.IdNumber).IdNumber != default(string))
                 throw new ExistingException("the parcel is already exist");
             DataSource.Parcels.Add(parcel);
+            return parcel.IdNumber;
         }
         #endregion
 

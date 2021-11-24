@@ -9,7 +9,7 @@ namespace IBL.BO
 {
     public class CustomerOfParcel
     {
-        public string IdNumer { set; get; }
+        public string IdNumber { set; get; }
         public string Name { set; get; }
         public override string ToString()
         {

@@ -50,13 +50,13 @@ namespace DalObject
             Parcels.Add(new Parcel()
             {
                 IdNumber = "333",
-                DroneId = "111",
+                DroneId = default(string),
                 Geter = "333",
                 Weight = WeightCategories.Heavy,
                 Priority = Priorities.Regular,
                 Sender = "444",
-                ArrivingDroneTime = DateTime.Now,
-                MatchForDroneTime = DateTime.Now,
+                ArrivingDroneTime = default(DateTime),
+                MatchForDroneTime = default(DateTime),
                 collectingDroneTime = default(DateTime),
                 CreateParcelTime = DateTime.Now,
             });

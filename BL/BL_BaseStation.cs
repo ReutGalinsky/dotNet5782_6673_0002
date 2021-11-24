@@ -57,18 +57,20 @@ namespace BL
         #endregion
 
         #region UpdatingDetailsOfBaseStation
-        public void UpdatingDetailsOfBaseStation(string id, string Name = "", int numberOfCharge = 0)
-            //מה עושים אם עדכנו למספר קטן יותר מכמות המוטענים?
+        public void UpdatingDetailsOfBaseStation(string id, string Name, string numberOfCharge)
+            //לקצר את הפונקציה!
         {
             try
             {
-                IBL.BO.BaseStation b = (IBL.BO.BaseStation)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(IBL.BO.BaseStation));
+                IDAL.DO.BaseStation temp = dal.GetBaseStation(id);
+                IBL.BO.BaseStation b = (IBL.BO.BaseStation)temp.CopyPropertiesToNew(typeof(IBL.BO.BaseStation));
+                b.Local = new Location() {Latitude=temp.Latitude,Longitude=temp.Longitude };
                 if (Name != "") b.Name = Name;
-                if (numberOfCharge != 0) 
+                if (numberOfCharge != ""&&(int.Parse(numberOfCharge)==0&&numberOfCharge!="0")) 
                 {
-                    if (b.Drones.Count() < numberOfCharge)
+                    if (b.Drones.Count() < int.Parse(numberOfCharge))
                         throw new UpdatingException("the new amount of charge slots it's not fit to charging drones");
-                    b.ChargeSlots = numberOfCharge- b.Drones.Count(); 
+                    b.ChargeSlots = int.Parse(numberOfCharge) - b.Drones.Count(); 
                 }
                 try
                 {

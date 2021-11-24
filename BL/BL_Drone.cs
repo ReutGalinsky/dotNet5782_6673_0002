@@ -39,7 +39,7 @@ namespace BL
                 }
                 catch(Exception e)
                 {
-                    throw new UpdatingException("cant add",e);//החריגה לא עובדת
+                    ;//החריגה לא עובדת
                 }
             }
         }
@@ -114,15 +114,19 @@ namespace BL
                                where item.ArrivingDroneTime != default(DateTime)
                                select item;
                     var list1 = list.ToList();
-                    if (list1.Count == 0) throw new AddingProblemException("there are no supplied parcels");//????????????
-                    //מה קורה אם אין חבילות שסופקו?
-                    num = rand.Next(0, list.Count());
-                    IDAL.DO.Parcel P = list1.ElementAt(num);
-                    drone.Current = new Location();
-                    drone.Current.Latitude = dal.GetCustomer(((P.Geter))).Latitude;
-                    drone.Current.Longitude = dal.GetCustomer((((P.Geter)))).Longitude;
-                    Location d = new Location() { Latitude = ClosestStation(drone.Current).Latitude, Longitude = ClosestStation(drone.Current).Longitude };
-                    drone.Battery = rand.Next((int)(DistanceTo(drone.Current, d) * availible), 101);
+                    if (list1.Count == 0) { drone.Current = new Location() { Latitude = rand.NextDouble() + rand.Next(29, 33), Longitude = rand.NextDouble() + rand.Next(34, 36) };
+                        drone.Battery = rand.Next(20, 101);
+                        }//????????????
+                    else {//מה קורה אם אין חבילות שסופקו?
+                        num = rand.Next(0, list.Count());
+                        IDAL.DO.Parcel P = list1.ElementAt(num);
+                        drone.Current = new Location();
+                        drone.Current.Latitude = dal.GetCustomer(((P.Geter))).Latitude;
+                        drone.Current.Longitude = dal.GetCustomer((((P.Geter)))).Longitude;
+                        Location d = new Location() { Latitude = ClosestStation(drone.Current).Latitude, Longitude = ClosestStation(drone.Current).Longitude };
+                        drone.Battery = rand.Next((int)(DistanceTo(drone.Current, d) * availible), 101);
+                    }
+                    drone.State = DroneState.Available;
                     break;
                 default:
                     break;
@@ -163,7 +167,14 @@ namespace BL
                 droneToAdd.Battery = r.Next(20, 40);
                 Location l = (Location)GetBaseStation(number).Local.CopyPropertiesToNew(typeof(Location));
                 droneToAdd.Current = l;
-                DroneToCharging(droneToAdd.IdNumber);
+                var ListOfStation = dal.GetBaseStation(number);
+                if (ListOfStation.ChargeSlots== 0)
+                    throw new ChargingException("there is not slots for charging in this base station");
+                droneToAdd.State = DroneState.maintaince;//לבדוק אם שינה ברשימת רחפנים בשכבה הלוגית
+                ListOfStation.ChargeSlots--;
+                dal.UpdateBaseStation(ListOfStation);
+                IDAL.DO.DroneCharge charge = new DroneCharge() { DroneId =droneToAdd.IdNumber , StationId = number };
+                dal.AddDroneCharge(charge);
                 Drones.Add(droneToAdd);
             }
             catch (Exception ex)
@@ -181,7 +192,7 @@ namespace BL
         #endregion
 
         #region GetDrone
-        public IBL.BO.Drone GetDrone(string id)
+        public IBL.BO.Drone GetDrone(string id)//האם צריך לקחת את הרחפן מהשכבה למטה?
         {
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if (d == null)
@@ -193,7 +204,8 @@ namespace BL
             drone.Current.Longitude = d.Current.Longitude;
             drone.State = d.State;
             drone.Battery = d.Battery;
-            drone.PassedParcel = GetPIP(d.NumberOfParcel);
+            if(d.NumberOfParcel!=default(string))
+                drone.PassedParcel = GetPIP(d.NumberOfParcel);
             return drone;
 
         }
@@ -202,8 +214,8 @@ namespace BL
         {
             IBL.BO.Parcel p = GetParcel(id);
             IBL.BO.ParcelInPassing temp= (IBL.BO.ParcelInPassing)p.CopyPropertiesToNew(typeof(IBL.BO.ParcelInPassing));
-            string sender =p.SenderCustomer.IdNumer;
-            string geter = p.GeterCustomer.IdNumer;
+            string sender =p.SenderCustomer.IdNumber;
+            string geter = p.GeterCustomer.IdNumber;
             temp.Sender = GetCustomerOfParcel(sender);
             temp.Getter = GetCustomerOfParcel(geter);
             temp.Packing = GetCustomer(sender).Local;

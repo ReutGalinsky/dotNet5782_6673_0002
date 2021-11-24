@@ -38,7 +38,7 @@ namespace BL
         #endregion
 
         #region AddParcelToDelivery
-        public void AddParcelToDelivery(IBL.BO.ParcelOfList parcel)
+        public string AddParcelToDelivery(IBL.BO.ParcelOfList parcel)
         {
             if (parcel.Sender == "")
                 throw new AddingProblemException("invalid name of customer");
@@ -50,19 +50,27 @@ namespace BL
                 throw new AddingProblemException("This prioritie is not an option");
             try
             {
+                IDAL.DO.Customer c = dal.GetCustomer(parcel.Sender);
+                c = dal.GetCustomer(parcel.Geter);
+            }
+            catch(Exception e)
+            {
+                throw new AddingProblemException("the customer is not exist", e);
+            }
+            try
+            {
                 IDAL.DO.Parcel p = (IDAL.DO.Parcel)parcel.CopyPropertiesToNew(typeof(IDAL.DO.Parcel));
                 p.DroneId = default(string);
                 p.CreateParcelTime = DateTime.Now;
                 p.MatchForDroneTime = new DateTime();
                 p.ArrivingDroneTime = new DateTime();
                 p.collectingDroneTime = new DateTime();
-                dal.AddParcel(p);
+                return  dal.AddParcel(p);
             }
             catch (Exception e)
             {
                 throw new AddingProblemException("can't add the parcel", e);
             }
-
         }
         #endregion
 
@@ -71,7 +79,9 @@ namespace BL
         {
             try
             {
-                IBL.BO.Customer updatedCustomer = (IBL.BO.Customer)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.Customer));
+                IDAL.DO.Customer temp = dal.GetCustomer(id);
+                IBL.BO.Customer updatedCustomer = (IBL.BO.Customer)temp.CopyPropertiesToNew(typeof(IBL.BO.Customer));
+                updatedCustomer.Local = new Location() { Latitude = temp.Latitude, Longitude = temp.Longitude };
                 if (Name != "") updatedCustomer.Name = Name;
                 if (phone != "")
                 {
@@ -161,7 +171,15 @@ namespace BL
 
         private IBL.BO.CustomerOfParcel GetCustomerOfParcel(string id)
         {
-            return (IBL.BO.CustomerOfParcel)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.CustomerOfParcel));
+            IDAL.DO.Customer temp = default(IDAL.DO.Customer);
+            try
+            {
+                return (IBL.BO.CustomerOfParcel)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.CustomerOfParcel));
+            }
+            catch(Exception e)
+            {
+                throw new AddingProblemException("the customer is not exist");
+            }
         }
 
     }

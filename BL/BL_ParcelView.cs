@@ -17,14 +17,17 @@ namespace BL
         {
             try
             {
-            IDAL.DO.Parcel p= dal.GetParcel(id);
-            IBL.BO.Parcel parcel= (IBL.BO.Parcel)p.CopyPropertiesToNew(typeof(IBL.BO.Parcel));
-            parcel.SenderCustomer = GetCustomerOfParcel(p.Sender);
-            parcel.GeterCustomer = GetCustomerOfParcel(p.Geter);
-            parcel.Drone = GetDroneInParcel(p.DroneId);
-            return parcel;
+                IDAL.DO.Parcel p = dal.GetParcel(id);
+                IBL.BO.Parcel parcel = (IBL.BO.Parcel)p.CopyPropertiesToNew(typeof(IBL.BO.Parcel));
+                parcel.SenderCustomer = GetCustomerOfParcel(p.Sender);
+                parcel.GeterCustomer = GetCustomerOfParcel(p.Geter);
+                if (p.DroneId != default(string))
+                {
+                    parcel.Drone = GetDroneInParcel(p.DroneId);
+                }
+                return parcel;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new GettingProblemException("the pacrel is not exist", e);
             }
@@ -42,11 +45,11 @@ namespace BL
         #region GetParcels
         public IEnumerable<IBL.BO.ParcelOfList> GetParcels()
         {
-            var list=from item in dal.GetParcels() select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
-            foreach(var item in list)
+            var list = from item in dal.GetParcels() select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
+            foreach (var item in list)
             {
                 IBL.BO.Parcel p = GetParcel(item.IdNumber);
-                if (p.MatchForDroneTime == default(DateTime))
+                if (p.MatchForDroneTime == default(DateTime))//לא שינה לdefine
                     item.State = State.Define;
                 else if (p.collectingDroneTime == default(DateTime))
                     item.State = State.match;
@@ -57,14 +60,32 @@ namespace BL
             return list;
         }
         #endregion
-
+        private IBL.BO.ParcelOfList GetPOL(string id)
+        {
+            IDAL.DO.Parcel P=dal.GetParcel(id);
+            IBL.BO.ParcelOfList  ofList = (IBL.BO.ParcelOfList)P.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
+            if (P.MatchForDroneTime==default(DateTime))
+            {
+                ofList.State = State.Define;
+            }
+            return ofList;
+        }
         #region GetParcelsNotMatching
         public IEnumerable<IBL.BO.ParcelOfList> GetParcelsNotMatching()
         {
-            var list = from item in GetParcels()
-                       where (item.State==State.Define)
-                       select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
-            return list;
+            //var list = from item in GetParcels()
+            //           where (item.State == State.Define)
+            //           select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
+            var list = from item in dal.GetParcels()
+                       where item.MatchForDroneTime == default(DateTime)
+                       select item;
+            foreach (var n in list)
+                if(n.MatchForDroneTime==default(DateTime))
+                { Console.WriteLine(n.IdNumber); }
+            var l =list.Select(x=>GetPOL(x.IdNumber));
+            foreach (var n in l)
+                { Console.WriteLine(n.IdNumber); }
+            return l;
         }
         #endregion
     }
