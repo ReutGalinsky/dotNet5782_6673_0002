@@ -37,9 +37,9 @@ namespace BL
         {
             IBL.BO.Drone d = GetDrone(id);
             IBL.BO.DroneInParcel dip = (IBL.BO.DroneInParcel)d.CopyPropertiesToNew(typeof(IBL.BO.DroneInParcel));
-            dip.Current = new Location();
-            dip.Current.Latitude = d.Current.Latitude;
-            dip.Current.Longitude = d.Current.Longitude;
+            dip.Location = new Location();
+            dip.Location.Latitude = d.Location.Latitude;
+            dip.Location.Longitude = d.Location.Longitude;
             return dip;
         }
         #region GetParcels
@@ -55,7 +55,7 @@ namespace BL
             IBL.BO.ParcelOfList  pol = (IBL.BO.ParcelOfList)P.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
             if (P.MatchForDroneTime == default(DateTime))
                 pol.State = State.Define;
-            else//צריך לבדוק אם לא נוצר ולזרוק חריגה?
+            else
                 if (P.collectingDroneTime == default(DateTime))
                 pol.State = State.match;
             else

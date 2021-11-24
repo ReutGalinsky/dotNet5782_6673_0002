@@ -37,7 +37,14 @@ namespace ConsoleUI
             Console.WriteLine("please enter the name of the station");
             Base1.Name = Console.ReadLine();
             Console.WriteLine("please enter the amount of charge slots in your base station");
-            Base1.ChargeSlots = int.Parse(Console.ReadLine());
+            try
+            {
+                Base1.ChargeSlots = int.Parse(Console.ReadLine());
+            }
+            catch(Exception e)
+            { Console.WriteLine("this amount is illegal please try to add this base station again");
+                return;
+            }
             try
             {
                 system.AddBaseStation(Base1);
@@ -60,7 +67,15 @@ namespace ConsoleUI
             Console.WriteLine("please enter the model of the drone");
             Drone1.Model = Console.ReadLine();
             Console.WriteLine("please enter the weight of your drone: 1 for light, 2 for middle and 3 for heavy");
-            Drone1.MaxWeight = (WeightCategories)(int.Parse(Console.ReadLine()));
+            try
+            {
+                Drone1.MaxWeight = (WeightCategories)(int.Parse(Console.ReadLine()));
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("you have not entered a number, please try to add this drone again");
+                return;
+            }
             try
             {
                 system.AddDrone(Drone1);
@@ -101,9 +116,17 @@ namespace ConsoleUI
             Console.WriteLine("please enter the id of the reciever customer");
             Parcel1.Geter = (Console.ReadLine());
             Console.WriteLine("please enter the weight of your Parcel: 1 for light, 2 for middle and 3 for heavy");
-            Parcel1.Weight = (WeightCategories)(int.Parse(Console.ReadLine()));
-            Console.WriteLine("please enter the priority of your Parcel: 1 for Regular, 2 for Speed and 3 for Emergency");
-            Parcel1.Priority = (Priorities)(int.Parse(Console.ReadLine()));
+            try
+            {
+                Parcel1.Weight = (WeightCategories)(int.Parse(Console.ReadLine()));
+                Console.WriteLine("please enter the priority of your Parcel: 1 for Regular, 2 for Speed and 3 for Emergency");
+                Parcel1.Priority = (Priorities)(int.Parse(Console.ReadLine()));
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("you have not entered a number, please try to add this parcel again");
+                return;
+            }
             Parcel1.DroneId = default(string);
             Parcel1.CreateParcelTime = DateTime.Now;
             Parcel1.collectingDroneTime = new DateTime();
@@ -161,7 +184,14 @@ namespace ConsoleUI
             string id = Console.ReadLine();
             BaseStation temp = system.GetBaseStation(id);
             Console.WriteLine("please enter new amount of charge slots");
-            temp.ChargeSlots = int.Parse(Console.ReadLine());
+            try
+            {
+                temp.ChargeSlots = int.Parse(Console.ReadLine());
+            }
+            catch(Exception e)
+            {
+                ;
+            }
             Console.WriteLine("please enter new Name");
             temp.Name = Console.ReadLine();
             try
@@ -294,7 +324,7 @@ namespace ConsoleUI
                                 }
                                 catch (Exception e)
                                 {
-                                    Console.WriteLine(e.Message);
+                                    Console.WriteLine(e.InnerException.Message);
                                 }
                                 break;
                             default:

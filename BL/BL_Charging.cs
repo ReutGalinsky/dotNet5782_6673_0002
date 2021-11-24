@@ -12,7 +12,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        //לעבור בכללי על חריגות
+
         #region DistanceTo
         private static double DistanceTo(Location a1,Location a2)
         {
@@ -33,7 +33,7 @@ namespace BL
         #region DroneToCharging
         public void DroneToCharging(string number)
         {
-            IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == number);
+            IBL.BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == number);
             if (d == null)
                 throw new ChargingException("the drone is not existing");
             if (d.State != DroneState.Available)
@@ -44,17 +44,17 @@ namespace BL
                 throw new ChargingException("there is no availible base station for charging");
             IDAL.DO.BaseStation b = ListOfStation.First();
             foreach (var item in ListOfStation)
-                if (DistanceTo(new Location() { Latitude = b.Latitude,Longitude = b.Longitude },d.Current) > DistanceTo(new Location() { Latitude = item.Latitude,Longitude = item.Longitude },d.Current))
+                if (DistanceTo(new Location() { Latitude = b.Latitude,Longitude = b.Longitude },d.Location) > DistanceTo(new Location() { Latitude = item.Latitude,Longitude = item.Longitude },d.Location))
                     b = item;
-            double temp = d.Battery;
-            temp -= availible * DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Current);
+            int temp = d.Battery;
+            temp -=(int)( availible * DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location));
             if (temp < 0)
                 throw new ChargingException("not enough battery to get the closest base station");
             d.Battery = temp;
             try
             {
-                d.State = DroneState.maintaince;//לבדוק אם שינה ברשימת רחפנים בשכבה הלוגית
-                d.Current = new Location() { Latitude = b.Latitude, Longitude = b.Longitude };
+                d.State = DroneState.maintaince;
+                d.Location = new Location() { Latitude = b.Latitude, Longitude = b.Longitude };
                 b.ChargeSlots--;
                 dal.UpdateBaseStation(b);
                 IDAL.DO.DroneCharge charge = new DroneCharge() { DroneId = number, StationId = b.IdNumber };
@@ -71,15 +71,14 @@ namespace BL
         #endregion
 
         #region DroneFromCharging
-        //להוסיף גם DATATIME בטעינת רחפן
         public void DroneFromCharging(string number, TimeSpan charging)
         {
-            IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == number);
+            IBL.BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == number);
             if (d == null)
                 throw new ChargingException("the drone is not existing");
             if (d.State != DroneState.maintaince)
                 throw new ChargingException("the drone was not charged");
-            d.Battery += ((float)(charging.TotalSeconds)/60)*speed; //פונקציה שנכין בכוחות עצמנו
+            d.Battery += (int)(((float)(charging.TotalSeconds)/60)*speed); 
             d.State = DroneState.Available;
             try
             {

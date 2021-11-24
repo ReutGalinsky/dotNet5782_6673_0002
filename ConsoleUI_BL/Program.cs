@@ -1,23 +1,24 @@
 ﻿using System;
 using BL;
 using IBL.BO;
+using System.Linq;
 
 
 namespace ConsoleUI_BL
 {
     public enum Options { Adding = 1, Updating, ShowItemp, ShowList, exit }//enum for optional actions
     public enum States { BaseStation = 1, Drone, Customer, Parcel, Unmatched, Available }//enum for internal choices
-    public enum Update { Match = 1, Collect, Giving, Sending, Release,Drone,BaseStation,Customer }//enum for updating options
+    public enum Update { Match = 1, Collect, Giving, Sending, Release, Drone, BaseStation, Customer }//enum for updating options
 
     class Program
     {
         static public void PrintMenu()//the first menu for the user
         {
             Console.WriteLine(@"1. adding
-            2. updating
-            3. show single item
-            4. show list
-            5. exit");
+2. updating
+3. show single item
+4. show list
+5. exit");
         }
         #region AddBaseStation
         static public void AddBaseStation(IBL.IBL system)
@@ -28,11 +29,29 @@ namespace ConsoleUI_BL
             Console.WriteLine("please enter the name of the station");
             Base1.Name = Console.ReadLine();
             Console.WriteLine("please enter the amount of charge slots in your base station");
-            Base1.ChargeSlots = int.Parse(Console.ReadLine());
-            Console.WriteLine("please enter the location of your base station (longitude,latitude) in israel");
-            Base1.Local = new Location();
-            Base1.Local.Latitude = double.Parse(Console.ReadLine());
-            Base1.Local.Longitude = double.Parse(Console.ReadLine());
+            try
+            {
+                Base1.ChargeSlots = int.Parse(Console.ReadLine());
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("invalid value for amount of charge slots");
+            }
+            Console.WriteLine("please enter the location of your base station in israel in format Latitude:Longitude");
+            string temp = Console.ReadLine();
+            var list = temp.Split(":");
+            if (list.Length != 2)
+            { Console.WriteLine("invalid Location"); return; }
+            try
+            {
+                Base1.Location = new Location();
+                Base1.Location.Latitude = double.Parse(list[0]);
+                Base1.Location.Longitude = double.Parse(list[1]);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Latitude or Longitude is invalid"); return;
+            }
             try
             {
                 system.AddBaseStation(Base1);
@@ -58,7 +77,7 @@ namespace ConsoleUI_BL
             string num = Console.ReadLine();
             try
             {
-                system.AddDrone(Drone1,num);
+                system.AddDrone(Drone1, num);
             }
             catch (Exception e)
             {
@@ -76,15 +95,26 @@ namespace ConsoleUI_BL
             Customer1.Name = Console.ReadLine();
             Console.WriteLine("plesae enter the phone number of the new customer");
             Customer1.Phone = Console.ReadLine();
-            Console.WriteLine("please enter the location of your base station (longitude,latitude)  in isearl");
-            Customer1.Local = new Location();
-            Customer1.Local.Latitude = double.Parse(Console.ReadLine());
-            Customer1.Local.Longitude = double.Parse(Console.ReadLine());
+            Console.WriteLine("please enter the location of your customer in israel in format Latitude:Longitude");
+            string temp = Console.ReadLine();
+            var list = temp.Split(":");
+            if (list.Length != 2)
+            { Console.WriteLine("invalid Location"); return; }
             try
             {
-            system.AddCustomer(Customer1);
+                Customer1.Location = new Location();
+                Customer1.Location.Latitude = double.Parse(list[0]);
+                Customer1.Location.Longitude = double.Parse(list[1]);
             }
-            catch(Exception e)
+            catch (Exception e)
+            {
+                Console.WriteLine("Latitude or Longitude is invalid"); return;
+            }
+            try
+            {
+                system.AddCustomer(Customer1);
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -105,10 +135,10 @@ namespace ConsoleUI_BL
             Parcel1.Priority = (Priorities)(int.Parse(Console.ReadLine()));
             try
             {
-                string id=system.AddParcelToDelivery(Parcel1);
-                Console.WriteLine("your pacel's id is{0}",id);
+                string id = system.AddParcelToDelivery(Parcel1);
+                Console.WriteLine("your pacel's id is {0}", id);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -118,12 +148,12 @@ namespace ConsoleUI_BL
         static public void MatchParcelToDrone(IBL.IBL system)
         {
             Console.WriteLine("please enter the drone code");
-            string num=Console.ReadLine();
+            string num = Console.ReadLine();
             try
             {
                 system.MatchingParcelToDrone(num);
             }
-            catch(Exception e)
+            catch (Exception e)
             { Console.WriteLine(e.Message); }
         }
         #endregion
@@ -131,12 +161,12 @@ namespace ConsoleUI_BL
         static public void CollectingFromCustomer(IBL.IBL system)
         {
             Console.WriteLine("please enter the drone code");
-            string num= Console.ReadLine();
+            string num = Console.ReadLine();
             try
             {
                 system.PickingParcelByDrone(num);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -146,12 +176,12 @@ namespace ConsoleUI_BL
         static public void GivingToCustomer(IBL.IBL system)
         {
             Console.WriteLine("please enter the drone code");
-            string num=Console.ReadLine();
+            string num = Console.ReadLine();
             try
             {
                 system.SupplyingParcelByDrone(num);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -163,15 +193,28 @@ namespace ConsoleUI_BL
             Console.WriteLine("please enter the Drone's id");
             string num = Console.ReadLine();
             Console.WriteLine("please enter the charging time in the Format: H:M:S");
-            int Hours = int.Parse(Console.ReadLine());
-            int Min = int.Parse(Console.ReadLine());
-            int Sec = int.Parse(Console.ReadLine());
-            TimeSpan t = new TimeSpan(Hours,Min,Sec);
+            string item = Console.ReadLine();
+            var list = item.Split(':');
+            if (list.Length != 3)
+            { Console.WriteLine("invalid time"); return; }
+            int Hours=0, Min=0, Sec=0;
             try
             {
-                system.DroneFromCharging(num,t);
+                 Hours = int.Parse(list[0]);
+                 Min = int.Parse(list[1]);
+                 Sec = int.Parse(list[2]);
             }
             catch(Exception e)
+            {
+                Console.WriteLine("invalid input of time");
+                return;
+            }
+            TimeSpan t = new TimeSpan(Hours, Min, Sec);
+            try
+            {
+                system.DroneFromCharging(num, t);
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -186,7 +229,7 @@ namespace ConsoleUI_BL
             {
                 system.DroneToCharging(num);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -196,14 +239,14 @@ namespace ConsoleUI_BL
         static public void UpdatingDrone(IBL.IBL system)
         {
             Console.WriteLine("please enter the Drone's id");
-            string num=Console.ReadLine();
+            string num = Console.ReadLine();
             Console.WriteLine("please enter new model");
             string model = Console.ReadLine();
             try
             {
                 system.UpdatingDetailsOfDrone(model, num);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -222,7 +265,7 @@ namespace ConsoleUI_BL
             string amount = Console.ReadLine();
             try
             {
-                system.UpdatingDetailsOfBaseStation(num, model,amount);
+                system.UpdatingDetailsOfBaseStation(num, model, amount);
             }
             catch (Exception e)
             {
@@ -242,7 +285,7 @@ namespace ConsoleUI_BL
             string phone = Console.ReadLine();
             try
             {
-                system.UpdatingDetailsOfCustomer(id, name,phone);
+                system.UpdatingDetailsOfCustomer(id, name, phone);
             }
             catch (Exception e)
             {
@@ -353,7 +396,7 @@ namespace ConsoleUI_BL
                                 {
                                     Console.WriteLine(system.GetBaseStation(num));
                                 }
-                                catch(Exception e)
+                                catch (Exception e)
                                 { Console.WriteLine(e.Message); }
                                 break;
                             case States.Drone:

@@ -17,17 +17,30 @@ namespace BL
         {
             if (customerToAdd.Name == "")
                 throw new AddingProblemException("invalid name of customer");
-            if (int.Parse(customerToAdd.Phone) == 0)
-                throw new AddingProblemException("the phone number is illegal");
-            if (customerToAdd.Local.Latitude > 33.3 || customerToAdd.Local.Latitude < 29.5)
-                throw new AddingProblemException("the location is out of israel");
-            if (customerToAdd.Local.Longitude > 35.6 || customerToAdd.Local.Longitude < 34.5)
-                throw new AddingProblemException("the location is out of israel");
+            try
+            {
+                if (int.Parse(customerToAdd.IdNumber) == 0)
+                    throw new AddingProblemException("invalid Id of customer");
+            }
+            catch (Exception e)
+            {
+                throw new AddingProblemException("invalid Id of customer");
+            }
+            try { if (int.Parse(customerToAdd.Phone) == 0)
+                    throw new AddingProblemException("the phone number is illegal"); }
+            catch (Exception e)
+            {
+                throw new AddingProblemException("invalid phone numeber of customer");
+            }
+            if (customerToAdd.Location.Latitude > 33.3 || customerToAdd.Location.Latitude < 29.5)
+                throw new AddingProblemException("the Latitude is out of israel");
+            if (customerToAdd.Location.Longitude > 35.6 || customerToAdd.Location.Longitude < 34.5)
+                throw new AddingProblemException("the Longitude is out of israel");
             try
             {
                 IDAL.DO.Customer c = (IDAL.DO.Customer)customerToAdd.CopyPropertiesToNew(typeof(IDAL.DO.Customer));
-                c.Longitude = customerToAdd.Local.Longitude;
-                c.Latitude = customerToAdd.Local.Latitude;
+                c.Longitude = customerToAdd.Location.Longitude;
+                c.Latitude = customerToAdd.Location.Latitude;
                 dal.AddCustomer(c);
             }
             catch (Exception e)
@@ -47,7 +60,7 @@ namespace BL
             if (parcel.Weight != IBL.BO.WeightCategories.Heavy && parcel.Weight != IBL.BO.WeightCategories.Middle && parcel.Weight != IBL.BO.WeightCategories.Light)
                 throw new AddingProblemException("This weight is not an option");
             if (parcel.Priority != IBL.BO.Priorities.Emergency && parcel.Priority != IBL.BO.Priorities.Regular && parcel.Priority != IBL.BO.Priorities.Speed)
-                throw new AddingProblemException("This prioritie is not an option");
+                throw new AddingProblemException("This priority is not an option");
             try
             {
                 IDAL.DO.Customer c = dal.GetCustomer(parcel.Sender);
@@ -81,19 +94,24 @@ namespace BL
             {
                 IDAL.DO.Customer temp = dal.GetCustomer(id);
                 IBL.BO.Customer updatedCustomer = (IBL.BO.Customer)temp.CopyPropertiesToNew(typeof(IBL.BO.Customer));
-                updatedCustomer.Local = new Location() { Latitude = temp.Latitude, Longitude = temp.Longitude };
+                updatedCustomer.Location = new Location() { Latitude = temp.Latitude, Longitude = temp.Longitude };
                 if (Name != "") updatedCustomer.Name = Name;
                 if (phone != "")
                 {
-                    if (int.Parse(phone) == 0)
-                        throw new UpdatingException("the phone number is illegal");
-                    updatedCustomer.Phone = phone;
+                    try
+                    {
+                        if (int.Parse(phone) == 0)
+                            throw new UpdatingException("the phone number is illegal");
+                        updatedCustomer.Phone = phone;
+                    }
+                    catch (Exception e)
+                    { throw new UpdatingException("the phone number is illegal"); }
                 }
                 try
                 {
                     IDAL.DO.Customer c= (IDAL.DO.Customer)updatedCustomer.CopyPropertiesToNew(typeof(IDAL.DO.Customer));
-                    c.Latitude = updatedCustomer.Local.Latitude;
-                    c.Longitude = updatedCustomer.Local.Longitude;
+                    c.Latitude = updatedCustomer.Location.Latitude;
+                    c.Longitude = updatedCustomer.Location.Longitude;
                     dal.UpdateCustomer(c);
                 }
                 catch (Exception e)
@@ -130,12 +148,11 @@ namespace BL
         {
             try
             {
-                // GeoCoordinate
                 IDAL.DO.Customer c = dal.GetCustomer(id);
                 IBL.BO.Customer customer = (IBL.BO.Customer)c.CopyPropertiesToNew(typeof(IBL.BO.Customer));
-                customer.Local = new Location();
-                customer.Local.Latitude = c.Latitude;
-                customer.Local.Longitude = c.Longitude;
+                customer.Location = new Location();
+                customer.Location.Latitude = c.Latitude;
+                customer.Location.Longitude = c.Longitude;
                 customer.FromCustomer = dal.GetParcels()
                     .Where(p => (p.Sender) == id)
                     .Select(p => GetPOC(p.IdNumber, true)).ToList();
@@ -146,7 +163,7 @@ namespace BL
             }
             catch (Exception e)
             {
-                throw new GettingProblemException("the customer is not exist", e);
+                throw new GettingProblemException("the customer is not exist",e );
             }
         }
         #endregion

@@ -10,7 +10,6 @@ using IDAL;
 namespace DalObject
 {
     public class DalObject : IDal
-    //האם הבדיקה האם נמצא זה לפי id? 
     {
         #region Constractor
         public DalObject() { DataSource.Initialize(); }
@@ -19,7 +18,7 @@ namespace DalObject
         #region AddDrone
         public void AddDrone(Drone drone)
         {
-            if (DataSource.Drones.Find(d => d.IdNumber == drone.IdNumber).IdNumber != default(string))
+            if (DataSource.Drones.FirstOrDefault(d => d.IdNumber == drone.IdNumber).IdNumber != default(string))
                 throw new ExistingException("the drone is already exist");
             DataSource.Drones.Add(drone);
         }
@@ -38,7 +37,7 @@ namespace DalObject
         #region DeleteDrone
         public void DeleteDrone(string id)
         {
-            Drone drone = DataSource.Drones.Find(d => d.IdNumber == id);
+            Drone drone = DataSource.Drones.FirstOrDefault(d => d.IdNumber == id);
             if (drone.IdNumber == default(string))
                 throw new NotExistingException("the drone is not existing");
             DataSource.Drones.Remove(drone);
@@ -65,9 +64,9 @@ namespace DalObject
         #endregion
 
         #region AddDroneCharge
-        public void AddDroneCharge(DroneCharge dronecharge)///???האם יש אופציה שכבר קיים או שלא ייתכן
+        public void AddDroneCharge(DroneCharge dronecharge)
         {
-            if (DataSource.Charges.Find(d => d.DroneId == dronecharge.DroneId).DroneId != default(string))
+            if (DataSource.Charges.FirstOrDefault(d => d.DroneId == dronecharge.DroneId).DroneId != default(string))
                 throw new ExistingException("the charge slot is already exist");
             DataSource.Charges.Add(dronecharge);
         }
@@ -86,7 +85,7 @@ namespace DalObject
         #region DeleteDroneCharge
         public void DeleteDroneCharge(string id)
         {
-            DroneCharge droneCharge = DataSource.Charges.Find(d => d.DroneId == id);
+            DroneCharge droneCharge = DataSource.Charges.FirstOrDefault(d => d.DroneId == id);
             if (droneCharge.DroneId == default(string))
                 throw new NotExistingException("the charge slot is not existing");
             DataSource.Charges.Remove(droneCharge);
@@ -115,7 +114,7 @@ namespace DalObject
         public string AddParcel(Parcel parcel)
         {
             parcel.IdNumber = DataSource.Config.RunningNumber++.ToString();
-            if (DataSource.Parcels.Find(d => d.IdNumber == parcel.IdNumber).IdNumber != default(string))
+            if (DataSource.Parcels.FirstOrDefault(d => d.IdNumber == parcel.IdNumber).IdNumber != default(string))
                 throw new ExistingException("the parcel is already exist");
             DataSource.Parcels.Add(parcel);
             return parcel.IdNumber;
@@ -135,7 +134,7 @@ namespace DalObject
         #region DeleteParcel
         public void DeleteParcel(string id)
         {
-            Parcel parcel = DataSource.Parcels.Find(d => d.IdNumber == id);
+            Parcel parcel = DataSource.Parcels.FirstOrDefault(d => d.IdNumber == id);
             if (parcel.IdNumber == default(string))
                 throw new NotExistingException("the parcel is not existing");
             DataSource.Parcels.Remove(parcel);
@@ -206,7 +205,7 @@ namespace DalObject
         #region AddBaseStation
         public void AddBaseStation(BaseStation baseStation)
         {
-            if (DataSource.stations.Find(d => d.IdNumber == baseStation.IdNumber).IdNumber != default(string))
+            if (DataSource.stations.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber != default(string))
                 throw new ExistingException("the baseStation is already exist");
             DataSource.stations.Add(baseStation);
         }
@@ -225,7 +224,7 @@ namespace DalObject
         #region DeleteBaseStation
         public void DeleteBaseStation(string id)
         {
-            BaseStation baseStation = DataSource.stations.Find(d => d.IdNumber == id);
+            BaseStation baseStation = DataSource.stations.FirstOrDefault(d => d.IdNumber == id);
             if (baseStation.IdNumber == default(string))
                 throw new NotExistingException("the baseStation is not existing");
             DataSource.stations.Remove(baseStation);
@@ -265,7 +264,7 @@ namespace DalObject
         #region AddCustomer
         public void AddCustomer(Customer customer)
         {
-            if (DataSource.Customers.Find(d => d.IdNumber == customer.IdNumber).IdNumber != default(string))
+            if (DataSource.Customers.FirstOrDefault(d => d.IdNumber == customer.IdNumber).IdNumber != default(string))
                 throw new ExistingException("the customer is already exist");
             DataSource.Customers.Add(customer);
         }
@@ -284,7 +283,7 @@ namespace DalObject
         #region DeleteCustomer
         public void DeleteCustomer(string id)
         {
-            Customer customer = DataSource.Customers.Find(d => d.IdNumber == id);
+            Customer customer = DataSource.Customers.FirstOrDefault(d => d.IdNumber == id);
             if (customer.IdNumber == default(string))
                 throw new NotExistingException("the customer is not existing");
             DataSource.Customers.Remove(customer);

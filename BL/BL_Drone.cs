@@ -67,7 +67,7 @@ namespace BL
                             if (DistanceTo(temp, a) < DistanceTo(b, a))
                                 b = temp;
                         }
-                        drone.Current = b;
+                        drone.Location = b;
                         Location c = new Location() { Latitude = dal.GetCustomer((item.Geter)).Latitude, Longitude = dal.GetCustomer((item.Geter)).Longitude };
                         Location d = new Location() { Latitude = ClosestStation(c).Latitude, Longitude = ClosestStation(c).Longitude };
                         switch (item.Weight)
@@ -86,11 +86,11 @@ namespace BL
                         }
                         distance2 = DistanceTo(c, d) * availible;
                         if ((int)(distance1 + distance2) > 100) throw new AddingProblemException("can't pass the parcel without charging in the middle of the shipping");
-                        drone.Battery = rand.Next((int)(distance1 + distance2), 101);//מה לעשות עם הבעיה של הבטריה.
+                        drone.Battery = rand.Next((int)(distance1 + distance2), 101);
                     }
                     else
                     {
-                        drone.Current = a;
+                        drone.Location = a;
                         Location d = new Location() { Latitude = ClosestStation(a).Latitude, Longitude = ClosestStation(a).Longitude };
                         distance2 = DistanceTo(a, d) * availible;
                     }
@@ -98,33 +98,38 @@ namespace BL
                 }
             }
             int number = rand.Next(0, 2);
-            switch (1)
+            switch (0)
             {
                 case 0:
+                    
                     drone.Battery = rand.Next(0, 20);
                     var station = dal.GetBaseStations().ToList();
-                    if (station.Count == 0) throw new AddingProblemException("there are no base stations");//???????????
+                    if (station.Count == 0) throw new AddingProblemException("there are no base stations");
                     int num = rand.Next(0, station.Count());
                     IDAL.DO.BaseStation b = station.ElementAt(num);
-                    drone.Current = new Location() { Latitude = b.Latitude, Longitude = b.Longitude };
+                    drone.Location = new Location() { Latitude = b.Latitude, Longitude = b.Longitude };
                     drone.State = DroneState.maintaince;
+                    b.ChargeSlots--;
+                    dal.UpdateBaseStation(b);
+                    IDAL.DO.DroneCharge charge = new DroneCharge() { DroneId = drone.IdNumber, StationId = b.IdNumber };
+                    dal.AddDroneCharge(charge);
                     break;
                 case 1:
                     var list = from item in dal.GetParcels()
                                where item.ArrivingDroneTime != default(DateTime)
                                select item;
                     var list1 = list.ToList();
-                    if (list1.Count == 0) { drone.Current = new Location() { Latitude = rand.NextDouble() + rand.Next(29, 33), Longitude = rand.NextDouble() + rand.Next(34, 36) };
+                    if (list1.Count == 0) { drone.Location = new Location() { Latitude = rand.NextDouble() + rand.Next(29, 33), Longitude = rand.NextDouble() + rand.Next(34, 36) };
                         drone.Battery = rand.Next(20, 101);
-                        }//????????????
-                    else {//מה קורה אם אין חבילות שסופקו?
+                        }
+                    else {
                         num = rand.Next(0, list.Count());
                         IDAL.DO.Parcel P = list1.ElementAt(num);
-                        drone.Current = new Location();
-                        drone.Current.Latitude = dal.GetCustomer(((P.Geter))).Latitude;
-                        drone.Current.Longitude = dal.GetCustomer((((P.Geter)))).Longitude;
-                        Location d = new Location() { Latitude = ClosestStation(drone.Current).Latitude, Longitude = ClosestStation(drone.Current).Longitude };
-                        drone.Battery = rand.Next((int)(DistanceTo(drone.Current, d) * availible), 101);
+                        drone.Location = new Location();
+                        drone.Location.Latitude = dal.GetCustomer(((P.Geter))).Latitude;
+                        drone.Location.Longitude = dal.GetCustomer((((P.Geter)))).Longitude;
+                        Location d = new Location() { Latitude = ClosestStation(drone.Location).Latitude, Longitude = ClosestStation(drone.Location).Longitude };
+                        drone.Battery = rand.Next((int)(DistanceTo(drone.Location, d) * availible), 101);
                     }
                     drone.State = DroneState.Available;
                     break;
@@ -162,17 +167,27 @@ namespace BL
                 throw new AddingProblemException("A model wasn't entered");
             try
             {
+                if (int.Parse(droneToAdd.IdNumber) == 0)
+                    throw new AddingProblemException("invalid Id of drone");
+            }
+            catch (Exception e)
+            {
+                throw new AddingProblemException("invalid Id of base station");
+            }
+            try
+            {
                 dal.AddDrone((IDAL.DO.Drone)droneToAdd.CopyPropertiesToNew(typeof(IDAL.DO.Drone)));
                 Random r = new Random();
                 droneToAdd.Battery = r.Next(20, 40);
-                Location l = (Location)GetBaseStation(number).Local.CopyPropertiesToNew(typeof(Location));
-                droneToAdd.Current = l;
+                Location l = (Location)GetBaseStation(number).Location.CopyPropertiesToNew(typeof(Location));
+                droneToAdd.Location = l;
                 var ListOfStation = dal.GetBaseStation(number);
                 if (ListOfStation.ChargeSlots== 0)
                     throw new ChargingException("there is not slots for charging in this base station");
                 droneToAdd.State = DroneState.maintaince;//לבדוק אם שינה ברשימת רחפנים בשכבה הלוגית
                 ListOfStation.ChargeSlots--;
                 dal.UpdateBaseStation(ListOfStation);
+                Drones.Add(droneToAdd);
                 IDAL.DO.DroneCharge charge = new DroneCharge() { DroneId =droneToAdd.IdNumber , StationId = number };
                 dal.AddDroneCharge(charge);
                 Drones.Add(droneToAdd);
@@ -194,13 +209,13 @@ namespace BL
         #region GetDrone
         public IBL.BO.Drone GetDrone(string id)//האם צריך לקחת את הרחפן מהשכבה למטה?
         {
-            IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
+            IBL.BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
             if (d == null)
                 throw new GettingProblemException("the drone is not exist");
             IBL.BO.Drone drone = (IBL.BO.Drone)d.CopyPropertiesToNew(typeof(IBL.BO.Drone));
-            drone.Current = new Location();
-            drone.Current.Latitude = d.Current.Latitude;
-            drone.Current.Longitude = d.Current.Longitude;
+            drone.Location = new Location();
+            drone.Location.Latitude = d.Location.Latitude;
+            drone.Location.Longitude = d.Location.Longitude;
             drone.State = d.State;
             drone.Battery = d.Battery;
             if(d.NumberOfParcel!=default(string))
@@ -232,7 +247,7 @@ namespace BL
         {
             if (Model == "")
                 throw new UpdatingException("the model is illegal");
-            IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
+            IBL.BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
             if (d == null)
                 throw new UpdatingException("the drone is not existing");
             d.Model = Model; //לוודא ששינה בBL של רחפנים

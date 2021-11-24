@@ -10,7 +10,7 @@ namespace IBL.BO
     public class ParcelInPassing
     {
         public string IdNumber { set; get; }
-        public bool isWaitingForColecting { set; get; }//?
+        public bool isWaitingForColecting { set; get; }
         public Priorities Priority { set; get; }
         public WeightCategories Weight { set; get; }
         public CustomerOfParcel Senderer { set; get; }

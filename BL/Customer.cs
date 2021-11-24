@@ -9,7 +9,7 @@ namespace IBL.BO
 {
     public class Customer
     {
-        public Location Local { set; get; }
+        public Location Location { set; get; }
         public string IdNumber { set; get; }
         public string Phone { set; get; }
         public string Name { set; get; }

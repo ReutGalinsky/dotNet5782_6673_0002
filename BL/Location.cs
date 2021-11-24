@@ -9,8 +9,9 @@ namespace IBL.BO
 {
     public class Location
     {
-        public double Longitude { set; get; }
         public double Latitude { set; get; }
+        public double Longitude { set; get; }
+
         public override string ToString()
         {
             return this.stringProperty();

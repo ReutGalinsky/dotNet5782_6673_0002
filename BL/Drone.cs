@@ -12,9 +12,9 @@ namespace IBL.BO
         public string IdNumber { set; get; }
         public string Model { set; get; }
         public WeightCategories MaxWeight { set; get; }
-        public double Battery { set; get; }
+        public int Battery { set; get; }
         public DroneState State { set; get; }
-        public Location Current { set; get; }
+        public Location Location { set; get; }
         public ParcelInPassing PassedParcel { set; get; }
         public override string ToString()
         {

@@ -7,8 +7,9 @@ namespace IDAL.DO
         public string IdNumber{get;set;}
         public string Name { get; set; }
         public int ChargeSlots { get; set; }
-        public double Longitude { get; set; }
         public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
         public override string ToString()
         {
             return string.Format(@$"station number {IdNumber}, name: {Name}
