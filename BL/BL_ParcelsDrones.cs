@@ -21,13 +21,11 @@ namespace BL
                 throw new ConnectionException("the drone is not existing");
             if (d.State != DroneState.Available)
                 throw new ConnectionException("the drone is not available");
-            var list = from item in GetParcelsNotMatching()
+            var tem = GetParcelsNotMatching();
+            var list = from item in tem
                        where (int)item.Weight <= (int)d.MaxWeight
                        orderby (int)item.Priority, (int)item.Weight, DistanceTo(GetCustomer(item.Sender).Local, d.Current)
                        select item;
-            // var list = GetParcelsNotMatching().ToList();
-            //IBL.BO.ParcelOfList win = list.First();
-            //bool flag = false;
             foreach (var item in list)
             {
                 double temp = d.Battery;

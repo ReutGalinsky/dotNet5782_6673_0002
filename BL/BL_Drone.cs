@@ -98,7 +98,7 @@ namespace BL
                 }
             }
             int number = rand.Next(0, 2);
-            switch (number)
+            switch (1)
             {
                 case 0:
                     drone.Battery = rand.Next(0, 20);
@@ -197,7 +197,6 @@ namespace BL
             IBL.BO.DroneToList d = Drones.Find(x => x.IdNumber == id);
             if (d == null)
                 throw new GettingProblemException("the drone is not exist");
-            
             IBL.BO.Drone drone = (IBL.BO.Drone)d.CopyPropertiesToNew(typeof(IBL.BO.Drone));
             drone.Current = new Location();
             drone.Current.Latitude = d.Current.Latitude;
@@ -212,14 +211,19 @@ namespace BL
         #endregion
         private IBL.BO.ParcelInPassing GetPIP(string id)
         {
-            IBL.BO.Parcel p = GetParcel(id);
+            IDAL.DO.Parcel p = dal.GetParcel(id);
             IBL.BO.ParcelInPassing temp= (IBL.BO.ParcelInPassing)p.CopyPropertiesToNew(typeof(IBL.BO.ParcelInPassing));
-            string sender =p.SenderCustomer.IdNumber;
-            string geter = p.GeterCustomer.IdNumber;
-            temp.Sender = GetCustomerOfParcel(sender);
-            temp.Getter = GetCustomerOfParcel(geter);
-            temp.Packing = GetCustomer(sender).Local;
-            temp.Destination = GetCustomer(geter).Local;
+            Location get = new Location() { Latitude = dal.GetCustomer(p.Geter).Latitude, Longitude = dal.GetCustomer(p.Geter).Longitude };
+            Location send = new Location() { Latitude = dal.GetCustomer(p.Sender).Latitude, Longitude = dal.GetCustomer(p.Sender).Longitude };
+            temp.Distance = DistanceTo(get, send);
+            temp.Packing = send;
+            temp.Destination =get;
+            temp.Senderer = GetCustomerOfParcel(p.Sender);
+            temp.Getterer = GetCustomerOfParcel(p.Geter);
+            if (p.collectingDroneTime == default(DateTime))
+                temp.isWaitingForColecting = true;
+            else
+                temp.isWaitingForColecting = false;
             return temp;
         }
 

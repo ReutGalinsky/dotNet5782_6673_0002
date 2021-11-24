@@ -79,12 +79,7 @@ namespace BL
             var list = from item in dal.GetParcels()
                        where item.MatchForDroneTime == default(DateTime)
                        select item;
-            foreach (var n in list)
-                if(n.MatchForDroneTime==default(DateTime))
-                { Console.WriteLine(n.IdNumber); }
             var l =list.Select(x=>GetPOL(x.IdNumber));
-            foreach (var n in l)
-                { Console.WriteLine(n.IdNumber); }
             return l;
         }
         #endregion

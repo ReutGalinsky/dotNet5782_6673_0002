@@ -52,7 +52,7 @@ namespace DalObject
                 IdNumber = "333",
                 DroneId = default(string),
                 Geter = "333",
-                Weight = WeightCategories.Heavy,
+                Weight = WeightCategories.Light,
                 Priority = Priorities.Regular,
                 Sender = "444",
                 ArrivingDroneTime = default(DateTime),
