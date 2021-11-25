@@ -212,6 +212,13 @@ namespace BL
                 throw new AddingProblemException("the customer is not exist");
             }
         }
+         public IEnumerable<IBL.BO.CustomerToList> PredicateCustomer(Predicate<IBL.BO.CustomerToList> c)
+        {
+            var list = from item in GetCustomers()
+                       where c(item)
+                       select item;
+            return list;
+        }
 
     }
 

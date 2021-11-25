@@ -280,7 +280,13 @@ namespace BL
         }
         #endregion
 
-
+         public IEnumerable<IBL.BO.DroneToList> PredicateDrone(Predicate<IBL.BO.DroneToList> c)
+        {
+            var list = from item in GetDrones()
+                       where c(item)
+                       select item;
+            return list;
+        }
 
     }
 }

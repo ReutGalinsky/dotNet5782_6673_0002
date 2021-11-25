@@ -16,6 +16,8 @@ namespace DalObject
         public DalObject() { DataSource.Initialize(); }
         #endregion
 
+        //*****Drones***********
+
         #region AddDrone
         public void AddDrone(Drone drone)
         {
@@ -32,6 +34,15 @@ namespace DalObject
             if (drone.IdNumber == default(string))
                 throw new NotExistingException("the drone is not exist");
             return drone;
+        }
+        #endregion
+
+        #region GetDrones
+        public IEnumerable<Drone> GetDrones()
+        {
+            var Drones = from item in DataSource.Drones
+                         select item;
+            return Drones;
         }
         #endregion
 
@@ -64,6 +75,18 @@ namespace DalObject
         }
         #endregion
 
+        #region PredicateDrone
+        public IEnumerable<Drone> PredicateDrone(Predicate<Drone> c)
+        {
+            var list = from item in DataSource.Drones()
+                       where c(item)
+                       select item;
+            return list;
+        }
+        #endregion
+
+        //*******charge********
+
         #region AddDroneCharge
         public void AddDroneCharge(DroneCharge dronecharge)
         {
@@ -80,6 +103,15 @@ namespace DalObject
             if (droneCharge.DroneId == default(string))
                 throw new NotExistingException("the charge slot is not exist");
             return droneCharge;
+        }
+        #endregion
+
+        #region GetDroneCharges
+        public IEnumerable<DroneCharge> GetDroneCharges()
+        {
+            var charges = from item in DataSource.Charges
+                          select item;
+            return charges;
         }
         #endregion
 
@@ -111,6 +143,8 @@ namespace DalObject
         }
         #endregion
 
+        //*******parcel********
+        
         #region AddParcel
         public string AddParcel(Parcel parcel)
         {
@@ -129,6 +163,15 @@ namespace DalObject
             if (parcel.IdNumber == default(string))
                 throw new NotExistingException("the parcel is not exist");
             return parcel;
+        }
+        #endregion
+
+        #region GetParcels
+        public IEnumerable<Parcel> GetParcels()
+        {
+            var parcels = from item in DataSource.Parcels
+                          select item;
+            return parcels;
         }
         #endregion
 
@@ -168,41 +211,17 @@ namespace DalObject
         }
         #endregion
 
-        #region GetDrones
-        public IEnumerable<Drone> GetDrones()
+        #region PredicateParcel
+        public IEnumerable<Parcel> PredicateParcel(Predicate<Parcel> c)
         {
-            var Drones = from item in DataSource.Drones
-                         select item;
-            return Drones;
+            var list = from item in DataSource.Parcels()
+                       where c(item)
+                       select item;
+            return list;
         }
         #endregion
 
-        #region GetDroneCharges
-        public IEnumerable<DroneCharge> GetDroneCharges()
-        {
-            var charges = from item in DataSource.Charges
-                          select item;
-            return charges;
-        }
-        #endregion
-
-        #region GetParcels
-        public IEnumerable<Parcel> GetParcels()
-        {
-            var parcels = from item in DataSource.Parcels
-                          select item;
-            return parcels;
-        }
-        #endregion
-
-        #region UsingElectricity
-        public double[] UsingElectricity()
-            //function that return the electricity values
-        {
-            double[] arr = new double[5] { DataSource.Config.available, DataSource.Config.heavy, DataSource.Config.light, DataSource.Config.medium, DataSource.Config.speed };
-            return arr;
-        }
-        #endregion
+        //*******base station********
 
         #region AddBaseStation
         public void AddBaseStation(BaseStation baseStation)
@@ -220,6 +239,15 @@ namespace DalObject
             if (baseStation.IdNumber == default(string))
                 throw new NotExistingException("the baseStation is not exist");
             return baseStation;
+        }
+        #endregion
+
+        #region GetBaseStations
+        public IEnumerable<BaseStation> GetBaseStations()
+        {
+            var BaseStations = from item in DataSource.stations
+                               select item;
+            return BaseStations;
         }
         #endregion
 
@@ -254,14 +282,17 @@ namespace DalObject
         }
         #endregion
 
-        #region GetBaseStations
-        public IEnumerable<BaseStation> GetBaseStations()
+        #region PredicateBaseStation
+        public IEnumerable<BaseStation> PredicateBaseStation(Predicate<BaseStation> c)
         {
-            var BaseStations = from item in DataSource.stations
-                               select item;
-            return BaseStations;
+            var list = from item in DataSource.stations()
+                       where c(item)
+                       select item;
+            return list;
         }
         #endregion
+
+         //*******customer********
 
         #region AddCustomer
         public void AddCustomer(Customer customer)
@@ -279,6 +310,15 @@ namespace DalObject
             if (customer.IdNumber == default(string))
                 throw new NotExistingException("the customer is not exist");
             return customer;
+        }
+        #endregion
+
+        #region GetCustomers
+        public IEnumerable<Customer> GetCustomers()
+        {
+            var Customers = from item in DataSource.Customers
+                            select item;
+            return Customers;
         }
         #endregion
 
@@ -313,12 +353,24 @@ namespace DalObject
         }
         #endregion
 
-        #region GetCustomers
-        public IEnumerable<Customer> GetCustomers()
+        #region PredicateCustomer
+        public IEnumerable<Customer> PredicateCustomer(Predicate<Customer> c)
         {
-            var Customers = from item in DataSource.Customers
-                            select item;
-            return Customers;
+            var list = from item in DataSource.Customers()
+                       where c(item)
+                       select item;
+            return list;
+        }
+        #endregion
+
+        //*******tools********
+
+        #region UsingElectricity
+        public double[] UsingElectricity()
+            //function that return the electricity values
+        {
+            double[] arr = new double[5] { DataSource.Config.available, DataSource.Config.heavy, DataSource.Config.light, DataSource.Config.medium, DataSource.Config.speed };
+            return arr;
         }
         #endregion
     }

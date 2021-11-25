@@ -81,5 +81,13 @@ namespace BL
             return l;
         }
         #endregion
+
+         public IEnumerable<IBL.BO.ParcelOfList> PredicateParcel(Predicate<IBL.BO.ParcelOfList> c)
+        {
+            var list = from item in GetParcels()
+                       where c(item)
+                       select item;
+            return list;
+        }
     }
 }
