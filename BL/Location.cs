@@ -14,7 +14,10 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return this.stringProperty();
+            return string.Format(
+                "Latitude: " + BL.ToolsBl.sexagesimalFormat(Latitude, false)+'\n'
+                + "Longitude: " + BL.ToolsBl.sexagesimalFormat(Longitude, true)
+                ); ;
         }
     }
 }

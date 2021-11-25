@@ -9,8 +9,8 @@ namespace IDAL.DO
     public struct Parcel
     {
         public string IdNumber { get; set; }
-        public string Sender { get; set; }//?
-        public string Geter { get; set; }//?
+        public string Sender { get; set; }
+        public string Geter { get; set; }
         public string DroneId { get; set; }   
         public WeightCategories Weight { get; set; }
         public Priorities Priority { get; set; }

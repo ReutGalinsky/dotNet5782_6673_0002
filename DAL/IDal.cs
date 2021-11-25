@@ -7,7 +7,7 @@ using IDAL.DO;
 
 namespace IDAL
 {
-    public interface IDal
+    public interface IDal//interface of the data layer
     {
         public double[] UsingElectricity();
         public void AddDrone(Drone drone);

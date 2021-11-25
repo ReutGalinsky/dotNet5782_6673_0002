@@ -11,6 +11,7 @@ namespace IBL.BO
     {
         public string IdNumber { set; get; }
         public bool isWaitingForColecting { set; get; }
+        // is the parcel is waiting to be collected or it's on the way to customer
         public Priorities Priority { set; get; }
         public WeightCategories Weight { set; get; }
         public CustomerOfParcel Senderer { set; get; }

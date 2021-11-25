@@ -10,6 +10,7 @@ using IDAL;
 namespace DalObject
 {
     public class DalObject : IDal
+        //implementation by lists
     {
         #region Constractor
         public DalObject() { DataSource.Initialize(); }
@@ -196,6 +197,7 @@ namespace DalObject
 
         #region UsingElectricity
         public double[] UsingElectricity()
+            //function that return the electricity values
         {
             double[] arr = new double[5] { DataSource.Config.available, DataSource.Config.heavy, DataSource.Config.light, DataSource.Config.medium, DataSource.Config.speed };
             return arr;

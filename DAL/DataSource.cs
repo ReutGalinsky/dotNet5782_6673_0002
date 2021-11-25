@@ -8,17 +8,15 @@ namespace DalObject
 {
     class DataSource
     {
-        /// <summary>
-        /// the data structs for out data base
-        /// </summary>
+        #region Lists
         internal static List<BaseStation> stations = new List<BaseStation>();
         internal static List<Drone> Drones = new List<Drone>();
         internal static List<Customer> Customers = new List<Customer>();
         internal static List<Parcel> Parcels = new List<Parcel>();
         internal static List<DroneCharge> Charges = new List<DroneCharge>();
-        /// <summary>
-        /// the inner class with the initialization
-        /// </summary>
+        #endregion
+
+        #region configClass
         internal class Config
         {
             internal static int RunningNumber = 1;//unique number for the parcels
@@ -28,96 +26,85 @@ namespace DalObject
             public static double medium { set; get; }
             public static double speed { set; get; }
         }
-        /// <summary>
-        /// function that initialize the data structures
-        /// </summary>
+        #endregion
+
+        #region Initialize
         internal static void Initialize()
         //assumption: the legal location is in israel:
-        //Longitude: between 33 to 35
         //Latitude: between 31 to 33
+        //Longitude: between 33 to 35
         {
             Config.speed = 0.05;
             Config.available = 0.05;
             Config.heavy = 0.05;
             Config.medium = 0.05;
             Config.light = 0.05;
-            //Drones.Add(new Drone() { IdNumber = "555", MaxWeight = WeightCategories.Heavy, Model = "XP5H" });
-            //stations.Add(new BaseStation() { IdNumber = "222", ChargeSlots = 2, Latitude = 32, Longitude = 32, Name = "Herzelia" });
-            //stations.Add(new BaseStation() { IdNumber = "333", ChargeSlots = 2, Latitude = 33, Longitude = 33, Name = "jerusalem" });
-            //stations.Add(new BaseStation() { IdNumber = "444", ChargeSlots = 2, Latitude = 34, Longitude = 34, Name = "telAviv" });
-            //Customers.Add(new Customer() { IdNumber = "333", Latitude = 32.5, Longitude = 31.5, Name = "yosi", Phone = "0550405" });
-            //Customers.Add(new Customer() { IdNumber = "444", Latitude = 32.6, Longitude = 31.7, Name = "gali", Phone = "0548872" });
+            Drones.Add(new Drone() { IdNumber = "1", MaxWeight = WeightCategories.Heavy, Model = "XP5H" });
+            Drones.Add(new Drone() { IdNumber = "2", MaxWeight = WeightCategories.Heavy, Model = "XP5H" });
+            Drones.Add(new Drone() { IdNumber = "3", MaxWeight = WeightCategories.Light, Model = "XP5H" });
+            Drones.Add(new Drone() { IdNumber = "4", MaxWeight = WeightCategories.Middle, Model = "XP5H" });
+            stations.Add(new BaseStation() { IdNumber = "5", ChargeSlots = 2, Latitude = 32.6, Longitude = 35.3, Name = "Afula" });
+            stations.Add(new BaseStation() { IdNumber = "6", ChargeSlots = 4, Latitude = 31.7, Longitude = 35.2, Name = "Jerusalem" });
+            stations.Add(new BaseStation() { IdNumber = "7", ChargeSlots = 1, Latitude = 31.2, Longitude = 34.8, Name = "Beer Sheva" });
+            Customers.Add(new Customer() { IdNumber = "8", Latitude = 32.5, Longitude = 35.4, Name = "yosi", Phone = "05793148" });
+            Customers.Add(new Customer() { IdNumber = "9", Latitude = 31.7, Longitude = 35.2, Name = "dani", Phone = "05478216" });
+            Customers.Add(new Customer() { IdNumber = "10", Latitude = 31.8, Longitude = 34.7, Name = "haim", Phone = "05021481" });
+            Customers.Add(new Customer() { IdNumber = "11", Latitude = 29.6, Longitude = 34.8, Name = "david", Phone = "059465842" });
+            Customers.Add(new Customer() { IdNumber = "12", Latitude = 30.6, Longitude = 34.8, Name = "ben", Phone = "05789541" });
             Parcels.Add(new Parcel()
             {
-                IdNumber = "333",
+                IdNumber = Config.RunningNumber++.ToString(),
+                DroneId = "4",
+                Geter = "8",
+                Weight = WeightCategories.Light,
+                Priority = Priorities.Regular,
+                Sender = "11",
+                ArrivingDroneTime = default(DateTime),
+                MatchForDroneTime = DateTime.Now,
+                collectingDroneTime = default(DateTime),
+                CreateParcelTime = DateTime.Now,
+            });
+            Parcels.Add(new Parcel()
+            {
+                IdNumber = Config.RunningNumber++.ToString(),
+                DroneId = "3",
+                Geter = "9",
+                Weight = WeightCategories.Light,
+                Priority = Priorities.Emergency,
+                Sender = "10",
+                ArrivingDroneTime = default(DateTime),
+                MatchForDroneTime = DateTime.Now,
+                collectingDroneTime = default(DateTime),
+                CreateParcelTime = DateTime.Now,
+            }); 
+            Parcels.Add(new Parcel()
+            {
+                IdNumber = Config.RunningNumber++.ToString(),
                 DroneId = default(string),
-                Geter = "333",
+                Geter = "12",
                 Weight = WeightCategories.Heavy,
                 Priority = Priorities.Regular,
-                Sender = "444",
+                Sender = "8",
                 ArrivingDroneTime = default(DateTime),
                 MatchForDroneTime = default(DateTime),
                 collectingDroneTime = default(DateTime),
                 CreateParcelTime = DateTime.Now,
-            });
-            //Parcels.Add(new Parcel()
-            //{
-            //    IdNumber = "456",
-            //    DroneId = default(string),
-            //    Geter = "444",
-            //    Weight = WeightCategories.Light,
-            //    Priority = Priorities.Emergency,
-            //    Sender = "333",
-            //    ArrivingDroneTime = default(DateTime),
-            //    MatchForDroneTime = default(DateTime),
-            //    collectingDroneTime = default(DateTime),
-            //    CreateParcelTime = DateTime.Now,
-            //});
+            }); 
+            Parcels.Add(new Parcel()
+            {
+                IdNumber = Config.RunningNumber++.ToString(),
+                DroneId = default(string),
+                Geter = "9",
+                Weight = WeightCategories.Middle,
+                Priority = Priorities.Regular,
+                Sender = "8",
+                ArrivingDroneTime = default(DateTime),
+                MatchForDroneTime = default(DateTime),
+                collectingDroneTime = default(DateTime),
+                CreateParcelTime = DateTime.Now,
+            }); 
 
-
-            //Random rand = new Random(DateTime.Now.Millisecond);
-            //int amount = rand.Next(2, 5);//random amount of any object
-            //{//base stations://-----------------------------------------------------------
-            //    for (int i = 0; i < amount; i++)
-            //    {
-            //        BaseStation s = new BaseStation() { IdNumber = rand.Next().ToString(), Name = string.Format($"station {i + 1}"), ChargeSlots= rand.Next(0, 4), Latitude = rand.Next(31, 33) + rand.NextDouble(), Longitude = rand.Next(33, 35) + rand.NextDouble() };;
-            //        stations.Add(s);
-            //    }
-            //}
-            //{ //Drones:--------------------------------------------------------------------
-            //  //all the drones are avalilible
-            //    amount = rand.Next(5, 10);
-            //    for (int i = 0; i < amount; i++)
-            //    {
-            //        Drone drone = new Drone() { IdNumber = rand.Next()+1.ToString(), Model = string.Format("model" + (char)(rand.Next(0, 23) + 97)), MaxWeight = (WeightCategories)(rand.Next(1, 4)) };
-            //        Drones.Add(drone);
-
-            //    }
-            //}
-            //{//customers:----------------------------------
-            //    amount = rand.Next(10, 50);
-            //    for (int i = 0; i < amount; i++)
-            //    {
-            //        Customer customer = new Customer() { IdNumber = rand.Next().ToString(), Name = string.Format($"{(char)(rand.Next(0, 23) + 97)}"), Phone = string.Format("050-" +(rand.Next(1111111, 9999999))), Latitude = rand.Next(31, 33) + rand.NextDouble(), Longitude = rand.Next(33, 35) + rand.NextDouble() };
-            //        Customers.Add(customer);
-            //    }
-            //}
-            //{
-            //    //parcels:--------------------------
-            //    //all the parcels are not matched to a drone yet
-            //    amount = rand.Next(10, 100);
-            //    for (int i = 0; i < amount; i++)
-            //    {
-            //        Parcel parcel = new Parcel() { IdNumber = Config.RunningNumber++.ToString(), Sender = rand.Next().ToString(), Geter = rand.Next().ToString(), Weight = (WeightCategories)(rand.Next(1, 4)), Priority = (Priorities)(rand.Next(1, 4)) };
-            //        parcel.DroneId = default(string);
-            //        parcel.CreateParcelTime = new DateTime(); //zero
-            //        parcel.MatchForDroneTime = new DateTime();//zero
-            //        parcel.collectingDroneTime = new DateTime();
-            //        parcel.ArrivingDroneTime = new DateTime();
-            //        Parcels.Add(parcel);
-
-            // }
-            // }
+            #endregion
         }
     }
 }

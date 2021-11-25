@@ -36,6 +36,7 @@ namespace ConsoleUI_BL
             catch(Exception e)
             {
                 Console.WriteLine("invalid value for amount of charge slots");
+                return;
             }
             Console.WriteLine("please enter the location of your base station in israel in format Latitude:Longitude");
             string temp = Console.ReadLine();
@@ -58,7 +59,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException==null?e.Message:e.InnerException.Message); 
             }
         }
         #endregion
@@ -66,7 +67,7 @@ namespace ConsoleUI_BL
 
         static public void AddDrone(IBL.IBL system)
         {
-            Console.WriteLine("please enter id number for the new drone");//האם צריך לבדוק שאכן ייחודי?
+            Console.WriteLine("please enter id number for the new drone");
             IBL.BO.DroneToList Drone1 = new IBL.BO.DroneToList();
             Drone1.IdNumber = Console.ReadLine();
             Console.WriteLine("please enter the model of the drone");
@@ -81,7 +82,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
         }
         #endregion
@@ -116,7 +117,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
         }
         #endregion
@@ -140,7 +141,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
         }
         #endregion
@@ -154,7 +155,9 @@ namespace ConsoleUI_BL
                 system.MatchingParcelToDrone(num);
             }
             catch (Exception e)
-            { Console.WriteLine(e.Message); }
+            {
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
+            }
         }
         #endregion
         #region CollectingFromCustomer
@@ -168,7 +171,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
         }
         #endregion
@@ -183,7 +186,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
         }
         #endregion
@@ -216,7 +219,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
         }
         #endregion
@@ -231,7 +234,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
         }
         #endregion
@@ -248,7 +251,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
 
         }
@@ -269,7 +272,7 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
         }
 
@@ -289,189 +292,213 @@ namespace ConsoleUI_BL
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
             }
         }
         #endregion
 
         static void Main(string[] args)
         {
-            IBL.IBL system = new BL.BL();
+            IBL.IBL system = null;
+            try
+            {
+                system = new BL.BL();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+                return;
+            }
             string choise;
             Console.WriteLine("Hi, welcome to the new system of Drone's delivery");
             Options choose = (Options)(1);
             while (choose != Options.exit)
             {
-                PrintMenu();
-                choise = (Console.ReadLine());
-                while ((choise == ""))//the program wont crash if it enter will be pressed
+                try
                 {
-                    choise = Console.ReadLine();
+                    PrintMenu();
+                    choise = (Console.ReadLine());
+                    while ((choise == ""))//the program wont crash if it enter will be pressed
+                    {
+                        choise = Console.ReadLine();
+                    }
+                    choose = (Options)int.Parse(choise);
+                    States internalChoose = (States)0;
+                    Update secondChoos = (Update)0;
+                    switch (choose)
+                    {
+                        case Options.Adding:
+                            Console.WriteLine("1.adding new base station \n2.adding drone \n3.adding new customer \n4.adding new parcel");
+                            choise = (Console.ReadLine());
+                            while ((choise == ""))//the program wont crash if it enter will be pressed
+                            {
+                                choise = Console.ReadLine();
+                            }
+                            internalChoose = (States)int.Parse(choise);
+                            switch (internalChoose)
+                            {
+                                case States.BaseStation:
+                                    AddBaseStation(system);
+                                    break;
+                                case States.Drone:
+                                    AddDrone(system);
+                                    break;
+                                case States.Customer:
+                                    AddCustomer(system);
+                                    break;
+                                case States.Parcel:
+                                    AddParcel(system);
+                                    break;
+                                default:
+                                    Console.WriteLine("error-invalid input");
+                                    break;
+                            }
+                            break;
+                        case Options.Updating:
+                            Console.WriteLine("1.match parcel to a drone \n2.collecting parcel by a drone \n3.giving parcel to a customer \n4.sending a dorne to be charged \n5. release drone from charging\n6. Updating Drone's name \n7. Updating model and charge slot of base station\n8. Updating name and phone of a customer");
+                            choise = (Console.ReadLine());
+                            while ((choise == ""))//the program wont crash if it enter will be pressed
+                            {
+                                choise = Console.ReadLine();
+                            }
+                            secondChoos = (Update)int.Parse(choise);
+                            switch (secondChoos)
+                            {
+                                case Update.Match:
+                                    MatchParcelToDrone(system);
+                                    break;
+                                case Update.Collect:
+                                    CollectingFromCustomer(system);
+                                    break;
+                                case Update.Giving:
+                                    GivingToCustomer(system);
+                                    break;
+                                case Update.Sending:
+                                    ChargeDrone(system);
+                                    break;
+                                case Update.Release:
+                                    RelaseCharge(system);
+                                    break;
+                                case Update.Drone:
+                                    UpdatingDrone(system);
+                                    break;
+                                case Update.BaseStation:
+                                    UpdatingBaseStation(system);
+                                    break;
+                                case Update.Customer:
+                                    UpdatingCustomer(system);
+                                    break;
+                                default:
+                                    Console.WriteLine("error-invalid output");
+                                    break;
+                            }
+                            break;
+                        case Options.ShowItemp:
+                            Console.WriteLine("1.show base station \n2.show drone \n3.show customer \n4.show parcel");
+                            choise = (Console.ReadLine());
+                            while ((choise == ""))//the program wont crash if it enter will be pressed
+                            {
+                                choise = Console.ReadLine();
+                            }
+                            internalChoose = (States)int.Parse(choise);
+                            Console.WriteLine("please enter the id number");
+                            string num = Console.ReadLine();
+                            switch (internalChoose)
+                            {
+                                case States.BaseStation:
+                                    try
+                                    {
+                                        Console.WriteLine(system.GetBaseStation(num));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
+                                    }
+                                    break;
+                                case States.Drone:
+                                    try
+                                    {
+                                        Console.WriteLine(system.GetDrone(num));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
+                                    }
+                                    break;
+                                case States.Customer:
+                                    try
+                                    {
+                                        Console.WriteLine(system.GetCustomer(num));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
+                                    }
+                                    break;
+                                case States.Parcel:
+                                    try
+                                    {
+                                        Console.WriteLine(system.GetParcel(num));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e.InnerException == null ? e.Message : e.InnerException.Message);
+                                    }
+                                    break;
+                                default:
+                                    Console.WriteLine("error-invalid input");
+                                    break;
+                            }
+                            break;
+                        case Options.ShowList:
+                            Console.WriteLine("1.show the list of base stations \n2.show the list of the drones \n3.show the list of the customer \n4.show the list of the parcel \n5.show the list of the unmatched percels \n6.show the list of base stations with availible charge slots");
+                            choise = (Console.ReadLine());
+                            while ((choise == ""))//the program wont crash if it enter will be pressed
+                            {
+                                choise = Console.ReadLine();
+                            }
+                            internalChoose = (States)int.Parse(choise);
+                            switch (internalChoose)
+                            {
+                                case States.BaseStation:
+                                    foreach (var item in system.GetBaseStations())
+                                        Console.WriteLine("*" + item + "\n");
+                                    break;
+                                case States.Drone:
+                                    foreach (var item in system.GetDrones())
+                                        Console.WriteLine("*" + item + "\n");
+                                    break;
+                                case States.Customer:
+                                    foreach (var item in system.GetCustomers())
+                                        Console.WriteLine("*" + item + "\n");
+                                    break;
+                                case States.Parcel:
+                                    foreach (var item in system.GetParcels())
+                                        Console.WriteLine("*" + item + "\n");
+                                    break;
+                                case States.Unmatched:
+                                    foreach (var item in system.GetParcelsNotMatching())
+                                        Console.WriteLine("*" + item + "\n");
+                                    break;
+                                case States.Available:
+                                    foreach (var item in system.GetBaseStationsWithCharge())
+                                        Console.WriteLine("*" + item + "\n");
+                                    break;
+                                default:
+                                    Console.WriteLine("error- invalid input");
+                                    break;
+                            }
+                            break;
+                        case Options.exit:
+                            break;
+                        default:
+                            Console.WriteLine("error- invalid input");
+                            break;
+                    }
                 }
-                choose = (Options)int.Parse(choise);
-                States internalChoose = (States)0;
-                Update secondChoos = (Update)0;
-                switch (choose)
+                catch(Exception e)
                 {
-                    case Options.Adding:
-                        Console.WriteLine("1.adding new base station \n2.adding drone \n3.adding new customer \n4.adding new parcel");
-                        choise = (Console.ReadLine());
-                        while ((choise == ""))//the program wont crash if it enter will be pressed
-                        {
-                            choise = Console.ReadLine();
-                        }
-                        internalChoose = (States)int.Parse(choise);
-                        switch (internalChoose)
-                        {
-                            case States.BaseStation:
-                                AddBaseStation(system);
-                                break;
-                            case States.Drone:
-                                AddDrone(system);
-                                break;
-                            case States.Customer:
-                                AddCustomer(system);
-                                break;
-                            case States.Parcel:
-                                AddParcel(system);
-                                break;
-                            default:
-                                Console.WriteLine("error-invalid input");
-                                break;
-                        }
-                        break;
-                    case Options.Updating:
-                        Console.WriteLine("1.match parcel to a drone \n2.collecting parcel by a drone \n3.giving parcel to a customer \n4.sending a dorne to be charged \n5. release drone from charging\n6. Updating Drone's name \n7. Updating model and charge slot of base station\n8. Updating name and phone of a customer");
-                        choise = (Console.ReadLine());
-                        while ((choise == ""))//the program wont crash if it enter will be pressed
-                        {
-                            choise = Console.ReadLine();
-                        }
-                        secondChoos = (Update)int.Parse(choise);
-                        switch (secondChoos)
-                        {
-                            case Update.Match:
-                                MatchParcelToDrone(system);
-                                break;
-                            case Update.Collect:
-                                CollectingFromCustomer(system);
-                                break;
-                            case Update.Giving:
-                                GivingToCustomer(system);
-                                break;
-                            case Update.Sending:
-                                ChargeDrone(system);
-                                break;
-                            case Update.Release:
-                                RelaseCharge(system);
-                                break;
-                            case Update.Drone:
-                                UpdatingDrone(system);
-                                break;
-                            case Update.BaseStation:
-                                UpdatingBaseStation(system);
-                                break;
-                            case Update.Customer:
-                                UpdatingCustomer(system);
-                                break;
-                            default:
-                                Console.WriteLine("error-invalid output");
-                                break;
-                        }
-                        break;
-                    case Options.ShowItemp:
-                        Console.WriteLine("1.show base station \n2.show drone \n3.show customer \n4.show parcel");
-                        choise = (Console.ReadLine());
-                        while ((choise == ""))//the program wont crash if it enter will be pressed
-                        {
-                            choise = Console.ReadLine();
-                        }
-                        internalChoose = (States)int.Parse(choise);
-                        Console.WriteLine("please enter the id number");
-                        string num = Console.ReadLine();
-                        switch (internalChoose)
-                        {
-                            case States.BaseStation:
-                                try
-                                {
-                                    Console.WriteLine(system.GetBaseStation(num));
-                                }
-                                catch (Exception e)
-                                { Console.WriteLine(e.Message); }
-                                break;
-                            case States.Drone:
-                                try
-                                {
-                                    Console.WriteLine(system.GetDrone(num));
-                                }
-                                catch (Exception e)
-                                { Console.WriteLine(e.Message); }
-                                break;
-                            case States.Customer:
-                                try
-                                {
-                                    Console.WriteLine(system.GetCustomer(num));
-                                }
-                                catch (Exception e)
-                                { Console.WriteLine(e.Message); }
-                                break;
-                            case States.Parcel:
-                                try
-                                {
-                                    Console.WriteLine(system.GetParcel(num));
-                                }
-                                catch (Exception e)
-                                { Console.WriteLine(e.Message); }
-                                break;
-                            default:
-                                Console.WriteLine("error-invalid input");
-                                break;
-                        }
-                        break;
-                    case Options.ShowList:
-                        Console.WriteLine("1.show the list of base stations \n2.show the list of the drones \n3.show the list of the customer \n4.show the list of the parcel \n5.show the list of the unmatched percels \n6.show the list of base stations with availible charge slots");
-                        choise = (Console.ReadLine());
-                        while ((choise == ""))//the program wont crash if it enter will be pressed
-                        {
-                            choise = Console.ReadLine();
-                        }
-                        internalChoose = (States)int.Parse(choise);
-                        switch (internalChoose)
-                        {
-                            case States.BaseStation:
-                                foreach (var item in system.GetBaseStations())
-                                    Console.WriteLine("*" + item + "\n");
-                                break;
-                            case States.Drone:
-                                foreach (var item in system.GetDrones())
-                                    Console.WriteLine("*" + item + "\n");
-                                break;
-                            case States.Customer:
-                                foreach (var item in system.GetCustomers())
-                                    Console.WriteLine("*" + item + "\n");
-                                break;
-                            case States.Parcel:
-                                foreach (var item in system.GetParcels())
-                                    Console.WriteLine("*" + item + "\n");
-                                break;
-                            case States.Unmatched:
-                                foreach (var item in system.GetParcelsNotMatching())
-                                    Console.WriteLine("*" + item + "\n");
-                                break;
-                            case States.Available:
-                                foreach (var item in system.GetBaseStationsWithCharge())
-                                    Console.WriteLine("*" + item + "\n");
-                                break;
-                            default:
-                                Console.WriteLine("error- invalid input");
-                                break;
-                        }
-                        break;
-                    case Options.exit:
-                        break;
-                    default:
-                        Console.WriteLine("error- invalid input");
-                        break;
+                    Console.WriteLine("illegal choose");
                 }
             }
 

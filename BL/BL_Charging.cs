@@ -14,6 +14,7 @@ namespace BL
     {
 
         #region DistanceTo
+        //function that calculate the distance between two locations in km
         private static double DistanceTo(Location a1,Location a2)
         {
             double rlat1 = Math.PI * a1.Latitude / 180;
@@ -31,20 +32,23 @@ namespace BL
         #endregion  
 
         #region DroneToCharging
+        //sent drone to charging
         public void DroneToCharging(string number)
         {
             IBL.BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == number);
-            if (d == null)
-                throw new ChargingException("the drone is not existing");
-            if (d.State != DroneState.Available)
+            IBL.BO.Drone droneBO = null;
+            try { droneBO = GetDrone(number); }//get from DAL
+            catch (Exception ) {
+                throw new ChargingException("the drone is not existing"); }
+            if (droneBO.State != DroneState.Available)
                 throw new ChargingException("the drone is not available");
             var ListOfStation = from item in dal.GetBaseStations()
-            where(item.ChargeSlots > 0) select(item);
+            where(item.ChargeSlots > 0) select(item);//all the base stations with availible charge slot
             if (ListOfStation.Count()==0)
                 throw new ChargingException("there is no availible base station for charging");
             IDAL.DO.BaseStation b = ListOfStation.First();
-            foreach (var item in ListOfStation)
-                if (DistanceTo(new Location() { Latitude = b.Latitude,Longitude = b.Longitude },d.Location) > DistanceTo(new Location() { Latitude = item.Latitude,Longitude = item.Longitude },d.Location))
+            foreach (var item in ListOfStation)//find the closest base station with availible charge slot
+                if (DistanceTo(new Location() { Latitude = b.Latitude,Longitude = b.Longitude },d.Location) > DistanceTo(new Location() { Latitude = item.Latitude,Longitude = item.Longitude },droneBO.Location))
                     b = item;
             int temp = d.Battery;
             temp -=(int)( availible * DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location));
@@ -64,13 +68,13 @@ namespace BL
             {
                 throw new ChargingException("can't Charge", e);
             }
-
         }
 
 
         #endregion
 
         #region DroneFromCharging
+        //function that release drone from charging
         public void DroneFromCharging(string number, TimeSpan charging)
         {
             IBL.BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == number);
@@ -78,21 +82,19 @@ namespace BL
                 throw new ChargingException("the drone is not existing");
             if (d.State != DroneState.maintaince)
                 throw new ChargingException("the drone was not charged");
-            d.Battery += (int)(((float)(charging.TotalSeconds)/60)*speed); 
-            d.State = DroneState.Available;
             try
             {
                 IDAL.DO.BaseStation station=dal.GetBaseStation(dal.GetDroneCharge(number).StationId);
-                dal.DeleteDroneCharge(number);
+                dal.DeleteDroneCharge(number);//delete from DAL
                 station.ChargeSlots++;
-                dal.UpdateBaseStation(station);
-
+                dal.UpdateBaseStation(station);//Updateing in DAL
+                d.Battery += (int)(((float)(charging.TotalSeconds) / 60) * speed);
+                d.State = DroneState.Available;
             }
             catch (Exception e)
             {
                 throw new DeletingException("can't delete the drone Charge", e);
             }
-
         }
         #endregion
     }

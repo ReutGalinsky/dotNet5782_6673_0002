@@ -14,6 +14,7 @@ namespace BL
     {
         #region GetParcel
         public IBL.BO.Parcel GetParcel(string id)
+            //return single parcel
         {
             try
             {
@@ -23,7 +24,7 @@ namespace BL
                 parcel.GeterCustomer = GetCustomerOfParcel(p.Geter);
                 if (p.DroneId != default(string))
                 {
-                    parcel.Drone = GetDroneInParcel(p.DroneId);
+                    parcel.Drone = GetDroneInParcel(p.DroneId);//return the drone that match this parcel 
                 }
                 return parcel;
             }
@@ -34,27 +35,31 @@ namespace BL
         }
         #endregion
         private IBL.BO.DroneInParcel GetDroneInParcel(string id)
+            //private function that return object of "DroneInParcel"
         {
-            IBL.BO.Drone d = GetDrone(id);
+            IBL.BO.Drone d = GetDrone(id);//get the drone
             IBL.BO.DroneInParcel dip = (IBL.BO.DroneInParcel)d.CopyPropertiesToNew(typeof(IBL.BO.DroneInParcel));
-            dip.Location = new Location();
+            dip.Location = new Location();//add the location
             dip.Location.Latitude = d.Location.Latitude;
             dip.Location.Longitude = d.Location.Longitude;
             return dip;
         }
+       
         #region GetParcels
         public IEnumerable<IBL.BO.ParcelOfList> GetParcels()
+            //function that return all the parcels for view
         {
             var list = from item in dal.GetParcels() select GetPOL(item.IdNumber);
             return list;
         }
         #endregion
         private IBL.BO.ParcelOfList GetPOL(string id)
+            //private function that return object of ParcelOfList
         {
             IDAL.DO.Parcel P=dal.GetParcel(id);
             IBL.BO.ParcelOfList  pol = (IBL.BO.ParcelOfList)P.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
             if (P.MatchForDroneTime == default(DateTime))
-                pol.State = State.Define;
+                pol.State = State.Define;//define the state
             else
                 if (P.collectingDroneTime == default(DateTime))
                 pol.State = State.match;
@@ -66,11 +71,9 @@ namespace BL
             return pol;
         }
         #region GetParcelsNotMatching
+        //return all the non-matching parcels
         public IEnumerable<IBL.BO.ParcelOfList> GetParcelsNotMatching()
         {
-            //var list = from item in GetParcels()
-            //           where (item.State == State.Define)
-            //           select (IBL.BO.ParcelOfList)item.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
             var list = from item in dal.GetParcels()
                        where item.MatchForDroneTime == default(DateTime)
                        select item;

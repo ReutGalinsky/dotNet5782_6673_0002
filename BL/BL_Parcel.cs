@@ -14,6 +14,8 @@ namespace BL
     {
         #region AddCustomer
         public void AddCustomer(IBL.BO.Customer customerToAdd)
+            //add new customer
+
         {
             if (customerToAdd.Name == "")
                 throw new AddingProblemException("invalid name of customer");
@@ -41,7 +43,7 @@ namespace BL
                 IDAL.DO.Customer c = (IDAL.DO.Customer)customerToAdd.CopyPropertiesToNew(typeof(IDAL.DO.Customer));
                 c.Longitude = customerToAdd.Location.Longitude;
                 c.Latitude = customerToAdd.Location.Latitude;
-                dal.AddCustomer(c);
+                dal.AddCustomer(c);//add to DAL
             }
             catch (Exception e)
             {
@@ -51,6 +53,7 @@ namespace BL
         #endregion
 
         #region AddParcelToDelivery
+        //add new parcel to the data base
         public string AddParcelToDelivery(IBL.BO.ParcelOfList parcel)
         {
             if (parcel.Sender == "")
@@ -62,7 +65,7 @@ namespace BL
             if (parcel.Priority != IBL.BO.Priorities.Emergency && parcel.Priority != IBL.BO.Priorities.Regular && parcel.Priority != IBL.BO.Priorities.Speed)
                 throw new AddingProblemException("This priority is not an option");
             try
-            {
+            {//check if the customers exist in DAL
                 IDAL.DO.Customer c = dal.GetCustomer(parcel.Sender);
                 c = dal.GetCustomer(parcel.Geter);
             }
@@ -78,7 +81,7 @@ namespace BL
                 p.MatchForDroneTime = new DateTime();
                 p.ArrivingDroneTime = new DateTime();
                 p.collectingDroneTime = new DateTime();
-                return  dal.AddParcel(p);
+                return dal.AddParcel(p);//retrun the id of the parcel
             }
             catch (Exception e)
             {
@@ -88,7 +91,8 @@ namespace BL
         #endregion
 
         #region UpdatingDetailsOfCustomer
-        public void UpdatingDetailsOfCustomer(string id, string Name, string phone)//למה היו ערכי ברירת מחדל. איך נשלח את זה לפונקציה?
+        // update customer
+        public void UpdatingDetailsOfCustomer(string id, string Name, string phone)
         {
             try
             {
@@ -110,9 +114,9 @@ namespace BL
                 try
                 {
                     IDAL.DO.Customer c= (IDAL.DO.Customer)updatedCustomer.CopyPropertiesToNew(typeof(IDAL.DO.Customer));
-                    c.Latitude = updatedCustomer.Location.Latitude;
+                    c.Latitude = updatedCustomer.Location.Latitude;//add location
                     c.Longitude = updatedCustomer.Location.Longitude;
-                    dal.UpdateCustomer(c);
+                    dal.UpdateCustomer(c);//update in DAL
                 }
                 catch (Exception e)
                 {
@@ -129,9 +133,10 @@ namespace BL
 
         #region GetCustomers
         public IEnumerable<IBL.BO.CustomerToList> GetCustomers()
+            //return all the customers of the data base
         {
             var list = from item in dal.GetCustomers() select (IBL.BO.CustomerToList)item.CopyPropertiesToNew(typeof(IBL.BO.CustomerToList));
-            foreach (var item in list)
+            foreach (var item in list)//calculate the amount of parcel
             {
                 item.ParcelOnTheWay = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == State.pick);
                 item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == State.supply);
@@ -144,6 +149,7 @@ namespace BL
         #endregion
 
         #region GetCustomer
+        //return single customer
         public IBL.BO.Customer GetCustomer(string id)
         {
             try
@@ -153,7 +159,7 @@ namespace BL
                 customer.Location = new Location();
                 customer.Location.Latitude = c.Latitude;
                 customer.Location.Longitude = c.Longitude;
-                customer.FromCustomer = dal.GetParcels()
+                customer.FromCustomer = dal.GetParcels()//the parcels that the customer send
                     .Where(p => (p.Sender) == id)
                     .Select(p => GetPOC(p.IdNumber, true)).ToList();
                 customer.ToCustomer = dal.GetParcels()
@@ -168,27 +174,35 @@ namespace BL
         }
         #endregion
         private IBL.BO.ParcelOfCustomer GetPOC(string id, bool senderOrReciever)
+            //private function that return object of: ParcelOfCustomer
         {
-            IDAL.DO.Parcel p = dal.GetParcel(id);
-            IBL.BO.ParcelOfCustomer poc = (IBL.BO.ParcelOfCustomer)p.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfCustomer));
-            if (p.MatchForDroneTime == default(DateTime))
-                poc.State = State.Define;
-            else//צריך לבדוק אם לא נוצר ולזרוק חריגה?
-                if (p.collectingDroneTime == default(DateTime))
-                poc.State = State.match;
-            else
-                if (p.ArrivingDroneTime == default(DateTime))
-                poc.State = State.pick;
-            else
-                poc.State = State.supply;
-            if (senderOrReciever == true) poc.SourceOrDestinaton = GetCustomerOfParcel(p.Geter);
-            else poc.SourceOrDestinaton = GetCustomerOfParcel(p.Sender);
-            return poc;
+            try
+            {
+                IDAL.DO.Parcel p = dal.GetParcel(id);
+                IBL.BO.ParcelOfCustomer poc = (IBL.BO.ParcelOfCustomer)p.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfCustomer));
+                if (p.MatchForDroneTime == default(DateTime))//define the state:
+                    poc.State = State.Define;
+                else
+                    if (p.collectingDroneTime == default(DateTime))
+                    poc.State = State.match;
+                else
+                    if (p.ArrivingDroneTime == default(DateTime))
+                    poc.State = State.pick;
+                else
+                    poc.State = State.supply;
+                if (senderOrReciever == true) poc.SourceOrDestinaton = GetCustomerOfParcel(p.Geter);
+                else poc.SourceOrDestinaton = GetCustomerOfParcel(p.Sender);
+                return poc;
+            }
+            catch(Exception e)
+            {
+                throw new GettingProblemException("error in Parcel", e);
+            }
         }
 
         private IBL.BO.CustomerOfParcel GetCustomerOfParcel(string id)
+            //function that return object of "CustomerOfParecl
         {
-            IDAL.DO.Customer temp = default(IDAL.DO.Customer);
             try
             {
                 return (IBL.BO.CustomerOfParcel)dal.GetCustomer(id).CopyPropertiesToNew(typeof(IBL.BO.CustomerOfParcel));
