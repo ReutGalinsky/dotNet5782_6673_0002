@@ -21,7 +21,7 @@ namespace DalObject
         #region AddDrone
         public void AddDrone(Drone drone)
         {
-            if (DataSource.Drones.FirstOrDefault(d => d.IdNumber == drone.IdNumber).IdNumber != default(string))
+            if (DataSource.Drones.FirstOrDefault(d => d.IdNumber == drone.IdNumber).IdNumber != null)
                 throw new ExistingException("the drone is already exist");
             DataSource.Drones.Add(drone);
         }
@@ -31,7 +31,7 @@ namespace DalObject
         public Drone GetDrone(string id)
         {
             Drone drone = DataSource.Drones.FirstOrDefault(d => d.IdNumber == id);
-            if (drone.IdNumber == default(string))
+            if (drone.IdNumber == null)
                 throw new NotExistingException("the drone is not exist");
             return drone;
         }
@@ -50,7 +50,7 @@ namespace DalObject
         public void DeleteDrone(string id)
         {
             Drone drone = DataSource.Drones.FirstOrDefault(d => d.IdNumber == id);
-            if (drone.IdNumber == default(string))
+            if (drone.IdNumber == null)
                 throw new NotExistingException("the drone is not existing");
             DataSource.Drones.Remove(drone);
         }
@@ -78,7 +78,7 @@ namespace DalObject
         #region PredicateDrone
         public IEnumerable<Drone> PredicateDrone(Predicate<Drone> c)
         {
-            var list = from item in DataSource.Drones()
+            var list = from item in DataSource.Drones
                        where c(item)
                        select item;
             return list;
@@ -90,7 +90,7 @@ namespace DalObject
         #region AddDroneCharge
         public void AddDroneCharge(DroneCharge dronecharge)
         {
-            if (DataSource.Charges.FirstOrDefault(d => d.DroneId == dronecharge.DroneId).DroneId != default(string))
+            if (DataSource.Charges.FirstOrDefault(d => d.DroneId == dronecharge.DroneId).DroneId != null)
                 throw new ExistingException("the charge slot is already exist");
             DataSource.Charges.Add(dronecharge);
         }
@@ -100,7 +100,7 @@ namespace DalObject
         public DroneCharge GetDroneCharge(string id)
         {
             DroneCharge droneCharge = DataSource.Charges.FirstOrDefault(d => d.DroneId == id);
-            if (droneCharge.DroneId == default(string))
+            if (droneCharge.DroneId == null)
                 throw new NotExistingException("the charge slot is not exist");
             return droneCharge;
         }
@@ -119,7 +119,7 @@ namespace DalObject
         public void DeleteDroneCharge(string id)
         {
             DroneCharge droneCharge = DataSource.Charges.FirstOrDefault(d => d.DroneId == id);
-            if (droneCharge.DroneId == default(string))
+            if (droneCharge.DroneId == null)
                 throw new NotExistingException("the charge slot is not existing");
             DataSource.Charges.Remove(droneCharge);
         }
@@ -143,13 +143,23 @@ namespace DalObject
         }
         #endregion
 
+        #region PredicateChargeDrone
+        public IEnumerable<DroneCharge> PredicateChargeDrone(Predicate<DroneCharge> c)
+        {
+            var list = from item in DataSource.Charges
+                       where c(item)
+                       select item;
+            return list;
+        }
+        #endregion
+
         //*******parcel********
-        
+
         #region AddParcel
         public string AddParcel(Parcel parcel)
         {
             parcel.IdNumber = DataSource.Config.RunningNumber++.ToString();
-            if (DataSource.Parcels.FirstOrDefault(d => d.IdNumber == parcel.IdNumber).IdNumber != default(string))
+            if (DataSource.Parcels.FirstOrDefault(d => d.IdNumber == parcel.IdNumber).IdNumber != null)
                 throw new ExistingException("the parcel is already exist");
             DataSource.Parcels.Add(parcel);
             return parcel.IdNumber;
@@ -160,7 +170,7 @@ namespace DalObject
         public Parcel GetParcel(string id)
         {
             Parcel parcel = DataSource.Parcels.FirstOrDefault(d => d.IdNumber == id);
-            if (parcel.IdNumber == default(string))
+            if (parcel.IdNumber == null)
                 throw new NotExistingException("the parcel is not exist");
             return parcel;
         }
@@ -179,7 +189,7 @@ namespace DalObject
         public void DeleteParcel(string id)
         {
             Parcel parcel = DataSource.Parcels.FirstOrDefault(d => d.IdNumber == id);
-            if (parcel.IdNumber == default(string))
+            if (parcel.IdNumber == null)
                 throw new NotExistingException("the parcel is not existing");
             DataSource.Parcels.Remove(parcel);
         }
@@ -214,7 +224,7 @@ namespace DalObject
         #region PredicateParcel
         public IEnumerable<Parcel> PredicateParcel(Predicate<Parcel> c)
         {
-            var list = from item in DataSource.Parcels()
+            var list = from item in DataSource.Parcels
                        where c(item)
                        select item;
             return list;
@@ -226,7 +236,7 @@ namespace DalObject
         #region AddBaseStation
         public void AddBaseStation(BaseStation baseStation)
         {
-            if (DataSource.stations.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber != default(string))
+            if (DataSource.stations.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber != null)
                 throw new ExistingException("the baseStation is already exist");
             DataSource.stations.Add(baseStation);
         }
@@ -236,7 +246,7 @@ namespace DalObject
         public BaseStation GetBaseStation(string id)
         {
             BaseStation baseStation = DataSource.stations.FirstOrDefault(d => d.IdNumber == id);
-            if (baseStation.IdNumber == default(string))
+            if (baseStation.IdNumber == null)
                 throw new NotExistingException("the baseStation is not exist");
             return baseStation;
         }
@@ -255,7 +265,7 @@ namespace DalObject
         public void DeleteBaseStation(string id)
         {
             BaseStation baseStation = DataSource.stations.FirstOrDefault(d => d.IdNumber == id);
-            if (baseStation.IdNumber == default(string))
+            if (baseStation.IdNumber == null)
                 throw new NotExistingException("the baseStation is not existing");
             DataSource.stations.Remove(baseStation);
         }
@@ -285,7 +295,7 @@ namespace DalObject
         #region PredicateBaseStation
         public IEnumerable<BaseStation> PredicateBaseStation(Predicate<BaseStation> c)
         {
-            var list = from item in DataSource.stations()
+            var list = from item in DataSource.stations
                        where c(item)
                        select item;
             return list;
@@ -297,7 +307,7 @@ namespace DalObject
         #region AddCustomer
         public void AddCustomer(Customer customer)
         {
-            if (DataSource.Customers.FirstOrDefault(d => d.IdNumber == customer.IdNumber).IdNumber != default(string))
+            if (DataSource.Customers.FirstOrDefault(d => d.IdNumber == customer.IdNumber).IdNumber != null)
                 throw new ExistingException("the customer is already exist");
             DataSource.Customers.Add(customer);
         }
@@ -307,7 +317,7 @@ namespace DalObject
         public Customer GetCustomer(string id)
         {
             Customer customer = DataSource.Customers.FirstOrDefault(d => d.IdNumber == id);
-            if (customer.IdNumber == default(string))
+            if (customer.IdNumber == null)
                 throw new NotExistingException("the customer is not exist");
             return customer;
         }
@@ -326,7 +336,7 @@ namespace DalObject
         public void DeleteCustomer(string id)
         {
             Customer customer = DataSource.Customers.FirstOrDefault(d => d.IdNumber == id);
-            if (customer.IdNumber == default(string))
+            if (customer.IdNumber == null)
                 throw new NotExistingException("the customer is not existing");
             DataSource.Customers.Remove(customer);
         }
@@ -356,7 +366,7 @@ namespace DalObject
         #region PredicateCustomer
         public IEnumerable<Customer> PredicateCustomer(Predicate<Customer> c)
         {
-            var list = from item in DataSource.Customers()
+            var list = from item in DataSource.Customers
                        where c(item)
                        select item;
             return list;

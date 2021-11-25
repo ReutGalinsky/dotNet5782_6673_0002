@@ -80,7 +80,7 @@ namespace DalObject
             Parcels.Add(new Parcel()
             {
                 IdNumber = Config.RunningNumber++.ToString(),
-                DroneId = default(string),
+                DroneId = null,
                 Geter = "12",
                 Weight = WeightCategories.Heavy,
                 Priority = Priorities.Regular,
@@ -93,7 +93,7 @@ namespace DalObject
             Parcels.Add(new Parcel()
             {
                 IdNumber = Config.RunningNumber++.ToString(),
-                DroneId = default(string),
+                DroneId =null,
                 Geter = "9",
                 Weight = WeightCategories.Middle,
                 Priority = Priorities.Regular,

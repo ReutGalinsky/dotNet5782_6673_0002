@@ -42,8 +42,7 @@ namespace BL
                 throw new ChargingException("the drone is not existing"); }
             if (droneBO.State != DroneState.Available)
                 throw new ChargingException("the drone is not available");
-            var ListOfStation = from item in dal.GetBaseStations()
-            where(item.ChargeSlots > 0) select(item);//all the base stations with availible charge slot
+            var ListOfStation = dal.PredicateBaseStation(x => x.ChargeSlots > 0);
             if (ListOfStation.Count()==0)
                 throw new ChargingException("there is no availible base station for charging");
             IDAL.DO.BaseStation b = ListOfStation.First();
@@ -99,7 +98,4 @@ namespace BL
         }
         #endregion
     }
-
-
-
 }

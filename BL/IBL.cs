@@ -11,7 +11,6 @@ namespace IBL
     {
         public void AddBaseStation(BaseStation baseStationToAdd);
         public IEnumerable<BaseStationToList> GetBaseStations();
-        public IEnumerable<BaseStationToList> GetBaseStationsWithCharge();
         public void UpdatingDetailsOfBaseStation(string id, string Name, string numberOfCharge);
         public BaseStation GetBaseStation(string id);
         public void DroneToCharging(string number);
@@ -30,7 +29,11 @@ namespace IBL
         public void SupplyingParcelByDrone(string id);
         public Parcel GetParcel(string id);
         public IEnumerable<ParcelOfList> GetParcels();
-        public IEnumerable<ParcelOfList> GetParcelsNotMatching();
+        public IEnumerable<BaseStationToList> PredicateBaseStation(Predicate<BaseStationToList> c);
+        public IEnumerable<DroneToList> PredicateDrone(Predicate<DroneToList> c);
+        public IEnumerable<ParcelOfList> PredicateParcel(Predicate<ParcelOfList> c);
+        public IEnumerable<CustomerToList> PredicateCustomer(Predicate<CustomerToList> c);
+
 
 
 

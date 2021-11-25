@@ -233,7 +233,7 @@ namespace BL
             drone.Location.Longitude = d.Location.Longitude;
             drone.State = d.State;
             drone.Battery = d.Battery;
-            if(d.NumberOfParcel!=default(string))
+            if(d.NumberOfParcel!=null)
                 drone.PassedParcel = GetPIP(d.NumberOfParcel);
             return drone;
 
@@ -280,13 +280,14 @@ namespace BL
         }
         #endregion
 
-         public IEnumerable<IBL.BO.DroneToList> PredicateDrone(Predicate<IBL.BO.DroneToList> c)
+        #region PredicateDrone
+        public IEnumerable<IBL.BO.DroneToList> PredicateDrone(Predicate<IBL.BO.DroneToList> c)
         {
             var list = from item in GetDrones()
                        where c(item)
                        select item;
             return list;
         }
-
+        #endregion 
     }
 }

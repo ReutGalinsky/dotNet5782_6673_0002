@@ -22,7 +22,7 @@ namespace BL
                 IBL.BO.Parcel parcel = (IBL.BO.Parcel)p.CopyPropertiesToNew(typeof(IBL.BO.Parcel));
                 parcel.SenderCustomer = GetCustomerOfParcel(p.Sender);
                 parcel.GeterCustomer = GetCustomerOfParcel(p.Geter);
-                if (p.DroneId != default(string))
+                if (p.DroneId != null)
                 {
                     parcel.Drone = GetDroneInParcel(p.DroneId);//return the drone that match this parcel 
                 }
@@ -70,24 +70,14 @@ namespace BL
                 pol.State = State.supply;
             return pol;
         }
-        #region GetParcelsNotMatching
-        //return all the non-matching parcels
-        public IEnumerable<IBL.BO.ParcelOfList> GetParcelsNotMatching()
-        {
-            var list = from item in dal.GetParcels()
-                       where item.MatchForDroneTime == null
-                       select item;
-            var l =list.Select(x=>GetPOL(x.IdNumber));
-            return l;
-        }
-        #endregion
-
-         public IEnumerable<IBL.BO.ParcelOfList> PredicateParcel(Predicate<IBL.BO.ParcelOfList> c)
+        #region PredicateParcel
+        public IEnumerable<IBL.BO.ParcelOfList> PredicateParcel(Predicate<IBL.BO.ParcelOfList> c)
         {
             var list = from item in GetParcels()
                        where c(item)
                        select item;
             return list;
         }
+        #endregion
     }
 }

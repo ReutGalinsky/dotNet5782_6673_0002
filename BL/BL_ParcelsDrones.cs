@@ -24,9 +24,7 @@ namespace BL
             {  throw new ConnectionException("the drone is not existing");
 }            if (d.State != DroneState.Available)
                 throw new ConnectionException("the drone is not available");
-            var tem = GetParcelsNotMatching();//get all the non-matched parcels
-            var list = from item in tem
-                       where (int)item.Weight <= (int)d.MaxWeight
+            var list = from item in PredicateParcel(x=>x.State==State.Define&& (int)x.Weight <= (int)d.MaxWeight)
                        orderby -1*(int)item.Priority, -1*(int)item.Weight, DistanceTo(GetCustomer(item.Sender).Location, d.Location)
                        //decending order by priority and weight and increasing by distance
                        select item;

@@ -35,6 +35,12 @@ namespace IDAL
         public void UpdateCustomer(Customer toUpdate);
         public IEnumerable<Customer> GetCustomers();
         public IEnumerable<BaseStation> GetBaseStations();
+        public IEnumerable<Drone> PredicateDrone(Predicate<Drone> c);
+        public IEnumerable<DroneCharge> PredicateChargeDrone(Predicate<DroneCharge> c);
+        public IEnumerable<Customer> PredicateCustomer(Predicate<Customer> c);
+        public IEnumerable<Parcel> PredicateParcel(Predicate<Parcel> c);
+        public IEnumerable<BaseStation> PredicateBaseStation(Predicate<BaseStation> c);
+
 
     }
 }

@@ -55,14 +55,14 @@ namespace BL
         }
         #endregion
 
-        #region GetBaseStationsWithCharge
-        //return all the base stations with availible charge slots
-        public IEnumerable<IBL.BO.BaseStationToList> GetBaseStationsWithCharge()
-        {
-            var b = PredicateBaseStation(x => x.ChargeSlots > 0);
-            return b;
-        }
-        #endregion
+        //#region GetBaseStationsWithCharge
+        ////return all the base stations with availible charge slots
+        //public IEnumerable<IBL.BO.BaseStationToList> GetBaseStationsWithCharge()
+        //{
+        //    var b = PredicateBaseStation(x => x.ChargeSlots > 0);
+        //    return b;
+        //}
+        //#endregion
 
         #region UpdatingDetailsOfBaseStation
         //update single base station
@@ -125,7 +125,7 @@ namespace BL
                 IDAL.DO.BaseStation station = dal.GetBaseStation(id);
                 IBL.BO.BaseStation GetStation = (IBL.BO.BaseStation)station.CopyPropertiesToNew(typeof(IBL.BO.BaseStation));
                 GetStation.Location = new Location() { Latitude = station.Latitude, Longitude = station.Longitude };
-                var list = PredicateDrone(x => x.StationId == id);
+                var list = dal.PredicateChargeDrone(x => x.StationId == id);
                 GetStation.Drones = new List<DroneInCharge>();
                 foreach (var item in list)//build the list of charging drones
                 {
@@ -148,6 +148,7 @@ namespace BL
         }
         #endregion
 
+        #region PredicateBaseStation
         public IEnumerable<IBL.BO.BaseStationToList> PredicateBaseStation(Predicate<IBL.BO.BaseStationToList> c)
         {
             var list = from item in GetBaseStations()
@@ -155,6 +156,6 @@ namespace BL
                        select item;
             return list;
         }
-
+        #endregion
     }
 }

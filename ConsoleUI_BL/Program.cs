@@ -125,7 +125,7 @@ namespace ConsoleUI_BL
         static public void AddParcel(IBL.IBL system)
         {
             IBL.BO.ParcelOfList Parcel1 = new IBL.BO.ParcelOfList();
-            Parcel1.IdNumber = default(string);
+            Parcel1.IdNumber = null;
             Console.WriteLine("please enter the id of the sender customer");
             Parcel1.Sender = Console.ReadLine();
             Console.WriteLine("please enter the id of the reciever customer");
@@ -477,11 +477,11 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("*" + item + "\n");
                                     break;
                                 case States.Unmatched:
-                                    foreach (var item in system.GetParcelsNotMatching())
+                                    foreach (var item in system.PredicateParcel(x=>x.State==State.Define))
                                         Console.WriteLine("*" + item + "\n");
                                     break;
                                 case States.Available:
-                                    foreach (var item in system.GetBaseStationsWithCharge())
+                                    foreach (var item in system.PredicateBaseStation(x=>x.ChargeSlots>0))
                                         Console.WriteLine("*" + item + "\n");
                                     break;
                                 default:

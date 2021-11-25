@@ -110,7 +110,7 @@ namespace ConsoleUI
         {
            
             Parcel Parcel1 = new Parcel();
-            Parcel1.IdNumber = default(string);
+            Parcel1.IdNumber = null;
             Console.WriteLine("please enter the id of the sender customer");
             Parcel1.Sender = (Console.ReadLine());
             Console.WriteLine("please enter the id of the reciever customer");
@@ -127,7 +127,7 @@ namespace ConsoleUI
                 Console.WriteLine("you have not entered a number, please try to add this parcel again");
                 return;
             }
-            Parcel1.DroneId = default(string);
+            Parcel1.DroneId = null;
             Parcel1.CreateParcelTime = DateTime.Now;
             Parcel1.collectingDroneTime = null;
             Parcel1.MatchForDroneTime = null;

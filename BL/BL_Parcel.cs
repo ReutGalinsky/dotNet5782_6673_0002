@@ -76,7 +76,7 @@ namespace BL
             try
             {
                 IDAL.DO.Parcel p = (IDAL.DO.Parcel)parcel.CopyPropertiesToNew(typeof(IDAL.DO.Parcel));
-                p.DroneId = default(string);
+                p.DroneId = null;
                 p.CreateParcelTime = DateTime.Now;
                 p.MatchForDroneTime = null;
                 p.ArrivingDroneTime = null;
@@ -159,12 +159,8 @@ namespace BL
                 customer.Location = new Location();
                 customer.Location.Latitude = c.Latitude;
                 customer.Location.Longitude = c.Longitude;
-                customer.FromCustomer = dal.GetParcels()//the parcels that the customer send
-                    .Where(p => (p.Sender) == id)
-                    .Select(p => GetPOC(p.IdNumber, true)).ToList();
-                customer.ToCustomer = dal.GetParcels()
-                    .Where(p => (p.Geter) == id)
-                    .Select(p => GetPOC(p.IdNumber, false)).ToList();
+                customer.FromCustomer = dal.PredicateParcel(p => (p.Sender) == id).Select(p => GetPOC(p.IdNumber, true)).ToList();//the parcels that the customer send
+                customer.ToCustomer = dal.PredicateParcel(p => (p.Geter) == id).Select(p => GetPOC(p.IdNumber, false)).ToList();
                 return customer;
             }
             catch (Exception e)
@@ -212,14 +208,15 @@ namespace BL
                 throw new AddingProblemException("the customer is not exist");
             }
         }
-         public IEnumerable<IBL.BO.CustomerToList> PredicateCustomer(Predicate<IBL.BO.CustomerToList> c)
+        #region PredicateCustomer
+        public IEnumerable<IBL.BO.CustomerToList> PredicateCustomer(Predicate<IBL.BO.CustomerToList> c)
         {
             var list = from item in GetCustomers()
                        where c(item)
                        select item;
             return list;
         }
-
+        #endregion
     }
 
 }
