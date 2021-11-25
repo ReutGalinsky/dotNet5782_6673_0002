@@ -33,12 +33,12 @@ namespace DalObject
         //assumption: the legal location is in israel:
         //Latitude: between 31 to 33
         //Longitude: between 33 to 35
-        {
-            Config.speed = 0.05;
-            Config.available = 0.05;
-            Config.heavy = 0.05;
-            Config.medium = 0.05;
-            Config.light = 0.05;
+        {//assumption: we suppose to set the values by ourself
+            Config.speed = 10;
+            Config.available = 0.1;
+            Config.heavy = 0.4;
+            Config.medium = 0.3;
+            Config.light = 0.2;
             Drones.Add(new Drone() { IdNumber = "1", MaxWeight = WeightCategories.Heavy, Model = "XP5H" });
             Drones.Add(new Drone() { IdNumber = "2", MaxWeight = WeightCategories.Heavy, Model = "XP5H" });
             Drones.Add(new Drone() { IdNumber = "3", MaxWeight = WeightCategories.Light, Model = "XP5H" });

@@ -89,6 +89,7 @@ namespace BL
                 station.ChargeSlots++;
                 dal.UpdateBaseStation(station);//Updateing in DAL
                 d.Battery += (int)(((float)(charging.TotalSeconds) / 60) * speed);
+                if (d.Battery > 100) d.Battery = 100;
                 d.State = DroneState.Available;
             }
             catch (Exception e)

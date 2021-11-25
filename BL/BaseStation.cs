@@ -16,7 +16,16 @@ namespace IBL.BO
         public List<DroneInCharge> Drones { set; get; }
         public override string ToString()
         {
-            return this.stringProperty();
+            string temp = "";
+            temp= temp + string.Format("{0,-10}:  {1,-10} \n{2,-10}:  {3,-10}\n{4,-10}:  {5,-10}\n","IdNumber", IdNumber, "Name", Name, "ChargeSlots", ChargeSlots);
+            temp += string.Format($"Location:\n{Location} ");
+            if (Drones.Count != 0)
+            {
+                temp += "\nDrones:\n";
+                foreach (var item in Drones)
+                    temp += item.stringProperty()+'\n';
+            }
+            return temp;
         }
 
     }
