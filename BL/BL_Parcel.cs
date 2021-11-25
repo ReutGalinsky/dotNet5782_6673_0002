@@ -78,9 +78,9 @@ namespace BL
                 IDAL.DO.Parcel p = (IDAL.DO.Parcel)parcel.CopyPropertiesToNew(typeof(IDAL.DO.Parcel));
                 p.DroneId = default(string);
                 p.CreateParcelTime = DateTime.Now;
-                p.MatchForDroneTime = new DateTime();
-                p.ArrivingDroneTime = new DateTime();
-                p.collectingDroneTime = new DateTime();
+                p.MatchForDroneTime = null;
+                p.ArrivingDroneTime = null;
+                p.collectingDroneTime = null;
                 return dal.AddParcel(p);//retrun the id of the parcel
             }
             catch (Exception e)
@@ -180,13 +180,13 @@ namespace BL
             {
                 IDAL.DO.Parcel p = dal.GetParcel(id);
                 IBL.BO.ParcelOfCustomer poc = (IBL.BO.ParcelOfCustomer)p.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfCustomer));
-                if (p.MatchForDroneTime == default(DateTime))//define the state:
+                if (p.MatchForDroneTime == null)//define the state:
                     poc.State = State.Define;
                 else
-                    if (p.collectingDroneTime == default(DateTime))
+                    if (p.collectingDroneTime == null)
                     poc.State = State.match;
                 else
-                    if (p.ArrivingDroneTime == default(DateTime))
+                    if (p.ArrivingDroneTime == null)
                     poc.State = State.pick;
                 else
                     poc.State = State.supply;

@@ -14,10 +14,10 @@ namespace IDAL.DO
         public string DroneId { get; set; }   
         public WeightCategories Weight { get; set; }
         public Priorities Priority { get; set; }
-        public System.DateTime CreateParcelTime { get; set; }
-        public System.DateTime MatchForDroneTime { get; set; }
-        public System.DateTime collectingDroneTime { get; set; }
-        public System.DateTime ArrivingDroneTime { get; set; }
+        public System.DateTime? CreateParcelTime { get; set; }
+        public System.DateTime? MatchForDroneTime { get; set; }
+        public System.DateTime? collectingDroneTime { get; set; }
+        public System.DateTime? ArrivingDroneTime { get; set; }
 
         public override string ToString()
             //assumption: the time shouldn't be printed

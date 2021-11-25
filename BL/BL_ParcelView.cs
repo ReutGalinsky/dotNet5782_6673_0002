@@ -58,13 +58,13 @@ namespace BL
         {
             IDAL.DO.Parcel P=dal.GetParcel(id);
             IBL.BO.ParcelOfList  pol = (IBL.BO.ParcelOfList)P.CopyPropertiesToNew(typeof(IBL.BO.ParcelOfList));
-            if (P.MatchForDroneTime == default(DateTime))
+            if (P.MatchForDroneTime == null)
                 pol.State = State.Define;//define the state
             else
-                if (P.collectingDroneTime == default(DateTime))
+                if (P.collectingDroneTime == null)
                 pol.State = State.match;
             else
-                if (P.ArrivingDroneTime == default(DateTime))
+                if (P.ArrivingDroneTime == null)
                 pol.State = State.pick;
             else
                 pol.State = State.supply;
@@ -75,7 +75,7 @@ namespace BL
         public IEnumerable<IBL.BO.ParcelOfList> GetParcelsNotMatching()
         {
             var list = from item in dal.GetParcels()
-                       where item.MatchForDroneTime == default(DateTime)
+                       where item.MatchForDroneTime == null
                        select item;
             var l =list.Select(x=>GetPOL(x.IdNumber));
             return l;

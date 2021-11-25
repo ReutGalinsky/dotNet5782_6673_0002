@@ -79,7 +79,7 @@ namespace BL
             }
             if (d.State != DroneState.shipping)
                 throw new ConnectionException("the drone is not shipping");
-            if (!(p.MatchForDroneTime != default(DateTime) && p.collectingDroneTime == default(DateTime)))
+            if (!(p.MatchForDroneTime != null && p.collectingDroneTime == null))
                 throw new ConnectionException("the parcel is not match");
             d.Battery -= (int)(DistanceTo(GetCustomer(p.SenderCustomer.IdNumber).Location, d.Location) * availible);//update the Battery
             d.Location = (Location)GetCustomer(p.SenderCustomer.IdNumber).Location.CopyPropertiesToNew(typeof(Location));
@@ -106,7 +106,7 @@ namespace BL
             if (droneBO.State != DroneState.shipping)
                 throw new ConnectionException("the drone is not shipping");
             IBL.BO.Parcel p = GetParcel(droneBO.PassedParcel.IdNumber);
-            if (!(p.collectingDroneTime != default(DateTime) && p.ArrivingDroneTime == default(DateTime)))
+            if (!(p.collectingDroneTime != null && p.ArrivingDroneTime == null))
                 throw new ConnectionException("the parcel is not picking yet");
             d.Battery = p.Weight switch//update the battery
             {

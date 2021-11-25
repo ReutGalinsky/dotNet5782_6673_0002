@@ -15,10 +15,10 @@ namespace IBL.BO
         public WeightCategories Weight { set; get; }
         public Priorities Priority{ set; get; }
         public DroneInParcel Drone { set; get; }
-        public DateTime CreateParcelTime { set; get; }
-        public DateTime MatchForDroneTime { set; get; }
-        public DateTime collectingDroneTime { set; get; }
-        public DateTime ArrivingDroneTime { set; get; }
+        public DateTime? CreateParcelTime { set; get; }
+        public DateTime? MatchForDroneTime { set; get; }
+        public DateTime? collectingDroneTime { set; get; }
+        public DateTime? ArrivingDroneTime { set; get; }
         public override string ToString()
         {
             return this.stringProperty();

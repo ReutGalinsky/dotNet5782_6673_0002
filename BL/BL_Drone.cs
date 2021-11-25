@@ -56,12 +56,12 @@ namespace BL
                              select item;
                 foreach (var item in parcel)//search if the drone is in shipping mode
                 {
-                    if (item.collectingDroneTime == default(DateTime) || item.ArrivingDroneTime == default(DateTime))
+                    if (item.collectingDroneTime == null || item.ArrivingDroneTime == null)
                     {
                         drone.State = DroneState.shipping;
                         double distance1 = 0, distance2;
                         Location a = new Location() { Latitude = dal.GetCustomer((item.Sender)).Latitude, Longitude = dal.GetCustomer((item.Sender)).Longitude };
-                        if (item.collectingDroneTime == default(DateTime))
+                        if (item.collectingDroneTime == null)
                         {
                             Location b = new Location() { Latitude = dal.GetBaseStations().First().Latitude, Longitude = dal.GetBaseStations().First().Longitude };
                             foreach (var obj in dal.GetBaseStations())
@@ -119,7 +119,7 @@ namespace BL
                         break;
                     case 1:// the drone is availible
                         var list = from item in dal.GetParcels()
-                                   where item.ArrivingDroneTime != default(DateTime)
+                                   where item.ArrivingDroneTime != null
                                    select item;
                         var list1 = list.ToList();
                         if (list1.Count == 0)
@@ -251,7 +251,7 @@ namespace BL
             temp.Destination =get;
             temp.Senderer = GetCustomerOfParcel(p.Sender);
             temp.Getterer = GetCustomerOfParcel(p.Geter);
-            if (p.collectingDroneTime == default(DateTime))//the boolian value
+            if (p.collectingDroneTime == null)//the boolian value
                 temp.isWaitingForColecting = true;
             else
                 temp.isWaitingForColecting = false;

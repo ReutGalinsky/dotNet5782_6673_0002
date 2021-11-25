@@ -129,9 +129,9 @@ namespace ConsoleUI
             }
             Parcel1.DroneId = default(string);
             Parcel1.CreateParcelTime = DateTime.Now;
-            Parcel1.collectingDroneTime = new DateTime();
-            Parcel1.MatchForDroneTime = new DateTime();
-            Parcel1.ArrivingDroneTime = new DateTime();
+            Parcel1.collectingDroneTime = null;
+            Parcel1.MatchForDroneTime = null;
+            Parcel1.ArrivingDroneTime = null;
             try
             {
                 system.AddParcel(Parcel1);

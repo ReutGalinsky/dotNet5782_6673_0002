@@ -59,9 +59,9 @@ namespace DalObject
                 Weight = WeightCategories.Light,
                 Priority = Priorities.Regular,
                 Sender = "11",
-                ArrivingDroneTime = default(DateTime),
+                ArrivingDroneTime = null,
                 MatchForDroneTime = DateTime.Now,
-                collectingDroneTime = default(DateTime),
+                collectingDroneTime = null,
                 CreateParcelTime = DateTime.Now,
             });
             Parcels.Add(new Parcel()
@@ -72,9 +72,9 @@ namespace DalObject
                 Weight = WeightCategories.Light,
                 Priority = Priorities.Emergency,
                 Sender = "10",
-                ArrivingDroneTime = default(DateTime),
+                ArrivingDroneTime = null,
                 MatchForDroneTime = DateTime.Now,
-                collectingDroneTime = default(DateTime),
+                collectingDroneTime = null,
                 CreateParcelTime = DateTime.Now,
             }); 
             Parcels.Add(new Parcel()
@@ -85,9 +85,9 @@ namespace DalObject
                 Weight = WeightCategories.Heavy,
                 Priority = Priorities.Regular,
                 Sender = "8",
-                ArrivingDroneTime = default(DateTime),
-                MatchForDroneTime = default(DateTime),
-                collectingDroneTime = default(DateTime),
+                ArrivingDroneTime = null,
+                MatchForDroneTime = null,
+                collectingDroneTime = null,
                 CreateParcelTime = DateTime.Now,
             }); 
             Parcels.Add(new Parcel()
@@ -98,9 +98,9 @@ namespace DalObject
                 Weight = WeightCategories.Middle,
                 Priority = Priorities.Regular,
                 Sender = "8",
-                ArrivingDroneTime = default(DateTime),
-                MatchForDroneTime = default(DateTime),
-                collectingDroneTime = default(DateTime),
+                ArrivingDroneTime = null,
+                MatchForDroneTime = null,
+                collectingDroneTime = null,
                 CreateParcelTime = DateTime.Now,
             }); 
 

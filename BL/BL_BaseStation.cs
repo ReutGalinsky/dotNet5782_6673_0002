@@ -60,6 +60,7 @@ namespace BL
         public IEnumerable<IBL.BO.BaseStationToList> GetBaseStationsWithCharge()
         {
             var b = GetBaseStations().Where(x=>x.ChargeSlots>0);
+            var a = PredicateBaseStation(x => x.ChargeSlots > 0);
             return b;
         }
         #endregion
@@ -147,5 +148,14 @@ namespace BL
             return (IBL.BO.DroneInCharge)Drones.FirstOrDefault(x=>x.IdNumber==id).CopyPropertiesToNew(typeof(IBL.BO.DroneInCharge));//take from the Bl list because need battery
         }
         #endregion
+
+        public IEnumerable<IBL.BO.BaseStationToList> PredicateBaseStation(Predicate<IBL.BO.BaseStationToList> c)
+        {
+            var list = from item in GetBaseStations()
+                       where c(item)
+                       select item;
+            return list;
+        }
+
     }
 }
