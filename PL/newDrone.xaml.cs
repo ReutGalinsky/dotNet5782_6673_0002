@@ -38,11 +38,19 @@ namespace PL
             {
                 IBL.BO.DroneToList d = new IBL.BO.DroneToList() { IdNumber = id.Text, MaxWeight = (IBL.BO.WeightCategories)weight.SelectedItem, Model = Model.Text };
                 bl.AddDrone(d,Station.Text);
+                var t = Window.GetWindow(this);
+                t.Close();
             }
-            catch(Exception )
+            catch (Exception )
             {
                 MessageBox.Show("can't add");
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {  
+            var t = Window.GetWindow(this);
+            t.Close();
         }
     }
 }

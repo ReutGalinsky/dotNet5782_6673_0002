@@ -97,6 +97,7 @@ namespace BL
                             Location d = new Location() { Latitude = ClosestStation(a).Latitude, Longitude = ClosestStation(a).Longitude };
                             distance2 = DistanceTo(a, d) * availible;
                         }
+                        drone.NumberOfParcel = item.IdNumber;
                         return drone;
                     }
                 }

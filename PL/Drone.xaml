@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Drone" Height="450" Width="800">
+        Title="Drone" Height="500" Width="800" Closed="closingAction">
+    
     <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
+
         </Grid.RowDefinitions>
+
         <Frame x:Name="main" Grid.Row="0"></Frame>
+        <Button Content="סגירה" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click" Background="#FFF39898" FontSize="20" FontFamily="Playbill"/>
 
     </Grid>
 </Window>

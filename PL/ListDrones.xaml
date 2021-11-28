@@ -6,35 +6,51 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ListDrones" Height="450" Width="800">
-    <Grid>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+    <Window.Resources>
+        <DataTemplate x:Key="MyDataTemplate"
+ DataType="local:IBL.BO.DroneToList">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+ Text="Id Number: " />
+                <TextBlock Grid.Column="1"
+ Text="{Binding Path=IdNumber}" />
+                <TextBlock Grid.Column="2"
+ Text="Model: " />
+                <TextBlock Grid.Column="3"
+ Text="{Binding Path=Model}" />
+                <TextBlock Grid.Column="4"
+ Text="Max Weight: " />
+                <TextBlock Grid.Column="5"
+ Text="{Binding Path=MaxWeight}" />
 
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
         </Grid.RowDefinitions>
         <ComboBox x:Name="State" HorizontalAlignment="Left" Margin="564,52,0,0" VerticalAlignment="Top" Width="187" Height="26" SelectionChanged="changedState">
         </ComboBox>
-        <ComboBox x:Name="weight" HorizontalAlignment="Left" Margin="372,52,0,0" VerticalAlignment="Top" Width="187" Height="26" SizeChanged="changedWeight">
+        <ComboBox x:Name="weight" HorizontalAlignment="Left" Margin="372,52,0,0" VerticalAlignment="Top" Width="187" Height="26" SelectionChanged="changeWeig">
         </ComboBox>
-        <Button x:Name="addingDrone" Content="הוספת רחפן" FontSize="24" HorizontalAlignment="Left" Margin="534,0,0,0" VerticalAlignment="Center" Height="88" Width="143" MouseDoubleClick="viewDrone" Grid.Row="1"/>
-        <Button x:Name="closing" Content="סגירה" HorizontalAlignment="Left" Margin="297,38,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="DroneListView"  Margin="42,14,291,40" Grid.Row="2" RenderTransformOrigin="0.5,0.5" RequestBringIntoView="showDouble">
-            <ListView.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ListView.RenderTransform>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+        <Button x:Name="addingDrone" Content="הוספת רחפן" FontSize="24" HorizontalAlignment="Left" Margin="630,89,0,0" VerticalAlignment="Top" Height="88" Width="143" MouseDoubleClick="viewDrone" Grid.Row="2" Click="addingDrone_Click"/>
+        <Button x:Name="closing" Content="סגירה" HorizontalAlignment="Left" Margin="42,10,0,0" VerticalAlignment="Top" Click="closing_Click"/>
+        <ListView x:Name="DroneListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action">
+            
         </ListView>
+        <TextBlock HorizontalAlignment="Left" Margin="604,31,0,0" Text="סינון על פי מצב רחפן"  TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="400,31,0,0" Text="סינון על פי משקל חבילה מירבי" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161"/>
 
     </Grid>
 </Window>
