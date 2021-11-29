@@ -28,10 +28,15 @@ namespace PL
         }
         private IBL.IBL bl = new BL.BL();
 
-        private void clickDrones(object sender, RoutedEventArgs e)
+        private void clickDrones(object sender, RoutedEventArgs e)//event for the drones button
         {
             ListDrones droneWindow = new ListDrones(bl);
             droneWindow.Show();
+        }
+
+        private void closing_Click(object sender, RoutedEventArgs e)//event for the closing button
+        {
+            this.Close();
         }
     }
 }

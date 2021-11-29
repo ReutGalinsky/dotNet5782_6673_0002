@@ -21,11 +21,11 @@ namespace PL
     /// </summary>
     public partial class ListDrones : Window
     {
-        public ListDrones(IBL.IBL i)
+        public ListDrones(IBL.IBL i)//ctor
         {
             InitializeComponent();
             bl = i;
-            foreach (IBL.BO.DroneToList s in bl.GetDrones())
+            foreach (IBL.BO.DroneToList s in bl.GetDrones())//create the source for the liseView
                 listDrones.Add(s);
             DroneListView.DataContext = listDrones;
             
@@ -33,21 +33,17 @@ namespace PL
             weight.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
         }
         private IBL.IBL bl;
-        private IBL.BO.DroneToList selected;
+        private IBL.BO.DroneToList selected;//selected item that will be send to the new window
+
         private ObservableCollection<IBL.BO.DroneToList> listDrones = new ObservableCollection<IBL.BO.DroneToList>();
-        private void viewDrone(object sender, MouseButtonEventArgs e)
-        {
-            Drone droneWindow = new Drone(bl);
-            droneWindow.Show();
-        }
-        private void updated(object sender, EventArgs e)
+        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             listDrones.Clear();
             foreach (var item in bl.GetDrones())
                 listDrones.Add(item);
         }
 
-        private void changedState(object sender, EventArgs e)
+        private void changedState(object sender, EventArgs e)//event for changing the drone state- in the state filter
         {
             var item = State.SelectedItem;
             var check = weight.SelectedItem;
@@ -78,7 +74,7 @@ namespace PL
             selected = (IBL.BO.DroneToList)DroneListView.SelectedItem;
         }
 
-        private void Action(object sender, MouseButtonEventArgs e)
+        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
             if (selected != null)
             {
@@ -89,12 +85,12 @@ namespace PL
             }
         }
 
-        private void closing_Click(object sender, RoutedEventArgs e)
+        private void closing_Click(object sender, RoutedEventArgs e)//event for the closing button
         {
             this.Close();
         }
 
-        private void changeWeig(object sender, SelectionChangedEventArgs e)
+        private void changeWeig(object sender, SelectionChangedEventArgs e)//event for changing the drone weight- in the weight filter
         {
             var item = weight.SelectedItem;
             var check = State.SelectedItem;
@@ -121,11 +117,20 @@ namespace PL
             }
         }
 
-        private void addingDrone_Click(object sender, RoutedEventArgs e)
+        private void addingDrone_Click(object sender, RoutedEventArgs e)//event for the adding button
         {
             Drone dWindow = new Drone(bl);
             dWindow.updateList += updated;
             dWindow.Show();
+        }
+
+        private void reset_Click(object sender, RoutedEventArgs e)//event for the reset button
+        {
+            listDrones.Clear();
+            foreach (var item in bl.GetDrones())
+                listDrones.Add(item);
+            State.SelectedItem = null;
+            weight.SelectedItem = null;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.ComponentModel;
 namespace PL
 {
     public class DronePO : INotifyPropertyChanged
+        //PL drone- enable binding
     {
         private string _IdNumber; 
         public string IdNumber
@@ -45,6 +46,32 @@ namespace PL
                 if (PropertyChanged != null)
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs("MaxWeight"));
+                }
+            }
+        }
+        private string _Longitude;
+        public string Longitude
+        {
+            get { return _Longitude; }
+            set
+            {
+                _Longitude = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("Longitude"));
+                }
+            }
+        }
+        private string _Latitude;
+        public string Latitude
+        {
+            get { return _Latitude; }
+            set
+            {
+                _Latitude = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("Latitude"));
                 }
             }
         }

@@ -18,9 +18,10 @@ namespace PL
     /// <summary>
     /// Interaction logic for actions.xaml
     /// </summary>
-    public partial class actions : Page
+    public partial class actions : Page//page for actions on selected drone
     {
         public actions(IBL.BO.DroneToList a, IBL.IBL bl)
+            //ctor- set the current drone and the binding- sourct objects
         {
             InitializeComponent();
             b = bl;
@@ -30,6 +31,8 @@ namespace PL
             drone.State = a.State;
             drone.MaxWeight = a.MaxWeight;
             drone.Model = a.Model;
+            drone.Longitude =LocationFormat.sexagesimalFormat( a.Location.Longitude, true);
+            drone.Latitude = LocationFormat.sexagesimalFormat(a.Location.Latitude, false);
             drone.NumberOfParcel = a.NumberOfParcel;
             state.DataContext = drone;
             id.DataContext = drone;
@@ -37,11 +40,14 @@ namespace PL
             Model.DataContext = drone;
             battery.DataContext = drone;
             weight.DataContext = drone;
+            latitude.DataContext = drone;
+            lonigude.DataContext = drone;
             notEnabled();
             Enabled();
-            weight.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            weight.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));//use the enum for the weight
         }
         private void Enabled()
+            //function that each time define which button will be enabled
         {
             if (drone.State == IBL.BO.DroneState.Available)
             {
@@ -62,6 +68,7 @@ namespace PL
             }
         }
         private void notEnabled()
+            //function that define all the buttons to be disenabled
         {
             time.Visibility = Visibility.Hidden;
             timeLabel.Visibility = Visibility.Hidden;
@@ -74,6 +81,7 @@ namespace PL
             supplying.IsEnabled = false;
         }
         public void convertToPo(DronePO dronePo, IBL.BO.Drone d)
+            //function that get the drone and update it to the current values as given from the bl
         {
             dronePo.Battery = d.Battery;
             dronePo.IdNumber = d.IdNumber;
@@ -81,11 +89,16 @@ namespace PL
             dronePo.MaxWeight = d.MaxWeight;
             dronePo.Model = d.Model;
             dronePo.NumberOfParcel = d.PassedParcel?.IdNumber;
+            dronePo.Latitude = LocationFormat.sexagesimalFormat(d.Location.Latitude, false); ;
+            dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true); ;
         }
-        IBL.IBL b;
-        DronePO drone;
-        private bool isClickedOnce = false;
-        private void update_Click(object sender, RoutedEventArgs e)
+
+        IBL.IBL b;//the BL object
+
+        DronePO drone;//the selected drone
+
+        private bool isClickedOnce = false;//for the releasing button
+        private void update_Click(object sender, RoutedEventArgs e)//event of the updaiting button
         {
             drone.Model = Model.Text;
             try
@@ -100,7 +113,7 @@ namespace PL
                 MessageBox.Show("err: " + ex.Message);
             }
         }
-        private void charging_Click(object sender, RoutedEventArgs e)
+        private void charging_Click(object sender, RoutedEventArgs e)//event for the charging button
         {
             try
             {
@@ -117,7 +130,7 @@ namespace PL
 
         }
 
-        private void release_Click(object sender, RoutedEventArgs e)
+        private void release_Click(object sender, RoutedEventArgs e)//event for the releasing button
         {
             if (isClickedOnce == false)
             {
@@ -133,7 +146,7 @@ namespace PL
                 {
                     string item = time.Text;
                     var list = item.Split(':');
-                    if (list.Length != 3)
+                    if (list.Length != 3)//check format
                     {
                         MessageBox.Show("not correct format");
                         return;
@@ -169,7 +182,7 @@ namespace PL
             }
         }
 
-        private void sendShip_Click(object sender, RoutedEventArgs e)
+        private void sendShip_Click(object sender, RoutedEventArgs e)//event for the send-shipping button 
         {
             try
             {
@@ -187,7 +200,7 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-        private void supplying_Click(object sender, RoutedEventArgs e)
+        private void supplying_Click(object sender, RoutedEventArgs e)//event for the supplying button
         {
             try
             {
@@ -198,8 +211,6 @@ namespace PL
                 convertToPo(drone, b.GetDrone(drone.IdNumber));
                 notEnabled();
                 Enabled();
-
-
             }
             catch (Exception ex)
             {
@@ -207,7 +218,7 @@ namespace PL
             }
         }
 
-        private void collecting_Click(object sender, RoutedEventArgs e)
+        private void collecting_Click(object sender, RoutedEventArgs e)//event for the collecting button
         {
             try
             {
