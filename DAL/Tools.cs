@@ -54,8 +54,6 @@ namespace DalObject
                 else final = final + string.Format(" W ");
             }
             return final;
-
-
         }
     }
 

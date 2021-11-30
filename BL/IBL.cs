@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBL.BO;
-
-namespace IBL
-{
-   public interface IBL
+using BO;
+namespace BLAPI
+{ 
+    public interface IBL
     {
         public void AddBaseStation(BaseStation baseStationToAdd);
         public IEnumerable<BaseStationToList> GetBaseStations();
@@ -33,21 +32,5 @@ namespace IBL
         public IEnumerable<DroneToList> PredicateDrone(Predicate<DroneToList> c);
         public IEnumerable<ParcelOfList> PredicateParcel(Predicate<ParcelOfList> c);
         public IEnumerable<CustomerToList> PredicateCustomer(Predicate<CustomerToList> c);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

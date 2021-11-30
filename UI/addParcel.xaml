@@ -1,0 +1,41 @@
+﻿<Window x:Class="UI.addParcel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI"
+        mc:Ignorable="d"
+        Title="addParcel" Height="300" Width="400">
+    <Grid>
+        <Button Background="{x:Null}" Height="38" Click="AddLineButton_Click" VerticalAlignment="Top"
+                    Margin="360,0,0,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/סגירה.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <TextBlock HorizontalAlignment="Left" Margin="55,68,0,0" Text="get id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="30"/>
+        <TextBox x:Name="IdGeter" HorizontalAlignment="Center" Margin="0,66,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" />
+        <TextBlock HorizontalAlignment="Left" Margin="46,103,0,0" Text="priopirty" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677" Height="16" Width="60"/>
+        <TextBlock HorizontalAlignment="Left" Margin="64,150,0,0" Text="weight" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.593,1.331"/>
+        <Button x:Name="login" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="154" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,205,0,0" Click="adButton">
+            <Button.Content>
+                <StackPanel Height="auto" Width="auto">
+                    <Image Height="56" Width="169"  Source="/הוסף.png" MouseEnter="changeColor" MouseLeave="returnColor"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <ComboBox x:Name="Weight" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="Prioprity" HorizontalAlignment="Center" Margin="0,111,0,0" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>

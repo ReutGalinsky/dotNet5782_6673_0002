@@ -9,6 +9,7 @@
       Title="newDrone">
 
     <Grid >
+        <!--"
         <Grid.Background>
             <ImageBrush ImageSource="/רקע2.png" Opacity="0.895"></ImageBrush>
         </Grid.Background>
@@ -30,6 +31,8 @@
         <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="565,0,0,0" Grid.Row="3" VerticalAlignment="Top" Background="#FF5DD65D" Click="clickAdd" Height="65" Width="82" FontFamily="Aharoni" FontSize="20"/>
         <Button Content="cancel" HorizontalAlignment="Left" Margin="450,0,0,0" Grid.Row="3" VerticalAlignment="Top" Height="65" Width="76" Background="#FFBF3030" Click="Button_Click" FontFamily="Aharoni" FontSize="20"/>
 
-
+-->
     </Grid>
 </Page>
+
+        

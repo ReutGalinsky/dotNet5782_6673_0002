@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <!--"
         <Grid.Background>
             <ImageBrush ImageSource="/רקע2.png" Opacity="0.895"></ImageBrush>
         </Grid.Background>
@@ -18,5 +19,6 @@
         <Button x:Name="closing" Content="סגירה" HorizontalAlignment="Left" Margin="42,10,0,0" VerticalAlignment="Top" Click="closing_Click" FontFamily="Aharoni" Height="54" Width="69" FontSize="20"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="518,0,0,0" Text="!ברוכים הבאים" FontSize="48" TextWrapping="Wrap" VerticalAlignment="Top" Height="64" Width="336" FontFamily="Aharoni"/>
-    </Grid>
+    -->
+        </Grid>
 </Window>

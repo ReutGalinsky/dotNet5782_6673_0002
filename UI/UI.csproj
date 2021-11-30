@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\התחבר.png" />
+    <None Remove="Pages\לקוח.png" />
+    <None Remove="Pages\מנהל2.png" />
+    <None Remove="Pages\מפתח.jpg" />
+    <None Remove="הוסף.png" />
+    <None Remove="חבילה אחת.jpg" />
+    <None Remove="חזור.jpg" />
+    <None Remove="כפתור כניסה.png" />
+    <None Remove="כפתור כניסה2.png" />
+    <None Remove="כפתור.png" />
+    <None Remove="כפתור3.png" />
+    <None Remove="לוגו רחפן.png" />
+    <None Remove="לקוח.png" />
+    <None Remove="מינוס.png" />
+    <None Remove="מנהל.png" />
+    <None Remove="מנהל2.png" />
+    <None Remove="סגירה.png" />
+    <None Remove="עגלה.jpg" />
+    <None Remove="עדכן.png" />
+    <None Remove="פלוס.jpg" />
+    <None Remove="קריאה.jpg" />
+    <None Remove="רחפן יחיד.png" />
+    <None Remove="רקע פרוקיט.jpg" />
+    <None Remove="תחנה.png" />
+    <None Remove="תחנת בסיס.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Pages\התחבר.png" />
+    <Resource Include="Pages\לקוח.png" />
+    <Resource Include="Pages\מנהל2.png" />
+    <Resource Include="Pages\מפתח.jpg" />
+    <Resource Include="הוסף.png" />
+    <Resource Include="חבילה אחת.jpg" />
+    <Resource Include="חזור.jpg" />
+    <Resource Include="כפתור כניסה.png" />
+    <Resource Include="כפתור כניסה2.png" />
+    <Resource Include="כפתור.png" />
+    <Resource Include="כפתור3.png" />
+    <Resource Include="לוגו רחפן.png" />
+    <Resource Include="לקוח.png" />
+    <Resource Include="מינוס.png" />
+    <Resource Include="מנהל.png" />
+    <Resource Include="מנהל2.png" />
+    <Resource Include="סגירה.png" />
+    <Resource Include="עגלה.jpg" />
+    <Resource Include="עדכן.png" />
+    <Resource Include="פלוס.jpg" />
+    <Resource Include="קריאה.jpg" />
+    <Resource Include="רחפן יחיד.png" />
+    <Resource Include="רקע פרוקיט.jpg" />
+    <Resource Include="תחנה.png" />
+    <Resource Include="תחנת בסיס.png" />
+  </ItemGroup>
+
+</Project>

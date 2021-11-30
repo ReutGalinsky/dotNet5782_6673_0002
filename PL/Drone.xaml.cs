@@ -14,34 +14,34 @@ using System.Windows.Shapes;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for Drone.xaml
-    /// </summary>
+    //    /// <summary>
+    //    /// Interaction logic for Drone.xaml
+    //    /// </summary>
     public partial class Drone : Window
     {
-        public Drone(IBL.IBL i)//ctor for adding new drone
+        public Drone()//ctor for adding new drone
         {
             InitializeComponent();
-            main.Content = new newDrone(i);
+            //            main.Content = new newDrone(i);
         }
-        public event EventHandler updateList;
+        //        public event EventHandler updateList;
 
-        public Drone(IBL.BO.DroneToList a, IBL.IBL i)//ctor for action on exsiting drone
-        {
-            InitializeComponent();
-            main.Content = new actions(a,i);
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)//event for close button
-        {
-            this.Close();
-        }
+        //        public Drone(IBL.BO.DroneToList a, IBL.IBL i)//ctor for action on exsiting drone
+        //        {
+        //            InitializeComponent();
+        //            main.Content = new actions(a,i);
+        //        }
+        //        private void Button_Click(object sender, RoutedEventArgs e)//event for close button
+        //        {
+        //            this.Close();
+        //        }
 
         private void closingAction(object sender, EventArgs e)
-            //function that power an event every time that the window is being closed
+        //            //function that power an event every time that the window is being closed
         {
-            updateList(this,EventArgs.Empty);
+            //            updateList(this,EventArgs.Empty);
         }
-
     }
-   
-}
+   }
+
+//}
