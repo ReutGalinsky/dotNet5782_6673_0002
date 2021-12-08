@@ -26,7 +26,7 @@ namespace PL
         }
         //        public event EventHandler updateList;
 
-        //        public Drone(IBL.BO.DroneToList a, IBL.IBL i)//ctor for action on exsiting drone
+        //        public Drone(BO.DroneToList a, BLApi.IBL i)//ctor for action on exsiting drone
         //        {
         //            InitializeComponent();
         //            main.Content = new actions(a,i);

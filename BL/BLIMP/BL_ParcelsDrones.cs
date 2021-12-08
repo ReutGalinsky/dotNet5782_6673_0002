@@ -3,34 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BO;
-using DLAPI;
 using DO;
+using BO;
 
 namespace BL
 {
-    public partial class BL : BLAPI.IBL
+    internal partial class BL : BLApi.IBL
     {
         #region MatchingParcelToDrone
         public void MatchingParcelToDrone(string id)
-            //match parcel to a proper drone
+        //match parcel to a proper drone
         {
 
             BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
             BO.Drone droneBO = null;
             try { droneBO = GetDrone(id); }
-            catch(Exception e)
-            {  throw new ConnectionException("the drone is not existing");
-}            if (d.State != DroneState.Available)
+            catch (Exception e)
+            {
+                throw new ConnectionException("the drone is not existing");
+            }
+            if (d.State != DroneState.Available)
                 throw new ConnectionException("the drone is not available");
-            var list = from item in PredicateParcel(x=>x.State==State.Define&& (int)x.Weight <= (int)d.MaxWeight)
-                       orderby -1*(int)item.Priority, -1*(int)item.Weight, DistanceTo(GetCustomer(item.Sender).Location, d.Location)
+            var list = from item in PredicateParcel(x => x.State == State.Define && (int)x.Weight <= (int)d.MaxWeight)
+                       orderby -1 * (int)item.Priority, -1 * (int)item.Weight, DistanceTo(GetCustomer(item.Sender).Location, d.Location)
                        //decending order by priority and weight and increasing by distance
                        select item;
             foreach (var item in list)
             {
                 int temp = d.Battery;
-                temp -=(int) (DistanceTo(GetCustomer(item.Sender).Location, d.Location) * availible);
+                temp -= (int)(DistanceTo(GetCustomer(item.Sender).Location, d.Location) * availible);
                 temp = item.Weight switch//check if the battery is enough for the delivery
                 {
                     BO.WeightCategories.Heavy => (int)(temp - heavy * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
@@ -50,7 +51,7 @@ namespace BL
                     return;
                 }
             }
-                throw new UpdatingException("cant find proper parcel for this drone");//didn't find parcel
+            throw new UpdatingException("cant find proper parcel for this drone");//didn't find parcel
         }
         #endregion
 
@@ -70,7 +71,7 @@ namespace BL
             {
                 p = GetParcel(droneBO.PassedParcel.IdNumber);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new UpdatingException("there is not any parcel that match this drone", e);
             }
@@ -88,15 +89,15 @@ namespace BL
 
         #region SupplyingParcelByDrone
         public void SupplyingParcelByDrone(string id)
-            //function that supply the parcel to the destination
+        //function that supply the parcel to the destination
         {
             BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
             BO.Drone droneBO = null;
             try
             {
-                 droneBO = GetDrone(id);
+                droneBO = GetDrone(id);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ConnectionException("the drone is not existing");
             }
@@ -121,7 +122,7 @@ namespace BL
                 dparcel.ArrivingDroneTime = DateTime.Now;
                 dal.UpdateParcel(dparcel);//update in DAL
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ConnectionException("the parcel is not existing");
             }

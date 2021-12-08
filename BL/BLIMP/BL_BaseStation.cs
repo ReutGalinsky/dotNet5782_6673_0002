@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using BO;
-using DLAPI;
-using DO;
-
-using BLAPI;
-
 namespace BL
 {
-    public partial class BL: BLAPI.IBL
+    internal partial class BL : BLApi.IBL
     {
         #region AddBaseStation
-        public void AddBaseStation(BO.BaseStation baseStationToAdd) 
-            //add new base station to the data base
+        public void AddBaseStation(BO.BaseStation baseStationToAdd)
+        //add new base station to the data base
         {
             if (baseStationToAdd.Name == "")
                 throw new AddingProblemException("invalid name of base station");
@@ -24,7 +20,7 @@ namespace BL
                 if (int.Parse(baseStationToAdd.IdNumber) == 0)
                     throw new AddingProblemException("invalid Id of base station");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new AddingProblemException("invalid Id of base station");
             }
@@ -32,7 +28,7 @@ namespace BL
                 throw new AddingProblemException("the Latitude is out of israel");
             if (baseStationToAdd.Location.Longitude > 35.6 || baseStationToAdd.Location.Longitude < 34.5)
                 throw new AddingProblemException("the Longitude is out of israel");
-            if (baseStationToAdd.ChargeSlots< 0)
+            if (baseStationToAdd.ChargeSlots < 0)
                 throw new AddingProblemException("there illegal amount of availible charge slots");
             try
             {
@@ -57,16 +53,25 @@ namespace BL
         }
         #endregion
 
+        //#region GetBaseStationsWithCharge
+        ////return all the base stations with availible charge slots
+        //public IEnumerable<BO.BaseStationToList> GetBaseStationsWithCharge()
+        //{
+        //    var b = PredicateBaseStation(x => x.ChargeSlots > 0);
+        //    return b;
+        //}
+        //#endregion
+
         #region UpdatingDetailsOfBaseStation
         //update single base station
         public void UpdatingDetailsOfBaseStation(string id, string Name, string numberOfCharge)
-            
+
         {
             try
             {
                 DO.BaseStation temp = dal.GetBaseStation(id);
                 BO.BaseStation b = (BO.BaseStation)temp.CopyPropertiesToNew(typeof(BO.BaseStation));
-                b.Location = new Location() {Latitude=temp.Latitude,Longitude=temp.Longitude };//add the location
+                b.Location = new Location() { Latitude = temp.Latitude, Longitude = temp.Longitude };//add the location
                 if (Name != "") b.Name = Name;
                 try//try to parse the given amount
                 {
@@ -77,7 +82,7 @@ namespace BL
                         b.ChargeSlots = int.Parse(numberOfCharge) - b.Drones.Count();
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 { throw new UpdatingException("the new amount of charge slots it's not fit to charging drones"); }
                 try
                 {
@@ -93,7 +98,7 @@ namespace BL
             }
             catch (Exception e)
             {
-                throw new UpdatingException("the base Station is not existing",e);
+                throw new UpdatingException("the base Station is not existing", e);
             }
         }
         #endregion
@@ -126,9 +131,9 @@ namespace BL
                 }
                 return GetStation;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                throw new GettingProblemException("the base station is not exist",e);
+                throw new GettingProblemException("the base station is not exist", e);
             }
         }
         #endregion
@@ -137,7 +142,7 @@ namespace BL
         //private function that return object of DroneInCharge
         private BO.DroneInCharge GetDroneInCharge(string id)
         {
-            return (BO.DroneInCharge)Drones.FirstOrDefault(x=>x.IdNumber==id).CopyPropertiesToNew(typeof(BO.DroneInCharge));//take from the Bl list because need battery
+            return (BO.DroneInCharge)Drones.FirstOrDefault(x => x.IdNumber == id).CopyPropertiesToNew(typeof(BO.DroneInCharge));//take from the Bl list because need battery
         }
         #endregion
 

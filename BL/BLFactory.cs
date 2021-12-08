@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BO;
-using DO;
-using DLAPI;
 
-namespace BLAPI
+namespace BLApi
 {
     public static class BLFactory
     {
-        public static IBL GetBL()
+        public static IBL GetBl()
         {
             return new BL.BL();
         }

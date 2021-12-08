@@ -20,20 +20,20 @@
 //    /// </summary>
 //    public partial class newDrone : Page
 //    {
-//        public newDrone(IBL.IBL i)//ctor
+//        public newDrone(BLApi.IBL i)//ctor
 //        {
 //            InitializeComponent();
 //            bl = i;
 //            add.IsEnabled = false;
-//            weight.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+//            weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
 //        }
-//        private IBL.IBL bl;
+//        private BLApi.IBL bl;
 
 //        private void clickAdd(object sender, RoutedEventArgs e)//event of the adding button
 //        {
 //            try
 //            {
-//                IBO.DroneToList d = new IBL.BO.DroneToList() { IdNumber = id.Text, MaxWeight = (IBL.BO.WeightCategories)weight.SelectedItem, Model = Model.Text };
+//                IBO.DroneToList d = new BO.DroneToList() { IdNumber = id.Text, MaxWeight = (BO.WeightCategories)weight.SelectedItem, Model = Model.Text };
 //                bl.AddDrone(d, Station.Text);
 //                var t = Window.GetWindow(this);
 //                t.Close();

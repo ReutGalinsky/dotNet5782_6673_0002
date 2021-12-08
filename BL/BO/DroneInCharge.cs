@@ -7,7 +7,7 @@ using BL;
 
 namespace BO
 {
-   public class DroneInCharge
+    public class DroneInCharge
     {
         public string IdNumber { set; get; }
         public int Battery { set; get; }

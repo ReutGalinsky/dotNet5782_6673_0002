@@ -32,7 +32,7 @@ namespace BL
             from.CopyPropertiesTo(to);//copy all value of properties with the same name to the new object
             return to;
         }
-      
+
         public static string stringProperty<T>(this T t)
         {
             Type Ttype = t.GetType();
@@ -40,7 +40,7 @@ namespace BL
             string temp = "";
             foreach (PropertyInfo item in info)
             {
-                
+
                 var value = item.GetValue(t, null); //get the value of the prperty
                 if (value is ValueType || value is string)
                     temp += string.Format("{0,-10}:  {1,-10}\n", item.Name, item.GetValue(t, null));
@@ -90,4 +90,3 @@ namespace BL
         }
     }
 }
-

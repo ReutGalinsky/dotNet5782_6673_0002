@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BO;
-using DLAPI;
 using DO;
+using BO;
 
 namespace BL
 {
-    public partial class BL : BLAPI.IBL
+    internal partial class BL : BLApi.IBL
     {
         #region GetParcel
         public BO.Parcel GetParcel(string id)
-            //return single parcel
+        //return single parcel
         {
             try
             {
@@ -34,7 +33,7 @@ namespace BL
         }
         #endregion
         private BO.DroneInParcel GetDroneInParcel(string id)
-            //private function that return object of "DroneInParcel"
+        //private function that return object of "DroneInParcel"
         {
             BO.Drone d = GetDrone(id);//get the drone
             BO.DroneInParcel dip = (BO.DroneInParcel)d.CopyPropertiesToNew(typeof(BO.DroneInParcel));
@@ -43,20 +42,20 @@ namespace BL
             dip.Location.Longitude = d.Location.Longitude;
             return dip;
         }
-       
+
         #region GetParcels
         public IEnumerable<BO.ParcelOfList> GetParcels()
-            //function that return all the parcels for view
+        //function that return all the parcels for view
         {
             var list = from item in dal.GetParcels() select GetPOL(item.IdNumber);
             return list;
         }
         #endregion
         private BO.ParcelOfList GetPOL(string id)
-            //private function that return object of ParcelOfList
+        //private function that return object of ParcelOfList
         {
-            DO.Parcel P=dal.GetParcel(id);
-            BO.ParcelOfList  pol = (BO.ParcelOfList)P.CopyPropertiesToNew(typeof(BO.ParcelOfList));
+            DO.Parcel P = dal.GetParcel(id);
+            BO.ParcelOfList pol = (BO.ParcelOfList)P.CopyPropertiesToNew(typeof(BO.ParcelOfList));
             if (P.MatchForDroneTime == null)
                 pol.State = State.Define;//define the state
             else

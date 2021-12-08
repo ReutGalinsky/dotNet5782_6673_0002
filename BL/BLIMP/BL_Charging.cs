@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BO;
-using DLAPI;
 using DO;
+using BO;
 
 namespace BL
 {
-    public partial class BL : BLAPI.IBL
+    internal partial class BL : BLApi.IBL
     {
 
         #region DistanceTo
         //function that calculate the distance between two locations in km
-        private static double DistanceTo(Location a1,Location a2)
+        private static double DistanceTo(Location a1, Location a2)
         {
             double rlat1 = Math.PI * a1.Latitude / 180;
             double rlat2 = Math.PI * a2.Latitude / 180;
@@ -37,19 +36,21 @@ namespace BL
             BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == number);
             BO.Drone droneBO = null;
             try { droneBO = GetDrone(number); }//get from DAL
-            catch (Exception ) {
-                throw new ChargingException("the drone is not existing"); }
+            catch (Exception)
+            {
+                throw new ChargingException("the drone is not existing");
+            }
             if (droneBO.State != DroneState.Available)
                 throw new ChargingException("the drone is not available");
             var ListOfStation = dal.PredicateBaseStation(x => x.ChargeSlots > 0);
-            if (ListOfStation.Count()==0)
+            if (ListOfStation.Count() == 0)
                 throw new ChargingException("there is no availible base station for charging");
             DO.BaseStation b = ListOfStation.First();
             foreach (var item in ListOfStation)//find the closest base station with availible charge slot
-                if (DistanceTo(new Location() { Latitude = b.Latitude,Longitude = b.Longitude },d.Location) > DistanceTo(new Location() { Latitude = item.Latitude,Longitude = item.Longitude },droneBO.Location))
+                if (DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location) > DistanceTo(new Location() { Latitude = item.Latitude, Longitude = item.Longitude }, droneBO.Location))
                     b = item;
             int temp = d.Battery;
-            temp -=(int)( availible * DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location));
+            temp -= (int)(availible * DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location));
             if (temp < 0)
                 throw new ChargingException("not enough battery to get the closest base station");
             d.Battery = temp;
@@ -82,7 +83,7 @@ namespace BL
                 throw new ChargingException("the drone was not charged");
             try
             {
-                DO.BaseStation station=dal.GetBaseStation(dal.GetDroneCharge(number).StationId);
+                DO.BaseStation station = dal.GetBaseStation(dal.GetDroneCharge(number).StationId);
                 dal.DeleteDroneCharge(number);//delete from DAL
                 station.ChargeSlots++;
                 dal.UpdateBaseStation(station);//Updateing in DAL

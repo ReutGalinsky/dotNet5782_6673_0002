@@ -6,20 +6,196 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<OutputPath>..\bin\</OutputPath>
+	</PropertyGroup>
+	
   <ItemGroup>
+    <None Remove="Pages\התחבר.png" />
+    <None Remove="Pages\לקוח.png" />
+    <None Remove="Pages\מנהל2.png" />
+    <None Remove="Pages\מפתח.jpg" />
+    <None Remove="חבילה אחת.jpg" />
+    <None Remove="חזור.jpg" />
+    <None Remove="לוגו רחפן.png" />
+    <None Remove="לקוח.png" />
+    <None Remove="מינוס.png" />
+    <None Remove="מנהל.png" />
+    <None Remove="מנהל2.png" />
+    <None Remove="סגירה.png" />
+    <None Remove="עגלה.jpg" />
+    <None Remove="פלוס.jpg" />
+    <None Remove="קריאה.jpg" />
+    <None Remove="רחפן יחיד.png" />
     <None Remove="רחפן עגול.png" />
+    <None Remove="רקע פרוקיט.jpg" />
     <None Remove="רקע.png" />
     <None Remove="רקע2.png" />
+    <None Remove="תחנה.png" />
+    <None Remove="תחנת בסיס.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BL\Bli.csproj" />
+    <ProjectReference Include="..\BL\BL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Pages\התחבר.png" />
+    <Resource Include="Pages\לקוח.png" />
+    <Resource Include="Pages\מנהל2.png" />
+    <Resource Include="Pages\מפתח.jpg" />
+    <Resource Include="חבילה אחת.jpg" />
+    <Resource Include="חזור.jpg" />
+    <Resource Include="לוגו רחפן.png" />
+    <Resource Include="לקוח.png" />
+    <Resource Include="מינוס.png" />
+    <Resource Include="מנהל.png" />
+    <Resource Include="מנהל2.png" />
+    <Resource Include="סגירה.png" />
+    <Resource Include="עגלה.jpg" />
+    <Resource Include="פלוס.jpg" />
+    <Resource Include="קריאה.jpg" />
+    <Resource Include="רחפן יחיד.png" />
     <Resource Include="רחפן עגול.png" />
+    <Resource Include="רקע פרוקיט.jpg" />
     <Resource Include="רקע.png" />
     <Resource Include="רקע2.png" />
+    <Resource Include="תחנה.png" />
+    <Resource Include="תחנת בסיס.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="addingWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="addParcel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CustomerParcels.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CustomerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="entryWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ManegerCustomers.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ManegerDrone.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ManegerParcel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ManegerStations.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ManegerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\CustomerOrders.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\CustomerSend.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\entryCustomer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\entryManeger.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\entryMenu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UpdateWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="viewParcelWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="viewStation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="addingWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="addParcel.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CustomerParcels.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CustomerWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="entryWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ManegerCustomers.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ManegerDrone.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ManegerParcel.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ManegerStations.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ManegerWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CustomerOrders.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CustomerSend.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\entryCustomer.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\entryManeger.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\entryMenu.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UpdateWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="viewParcelWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="viewStation.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

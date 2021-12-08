@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BO;
-using DLAPI;
 using DO;
+using BO;
 
 
 namespace BL
 {
-   public partial class BL: BLAPI.IBL
+    internal partial class BL : BLApi.IBL
     {
-        public IDal dal;
-        public List<DroneToList> Drones=new List<DroneToList>();///
-        public double availible;
-        public double heavy;
-        public double light;
-        public double medium;
-        public double speed;
+        private DalApi.IDal dal;
+        private List<BO.DroneToList> Drones = new List<DroneToList>();
+        private double availible;
+        private double heavy;
+        private double light;
+        private double medium;
+        private double speed;
 
         #region BL_Constructor
-        public BL() 
+        public BL()
         {
-            dal = DLAPI.DalFactory.GetDal();
+            dal = DalApi.DLFactory.GetDal();
             double[] arr = dal.UsingElectricity();
             availible = arr[0];
             heavy = arr[1];
@@ -36,16 +35,15 @@ namespace BL
                 {
                     Drones.Add(GetDroneToList(item.IdNumber));//create the list of drones for the BL
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    throw new AddingProblemException("",e);
+                    throw new AddingProblemException("", e);
                 }
             }
         }
-        #endregion
 
         private BO.DroneToList GetDroneToList(string id)
-            //function that return object of DroneToList for constructor
+        //function that return object of DroneToList for constructor
         {
             try
             {
@@ -145,14 +143,14 @@ namespace BL
                 }
                 return drone;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                throw new AddingProblemException("the drone number "+id+" is not correct, can't running this program");
+                throw new AddingProblemException("the drone number " + id + " is not correct, can't running this program");
             }
 
         }
         private DO.BaseStation ClosestStation(Location l)
-            //private function that return the closest base station to a given location
+        //private function that return the closest base station to a given location
         {
             var list = dal.GetBaseStations();
             DO.BaseStation baseStationToReturn;
@@ -170,11 +168,11 @@ namespace BL
             return baseStationToReturn;
         }
 
-        
+        #endregion
 
         #region AddDrone
         public void AddDrone(BO.DroneToList droneToAdd, string number)
-            //function that add drone
+        //function that add drone
         {
             if (droneToAdd.MaxWeight != BO.WeightCategories.Heavy && droneToAdd.MaxWeight != BO.WeightCategories.Middle && droneToAdd.MaxWeight != BO.WeightCategories.Light)
                 throw new AddingProblemException("This weight is not an option");
@@ -197,13 +195,13 @@ namespace BL
                 Location l = (Location)GetBaseStation(number).Location.CopyPropertiesToNew(typeof(Location));
                 droneToAdd.Location = l;
                 var ListOfStation = dal.GetBaseStation(number);
-                if (ListOfStation.ChargeSlots== 0)
+                if (ListOfStation.ChargeSlots == 0)
                     throw new ChargingException("there is not any slot for charging in this base station");
                 droneToAdd.State = DroneState.maintaince;
                 ListOfStation.ChargeSlots--;
                 dal.UpdateBaseStation(ListOfStation);
                 Drones.Add(droneToAdd);
-                DO.DroneCharge charge = new DroneCharge() { DroneId =droneToAdd.IdNumber , StationId = number };
+                DO.DroneCharge charge = new DroneCharge() { DroneId = droneToAdd.IdNumber, StationId = number };
                 dal.AddDroneCharge(charge);
             }
             catch (Exception ex)
@@ -234,22 +232,22 @@ namespace BL
             drone.Location.Longitude = d.Location.Longitude;
             drone.State = d.State;
             drone.Battery = d.Battery;
-            if(d.NumberOfParcel!=null)
+            if (d.NumberOfParcel != null)
                 drone.PassedParcel = GetPIP(d.NumberOfParcel);
             return drone;
 
         }
         #endregion
         private BO.ParcelInPassing GetPIP(string id)
-            //private function that return object of ParcelInPassing
+        //private function that return object of ParcelInPassing
         {
             DO.Parcel p = dal.GetParcel(id);
-            BO.ParcelInPassing temp= (BO.ParcelInPassing)p.CopyPropertiesToNew(typeof(BO.ParcelInPassing));
+            BO.ParcelInPassing temp = (BO.ParcelInPassing)p.CopyPropertiesToNew(typeof(BO.ParcelInPassing));
             Location get = new Location() { Latitude = dal.GetCustomer(p.Geter).Latitude, Longitude = dal.GetCustomer(p.Geter).Longitude };
             Location send = new Location() { Latitude = dal.GetCustomer(p.Sender).Latitude, Longitude = dal.GetCustomer(p.Sender).Longitude };
             temp.Distance = DistanceTo(get, send);
             temp.Packing = send;
-            temp.Destination =get;
+            temp.Destination = get;
             temp.Senderer = GetCustomerOfParcel(p.Sender);
             temp.Getterer = GetCustomerOfParcel(p.Geter);
             if (p.collectingDroneTime == null)//the boolian value
@@ -261,13 +259,13 @@ namespace BL
 
         #region UpdatingDetailsOfDrone
         public void UpdatingDetailsOfDrone(string Model, string id)
-            //update drone
+        //update drone
         {
             if (Model == "")
                 throw new UpdatingException("the model is illegal");
             BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
-            if(d==null)
-                  throw new UpdatingException("the drone is not existing"); 
+            if (d == null)
+                throw new UpdatingException("the drone is not existing");
             d.Model = Model;
             try
             {

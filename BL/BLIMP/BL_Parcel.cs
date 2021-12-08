@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BO;
-using DLAPI;
 using DO;
+using BO;
 
 namespace BL
 {
-    public partial class BL : BLAPI.IBL
+    internal partial class BL : BLApi.IBL
     {
         #region AddCustomer
         public void AddCustomer(BO.Customer customerToAdd)
-            //add new customer
+        //add new customer
 
         {
             if (customerToAdd.Name == "")
@@ -27,8 +26,11 @@ namespace BL
             {
                 throw new AddingProblemException("invalid Id of customer");
             }
-            try { if (int.Parse(customerToAdd.Phone) == 0)
-                    throw new AddingProblemException("the phone number is illegal"); }
+            try
+            {
+                if (int.Parse(customerToAdd.Phone) == 0)
+                    throw new AddingProblemException("the phone number is illegal");
+            }
             catch (Exception e)
             {
                 throw new AddingProblemException("invalid phone numeber of customer");
@@ -68,7 +70,7 @@ namespace BL
                 DO.Customer c = dal.GetCustomer(parcel.Sender);
                 c = dal.GetCustomer(parcel.Geter);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new AddingProblemException("the customer is not exist", e);
             }
@@ -112,7 +114,7 @@ namespace BL
                 }
                 try
                 {
-                    DO.Customer c= (DO.Customer)updatedCustomer.CopyPropertiesToNew(typeof(DO.Customer));
+                    DO.Customer c = (DO.Customer)updatedCustomer.CopyPropertiesToNew(typeof(DO.Customer));
                     c.Latitude = updatedCustomer.Location.Latitude;//add location
                     c.Longitude = updatedCustomer.Location.Longitude;
                     dal.UpdateCustomer(c);//update in DAL
@@ -132,7 +134,7 @@ namespace BL
 
         #region GetCustomers
         public IEnumerable<BO.CustomerToList> GetCustomers()
-            //return all the customers of the data base
+        //return all the customers of the data base
         {
             var list = from item in dal.GetCustomers() select (BO.CustomerToList)item.CopyPropertiesToNew(typeof(BO.CustomerToList));
             foreach (var item in list)//calculate the amount of parcel
@@ -164,12 +166,12 @@ namespace BL
             }
             catch (Exception e)
             {
-                throw new GettingProblemException("the customer is not exist",e );
+                throw new GettingProblemException("the customer is not exist", e);
             }
         }
         #endregion
         private BO.ParcelOfCustomer GetPOC(string id, bool senderOrReciever)
-            //private function that return object of: ParcelOfCustomer
+        //private function that return object of: ParcelOfCustomer
         {
             try
             {
@@ -189,20 +191,20 @@ namespace BL
                 else poc.SourceOrDestinaton = GetCustomerOfParcel(p.Sender);
                 return poc;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new GettingProblemException("error in Parcel", e);
             }
         }
 
         private BO.CustomerOfParcel GetCustomerOfParcel(string id)
-            //function that return object of "CustomerOfParecl
+        //function that return object of "CustomerOfParecl
         {
             try
             {
                 return (BO.CustomerOfParcel)dal.GetCustomer(id).CopyPropertiesToNew(typeof(BO.CustomerOfParcel));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new AddingProblemException("the customer is not exist");
             }

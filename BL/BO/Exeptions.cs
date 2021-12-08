@@ -45,13 +45,13 @@ namespace BO
         protected DeletingException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
     }
-        public class ConnectionException : Exception
+    public class ConnectionException : Exception
     {
         public ConnectionException() : base() { }
         public ConnectionException(string Messege) : base(Messege) { }
         public ConnectionException(string Messege, Exception inner) : base(Messege, inner) { }
         protected ConnectionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        
+
     }
 
 }

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BO;
-namespace BLAPI
-{ 
+
+namespace BLApi
+{
     public interface IBL
     {
         public void AddBaseStation(BaseStation baseStationToAdd);
@@ -32,5 +33,21 @@ namespace BLAPI
         public IEnumerable<DroneToList> PredicateDrone(Predicate<DroneToList> c);
         public IEnumerable<ParcelOfList> PredicateParcel(Predicate<ParcelOfList> c);
         public IEnumerable<CustomerToList> PredicateCustomer(Predicate<CustomerToList> c);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

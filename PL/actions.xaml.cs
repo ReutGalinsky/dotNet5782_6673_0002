@@ -20,7 +20,7 @@
 //    /// </summary>
 //    public partial class actions : Page//page for actions on selected drone
 //    {
-//        public actions(IBL.BO.DroneToList a, IBL.IBL bl)
+//        public actions(BO.DroneToList a, BLApi.IBL bl)
 //            //ctor- set the current drone and the binding- sourct objects
 //        {
 //            InitializeComponent();
@@ -44,17 +44,17 @@
 //            lonigude.DataContext = drone;
 //            notEnabled();
 //            Enabled();
-//            weight.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));//use the enum for the weight
+//            weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));//use the enum for the weight
 //        }
 //        private void Enabled()
 //            //function that each time define which button will be enabled
 //        {
-//            if (drone.State == IBL.BO.DroneState.Available)
+//            if (drone.State == BO.DroneState.Available)
 //            {
 //                charging.IsEnabled = true;
 //                sendShip.IsEnabled = true;
 //            }
-//            else if (drone.State == IBL.BO.DroneState.maintaince)
+//            else if (drone.State == BO.DroneState.maintaince)
 //            { release.IsEnabled = true;
 //            }
 //            else
@@ -80,7 +80,7 @@
 //            collecting.IsEnabled = false;
 //            supplying.IsEnabled = false;
 //        }
-//        public void convertToPo(DronePO dronePo, IBL.BO.Drone d)
+//        public void convertToPo(DronePO dronePo, BO.Drone d)
 //            //function that get the drone and update it to the current values as given from the bl
 //        {
 //            dronePo.Battery = d.Battery;
@@ -93,7 +93,7 @@
 //            dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true); ;
 //        }
 
-//        IBL.IBL b;//the BL object
+//        BLApi.IBL b;//the BL object
 
 //        DronePO drone;//the selected drone
 

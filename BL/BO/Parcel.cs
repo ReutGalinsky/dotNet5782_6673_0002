@@ -13,7 +13,7 @@ namespace BO
         public CustomerOfParcel SenderCustomer { set; get; }
         public CustomerOfParcel GeterCustomer { set; get; }
         public WeightCategories Weight { set; get; }
-        public Priorities Priority{ set; get; }
+        public Priorities Priority { set; get; }
         public DroneInParcel Drone { set; get; }
         public DateTime? CreateParcelTime { set; get; }
         public DateTime? MatchForDroneTime { set; get; }

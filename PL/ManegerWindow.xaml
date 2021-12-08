@@ -1,0 +1,114 @@
+﻿<Window x:Class="PL.ManegerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ManegerWindow" Height="450" Width="800">
+    <Grid>
+        <Button Background="{x:Null}" Height="179" VerticalAlignment="Top"
+                    Margin="452,219,153,0" Click="DronesClick">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/רחפן יחיד.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Background="{x:Null}" Height="187" VerticalAlignment="Top"
+                    Margin="452,27,153,0" Click="customersClick">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/לקוח.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Background="{x:Null}" Height="185" VerticalAlignment="Top"
+                    Margin="178,27,419,0" Click="Button_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/תחנה.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Background="{x:Null}" Height="181" VerticalAlignment="Top"
+                    Margin="178,217,442,0" Click="ParcelsClick">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/חבילה אחת.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Background="{x:Null}" Height="51" Click="closeButton" VerticalAlignment="Top"
+                    Margin="742,0,0,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/סגירה.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Background="{x:Null}" Height="51" Click="AddLineButton_Click" VerticalAlignment="Top"
+                    Margin="0,0,742,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/חזור.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+    </Grid>
+</Window>
