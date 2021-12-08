@@ -61,8 +61,8 @@
 //            {
 //                parcel.Visibility = Visibility.Visible;
 //                parcell.Visibility = Visibility.Visible;
-//                if (b.GetParcel(drone.NumberOfParcel).collectingDroneTime == null)
-//                    collecting.IsEnabled = true;
+//                if (b.GetParcel(drone.NumberOfParcel).CollectingDroneTime == null)
+//                    Collecting.IsEnabled = true;
 //                else
 //                    supplying.IsEnabled = true;
 //            }
@@ -77,7 +77,7 @@
 //            charging.IsEnabled = false;
 //            sendShip.IsEnabled = false;
 //            release.IsEnabled = false;
-//            collecting.IsEnabled = false;
+//            Collecting.IsEnabled = false;
 //            supplying.IsEnabled = false;
 //        }
 //        public void convertToPo(DronePO dronePo, BO.Drone d)
@@ -218,7 +218,7 @@
 //            }
 //        }
 
-//        private void collecting_Click(object sender, RoutedEventArgs e)//event for the collecting button
+//        private void Collecting_Click(object sender, RoutedEventArgs e)//event for the Collecting button
 //        {
 //            try
 //            {

@@ -9,32 +9,29 @@ using DalApi;
 namespace Dal
 {
     public class DalObject : DalApi.IDal
-    //implementation by lists
     {
-        #region Constractor
-        //private DalObject() { DataSource.Initialize(); }
-        #endregion
-
         #region singleton
         class Nested
         {
             static Nested() { }
             internal static readonly IDal instance = new DalObject();
         }
-        static DalObject() { DataSource.Initialize(); }
-        DalObject() { }
+        static DalObject() { }
+        private DalObject() { DataSource.Initialize(); }
+
         public static IDal Instance
         {
             get { return Nested.instance; }
         }
         #endregion
+
         //*****Drones***********
 
         #region AddDrone
         public void AddDrone(Drone drone)
         {
             if (DataSource.Drones.FirstOrDefault(d => d.IdNumber == drone.IdNumber).IdNumber != null)
-                throw new ExistingException("the drone is already exist");
+                throw new ExistingException($"the drone with the id:{drone.IdNumber} is already exist");
             DataSource.Drones.Add(drone);
         }
         #endregion
@@ -44,7 +41,7 @@ namespace Dal
         {
             Drone drone = DataSource.Drones.FirstOrDefault(d => d.IdNumber == id);
             if (drone.IdNumber == null)
-                throw new NotExistingException("the drone is not exist");
+                throw new NotExistingException($"the drone with the id:{id} is not exist");
             return drone;
         }
         #endregion
@@ -63,7 +60,7 @@ namespace Dal
         {
             Drone drone = DataSource.Drones.FirstOrDefault(d => d.IdNumber == id);
             if (drone.IdNumber == null)
-                throw new NotExistingException("the drone is not existing");
+                throw new NotExistingException($"the drone with the id:{id} is not existing");
             DataSource.Drones.Remove(drone);
         }
         #endregion
@@ -75,23 +72,23 @@ namespace Dal
             {
                 if (DataSource.Drones[i].IdNumber == toUpdate.IdNumber)
                 {
-                    Drone d = new Drone();
-                    d.Model = toUpdate.Model;
-                    d.MaxWeight = toUpdate.MaxWeight;
-                    d.IdNumber = toUpdate.IdNumber;
-                    DataSource.Drones[i] = d;
+                    Drone drone = new Drone();
+                    drone.Model = toUpdate.Model;
+                    drone.MaxWeight = toUpdate.MaxWeight;
+                    drone.IdNumber = toUpdate.IdNumber;
+                    DataSource.Drones[i] = drone;
                     return;
                 }
             }
-            throw new NotExistingException("the drone is not exist");
+            throw new NotExistingException($"the drone with the id:{toUpdate.IdNumber} is not exist");
         }
         #endregion
 
         #region PredicateDrone
-        public IEnumerable<Drone> PredicateDrone(Predicate<Drone> c)
+        public IEnumerable<Drone> PredicateDrone(Predicate<Drone> condition)
         {
             var list = from item in DataSource.Drones
-                       where c(item)
+                       where condition(item)
                        select item;
             return list;
         }
@@ -103,7 +100,7 @@ namespace Dal
         public void AddDroneCharge(DroneCharge dronecharge)
         {
             if (DataSource.Charges.FirstOrDefault(d => d.DroneId == dronecharge.DroneId).DroneId != null)
-                throw new ExistingException("the charge slot is already exist");
+                throw new ExistingException($"the charge slot with the drone id:{dronecharge.DroneId} is already exist");
             DataSource.Charges.Add(dronecharge);
         }
         #endregion
@@ -113,7 +110,7 @@ namespace Dal
         {
             DroneCharge droneCharge = DataSource.Charges.FirstOrDefault(d => d.DroneId == id);
             if (droneCharge.DroneId == null)
-                throw new NotExistingException("the charge slot is not exist");
+                throw new NotExistingException($"the charge slot with the drone id:{id} is not exist");
             return droneCharge;
         }
         #endregion
@@ -132,7 +129,7 @@ namespace Dal
         {
             DroneCharge droneCharge = DataSource.Charges.FirstOrDefault(d => d.DroneId == id);
             if (droneCharge.DroneId == null)
-                throw new NotExistingException("the charge slot is not existing");
+                throw new NotExistingException($"the charge slot with the dorne id:{id} is not existing");
             DataSource.Charges.Remove(droneCharge);
         }
         #endregion
@@ -144,22 +141,22 @@ namespace Dal
             {
                 if (DataSource.Charges[i].DroneId == toUpdate.DroneId)
                 {
-                    DroneCharge d = new DroneCharge();
-                    d.DroneId = toUpdate.DroneId;
-                    d.StationId = toUpdate.StationId;
-                    DataSource.Charges[i] = d;
+                    DroneCharge droneCharge = new DroneCharge();
+                    droneCharge.DroneId = toUpdate.DroneId;
+                    droneCharge.StationId = toUpdate.StationId;
+                    DataSource.Charges[i] = droneCharge;
                     return;
                 }
             }
-            throw new NotExistingException("the charge slot is not exist");
+            throw new NotExistingException($"the charge slot with the dorne id:{toUpdate.DroneId} is not existing");
         }
         #endregion
 
         #region PredicateChargeDrone
-        public IEnumerable<DroneCharge> PredicateChargeDrone(Predicate<DroneCharge> c)
+        public IEnumerable<DroneCharge> PredicateChargeDrone(Predicate<DroneCharge> condition)
         {
             var list = from item in DataSource.Charges
-                       where c(item)
+                       where condition(item)
                        select item;
             return list;
         }
@@ -172,7 +169,7 @@ namespace Dal
         {
             parcel.IdNumber = DataSource.Config.RunningNumber++.ToString();
             if (DataSource.Parcels.FirstOrDefault(d => d.IdNumber == parcel.IdNumber).IdNumber != null)
-                throw new ExistingException("the parcel is already exist");
+                throw new ExistingException($"the parcel with the id:{parcel.IdNumber} is already exist");
             DataSource.Parcels.Add(parcel);
             return parcel.IdNumber;
         }
@@ -183,7 +180,7 @@ namespace Dal
         {
             Parcel parcel = DataSource.Parcels.FirstOrDefault(d => d.IdNumber == id);
             if (parcel.IdNumber == null)
-                throw new NotExistingException("the parcel is not exist");
+                throw new NotExistingException($"the parcel with the id:{parcel.IdNumber} is not exist");
             return parcel;
         }
         #endregion
@@ -202,7 +199,7 @@ namespace Dal
         {
             Parcel parcel = DataSource.Parcels.FirstOrDefault(d => d.IdNumber == id);
             if (parcel.IdNumber == null)
-                throw new NotExistingException("the parcel is not existing");
+                throw new NotExistingException($"the parcel with the id:{parcel.IdNumber} is not exist");
             DataSource.Parcels.Remove(parcel);
         }
         #endregion
@@ -214,30 +211,30 @@ namespace Dal
             {
                 if (DataSource.Parcels[i].IdNumber == toUpdate.IdNumber)
                 {
-                    Parcel d = new Parcel();
-                    d.ArrivingDroneTime = toUpdate.ArrivingDroneTime;
-                    d.Geter = toUpdate.Geter;
-                    d.Sender = toUpdate.Sender;
-                    d.collectingDroneTime = toUpdate.collectingDroneTime;
-                    d.CreateParcelTime = toUpdate.CreateParcelTime;
-                    d.DroneId = toUpdate.DroneId;
-                    d.IdNumber = toUpdate.IdNumber;
-                    d.MatchForDroneTime = toUpdate.MatchForDroneTime;
-                    d.Priority = toUpdate.Priority;
-                    d.Weight = toUpdate.Weight;
-                    DataSource.Parcels[i] = d;
+                    Parcel parcel = new Parcel();
+                    parcel.ArrivingDroneTime = toUpdate.ArrivingDroneTime;
+                    parcel.Geter = toUpdate.Geter;
+                    parcel.Sender = toUpdate.Sender;
+                    parcel.CollectingDroneTime = toUpdate.CollectingDroneTime;
+                    parcel.CreateParcelTime = toUpdate.CreateParcelTime;
+                    parcel.DroneId = toUpdate.DroneId;
+                    parcel.IdNumber = toUpdate.IdNumber;
+                    parcel.MatchForDroneTime = toUpdate.MatchForDroneTime;
+                    parcel.Priority = toUpdate.Priority;
+                    parcel.Weight = toUpdate.Weight;
+                    DataSource.Parcels[i] = parcel;
                     return;
                 }
             }
-            throw new NotExistingException("the parcel is not exist");
+            throw new NotExistingException($"the parcel with the id:{toUpdate.IdNumber} is not exist");
         }
         #endregion
 
         #region PredicateParcel
-        public IEnumerable<Parcel> PredicateParcel(Predicate<Parcel> c)
+        public IEnumerable<Parcel> PredicateParcel(Predicate<Parcel> condition)
         {
             var list = from item in DataSource.Parcels
-                       where c(item)
+                       where condition(item)
                        select item;
             return list;
         }
@@ -248,18 +245,18 @@ namespace Dal
         #region AddBaseStation
         public void AddBaseStation(BaseStation baseStation)
         {
-            if (DataSource.stations.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber != null)
-                throw new ExistingException("the baseStation is already exist");
-            DataSource.stations.Add(baseStation);
+            if (DataSource. Stations.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber != null)
+                throw new ExistingException($"the baseStation with the id:{baseStation.IdNumber} is already exist");
+            DataSource.Stations.Add(baseStation);
         }
         #endregion
 
         #region GetBaseStation
         public BaseStation GetBaseStation(string id)
         {
-            BaseStation baseStation = DataSource.stations.FirstOrDefault(d => d.IdNumber == id);
+            BaseStation baseStation = DataSource.Stations.FirstOrDefault(d => d.IdNumber == id);
             if (baseStation.IdNumber == null)
-                throw new NotExistingException("the baseStation is not exist");
+                throw new NotExistingException($"the baseStation with the id:{baseStation.IdNumber} is not exist");
             return baseStation;
         }
         #endregion
@@ -267,7 +264,7 @@ namespace Dal
         #region GetBaseStations
         public IEnumerable<BaseStation> GetBaseStations()
         {
-            var BaseStations = from item in DataSource.stations
+            var BaseStations = from item in DataSource.Stations
                                select item;
             return BaseStations;
         }
@@ -276,39 +273,39 @@ namespace Dal
         #region DeleteBaseStation
         public void DeleteBaseStation(string id)
         {
-            BaseStation baseStation = DataSource.stations.FirstOrDefault(d => d.IdNumber == id);
+            BaseStation baseStation = DataSource.Stations.FirstOrDefault(d => d.IdNumber == id);
             if (baseStation.IdNumber == null)
-                throw new NotExistingException("the baseStation is not existing");
-            DataSource.stations.Remove(baseStation);
+                throw new NotExistingException($"the baseStation with the id:{baseStation.IdNumber} is not exist");
+            DataSource.Stations.Remove(baseStation);
         }
         #endregion
 
         #region UpdateBaseStation
         public void UpdateBaseStation(BaseStation toUpdate)
         {
-            for (int i = 0; i < DataSource.stations.Count; i++)
+            for (int i = 0; i < DataSource.Stations.Count; i++)
             {
-                if (DataSource.stations[i].IdNumber == toUpdate.IdNumber)
+                if (DataSource.Stations[i].IdNumber == toUpdate.IdNumber)
                 {
-                    BaseStation b = new BaseStation();
-                    b.ChargeSlots = toUpdate.ChargeSlots;
-                    b.Name = toUpdate.Name;
-                    b.IdNumber = toUpdate.IdNumber;
-                    b.Longitude = toUpdate.Longitude;
-                    b.Latitude = toUpdate.Latitude;
-                    DataSource.stations[i] = b;
+                    BaseStation baseStation = new BaseStation();
+                    baseStation.ChargeSlots = toUpdate.ChargeSlots;
+                    baseStation.Name = toUpdate.Name;
+                    baseStation.IdNumber = toUpdate.IdNumber;
+                    baseStation.Longitude = toUpdate.Longitude;
+                    baseStation.Latitude = toUpdate.Latitude;
+                    DataSource.Stations[i] = baseStation;
                     return;
                 }
             }
-            throw new NotExistingException("the base station is not exist");
+            throw new NotExistingException($"the baseStation with the id:{toUpdate.IdNumber} is not exist");
         }
         #endregion
 
         #region PredicateBaseStation
-        public IEnumerable<BaseStation> PredicateBaseStation(Predicate<BaseStation> c)
+        public IEnumerable<BaseStation> PredicateBaseStation(Predicate<BaseStation> condition)
         {
-            var list = from item in DataSource.stations
-                       where c(item)
+            var list = from item in DataSource.Stations
+                       where condition(item)
                        select item;
             return list;
         }
@@ -320,7 +317,7 @@ namespace Dal
         public void AddCustomer(Customer customer)
         {
             if (DataSource.Customers.FirstOrDefault(d => d.IdNumber == customer.IdNumber).IdNumber != null)
-                throw new ExistingException("the customer is already exist");
+                throw new ExistingException($"the customer with the id:{customer.IdNumber} is already exist");
             DataSource.Customers.Add(customer);
         }
         #endregion
@@ -330,7 +327,7 @@ namespace Dal
         {
             Customer customer = DataSource.Customers.FirstOrDefault(d => d.IdNumber == id);
             if (customer.IdNumber == null)
-                throw new NotExistingException("the customer is not exist");
+                throw new NotExistingException($"the customer with the id:{customer.IdNumber} is not exist");
             return customer;
         }
         #endregion
@@ -349,7 +346,7 @@ namespace Dal
         {
             Customer customer = DataSource.Customers.FirstOrDefault(d => d.IdNumber == id);
             if (customer.IdNumber == null)
-                throw new NotExistingException("the customer is not existing");
+                throw new NotExistingException($"the customer with the id:{customer.IdNumber} is not exist");
             DataSource.Customers.Remove(customer);
         }
         #endregion
@@ -361,37 +358,41 @@ namespace Dal
             {
                 if (DataSource.Customers[i].IdNumber == toUpdate.IdNumber)
                 {
-                    Customer c = new Customer();
-                    c.IdNumber = toUpdate.IdNumber;
-                    c.Name = toUpdate.Name;
-                    c.Phone = toUpdate.Phone;
-                    c.Longitude = toUpdate.Longitude;
-                    c.Latitude = toUpdate.Latitude;
-                    DataSource.Customers[i] = c;
+                    Customer customer = new Customer();
+                    customer.IdNumber = toUpdate.IdNumber;
+                    customer.Name = toUpdate.Name;
+                    customer.Phone = toUpdate.Phone;
+                    customer.Longitude = toUpdate.Longitude;
+                    customer.Latitude = toUpdate.Latitude;
+                    DataSource.Customers[i] = customer;
                     return;
                 }
             }
-            throw new NotExistingException("the customer is not exist");
+            throw new NotExistingException($"the customer with the id:{toUpdate.IdNumber} is not exist");
         }
         #endregion
 
         #region PredicateCustomer
-        public IEnumerable<Customer> PredicateCustomer(Predicate<Customer> c)
+        public IEnumerable<Customer> PredicateCustomer(Predicate<Customer> condition)
         {
             var list = from item in DataSource.Customers
-                       where c(item)
+                       where condition(item)
                        select item;
             return list;
         }
         #endregion
 
-        //*******tools********
+        //*******electricity********
 
         #region UsingElectricity
+        /// <summary>
+        /// returnnig the values of the battery change
+        /// </summary>
+        /// <returns>the values of the battery loose and gain</returns>
         public double[] UsingElectricity()
         //function that return the electricity values
         {
-            double[] arr = new double[5] { DataSource.Config.available, DataSource.Config.heavy, DataSource.Config.light, DataSource.Config.medium, DataSource.Config.speed };
+            double[] arr = new double[5] { DataSource.Config.Available, DataSource.Config.Heavy, DataSource.Config.Light, DataSource.Config.Medium, DataSource.Config.Speed };
             return arr;
         }
         #endregion

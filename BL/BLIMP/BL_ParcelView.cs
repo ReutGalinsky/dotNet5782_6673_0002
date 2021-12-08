@@ -59,7 +59,7 @@ namespace BL
             if (P.MatchForDroneTime == null)
                 pol.State = State.Define;//define the state
             else
-                if (P.collectingDroneTime == null)
+                if (P.CollectingDroneTime == null)
                 pol.State = State.match;
             else
                 if (P.ArrivingDroneTime == null)

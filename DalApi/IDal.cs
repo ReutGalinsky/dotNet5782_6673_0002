@@ -7,7 +7,7 @@ using DO;
 
 namespace DalApi
 {
-    public interface IDal//interface of the data layer
+    public interface IDal
     {
         public double[] UsingElectricity();
         public void AddDrone(Drone drone);
@@ -35,12 +35,10 @@ namespace DalApi
         public void UpdateCustomer(Customer toUpdate);
         public IEnumerable<Customer> GetCustomers();
         public IEnumerable<BaseStation> GetBaseStations();
-        public IEnumerable<Drone> PredicateDrone(Predicate<Drone> c);
-        public IEnumerable<DroneCharge> PredicateChargeDrone(Predicate<DroneCharge> c);
-        public IEnumerable<Customer> PredicateCustomer(Predicate<Customer> c);
-        public IEnumerable<Parcel> PredicateParcel(Predicate<Parcel> c);
-        public IEnumerable<BaseStation> PredicateBaseStation(Predicate<BaseStation> c);
-
-
+        public IEnumerable<Drone> PredicateDrone(Predicate<Drone> condition);
+        public IEnumerable<DroneCharge> PredicateChargeDrone(Predicate<DroneCharge> condition);
+        public IEnumerable<Customer> PredicateCustomer(Predicate<Customer> condition);
+        public IEnumerable<Parcel> PredicateParcel(Predicate<Parcel> condition);
+        public IEnumerable<BaseStation> PredicateBaseStation(Predicate<BaseStation> condition);
     }
 }

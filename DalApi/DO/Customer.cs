@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DO
 {
+    /// <summary>
+    /// Customer
+    /// </summary>
     public struct Customer
     {
         public string IdNumber { get; set; }
@@ -16,11 +19,10 @@ namespace DO
 
         public override string ToString()
         {
-            return "";
-//            return string.Format($@"the customer {Name} with the id of {IdNumber}
-//phone num. {Phone}
-//Address:
-//Longitude: " + DalObject.Tools.sexagesimalFormat(Longitude, true) + '\n' + "Latitude: " + DalObject.Tools.sexagesimalFormat(Latitude, false) + '\n');
+            return string.Format($@"the customer {Name} with the id of {IdNumber}
+phone num. {Phone}
+Address:
+Longitude: {Longitude} Latitude: {Latitude}");
         }
 
     }

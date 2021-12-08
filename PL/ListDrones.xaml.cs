@@ -28,7 +28,6 @@ namespace PL
             foreach (BO.DroneToList s in bl.GetDrones())//create the source for the liseView
                 listDrones.Add(s);
             DroneListView.DataContext = listDrones;
-            BO.BaseStation b= i.GetBaseStation("7");
             State.ItemsSource = Enum.GetValues(typeof(BO.DroneState));
             weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }

@@ -56,7 +56,7 @@ namespace BL
         #endregion
 
         #region PickingParcelByDrone
-        //function for collecting parcel from sender customer by a drone
+        //function for Collecting parcel from sender customer by a drone
         public void PickingParcelByDrone(string id)
         {
             BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
@@ -77,12 +77,12 @@ namespace BL
             }
             if (d.State != DroneState.shipping)
                 throw new ConnectionException("the drone is not shipping");
-            if (!(p.MatchForDroneTime != null && p.collectingDroneTime == null))
+            if (!(p.MatchForDroneTime != null && p.CollectingDroneTime == null))
                 throw new ConnectionException("the parcel is not match");
             d.Battery -= (int)(DistanceTo(GetCustomer(p.SenderCustomer.IdNumber).Location, d.Location) * availible);//update the Battery
             d.Location = (Location)GetCustomer(p.SenderCustomer.IdNumber).Location.CopyPropertiesToNew(typeof(Location));
             DO.Parcel dparcel = dal.GetParcel(p.IdNumber);
-            dparcel.collectingDroneTime = DateTime.Now;
+            dparcel.CollectingDroneTime = DateTime.Now;
             dal.UpdateParcel(dparcel);//update in DAL
         }
         #endregion
@@ -104,7 +104,7 @@ namespace BL
             if (droneBO.State != DroneState.shipping)
                 throw new ConnectionException("the drone is not shipping");
             BO.Parcel p = GetParcel(droneBO.PassedParcel.IdNumber);
-            if (!(p.collectingDroneTime != null && p.ArrivingDroneTime == null))
+            if (!(p.CollectingDroneTime != null && p.ArrivingDroneTime == null))
                 throw new ConnectionException("the parcel is not picking yet");
             d.Battery = p.Weight switch//update the battery
             {

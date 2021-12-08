@@ -355,7 +355,7 @@ namespace ConsoleUI_BL
                             }
                             break;
                         case Options.Updating:
-                            Console.WriteLine("1.match parcel to a drone \n2.collecting parcel by a drone \n3.giving parcel to a customer \n4.sending a dorne to be charged \n5. release drone from charging\n6. Updating Drone's name \n7. Updating model and charge slot of base station\n8. Updating name and phone of a customer");
+                            Console.WriteLine("1.match parcel to a drone \n2.Collecting parcel by a drone \n3.giving parcel to a customer \n4.sending a dorne to be charged \n5. release drone from charging\n6. Updating Drone's name \n7. Updating model and charge slot of base station\n8. Updating name and phone of a customer");
                             choise = (Console.ReadLine());
                             while ((choise == ""))//the program wont crash if it enter will be pressed
                             {

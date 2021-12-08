@@ -81,7 +81,7 @@ namespace BL
                 p.CreateParcelTime = DateTime.Now;
                 p.MatchForDroneTime = null;
                 p.ArrivingDroneTime = null;
-                p.collectingDroneTime = null;
+                p.CollectingDroneTime = null;
                 return dal.AddParcel(p);//retrun the id of the parcel
             }
             catch (Exception e)
@@ -180,7 +180,7 @@ namespace BL
                 if (p.MatchForDroneTime == null)//define the state:
                     poc.State = State.Define;
                 else
-                    if (p.collectingDroneTime == null)
+                    if (p.CollectingDroneTime == null)
                     poc.State = State.match;
                 else
                     if (p.ArrivingDroneTime == null)

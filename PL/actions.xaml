@@ -48,7 +48,7 @@
         <Button x:Name="charging" Content="sent to charge"  HorizontalAlignment="Left" Margin="130,0,0,0" Grid.Row="2" VerticalAlignment="Top" Height="44" Width="112" Click="charging_Click" FontFamily="Aharoni"/>
         <Button x:Name="release" Content="release form charge" HorizontalAlignment="Left" Margin="133,73,0,0" Grid.Row="2" VerticalAlignment="Top" Click="release_Click" Height="40" Grid.RowSpan="2" FontFamily="Aharoni"/>
         <Button  x:Name="sendShip" Content="send shipping" HorizontalAlignment="Left" Margin="132,45,0,0" Grid.Row="1" VerticalAlignment="Top" Click="sendShip_Click" Height="33" Width="109" FontFamily="Aharoni"/>
-        <Button x:Name="collecting" Content="collect parcel" HorizontalAlignment="Left" Margin="129,29,0,0" VerticalAlignment="Top" Height="35" Width="109" Click="collecting_Click" FontFamily="Aharoni"/>
+        <Button x:Name="Collecting" Content="collect parcel" HorizontalAlignment="Left" Margin="129,29,0,0" VerticalAlignment="Top" Height="35" Width="109" Click="Collecting_Click" FontFamily="Aharoni"/>
         <Button x:Name="supplying" Content="supply parcel" HorizontalAlignment="Left" Margin="129,84,0,0" VerticalAlignment="Top" Height="37" Width="109" Click="supplying_Click" Grid.RowSpan="2" FontFamily="Aharoni"/>
         <TextBox x:Name="time"  HorizontalAlignment="Left" Margin="116,56,0,0" Grid.Row="3" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" Height="34"/>
         <Label x:Name="timeLabel" Content="enter the time in format of H:M:S" HorizontalAlignment="Left" Margin="100,18,0,0" Grid.Row="3" VerticalAlignment="Top" Width="202" FontFamily="Aharoni"/>

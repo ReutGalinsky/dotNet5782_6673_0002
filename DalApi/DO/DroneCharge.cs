@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DO
 {
+    /// <summary>
+    /// Full charge slot
+    /// </summary>
     public struct DroneCharge
     {
         public string DroneId { get; set; }

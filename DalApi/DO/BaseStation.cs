@@ -1,6 +1,9 @@
 ﻿using System;
 namespace DO
 {
+    /// <summary>
+    /// BaseStation
+    /// </summary>
     public struct BaseStation
     {
         public string IdNumber { get; set; }
@@ -11,10 +14,9 @@ namespace DO
 
         public override string ToString()
         {
-            return "";
-//            return string.Format(@$"station number {IdNumber}, name: {Name}
-//number of charge slots: {ChargeSlots}
-//Longitude: " + Tools.sexagesimalFormat(Longitude, true) + '\n' + "Latitude: " + .Tools.sexagesimalFormat(Latitude, false) + '\n');
+            return string.Format(@$"station number {IdNumber}, name: {Name}
+number of charge slots: {ChargeSlots}
+Longitude: {Longitude} Latitude: {Latitude}");
         }
     }
 }

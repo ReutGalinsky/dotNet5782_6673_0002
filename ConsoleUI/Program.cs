@@ -3,7 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DalObject;
+using Dal;
 using DO;
 
 public enum Options { Adding = 1, Updating, ShowItemp, ShowList, exit }//enum for optional actions
@@ -16,7 +16,7 @@ namespace ConsoleUI
     class Program
     {
 
-
+       
         static public void PrintMenu()//the first menu for the user
         {
             Console.WriteLine(@"1. adding
@@ -130,7 +130,7 @@ namespace ConsoleUI
             }
             Parcel1.DroneId = null;
             Parcel1.CreateParcelTime = DateTime.Now;
-            Parcel1.collectingDroneTime = null;
+            Parcel1.CollectingDroneTime = null;
             Parcel1.MatchForDroneTime = null;
             Parcel1.ArrivingDroneTime = null;
             try
