@@ -7,6 +7,9 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// full details of a single customer. including all his parcels  
+    /// </summary>
     public class Customer
     {
         public string IdNumber { set; get; }
@@ -34,6 +37,5 @@ namespace BO
             }
             return temp;
         }
-
     }
 }

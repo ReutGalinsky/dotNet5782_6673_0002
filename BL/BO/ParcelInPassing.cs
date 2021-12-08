@@ -7,11 +7,13 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// single parcel in passing. including details about locations and customers
+    /// </summary>
     public class ParcelInPassing
     {
         public string IdNumber { set; get; }
-        public bool isWaitingForColecting { set; get; }
-        // is the parcel is waiting to be collected or it's on the way to customer
+        public bool isCollected { set; get; }// true= the parcel collected by customer
         public Priorities Priority { set; get; }
         public WeightCategories Weight { set; get; }
         public CustomerOfParcel Senderer { set; get; }
@@ -19,9 +21,6 @@ namespace BO
         public Location Packing { set; get; }
         public Location Destination { set; get; }
         public double Distance { set; get; }
-        public override string ToString()
-        {
-            return this.stringProperty();
-        }
+        public override string ToString(){ return this.stringProperty(); }
     }
 }

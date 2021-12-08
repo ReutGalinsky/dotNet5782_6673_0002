@@ -7,6 +7,9 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// the location. including longitude and latitude
+    /// </summary>
     public class Location
     {
         public double Latitude { set; get; }

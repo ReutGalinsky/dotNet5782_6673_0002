@@ -7,13 +7,13 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// viewing of a charging drone  
+    /// </summary>
     public class DroneInCharge
     {
         public string IdNumber { set; get; }
         public int Battery { set; get; }
-        public override string ToString()
-        {
-            return this.stringProperty();
-        }
+        public override string ToString() {return this.stringProperty();}
     }
 }

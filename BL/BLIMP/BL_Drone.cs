@@ -9,6 +9,9 @@ using BO;
 
 namespace BL
 {
+    /// <summary>
+    /// all possible actions on drones 
+    /// </summary>
     internal partial class BL : BLApi.IBL
     {
         private DalApi.IDal dal;
@@ -20,6 +23,9 @@ namespace BL
         private double speed;
 
         #region BL_Constructor
+        /// <summary>
+        /// constructor that create the list of drones for BL layer
+        /// </summary>
         public BL()
         {
             dal = DalApi.DLFactory.GetDal();
@@ -32,16 +38,11 @@ namespace BL
             foreach (var item in dal.GetDrones())
             {
                 try
-                {
-                    Drones.Add(GetDroneToList(item.IdNumber));//create the list of drones for the BL
-                }
+                {Drones.Add(GetDroneToList(item.IdNumber));}
                 catch (Exception e)
-                {
-                    throw new AddingProblemException("", e);
-                }
+                {throw new AddingProblemException("", e);}
             }
         }
-
         private BO.DroneToList GetDroneToList(string id)
         //function that return object of DroneToList for constructor
         {
@@ -171,22 +172,22 @@ namespace BL
         #endregion
 
         #region AddDrone
+        /// <summary>
+        /// adding a new drone  
+        /// </summary>
         public void AddDrone(BO.DroneToList droneToAdd, string number)
-        //function that add drone
         {
             if (droneToAdd.MaxWeight != BO.WeightCategories.Heavy && droneToAdd.MaxWeight != BO.WeightCategories.Middle && droneToAdd.MaxWeight != BO.WeightCategories.Light)
-                throw new AddingProblemException("This weight is not an option");
+                throw new AddingProblemException($"The weight of this drone is not an option");
             if (droneToAdd.Model == "")
-                throw new AddingProblemException("A model wasn't entered");
+                throw new AddingProblemException($"The model of this drone wasn't entered");
             try
             {
                 if (int.Parse(droneToAdd.IdNumber) == 0)
-                    throw new AddingProblemException("invalid Id of drone");
+                    throw new AddingProblemException($"This drone can't add");
             }
             catch (Exception e)
-            {
-                throw new AddingProblemException("invalid Id of base station");
-            }
+            {throw new AddingProblemException($"Base station number {number} is not valid"); }
             try //assumption: drone need to get charging when it's being added
             {
                 dal.AddDrone((DO.Drone)droneToAdd.CopyPropertiesToNew(typeof(DO.Drone)));//add to DAL
@@ -196,7 +197,7 @@ namespace BL
                 droneToAdd.Location = l;
                 var ListOfStation = dal.GetBaseStation(number);
                 if (ListOfStation.ChargeSlots == 0)
-                    throw new ChargingException("there is not any slot for charging in this base station");
+                    throw new ChargingException("there is not any slot for charging in base station with id {number}");
                 droneToAdd.State = DroneState.maintaince;
                 ListOfStation.ChargeSlots--;
                 dal.UpdateBaseStation(ListOfStation);
@@ -205,14 +206,13 @@ namespace BL
                 dal.AddDroneCharge(charge);
             }
             catch (Exception ex)
-            {
-                throw new AddingProblemException("Can't add this drone", ex);
-            }
+            {throw new AddingProblemException("Can't add this drone", ex);}
         }
         #endregion
-
         #region GetDrones
-        //return all the drones
+        /// <summary>
+        /// return all drones 
+        /// </summary>
         public IEnumerable<BO.DroneToList> GetDrones()
         {
             return Drones;
@@ -220,12 +220,14 @@ namespace BL
         #endregion
 
         #region GetDrone
-        //retrun single drone
+        /// <summary>
+        /// return a single drone
+        /// </summary>
         public BO.Drone GetDrone(string id)
         {
             BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
             if (d == null)
-                throw new GettingProblemException("the drone is not exist");
+                throw new GettingProblemException($"the drone with the id {id} is not exist");
             BO.Drone drone = (BO.Drone)d.CopyPropertiesToNew(typeof(BO.Drone));
             drone.Location = new Location();
             drone.Location.Latitude = d.Location.Latitude;
@@ -235,11 +237,13 @@ namespace BL
             if (d.NumberOfParcel != null)
                 drone.PassedParcel = GetPIP(d.NumberOfParcel);
             return drone;
-
         }
         #endregion
+        #region GetPIP
         private BO.ParcelInPassing GetPIP(string id)
+        /// <summary>
         //private function that return object of ParcelInPassing
+        /// </summary>
         {
             DO.Parcel p = dal.GetParcel(id);
             BO.ParcelInPassing temp = (BO.ParcelInPassing)p.CopyPropertiesToNew(typeof(BO.ParcelInPassing));
@@ -251,15 +255,17 @@ namespace BL
             temp.Senderer = GetCustomerOfParcel(p.Sender);
             temp.Getterer = GetCustomerOfParcel(p.Geter);
             if (p.CollectingDroneTime == null)//the boolian value
-                temp.isWaitingForColecting = true;
+                temp.isCollected = true;
             else
-                temp.isWaitingForColecting = false;
+                temp.isCollected = false;
             return temp;
         }
-
+        #endregion
         #region UpdatingDetailsOfDrone
+        /// <summary>
+        //updating drone
+        /// </summary>
         public void UpdatingDetailsOfDrone(string Model, string id)
-        //update drone
         {
             if (Model == "")
                 throw new UpdatingException("the model is illegal");
@@ -280,6 +286,9 @@ namespace BL
         #endregion
 
         #region PredicateDrone
+        /// <summary>
+        // drone predicate
+        /// </summary>
         public IEnumerable<BO.DroneToList> PredicateDrone(Predicate<BO.DroneToList> c)
         {
             var list = from item in GetDrones()

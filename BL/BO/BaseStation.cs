@@ -7,6 +7,9 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// full details about a single base station  
+    /// </summary>
     public class BaseStation
     {
         public string IdNumber { set; get; }
@@ -27,6 +30,5 @@ namespace BO
             }
             return temp;
         }
-
     }
 }

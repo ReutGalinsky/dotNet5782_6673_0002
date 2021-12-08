@@ -7,6 +7,9 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// full details about a single drone. including his parcel  
+    /// </summary>
     public class Drone
     {
         public string IdNumber { set; get; }
@@ -16,9 +19,6 @@ namespace BO
         public DroneState State { set; get; }
         public Location Location { set; get; }
         public ParcelInPassing PassedParcel { set; get; }
-        public override string ToString()
-        {
-            return this.stringProperty();
-        }
+        public override string ToString() {return this.stringProperty();}
     }
 }

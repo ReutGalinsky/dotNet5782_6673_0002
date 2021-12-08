@@ -7,6 +7,9 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// viewing of a single parcel
+    /// </summary>
     public class ParcelOfList
     {
         public string IdNumber { set; get; }
@@ -14,10 +17,7 @@ namespace BO
         public string Geter { set; get; }
         public WeightCategories Weight { set; get; }
         public Priorities Priority { set; get; }
-        public State State { set; get; }
-        public override string ToString()
-        {
-            return this.stringProperty();
-        }
+        public ParcelState State { set; get; }
+        public override string ToString() {return this.stringProperty();}
     }
 }

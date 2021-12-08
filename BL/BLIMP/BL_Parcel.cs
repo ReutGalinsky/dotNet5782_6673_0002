@@ -8,12 +8,16 @@ using BO;
 
 namespace BL
 {
+    /// <summary>
+    /// all possible actions on parcels
+    /// </summary>
     internal partial class BL : BLApi.IBL
     {
         #region AddCustomer
+        /// <summary>
+        // adding a new customer
+        /// </summary>
         public void AddCustomer(BO.Customer customerToAdd)
-        //add new customer
-
         {
             if (customerToAdd.Name == "")
                 throw new AddingProblemException("invalid name of customer");
@@ -23,18 +27,14 @@ namespace BL
                     throw new AddingProblemException("invalid Id of customer");
             }
             catch (Exception e)
-            {
-                throw new AddingProblemException("invalid Id of customer");
-            }
+            {throw new AddingProblemException("invalid Id of customer");}
             try
             {
                 if (int.Parse(customerToAdd.Phone) == 0)
                     throw new AddingProblemException("the phone number is illegal");
             }
             catch (Exception e)
-            {
-                throw new AddingProblemException("invalid phone numeber of customer");
-            }
+            {throw new AddingProblemException("invalid phone numeber of customer");}
             if (customerToAdd.Location.Latitude > 33.3 || customerToAdd.Location.Latitude < 29.5)
                 throw new AddingProblemException("the Latitude is out of israel");
             if (customerToAdd.Location.Longitude > 35.6 || customerToAdd.Location.Longitude < 34.5)
@@ -47,14 +47,14 @@ namespace BL
                 dal.AddCustomer(c);//add to DAL
             }
             catch (Exception e)
-            {
-                throw new AddingProblemException("can't add the customer", e);
-            }
+            {throw new AddingProblemException("can't add the customer", e);}
         }
         #endregion
 
         #region AddParcelToDelivery
-        //add new parcel to the data base
+        /// <summary>
+        ///adding new parcel to the data base
+        /// </summary>
         public string AddParcelToDelivery(BO.ParcelOfList parcel)
         {
             if (parcel.Sender == "")
@@ -71,9 +71,7 @@ namespace BL
                 c = dal.GetCustomer(parcel.Geter);
             }
             catch (Exception e)
-            {
-                throw new AddingProblemException("the customer is not exist", e);
-            }
+            {throw new AddingProblemException("the customer is not exist", e);}
             try
             {
                 DO.Parcel p = (DO.Parcel)parcel.CopyPropertiesToNew(typeof(DO.Parcel));
@@ -85,14 +83,14 @@ namespace BL
                 return dal.AddParcel(p);//retrun the id of the parcel
             }
             catch (Exception e)
-            {
-                throw new AddingProblemException("can't add the parcel", e);
-            }
+            {throw new AddingProblemException("can't add the parcel", e);}
         }
         #endregion
 
         #region UpdatingDetailsOfCustomer
-        // update customer
+        /// <summary>
+        ///adding new parcel to the data base
+        /// </summary>
         public void UpdatingDetailsOfCustomer(string id, string Name, string phone)
         {
             try
@@ -110,7 +108,7 @@ namespace BL
                         updatedCustomer.Phone = phone;
                     }
                     catch (Exception e)
-                    { throw new UpdatingException("the phone number is illegal"); }
+                    {throw new UpdatingException("the phone number is illegal"); }
                 }
                 try
                 {
@@ -120,37 +118,35 @@ namespace BL
                     dal.UpdateCustomer(c);//update in DAL
                 }
                 catch (Exception e)
-                {
-                    throw new UpdatingException("can't update the customer", e);
-                }
+                {throw new UpdatingException("can't update the customer", e);}
             }
             catch (Exception e)
-            {
-                throw new UpdatingException("the customer is not exist", e);
-            }
-
+            {throw new UpdatingException("the customer is not exist", e);}
         }
         #endregion
 
         #region GetCustomers
+        /// <summary>
+        ///return all the customers of the data base
+        /// </summary>
         public IEnumerable<BO.CustomerToList> GetCustomers()
-        //return all the customers of the data base
         {
             var list = from item in dal.GetCustomers() select (BO.CustomerToList)item.CopyPropertiesToNew(typeof(BO.CustomerToList));
             foreach (var item in list)//calculate the amount of parcel
             {
-                item.ParcelOnTheWay = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == State.pick);
-                item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == State.supply);
-                item.ParcelGet = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == State.supply);
-                item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == State.supply);
+                item.ParcelOnTheWay = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.pick);
+                item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.supply);
+                item.ParcelGet = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.supply);
+                item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.supply);
             }
             return list;
-
         }
         #endregion
 
         #region GetCustomer
-        //return single customer
+        /// <summary>
+        ///return a single customer
+        /// </summary>  
         public BO.Customer GetCustomer(string id)
         {
             try
@@ -165,28 +161,26 @@ namespace BL
                 return customer;
             }
             catch (Exception e)
-            {
-                throw new GettingProblemException("the customer is not exist", e);
-            }
+            {throw new GettingProblemException("the customer is not exist", e);}
         }
         #endregion
         private BO.ParcelOfCustomer GetPOC(string id, bool senderOrReciever)
-        //private function that return object of: ParcelOfCustomer
+        //return single customer//private function that return object of: ParcelOfCustomer
         {
             try
             {
                 DO.Parcel p = dal.GetParcel(id);
                 BO.ParcelOfCustomer poc = (BO.ParcelOfCustomer)p.CopyPropertiesToNew(typeof(BO.ParcelOfCustomer));
-                if (p.MatchForDroneTime == null)//define the state:
-                    poc.State = State.Define;
+                if (p.MatchForDroneTime == null)//define the parcel state:
+                    poc.State = ParcelState.Define;
                 else
                     if (p.CollectingDroneTime == null)
-                    poc.State = State.match;
+                    poc.State = ParcelState.match;
                 else
                     if (p.ArrivingDroneTime == null)
-                    poc.State = State.pick;
+                    poc.State = ParcelState.pick;
                 else
-                    poc.State = State.supply;
+                    poc.State = ParcelState.supply;
                 if (senderOrReciever == true) poc.SourceOrDestinaton = GetCustomerOfParcel(p.Geter);
                 else poc.SourceOrDestinaton = GetCustomerOfParcel(p.Sender);
                 return poc;
@@ -198,7 +192,9 @@ namespace BL
         }
 
         private BO.CustomerOfParcel GetCustomerOfParcel(string id)
-        //function that return object of "CustomerOfParecl
+        /// <summary>
+        /// return object of CustomerOfParecl
+        /// </summary> 
         {
             try
             {
@@ -206,10 +202,13 @@ namespace BL
             }
             catch (Exception e)
             {
-                throw new AddingProblemException("the customer is not exist");
+                throw new AddingProblemException($"the customer with the id {id} is not exist");
             }
         }
         #region PredicateCustomer
+        /// <summary>
+        /// customer predicate
+        /// </summary> 
         public IEnumerable<BO.CustomerToList> PredicateCustomer(Predicate<BO.CustomerToList> c)
         {
             var list = from item in GetCustomers()

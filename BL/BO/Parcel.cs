@@ -7,6 +7,9 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// parcel: including details about times, drone and customers
+    /// </summary>
     public class Parcel
     {
         public string IdNumber { set; get; }
@@ -19,9 +22,6 @@ namespace BO
         public DateTime? MatchForDroneTime { set; get; }
         public DateTime? CollectingDroneTime { set; get; }
         public DateTime? ArrivingDroneTime { set; get; }
-        public override string ToString()
-        {
-            return this.stringProperty();
-        }
+        public override string ToString() { return this.stringProperty();}
     }
 }

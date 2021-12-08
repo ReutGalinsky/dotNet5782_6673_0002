@@ -7,6 +7,9 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// viewing of a single drone  
+    /// </summary>
     public class DroneToList
     {
         public string IdNumber { set; get; }
@@ -16,9 +19,6 @@ namespace BO
         public DroneState State { set; get; }
         public Location Location { set; get; }
         public string NumberOfParcel { set; get; }
-        public override string ToString()
-        {
-            return this.stringProperty();
-        }
+        public override string ToString() {return this.stringProperty();}
     }
 }

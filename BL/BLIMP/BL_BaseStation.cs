@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 using BO;
 namespace BL
 {
+    /// <summary>
+    /// all possible actions on base stations 
+    /// </summary>
     internal partial class BL : BLApi.IBL
     {
         #region AddBaseStation
+        /// <summary>
+        /// adding a new base station
+        /// </summary>
         public void AddBaseStation(BO.BaseStation baseStationToAdd)
-        //add new base station to the data base
-        {
+        {          
             if (baseStationToAdd.Name == "")
-                throw new AddingProblemException("invalid name of base station");
+                throw new AddingProblemException("invalid Name of base station");
             try
             {
                 if (int.Parse(baseStationToAdd.IdNumber) == 0)
@@ -43,29 +48,21 @@ namespace BL
             }
         }
         #endregion
-
         #region GetBaseStations
-        //return all the base stations
+        /// <summary>
+        /// return all base stations 
+        /// </summary>
         public IEnumerable<BO.BaseStationToList> GetBaseStations()
         {
             var list = from item in dal.GetBaseStations() select GetBaseStationOfList(item.IdNumber);
             return list;
         }
-        #endregion
-
-        //#region GetBaseStationsWithCharge
-        ////return all the base stations with availible charge slots
-        //public IEnumerable<BO.BaseStationToList> GetBaseStationsWithCharge()
-        //{
-        //    var b = PredicateBaseStation(x => x.ChargeSlots > 0);
-        //    return b;
-        //}
-        //#endregion
-
+        #endregion   
         #region UpdatingDetailsOfBaseStation
-        //update single base station
+        /// <summary>
+        /// updating a single base station
+        /// </summary>
         public void UpdatingDetailsOfBaseStation(string id, string Name, string numberOfCharge)
-
         {
             try
             {
@@ -83,7 +80,7 @@ namespace BL
                     }
                 }
                 catch (Exception e)
-                { throw new UpdatingException("the new amount of charge slots it's not fit to charging drones"); }
+                {throw new UpdatingException("the new amount of charge slots it's not fit to charging drones"); }
                 try
                 {
                     DO.BaseStation station = (DO.BaseStation)b.CopyPropertiesToNew(typeof(DO.BaseStation));
@@ -92,19 +89,16 @@ namespace BL
                     dal.UpdateBaseStation(station);// update the base station in the data layer
                 }
                 catch (Exception e)
-                {
-                    throw new UpdatingException("can't update the base station", e);
-                }
+                {throw new UpdatingException("can't update the base station", e);}
             }
             catch (Exception e)
-            {
-                throw new UpdatingException("the base Station is not existing", e);
-            }
+            {throw new UpdatingException("the base Station is not existing", e);}
         }
         #endregion
-
         #region GetBaseStationOfList
-        //private function that return base station as object of 'baseStationOfList' for view
+        /// <summary>
+        /// private function: viewing a single base station
+        /// </summary>
         private BO.BaseStationToList GetBaseStationOfList(string id)
         {
             BO.BaseStationToList b = (BO.BaseStationToList)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(BO.BaseStationToList));
@@ -113,9 +107,10 @@ namespace BL
             return b;
         }
         #endregion
-
         #region GetBaseStation
-        //retrun single item of base station
+        /// <summary>
+        /// return a single base station
+        /// </summary>
         public BO.BaseStation GetBaseStation(string id)
         {
             try
@@ -126,27 +121,26 @@ namespace BL
                 var list = dal.PredicateChargeDrone(x => x.StationId == id);
                 GetStation.Drones = new List<DroneInCharge>();
                 foreach (var item in list)//build the list of charging drones
-                {
                     GetStation.Drones.Add(GetDroneInCharge(item.DroneId));
-                }
                 return GetStation;
             }
             catch (Exception e)
-            {
-                throw new GettingProblemException("the base station is not exist", e);
-            }
+            {throw new GettingProblemException("the base station is not exist", e);}
         }
         #endregion
-
         #region GetDroneInCharge
-        //private function that return object of DroneInCharge
+        /// <summary>
+        /// private function. return a single charging drone
+        /// </summary>
         private BO.DroneInCharge GetDroneInCharge(string id)
         {
             return (BO.DroneInCharge)Drones.FirstOrDefault(x => x.IdNumber == id).CopyPropertiesToNew(typeof(BO.DroneInCharge));//take from the Bl list because need battery
         }
         #endregion
-
         #region PredicateBaseStation
+        /// <summary>
+        /// base station predicate
+        /// </summary>
         public IEnumerable<BO.BaseStationToList> PredicateBaseStation(Predicate<BO.BaseStationToList> c)
         {
             var list = from item in GetBaseStations()
@@ -157,3 +151,14 @@ namespace BL
         #endregion
     }
 }
+
+
+
+//#region GetBaseStationsWithCharge
+        ////return all the base stations with availible charge slots
+        //public IEnumerable<BO.BaseStationToList> GetBaseStationsWithCharge()
+        //{
+        //    var b = PredicateBaseStation(x => x.ChargeSlots > 0);
+        //    return b;
+        //}
+        //#endregion

@@ -8,11 +8,16 @@ using BO;
 
 namespace BL
 {
+    /// <summary>
+    /// all possible actions charging drones 
+    /// </summary>
     internal partial class BL : BLApi.IBL
     {
 
         #region DistanceTo
-        //function that calculate the distance between two locations in km
+        /// <summary>
+        /// calculating distance between two locations in km 
+        /// </summary>
         private static double DistanceTo(Location a1, Location a2)
         {
             double rlat1 = Math.PI * a1.Latitude / 180;
@@ -30,7 +35,9 @@ namespace BL
         #endregion  
 
         #region DroneToCharging
-        //sent drone to charging
+        /// <summary>
+        /// sending drone to charging
+        /// </summary>
         public void DroneToCharging(string number)
         {
             BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == number);
@@ -38,13 +45,13 @@ namespace BL
             try { droneBO = GetDrone(number); }//get from DAL
             catch (Exception)
             {
-                throw new ChargingException("the drone is not existing");
+                throw new ChargingException($"the drone with the id:{number} is not existing");
             }
             if (droneBO.State != DroneState.Available)
-                throw new ChargingException("the drone is not available");
+                throw new ChargingException($"the drone with the id:{number} is not available");
             var ListOfStation = dal.PredicateBaseStation(x => x.ChargeSlots > 0);
             if (ListOfStation.Count() == 0)
-                throw new ChargingException("there is no availible base station for charging");
+                throw new ChargingException($"there is no any availible base station for charging the drone with the id:{number}");
             DO.BaseStation b = ListOfStation.First();
             foreach (var item in ListOfStation)//find the closest base station with availible charge slot
                 if (DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location) > DistanceTo(new Location() { Latitude = item.Latitude, Longitude = item.Longitude }, droneBO.Location))
@@ -52,7 +59,7 @@ namespace BL
             int temp = d.Battery;
             temp -= (int)(availible * DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location));
             if (temp < 0)
-                throw new ChargingException("not enough battery to get the closest base station");
+                throw new ChargingException($"there is not enough battery in the drone with the id:{number} to get the closest base station");
             d.Battery = temp;
             try
             {
@@ -64,23 +71,21 @@ namespace BL
                 dal.AddDroneCharge(charge);
             }
             catch (Exception e)
-            {
-                throw new ChargingException("can't Charge", e);
-            }
+            { throw new ChargingException($"the drone with the id:{ number } can't Charge", e);}
         }
-
-
         #endregion
 
         #region DroneFromCharging
-        //function that release drone from charging
+        /// <summary>
+        /// releasing drone from charging
+        /// </summary>
         public void DroneFromCharging(string number, TimeSpan charging)
         {
             BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == number);
             if (d == null)
-                throw new ChargingException("the drone is not existing");
+                throw new ChargingException($"the drone with the id:{ number } is not existing");
             if (d.State != DroneState.maintaince)
-                throw new ChargingException("the drone was not charged");
+                throw new ChargingException($"the drone with the id:{ number } was not charged");
             try
             {
                 DO.BaseStation station = dal.GetBaseStation(dal.GetDroneCharge(number).StationId);
@@ -91,10 +96,7 @@ namespace BL
                 if (d.Battery > 100) d.Battery = 100;
                 d.State = DroneState.Available;
             }
-            catch (Exception e)
-            {
-                throw new DeletingException("can't delete the drone Charge", e);
-            }
+            catch (Exception e) {throw new DeletingException($"can't releasing the drone with the id:{ number } from Charge", e);}
         }
         #endregion
     }

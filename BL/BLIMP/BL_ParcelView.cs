@@ -57,15 +57,15 @@ namespace BL
             DO.Parcel P = dal.GetParcel(id);
             BO.ParcelOfList pol = (BO.ParcelOfList)P.CopyPropertiesToNew(typeof(BO.ParcelOfList));
             if (P.MatchForDroneTime == null)
-                pol.State = State.Define;//define the state
+                pol.ParcelState = ParcelState.Define;//define the parcel state
             else
                 if (P.CollectingDroneTime == null)
-                pol.State = State.match;
+                pol.ParcelState = ParcelState.match;
             else
                 if (P.ArrivingDroneTime == null)
-                pol.State = State.pick;
+                pol.ParcelState = ParcelState.pick;
             else
-                pol.State = State.supply;
+                pol.ParcelState = ParcelState.supply;
             return pol;
         }
         #region PredicateParcel

@@ -7,6 +7,9 @@ using BL;
 
 namespace BO
 {
+    /// <summary>
+    /// viewing of a single customer. including all his parcels 
+    /// </summary>
     public class CustomerToList
     {
         public string IdNumber { set; get; }
@@ -16,11 +19,6 @@ namespace BO
         public int ParcelSendAndNotGet { set; get; }
         public int ParcelOnTheWay { set; get; }
         public int ParcelGet { set; get; }
-        public override string ToString()
-        {
-            return this.stringProperty();
-        }
-
-
+        public override string ToString() {return this.stringProperty();}
     }
 }
