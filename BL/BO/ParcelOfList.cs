@@ -17,7 +17,7 @@ namespace BO
         public string Geter { set; get; }
         public WeightCategories Weight { set; get; }
         public Priorities Priority { set; get; }
-        public ParcelState State { set; get; }
+        public ParcelState ParcelState { set; get; }
         public override string ToString() {return this.stringProperty();}
     }
 }

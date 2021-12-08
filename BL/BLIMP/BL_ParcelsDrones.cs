@@ -28,7 +28,7 @@ namespace BL
             }
             if (d.State != DroneState.Available)
                 throw new ConnectionException($"the drone with the id {id} is not available");
-            var list = from item in PredicateParcel(x => x.State == ParcelState.Define && (int)x.Weight <= (int)d.MaxWeight)
+            var list = from item in PredicateParcel(x => x.ParcelState == ParcelState.Define && (int)x.Weight <= (int)d.MaxWeight)
                        orderby -1 * (int)item.Priority, -1 * (int)item.Weight, DistanceTo(GetCustomer(item.Sender).Location, d.Location)
                        //decending order by priority and weight and increasing by distance
                        select item;

@@ -22,7 +22,7 @@ namespace DalApi
         /// </summary>
         static DalConfig()
         {
-            XElement dalConfig = XElement.Load(@"config.xml");
+            XElement dalConfig = XElement.Load(@"dal-config.xml");
             DalName = dalConfig.Element("dal").Value;
             DalPackages = (from pkg in dalConfig.Element("dal-packages").Elements()
                            select pkg).ToDictionary(p => "" + p.Name, p => p.Value);

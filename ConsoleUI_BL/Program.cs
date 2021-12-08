@@ -477,7 +477,7 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("*" + item + "\n");
                                     break;
                                 case States.Unmatched:
-                                    foreach (var item in system.PredicateParcel(x => x.State == State.Define))
+                                    foreach (var item in system.PredicateParcel(x => x.ParcelState == ParcelState.Define))
                                         Console.WriteLine("*" + item + "\n");
                                     break;
                                 case States.Available:

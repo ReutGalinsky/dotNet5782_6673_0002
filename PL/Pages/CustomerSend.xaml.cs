@@ -23,7 +23,7 @@ namespace PL.Pages
         public CustomerSend()
         {
             InitializeComponent();
-            var temp=Enum.GetValues(typeof(BO.State));//אין אופציה של ללא
+            var temp=Enum.GetValues(typeof(BO.ParcelState));//אין אופציה של ללא
             State.ItemsSource = temp;
             var item= b.PredicateParcel(x => x.Sender == id).Select(x => x.IdNumber);
            item= item.Prepend("ללא");

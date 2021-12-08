@@ -22,11 +22,19 @@ namespace BL
         private double medium;
         private double speed;
 
-        #region BL_Constructor
+        #region singelton
+        class Nested
+        {
+            static Nested() { }
+            internal static readonly BLApi.IBL instance = new BL(); 
+        }
+        static BL() { }
+        public static BLApi.IBL Instance
+        { get { return Nested.instance; } }
         /// <summary>
         /// constructor that create the list of drones for BL layer
         /// </summary>
-        public BL()
+        BL()
         {
             dal = DalApi.DLFactory.GetDal();
             double[] arr = dal.UsingElectricity();
@@ -43,6 +51,7 @@ namespace BL
                 {throw new AddingProblemException("", e);}
             }
         }
+        #endregion
         private BO.DroneToList GetDroneToList(string id)
         //function that return object of DroneToList for constructor
         {
@@ -169,7 +178,6 @@ namespace BL
             return baseStationToReturn;
         }
 
-        #endregion
 
         #region AddDrone
         /// <summary>
@@ -197,7 +205,7 @@ namespace BL
                 droneToAdd.Location = l;
                 var ListOfStation = dal.GetBaseStation(number);
                 if (ListOfStation.ChargeSlots == 0)
-                    throw new ChargingException("there is not any slot for charging in base station with id {number}");
+                    throw new ChargingException($"there is not any slot for charging in base station with id {number}");
                 droneToAdd.State = DroneState.maintaince;
                 ListOfStation.ChargeSlots--;
                 dal.UpdateBaseStation(ListOfStation);
