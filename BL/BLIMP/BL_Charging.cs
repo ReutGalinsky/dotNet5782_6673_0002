@@ -55,12 +55,12 @@ namespace BL
             DO.BaseStation b = ListOfStation.First();
             foreach (var item in ListOfStation)//find the closest base station with availible charge slot
                 if (DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location) > DistanceTo(new Location() { Latitude = item.Latitude, Longitude = item.Longitude }, droneBO.Location))
-                    b = item;
-            int temp = d.Battery;
-            temp -= (int)(availible * DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location));
-            if (temp < 0)
+                    b = item; ////
+            int tempBattery = d.Battery;
+            tempBattery -= (int)(_available * DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, d.Location));
+            if (tempBattery < 0)
                 throw new ChargingException($"there is not enough battery in the drone with the id:{number} to get the closest base station");
-            d.Battery = temp;
+            d.Battery = tempBattery;
             try
             {
                 d.State = DroneState.maintaince;
@@ -92,7 +92,7 @@ namespace BL
                 dal.DeleteDroneCharge(number);//delete from DAL
                 station.ChargeSlots++;
                 dal.UpdateBaseStation(station);//Updateing in DAL
-                d.Battery += (int)(((float)(charging.TotalSeconds) / 60) * speed);
+                d.Battery += (int)(((float)(charging.TotalSeconds) / 60) * _speed);
                 if (d.Battery > 100) d.Battery = 100;
                 d.State = DroneState.Available;
             }

@@ -16,11 +16,11 @@ namespace BL
     {
         private DalApi.IDal dal;
         private List<BO.DroneToList> Drones = new List<DroneToList>();
-        private double availible;
-        private double heavy;
-        private double light;
-        private double medium;
-        private double speed;
+        private double _available;
+        private double _heavy;
+        private double _light;
+        private double _medium;
+        private double _speed;
 
         #region singelton
         class Nested
@@ -38,11 +38,11 @@ namespace BL
         {
             dal = DalApi.DLFactory.GetDal();
             double[] arr = dal.UsingElectricity();
-            availible = arr[0];
-            heavy = arr[1];
-            light = arr[2];
-            medium = arr[3];
-            speed = arr[4];
+            _available = arr[0];
+            _heavy = arr[1];
+            _light = arr[2];
+            _medium = arr[3];
+            _speed = arr[4];
             foreach (var item in dal.GetDrones())
             {
                 try
@@ -84,18 +84,18 @@ namespace BL
                             switch (item.Weight)
                             {
                                 case DO.WeightCategories.Heavy:
-                                    distance1 = DistanceTo(b, c) * heavy;
+                                    distance1 = DistanceTo(b, c) * _heavy;
                                     break;
                                 case DO.WeightCategories.Middle:
-                                    distance1 = DistanceTo(b, c) * medium;
+                                    distance1 = DistanceTo(b, c) * _medium;
                                     break;
                                 case DO.WeightCategories.Light:
-                                    distance1 = DistanceTo(b, c) * light;
+                                    distance1 = DistanceTo(b, c) * _light;
                                     break;
                                 default:
                                     break;
                             }
-                            distance2 = DistanceTo(c, d) * availible;
+                            distance2 = DistanceTo(c, d) * _available;
                             if ((int)(distance1 + distance2) > 100) throw new AddingProblemException("can't pass the parcel without charging in the middle of the shipping");
                             drone.Battery = rand.Next((int)(distance1 + distance2), 101);
                         }
@@ -103,7 +103,7 @@ namespace BL
                         {
                             drone.Location = a;
                             Location d = new Location() { Latitude = ClosestStation(a).Latitude, Longitude = ClosestStation(a).Longitude };
-                            distance2 = DistanceTo(a, d) * availible;
+                            distance2 = DistanceTo(a, d) * _available;
                         }
                         drone.NumberOfParcel = item.IdNumber;
                         return drone;
@@ -126,7 +126,7 @@ namespace BL
                         DO.DroneCharge charge = new DroneCharge() { DroneId = drone.IdNumber, StationId = b.IdNumber };
                         dal.AddDroneCharge(charge);
                         break;
-                    case 1:// the drone is availible
+                    case 1:// the drone is available
                         var list = from item in dal.GetParcels()
                                    where item.ArrivingDroneTime != null
                                    select item;
@@ -144,7 +144,7 @@ namespace BL
                             drone.Location.Latitude = dal.GetCustomer(((P.Geter))).Latitude;
                             drone.Location.Longitude = dal.GetCustomer((((P.Geter)))).Longitude;
                             Location d = new Location() { Latitude = ClosestStation(drone.Location).Latitude, Longitude = ClosestStation(drone.Location).Longitude };
-                            drone.Battery = rand.Next((int)(DistanceTo(drone.Location, d) * availible), 101);
+                            drone.Battery = rand.Next((int)(DistanceTo(drone.Location, d) * _available), 101);
                         }
                         drone.State = DroneState.Available;
                         break;
@@ -155,7 +155,7 @@ namespace BL
             }
             catch (Exception e)
             {
-                throw new AddingProblemException("the drone number " + id + " is not correct, can't running this program");
+                throw new AddingProblemException($"the drone number {id} is not correct, can't running this program");
             }
 
         }
@@ -186,13 +186,13 @@ namespace BL
         public void AddDrone(BO.DroneToList droneToAdd, string number)
         {
             if (droneToAdd.MaxWeight != BO.WeightCategories.Heavy && droneToAdd.MaxWeight != BO.WeightCategories.Middle && droneToAdd.MaxWeight != BO.WeightCategories.Light)
-                throw new AddingProblemException($"The weight of this drone is not an option");
+                throw new AddingProblemException($"The weight of the drone {droneToAdd.IdNumber} is not an option");
             if (droneToAdd.Model == "")
-                throw new AddingProblemException($"The model of this drone wasn't entered");
+                throw new AddingProblemException($"The model of the drone {droneToAdd.IdNumber} wasn't entered");
             try
             {
                 if (int.Parse(droneToAdd.IdNumber) == 0)
-                    throw new AddingProblemException($"This drone can't add");
+                    throw new AddingProblemException($"The drone {droneToAdd.IdNumber} can't add");
             }
             catch (Exception e)
             {throw new AddingProblemException($"Base station number {number} is not valid"); }
@@ -214,7 +214,7 @@ namespace BL
                 dal.AddDroneCharge(charge);
             }
             catch (Exception ex)
-            {throw new AddingProblemException("Can't add this drone", ex);}
+            {throw new AddingProblemException($"Can't add the drone {droneToAdd.IdNumber}", ex);}
         }
         #endregion
         #region GetDrones
@@ -276,10 +276,10 @@ namespace BL
         public void UpdatingDetailsOfDrone(string Model, string id)
         {
             if (Model == "")
-                throw new UpdatingException("the model is illegal");
+                throw new UpdatingException($"The model of drone number {id}is illegal");
             BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
             if (d == null)
-                throw new UpdatingException("the drone is not existing");
+                throw new UpdatingException($"Drone number {id} is not existing");
             d.Model = Model;
             try
             {
@@ -287,7 +287,7 @@ namespace BL
             }
             catch (Exception e)
             {
-                throw new UpdatingException("can't update the drone", e);
+                throw new UpdatingException($"Can't update drone number {id}", e);
             }
 
         }

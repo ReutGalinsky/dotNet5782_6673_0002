@@ -25,7 +25,7 @@ namespace Dal
             internal static double Heavy { set; get; }
             internal static double Available { set; get; }
             internal static double Medium { set; get; }
-            internal static double Speed { set; get; }
+            internal static double _speed { set; get; }
         }
         #endregion
 
@@ -39,7 +39,7 @@ namespace Dal
         //Latitude: between 31 to 33
         //Longitude: between 33 to 35
         {//assumption: we suppose to set the values by ourself
-            Config.Speed = 10;
+            Config._speed = 10;
             Config.Available = 0.1;
             Config.Heavy = 0.4;
             Config.Medium = 0.3;

@@ -392,7 +392,7 @@ namespace Dal
         public double[] UsingElectricity()
         //function that return the electricity values
         {
-            double[] arr = new double[5] { DataSource.Config.Available, DataSource.Config.Heavy, DataSource.Config.Light, DataSource.Config.Medium, DataSource.Config.Speed };
+            double[] arr = new double[5] { DataSource.Config.Available, DataSource.Config.Heavy, DataSource.Config.Light, DataSource.Config.Medium, DataSource.Config._speed };
             return arr;
         }
         #endregion

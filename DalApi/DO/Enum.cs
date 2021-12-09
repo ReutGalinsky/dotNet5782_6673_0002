@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace DO
 {
     public enum WeightCategories { Light = 1, Middle, Heavy }
-    public enum Priorities { Regular = 1, Speed, Emergency }
+    public enum Priorities { Regular = 1, speed, Emergency }
 }

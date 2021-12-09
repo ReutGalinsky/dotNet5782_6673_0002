@@ -35,15 +35,15 @@ namespace BL
             foreach (var item in list)
             {
                 int temp = d.Battery;
-                temp -= (int)(DistanceTo(GetCustomer(item.Sender).Location, d.Location) * availible);
+                temp -= (int)(DistanceTo(GetCustomer(item.Sender).Location, d.Location) * _available);
                 temp = item.Weight switch//check if the battery is enough for the delivery
                 {
-                    BO.WeightCategories.Heavy => (int)(temp - heavy * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
-                    BO.WeightCategories.Light => (int)(temp - light * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
-                    BO.WeightCategories.Middle => (int)(temp - medium * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
+                    BO.WeightCategories.Heavy => (int)(temp - _heavy * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
+                    BO.WeightCategories.Light => (int)(temp - _light * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
+                    BO.WeightCategories.Middle => (int)(temp - _medium * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
                 };
                 DO.BaseStation b = ClosestStation(GetCustomer(item.Geter).Location);
-                temp -= (int)(DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, GetCustomer(item.Geter).Location) * availible);
+                temp -= (int)(DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, GetCustomer(item.Geter).Location) * _available);
                 if (temp >= 0)
                 {
                     d.State = DroneState.shipping;
@@ -85,7 +85,7 @@ namespace BL
                 throw new ConnectionException($"the drone with the id {id} is not shipping");
             if (!(p.MatchForDroneTime != null && p.CollectingDroneTime == null))
                 throw new ConnectionException("the parcel is not match");
-            d.Battery -= (int)(DistanceTo(GetCustomer(p.SenderCustomer.IdNumber).Location, d.Location) * availible);//update the Battery
+            d.Battery -= (int)(DistanceTo(GetCustomer(p.SenderCustomer.IdNumber).Location, d.Location) * _available);//update the Battery
             d.Location = (Location)GetCustomer(p.SenderCustomer.IdNumber).Location.CopyPropertiesToNew(typeof(Location));
             DO.Parcel dparcel = dal.GetParcel(p.IdNumber);
             dparcel.CollectingDroneTime = DateTime.Now;
@@ -116,9 +116,9 @@ namespace BL
                 throw new ConnectionException("the parcel is not picking yet");
             d.Battery = p.Weight switch//update the battery
             {
-                BO.WeightCategories.Heavy => (int)(d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Location, d.Location)) * heavy),
-                BO.WeightCategories.Light => (int)(d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Location, d.Location)) * light),
-                BO.WeightCategories.Middle => (int)(d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Location, d.Location)) * medium),
+                BO.WeightCategories.Heavy => (int)(d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Location, d.Location)) * _heavy),
+                BO.WeightCategories.Light => (int)(d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Location, d.Location)) * _light),
+                BO.WeightCategories.Middle => (int)(d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Location, d.Location)) * _medium),
                 _ => throw new UpdatingException("invalid Weight"),
             };
             d.Location = (Location)GetCustomer(p.GeterCustomer.IdNumber).Location.CopyPropertiesToNew(typeof(Location));

@@ -120,7 +120,7 @@ namespace ConsoleUI
             try
             {
                 Parcel1.Weight = (WeightCategories)(int.Parse(Console.ReadLine()));
-                Console.WriteLine("please enter the priority of your Parcel: 1 for Regular, 2 for Speed and 3 for Emergency");
+                Console.WriteLine("please enter the priority of your Parcel: 1 for Regular, 2 for _speed and 3 for Emergency");
                 Parcel1.Priority = (Priorities)(int.Parse(Console.ReadLine()));
             }
             catch (Exception e)

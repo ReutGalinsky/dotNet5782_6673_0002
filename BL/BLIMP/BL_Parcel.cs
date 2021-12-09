@@ -63,7 +63,7 @@ namespace BL
                 throw new AddingProblemException("invalid name of customer");
             if (parcel.Weight != BO.WeightCategories.Heavy && parcel.Weight != BO.WeightCategories.Middle && parcel.Weight != BO.WeightCategories.Light)
                 throw new AddingProblemException("This weight is not an option");
-            if (parcel.Priority != BO.Priorities.Emergency && parcel.Priority != BO.Priorities.Regular && parcel.Priority != BO.Priorities.Speed)
+            if (parcel.Priority != BO.Priorities.Emergency && parcel.Priority != BO.Priorities.Regular && parcel.Priority != BO.Priorities.speed)
                 throw new AddingProblemException("This priority is not an option");
             try
             {//check if the customers exist in DAL
