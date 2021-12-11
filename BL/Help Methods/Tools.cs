@@ -85,8 +85,36 @@ namespace BL
                 else final = final + string.Format(" W ");
             }
             return final;
-
-
         }
+
+        public static Location GetLocation<T>(this T obj)
+        {
+            var type = obj.GetType();
+            var latitude = (double) type.GetRuntimeProperty("Latitude").GetValue(obj);
+            var longitude = (double) type.GetRuntimeProperty("Longitude").GetValue(obj);
+
+            return new Location { Latitude = latitude, Longitude = longitude };
+        }
+
+        #region DistanceTo
+        /// <summary>
+        /// calculating distance between two locations in km 
+        /// </summary>
+        public static double DistanceTo(this Location source, Location destenetion)
+        {
+            double rlat1 = Math.PI * source.Latitude / 180;
+            double rlat2 = Math.PI * destenetion.Latitude / 180;
+            double theta = source.Longitude - destenetion.Longitude;
+            double rtheta = Math.PI * theta / 180;
+            double distance =
+                Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+                Math.Cos(rlat2) * Math.Cos(rtheta);
+            distance = Math.Acos(distance);
+            distance = distance * 180 / Math.PI;
+            distance = distance * 60 * 1.1515;
+            return distance * 1.609344;
+        }
+        #endregion  
+
     }
 }

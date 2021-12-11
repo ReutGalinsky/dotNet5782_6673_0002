@@ -25,7 +25,7 @@ namespace PL.Pages
             InitializeComponent();
             var temp=Enum.GetValues(typeof(BO.ParcelState));//אין אופציה של ללא
             State.ItemsSource = temp;
-            var item= b.PredicateParcel(x => x.Sender == id).Select(x => x.IdNumber);
+            var item= b.GetAllParcelsBy(x => x.Sender == id).Select(x => x.IdNumber);
            item= item.Prepend("ללא");
             item = item.Distinct();
             Geter.ItemsSource = item;

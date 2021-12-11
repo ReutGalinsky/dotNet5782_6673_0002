@@ -24,7 +24,6 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-
         }
         private BLApi.IBL bl = BLApi.BLFactory.GetBl();
 

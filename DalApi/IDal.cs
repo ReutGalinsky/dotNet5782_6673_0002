@@ -35,10 +35,10 @@ namespace DalApi
         public void UpdateCustomer(Customer toUpdate);
         public IEnumerable<Customer> GetCustomers();
         public IEnumerable<BaseStation> GetBaseStations();
-        public IEnumerable<Drone> PredicateDrone(Predicate<Drone> condition);
-        public IEnumerable<DroneCharge> PredicateChargeDrone(Predicate<DroneCharge> condition);
-        public IEnumerable<Customer> PredicateCustomer(Predicate<Customer> condition);
-        public IEnumerable<Parcel> PredicateParcel(Predicate<Parcel> condition);
-        public IEnumerable<BaseStation> PredicateBaseStation(Predicate<BaseStation> condition);
+        public IEnumerable<Drone> GetAllDronesBy(Predicate<Drone> condition);
+        public IEnumerable<DroneCharge> GetAllChargeDronesBy(Predicate<DroneCharge> condition);
+        public IEnumerable<Customer> GetAllCustomersBy(Predicate<Customer> condition);
+        public IEnumerable<Parcel> GetAllParcelsBy(Predicate<Parcel> condition);
+        public IEnumerable<BaseStation> GetAllBaseStationsBy(Predicate<BaseStation> condition);
     }
 }

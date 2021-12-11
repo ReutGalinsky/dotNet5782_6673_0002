@@ -26,11 +26,11 @@ namespace PL.Pages
             InitializeComponent();
             var temp = Enum.GetValues(typeof(BO.ParcelState));//אין אופציה של ללא
             State.ItemsSource = temp;
-            var item = b.PredicateParcel(x => x.Geter == id).Select(x => x.IdNumber);
+            var item = b.GetAllParcelsBy(x => x.Geter == id).Select(x => x.IdNumber);
             item = item.Prepend("ללא");
             item = item.Distinct();
             Sender.ItemsSource = item;
-            listViewOrders.ItemsSource = b.PredicateParcel(x=>x.Geter==id);
+            listViewOrders.ItemsSource = b.GetAllParcelsBy(x=>x.Geter==id);
         }
         private BLApi.IBL b;
         private string id;

@@ -50,9 +50,9 @@ namespace PL
             {
                 DroneListView.ItemsSource = item switch
                 {
-                    BO.DroneState.Available => bl.PredicateDrone(x => x.State == BO.DroneState.Available),
-                    BO.DroneState.maintaince => bl.PredicateDrone(x => x.State == BO.DroneState.maintaince),
-                    BO.DroneState.shipping => bl.PredicateDrone(x => x.State == BO.DroneState.shipping),
+                    BO.DroneState.Available => bl.GetAllDronesBy(x => x.State == BO.DroneState.Available),
+                    BO.DroneState.maintaince => bl.GetAllDronesBy(x => x.State == BO.DroneState.maintaince),
+                    BO.DroneState.shipping => bl.GetAllDronesBy(x => x.State == BO.DroneState.shipping),
                     _ => bl.GetDrones(),
                 };
             }
@@ -60,9 +60,9 @@ namespace PL
             {
                 DroneListView.ItemsSource = item switch
                 {
-                    BO.DroneState.Available => bl.PredicateDrone(x => ((x.State == BO.DroneState.Available) && (x.MaxWeight == (BO.WeightCategories)check))),
-                    BO.DroneState.maintaince => bl.PredicateDrone(x => ((x.State == BO.DroneState.maintaince) && (x.MaxWeight == (BO.WeightCategories)check))),
-                    BO.DroneState.shipping => bl.PredicateDrone(x => ((x.State == BO.DroneState.shipping) && (x.MaxWeight == (BO.WeightCategories)check))),
+                    BO.DroneState.Available => bl.GetAllDronesBy(x => ((x.State == BO.DroneState.Available) && (x.MaxWeight == (BO.WeightCategories)check))),
+                    BO.DroneState.maintaince => bl.GetAllDronesBy(x => ((x.State == BO.DroneState.maintaince) && (x.MaxWeight == (BO.WeightCategories)check))),
+                    BO.DroneState.shipping => bl.GetAllDronesBy(x => ((x.State == BO.DroneState.shipping) && (x.MaxWeight == (BO.WeightCategories)check))),
                     _ => bl.GetDrones(),
                 };
             }
@@ -75,7 +75,9 @@ namespace PL
 
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
-            
+            Drone action = new Drone(selected,bl);
+            action.updateList += updated;
+            action.Show();
         }
 
         private void closing_Click(object sender, RoutedEventArgs e)//event for the closing button
@@ -91,9 +93,9 @@ namespace PL
             {
                 DroneListView.ItemsSource = item switch
                 {
-                    BO.WeightCategories.Heavy => bl.PredicateDrone(x => x.MaxWeight == BO.WeightCategories.Heavy),
-                    BO.WeightCategories.Light => bl.PredicateDrone(x => x.MaxWeight == BO.WeightCategories.Light),
-                    BO.WeightCategories.Middle => bl.PredicateDrone(x => x.MaxWeight == BO.WeightCategories.Middle),
+                    BO.WeightCategories.Heavy => bl.GetAllDronesBy(x => x.MaxWeight == BO.WeightCategories.Heavy),
+                    BO.WeightCategories.Light => bl.GetAllDronesBy(x => x.MaxWeight == BO.WeightCategories.Light),
+                    BO.WeightCategories.Middle => bl.GetAllDronesBy(x => x.MaxWeight == BO.WeightCategories.Middle),
                     _ => bl.GetDrones(),
 
                 };
@@ -102,9 +104,9 @@ namespace PL
             {
                 DroneListView.ItemsSource = item switch
                 {
-                    BO.WeightCategories.Heavy => bl.PredicateDrone(x => ((x.MaxWeight == BO.WeightCategories.Heavy) && (x.State == (BO.DroneState)check))),
-                    BO.WeightCategories.Light => bl.PredicateDrone(x => ((x.MaxWeight == BO.WeightCategories.Light) && (x.State == (BO.DroneState)check))),
-                    BO.WeightCategories.Middle => bl.PredicateDrone(x => ((x.MaxWeight == BO.WeightCategories.Middle) && (x.State == (BO.DroneState)check))),
+                    BO.WeightCategories.Heavy => bl.GetAllDronesBy(x => ((x.MaxWeight == BO.WeightCategories.Heavy) && (x.State == (BO.DroneState)check))),
+                    BO.WeightCategories.Light => bl.GetAllDronesBy(x => ((x.MaxWeight == BO.WeightCategories.Light) && (x.State == (BO.DroneState)check))),
+                    BO.WeightCategories.Middle => bl.GetAllDronesBy(x => ((x.MaxWeight == BO.WeightCategories.Middle) && (x.State == (BO.DroneState)check))),
                     _ => bl.GetDrones(),
                 };
             }
@@ -112,6 +114,9 @@ namespace PL
 
         private void addingDrone_Click(object sender, RoutedEventArgs e)//event for the adding button
         {
+            Drone drone = new Drone(bl);
+            drone.updateList += updated;
+            drone.ShowDialog();
         }
 
         private void reset_Click(object sender, RoutedEventArgs e)//event for the reset button

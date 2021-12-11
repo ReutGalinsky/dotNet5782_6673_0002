@@ -19,27 +19,27 @@ namespace PL
     //    /// </summary>
     public partial class Drone : Window
     {
-        public Drone()//ctor for adding new drone
+        public Drone(BLApi.IBL i)//ctor for adding new drone
         {
             InitializeComponent();
-            //            main.Content = new newDrone(i);
+            main.Content = new newDrone(i);
         }
-        //        public event EventHandler updateList;
+        public event EventHandler updateList;
 
-        //        public Drone(BO.DroneToList a, BLApi.IBL i)//ctor for action on exsiting drone
-        //        {
-        //            InitializeComponent();
-        //            main.Content = new actions(a,i);
-        //        }
-        //        private void Button_Click(object sender, RoutedEventArgs e)//event for close button
-        //        {
-        //            this.Close();
-        //        }
+        public Drone(BO.DroneToList a, BLApi.IBL i)//ctor for action on exsiting drone
+        {
+            InitializeComponent();
+            main.Content = new actions(a, i);
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)//event for close button
+        {
+            this.Close();
+        }
 
         private void closingAction(object sender, EventArgs e)
         //            //function that power an event every time that the window is being closed
         {
-            //            updateList(this,EventArgs.Empty);
+                        updateList(this,EventArgs.Empty);
         }
     }
    }

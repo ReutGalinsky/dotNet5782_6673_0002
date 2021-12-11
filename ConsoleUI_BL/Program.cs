@@ -477,11 +477,11 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("*" + item + "\n");
                                     break;
                                 case States.Unmatched:
-                                    foreach (var item in system.PredicateParcel(x => x.ParcelState == ParcelState.Define))
+                                    foreach (var item in system.GetAllParcelsBy(x => x.ParcelState == ParcelState.Define))
                                         Console.WriteLine("*" + item + "\n");
                                     break;
                                 case States.Available:
-                                    foreach (var item in system.PredicateBaseStation(x => x.ChargeSlots > 0))
+                                    foreach (var item in system.GetAllBaseStationsBy(x => x.ChargeSlots > 0))
                                         Console.WriteLine("*" + item + "\n");
                                     break;
                                 default:

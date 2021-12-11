@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using BO;
+using static BO.DroneState;
+using static BO.ParcelState;
 
 namespace BL
 {
@@ -13,51 +15,64 @@ namespace BL
     /// </summary> 
     internal partial class BL : BLApi.IBL
     {
+
         #region MatchingParcelToDrone
         /// <summary>
         ///matching parcel to a proper drone
         /// </summary> 
-        public void MatchingParcelToDrone(string id)
+        public void MatchingParcelToDrone(string droneId)
         {
-            BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
-            BO.Drone droneBO = null;
-            try { droneBO = GetDrone(id); }
-            catch (Exception e)
+            DroneToList drone = Drones.FirstOrDefault(x => x.IdNumber == droneId);
+            BO.Drone droneBO;
+            droneBO = GetDrone(droneId);
+
+            if (drone.State != Available)
+                throw new ConnectionException($"the drone with the id {droneId} is not available");
+
+            var parcelQueue = GetAllParcelsBy(x => x.ParcelState == Define && (int)x.Weight <= (int)drone.MaxWeight)
+                .OrderByDescending(p => (int)p.Priority)
+                .ThenByDescending(p => (int)p.Weight)
+                .ThenBy(p => dal.GetCustomer(p.Sender).GetLocation().DistanceTo(drone.Location));
+
+            foreach (var parcel in parcelQueue)
             {
-                throw new ConnectionException($"the drone with the id {id} is not existing");
-            }
-            if (d.State != DroneState.Available)
-                throw new ConnectionException($"the drone with the id {id} is not available");
-            var list = from item in PredicateParcel(x => x.ParcelState == ParcelState.Define && (int)x.Weight <= (int)d.MaxWeight)
-                       orderby -1 * (int)item.Priority, -1 * (int)item.Weight, DistanceTo(GetCustomer(item.Sender).Location, d.Location)
-                       //decending order by priority and weight and increasing by distance
-                       select item;
-            foreach (var item in list)
-            {
-                int temp = d.Battery;
-                temp -= (int)(DistanceTo(GetCustomer(item.Sender).Location, d.Location) * _available);
-                temp = item.Weight switch//check if the battery is enough for the delivery
+                var usagee = battarUseag(drone, parcel);
+                if (drone.Battery >= usagee)
                 {
-                    BO.WeightCategories.Heavy => (int)(temp - _heavy * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
-                    BO.WeightCategories.Light => (int)(temp - _light * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
-                    BO.WeightCategories.Middle => (int)(temp - _medium * DistanceTo(GetCustomer(item.Sender).Location, GetCustomer(item.Geter).Location)),
-                };
-                DO.BaseStation b = ClosestStation(GetCustomer(item.Geter).Location);
-                temp -= (int)(DistanceTo(new Location() { Latitude = b.Latitude, Longitude = b.Longitude }, GetCustomer(item.Geter).Location) * _available);
-                if (temp >= 0)
-                {
-                    d.State = DroneState.shipping;
-                    d.NumberOfParcel = item.IdNumber;
-                    DO.Parcel P = dal.GetParcel(item.IdNumber);
-                    P.DroneId = d.IdNumber;
-                    P.MatchForDroneTime = DateTime.Now;
-                    dal.UpdateParcel(P);//update in DAL
+                    drone.State = DroneState.shipping;
+                    drone.NumberOfParcel = parcel.IdNumber;
+                    DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
+                    parcelDO.DroneId = drone.IdNumber;
+                    parcelDO.MatchForDroneTime = DateTime.Now;
+                    dal.UpdateParcel(parcelDO);
                     return;
                 }
             }
-            throw new UpdatingException($"cant find proper parcel for the drone with id {id}");//didn't find parcel
+            throw new UpdatingException($"cant find proper parcel for the drone with id {droneId}");//didn't find parcel
         }
-        #endregion
+        #endregion 
+
+        private int calculateSomthing(double distance, double factorBattery)
+        {
+            return (int)(distance * factorBattery);
+        }
+
+        private int battarUseag(BO.DroneToList drone, BO.ParcelOfList parcel)
+        {
+            int battery = 0;
+            BO.Customer sender = GetCustomer(parcel.Sender);
+            BO.Customer geter = GetCustomer(parcel.Geter);
+            DO.BaseStation baseStation = ClosestStation(GetCustomer(parcel.Geter).Location);
+            battery = calculateSomthing(drone.Location.DistanceTo(sender.Location) + geter.Location.DistanceTo(baseStation.GetLocation()), _available);
+            battery += parcel.Weight switch
+            {
+                BO.WeightCategories.Heavy => calculateSomthing(sender.Location.DistanceTo(geter.Location), _heavy),
+                BO.WeightCategories.Light => calculateSomthing(sender.Location.DistanceTo(geter.Location), _light),
+                BO.WeightCategories.Middle => (calculateSomthing(sender.Location.DistanceTo(geter.Location), _medium)),
+                _ => throw new NotImplementedException(),
+            };
+            return battery;
+        }
 
         #region PickingParcelByDrone
         /// <summary>
@@ -65,31 +80,33 @@ namespace BL
         /// </summary>
         public void PickingParcelByDrone(string id)
         {
-            BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
-            BO.Drone droneBO = null;
-            try { droneBO = GetDrone(id); }//get the drone from DAL
-            catch (Exception e)
-            {
-                throw new ConnectionException($"the drone with the id {id} is not existing");
-            }
-            BO.Parcel p = null;
+            //initialized
+            BO.DroneToList drone = Drones.FirstOrDefault(x => x.IdNumber == id);
+            BO.Drone droneBO;
+            BO.Parcel parcel;
+
+            //validation
             try
             {
-                p = GetParcel(droneBO.PassedParcel.IdNumber);
+                droneBO = GetDrone(id);
+                parcel = GetParcel(droneBO.PassedParcel.IdNumber);
             }
             catch (Exception e)
             {
-                throw new UpdatingException($"there is not any parcel that match the drone with the id { id }", e);
+                throw new ConnectionException(e.Message, e);
             }
-            if (d.State != DroneState.shipping)
+            if (drone.State != DroneState.shipping)
                 throw new ConnectionException($"the drone with the id {id} is not shipping");
-            if (!(p.MatchForDroneTime != null && p.CollectingDroneTime == null))
+            if (!(parcel.MatchForDroneTime != null && parcel.CollectingDroneTime == null))
                 throw new ConnectionException("the parcel is not match");
-            d.Battery -= (int)(DistanceTo(GetCustomer(p.SenderCustomer.IdNumber).Location, d.Location) * _available);//update the Battery
-            d.Location = (Location)GetCustomer(p.SenderCustomer.IdNumber).Location.CopyPropertiesToNew(typeof(Location));
-            DO.Parcel dparcel = dal.GetParcel(p.IdNumber);
-            dparcel.CollectingDroneTime = DateTime.Now;
-            dal.UpdateParcel(dparcel);//update in DAL
+
+            //update
+            drone.Battery -= calculateSomthing(drone.Location.DistanceTo(GetCustomer(parcel.SenderCustomer.IdNumber).Location), _available);
+            //drone.Location = (Location)GetCustomer(parcel.SenderCustomer.IdNumber).Location.CopyPropertiesToNew(typeof(Location));
+            drone.Location = GetCustomer(parcel.SenderCustomer.IdNumber).Location.GetLocation();
+            DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
+            parcelDO.CollectingDroneTime = DateTime.Now;
+            dal.UpdateParcel(parcelDO);
         }
         #endregion
 
@@ -99,40 +116,47 @@ namespace BL
         ///function that supply the parcel to the destination
         /// </summary>
         {
-            BO.DroneToList d = Drones.FirstOrDefault(x => x.IdNumber == id);
-            BO.Drone droneBO = null;
+            //initialized
+            BO.DroneToList drone = Drones.FirstOrDefault(x => x.IdNumber == id);
+            BO.Drone droneBO;
             try
             {
                 droneBO = GetDrone(id);
             }
             catch (Exception e)
             {
-                throw new ConnectionException($"the drone with the id {id} is not existing");
+                throw new ConnectionException(e.Message,e);
             }
+
+            //validation
             if (droneBO.State != DroneState.shipping)
                 throw new ConnectionException($"the drone with the id {id} is not shipping");
-            BO.Parcel p = GetParcel(droneBO.PassedParcel.IdNumber);
-            if (!(p.CollectingDroneTime != null && p.ArrivingDroneTime == null))
+            BO.Parcel parcel = GetParcel(droneBO.PassedParcel.IdNumber);
+            if (!(parcel.CollectingDroneTime != null && parcel.ArrivingDroneTime == null))
                 throw new ConnectionException("the parcel is not picking yet");
-            d.Battery = p.Weight switch//update the battery
+
+            //update
+           
+            drone.Battery -= parcel.Weight switch//update the battery
             {
-                BO.WeightCategories.Heavy => (int)(d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Location, d.Location)) * _heavy),
-                BO.WeightCategories.Light => (int)(d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Location, d.Location)) * _light),
-                BO.WeightCategories.Middle => (int)(d.Battery - (DistanceTo(GetCustomer(p.GeterCustomer.IdNumber).Location, d.Location)) * _medium),
+                BO.WeightCategories.Heavy => calculateSomthing(droneBO.PassedParcel.Distance, _heavy),
+                BO.WeightCategories.Light => (calculateSomthing(droneBO.PassedParcel.Distance, _light)),
+                BO.WeightCategories.Middle => calculateSomthing(droneBO.PassedParcel.Distance, _medium),
                 _ => throw new UpdatingException("invalid Weight"),
             };
-            d.Location = (Location)GetCustomer(p.GeterCustomer.IdNumber).Location.CopyPropertiesToNew(typeof(Location));
-            p.ArrivingDroneTime = DateTime.Now;
-            d.State = DroneState.Available;
+            drone.NumberOfParcel = null;
+            drone.Location = GetCustomer(parcel.GeterCustomer.IdNumber).Location.GetLocation();
+            parcel.ArrivingDroneTime = DateTime.Now;
+            drone.State = DroneState.Available;
             try
             {
-                DO.Parcel dparcel = dal.GetParcel(p.IdNumber);
+                DO.Parcel dparcel = dal.GetParcel(parcel.IdNumber);
                 dparcel.ArrivingDroneTime = DateTime.Now;
-                dal.UpdateParcel(dparcel);//update in DAL
+                dal.UpdateParcel(dparcel);
             }
             catch (Exception e)
             {
-                throw new ConnectionException("the parcel is not existing");
+                throw new ConnectionException(e.Message,e);
             }
         }
         #endregion

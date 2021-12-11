@@ -16,14 +16,15 @@ namespace BL
         {
             try
             {
-                DO.Parcel p = dal.GetParcel(id);
-                BO.Parcel parcel = (BO.Parcel)p.CopyPropertiesToNew(typeof(BO.Parcel));
-                parcel.SenderCustomer = GetCustomerOfParcel(p.Sender);
-                parcel.GeterCustomer = GetCustomerOfParcel(p.Geter);
-                if (p.DroneId != null)
-                {
-                    parcel.Drone = GetDroneInParcel(p.DroneId);//return the drone that match this parcel 
-                }
+                DO.Parcel parcelDO = dal.GetParcel(id);
+                BO.Parcel parcel = (BO.Parcel)parcelDO.CopyPropertiesToNew(typeof(BO.Parcel));
+                parcel.SenderCustomer = GetCustomerOfParcel(parcelDO.Sender);
+                parcel.GeterCustomer = GetCustomerOfParcel(parcelDO.Geter);
+                parcel.Drone=parcelDO.DroneId!=null? GetDroneInParcel(parcelDO.DroneId):null;
+                //if (parcelDO.DroneId != null)
+                //{
+                //    parcel.Drone = GetDroneInParcel(parcelDO.DroneId);//return the drone that match this parcel 
+                //}
                 return parcel;
             }
             catch (Exception e)
@@ -32,16 +33,6 @@ namespace BL
             }
         }
         #endregion
-        private BO.DroneInParcel GetDroneInParcel(string id)
-        //private function that return object of "DroneInParcel"
-        {
-            BO.Drone d = GetDrone(id);//get the drone
-            BO.DroneInParcel dip = (BO.DroneInParcel)d.CopyPropertiesToNew(typeof(BO.DroneInParcel));
-            dip.Location = new Location();//add the location
-            dip.Location.Latitude = d.Location.Latitude;
-            dip.Location.Longitude = d.Location.Longitude;
-            return dip;
-        }
 
         #region GetParcels
         public IEnumerable<BO.ParcelOfList> GetParcels()
@@ -51,31 +42,59 @@ namespace BL
             return list;
         }
         #endregion
-        private BO.ParcelOfList GetPOL(string id)
-        //private function that return object of ParcelOfList
-        {
-            DO.Parcel P = dal.GetParcel(id);
-            BO.ParcelOfList pol = (BO.ParcelOfList)P.CopyPropertiesToNew(typeof(BO.ParcelOfList));
-            if (P.MatchForDroneTime == null)
-                pol.ParcelState = ParcelState.Define;//define the parcel state
-            else
-                if (P.CollectingDroneTime == null)
-                pol.ParcelState = ParcelState.match;
-            else
-                if (P.ArrivingDroneTime == null)
-                pol.ParcelState = ParcelState.pick;
-            else
-                pol.ParcelState = ParcelState.supply;
-            return pol;
-        }
-        #region PredicateParcel
-        public IEnumerable<BO.ParcelOfList> PredicateParcel(Predicate<BO.ParcelOfList> c)
+
+        #region GetAllParcelsBy
+        public IEnumerable<BO.ParcelOfList> GetAllParcelsBy(Predicate<BO.ParcelOfList> condition)
         {
             var list = from item in GetParcels()
-                       where c(item)
+                       where condition(item)
                        select item;
             return list;
         }
         #endregion
+
+        //********return inner objects********
+        private BO.DroneInParcel GetDroneInParcel(string id)
+        //private function that return object of "DroneInParcel"
+        {
+            BO.Drone drone = GetDrone(id);//get the drone
+            BO.DroneInParcel droneInParcel = (BO.DroneInParcel)drone.CopyPropertiesToNew(typeof(BO.DroneInParcel));
+            droneInParcel.Location = drone.Location.GetLocation();
+            //droneInParcel.Location = new Location();//add the location
+            //droneInParcel.Location.Latitude = d.Location.Latitude;
+            //droneInParcel.Location.Longitude = d.Location.Longitude;
+            return droneInParcel;
+        }
+        private BO.ParcelOfList GetPOL(string id)
+        //private function that return object of ParcelOfList
+        {
+            DO.Parcel parcel = dal.GetParcel(id);
+            BO.ParcelOfList parcelOfList = (BO.ParcelOfList)parcel.CopyPropertiesToNew(typeof(BO.ParcelOfList));
+            //if (parcel.MatchForDroneTime == null)
+            //    parcelOfList.ParcelState = ParcelState.Define;//define the parcel state
+            //else
+            //    if (parcel.CollectingDroneTime == null)
+            //    parcelOfList.ParcelState = ParcelState.match;
+            //else
+            //    if (parcel.ArrivingDroneTime == null)
+            //    parcelOfList.ParcelState = ParcelState.pick;
+            //else
+            //    parcelOfList.ParcelState = ParcelState.supply;
+            parcelOfList.ParcelState = parcel.MatchForDroneTime switch
+            {
+                null => ParcelState.Define,
+                _ => parcel.CollectingDroneTime switch
+                {
+                    null=> ParcelState.match,
+                    _ => parcel.ArrivingDroneTime switch
+                    {
+                        null=> ParcelState.pick,
+                        _=> ParcelState.supply,
+                    },
+                },
+            };
+            return parcelOfList;
+        }
+
     }
 }

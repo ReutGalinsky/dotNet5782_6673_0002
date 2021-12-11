@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Drone" Height="500" Width="800" Closed="closingAction">
-    <!--
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -18,5 +18,5 @@
         <Button BorderBrush="Red" Content="סגירה" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click" Background="#FFF39898" FontSize="20" FontFamily="Segoe UI Black"/>
 
     </Grid>
-    -->
+    
 </Window>

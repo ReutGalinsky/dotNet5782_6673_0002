@@ -84,8 +84,8 @@ namespace Dal
         }
         #endregion
 
-        #region PredicateDrone
-        public IEnumerable<Drone> PredicateDrone(Predicate<Drone> condition)
+        #region GetAllDronesBy
+        public IEnumerable<Drone> GetAllDronesBy(Predicate<Drone> condition)
         {
             var list = from item in DataSource.Drones
                        where condition(item)
@@ -152,8 +152,8 @@ namespace Dal
         }
         #endregion
 
-        #region PredicateChargeDrone
-        public IEnumerable<DroneCharge> PredicateChargeDrone(Predicate<DroneCharge> condition)
+        #region GetAllChargeDronesBy
+        public IEnumerable<DroneCharge> GetAllChargeDronesBy(Predicate<DroneCharge> condition)
         {
             var list = from item in DataSource.Charges
                        where condition(item)
@@ -230,8 +230,8 @@ namespace Dal
         }
         #endregion
 
-        #region PredicateParcel
-        public IEnumerable<Parcel> PredicateParcel(Predicate<Parcel> condition)
+        #region GetAllParcelsBy
+        public IEnumerable<Parcel> GetAllParcelsBy(Predicate<Parcel> condition)
         {
             var list = from item in DataSource.Parcels
                        where condition(item)
@@ -301,8 +301,8 @@ namespace Dal
         }
         #endregion
 
-        #region PredicateBaseStation
-        public IEnumerable<BaseStation> PredicateBaseStation(Predicate<BaseStation> condition)
+        #region GetAllBaseStationsBy
+        public IEnumerable<BaseStation> GetAllBaseStationsBy(Predicate<BaseStation> condition)
         {
             var list = from item in DataSource.Stations
                        where condition(item)
@@ -372,8 +372,8 @@ namespace Dal
         }
         #endregion
 
-        #region PredicateCustomer
-        public IEnumerable<Customer> PredicateCustomer(Predicate<Customer> condition)
+        #region GetAllCustomersBy
+        public IEnumerable<Customer> GetAllCustomersBy(Predicate<Customer> condition)
         {
             var list = from item in DataSource.Customers
                        where condition(item)

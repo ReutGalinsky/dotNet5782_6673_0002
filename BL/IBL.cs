@@ -29,10 +29,10 @@ namespace BLApi
         public void SupplyingParcelByDrone(string id);
         public Parcel GetParcel(string id);
         public IEnumerable<ParcelOfList> GetParcels();
-        public IEnumerable<BaseStationToList> PredicateBaseStation(Predicate<BaseStationToList> c);
-        public IEnumerable<DroneToList> PredicateDrone(Predicate<DroneToList> c);
-        public IEnumerable<ParcelOfList> PredicateParcel(Predicate<ParcelOfList> c);
-        public IEnumerable<CustomerToList> PredicateCustomer(Predicate<CustomerToList> c);
+        public IEnumerable<BaseStationToList> GetAllBaseStationsBy(Predicate<BaseStationToList> c);
+        public IEnumerable<DroneToList> GetAllDronesBy(Predicate<DroneToList> c);
+        public IEnumerable<ParcelOfList> GetAllParcelsBy(Predicate<ParcelOfList> c);
+        public IEnumerable<CustomerToList> GetAllCustomersBy(Predicate<CustomerToList> c);
 
 
 
