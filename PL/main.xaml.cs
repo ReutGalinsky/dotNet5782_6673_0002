@@ -28,12 +28,10 @@ namespace PL
         private BLApi.IBL bl;
         private void changeColor(object sender, MouseEventArgs e)
         {
-            startButton.Opacity = 50;
         }
 
         private void returnColor(object sender, MouseEventArgs e)
         {
-            startButton.Opacity = 100;
         }
 
         private void closeButton(object sender, RoutedEventArgs e)

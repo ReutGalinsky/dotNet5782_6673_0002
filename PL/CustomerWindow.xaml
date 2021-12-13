@@ -7,56 +7,75 @@
         mc:Ignorable="d"
         Title="CustomerWindow" Height="450" Width="800">
     <Grid>
-        <Button Background="{x:Null}" Height="181" Click="addNewParcel" VerticalAlignment="Top"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Button Background="{x:Null}" Height="181" Click="addNewParcel" VerticalAlignment="Top"
                     Margin="546,144,77,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/עגלה.jpg" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Background="{x:Null}" Height="181" Click="AddLineButton_Click" VerticalAlignment="Top"
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/עגלה.jpg" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Background="{x:Null}" Height="181" Click="AddLineButton_Click" VerticalAlignment="Top"
                     Margin="334,144,278,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/לקוח.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/לקוח.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Background="{x:Null}" Height="181" Click="AddLineButton_Click" VerticalAlignment="Top"
+                    Margin="113,89,507,0">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/חבילה אחת.jpg" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+        <Button HorizontalAlignment="Left" Margin="642,0,0,0" VerticalAlignment="Center" Height="75" Width="158">
+            <Button.Content>
+                <Image Source="/עגלה.jpg" Margin="0,5,90,0"></Image>
+            </Button.Content>
         </Button>
-        <Button Background="{x:Null}" Height="181" Click="AddLineButton_Click" VerticalAlignment="Top"
-                    Margin="128,144,492,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/חבילה אחת.jpg" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
+        <Button HorizontalAlignment="Left" Margin="326,0,0,0" VerticalAlignment="Center" Height="75" Width="158">
+            <Button.Content>
+                <Image Source="/לקוח.png" Margin="0,5,90,0"></Image>
+            </Button.Content>
         </Button>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="484,0,0,0" VerticalAlignment="Center" Height="75" Width="158"/>
+
     </Grid>
 </Window>

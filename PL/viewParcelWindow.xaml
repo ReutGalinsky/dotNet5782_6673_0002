@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="viewParcelWindow" Height="300" Width="400">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.7"></ImageBrush>
+        </Grid.Background>
+
         <Button Width="50" Background="{x:Null}" Height="50" Click="AddLineButton_Click" VerticalAlignment="Top"
                     Margin="350,0,0,0">
             <Button.Template>

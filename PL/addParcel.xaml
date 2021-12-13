@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="addParcel" Height="300" Width="400">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
+        </Grid.Background>
+
         <Button Background="{x:Null}" Height="38" VerticalAlignment="Top"
                     Margin="360,0,0,0">
             <Button.Template>
@@ -30,6 +34,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="64,150,0,0" Text="weight" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.593,1.331"/>
         <ComboBox x:Name="Weight" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="Prioprity" HorizontalAlignment="Center" Margin="0,111,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="הוסף" HorizontalAlignment="Center" Margin="0,207,0,0" VerticalAlignment="Top" Height="59" Width="120" Click="Button_Click" FontFamily="Tahoma" FontSize="24" FontWeight="Bold"/>
+        <Button Content="הוסף" Style="{StaticResource myButton}" HorizontalAlignment="Center" Margin="0,207,0,0" VerticalAlignment="Top" Height="59" Width="120" Click="Button_Click" FontFamily="Tahoma" FontSize="24" FontWeight="Bold"/>
     </Grid>
 </Window>

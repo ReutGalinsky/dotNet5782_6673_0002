@@ -7,13 +7,18 @@
         mc:Ignorable="d"
         Title="entryWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background >
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.8"></ImageBrush>
+            
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="55"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Frame x:Name="frame" Height="auto" Grid.Row="1"></Frame>
+        <!--
         <Button Width="50" Background="{x:Null}" Height="50" Click="closeButton_Click" VerticalAlignment="Center"
-                    Margin="740,0,10,0">
+                    Margin="700,0,10,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -30,7 +35,7 @@
             </Button.Template>
         </Button>
         <Button Width="50" Background="{x:Null}" Height="50" Click="returnButton_Click" VerticalAlignment="Bottom"
-                    Margin="0,0,750,3">
+                    Margin="0,0,700,3">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -50,9 +55,9 @@
                     Margin="200,75,428,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                    <Ellipse StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/לקוח.png" />
+                            <ImageBrush ImageSource="/customer.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>
@@ -64,12 +69,12 @@
             </Button.Template>
         </Button>
         <Button x:Name="manegerIcon" Background="{x:Null}" Height="172" Click="manegerButton_Click" VerticalAlignment="Top" Grid.Row="1"
-                    Margin="449,68,185,0">
+                    Margin="449,68,163,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                    <Ellipse StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush x:Name="icon" ImageSource="/מנהל2.png" />
+                            <ImageBrush x:Name="icon" ImageSource="/manager.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>
@@ -82,6 +87,6 @@
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="502,245,0,0" Grid.Row="1" Text="מנהל" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="135" FontFamily="Tahoma" FontWeight="Bold" FontSize="26"/>
         <TextBlock HorizontalAlignment="Left" Margin="252,245,0,0" Grid.Row="1" Text="לקוח" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="68" FontFamily="Tahoma" FontWeight="Bold" FontSize="26"/>
-
-    </Grid>
+   -->
+        </Grid>
 </Window>

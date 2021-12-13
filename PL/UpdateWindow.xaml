@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="UpdateWindow" Height="350" Width="500">
+        Title="UpdateWindow" Height="350" Width="450">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg"></ImageBrush>
+        </Grid.Background>
         <TextBlock HorizontalAlignment="Left" Margin="55,66,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="30"/>
         <TextBox x:Name="Id" HorizontalAlignment="Left" Margin="140,66,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="27"/>
         <TextBlock HorizontalAlignment="Left" Margin="67,103,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677"/>
@@ -16,7 +19,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="67,168,0,0" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="48"/>
         <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="217,167,0,0" Text="{Binding Path=Location.Longitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="27"/>
         <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="140,168,0,0" Text="{Binding Path=Location.Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="27"/>
-        <Button Content="עדכן" HorizontalAlignment="Left" Margin="170,248,0,0" VerticalAlignment="Top" Height="63" Width="124" FontSize="24"/>
+        <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="170,248,0,0" VerticalAlignment="Top" Height="63" Width="124" FontSize="24"/>
 
     </Grid>
 </Window>

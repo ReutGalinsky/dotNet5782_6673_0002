@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="ManegerParcel" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
+        </Grid.Background>
         <Button Background="{x:Null}" Height="82" VerticalAlignment="Top"
                     Margin="656,326,50,0">
             <Button.Template>

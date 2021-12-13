@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="ManegerStations" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
+        </Grid.Background>
+
         <Button x:Name="addButton" Background="{x:Null}" Height="88" Click="addStation" VerticalAlignment="Top"
                     Margin="658,336,48,0" RenderTransformOrigin="0.588,0.314">
             <Button.Template>

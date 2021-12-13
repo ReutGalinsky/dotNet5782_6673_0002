@@ -33,12 +33,6 @@
             </Button.Template>
         </Button>
         <Image HorizontalAlignment="Center" Height="356" Margin="0,-22,0,0" VerticalAlignment="Top" Width="733" Source="/לוגו רחפן.png" Grid.RowSpan="3"/>
-
-        <Button x:Name="startButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="112" Width="232" Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Margin="529,19,0,0">
-            <Button.Content>
-                <StackPanel Height="auto" Width="auto"/>
-            </Button.Content>
-        </Button>
         <Button Margin="300,67,300,40" BorderThickness="3"  Grid.Row="2" BorderBrush="#FFF0F0F3" Content="התחל" Click="startclick" FontFamily="Tahoma" FontSize="44" FontWeight="Bold" Background="#FFD3DBEB">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -47,7 +41,7 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" Value="0.5"></Setter>
                         </Trigger>
-                    </Style.Triggers>
+                     </Style.Triggers>
                 </Style>
             </Button.Resources>
         </Button>

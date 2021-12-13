@@ -8,19 +8,23 @@
       d:DesignHeight="374" d:DesignWidth="800"
       Title="entryMenu">
 
-    <Grid Background="White">
+    <Grid>
+        <Grid.Background >
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.8"></ImageBrush>
+
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="55"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Frame x:Name="frame" Grid.Row="1"></Frame>
-        <Button Background="{x:Null}" Height="165" VerticalAlignment="Top" Grid.Row="1"
-                    Margin="200,75,428,0">
+        <Frame x:Name="frame" Height="auto" Grid.Row="1"></Frame>
+        <Button Width="50" Background="{x:Null}" Height="50" VerticalAlignment="Center"
+                    Margin="700,0,10,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/לקוח.png" />
+                            <ImageBrush ImageSource="/סגירה.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>
@@ -31,13 +35,47 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="manegerIcon" Background="{x:Null}" Height="172" VerticalAlignment="Top" Grid.Row="1"
-                    Margin="449,68,185,0">
+        <Button Width="50" Background="{x:Null}" Height="50" VerticalAlignment="Bottom"
+                    Margin="0,0,700,3">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush x:Name="icon" ImageSource="/מנהל2.png" />
+                            <ImageBrush ImageSource="/חזור.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Background="{x:Null}" Height="165" Click="customerButton_Click" VerticalAlignment="Top" Grid.Row="1"
+                    Margin="200,75,428,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/customer.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="manegerIcon" Background="{x:Null}" Height="172" Click="manegerButton_Click" VerticalAlignment="Top" Grid.Row="1"
+                    Margin="449,68,163,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="icon" ImageSource="/manager.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>

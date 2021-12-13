@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="CustomerParcels" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
+        </Grid.Background>
         <Button Background="{x:Null}" Height="99" Click="AddLineButton_Click" VerticalAlignment="Top"
                     Margin="652,309,45,0">
             <Button.Template>

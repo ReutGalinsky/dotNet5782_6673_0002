@@ -25,12 +25,10 @@ namespace PL
             InitializeComponent();
             bl = b;
             // frame.Content = new entryMenu(bl);
-            customerPage = new Pages.entryCustomer(bl);//לבדוק אם אפשר לפתוח רק בתוך הפונקציה
-            manegerPages = new Pages.entryManeger(bl);
+            menu = new Pages.entryMenu(bl);
+            frame.NavigationService.Navigate(menu);
         }
         private BLApi.IBL bl;
-        private Pages.entryCustomer customerPage;
-        private Pages.entryManeger manegerPages;
         private Pages.entryMenu menu;
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
@@ -47,12 +45,10 @@ namespace PL
 
         private void manegerButton_Click(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(manegerPages);
         }
 
         private void customerButton_Click(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(customerPage);
         }
     }
 }

@@ -25,17 +25,43 @@ namespace PL
         {
             InitializeComponent();
         }
-        private BLApi.IBL bl = BLApi.BLFactory.GetBl();
+        //private BLApi.IBL bl = BLApi.BLFactory.GetBl();
 
-        private void clickDrones(object sender, RoutedEventArgs e)//event for the drones button
+        //private void clickDrones(object sender, RoutedEventArgs e)//event for the drones button
+        //{
+        //    ListDrones drone = new ListDrones(bl);
+        //    drone.Show();
+        //}
+
+        //private void closing_Click(object sender, RoutedEventArgs e)//event for the closing button
+        //{
+        //    this.Close();
+        //}
+        private BLApi.IBL bl;
+        private void changeColor(object sender, MouseEventArgs e)
         {
-            ListDrones drone = new ListDrones(bl);
-            drone.Show();
         }
 
-        private void closing_Click(object sender, RoutedEventArgs e)//event for the closing button
+        private void returnColor(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void closeButton(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
+        private void AddLineButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void startclick(object sender, RoutedEventArgs e)
+        {
+            entryWindow entry = new entryWindow(bl);
+            entry.Show();
+            this.Close();
+        }
+    
     }
 }

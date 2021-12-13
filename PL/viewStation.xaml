@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="viewStation" Height="350" Width="450">
     <Grid>
-
+        <Grid.Background>
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg"></ImageBrush>
+        </Grid.Background>
         <TextBlock HorizontalAlignment="Left" Margin="54,31,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="30"/>
         <TextBox HorizontalAlignment="Left" IsEnabled="False" Margin="140,30,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="27"/>
         <TextBlock HorizontalAlignment="Left" Margin="71,69,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677"/>
@@ -18,6 +20,6 @@
         <TextBox HorizontalAlignment="Left" IsEnabled="False" Margin="225,127,0,0" Text="{Binding Path=Longitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="27"/>
         <TextBox HorizontalAlignment="Left" IsEnabled="False" Margin="140,126,0,0" Text="{Binding Path=Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="28"/>
         <ListBox x:Name="Drone" ItemsSource="{Binding}" Margin="87,167,77,64"/>
-        <Button Content="עדכן" HorizontalAlignment="Left" Margin="170,275,0,0" VerticalAlignment="Top" Height="49" Width="117" FontSize="22" Click="Button_Click"/>
+        <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="170,275,0,0" VerticalAlignment="Top" Height="49" Width="117" FontSize="22" Click="Button_Click"/>
     </Grid>
 </Window>

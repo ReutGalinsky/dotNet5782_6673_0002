@@ -33,7 +33,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="67,168,0,0" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBox  x:Name="Longitude" HorizontalAlignment="Left" Margin="217,159,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="27"/>
         <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="149,159,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="27"/>
-        <Button Content="הוסף" HorizontalAlignment="Left" Margin="168,211,0,0" VerticalAlignment="Top" Height="49" Width="98" FontSize="22" Click="addClick"/>
+        <Button Content="הוסף" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="168,211,0,0" VerticalAlignment="Top" Height="49" Width="98" FontSize="22" Click="addClick"/>
 
     </Grid>
 </Window>

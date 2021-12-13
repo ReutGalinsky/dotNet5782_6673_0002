@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="ManegerDrone" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
+        </Grid.Background>
         <Button Background="{x:Null}" Height="88"  VerticalAlignment="Top"
                     Margin="657,336,49,0">
             <Button.Template>
