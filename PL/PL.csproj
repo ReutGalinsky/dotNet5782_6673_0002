@@ -11,10 +11,36 @@
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 		<OutputPath>..\bin\</OutputPath>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="entryWindow.xaml.cs" />
+	  <Compile Remove="ManegerWindow.xaml.cs" />
+	</ItemGroup>
 	
   <ItemGroup>
     <None Remove="customer.png" />
     <None Remove="manager.png" />
+    <None Remove="Pages\Images\BackGround.png" />
+    <None Remove="Pages\Images\Backing.png" />
+    <None Remove="Pages\Images\Closing.png" />
+    <None Remove="Pages\Images\customer.png" />
+    <None Remove="Pages\Images\manager.png" />
+    <None Remove="Pages\Images\התחבר.png" />
+    <None Remove="Pages\Images\חבילה אחת.jpg" />
+    <None Remove="Pages\Images\לוגו רחפן.png" />
+    <None Remove="Pages\Images\לקוח.png" />
+    <None Remove="Pages\Images\מינוס.png" />
+    <None Remove="Pages\Images\מנהל.png" />
+    <None Remove="Pages\Images\מנהל2.png" />
+    <None Remove="Pages\Images\מפתח.jpg" />
+    <None Remove="Pages\Images\עגלה.jpg" />
+    <None Remove="Pages\Images\פלוס.jpg" />
+    <None Remove="Pages\Images\קריאה.jpg" />
+    <None Remove="Pages\Images\רחפן יחיד.png" />
+    <None Remove="Pages\Images\רחפן עגול.png" />
+    <None Remove="Pages\Images\רקע2.png" />
+    <None Remove="Pages\Images\תחנה.png" />
+    <None Remove="Pages\Images\תחנת בסיס.png" />
     <None Remove="Pages\התחבר.png" />
     <None Remove="Pages\לקוח.png" />
     <None Remove="Pages\מנהל2.png" />
@@ -37,6 +63,10 @@
     <None Remove="תחנה.png" />
     <None Remove="תחנת בסיס.png" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Page Remove="entryWindow.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
@@ -45,6 +75,69 @@
   <ItemGroup>
     <Resource Include="customer.png" />
     <Resource Include="manager.png" />
+    <Resource Include="Pages\Images\Customer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\Manager.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\התחבר.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\חבילה אחת.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\Backing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\לוגו רחפן.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\לקוח.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\מינוס.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\מנהל.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\מנהל2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\מפתח.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\Closing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\עגלה.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\פלוס.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\קריאה.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\רחפן יחיד.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\רחפן עגול.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\BackGround.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\רקע2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\תחנה.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pages\Images\תחנת בסיס.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Pages\התחבר.png" />
     <Resource Include="Pages\לקוח.png" />
     <Resource Include="Pages\מנהל2.png" />
@@ -69,40 +162,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="addingWindow.xaml.cs">
+    <Compile Update="addBaseStation.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="addParcel.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="CustomerParcels.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="CustomerWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="entryWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ManegerCustomers.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ManegerDrone.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="ManegerParcel.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ManegerStations.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ManegerWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Pages\CustomerOrders.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Pages\CustomerSend.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\entryCustomer.xaml.cs">
@@ -111,22 +177,16 @@
     <Compile Update="Pages\entryManeger.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\entryMenu.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UpdateWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="viewParcelWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="viewStation.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="addingWindow.xaml">
+    <None Update="Pages\Images\עין.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="addBaseStation.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -134,43 +194,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="CustomerParcels.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="CustomerWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="entryWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="ManegerCustomers.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="ManegerDrone.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="ManegerParcel.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="ManegerStations.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="ManegerWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\CustomerOrders.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\CustomerSend.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -179,22 +203,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\entryManeger.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\entryMenu.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UpdateWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="viewParcelWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="viewStation.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

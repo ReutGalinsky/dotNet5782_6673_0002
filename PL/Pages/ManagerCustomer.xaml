@@ -1,0 +1,43 @@
+﻿<Page x:Class="PL.Pages.ManagerCustomer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PL.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ManagerCustomer">
+    <Page.Resources>
+        <DataTemplate x:Key="MyDataTemplate"
+ DataType="local:BO.CustomerToList">
+
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+
+        <Button Background="{x:Null}" Height="88" VerticalAlignment="Top"
+                    Margin="659,223,47,0" Click="Button_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/פלוס.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}"/>
+
+            <ComboBox x:Name="ChargeSlot" HorizontalAlignment="Left" Margin="631,10,0,0" VerticalAlignment="Top" Width="144" Height="35"/>
+        <ComboBox HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" Width="133" Height="35"/>
+        <TextBlock HorizontalAlignment="Left" Margin="610,50,0,0" Text="סינון על פי מספר עמדות טעינה" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
+
+        <Button x:Name="reset" Content="איפוס" HorizontalAlignment="Left" Margin="399,13,0,0" VerticalAlignment="Top" Height="26" Width="51" Click="reset_Click" FontFamily="Aharoni"/>
+    </Grid>
+</Page>

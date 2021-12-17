@@ -10,46 +10,39 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BL;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CustomerPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CustomerPage : Window
     {
-        public MainWindow()
+        public CustomerPage(BLApi.IBL b,string i)
         {
             InitializeComponent();
+            bl = b;
+            id = i;
         }
-        private BLApi.IBL bl;
-        private void changeColor(object sender, MouseEventArgs e)
+        BLApi.IBL bl;
+        string id;
+        private void ButtonParcel(object sender, RoutedEventArgs e)
         {
+            Customer.Content = new Pages.CustomerParcel(bl,id);
         }
-
-        private void returnColor(object sender, MouseEventArgs e)
+private void ButtonPersonalArea(object sender, RoutedEventArgs e)
         {
+            Customer.Content = new Pages.CustomerPersonalArea(bl,id);
         }
-
-        private void closeButton(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void AddLineButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void startclick(object sender, RoutedEventArgs e)
+        private void ButtonDelivery(object sender, RoutedEventArgs e)
         {
-            TypeOfUser entry = new TypeOfUser(bl);
-            entry.Show();
-            this.Close();
-        }
-    
+            Customer.Content = new Pages.CustomerDelivery(bl,id);
+        }     
     }
 }

@@ -27,7 +27,7 @@ namespace PL.Pages
         private void startclick(object sender, RoutedEventArgs e)
         {            //if()//אם הסיסמא והתז נכונים
 
-            ManegerWindow maneger = new ManegerWindow(bl);
+            ManagerPage maneger = new ManagerPage(bl);
             var t = Window.GetWindow(this);
             maneger.Show();
             t.Close();

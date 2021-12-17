@@ -30,7 +30,7 @@ namespace PL.Pages
         private void logInButton(object sender, RoutedEventArgs e)
         {
             //if()//אם הסיסמא והתז נכונים
-            CustomerWindow customer = new CustomerWindow(bl,user.Text);
+            CustomerPage customer = new CustomerPage(bl,user.Text);
             customer.Show();
             var t = Window.GetWindow(this);
             t.Close();

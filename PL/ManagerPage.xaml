@@ -1,0 +1,49 @@
+﻿<Window x:Class="PL.ManagerPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Title="ManagerPage" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
+        </Grid.Background>
+        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top">
+            <Button x:Name="DroneInManager" Content="DRONE" MinWidth="100" Margin="10,0,0,0" Click="ButtonDrone"/>
+            <Button x:Name="ParcelInManager" Content="PARCEL" MinWidth="100" Margin="10,0,0,0" Click="ButtonParcel"/>
+            <Button x:Name="BaseStationInManager" Content="BASESTATION" MinWidth="100" Margin="10,0,0,0" Click="ButtonBaseStation"/>
+            <Button x:Name="CustomerInManager" Content="CUSTOMER" MinWidth="100" Margin="10,0,0,0" Click="ButtonCustomer"/>
+        </StackPanel>
+        <Button Background="{x:Null}" Height="38" Click="AddLineButton_Click" VerticalAlignment="Top"
+                    Margin="750,0,0,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/סגירה.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Frame x:Name="Manager" Margin="0,35,0,0" NavigationUIVisibility="Hidden" RenderTransformOrigin="0.5,0.5">
+            <Frame.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.762"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-5.32"/>
+                </TransformGroup>
+            </Frame.RenderTransform>
+        </Frame>
+    </Grid>
+</Window>

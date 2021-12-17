@@ -1,0 +1,72 @@
+﻿<Page x:Class="PL.Pages.ManagerBaseStation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PL.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ManagerBaseStation">
+
+    <Grid>
+
+        <Button x:Name="addButton" Background="{x:Null}" Height="88"  VerticalAlignment="Top"
+                    Margin="656,245,50,0" RenderTransformOrigin="0.588,0.314">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/פלוס.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Background="{x:Null}" Height="93"  VerticalAlignment="Top"
+                    Margin="652,134,44,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/קריאה.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <ListView x:Name="listBaseStations" Margin="10,63,214,26"  >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ComboBox x:Name="Location" HorizontalAlignment="Left" Margin="631,10,0,0" VerticalAlignment="Top" Width="144" Height="35" SelectionChanged="Location_SelectionChanged">
+            <ComboBoxItem Tag="all" Content="הכל"></ComboBoxItem>
+            <ComboBoxItem Tag="jerusalem" Content="ירושלים והסביבה"></ComboBoxItem>
+            <ComboBoxItem Tag="north" Content="צפון"></ComboBoxItem>
+            <ComboBoxItem Tag="south" Content="דרום"></ComboBoxItem>
+            <ComboBoxItem Tag="center" Content="מרכז"></ComboBoxItem>
+        </ComboBox>
+        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" Width="133" Height="35" >
+            <ComboBoxItem Tag="availible" Content="עם עמדות פנויות"></ComboBoxItem>
+            <ComboBoxItem Tag="full" Content="ללא עמדות פנויות"></ComboBoxItem>
+        </ComboBox>
+        <TextBlock HorizontalAlignment="Left" Margin="440,50,0,0" Text="סינון על פי מספר עמדות טעינה" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
+        <TextBlock HorizontalAlignment="Left" Margin="620,50,0,0" Text="סינון לפי אזור" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
+
+        <Button x:Name="reset" Content="איפוס" HorizontalAlignment="Left" Margin="399,13,0,0" VerticalAlignment="Top" Height="26" Width="51" Click="reset_Click" FontFamily="Aharoni"/>
+
+
+    </Grid>
+</Page>

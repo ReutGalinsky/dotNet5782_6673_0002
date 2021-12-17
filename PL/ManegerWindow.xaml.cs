@@ -28,7 +28,7 @@ namespace PL
 
         private void AddLineButton_Click(object sender, RoutedEventArgs e)
         {
-            entryWindow entry = new entryWindow(bl);
+            TypeOfUser entry = new TypeOfUser(bl);
             entry.Show();
             this.Close();
         }
@@ -37,33 +37,34 @@ namespace PL
         {
             this.Close();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ManegerStations stations = new ManegerStations(bl);
-            stations.Show();
-            this.Close();
-        }
-
-        private void customersClick(object sender, RoutedEventArgs e)
-        {
-            ManegerCustomers stations = new ManegerCustomers(bl);
-            stations.Show();
-            this.Close();
-        }
-
-        private void ParcelsClick(object sender, RoutedEventArgs e)
-        {
-            ManegerParcel stations = new ManegerParcel(bl);
-            stations.Show();
-            this.Close();
-        }
-
-        private void DronesClick(object sender, RoutedEventArgs e)
-        {
-            ManegerDrone stations = new ManegerDrone(bl);
-            stations.Show();
-            this.Close();
-        }
     }
 }
+//        private void Button_Click(object sender, RoutedEventArgs e)
+//        {
+//            ManegerStations stations = new ManagerStations(bl);
+//            stations.Show();
+//            this.Close();
+//        }
+
+//        private void customersClick(object sender, RoutedEventArgs e)
+//        {
+//            ManegerCustomers stations = new ManegerCustomers(bl);
+//            stations.Show();
+//            this.Close();
+//        }
+
+//        private void ParcelsClick(object sender, RoutedEventArgs e)
+//        {
+//            ManegerParcel stations = new ManegerParcel(bl);
+//            stations.Show();
+//            this.Close();
+//        }
+
+//        private void DronesClick(object sender, RoutedEventArgs e)
+//        {
+//            ManegerDrone stations = new ManegerDrone(bl);
+//            stations.Show();
+//            this.Close();
+//        }
+//    }
+//}
