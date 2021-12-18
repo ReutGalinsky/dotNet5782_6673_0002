@@ -24,6 +24,7 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
+            bl = BLApi.BLFactory.GetBl();
         }
         private BLApi.IBL bl;
         private void changeColor(object sender, MouseEventArgs e)

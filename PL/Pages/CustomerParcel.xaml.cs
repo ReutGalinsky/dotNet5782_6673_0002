@@ -26,13 +26,14 @@ namespace PL.Pages
         {
             InitializeComponent();
             bl = b;
-            foreach (BO.ParcelOfList s in bl.GetParcels())//create the source for the liseView
+            id = i;
+            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x=>x.Sender==id))//create the source for the liseView
                 listParcels.Add(s);
             ParcelListView.DataContext = listParcels;
-
             State.ItemsSource = Enum.GetValues(typeof(BO.DroneState));
         }
         private BLApi.IBL bl;
+        string id;
         private BO.ParcelOfList selected;//selected item that will be send to the new window
         private ObservableCollection<BO.ParcelOfList> listParcels = new ObservableCollection<BO.ParcelOfList>();
         
@@ -47,10 +48,29 @@ namespace PL.Pages
 
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
-
+            selected = (BO.ParcelOfList)ParcelListView.SelectedItem;
         }
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
+            CustomerShowParcel showParcel = new CustomerShowParcel(bl,selected.IdNumber);
+            showParcel.Show();
+        }
+        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+        {
+            Idi.SelectedItem = "all";
+            State.SelectedItem = "all";
+            listParcels.Clear();
+            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x=>x.Sender==id))//create the source for the liseView
+                listParcels.Add(s);
+            ParcelListView.ItemsSource = listParcels;
+            var current = Window.GetWindow(this);
+            current.Opacity = 1;
+        }
+        private void addParcel(object sender, RoutedEventArgs e)
+        {
+            addParcel addWindow = new addParcel(bl,id);
+            addWindow.updateList += updated;
+            addWindow.ShowDialog();
 
         }
     }

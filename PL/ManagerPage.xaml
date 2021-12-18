@@ -35,7 +35,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Frame x:Name="Manager" Margin="0,35,0,0" NavigationUIVisibility="Hidden" RenderTransformOrigin="0.5,0.5">
+        <Frame x:Name="Manager" Margin="0,45,0,0" NavigationUIVisibility="Hidden" RenderTransformOrigin="0.5,0.5">
             <Frame.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

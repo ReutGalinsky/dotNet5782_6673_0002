@@ -20,21 +20,23 @@ namespace PL
     public partial class AddDrone : Window
     {
         public AddDrone(BLApi.IBL b)
-        { 
-                bl = b;
+        {
+            InitializeComponent();
+            bl = b;
                 add.IsEnabled = false;
                 weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             }
             private BLApi.IBL bl;
 
-            private void clickAdd(object sender, RoutedEventArgs e)//event of the adding button
+            public event EventHandler updateList;
+        private void clickAdd(object sender, RoutedEventArgs e)//event of the adding button
             {
                 try
                 {
                     BO.DroneToList d = new BO.DroneToList() { IdNumber = id.Text, MaxWeight = (BO.WeightCategories)weight.SelectedItem, Model = Model.Text };
                     bl.AddDrone(d, Station.Text);
                     var t = Window.GetWindow(this);
-                    t.Close();
+                Button_Click_1(sender,e);
                 }
                 catch (Exception)
                 {
@@ -45,12 +47,12 @@ namespace PL
             private void Button_Click(object sender, RoutedEventArgs e)//event of the cancel button
             {
                 var t = Window.GetWindow(this);
+                updateList(sender, e);
                 t.Close();
             }
 
             private void focusModel(object sender, RoutedEventArgs e)//event to define if the add button is availible
             {
-
                 try
                 {
                     if (Model.Text == "")
@@ -163,6 +165,12 @@ namespace PL
             {
                 TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
             }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            updateList(sender,e);
+            this.Close();
         }
+    }
     }
 

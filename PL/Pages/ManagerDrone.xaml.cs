@@ -28,21 +28,33 @@ namespace PL.Pages
             foreach (BO.DroneToList s in bl.GetDrones())//create the source for the liseView
                 listDrones.Add(s);
             DroneListView.DataContext = listDrones;
-            State.ItemsSource = Enum.GetValues(typeof(BO.DroneState));
-            Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-      
+            var states = BO.DroneState.GetNames(typeof(BO.DroneState)).ToList();
+            states.Insert(0, "all");
+            State.DataContext = states;
+            State.SelectedItem = "all";
+            var weights = BO.WeightCategories.GetNames(typeof(BO.WeightCategories)).ToList();
+            weights.Insert(0, "all");
+            Weight.DataContext = weights;
+            Weight.SelectedItem = "all";
         }
-        private BLApi.IBL bl;
-private BO.DroneToList selected;
-    private ObservableCollection<BO.DroneToList> listDrones = new ObservableCollection<BO.DroneToList>();
-    private void updated(object sender, EventArgs e)//the event that will update the details of the listView
-    {
-        listDrones.Clear();
-        foreach (var item in bl.GetDrones())
-            listDrones.Add(item);
-    }
 
-    private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+        Predicate<BO.DroneToList> stateCondition;
+        Predicate<BO.DroneToList> weightCondition;
+        
+
+        private BLApi.IBL bl;
+        private BO.DroneToList selected;
+        private ObservableCollection<BO.DroneToList> listDrones = new ObservableCollection<BO.DroneToList>();
+        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+        {
+            Weight.SelectedItem = "all";
+            State.SelectedItem = "all";
+            DroneListView.ItemsSource = bl.GetDrones();
+            var t = Window.GetWindow(this);
+            t.Opacity = 1;
+        }
+
+        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
             //AddDrone action = new AddDrone(selected, bl);
             //action.updateList += updated;
@@ -51,80 +63,85 @@ private BO.DroneToList selected;
 
         private void addingDrone_Click(object sender, RoutedEventArgs e)
         {
-            //AddDrone drone = new AddDrone(bl);
-            //drone.updateList += updated;
-            //drone.ShowDialog();
+            AddDrone drone = new AddDrone(bl);
+            drone.updateList += updated;
+            var t = Window.GetWindow(this);
+            t.Opacity = 0.75;
+            drone.ShowDialog();
+
         }
 
         private void ComboBox_Weight(object sender, SelectionChangedEventArgs e)
         {
-            var item = Weight.SelectedItem;
-            var check = State.SelectedItem;
-            if (check == null)
+            if(Weight.SelectedItem==null||State.SelectedItem==null)
             {
-                DroneListView.ItemsSource = item switch
-                {
-                    BO.WeightCategories.Heavy => bl.GetAllDronesBy(x => x.MaxWeight == BO.WeightCategories.Heavy),
-                    BO.WeightCategories.Light => bl.GetAllDronesBy(x => x.MaxWeight == BO.WeightCategories.Light),
-                    BO.WeightCategories.Middle => bl.GetAllDronesBy(x => x.MaxWeight == BO.WeightCategories.Middle),
-                    _ => bl.GetDrones(),
-
-                };
+                return;
             }
-            else
+            object item;
+            Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
+            object check;
+            Enum.TryParse(typeof(BO.DroneState), State.SelectedItem.ToString(), out check);
+            listDrones.Clear();
+            DroneListView.ItemsSource = item switch
             {
-                DroneListView.ItemsSource = item switch
+                null => check switch
                 {
-                    BO.WeightCategories.Heavy => bl.GetAllDronesBy(x => ((x.MaxWeight == BO.WeightCategories.Heavy) && (x.State == (BO.DroneState)check))),
-                    BO.WeightCategories.Light => bl.GetAllDronesBy(x => ((x.MaxWeight == BO.WeightCategories.Light) && (x.State == (BO.DroneState)check))),
-                    BO.WeightCategories.Middle => bl.GetAllDronesBy(x => ((x.MaxWeight == BO.WeightCategories.Middle) && (x.State == (BO.DroneState)check))),
-                    _ => bl.GetDrones(),
-                };
-            }
+                    null => bl.GetDrones(),
+                    _ => bl.GetAllDronesBy(x => x.State == (BO.DroneState)check),
+                },
+                _ => check switch
+                {
+                    null => bl.GetAllDronesBy(x => x.MaxWeight == (BO.WeightCategories)item),
+                    _ => bl.GetAllDronesBy(x => x.MaxWeight == (BO.WeightCategories)item && x.State == (BO.DroneState)check),
+                },
+            };
         }
 
         private void ComboBox_State(object sender, SelectionChangedEventArgs e)
         {
-            var item = State.SelectedItem;
-            var check = Weight.SelectedItem;
-            if (check == null)
+            if (Weight.SelectedItem == null || State.SelectedItem == null)
             {
-                DroneListView.ItemsSource = item switch
-                {
-                    BO.DroneState.Available => bl.GetAllDronesBy(x => x.State == BO.DroneState.Available),
-                    BO.DroneState.maintaince => bl.GetAllDronesBy(x => x.State == BO.DroneState.maintaince),
-                    BO.DroneState.shipping => bl.GetAllDronesBy(x => x.State == BO.DroneState.shipping),
-                    _ => bl.GetDrones(),
-                };
+                return;
             }
-            else
+            object item;
+            var b = Weight.SelectedItem;
+            Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
+            object check;
+            Enum.TryParse(typeof(BO.DroneState), State.SelectedItem.ToString(), out check);
+            listDrones.Clear();
+            DroneListView.ItemsSource = item switch
             {
-                DroneListView.ItemsSource = item switch
+                null => check switch
                 {
-                    BO.DroneState.Available => bl.GetAllDronesBy(x => ((x.State == BO.DroneState.Available) && (x.MaxWeight == (BO.WeightCategories)check))),
-                    BO.DroneState.maintaince => bl.GetAllDronesBy(x => ((x.State == BO.DroneState.maintaince) && (x.MaxWeight == (BO.WeightCategories)check))),
-                    BO.DroneState.shipping => bl.GetAllDronesBy(x => ((x.State == BO.DroneState.shipping) && (x.MaxWeight == (BO.WeightCategories)check))),
-                    _ => bl.GetDrones(),
-                };
-            }
+                    null => bl.GetDrones(),
+                    _ => bl.GetAllDronesBy(x => x.State == (BO.DroneState)check),
+                },
+                _ => check switch
+                {
+                    null => bl.GetAllDronesBy(x => x.MaxWeight == (BO.WeightCategories)item),
+                    _ => bl.GetAllDronesBy(x => x.MaxWeight == (BO.WeightCategories)item && x.State == (BO.DroneState)check),
+                },
+            };
 
         }
-
-        private void reset_Click(object sender, RoutedEventArgs e)
-        {
-
-                listDrones.Clear();
-                foreach (var item in bl.GetDrones())
-                    listDrones.Add(item);
-                State.SelectedItem = null;
-                Weight.SelectedItem = null;
-
-        }
-
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
             selected = (BO.DroneToList)DroneListView.SelectedItem;
         }
+
+        private void deleteDrone(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BO.DroneToList stationToDelte = ((sender as Button).DataContext) as BO.DroneToList;
+                MessageBox.Show($"delete {stationToDelte.IdNumber}");
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
     }
 }
 

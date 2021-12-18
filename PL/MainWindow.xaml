@@ -8,23 +8,6 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Title="MainWindow" Height="450" Width="800">
-    <!--
-    <Grid>
-        
-        <Grid.Background>
-            <ImageBrush ImageSource="/רקע2.png" Opacity="0.895"></ImageBrush>
-        </Grid.Background>
-        <Button x:Name="ListOfDrones" FontSize="24" HorizontalAlignment="Left" Margin="92,239,0,0" VerticalAlignment="Top" Height="154" Width="204" Click="clickDrones" RenderTransformOrigin="0,0">
-            <Button.Content>
-                <TextBlock  HorizontalAlignment="Left"    Foreground="#FF042038" Text="רשימת רחפנים" TextWrapping="Wrap" VerticalAlignment="Top" Cursor="" FontWeight="Bold"/>
-            </Button.Content>
-        </Button>
-        <Button x:Name="closing" Content="סגירה" HorizontalAlignment="Left" Margin="42,10,0,0" VerticalAlignment="Top" Click="closing_Click" FontFamily="Aharoni" Height="54" Width="69" FontSize="20"/>
-
-        <TextBlock HorizontalAlignment="Left" Margin="518,0,0,0" Text="!ברוכים הבאים" FontSize="48" TextWrapping="Wrap" VerticalAlignment="Top" Height="64" Width="336" FontFamily="Aharoni"/>
-    
-        </Grid>
-    -->
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/רקע פרוקיט.jpg"></ImageBrush>

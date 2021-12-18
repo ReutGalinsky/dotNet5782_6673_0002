@@ -29,6 +29,7 @@ namespace PL
         }
         private BLApi.IBL bl;
         private string id;
+        public event EventHandler updateList;
 
         private void adButton(object sender, RoutedEventArgs e)
         {
@@ -46,7 +47,17 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                BO.ParcelOfList parcel=new BO.ParcelOfList() { Geter=id=IdGeter.Text, Priority=(BO.Priorities)Prioprity.SelectedItem, Weight= (BO.WeightCategories)Weight.SelectedItem, Sender=id };
+                bl.AddParcelToDelivery(parcel);
+                updateList(sender, e);
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("error");
+            }
         }
     }
 }

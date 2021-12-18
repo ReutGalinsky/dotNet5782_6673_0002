@@ -26,9 +26,12 @@ namespace PL.Pages
         {
             InitializeComponent();
             bl = b;
-            liststations = new ObservableCollection<BO.BaseStationToList>();
-            listBaseStations.DataContext = liststations;
-
+            foreach(var item in bl.GetBaseStations())
+            {
+                liststations.Add(item);
+            }
+            StatiosListView.DataContext = liststations;
+            chargeSlot.SelectedItem = "All";
         }
         public ObservableCollection<BO.BaseStationToList> liststations = new ObservableCollection<BO.BaseStationToList>();
 
@@ -46,22 +49,6 @@ namespace PL.Pages
         foreach (var item in bl.GetBaseStations())
                 liststations.Add(item);
         }
-    private void getNorth(ObservableCollection<BO.BaseStation> a)
-    {
-     //a = bl.get(X=>X.ChargeSlots<35); ///לבדוק קווים של צפון
-    }
-    //YYYYYYYYYYYYYYYYYYYYYY
-    //private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    //{
-    //    if(chargeSlots.SelectedItem!=null)
-    //    {
-    //        switch (Location.SelectedItem) 
-    //        {
-    //            north=>getNorth(a);
-    //        }
-    //    }
-    //    else
-    //}
 
     private void removeButton_Click(object sender, RoutedEventArgs e)
     {
@@ -70,7 +57,7 @@ namespace PL.Pages
 
     private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
     {
-        selected = (BO.BaseStationToList)listBaseStations.SelectedItem;
+        selected = (BO.BaseStationToList)StatiosListView.SelectedItem;
     }
 
     private void viewItem(object sender, MouseButtonEventArgs e)
@@ -95,8 +82,23 @@ namespace PL.Pages
                 liststations.Add(item);
         }
 
-        private void Location_SelectionChanged(object sender, SelectionChangedEventArgs e)
+     
+
+        private void listBaseStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            selected = (BO.BaseStationToList)StatiosListView.SelectedItem;
+
+        }
+
+            private void changeFilterCharge(object sender, SelectionChangedEventArgs e)
+        {
+        
+            StatiosListView.ItemsSource = (string)chargeSlot.SelectedItem switch
+            {
+                "All" => bl.GetBaseStations(),
+                "With available charging slots" => bl.GetAllBaseStationsBy(x => x.ChargeSlots > 0),
+                _ => bl.GetAllBaseStationsBy(x => x.ChargeSlots == 0),
+            };
 
         }
     }

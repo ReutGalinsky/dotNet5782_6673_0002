@@ -36,7 +36,7 @@ namespace PL
 
         private void customerButton_Click(object sender, RoutedEventArgs e)
         {
-            CustomerPage entry = new CustomerPage(bl,"555");//רק לצורך הדוגמא
+            CustomerPage entry = new CustomerPage(bl,"8");//רק לצורך הדוגמא
             entry.Show();
             this.Close();
         }

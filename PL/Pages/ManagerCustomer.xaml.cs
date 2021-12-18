@@ -26,7 +26,10 @@ namespace PL.Pages
         {
             InitializeComponent();
             bl = b;
-            foreach (BO.CustomerToList s in bl.GetCustomers())//create the source for the liseView
+            var temp = from item in bl.GetCustomers()
+                       orderby item.Name
+                       select item;
+            foreach (BO.CustomerToList s in temp)//create the source for the liseView
                 listCustomers.Add(s);
             CustomerListView.DataContext = listCustomers;       
         }

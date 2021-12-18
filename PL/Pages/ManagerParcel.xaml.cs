@@ -25,12 +25,21 @@ namespace PL.Pages
         {
             InitializeComponent();
             bl = b;
-            
             foreach (BO.ParcelOfList s in bl.GetParcels())//create the source for the liseView
                 listParcels.Add(s);
             ParcelListView.DataContext = listParcels;
-            Priority.ItemsSource = Enum.GetValues(typeof(BO.DroneState));
-            Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+            var states = BO.ParcelState.GetNames(typeof(BO.ParcelState)).ToList();
+            states.Insert(0, "all");
+            State.ItemsSource = states;
+            State.SelectedItem = "all";
+            var weights = BO.WeightCategories.GetNames(typeof(BO.WeightCategories)).ToList();
+            weights.Insert(0, "all");
+            Weight.ItemsSource = weights;
+            Weight.SelectedItem = "all";
+            var priority= BO.Priorities.GetNames(typeof(BO.Priorities)).ToList();
+            priority.Insert(0, "all");
+            Priority.SelectedItem = "all";
+            Priority.ItemsSource = priority;
 
         }
         private BLApi.IBL bl;

@@ -43,8 +43,10 @@
     <None Remove="Pages\Images\תחנת בסיס.png" />
     <None Remove="Pages\התחבר.png" />
     <None Remove="Pages\לקוח.png" />
+    <None Remove="Pages\מחיקה.jpg" />
     <None Remove="Pages\מנהל2.png" />
     <None Remove="Pages\מפתח.jpg" />
+    <None Remove="Pages\פלוס.jpg" />
     <None Remove="חבילה אחת.jpg" />
     <None Remove="חזור.jpg" />
     <None Remove="לוגו רחפן.png" />
@@ -140,8 +142,10 @@
     </Resource>
     <Resource Include="Pages\התחבר.png" />
     <Resource Include="Pages\לקוח.png" />
+    <Resource Include="Pages\מחיקה.jpg" />
     <Resource Include="Pages\מנהל2.png" />
     <Resource Include="Pages\מפתח.jpg" />
+    <Resource Include="Pages\פלוס.jpg" />
     <Resource Include="חבילה אחת.jpg" />
     <Resource Include="חזור.jpg" />
     <Resource Include="לוגו רחפן.png" />

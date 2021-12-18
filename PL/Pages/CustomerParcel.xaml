@@ -10,35 +10,47 @@
     <Page.Resources>
         <DataTemplate x:Key="MyDataTemplate"
  DataType="local:BO.ParcelOfList">
-
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+ Text="Id Number: " />
+                <TextBlock Grid.Column="1"
+ Text="{Binding Path=IdNumber}" />
+                <TextBlock Grid.Column="2"
+ Text="Priority: " />
+                <TextBlock Grid.Column="3"
+ Text="{Binding Path=Priority}" />
+                <TextBlock Grid.Column="4"
+ Text="state" />
+                <TextBlock Grid.Column="5"
+ Text="{Binding Path=ParcelState}" />
+                <Button Grid.Column="6" Height="40" Width="40" BorderBrush="{x:Null}" Background="{x:Null}">
+                    <Button.Content>
+                        <Image Source="/Pages/מחיקה.jpg" Width="40" Height="40"></Image>
+                    </Button.Content>
+                </Button>
+            </Grid>
         </DataTemplate>
     </Page.Resources>
     <Grid>
-
-                <Button Background="{x:Null}" Height="99"  VerticalAlignment="Top"
-                    Margin="652,309,45,0">
+        <Button Background="{x:Null}" Height="99"  VerticalAlignment="Top"
+                    Margin="652,309,45,0" Click="addParcel">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/מינוס.png" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Opacity" Value="0.5"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button Background="{x:Null}" Height="93"  VerticalAlignment="Top"
-                    Margin="651,211,45,0">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/קריאה.jpg" />
+                                    <ImageBrush ImageSource="/Pages/פלוס.jpg" />
                                 </Ellipse.Fill>
                             </Ellipse>
                             <ControlTemplate.Triggers>
@@ -50,9 +62,8 @@
                     </Button.Template>
                 </Button>
         <ListView x:Name="ParcelListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}"/>
-
         <ComboBox x:Name="State" HorizontalAlignment="Left" Margin="631,10,0,0" VerticalAlignment="Top" Width="144" Height="35"/>
-                <ComboBox x:Name="Idi" HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" Width="133" Height="35"/>
+       <ComboBox x:Name="Idi" HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" Width="133" Height="35"/>
         <Button x:Name="reset" Content="איפוס" HorizontalAlignment="Left" Margin="399,13,0,0" VerticalAlignment="Top" Height="26" Width="51" Click="reset_Click" FontFamily="Aharoni"/>
 
     </Grid>

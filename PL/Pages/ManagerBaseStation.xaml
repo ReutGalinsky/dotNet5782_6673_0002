@@ -7,7 +7,42 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagerBaseStation">
-
+    <Page.Resources>
+        <DataTemplate x:Key="MyDataTemplate"
+ DataType="local:BO.BaseStationToList">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+ Text="Id Number: " />
+                <TextBlock Grid.Column="1"
+ Text="{Binding Path=IdNumber}" />
+                <TextBlock Grid.Column="2"
+ Text="Name: " />
+                <TextBlock Grid.Column="3"
+ Text="{Binding Path=Name}" />
+                <TextBlock Grid.Column="4"
+ Text="availible slots: " />
+                <TextBlock Grid.Column="5"
+ Text="{Binding Path=ChargeSlots}" />
+                <Button Grid.Column="6" Height="40" Width="40" BorderBrush="{x:Null}" Background="{x:Null}">
+                    <Button.Content>
+                        <Image Source="/Pages/מחיקה.jpg" Width="40" Height="40"></Image>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
 
         <Button x:Name="addButton" Background="{x:Null}" Height="88"  VerticalAlignment="Top"
@@ -27,43 +62,13 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Background="{x:Null}" Height="93"  VerticalAlignment="Top"
-                    Margin="652,134,44,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/קריאה.jpg" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <ListView x:Name="listBaseStations" Margin="10,63,214,26"  >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <ComboBox x:Name="Location" HorizontalAlignment="Left" Margin="631,10,0,0" VerticalAlignment="Top" Width="144" Height="35" SelectionChanged="Location_SelectionChanged">
-            <ComboBoxItem Tag="all" Content="הכל"></ComboBoxItem>
-            <ComboBoxItem Tag="jerusalem" Content="ירושלים והסביבה"></ComboBoxItem>
-            <ComboBoxItem Tag="north" Content="צפון"></ComboBoxItem>
-            <ComboBoxItem Tag="south" Content="דרום"></ComboBoxItem>
-            <ComboBoxItem Tag="center" Content="מרכז"></ComboBoxItem>
-        </ComboBox>
-        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" Width="133" Height="35" >
-            <ComboBoxItem Tag="availible" Content="עם עמדות פנויות"></ComboBoxItem>
-            <ComboBoxItem Tag="full" Content="ללא עמדות פנויות"></ComboBoxItem>
+        <ListView x:Name="StatiosListView" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" HorizontalContentAlignment="Stretch" Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" Background="{x:Null}"/>
+        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" Width="133" Height="35" SelectionChanged="changeFilterCharge" >
+            <ComboBoxItem Tag="all" Content="All" ></ComboBoxItem>
+            <ComboBoxItem Tag="availible" Content="With available charging slots"></ComboBoxItem>
+            <ComboBoxItem Tag="full" Content="Without available charging slots"></ComboBoxItem>
         </ComboBox>
         <TextBlock HorizontalAlignment="Left" Margin="440,50,0,0" Text="סינון על פי מספר עמדות טעינה" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
-        <TextBlock HorizontalAlignment="Left" Margin="620,50,0,0" Text="סינון לפי אזור" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
 
         <Button x:Name="reset" Content="איפוס" HorizontalAlignment="Left" Margin="399,13,0,0" VerticalAlignment="Top" Height="26" Width="51" Click="reset_Click" FontFamily="Aharoni"/>
 
