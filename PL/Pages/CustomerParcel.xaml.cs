@@ -70,7 +70,7 @@ namespace PL.Pages
         }
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
-           Weight.SelectedItem = "all";
+            Weight.SelectedItem = "all";
             State.SelectedItem = "all";
             listParcels.Clear();
             foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x=>x.Sender==id))//create the source for the liseView
@@ -116,13 +116,13 @@ namespace PL.Pages
             {
                 null => check switch
                 {
-                    null => bl.GetParcels(),
-                    _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check),
+                    null => bl.GetAllParcelsBy(x=>x.Sender==id),
+                    _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check&& x.Sender == id),
                 },
                 _ => check switch
                 {
-                    null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item),
-                    _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check),
+                    null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item&& x.Sender == id),
+                    _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check&& x.Sender == id),
                 },
             };
 
@@ -143,13 +143,13 @@ namespace PL.Pages
             {
                 null => check switch
                 {
-                    null => bl.GetParcels(),
-                    _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check),
+                    null => bl.GetAllParcelsBy(x=>x.Sender == id),
+                    _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check&& x.Sender == id),
                 },
                 _ => check switch
                 {
-                    null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item),
-                    _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check),
+                    null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item&& x.Sender == id),
+                    _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check&& x.Sender == id),
                 },
             };
         }

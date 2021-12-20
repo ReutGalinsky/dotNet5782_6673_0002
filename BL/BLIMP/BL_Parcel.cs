@@ -44,6 +44,37 @@ namespace BL
             { throw new AddingProblemException("can't add the customer", e); }
         }
         #endregion
+        public void RemoveParcel(string number)
+        {
+            try
+            {
+                var parcel = GetParcel(number);
+                if (parcel.Drone!=null&&parcel.ArrivingDroneTime!=null)
+                    throw new DeletingException("can't delete parcel that passing");
+                dal.DeleteParcel(number);
+            }
+            catch (Exception e)
+            {
+                throw new DeletingException(e.Message, e);
+            }
+        }
+
+        public void RemoveCustomer(string number)
+        {
+            try
+            {
+                var customer = GetCustomer(number);
+                if (customer.FromCustomer.FirstOrDefault(x=>x.State!= ParcelState.supply)!=null)
+                    throw new DeletingException("can't delete customer that sending");
+                if (customer.ToCustomer.FirstOrDefault(x => x.State != ParcelState.supply) != null)
+                    throw new DeletingException("can't delete customer that waiting to parcel");
+                dal.DeleteCustomer(number);
+            }
+            catch (Exception e)
+            {
+                throw new DeletingException(e.Message, e);
+            }
+        }
 
         #region AddParcelToDelivery
         /// <summary>

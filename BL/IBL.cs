@@ -33,7 +33,10 @@ namespace BLApi
         public IEnumerable<DroneToList> GetAllDronesBy(Predicate<DroneToList> c);
         public IEnumerable<ParcelOfList> GetAllParcelsBy(Predicate<ParcelOfList> c);
         public IEnumerable<CustomerToList> GetAllCustomersBy(Predicate<CustomerToList> c);
-
+        public void RemoveDrone(string number);
+        public void RemoveParcel(string number);
+        public void RemoveBaseStation(string number);
+        public void RemoveCustomer(string number);
 
 
 

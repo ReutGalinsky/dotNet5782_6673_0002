@@ -95,14 +95,32 @@ namespace PL.Pages
 
         private void changeFilterCharge(object sender, SelectionChangedEventArgs e)
         {
-        
-            StationsListView.ItemsSource = (string)chargeSlot.SelectedItem switch
+            var comboBoxItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
+            StationsListView.ItemsSource = comboBoxItem.Content.ToString() switch
             {
-                "All" => bl.GetBaseStations(),
-                "With available charging slots" => bl.GetAllBaseStationsBy(x => x.ChargeSlots > 0),
-                _ => bl.GetAllBaseStationsBy(x => x.ChargeSlots == 0),
+                "With available charging slots"=>bl.GetAllBaseStationsBy(x=>x.ChargeSlots>0),
+                "Without available charging slots"=> bl.GetAllBaseStationsBy(x => x.ChargeSlots ==0),
+                _=>bl.GetBaseStations(),
             };
 
+        }
+
+        private void deleteStation(object sender, RoutedEventArgs e)
+        {
+            var dialogResult = MessageBox.Show($"are you sure?", "Delede Parcel", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    BO.BaseStationToList ParcelToDelte = ((sender as Button).DataContext) as BO.BaseStationToList;
+                    bl.RemoveBaseStation(ParcelToDelte.IdNumber);
+                    StationsListView.ItemsSource = bl.GetBaseStations();
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
         }
     }
 }

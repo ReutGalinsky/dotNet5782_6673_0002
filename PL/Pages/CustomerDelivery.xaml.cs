@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace PL.Pages
 {
@@ -21,29 +22,126 @@ namespace PL.Pages
     public partial class CustomerDelivery : Page
     {
         public CustomerDelivery(BLApi.IBL b, string i)
-        {
+        { 
             InitializeComponent();
             bl = b;
             id = i;
+            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x=>x.Geter==id))//create the source for the liseView
+                parcelList.Add(s);
+            ParcelsListView.ItemsSource = parcelList;
+            State.ItemsSource = Enum.GetValues(typeof(BO.DroneState));
             Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            Prioprity.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
+            var states = BO.ParcelState.GetNames(typeof(BO.ParcelState)).ToList();
+        states.Insert(0, "all");
+            State.ItemsSource = states;
+            State.SelectedItem = "all";
+            var weights = BO.WeightCategories.GetNames(typeof(BO.WeightCategories)).ToList();
+        weights.Insert(0, "all");
+            Weight.ItemsSource = weights;
+            Weight.SelectedItem = "all";
         }
-        private BLApi.IBL bl;
-        private string id;
-        private void Button_Click(object sender, RoutedEventArgs e)
+    private BLApi.IBL bl;
+    string id;
+    private BO.ParcelOfList selected;//selected item that will be send to the new window
+    private ObservableCollection<BO.ParcelOfList> parcelList = new ObservableCollection<BO.ParcelOfList>();
+    private void selectionChange(object sender, SelectionChangedEventArgs e)
+    {
+        selected = (BO.ParcelOfList)ParcelsListView.SelectedItem;
+    }
+    private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+    {
+        CustomerShowParcel showParcel = new CustomerShowParcel(bl, selected.IdNumber);
+        showParcel.Show();
+    }
+    private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+    {
+        Weight.SelectedItem = "all";
+        State.SelectedItem = "all";
+            parcelList.Clear();
+        foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the liseView
+                parcelList.Add(s);
+        ParcelsListView.ItemsSource = parcelList;
+        var current = Window.GetWindow(this);
+        current.Opacity = 1;
+    }
+    private void addParcel(object sender, RoutedEventArgs e)
+    {
+        addParcel addWindow = new addParcel(bl, id);
+        addWindow.updateList += updated;
+        addWindow.ShowDialog();
+
+    }
+    private void deleteParcel(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            try
-            {
-                BO.ParcelOfList parcel = new BO.ParcelOfList() { Priority = (BO.Priorities)Prioprity.SelectedItem, Weight = (BO.WeightCategories)Weight.SelectedItem, Geter = IdGeter.Text, Sender = id };//?האם ההמרה זו הייתה הבעיה
-                bl.AddParcelToDelivery(parcel);
-                MessageBox.Show($"the parcel number: RUNNING NUMBER TO SEARCH added successfully!");
-            }
-            catch (Exception ex)//חריגה לא מדוייקת
-            {
-                MessageBox.Show("the geter customer is not existing in the system, please enter again correct details", "error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            BO.ParcelOfList ParcelToDelte = ((sender as Button).DataContext) as BO.ParcelOfList;
+            MessageBox.Show($"delete {ParcelToDelte.IdNumber}");
+        }
+        catch (Exception ex)
+        {
+
         }
     }
+
+    private void State_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+        if (Weight.SelectedItem == null || State.SelectedItem == null)
+        {
+            return;
+        }
+        object item;
+        var b = Weight.SelectedItem;
+        Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
+        object check;
+        Enum.TryParse(typeof(BO.ParcelState), State.SelectedItem.ToString(), out check);
+            parcelList.Clear();
+        ParcelsListView.ItemsSource = item switch
+        {
+            null => check switch
+            {
+                null => bl.GetAllParcelsBy(x => x.Geter == id),
+                _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check && x.Geter == id),
+            },
+            _ => check switch
+            {
+                null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.Geter == id),
+                _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check && x.Geter == id),
+            },
+        };
+
+    }
+
+    private void Weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (Weight.SelectedItem == null || State.SelectedItem == null)
+        {
+            return;
+        }
+        object item;
+        Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
+        object check;
+        Enum.TryParse(typeof(BO.ParcelState), State.SelectedItem.ToString(), out check);
+            parcelList.Clear();
+        ParcelsListView.ItemsSource = item switch
+        {
+            null => check switch
+            {
+                null => bl.GetAllParcelsBy(x => x.Sender == id),
+                _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check && x.Geter == id),
+            },
+            _ => check switch
+            {
+                null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.Geter == id),
+                _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check && x.Geter == id),
+            },
+        };
+    }
 }
+
+        
+ }
+ 
 
 

@@ -12,6 +12,20 @@ namespace BL
     /// </summary>
     internal partial class BL : BLApi.IBL
     {
+        public void RemoveBaseStation(string number)
+        {
+            try
+            {
+                var baseStation = GetBaseStation(number);
+                if (baseStation.Drones.Count()!=0)
+                    throw new DeletingException("can't delete base station with charged drones");
+                dal.DeleteBaseStation(number);
+            }
+            catch (Exception e)
+            {
+                throw new DeletingException(e.Message, e);
+            }
+        }
         #region AddBaseStation
         /// <summary>
         /// adding a new base station

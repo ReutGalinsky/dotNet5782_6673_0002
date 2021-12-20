@@ -31,7 +31,9 @@ namespace PL.Pages
                        select item;
             foreach (BO.CustomerToList s in temp)//create the source for the liseView
                 listCustomers.Add(s);
-            CustomerListView.DataContext = listCustomers;       
+            CustomerListView.DataContext = listCustomers;
+            Location.SelectedItem = Location.Items[0];
+
         }
         private BLApi.IBL bl;
         private BO.CustomerToList selected;
@@ -60,6 +62,34 @@ namespace PL.Pages
         {
             ManagerViewCustomer customer= new ManagerViewCustomer(bl, selected.IdNumber);
             customer.Show();
+        }
+
+        private void Location_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var LocationItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
+            CustomerListView.ItemsSource = LocationItem.Content.ToString() switch
+            {
+                "Parcels on way" => bl.GetAllCustomersBy(x => x.ParcelOnTheWay != 0 || x.ParcelGet != 0),
+                "No parcels on way" => bl.GetAllCustomersBy(x => x.ParcelOnTheWay == 0 || x.ParcelGet == 0),
+                _ => bl.GetCustomers(),
+            };
+        }
+
+        private void deleteCustomer(object sender, RoutedEventArgs e)
+        {
+            var dialogResult = MessageBox.Show($"are you sure?", "Delede Parcel", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    BO.CustomerToList CustomerToDelte = ((sender as Button).DataContext) as BO.CustomerToList;
+                    bl.RemoveBaseStation(CustomerToDelte.IdNumber);
+                    CustomerListView.ItemsSource = bl.GetCustomers();
+                }
+                catch (Exception ex)
+                {
+                }
+            }
         }
     }
     //צריך להוסיף:

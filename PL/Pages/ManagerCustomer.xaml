@@ -35,7 +35,7 @@
  Text="Phone Number: " />
                 <TextBlock Grid.Column="5"
  Text="{Binding Path=Phone}" />
-                <Button Grid.Column="6" Height="40" Width="40" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Button Grid.Column="6" Height="40" Width="40" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteCustomer">
                     <Button.Content>
                         <Image Source="/Pages/מחיקה.jpg" Width="40" Height="40"></Image>
                     </Button.Content>
@@ -64,10 +64,23 @@
         </Button>
         <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}"/>
 
-        <ComboBox x:Name="ChargeSlot" HorizontalAlignment="Left" Margin="631,10,0,0" VerticalAlignment="Top" Width="144" Height="35"/>
-        <ComboBox HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" Width="133" Height="35"/>
-        <TextBlock HorizontalAlignment="Left" Margin="610,50,0,0" Text="סינון על פי מספר עמדות טעינה" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
+        <ComboBox x:Name="Location" HorizontalAlignment="Left" Margin="631,10,0,0" VerticalAlignment="Top" Width="144" Height="35" SelectionChanged="Location_SelectionChanged">
+            <ComboBoxItem Content="All"></ComboBoxItem>
+            <ComboBoxItem Content="Parcels on way"></ComboBoxItem>
+            <ComboBoxItem Content="No parcels on way"></ComboBoxItem>
+        </ComboBox>
+        <TextBlock HorizontalAlignment="Left" Margin="659,50,0,0" Text="סינון על פי חבילות בדרך" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
+        <RadioButton Content="מיון לפי תז" GroupName="key1" HorizontalAlignment="Left" Margin="659,108,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="מיון לפי שם " GroupName="key1" HorizontalAlignment="Left" Margin="659,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="80">
+            <RadioButton.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.2"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </RadioButton.RenderTransform>
+        </RadioButton>
 
-        <Button x:Name="reset" Content="איפוס" HorizontalAlignment="Left" Margin="399,13,0,0" VerticalAlignment="Top" Height="26" Width="51" Click="reset_Click" FontFamily="Aharoni"/>
     </Grid>
 </Page>

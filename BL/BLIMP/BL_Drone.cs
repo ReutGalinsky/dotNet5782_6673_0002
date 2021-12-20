@@ -351,6 +351,24 @@ namespace BL
             //return baseStationToReturn;
         }
 
+        public void RemoveDrone(string number)
+        {
+            try
+            {
+              var drone=GetDrone(number);
+                if (drone.State == DroneState.shipping)
+                    throw new DeletingException("can't delete drone that shipping");
+                TimeSpan t=new TimeSpan(0);
+              if (drone.State == DroneState.maintaince)
+                    DroneFromCharging(number,t);
+                dal.DeleteDrone(number);
+                Drones.RemoveAll(x=>x.IdNumber==number);
+            }
+            catch(Exception e)
+            {
+                throw new DeletingException(e.Message, e);
+            }
+        }
 
     }
 }

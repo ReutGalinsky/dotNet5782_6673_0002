@@ -40,6 +40,18 @@ namespace PL
             entry.Show();
             this.Close();
         }
+
+        private void move(object sender, MouseButtonEventArgs e)
+        {
+            
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void colsing(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
 

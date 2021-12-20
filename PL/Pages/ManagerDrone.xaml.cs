@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-
 namespace PL.Pages
 {
     /// <summary>
@@ -129,17 +128,21 @@ namespace PL.Pages
 
         private void deleteDrone(object sender, RoutedEventArgs e)
         {
-            try
+            var dialogResult = MessageBox.Show($"are you sure?", "Delede Drone", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
             {
-                BO.DroneToList DroneToDelte = ((sender as Button).DataContext) as BO.DroneToList;
-                MessageBox.Show($"delete {DroneToDelte.IdNumber}");
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    BO.DroneToList DroneToDelte = ((sender as Button).DataContext) as BO.DroneToList;
+                    bl.RemoveDrone(DroneToDelte.IdNumber);
+                    updated(sender, e);
+                }
+                catch (Exception ex)
+                {
 
+                }
             }
         }
-
     }
 }
 
