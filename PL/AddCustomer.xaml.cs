@@ -28,6 +28,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
             //משהו כזה אבל בנתונים של לקוח
             //try
             //{
@@ -40,6 +41,13 @@ namespace PL
             //{
             //    MessageBox.Show("can't add");
             //}
+        }
+
+        private void move(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+
         }
     }
 }

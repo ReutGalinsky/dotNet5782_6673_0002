@@ -18,8 +18,9 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Background="{x:Null}" Height="38" VerticalAlignment="Top"
-                    Margin="459,0,0,0" Click="Button_Click_1" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="4"/>
+        <Button Background="{x:Null}" Height="35" VerticalAlignment="Top"
+                    Margin="464,0,0,0" Click="Button_Click_1" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="-1"/>

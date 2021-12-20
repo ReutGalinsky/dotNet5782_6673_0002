@@ -91,6 +91,16 @@ namespace PL.Pages
                 }
             }
         }
+
+        private void idCheck(object sender, RoutedEventArgs e)
+        {
+            CustomerListView.ItemsSource = bl.GetCustomers().OrderBy(x => int.Parse(x.IdNumber));
+        }
+
+        private void nameCheck(object sender, RoutedEventArgs e)
+        {
+            CustomerListView.ItemsSource = bl.GetCustomers().OrderBy(x => x.Name);
+        }
     }
     //צריך להוסיף:
     //קומבובוקס לסינון אנשים לפי איזה אופציה שנבחר

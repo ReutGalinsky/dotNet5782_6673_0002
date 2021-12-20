@@ -10,21 +10,25 @@
         Title="CustomerPage" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="35*"/>
             <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="773*"/>
+            <ColumnDefinition Width="95*"/>
+            <ColumnDefinition Width="678*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
-        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top" Grid.ColumnSpan="3">
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="4"/>
+
+        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top" Grid.ColumnSpan="4">
+
             <Button x:Name="ParcelInManager" Content="PARCEL" MinWidth="100" Margin="200,0,0,0" Click="ButtonParcel"/>
             <Button x:Name="PersonalAreaInManager" Content="PERSONAL AREA" MinWidth="100" Margin="10,0,0,0" Click="ButtonPersonalArea"/>
             <Button x:Name="DeliveryInManager" Content="DELIVERY" MinWidth="100" Margin="10,0,0,0" Click="ButtonDelivery"/>
         </StackPanel>
-        <Frame x:Name="Customer" Margin="0,35,0,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="3"/>
-        <Button Background="{x:Null}" Height="38" Click="Button_Click" VerticalAlignment="Top"
-                    Margin="0,0,723,0" Grid.Column="2">
+        <Frame x:Name="Customer" Margin="0,35,0,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="4"/>
+        <Button Background="{x:Null}" Height="35" Width="35" Click="Button_Click" VerticalAlignment="Top"
+                    Margin="0,0,45,0" Grid.Column="2">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -42,8 +46,8 @@
         </Button>
 
 
-        <Button Background="{x:Null}" Height="38" Click="AddLineButton_Click" VerticalAlignment="Top"
-                    Margin="723,0,0,0" Grid.Column="2">
+        <Button Background="{x:Null}" Height="35" Width="35" Click="AddLineButton_Click" VerticalAlignment="Top"
+                    Margin="628,0,0,0" Grid.Column="3">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">

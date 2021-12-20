@@ -59,6 +59,13 @@ namespace PL
         {
             Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
         }
+
+        private void move(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+
+        }
     }
           
 

@@ -12,13 +12,19 @@
             <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+
         </Grid.RowDefinitions>
-        <Button Background="{x:Null}" Height="38" VerticalAlignment="Top"
-                    Margin="459,0,0,0" RenderTransformOrigin="0.5,0.5" Click="closing">
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Center" Height="35" Margin="0,-10,0,0" Stroke="Black" VerticalAlignment="Top" MouseDown="move"/>
+
+        <Button Background="{x:Null}" Height="35" Width="35" VerticalAlignment="Top"
+                    Margin="468,-10,0,0" RenderTransformOrigin="0.5,0.5" Click="closing">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="-1"/>
@@ -43,19 +49,19 @@
             </Button.Template>
         </Button>
 
-        <TextBox x:Name="Id" HorizontalAlignment="Left"  Margin="137,33,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="24" Background="{x:Null}"  />
-        <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="137,66,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" Height="28"  Background="{x:Null}"/>
-        <Label Content="Id Number" HorizontalAlignment="Left" Margin="26,33,0,0" FontSize="14" VerticalAlignment="Top" Height="28" Width="106" FontFamily="Aharoni"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="27,66,0,81" FontSize="14" FontFamily="Aharoni" Grid.RowSpan="2"/>
-        <Label Content="Charge slots:" HorizontalAlignment="Left" Margin="28,3,0,48" FontSize="14" FontFamily="Aharoni" Grid.Row="1"/>
-        <TextBox x:Name="ChargeSlot" HorizontalAlignment="Left" Margin="137,3,0,0" Text="{Binding Path=ChargeSlots}" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Height="22" Background="{x:Null}" Grid.Row="1"/>
-        <Label Content="Latitude:" HorizontalAlignment="Left" Margin="37,74,0,73" FontSize="14" FontFamily="Aharoni" Grid.Row="1" Grid.RowSpan="2"/>
-        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="36,40,0,11" FontSize="14" FontFamily="Aharoni" Grid.Row="1"/>
-        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="189,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="102" Height="26"  Background="{x:Null}" Grid.Row="1"/>
-        <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="188,72,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="1" Grid.RowSpan="2"/>
-        <ListBox Grid.Row="2" Margin="269,59,49,73" Grid.RowSpan="2"/>
-        <ListBox Grid.Row="2" Margin="51,64,260,76" Grid.RowSpan="2"/>
-        <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click" Margin="0,2,0,0" Grid.Row="3"/>
+        <TextBox x:Name="Id" Grid.Row="1" HorizontalAlignment="Center" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="24" Background="{x:Null}"  />
+        <TextBox x:Name="Name" Grid.Row="2" HorizontalAlignment="Left" Margin="143,12,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" Height="28"  Background="{x:Null}"/>
+        <Label Content="Id Number" Grid.Row="1" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" VerticalAlignment="Top" Height="28" Width="106" FontFamily="Aharoni" RenderTransformOrigin="0.539,-0.577"/>
+        <Label Content="Name:" Grid.Row="2" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni"/>
+        <Label Content="Charge slots:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="3"/>
+        <TextBox x:Name="ChargeSlot" HorizontalAlignment="Left" Margin="143,0,0,0" Text="{Binding Path=ChargeSlots}" TextWrapping="Wrap" VerticalAlignment="Center" Width="198" Height="22" Background="{x:Null}" Grid.Row="3"/>
+        <Label Content="Latitude:" HorizontalAlignment="Left" Margin="250,9,0,15" FontSize="14" FontFamily="Aharoni" Grid.Row="4"/>
+        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="4"/>
+        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="110,7,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
+        <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="349,4,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
+        <ListBox Grid.Row="4" Margin="269,49,49,3" Grid.RowSpan="2"/>
+        <ListBox Grid.Row="4" Margin="47,49,264,3" Grid.RowSpan="2"/>
+        <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click" Margin="0,2,0,0" Grid.Row="6"/>
 
 
     </Grid>

@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using PL.Pages;
 namespace PL
 {
     /// <summary>
@@ -23,19 +23,33 @@ namespace PL
         {
             InitializeComponent();
             bl = b;
+            pageDrone = new ManagerDrone(bl);
+            pageCustomer = new ManagerCustomer(bl);
+            pageParcel = new ManagerParcel(bl);
+            pageBaseStation = new ManagerBaseStation(bl);
         }
         BLApi.IBL bl;
+        private ManagerDrone pageDrone;
+        private ManagerCustomer pageCustomer;
+        private ManagerParcel pageParcel;
+        private ManagerBaseStation pageBaseStation;
+
         private void ButtonDrone(object sender, RoutedEventArgs e)
         {
-            Manager.Content = new Pages.ManagerDrone(bl);
+            //Manager.Content = new Pages.ManagerDrone(bl);
+            Manager.NavigationService.Navigate(pageDrone);
         }
         private void ButtonParcel(object sender, RoutedEventArgs e)
         {
-            Manager.Content = new Pages.ManagerParcel(bl);
+            //Manager.Content = new Pages.ManagerParcel(bl);
+            Manager.NavigationService.Navigate(pageParcel);
+
         }
         private void ButtonCustomer(object sender, RoutedEventArgs e)
         {
-            Manager.Content = new Pages.ManagerCustomer(bl);
+            //Manager.Content = new Pages.ManagerCustomer(bl);
+            Manager.NavigationService.Navigate(pageCustomer);
+
         }
         private void AddLineButton_Click(object sender, RoutedEventArgs e)
         {
@@ -51,7 +65,16 @@ namespace PL
 
         private void ButtonBaseStation(object sender, RoutedEventArgs e)
         {
-            Manager.Content = new Pages.ManagerBaseStation(bl);
+            //Manager.Content = new Pages.ManagerBaseStation(bl);
+            Manager.NavigationService.Navigate(pageBaseStation);
+
+        }
+
+        private void move(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+
         }
     }
 }

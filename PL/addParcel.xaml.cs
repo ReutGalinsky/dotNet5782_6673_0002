@@ -63,5 +63,17 @@ namespace PL
         {
             this.Close();
         }
+
+        private void move(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+
+        }
+
+        private void closeing(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

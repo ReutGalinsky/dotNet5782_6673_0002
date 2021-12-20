@@ -15,14 +15,14 @@
 
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Frame x:Name="frame" Height="auto" Grid.Row="1"></Frame>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Center" Height="50" Margin="0,-10,0,0" Stroke="Black" VerticalAlignment="Top" MouseDown="move"/>
-        <Button Background="{x:Null}" Height="36" VerticalAlignment="Top" 
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Center" Height="35" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" MouseDown="move"/>
+        <Button Background="{x:Null}" Height="35" Width="35" VerticalAlignment="Center" 
 
-                    Margin="730,0,30,0" Click="colsing">
+                    Margin="755,0,10,0" Click="colsing">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -38,8 +38,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Background="{x:Null}" Height="34" VerticalAlignment="Bottom"
-                    Margin="26,0,736,14" Click="Button_Click">
+        <Button Background="{x:Null}" Height="35" Width="35" VerticalAlignment="Center"
+                    Margin="10,0,755,0" Click="Button_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">

@@ -282,7 +282,7 @@ namespace BL
                         drone.State = DroneState.maintaince;
                         baseStaion.ChargeSlots--;
                         dal.UpdateBaseStation(baseStaion);
-                        DO.DroneCharge charge = new DroneCharge() { DroneId = drone.IdNumber, StationId = baseStaion.IdNumber };
+                        DO.DroneCharge charge = new DroneCharge() { DroneId = drone.IdNumber, StationId = baseStaion.IdNumber, startCharging=DateTime.Now };
                         dal.AddDroneCharge(charge);
                         break;
 

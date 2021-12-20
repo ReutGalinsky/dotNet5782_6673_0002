@@ -171,6 +171,13 @@ namespace PL
             updateList(sender,e);
             this.Close();
         }
+
+        private void move(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+
+        }
     }
     }
 
