@@ -1,0 +1,60 @@
+﻿<Window x:Class="PL.ManagerViewDrone"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ManagerViewDrone" Height="400" Width="500">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Background="{x:Null}" Height="38" VerticalAlignment="Top"
+                    Margin="459,0,0,0" RenderTransformOrigin="0.5,0.5" Click="closing">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/סגירה.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <TextBox x:Name="Id" HorizontalAlignment="Left"  Margin="137,33,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="24" Background="{x:Null}"  />
+        <TextBox x:Name="Model" HorizontalAlignment="Left" Margin="137,66,0,0" Text="{Binding Path=Model}" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Height="26"  Background="{x:Null}"/>
+        <Label Content="Id Number" HorizontalAlignment="Left" Margin="26,33,0,0" FontSize="14" VerticalAlignment="Top" Height="28" Width="106" FontFamily="Aharoni"/>
+        <Label Content="Model:" HorizontalAlignment="Left" Margin="27,66,0,81" FontSize="14" FontFamily="Aharoni" Grid.RowSpan="2"/>
+        <Label Content="MaxWeight:" HorizontalAlignment="Left" Margin="28,3,0,48" FontSize="14" FontFamily="Aharoni" Grid.Row="1"/>
+        <TextBox x:Name="MaxWeight" HorizontalAlignment="Left" Margin="137,3,0,0" Text="{Binding Path=MaxWeight}" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Height="26" Background="{x:Null}" Grid.Row="1"/>
+        <Label Content="State:" HorizontalAlignment="Left" Margin="37,74,0,73" FontSize="14" FontFamily="Aharoni" Grid.Row="1" Grid.RowSpan="2"/>
+        <Label Content="Battery" HorizontalAlignment="Left" Margin="36,40,0,11" FontSize="14" FontFamily="Aharoni" Grid.Row="1"/>
+        <TextBox x:Name="Battery" HorizontalAlignment="Left" Margin="134,41,0,0" Text="{Binding Path=Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Height="26"  Background="{x:Null}" Grid.Row="1"/>
+        <TextBox x:Name="State" HorizontalAlignment="Left" Margin="134,72,0,0" Text="{Binding Path=State}" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="26"  Background="{x:Null}" Grid.Row="1" Grid.RowSpan="2"/>
+        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="36,36,0,15" FontSize="14" FontFamily="Aharoni" Grid.Row="2"/>
+        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="23" Background="{x:Null}" Grid.Row="2" Margin="149,0,0,0"/>
+        <Label Content="Latitude:" HorizontalAlignment="Left" Margin="41,73,0,74" FontSize="14" FontFamily="Aharoni" Grid.Row="2" Grid.RowSpan="2"/>
+        <TextBox x:Name="Latitude" HorizontalAlignment="Center" Margin="0,66,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="20"  Background="{x:Null}" Grid.Row="2"/>
+    </Grid>
+</Window>

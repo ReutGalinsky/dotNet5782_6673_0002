@@ -19,10 +19,28 @@ namespace PL
     /// </summary>
     public partial class ManagerViewParcel : Window
     {
-        public ManagerViewParcel()
+        public ManagerViewParcel(BLApi.IBL b, string i)
         {
             InitializeComponent();
+            bl = b;
+            id = i;
+            parcel = bl.GetParcel(id);
+            Id.DataContext = parcel;
+            SenderId.Text = parcel.SenderCustomer.IdNumber;
+            SenderName.Text = parcel.SenderCustomer.Name;
+            GeterId.Text = parcel.GeterCustomer.IdNumber;
+            GeterName.Text = parcel.GeterCustomer.Name;
+            PriorityBox.DataContext = parcel;
+            WeightBox.DataContext = parcel;
+            Create.DataContext = parcel;
+            Match.DataContext = parcel;
+            Supply.DataContext = parcel;
+            Pick.DataContext = parcel;
         }
+        private BLApi.IBL bl;
+        private string id;
+        private BO.Parcel parcel;
+
         private void closing(object sender, RoutedEventArgs e)
         {
             this.Close();

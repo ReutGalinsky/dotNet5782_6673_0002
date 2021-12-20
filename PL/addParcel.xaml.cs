@@ -59,5 +59,9 @@ namespace PL
                 MessageBox.Show("error");
             }
         }
+        private void closing(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

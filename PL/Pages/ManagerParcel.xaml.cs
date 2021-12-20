@@ -48,37 +48,26 @@ namespace PL.Pages
         private ObservableCollection<BO.ParcelOfList> listParcels = new ObservableCollection<BO.ParcelOfList>();
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ComboBox_Weight(object sender, SelectionChangedEventArgs e)
         {
-            var item = Weight.SelectedItem;
-            var check = Priority.SelectedItem;
-            if (check == null)
+            if (Weight.SelectedItem == null || State.SelectedItem == null ||Priority.SelectedItem==null)
             {
-                
-                ParcelListView.ItemsSource = item switch
-                {
-                    BO.WeightCategories.Heavy => bl.GetAllDronesBy(x => x.MaxWeight == BO.WeightCategories.Heavy),
-                    BO.WeightCategories.Light => bl.GetAllDronesBy(x => x.MaxWeight == BO.WeightCategories.Light),
-                    BO.WeightCategories.Middle => bl.GetAllDronesBy(x => x.MaxWeight == BO.WeightCategories.Middle),
-                    _ => bl.GetDrones(),
+                return;
+            }
+            object weight;
+            var b = Weight.SelectedItem;
+            Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out weight);
+            object state;
+            Enum.TryParse(typeof(BO.ParcelState), State.SelectedItem.ToString(), out state);
+            object priority;
+            Enum.TryParse(typeof(BO.Priorities), State.SelectedItem.ToString(), out priority);
 
-                };
-            }
-            else
+            listParcels.Clear();
+            ParcelListView.ItemsSource = weight switch
             {
-                ParcelListView.ItemsSource = item switch
-                {
-                    BO.WeightCategories.Heavy => bl.GetAllDronesBy(x => ((x.MaxWeight == BO.WeightCategories.Heavy) && (x.State == (BO.DroneState)check))),
-                    BO.WeightCategories.Light => bl.GetAllDronesBy(x => ((x.MaxWeight == BO.WeightCategories.Light) && (x.State == (BO.DroneState)check))),
-                    BO.WeightCategories.Middle => bl.GetAllDronesBy(x => ((x.MaxWeight == BO.WeightCategories.Middle) && (x.State == (BO.DroneState)check))),
-                    _ => bl.GetDrones(),
-                };
-            }
+              
+            };
+
         }
 
         private void ComboBox_State(object sender, SelectionChangedEventArgs e)
@@ -89,20 +78,24 @@ namespace PL.Pages
             {
                 ParcelListView.ItemsSource = item switch
                 {
-                    BO.DroneState.Available => bl.GetAllDronesBy(x => x.State == BO.DroneState.Available),
-                    BO.DroneState.maintaince => bl.GetAllDronesBy(x => x.State == BO.DroneState.maintaince),
-                    BO.DroneState.shipping => bl.GetAllDronesBy(x => x.State == BO.DroneState.shipping),
-                    _ => bl.GetDrones(),
+                    BO.ParcelState.Define => bl.GetAllParcelsBy(x => x.ParcelState == BO.ParcelState.Define),
+                    BO.ParcelState.match => bl.GetAllParcelsBy(x => x.ParcelState == BO.ParcelState.match),
+                    BO.ParcelState.pick => bl.GetAllParcelsBy(x => x.ParcelState == BO.ParcelState.pick),
+                    BO.ParcelState.supply => bl.GetAllParcelsBy(x => x.ParcelState == BO.ParcelState.supply),
+
+                    _ => bl.GetParcels(),
                 };
             }
             else
             {
                 ParcelListView.ItemsSource = item switch
                 {
-                    BO.DroneState.Available => bl.GetAllDronesBy(x => ((x.State == BO.DroneState.Available) && (x.MaxWeight == (BO.WeightCategories)check))),
-                    BO.DroneState.maintaince => bl.GetAllDronesBy(x => ((x.State == BO.DroneState.maintaince) && (x.MaxWeight == (BO.WeightCategories)check))),
-                    BO.DroneState.shipping => bl.GetAllDronesBy(x => ((x.State == BO.DroneState.shipping) && (x.MaxWeight == (BO.WeightCategories)check))),
-                    _ => bl.GetDrones(),
+                    BO.ParcelState.Define => bl.GetAllParcelsBy(x => x.ParcelState == BO.ParcelState.Define&&x.Weight==(BO.WeightCategories)check),
+                    BO.ParcelState.match => bl.GetAllParcelsBy(x => x.ParcelState == BO.ParcelState.match && x.Weight == (BO.WeightCategories)check),
+                    BO.ParcelState.pick => bl.GetAllParcelsBy(x => x.ParcelState == BO.ParcelState.pick && x.Weight == (BO.WeightCategories)check),
+                    BO.ParcelState.supply => bl.GetAllParcelsBy(x => x.ParcelState == BO.ParcelState.supply && x.Weight == (BO.WeightCategories)check),
+
+                    _ => bl.GetParcels(),
                 };
             }
 
@@ -110,6 +103,31 @@ namespace PL.Pages
 
         private void ComboBox_Priority(object sender, SelectionChangedEventArgs e)
         {
+                var item = State.SelectedItem;
+                var check = Weight.SelectedItem;
+                if (check == null)
+                {
+                    ParcelListView.ItemsSource = item switch
+                    {
+                        BO.Priorities.Emergency => bl.GetAllParcelsBy(x => x.Priority == BO.Priorities.Emergency),
+                        BO.Priorities.Regular => bl.GetAllParcelsBy(x => x.Priority == BO.Priorities.Regular),
+                        BO.Priorities.speed => bl.GetAllParcelsBy(x => x.Priority == BO.Priorities.speed),
+
+                        _ => bl.GetParcels(),
+                    };
+                }
+                else
+                {
+                    ParcelListView.ItemsSource = item switch
+                    {
+                    BO.Priorities.Emergency => bl.GetAllParcelsBy(x => x.Priority == BO.Priorities.Emergency && x.Weight == (BO.WeightCategories)check),
+                        BO.Priorities.Regular => bl.GetAllParcelsBy(x => x.Priority == BO.Priorities.Regular && x.Weight == (BO.WeightCategories)check),
+                        BO.Priorities.speed => bl.GetAllParcelsBy(x => x.Priority == BO.Priorities.speed && x.Weight == (BO.WeightCategories)check),
+
+                        _ => bl.GetParcels(),
+                    };
+                }
+
 
         }
 
@@ -124,11 +142,12 @@ namespace PL.Pages
 
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
-
+            selected = (BO.ParcelOfList)ParcelListView.SelectedItem;
         }
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
-         
+            ManagerViewParcel showParcel = new ManagerViewParcel(bl, selected.IdNumber);
+            showParcel.Show();
         }
     }
 }

@@ -52,12 +52,14 @@ namespace PL.Pages
         }
 
         private void selectionChange(object sender, SelectionChangedEventArgs e)
-        {
-
+        {    
+                selected = (BO.CustomerToList)CustomerListView.SelectedItem;      
         }
+        
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
-
+            ManagerViewCustomer customer= new ManagerViewCustomer(bl, selected.IdNumber);
+            customer.Show();
         }
     }
     //צריך להוסיף:

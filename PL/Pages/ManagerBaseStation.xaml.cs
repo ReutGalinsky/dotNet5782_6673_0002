@@ -30,7 +30,7 @@ namespace PL.Pages
             {
                 liststations.Add(item);
             }
-            StatiosListView.DataContext = liststations;
+            StationsListView.DataContext = liststations;
             chargeSlot.SelectedItem = "All";
         }
         public ObservableCollection<BO.BaseStationToList> liststations = new ObservableCollection<BO.BaseStationToList>();
@@ -57,7 +57,7 @@ namespace PL.Pages
 
     private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
     {
-        selected = (BO.BaseStationToList)StatiosListView.SelectedItem;
+        selected = (BO.BaseStationToList)StationsListView.SelectedItem;
     }
 
     private void viewItem(object sender, MouseButtonEventArgs e)
@@ -81,19 +81,22 @@ namespace PL.Pages
             foreach (var item in bl.GetBaseStations())
                 liststations.Add(item);
         }
-
-     
+       
 
         private void listBaseStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selected = (BO.BaseStationToList)StatiosListView.SelectedItem;
-
+            selected = (BO.BaseStationToList)StationsListView.SelectedItem;
+        }
+        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+        {
+            CustomerViewBaseStation showBase = new CustomerViewBaseStation(bl, selected.IdNumber);
+            showBase.Show();
         }
 
-            private void changeFilterCharge(object sender, SelectionChangedEventArgs e)
+        private void changeFilterCharge(object sender, SelectionChangedEventArgs e)
         {
         
-            StatiosListView.ItemsSource = (string)chargeSlot.SelectedItem switch
+            StationsListView.ItemsSource = (string)chargeSlot.SelectedItem switch
             {
                 "All" => bl.GetBaseStations(),
                 "With available charging slots" => bl.GetAllBaseStationsBy(x => x.ChargeSlots > 0),

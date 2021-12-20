@@ -54,13 +54,6 @@ namespace PL.Pages
             t.Opacity = 1;
         }
 
-        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
-        {
-            //AddDrone action = new AddDrone(selected, bl);
-            //action.updateList += updated;
-            //action.Show();
-        }
-
         private void addingDrone_Click(object sender, RoutedEventArgs e)
         {
             AddDrone drone = new AddDrone(bl);
@@ -128,13 +121,18 @@ namespace PL.Pages
         {
             selected = (BO.DroneToList)DroneListView.SelectedItem;
         }
+        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+        {
+            ManagerViewDrone showDrone = new ManagerViewDrone(bl, selected.IdNumber);
+            showDrone.Show();
+        }
 
         private void deleteDrone(object sender, RoutedEventArgs e)
         {
             try
             {
-                BO.DroneToList stationToDelte = ((sender as Button).DataContext) as BO.DroneToList;
-                MessageBox.Show($"delete {stationToDelte.IdNumber}");
+                BO.DroneToList DroneToDelte = ((sender as Button).DataContext) as BO.DroneToList;
+                MessageBox.Show($"delete {DroneToDelte.IdNumber}");
             }
             catch (Exception ex)
             {
