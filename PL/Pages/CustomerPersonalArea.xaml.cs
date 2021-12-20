@@ -28,8 +28,8 @@ namespace PL.Pages
             Id.DataContext = customer;
             Phone.DataContext = customer;
             Name.DataContext = customer;
-            Latitude.DataContext = customer;
-            Longitude.DataContext = customer;
+            Longitude.Text = customer.Location.Longitude.ToString();
+            Latitude.Text = customer.Location.Latitude.ToString();
         }
         private BLApi.IBL bl;
         private BO.Customer customer;

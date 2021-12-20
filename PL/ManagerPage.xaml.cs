@@ -41,7 +41,14 @@ namespace PL
         {
             this.Close();
         }
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            TypeOfUser typeOfUser = new TypeOfUser(bl);
+            typeOfUser.Show();
+            this.Close();
+        }
+
         private void ButtonBaseStation(object sender, RoutedEventArgs e)
         {
             Manager.Content = new Pages.ManagerBaseStation(bl);

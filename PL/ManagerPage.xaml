@@ -9,17 +9,39 @@
         ResizeMode="NoResize"
         Title="ManagerPage" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="377*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
-        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top">
-            <Button x:Name="DroneInManager" Content="DRONE" MinWidth="100" Margin="10,0,0,0" Click="ButtonDrone"/>
+        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <Button x:Name="DroneInManager" Content="DRONE" MinWidth="100" Margin="250,0,0,0" Click="ButtonDrone"/>
             <Button x:Name="ParcelInManager" Content="PARCEL" MinWidth="100" Margin="10,0,0,0" Click="ButtonParcel"/>
             <Button x:Name="BaseStationInManager" Content="BASESTATION" MinWidth="100" Margin="10,0,0,0" Click="ButtonBaseStation"/>
-            <Button x:Name="CustomerInManager" Content="CUSTOMER" MinWidth="100" Margin="10,0,0,0" Click="ButtonCustomer"/>
+            <Button x:Name="CustomerInManager" Content="CUSTOMER" MinWidth="100" Click="ButtonCustomer"/>
         </StackPanel>
+        <Button Background="{x:Null}" Height="38" Click="Button_Click" VerticalAlignment="Top"
+                    Margin="0,0,723,0" Grid.Column="2">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/חזור.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
         <Button Background="{x:Null}" Height="38" Click="AddLineButton_Click" VerticalAlignment="Top"
-                    Margin="750,0,0,0">
+                    Margin="704,0,0,0" Grid.Column="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -35,7 +57,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Frame x:Name="Manager" Margin="0,45,0,0" NavigationUIVisibility="Hidden" RenderTransformOrigin="0.5,0.5">
+        <Frame x:Name="Manager" Margin="0,45,0,0" NavigationUIVisibility="Hidden" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <Frame.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

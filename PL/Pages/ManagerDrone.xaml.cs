@@ -123,6 +123,7 @@ namespace PL.Pages
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
             ManagerViewDrone showDrone = new ManagerViewDrone(bl, selected.IdNumber);
+            showDrone.updateList+=updated;
             showDrone.Show();
         }
 

@@ -29,8 +29,8 @@ namespace PL
             Id.Text = customer.IdNumber;
             Name.Text = customer.Name;
             Phone.Text = customer.Phone;
-            Latitude.DataContext = customer;
-            Longitude.DataContext = customer;
+            Latitude.DataContext = customer.Location.Latitude;
+            Longitude.DataContext = customer.Location.Longitude;
         }
         private BLApi.IBL bl;
         private string id;

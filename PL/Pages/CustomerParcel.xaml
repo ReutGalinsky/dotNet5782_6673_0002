@@ -23,8 +23,10 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" />
-                <TextBlock Grid.Column="1" />
+                <TextBlock Grid.Column="0"
+                Text="IdNumber: " />
+
+                <TextBlock Grid.Column="1"  Text="{Binding Path=IdNumber}" />
                 <TextBlock Grid.Column="2"
  Text="Priority: " />
                 <TextBlock Grid.Column="3"

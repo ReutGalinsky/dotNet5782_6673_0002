@@ -9,17 +9,41 @@
         ResizeMode="NoResize"
         Title="CustomerPage" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="773*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
-        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top">
-                <Button x:Name="ParcelInManager" Content="PARCEL" MinWidth="100" Margin="10,0,0,0" Click="ButtonParcel"/>
+        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top" Grid.ColumnSpan="3">
+            <Button x:Name="ParcelInManager" Content="PARCEL" MinWidth="100" Margin="200,0,0,0" Click="ButtonParcel"/>
             <Button x:Name="PersonalAreaInManager" Content="PERSONAL AREA" MinWidth="100" Margin="10,0,0,0" Click="ButtonPersonalArea"/>
             <Button x:Name="DeliveryInManager" Content="DELIVERY" MinWidth="100" Margin="10,0,0,0" Click="ButtonDelivery"/>
-            </StackPanel>
-            <Frame x:Name="Customer" Margin="0,35,0,0" NavigationUIVisibility="Hidden"/>
+        </StackPanel>
+        <Frame x:Name="Customer" Margin="0,35,0,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="3"/>
+        <Button Background="{x:Null}" Height="38" Click="Button_Click" VerticalAlignment="Top"
+                    Margin="0,0,723,0" Grid.Column="2">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/חזור.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
         <Button Background="{x:Null}" Height="38" Click="AddLineButton_Click" VerticalAlignment="Top"
-                    Margin="750,0,0,0">
+                    Margin="723,0,0,0" Grid.Column="2">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">

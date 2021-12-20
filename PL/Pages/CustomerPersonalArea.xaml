@@ -17,8 +17,8 @@
                 <TextBlock HorizontalAlignment="Left" Margin="67,138,0,0" Text="phone" TextWrapping="Wrap" VerticalAlignment="Top"/>
                 <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="140,98,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="21"/>
                 <TextBlock HorizontalAlignment="Left" Margin="67,168,0,0" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="48"/>
-                <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="217,167,0,0" Text="{Binding Path=Location.Longitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="27"/>
-                <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="140,168,0,0" Text="{Binding Path=Location.Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="27"/>
+                <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="217,167,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="27"/>
+                <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="140,168,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="27"/>
                 <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="170,248,0,0" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click"/>
 
          

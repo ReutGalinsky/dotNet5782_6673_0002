@@ -77,13 +77,13 @@ namespace PL.Pages
 
         private void deleteCustomer(object sender, RoutedEventArgs e)
         {
-            var dialogResult = MessageBox.Show($"are you sure?", "Delede Parcel", MessageBoxButton.YesNo);
+            var dialogResult = MessageBox.Show($"are you sure?", "Delete Customer", MessageBoxButton.YesNo);
             if (dialogResult == MessageBoxResult.Yes)
             {
                 try
                 {
                     BO.CustomerToList CustomerToDelte = ((sender as Button).DataContext) as BO.CustomerToList;
-                    bl.RemoveBaseStation(CustomerToDelte.IdNumber);
+                    bl.RemoveCustomer(CustomerToDelte.IdNumber);
                     CustomerListView.ItemsSource = bl.GetCustomers();
                 }
                 catch (Exception ex)

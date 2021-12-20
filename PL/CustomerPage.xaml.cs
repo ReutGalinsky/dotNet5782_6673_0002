@@ -43,6 +43,13 @@ private void ButtonPersonalArea(object sender, RoutedEventArgs e)
         private void ButtonDelivery(object sender, RoutedEventArgs e)
         {
             Customer.Content = new Pages.CustomerDelivery(bl,id);
-        }     
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            TypeOfUser typeOfUser = new TypeOfUser(bl);
+            typeOfUser.Show();
+            this.Close();
+        }
     }
 }

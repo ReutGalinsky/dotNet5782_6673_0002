@@ -137,7 +137,7 @@ namespace BL
         {
             //validation
             if (Model == "")
-                throw new UpdatingException($"The model of drone number {id}is illegal");
+                throw new UpdatingException($"The model of drone number{id}is illegal");
             BO.DroneToList drone = Drones.FirstOrDefault(x => x.IdNumber == id);
             if (drone == null)
                 throw new UpdatingException($"Drone number {id} is not existing");

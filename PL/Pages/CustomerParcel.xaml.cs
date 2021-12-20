@@ -88,15 +88,21 @@ namespace PL.Pages
         }
         private void deleteParcel(object sender, RoutedEventArgs e)
         {
-            try
+            var dialogResult = MessageBox.Show($"are you sure?", "Delete Parcel", MessageBoxButton.YesNo);
+            BO.ParcelOfList ParcelToDelte = ((sender as Button).DataContext) as BO.ParcelOfList;
+            if (dialogResult == MessageBoxResult.Yes && ParcelToDelte.ParcelState == BO.ParcelState.Define)//לחשוב אם רוצים לכלול גם אופציה שנשלח רחפן אך לא אסף עדיין את החבילה
             {
-                BO.ParcelOfList ParcelToDelte = ((sender as Button).DataContext) as BO.ParcelOfList;
-                MessageBox.Show($"delete {ParcelToDelte.IdNumber}");
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    bl.RemoveParcel(ParcelToDelte.IdNumber);
+                    ParcelListView.ItemsSource = bl.GetAllParcelsBy(x => x.Sender == id);
+                }
+                catch (Exception ex)
+                {
 
+                }
             }
+            
         }
 
         private void State_SelectionChanged(object sender, SelectionChangedEventArgs e)

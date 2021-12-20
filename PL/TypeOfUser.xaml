@@ -39,7 +39,7 @@
             </Button.Template>
         </Button>
         <Button Background="{x:Null}" Height="34" VerticalAlignment="Bottom"
-                    Margin="26,0,736,14">
+                    Margin="26,0,736,14" Click="Button_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">

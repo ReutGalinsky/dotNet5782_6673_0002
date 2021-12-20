@@ -27,14 +27,19 @@ namespace PL
             drone = bl.GetDrone(id);
             Id.DataContext = drone;
             MaxWeight.DataContext = drone;
+            Model.DataContext = drone;
+
             Battery.DataContext = drone;
             State.DataContext = drone;
-            Latitude.DataContext = drone;
-            Longitude.DataContext = drone;
+            Latitude.Text = drone.Location.Latitude.ToString();
+            Longitude.Text = drone.Location.Longitude.ToString();
+            
         }
         private BLApi.IBL bl;
         private string id;
         private BO.Drone drone;
+        public event EventHandler updateList;
+
         /// <summary>
         /// ///להוסיפ שורה של כל החבילות
         /// </summary>
@@ -45,7 +50,20 @@ namespace PL
         {
             this.Close();
         }
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdatingDetailsOfDrone(drone.Model, drone.IdNumber);
+                MessageBox.Show($"the drone number {drone.IdNumber} updated successfully!");
+                updateList(sender, e);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"the model {Model.Text} is illegal. please enter again", "Model Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
        
     }
 }
