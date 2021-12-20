@@ -144,33 +144,13 @@ namespace PL
             else
             {
                 try
-                {
-                    string item = time.Text;
-                    var list = item.Split(':');
-                    if (list.Length != 3)//check format
-                    {
-                        MessageBox.Show("not correct format");
-                        return;
-                    }
-                    int Hours = 0, Min = 0, Sec = 0;
-                    try
-                    {
-                        Hours = int.Parse(list[0]);
-                        Min = int.Parse(list[1]);
-                        Sec = int.Parse(list[2]);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("not correct format");
-                        return;
-                    }
+                {                 
                     time.Visibility = Visibility.Hidden;
                     timeLabel.Visibility = Visibility.Hidden;
-                    TimeSpan a = new TimeSpan(Hours, Min, Sec);
                     release.Content = "release from charge";
                     isClickedOnce = false;
                     parcel.Text = "";
-                    b.DroneFromCharging(drone.IdNumber, a);
+                    b.DroneFromCharging(drone.IdNumber);
                     MessageBox.Show("success");
                     convertToPo(drone, b.GetDrone(drone.IdNumber));
                     notEnabled();

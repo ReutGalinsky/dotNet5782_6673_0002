@@ -58,7 +58,7 @@ namespace BL
                 drone.Location = closestStation.station.GetLocation();
                 station.ChargeSlots--;
                 dal.UpdateBaseStation(station);
-                DO.DroneCharge charge = new DroneCharge() { DroneId = droneId, StationId = station.IdNumber };
+                DO.DroneCharge charge = new DroneCharge() { DroneId = droneId, StationId = station.IdNumber, startCharging=DateTime.Now };
                 dal.AddDroneCharge(charge);
             }
             catch (Exception e)
@@ -70,7 +70,7 @@ namespace BL
         /// <summary>
         /// releasing drone from charging
         /// </summary>
-        public void DroneFromCharging(string droneID, TimeSpan charging)
+        public void DroneFromCharging(string droneID)
         {
             //initialization
             BO.DroneToList drone = Drones.FirstOrDefault(x => x.IdNumber == droneID);
@@ -84,11 +84,13 @@ namespace BL
             //update
             try
             {
+                var chargeDrone = dal.GetDroneCharge(droneID);
                 DO.BaseStation station = dal.GetBaseStation(dal.GetDroneCharge(droneID).StationId);
                 dal.DeleteDroneCharge(droneID);
+                TimeSpan? charging = DateTime.Now - chargeDrone.startCharging;
                 station.ChargeSlots++;
                 dal.UpdateBaseStation(station);
-                drone.Battery += (int)(((float)(charging.TotalSeconds) / 60) * _speed);
+                drone.Battery += (int)(((float)(charging.Value.TotalSeconds) / 60) * _speed);
                 if (drone.Battery > 100) drone.Battery = 100;
                 drone.State = DroneState.Available;
             }

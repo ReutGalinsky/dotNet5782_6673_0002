@@ -26,9 +26,10 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             id = i;
+            parcels = new ObservableCollection<BO.ParcelOfList>();
             foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x=>x.Geter==id))//create the source for the liseView
-                parcelList.Add(s);
-            ParcelsListView.ItemsSource = parcelList;
+                parcels.Add(s);
+            Delivery.DataContext = parcels;
             State.ItemsSource = Enum.GetValues(typeof(BO.DroneState));
             Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             var states = BO.ParcelState.GetNames(typeof(BO.ParcelState)).ToList();
@@ -43,10 +44,10 @@ namespace PL.Pages
     private BLApi.IBL bl;
     string id;
     private BO.ParcelOfList selected;//selected item that will be send to the new window
-    private ObservableCollection<BO.ParcelOfList> parcelList = new ObservableCollection<BO.ParcelOfList>();
+        private ObservableCollection<BO.ParcelOfList> parcels;
     private void selectionChange(object sender, SelectionChangedEventArgs e)
     {
-        selected = (BO.ParcelOfList)ParcelsListView.SelectedItem;
+        selected = (BO.ParcelOfList)Delivery.SelectedItem;
     }
     private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
     {
@@ -57,11 +58,11 @@ namespace PL.Pages
     {
         Weight.SelectedItem = "all";
         State.SelectedItem = "all";
-            parcelList.Clear();
-        foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the liseView
-                parcelList.Add(s);
-        ParcelsListView.ItemsSource = parcelList;
-        var current = Window.GetWindow(this);
+            parcels.Clear();
+            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the liseView
+                parcels.Add(s);
+            Delivery.ItemsSource = parcels;
+            var current = Window.GetWindow(this);
         current.Opacity = 1;
     }
     private void addParcel(object sender, RoutedEventArgs e)
@@ -96,22 +97,22 @@ namespace PL.Pages
         Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
         object check;
         Enum.TryParse(typeof(BO.ParcelState), State.SelectedItem.ToString(), out check);
-            parcelList.Clear();
-        ParcelsListView.ItemsSource = item switch
-        {
-            null => check switch
+            parcels.Clear();
+            Delivery.ItemsSource = item switch
             {
-                null => bl.GetAllParcelsBy(x => x.Geter == id),
-                _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check && x.Geter == id),
-            },
-            _ => check switch
-            {
-                null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.Geter == id),
-                _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check && x.Geter == id),
-            },
-        };
+                null => check switch
+                {
+                    null => bl.GetAllParcelsBy(x => x.Geter == id),
+                    _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check && x.Geter == id),
+                },
+                _ => check switch
+                {
+                    null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.Geter == id),
+                    _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check && x.Geter == id),
+                },
+            };
 
-    }
+        }
 
     private void Weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -123,21 +124,21 @@ namespace PL.Pages
         Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
         object check;
         Enum.TryParse(typeof(BO.ParcelState), State.SelectedItem.ToString(), out check);
-            parcelList.Clear();
-        ParcelsListView.ItemsSource = item switch
-        {
-            null => check switch
+            parcels.Clear();
+            Delivery.ItemsSource = item switch
             {
-                null => bl.GetAllParcelsBy(x => x.Sender == id),
-                _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check && x.Geter == id),
-            },
-            _ => check switch
-            {
-                null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.Geter == id),
-                _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check && x.Geter == id),
-            },
-        };
-    }
+                null => check switch
+                {
+                    null => bl.GetAllParcelsBy(x => x.Sender == id),
+                    _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check && x.Geter == id),
+                },
+                _ => check switch
+                {
+                    null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.Geter == id),
+                    _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check && x.Geter == id),
+                },
+            };
+        }
 }
 
         

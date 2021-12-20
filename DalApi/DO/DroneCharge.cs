@@ -13,6 +13,7 @@ namespace DO
     {
         public string DroneId { get; set; }
         public string StationId { get; set; }
+        public DateTime? startCharging { get; set; }
         public override string ToString()
         {
             return string.Format($"Drone number: {DroneId}" +

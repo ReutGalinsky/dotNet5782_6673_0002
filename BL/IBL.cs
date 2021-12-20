@@ -14,7 +14,7 @@ namespace BLApi
         public void UpdatingDetailsOfBaseStation(string id, string Name, string numberOfCharge);
         public BaseStation GetBaseStation(string id);
         public void DroneToCharging(string number);
-        public void DroneFromCharging(string number, TimeSpan charging);
+        public void DroneFromCharging(string number);
         public void AddDrone(DroneToList droneToAdd, string number);
         public IEnumerable<DroneToList> GetDrones();
         public Drone GetDrone(string id);
