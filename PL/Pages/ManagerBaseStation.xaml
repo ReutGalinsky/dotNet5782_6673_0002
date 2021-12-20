@@ -62,7 +62,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <ListView x:Name="StationsListView" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" HorizontalContentAlignment="Stretch" Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" Background="{x:Null}"/>
+        <ListView x:Name="StationsListView" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" HorizontalContentAlignment="Stretch" Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}"/>
         <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" Width="133" Height="35" SelectionChanged="changeFilterCharge" >
             <ComboBoxItem Tag="all" Content="All" ></ComboBoxItem>
             <ComboBoxItem Tag="availible" Content="With available charging slots"></ComboBoxItem>

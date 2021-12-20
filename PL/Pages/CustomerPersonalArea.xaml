@@ -10,16 +10,16 @@
 
     <Grid>
     
-                <TextBlock HorizontalAlignment="Left" Margin="55,66,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="30"/>
-                <TextBox x:Name="Id" HorizontalAlignment="Left" Margin="140,66,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="27"/>
-                <TextBlock HorizontalAlignment="Left" Margin="67,103,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677"/>
-                <TextBox x:Name="Phone" HorizontalAlignment="Left" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="24" Margin="140,130,0,0"/>
-                <TextBlock HorizontalAlignment="Left" Margin="67,138,0,0" Text="phone" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="140,98,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="21"/>
-                <TextBlock HorizontalAlignment="Left" Margin="67,168,0,0" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="48"/>
-                <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="217,167,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="27"/>
-                <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="140,168,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="27"/>
-                <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="170,248,0,0" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click"/>
+                <TextBlock HorizontalAlignment="Left" Margin="300,66,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="30"/>
+                <TextBox x:Name="Id" HorizontalAlignment="Left" Margin="350,66,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="27"/>
+                <TextBlock HorizontalAlignment="Left" Margin="300,103,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677"/>
+                <TextBox x:Name="Phone" HorizontalAlignment="Left" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="24" Margin="350,130,0,0"/>
+                <TextBlock HorizontalAlignment="Left" Margin="300,138,0,0" Text="phone" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="350,98,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="21"/>
+                <TextBlock HorizontalAlignment="Left" Margin="300,168,0,0" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="48"/>
+                <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="440,168,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="27"/>
+                <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="350,168,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="27"/>
+                <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="350,248,0,0" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click"/>
 
          
     </Grid>

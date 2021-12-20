@@ -41,6 +41,8 @@ namespace PL
             {//להוסיף try להמרות
                 BO.BaseStation station = new BO.BaseStation() { ChargeSlots = int.Parse(ChargeSlots.Text), IdNumber = Id.Text, Location = new BO.Location() { Latitude = double.Parse(Latitude.Text), Longitude = double.Parse(Longitude.Text) } };
                 bl.AddBaseStation(station);
+                add(sender, e);
+                this.Close();
             }
             catch (Exception ex)//לטפל בחריגות
             {
@@ -58,4 +60,8 @@ namespace PL
             Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
         }
     }
+          
+
+            
+  
 }

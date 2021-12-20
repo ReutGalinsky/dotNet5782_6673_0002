@@ -52,7 +52,8 @@ namespace BL
                 if (parcel.Drone != null && parcel.ArrivingDroneTime == null && parcel.MatchForDroneTime != null)
                     throw new DeletingException("can't delete parcel that passing");
                 dal.DeleteParcel(number);
-                Drones.FirstOrDefault(x => x.NumberOfParcel == number).State=DroneState.Available;
+                var d=Drones.FirstOrDefault(x => x.NumberOfParcel == number);
+                 if (d!=null)   d.State=DroneState.Available;
             }
             catch (Exception e)
             {

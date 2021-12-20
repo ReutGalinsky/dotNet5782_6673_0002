@@ -32,7 +32,7 @@ namespace PL.Pages
             states.Insert(0, "all");
             State.ItemsSource = states;
             State.SelectedItem = "all";
-            var priority= BO.Priorities.GetNames(typeof(BO.Priorities)).ToList();
+            var priority = BO.Priorities.GetNames(typeof(BO.Priorities)).ToList();
             priority.Insert(0, "all");
             Priority.SelectedItem = "all";
             Priority.ItemsSource = priority;
@@ -72,11 +72,11 @@ namespace PL.Pages
 
         private void reset_Click(object sender, RoutedEventArgs e)
         {
-        
-                listParcels.Clear();
-                foreach (var item in bl.GetParcels())
+
+            listParcels.Clear();
+            foreach (var item in bl.GetParcels())
                 listParcels.Add(item);
-    
+
         }
 
         private void selectionChange(object sender, SelectionChangedEventArgs e)
@@ -96,9 +96,9 @@ namespace PL.Pages
             {
                 try
                 {
-                    BO.ParcelOfList ParcelToDelte = ((sender as Button).DataContext) as BO.ParcelOfList;
-                    bl.RemoveParcel(ParcelToDelte.IdNumber);
-                    ParcelListView.ItemsSource=bl.GetParcels();
+                    BO.ParcelOfList ParcelToDelete = ((sender as Button).DataContext) as BO.ParcelOfList;
+                    bl.RemoveParcel(ParcelToDelete.IdNumber);
+                    ParcelListView.ItemsSource = bl.GetParcels();
                 }
                 catch (Exception ex)
                 {

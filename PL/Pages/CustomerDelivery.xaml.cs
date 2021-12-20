@@ -27,9 +27,6 @@ namespace PL.Pages
             bl = b;
             id = i;
             parcels = new ObservableCollection<BO.ParcelOfList>();
-            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x=>x.Geter==id))//create the source for the liseView
-                parcels.Add(s);
-            Delivery.DataContext = parcels;
             State.ItemsSource = Enum.GetValues(typeof(BO.DroneState));
             Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             var states = BO.ParcelState.GetNames(typeof(BO.ParcelState)).ToList();
@@ -40,6 +37,9 @@ namespace PL.Pages
         weights.Insert(0, "all");
             Weight.ItemsSource = weights;
             Weight.SelectedItem = "all";
+            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the listView
+                parcels.Add(s);
+            Delivery.ItemsSource = parcels;
         }
     private BLApi.IBL bl;
     string id;
@@ -59,7 +59,7 @@ namespace PL.Pages
         Weight.SelectedItem = "all";
         State.SelectedItem = "all";
             parcels.Clear();
-            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the liseView
+            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the listView
                 parcels.Add(s);
             Delivery.ItemsSource = parcels;
             var current = Window.GetWindow(this);
@@ -74,17 +74,21 @@ namespace PL.Pages
     }
     private void deleteParcel(object sender, RoutedEventArgs e)
     {
-        try
-        {
+            var dialogResult = MessageBox.Show($"are you sure?", "Delete Parcel", MessageBoxButton.YesNo);
             BO.ParcelOfList ParcelToDelte = ((sender as Button).DataContext) as BO.ParcelOfList;
-            MessageBox.Show($"delete {ParcelToDelte.IdNumber}");
-        }
-        catch (Exception ex)
-        {
+            if (dialogResult == MessageBoxResult.Yes && ParcelToDelte.ParcelState == BO.ParcelState.Define)//לחשוב אם רוצים לכלול גם אופציה שנשלח רחפן אך לא אסף עדיין את החבילה
+            {
+                try
+                {
+                    bl.RemoveParcel(ParcelToDelte.IdNumber);
+                    Delivery.ItemsSource = bl.GetAllParcelsBy(x => x.Geter == id);
+                }
+                catch (Exception ex)
+                {
 
+                }
+            }
         }
-    }
-
     private void State_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
 
@@ -129,7 +133,7 @@ namespace PL.Pages
             {
                 null => check switch
                 {
-                    null => bl.GetAllParcelsBy(x => x.Sender == id),
+                    null => bl.GetAllParcelsBy(x => x.Geter == id),
                     _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check && x.Geter == id),
                 },
                 _ => check switch
