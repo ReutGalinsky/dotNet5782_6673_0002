@@ -36,6 +36,7 @@ namespace PL
             Match.DataContext = parcel;
             Supply.DataContext = parcel;
             Pick.DataContext = parcel;
+            
         }
         private BLApi.IBL bl;
         private string id;

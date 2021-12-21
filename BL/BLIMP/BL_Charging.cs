@@ -90,7 +90,8 @@ namespace BL
                 TimeSpan? charging = DateTime.Now - chargeDrone.startCharging;
                 station.ChargeSlots++;
                 dal.UpdateBaseStation(station);
-                drone.Battery += (int)(((float)(charging.Value.TotalSeconds) / 60) * _speed);
+                //drone.Battery += (int)(((float)(charging.Value.TotalSeconds) / 60) * _speed);
+                drone.Battery += (int)(((float)(charging.Value.TotalSeconds) / 10) * _speed);
                 if (drone.Battery > 100) drone.Battery = 100;
                 drone.State = DroneState.Available;
             }

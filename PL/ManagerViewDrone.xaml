@@ -6,19 +6,40 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ManagerViewDrone" Height="400" Width="500">
+    <Window.Resources>
+        <Style x:Key="myActionButton" TargetType="Button">
+            <Setter Property="BorderBrush" Value="#FFF0F0F3"></Setter>
+            <Setter Property="BorderThickness" Value="3"></Setter>
+            <Setter Property="FontFamily" Value="Tahoma"></Setter>
+            <Setter Property="FontSize" Value="44"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Background" Value="#FFD3DBEB"></Setter>
+
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"></Setter>
+                </Style>
+            </Style.Resources>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.5"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="44*"></RowDefinition>
+            <RowDefinition Height="44*"></RowDefinition>
+            <RowDefinition Height="43.63"></RowDefinition>
+            <RowDefinition Height="44*"></RowDefinition>
+            <RowDefinition Height="44*"></RowDefinition>
+            <RowDefinition Height="44*"></RowDefinition>
+            <RowDefinition Height="87*"></RowDefinition>
         </Grid.RowDefinitions>
         <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Center" Height="35" Margin="0,-2,0,0" Stroke="Black" VerticalAlignment="Top" MouseDown="move"/>
         <Button Background="{x:Null}" Height="35" Width="35" VerticalAlignment="Top"
@@ -47,21 +68,36 @@
             </Button.Template>
         </Button>
 
-        <TextBox x:Name="Id" Grid.Row="1" HorizontalAlignment="Left"  Margin="138,12,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="24" Background="{x:Null}"  />
+        <TextBox x:Name="Id" Grid.Row="1" HorizontalAlignment="Left" IsEnabled="False" Margin="138,12,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="24" Background="{x:Null}"  />
         <TextBox x:Name="Model" Grid.Row="2" HorizontalAlignment="Left" Margin="138,7,0,0" Text="{Binding Path=Model}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="26"  Background="{x:Null}"/>
         <Label Content="Id Number" Grid.Row="1" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" VerticalAlignment="Top" Height="28" Width="106" FontFamily="Aharoni"/>
         <Label Content="Model:" Grid.Row="2" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni"/>
         <Label Content="MaxWeight:"  HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="3"/>
-        <TextBox x:Name="MaxWeight" HorizontalAlignment="Left" Margin="138,0,0,0" Text="{Binding Path=MaxWeight}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="26" Background="{x:Null}" Grid.Row="3"/>
+        <TextBox x:Name="MaxWeight" IsEnabled="False" HorizontalAlignment="Left" Margin="138,0,0,0" Text="{Binding Path=MaxWeight}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="26" Background="{x:Null}" Grid.Row="3"/>
         <Label Content="State:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="4"/>
         <Label Content="Battery" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="5" Height="25" VerticalAlignment="Top"/>
-        <TextBox x:Name="Battery" HorizontalAlignment="Left" Margin="138,10,0,0" Text="{Binding Path=Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="26"  Background="{x:Null}" Grid.Row="5"/>
-        <TextBox x:Name="State" HorizontalAlignment="Left" Margin="138,0,0,0" Text="{Binding Path=State}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="26"  Background="{x:Null}" Grid.Row="4"/>
+        <TextBox x:Name="Battery" HorizontalAlignment="Left" IsEnabled="False" Margin="138,10,0,0" Text="{Binding Path=Battery}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="26"  Background="{x:Null}" Grid.Row="5"/>
+        <TextBox x:Name="State" IsEnabled="False" HorizontalAlignment="Left" Margin="138,0,0,0" Text="{Binding Path=State}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="26"  Background="{x:Null}" Grid.Row="4"/>
         <Label Content="Longitude:" HorizontalAlignment="Left" Margin="26,1,0,53" FontSize="14" FontFamily="Aharoni" Grid.Row="6" Grid.RowSpan="2"/>
-        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top"  Width="75" Height="23" Background="{x:Null}" Grid.Row="5" Margin="120,43,0,0" Grid.RowSpan="2"/>
+        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Text="" IsEnabled="False" TextWrapping="Wrap" VerticalAlignment="Top"  Width="75" Height="23" Background="{x:Null}" Grid.Row="5" Margin="120,43,0,0" Grid.RowSpan="2" FontSize="10"/>
         <Label Content="Latitude:" HorizontalAlignment="Left" Margin="206,43,0,16" FontSize="14"  FontFamily="Aharoni" Grid.Row="5" Grid.RowSpan="2"/>
-        <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="286,1,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="20"  Background="{x:Null}" Grid.Row="6"/>
+        <TextBox x:Name="Latitude" HorizontalAlignment="Left" IsEnabled="False" Margin="278,43,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="20"  Background="{x:Null}" Grid.Row="5" Grid.RowSpan="2" FontSize="10"/>
         <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click" Margin="0,2,0,0" Grid.Row="7"/>
+        <Button HorizontalAlignment="Left" Content="" Style="{StaticResource myActionButton}" Height="65" Margin="402,12,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2" FontSize="15" Width="71" Click="Button_Click_1">
+            <Button.Background>
+                <ImageBrush x:Name="action" ImageSource="/פעולות.png" Stretch="UniformToFill"></ImageBrush>
+            </Button.Background>
+        </Button>
+        <Button HorizontalAlignment="Left" x:Name="shippingButton" Visibility="Hidden" Content="" Style="{StaticResource myActionButton}" Margin="402,38,0,28" Grid.Row="2" Grid.RowSpan="3" FontSize="15" Width="71" Click="shipButton">
+            <Button.Background>
+                <ImageBrush ImageSource="/שליחה.png" Stretch="UniformToFill"></ImageBrush>
+            </Button.Background>
+        </Button>
+        <Button HorizontalAlignment="Left" x:Name="chargingButton" Visibility="Hidden" Content="" Style="{StaticResource myActionButton}" Margin="402,23,0,43" Grid.Row="4" Grid.RowSpan="3" FontSize="15" Width="71" Click="charge">
+            <Button.Background>
+                <ImageBrush ImageSource="/טעינה.png" Stretch="UniformToFill"></ImageBrush>
+            </Button.Background>
+        </Button>
 
 
     </Grid>

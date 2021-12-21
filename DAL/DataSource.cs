@@ -15,6 +15,8 @@ namespace Dal
         internal static List<Customer> Customers = new List<Customer>();
         internal static List<Parcel> Parcels = new List<Parcel>();
         internal static List<DroneCharge> Charges = new List<DroneCharge>();
+        internal static List<User> Users = new List<User>();
+
         #endregion
 
         #region ConfigClass
@@ -107,6 +109,28 @@ namespace Dal
                 MatchForDroneTime = null,
                 CollectingDroneTime = null,
                 CreateParcelTime = DateTime.Now,
+            });
+            Users.Add(new User()
+            {
+                 isManager=false,
+                  UserName="9",
+                  UserPassword="yosiyosi",
+            });
+            Users.Add(new User()
+            {
+                isManager = true,
+                UserName = "reut",
+                UserPassword = "reutreut",
+            }); Users.Add(new User()
+            {
+                isManager = true,
+                UserName = "osnat",
+                UserPassword = "osnatosnat",
+            }); Users.Add(new User()
+            {
+                isManager = false,
+                UserName = "8",
+                UserPassword = "tcptcp",
             });
 
             #endregion

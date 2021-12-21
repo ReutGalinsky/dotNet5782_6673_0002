@@ -38,10 +38,12 @@ namespace BLApi
         public void RemoveBaseStation(string number);
         public void RemoveCustomer(string number);
 
-
-
-
-
+        public void RemoveUser(string name);
+        public IEnumerable<User> GetAllUsersBy(Predicate<User> c);
+        public IEnumerable<User> GetUsers();
+        public User GetUser(string name);
+        public void UpdatingDetailsOfUser(string name, string password);
+        public void AddUser(User userToAdd);
 
 
 

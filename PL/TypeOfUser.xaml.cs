@@ -28,7 +28,7 @@ namespace PL
 
         private void managerButton_Click(object sender, RoutedEventArgs e)
         {
-            ManagerPage entry = new ManagerPage(bl);
+            ManagerEntry entry = new ManagerEntry(bl);
             entry.Show();
             this.Close();
 
@@ -36,7 +36,7 @@ namespace PL
 
         private void customerButton_Click(object sender, RoutedEventArgs e)
         {
-            CustomerPage entry = new CustomerPage(bl,"8");//רק לצורך הדוגמא
+            CustomerEntry entry = new CustomerEntry(bl);//רק לצורך הדוגמא
             entry.Show();
             this.Close();
         }

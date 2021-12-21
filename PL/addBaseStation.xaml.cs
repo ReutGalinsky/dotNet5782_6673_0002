@@ -38,7 +38,7 @@ namespace PL
         {
             try
             {//להוסיף try להמרות
-                BO.BaseStation station = new BO.BaseStation() { ChargeSlots = int.Parse(ChargeSlots.Text), IdNumber = Id.Text, Location = new BO.Location() { Latitude = double.Parse(Latitude.Text), Longitude = double.Parse(Longitude.Text) } };
+                BO.BaseStation station = new BO.BaseStation() {   Name=Name.Text,ChargeSlots = int.Parse(ChargeSlots.Text), IdNumber = Id.Text, Location = new BO.Location() { Latitude = double.Parse(Latitude.Text), Longitude = double.Parse(Longitude.Text) } };
                 bl.AddBaseStation(station);
                 updateList(sender, e);
                 this.Close();
@@ -64,6 +64,11 @@ namespace PL
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
           

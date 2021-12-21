@@ -60,9 +60,13 @@ namespace PL.Pages
         
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
-            ManagerViewCustomer customer= new ManagerViewCustomer(bl, selected.IdNumber);
-            customer.updateList += updated;
-            customer.Show();
+            if (selected != null)
+            {
+
+                ManagerViewCustomer customer = new ManagerViewCustomer(bl, selected.IdNumber);
+                customer.updateList += updated;
+                customer.Show();
+            }
         }
         
         

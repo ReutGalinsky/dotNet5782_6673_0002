@@ -19,6 +19,12 @@ namespace DalApi
         public void DeleteDroneCharge(string id);
         public void UpdateDroneCharge(DroneCharge toUpdate);
         public string AddParcel(Parcel parcel);
+        public void AddUser(User user);
+        public void DeleteUser(string userName);
+        public User GetUser(string userName);
+        public void UpdateUser(User toUpdate);
+        public IEnumerable<User> GetUsers();
+        public IEnumerable<User> GetAllUsersBy(Predicate<User> condition);
         public Parcel GetParcel(string id);
         public void DeleteParcel(string id);
         public void UpdateParcel(Parcel toUpdate);

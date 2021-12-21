@@ -91,10 +91,14 @@ namespace BL
             if (Name != "") baseStation.Name = Name;
             int tempInteger = 0;
 
-            if (numberOfCharge != "" && (int.TryParse(numberOfCharge, out tempInteger) == false))
+            if (numberOfCharge != "" && (int.TryParse(numberOfCharge, out tempInteger) == false)||tempInteger<0)
                 throw new UpdatingException($"{numberOfCharge} is an illegal number for charging drones");
+   
+            if(baseStation.Drones!=null&&baseStation.Drones.Count()>tempInteger)
+                throw new UpdatingException($"{numberOfCharge} is an illegal number for this base station");
 
-            /*if (numberOfCharge == "")*/ baseStation.ChargeSlots = tempBaseStation.ChargeSlots;
+            /*if (numberOfCharge == "")*/
+            baseStation.ChargeSlots = tempInteger;
             //else
             //{
             //    //if (baseStation.Drones.Count() > tempInteger)
@@ -117,7 +121,7 @@ namespace BL
 
 #endregion
 
-#region GetBaseStation
+        #region GetBaseStation
 /// <summary>
 /// return a single base station
 /// </summary>

@@ -381,6 +381,58 @@ namespace Dal
             return list;
         }
         #endregion
+        //********User*************
+        public void AddUser(User user)
+        {
+            if (DataSource.Users.FirstOrDefault(d => d.UserName == user.UserName).UserName != null)
+                throw new ExistingException($"the user with the name:{user.UserName} is already exist");
+            DataSource.Users.Add(user);
+
+        }
+        public void DeleteUser(string userName)
+        {
+            User user = DataSource.Users.FirstOrDefault(d => d.UserName == userName);
+            if (user.UserName == null)
+                throw new NotExistingException($"the User with the name:{user.UserName} is not exist");
+            DataSource.Users.Remove(user);
+        }
+        public User GetUser(string userName)
+        {
+            User user = DataSource.Users.FirstOrDefault(d => d.UserName == userName);
+            if (user.UserName == null)
+                throw new NotExistingException($"the customer with the id:{user.UserName} is not exist");
+            return user;
+        }
+        public void UpdateUser(User toUpdate)
+        {
+            for (int i = 0; i < DataSource.Users.Count; i++)
+            {
+                if (DataSource.Users[i].UserName == toUpdate.UserName)
+                {
+                    User user = new User();
+                    user.UserName = toUpdate.UserName;
+                    user.UserPassword = toUpdate.UserPassword;
+                    user.isManager = toUpdate.isManager;
+                    DataSource.Users[i] = user;
+                    return;
+                }
+            }
+            throw new NotExistingException($"the user with the name:{toUpdate.UserName} is not exist");
+        }
+        public IEnumerable<User> GetUsers()
+        {
+            var Customers = from item in DataSource.Users
+                            select item;
+            return Customers;
+        }
+        public IEnumerable<User> GetAllUsersBy(Predicate<User> condition)
+        {
+            var list = from item in DataSource.Users
+                       where condition(item)
+                       select item;
+            return list;
+        }
+
 
         //*******electricity********
 

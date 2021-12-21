@@ -84,9 +84,12 @@ namespace PL.Pages
         }
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
-            ManagerViewDrone showDrone = new ManagerViewDrone(bl, selected.IdNumber);
-            showDrone.updateList+=updated;
-            showDrone.Show();
+            if (selected != null)
+            {
+                ManagerViewDrone showDrone = new ManagerViewDrone(bl, selected.IdNumber);
+                showDrone.updateList += updated;
+                showDrone.Show();
+            }
         }
 
         private void deleteDrone(object sender, RoutedEventArgs e)

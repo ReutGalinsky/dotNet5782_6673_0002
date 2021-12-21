@@ -24,19 +24,19 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
-            drone = bl.GetDrone(id);
+            convertToPo(drone, bl.GetDrone(id));
             Id.DataContext = drone;
             MaxWeight.DataContext = drone;
             Model.DataContext = drone;
             Battery.DataContext = drone;
             State.DataContext = drone;
-            Latitude.Text = drone.Location.Latitude.ToString();
-            Longitude.Text = drone.Location.Longitude.ToString();
-            
+            Latitude.Text = drone.Latitude;
+            Longitude.Text = drone.Longitude;
         }
         private BLApi.IBL bl;
+        private bool isClosed = true;
         private string id;
-        private BO.Drone drone;
+        private PO.DronePO drone=new PO.DronePO();
         public event EventHandler updateList;
 
         /// <summary>
@@ -44,7 +44,18 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
+        public void convertToPo(PO.DronePO dronePo, BO.Drone d)
+        //function that get the drone and update it to the current values as given from the bl
+        {
+            dronePo.Battery = d.Battery;
+            dronePo.IdNumber = d.IdNumber;
+            dronePo.State = d.State;
+            dronePo.MaxWeight = d.MaxWeight;
+            dronePo.Model = d.Model;
+            dronePo.NumberOfParcel = d.PassedParcel?.IdNumber;
+            dronePo.Latitude = LocationFormat.sexagesimalFormat(d.Location.Latitude, false); ;
+            dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true); ;
+        }
         private void closing(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -68,6 +79,109 @@ namespace PL
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            switch(isClosed)
+            {
+                case true:
+                    isClosed = false;
+                    shippingButton.Visibility =Visibility.Visible;
+                    chargingButton.Visibility = Visibility.Visible;
+                    break;
+                case false:
+                    isClosed = true;
+                    shippingButton.Visibility = Visibility.Hidden;
+                    chargingButton.Visibility = Visibility.Hidden;
+                    break;
+                default:
+            }
+
+        }
+        private void charge(object sender, RoutedEventArgs e)
+        {
+            switch(drone.State)
+            {
+                case BO.DroneState.Available:
+                    try 
+                    {
+                        bl.DroneToCharging(drone.IdNumber);
+                        convertToPo(drone, bl.GetDrone(id));
+                        MessageBox.Show("start charge");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("error");
+                    }
+                    break;
+                case BO.DroneState.maintaince:
+                    try
+                    {
+                        bl.DroneFromCharging(drone.IdNumber);
+                        convertToPo(drone, bl.GetDrone(id));
+                        MessageBox.Show("release charge");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("error");
+                    }
+                    break;
+                case BO.DroneState.shipping:
+                    MessageBox.Show("error");
+                    break;
+
+            }
+        }
+
+        private void shipButton(object sender, RoutedEventArgs e)
+        {
+            switch (drone.State)
+            {
+                case BO.DroneState.Available:
+                    try
+                    {
+                        bl.MatchingParcelToDrone(drone.IdNumber);
+                        convertToPo(drone,bl.GetDrone(id));
+                        MessageBox.Show("match");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("error");
+                    }
+                    break;
+                case BO.DroneState.maintaince:
+                    MessageBox.Show("error");
+                    break;
+                case BO.DroneState.shipping:
+                    try
+                    {
+                        if(bl.GetParcel(drone.NumberOfParcel).CollectingDroneTime==null)
+                        {
+                            bl.PickingParcelByDrone(drone.IdNumber);
+                            convertToPo(drone, bl.GetDrone(id));
+                            MessageBox.Show("pick");
+
+
+                        }
+                        else
+                        {
+                            bl.SupplyingParcelByDrone(drone.IdNumber);
+                            convertToPo(drone, bl.GetDrone(id));
+                            MessageBox.Show("supply");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("error");
+                    }
+                    break;
+
+            }
 
         }
     }

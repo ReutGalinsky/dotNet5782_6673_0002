@@ -42,6 +42,7 @@ namespace PL
         private void ButtonParcel(object sender, RoutedEventArgs e)
         {
             //Manager.Content = new Pages.ManagerParcel(bl);
+            pageParcel.update(sender, e);
             Manager.NavigationService.Navigate(pageParcel);
 
         }

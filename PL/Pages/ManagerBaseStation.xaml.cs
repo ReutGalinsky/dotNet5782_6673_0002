@@ -31,7 +31,7 @@ namespace PL.Pages
                 liststations.Add(item);
             }
             StationsListView.DataContext = liststations;
-            chargeSlot.SelectedItem = "all";
+            chargeSlot.SelectedItem = chargeSlot.Items[0];
         }
         public ObservableCollection<BO.BaseStationToList> liststations = new ObservableCollection<BO.BaseStationToList>();
 
@@ -83,9 +83,12 @@ namespace PL.Pages
         }
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
-            ManagerViewBaseStation showBase = new ManagerViewBaseStation(bl, selected.IdNumber);
-            showBase.updateList += updated;
-            showBase.Show();
+            if (selected != null)
+            {
+                ManagerViewBaseStation showBase = new ManagerViewBaseStation(bl, selected.IdNumber);
+                showBase.updateList += updated;
+                showBase.Show();
+            }
         }
 
 

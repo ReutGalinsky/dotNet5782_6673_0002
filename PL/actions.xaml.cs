@@ -25,7 +25,7 @@ namespace PL
         {
             InitializeComponent();
             b = bl;
-            drone = new DronePO();
+            drone = new PO.DronePO();
             drone.Battery = a.Battery;
             drone.IdNumber = a.IdNumber;
             drone.State = a.State;
@@ -81,7 +81,7 @@ namespace PL
             Collecting.IsEnabled = false;
             supplying.IsEnabled = false;
         }
-        public void convertToPo(DronePO dronePo, BO.Drone d)
+        public void convertToPo(PO.DronePO dronePo, BO.Drone d)
         //function that get the drone and update it to the current values as given from the bl
         {
             dronePo.Battery = d.Battery;
@@ -96,7 +96,7 @@ namespace PL
 
         BLApi.IBL b;//the BL object
 
-        DronePO drone;//the selected drone
+        PO.DronePO drone;//the selected drone
 
         private bool isClickedOnce = false;//for the releasing button
         private void update_Click(object sender, RoutedEventArgs e)//event of the updaiting button

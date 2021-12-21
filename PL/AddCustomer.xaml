@@ -5,25 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="AddCustomer" Height="450" Width="800">
+        Title="AddCustomer" Height="400" Width="500">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+
+        </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="4"/>
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="4"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="55,66,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="30"/>
-        <TextBox x:Name="Id" HorizontalAlignment="Left" Margin="140,66,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="27"/>
-        <TextBlock HorizontalAlignment="Left" Margin="67,103,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677"/>
-        <TextBox x:Name="Phone" HorizontalAlignment="Left" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="24" Margin="140,130,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="67,138,0,0" Text="phone" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="140,98,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="21"/>
-        <TextBlock HorizontalAlignment="Left" Margin="67,168,0,0" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="48"/>
-        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="217,167,0,0" Text="{Binding Path=Location.Longitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="27"/>
-        <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="140,168,0,0" Text="{Binding Path=Location.Latitude}" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="27"/>
-        <Button Content="הוסף" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="170,248,0,0" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click"/>
-        <Button Background="{x:Null}" Height="35" Click="Button_Click" VerticalAlignment="Top"
-                    Margin="758,0,0,0">
+        <TextBlock HorizontalAlignment="Left" Grid.Row="1" Margin="26,10,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="30" FontFamily="Aharoni" FontSize="14"/>
+        <TextBox x:Name="Id" Background="{x:Null}" HorizontalAlignment="Left" Grid.Row="1" Margin="140,10,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="27"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Row="2" Margin="26,10,0,26" Text="Name" TextWrapping="Wrap" RenderTransformOrigin="0.151,0.677" FontFamily="Aharoni" FontSize="14"/>
+        <TextBox x:Name="Phone" Background="{x:Null}" HorizontalAlignment="Left" Grid.Row="3" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="24" Margin="140,16,0,0"/>
+        <TextBlock HorizontalAlignment="Left" Margin="26,10,0,0" Grid.Row="3" Text="phone" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Aharoni" FontSize="14"/>
+        <TextBox x:Name="Name" Background="{x:Null}" HorizontalAlignment="Left" Margin="140,19,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="21" Grid.Row="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="26,17,0,0" Grid.Row="4" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="65" FontFamily="Aharoni" FontSize="14"/>
+        <TextBox x:Name="Longitude" Background="{x:Null}" HorizontalAlignment="Left" Margin="140,0,0,0" Text="{Binding Path=Location.Longitude}" TextWrapping="Wrap" VerticalAlignment="Center" Width="92" Height="27" Grid.Row="4"/>
+        <TextBox x:Name="Latitude" Background="{x:Null}" HorizontalAlignment="Left" Margin="237,0,0,0" Text="{Binding Path=Location.Latitude}" TextWrapping="Wrap" VerticalAlignment="Center" Width="87" Height="27" Grid.Row="4"/>
+        <Button Content="הוסף" Style="{StaticResource myButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click" Grid.Row="5" Margin="280,48,0,0" Grid.RowSpan="2"/>
+        <Button Background="{x:Null}" Height="35" Width="35" Click="Button_Click" VerticalAlignment="Center"
+                    Margin="465,0,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -39,6 +49,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <Button x:Name="cancel" Content="ביטול" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="112,3,0,0" VerticalAlignment="Top" Height="58" Width="120" Click="Button_Click" FontFamily="Tahoma" FontSize="24" FontWeight="Bold" Grid.Row="6"/>
+
 
 
     </Grid>

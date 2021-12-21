@@ -65,8 +65,11 @@ namespace PL.Pages
         }
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
-            CustomerShowParcel showParcel = new CustomerShowParcel(bl,selected.IdNumber);
-            showParcel.Show();
+            if (selected != null)
+            {
+                CustomerShowParcel showParcel = new CustomerShowParcel(bl, selected.IdNumber);
+                showParcel.Show();
+            }
         }
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {

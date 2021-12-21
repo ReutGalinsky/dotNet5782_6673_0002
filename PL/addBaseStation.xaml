@@ -7,11 +7,14 @@
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Title="AddBaseStation" Height="300" Width="400">
+        Title="AddBaseStation" Height="400" Width="500">
     <Grid>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="400" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="4"/>
-        <Button Background="{x:Null}" Height="38" Click="AddLineButton_Click" VerticalAlignment="Top"
-                    Margin="360,0,0,0">
+        <Grid.Background>
+            <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
+        </Grid.Background>
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="4"/>
+        <Button Background="{x:Null}" Height="35" Width="35" Click="AddLineButton_Click" VerticalAlignment="Top"
+                    Margin="455,0,10,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -27,16 +30,17 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="55,66,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="30"/>
-        <TextBox  x:Name="Id" HorizontalAlignment="Left" Margin="140,66,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="27" PreviewKeyDown="Onlynumbers"/>
-        <TextBlock HorizontalAlignment="Left" Margin="67,103,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677"/>
-        <TextBox  x:Name="Name" HorizontalAlignment="Left" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="154" Height="24" Margin="140,0,0,0" PreviewKeyDown="OnlyNumber"/>
-        <TextBlock HorizontalAlignment="Left" Margin="67,138,0,0" Text="Charge slots" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox  x:Name="ChargeSlots" HorizontalAlignment="Left" Margin="140,98,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="21"/>
-        <TextBlock HorizontalAlignment="Left" Margin="67,168,0,0" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox  x:Name="Longitude" HorizontalAlignment="Left" Margin="217,159,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="27"/>
-        <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="149,159,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="27"/>
-        <Button Content="הוסף" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="168,211,0,0" VerticalAlignment="Top" Height="49" Width="98" FontSize="22" Click="addClick"/>
+        <TextBlock HorizontalAlignment="Left" Margin="80,104,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="30"/>
+        <TextBox Background="{x:Null}" x:Name="Id" HorizontalAlignment="Left" Margin="179,103,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="27" PreviewKeyDown="Onlynumbers"/>
+        <TextBlock HorizontalAlignment="Left" Margin="90,156,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677"/>
+        <TextBox Background="{x:Null}" x:Name="Name" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="24" Margin="179,140,0,0"/>
+        <TextBlock HorizontalAlignment="Left" Margin="80,184,0,0" Text="Charge slots" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox Background="{x:Null}" x:Name="ChargeSlots" HorizontalAlignment="Left" Margin="179,184,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="21" PreviewKeyDown="OnlyNumber"/>
+        <TextBlock HorizontalAlignment="Left" Margin="77,226,0,0" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox Background="{x:Null}" x:Name="Longitude" HorizontalAlignment="Left" Margin="265,226,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="68" Height="28"/>
+        <TextBox x:Name="Latitude" Background="{x:Null}" HorizontalAlignment="Left" Margin="179,226,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="71" Height="28"/>
+        <Button Content="הוסף" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="265,278,0,0" VerticalAlignment="Top" Height="53" Width="111" FontSize="22" Click="addClick"/>
+        <Button x:Name="cancel" Content="ביטול" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="119,278,0,0" VerticalAlignment="Top" Height="58" Width="120" Click="Button_Click" FontFamily="Tahoma" FontSize="24" FontWeight="Bold"/>
 
     </Grid>
 </Window>

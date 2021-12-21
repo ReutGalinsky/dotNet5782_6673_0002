@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace PL
+namespace PL.PO
 {
     public class DronePO : INotifyPropertyChanged
     //PL drone- enable binding

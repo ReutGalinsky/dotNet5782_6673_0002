@@ -49,7 +49,7 @@
             </Button.Template>
         </Button>
 
-        <TextBox x:Name="Id" Grid.Row="1" HorizontalAlignment="Center" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="24" Background="{x:Null}"  />
+        <TextBox x:Name="Id" Grid.Row="1" IsEnabled="False" HorizontalAlignment="Center" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="24" Background="{x:Null}"  />
         <TextBox x:Name="Name" Grid.Row="2" HorizontalAlignment="Left" Margin="143,12,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" Height="28"  Background="{x:Null}"/>
         <Label Content="Id Number" Grid.Row="1" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" VerticalAlignment="Top" Height="28" Width="106" FontFamily="Aharoni" RenderTransformOrigin="0.539,-0.577"/>
         <Label Content="Name:" Grid.Row="2" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni"/>
@@ -57,8 +57,8 @@
         <TextBox x:Name="ChargeSlot" HorizontalAlignment="Left" Margin="143,0,0,0" Text="{Binding Path=ChargeSlots}" TextWrapping="Wrap" VerticalAlignment="Center" Width="198" Height="22" Background="{x:Null}" Grid.Row="3"/>
         <Label Content="Latitude:" HorizontalAlignment="Left" Margin="250,9,0,15" FontSize="14" FontFamily="Aharoni" Grid.Row="4"/>
         <Label Content="Longitude:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="4"/>
-        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="110,7,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
-        <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="349,4,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
+        <TextBox x:Name="Longitude" IsEnabled="False" HorizontalAlignment="Left" Margin="110,7,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
+        <TextBox x:Name="Latitude" IsEnabled="False" HorizontalAlignment="Left" Margin="349,4,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
         <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click" Margin="0,2,0,0" Grid.Row="6"/>
 
 

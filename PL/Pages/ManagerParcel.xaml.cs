@@ -29,20 +29,28 @@ namespace PL.Pages
                 listParcels.Add(s);
             ParcelListView.DataContext = listParcels;
             var states = BO.ParcelState.GetNames(typeof(BO.ParcelState)).ToList();
-            states.Insert(0, "all");
+            states.Insert(0, "All");
             State.ItemsSource = states;
-            State.SelectedItem = "all";
+            State.SelectedItem = "All";
             var priority = BO.Priorities.GetNames(typeof(BO.Priorities)).ToList();
-            priority.Insert(0, "all");
-            Priority.SelectedItem = "all";
+            priority.Insert(0, "All");
+            Priority.SelectedItem = "All";
             Priority.ItemsSource = priority;
+            update += updated;
 
         }
         private BLApi.IBL bl;
-
+        public EventHandler update;
         private BO.ParcelOfList selected;
         private ObservableCollection<BO.ParcelOfList> listParcels = new ObservableCollection<BO.ParcelOfList>();
 
+        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+        {
+            ParcelListView.ItemsSource = bl.GetParcels();
+            Priority.SelectedItem = "All";
+            State.SelectedItem = "All";
+
+        }
         private void ComboBox_State(object sender, SelectionChangedEventArgs e)
         {
             if (Priority.SelectedItem == null || State.SelectedItem == null)
@@ -85,8 +93,12 @@ namespace PL.Pages
         }
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
-            ManagerViewParcel showParcel = new ManagerViewParcel(bl, selected.IdNumber);
-            showParcel.Show();
+            if (selected != null)
+            {
+
+                ManagerViewParcel showParcel = new ManagerViewParcel(bl, selected.IdNumber);
+                showParcel.Show();
+            }
         }
 
         private void deleteParcel(object sender, RoutedEventArgs e)
