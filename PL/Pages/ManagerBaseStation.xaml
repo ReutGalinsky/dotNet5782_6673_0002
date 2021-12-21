@@ -45,7 +45,7 @@
     </Page.Resources>
     <Grid>
 
-        <Button x:Name="addButton" Background="{x:Null}" Height="88"  VerticalAlignment="Top"
+        <Button x:Name="addButton" Click="addBaseStation" Background="{x:Null}" Height="88"  VerticalAlignment="Top"
                     Margin="656,245,50,0" RenderTransformOrigin="0.588,0.314">
             <Button.Template>
                 <ControlTemplate TargetType="Button">

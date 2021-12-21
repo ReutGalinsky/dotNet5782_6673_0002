@@ -38,22 +38,14 @@ namespace PL.Pages
         private BLApi.IBL bl;
         private BO.BaseStationToList selected;
 
-        private void AddLineButton_Click(object sender, RoutedEventArgs e)
-        {
-            addingWindow add = new addingWindow(bl);
-            add.ShowDialog();
-        }
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             chargeSlot.SelectedItem = "all";
-            liststations.Clear();
-            foreach (var item in bl.GetBaseStations())
-                liststations.Add(item);
-            StationsListView.ItemsSource = liststations;
+            StationsListView.ItemsSource = bl.GetBaseStations();
             var current = Window.GetWindow(this);
             current.Opacity = 1;
         }
-
+       
         private void removeButton_Click(object sender, RoutedEventArgs e)
         {
             addButton.IsEnabled = false;
@@ -66,11 +58,14 @@ namespace PL.Pages
 
 
 
-        private void addStation(object sender, RoutedEventArgs e)
+        private void addBaseStation(object sender, RoutedEventArgs e)
         {
-            addingWindow adding = new addingWindow(bl);
-            adding.add += updated;
-            adding.ShowDialog();
+            AddBaseStation baseStation = new AddBaseStation(bl);
+            baseStation.updateList += updated;
+            var t = Window.GetWindow(this);
+            t.Opacity = 0.75;
+            baseStation.ShowDialog();
+     
         }
 
         private void reset_Click(object sender, RoutedEventArgs e)
@@ -89,6 +84,7 @@ namespace PL.Pages
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
             ManagerViewBaseStation showBase = new ManagerViewBaseStation(bl, selected.IdNumber);
+            showBase.updateList += updated;
             showBase.Show();
         }
 

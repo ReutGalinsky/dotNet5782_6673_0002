@@ -57,8 +57,6 @@
         <Label Content="Longitude:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="5" Grid.RowSpan="2"/>
         <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="202,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="5"/>
         <TextBox x:Name="Latitude" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
-        <ListBox Grid.Row="6" Margin="71,35,247,34"/>
-        <ListBox Grid.Row="6" Margin="273,35,60,34"/>
 
 
     </Grid>

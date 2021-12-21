@@ -20,21 +20,22 @@ namespace PL
     public partial class ManagerViewCustomer : Window
     {
         public ManagerViewCustomer(BLApi.IBL b, string i)
-        {
-        
+        { 
             InitializeComponent();
             bl = b;
             id = i;
             customer = bl.GetCustomer(id);
-            Id.Text = customer.IdNumber;
-            Name.Text = customer.Name;
-            Phone.Text = customer.Phone;
-            Latitude.DataContext = customer.Location.Latitude;
-            Longitude.DataContext = customer.Location.Longitude;
+            Id.DataContext = customer;
+            Phone.DataContext = customer;
+            Name.DataContext = customer;
+            Longitude.Text = customer.Location.Longitude.ToString();
+            Latitude.Text = customer.Location.Latitude.ToString();
         }
         private BLApi.IBL bl;
-        private string id;
         private BO.Customer customer;
+        private string id;
+        public event EventHandler updateList;
+
 
         private void closing(object sender, RoutedEventArgs e)
         {

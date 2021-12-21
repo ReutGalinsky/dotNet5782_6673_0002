@@ -29,13 +29,11 @@ namespace PL
             Name.DataContext = baseStation;
             ChargeSlot.DataContext = baseStation;
             Latitude.Text = baseStation.Location.Latitude.ToString();
-            Longitude.Text = baseStation.Location.Longitude.ToString();
-
-            
+            Longitude.Text = baseStation.Location.Longitude.ToString();     
         }
         private BLApi.IBL bl;
-    private string id;
-    private BO.BaseStation baseStation;
+        private string id;
+        private BO.BaseStation baseStation;
         public event EventHandler updateList;
 
         private void closing(object sender, RoutedEventArgs e)
@@ -53,8 +51,12 @@ namespace PL
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"can't update the base station");
+
             }
         }
+        
+
 
         private void move(object sender, MouseButtonEventArgs e)
         {

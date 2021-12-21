@@ -30,10 +30,9 @@ namespace PL.Pages
                        orderby item.Name
                        select item;
             foreach (BO.CustomerToList s in temp)//create the source for the liseView
-                listCustomers.Add(s);
+                listCustomers.Add(s);         
             CustomerListView.DataContext = listCustomers;
             Location.SelectedItem = Location.Items[0];
-
         }
         private BLApi.IBL bl;
         private BO.CustomerToList selected;
@@ -45,6 +44,7 @@ namespace PL.Pages
             AddCustomer customer =new AddCustomer(bl);
             customer.ShowDialog();
         }
+      
         private void reset_Click(object sender, RoutedEventArgs e)
         {
 
@@ -61,8 +61,11 @@ namespace PL.Pages
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
             ManagerViewCustomer customer= new ManagerViewCustomer(bl, selected.IdNumber);
+            customer.updateList += updated;
             customer.Show();
         }
+        
+        
 
         private void Location_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -74,6 +77,13 @@ namespace PL.Pages
                 _ => bl.GetCustomers(),
             };
         }
+        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+        {
+            Location.SelectedItem = "All";
+            CustomerListView.ItemsSource = bl.GetCustomers();
+            var t = Window.GetWindow(this);
+            t.Opacity = 1;
+        }
 
         private void deleteCustomer(object sender, RoutedEventArgs e)
         {
@@ -84,13 +94,14 @@ namespace PL.Pages
                 {
                     BO.CustomerToList CustomerToDelte = ((sender as Button).DataContext) as BO.CustomerToList;
                     bl.RemoveCustomer(CustomerToDelte.IdNumber);
-                    CustomerListView.ItemsSource = bl.GetCustomers();
+                    updated(sender, e);
                 }
                 catch (Exception ex)
                 {
                 }
             }
-        }
+
+            }
 
         private void idCheck(object sender, RoutedEventArgs e)
         {

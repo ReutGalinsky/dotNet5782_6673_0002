@@ -78,34 +78,6 @@ namespace PL.Pages
                 },
             };
         }
-
-        //private void ComboBox_State(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (Weight.SelectedItem == null || State.SelectedItem == null)
-        //    {
-        //        return;
-        //    }
-        //    object item;
-        //    var b = Weight.SelectedItem;
-        //    Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
-        //    object check;
-        //    Enum.TryParse(typeof(BO.DroneState), State.SelectedItem.ToString(), out check);
-        //    listDrones.Clear();
-        //    DroneListView.ItemsSource = item switch
-        //    {
-        //        null => check switch
-        //        {
-        //            null => bl.GetDrones(),
-        //            _ => bl.GetAllDronesBy(x => x.State == (BO.DroneState)check),
-        //        },
-        //        _ => check switch
-        //        {
-        //            null => bl.GetAllDronesBy(x => x.MaxWeight == (BO.WeightCategories)item),
-        //            _ => bl.GetAllDronesBy(x => x.MaxWeight == (BO.WeightCategories)item && x.State == (BO.DroneState)check),
-        //        },
-        //    };
-
-        //}
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
             selected = (BO.DroneToList)DroneListView.SelectedItem;

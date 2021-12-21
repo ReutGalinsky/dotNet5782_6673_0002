@@ -94,13 +94,13 @@ namespace BL
             if (numberOfCharge != "" && (int.TryParse(numberOfCharge, out tempInteger) == false))
                 throw new UpdatingException($"{numberOfCharge} is an illegal number for charging drones");
 
-            if (numberOfCharge == "") baseStation.ChargeSlots = tempBaseStation.ChargeSlots;
-            else
-            {
-                if (baseStation.Drones.Count() < tempInteger)
-                    throw new UpdatingException($"{numberOfCharge} is an illegal number for charging drones");
-                baseStation.ChargeSlots = tempInteger - baseStation.Drones.Count();
-            }
+            /*if (numberOfCharge == "")*/ baseStation.ChargeSlots = tempBaseStation.ChargeSlots;
+            //else
+            //{
+            //    //if (baseStation.Drones.Count() > tempInteger)
+            //    //    throw new UpdatingException($"{numberOfCharge} is an illegal number for charging drones");
+            //    //baseStation.ChargeSlots = tempInteger - baseStation.Drones.Count();
+            //}
 
             //update
             try
@@ -115,13 +115,13 @@ namespace BL
         }
 
 
-        #endregion
+#endregion
 
-        #region GetBaseStation
-        /// <summary>
-        /// return a single base station
-        /// </summary>
-        public BO.BaseStation GetBaseStation(string id)
+#region GetBaseStation
+/// <summary>
+/// return a single base station
+/// </summary>
+public BO.BaseStation GetBaseStation(string id)
         {
             try
             {

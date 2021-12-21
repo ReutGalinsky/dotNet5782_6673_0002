@@ -28,7 +28,6 @@ namespace PL
             Id.DataContext = drone;
             MaxWeight.DataContext = drone;
             Model.DataContext = drone;
-
             Battery.DataContext = drone;
             State.DataContext = drone;
             Latitude.Text = drone.Location.Latitude.ToString();
