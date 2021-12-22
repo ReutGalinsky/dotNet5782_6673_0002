@@ -16,10 +16,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="2"/>
-
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="movingWindow" Grid.ColumnSpan="2"/>
         <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top" Grid.ColumnSpan="2">
-            <Button x:Name="DroneInManager" Content="DRONE" BorderThickness="2.5" BorderBrush="#FF052C4E" MinWidth="100" Height="33" FontSize="13"  Margin="250,0,0,0" Click="ButtonDrone" FontFamily="Segoe UI Black">
+            <Button x:Name="DroneInManager" Content="DRONE" BorderThickness="2.5" BorderBrush="#FF052C4E" MinWidth="100" Height="33" FontSize="13"  Margin="190,0,0,0" Click="ButtonDrone" FontFamily="Segoe UI Black">
                 <Button.Background>
                     <SolidColorBrush Color="#FFE2F1FF"></SolidColorBrush>
                 </Button.Background>
@@ -28,7 +27,7 @@
             <Button x:Name="BaseStationInManager" Background="#FFE2F1FF" Margin="10,0,0,0" FontFamily="Segoe UI Black" Content="BASESTATION" MinWidth="100" BorderThickness="2.5" BorderBrush="#FF052C4E" Click="ButtonBaseStation" FontSize="13"/>
             <Button x:Name="CustomerInManager" Background="#FFE2F1FF" Margin="10,0,0,0" FontFamily="Segoe UI Black" Content="CUSTOMER" MinWidth="100" BorderThickness="2.5" BorderBrush="#FF052C4E" Click="ButtonCustomer" FontSize="13"/>
         </StackPanel>
-        <Button Background="{x:Null}" Height="35" Width="35" Click="Button_Click" VerticalAlignment="Top"
+        <Button Background="{x:Null}" Height="35" Width="35" Click="returningButton" VerticalAlignment="Top"
                     Margin="5,0,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -45,8 +44,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
-        <Button Background="{x:Null}" Height="35" Width="35" Click="AddLineButton_Click" VerticalAlignment="Top"
+        <Button Background="{x:Null}" Height="35" Width="35" Click="closingButton" VerticalAlignment="Top"
                     Margin="706,0,0,0" Grid.Column="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">

@@ -58,6 +58,7 @@ namespace PL
         }
         private void closing(object sender, RoutedEventArgs e)
         {
+            updateList(sender, e);
             this.Close();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -66,8 +67,6 @@ namespace PL
             {
                 bl.UpdatingDetailsOfDrone(drone.Model, drone.IdNumber);
                 MessageBox.Show($"the drone number {drone.IdNumber} updated successfully!");
-                updateList(sender, e);
-                this.Close();
             }
             catch (Exception ex)
             {

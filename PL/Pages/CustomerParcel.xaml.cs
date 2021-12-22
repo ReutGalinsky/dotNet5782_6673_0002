@@ -42,9 +42,11 @@ namespace PL.Pages
             weights.Insert(0, "all");
             Weight.ItemsSource = weights;
             Weight.SelectedItem = "all";
-            
+            update += updated;
 
         }
+
+        public EventHandler update;
         private BLApi.IBL bl;
         string id;
         private BO.ParcelOfList selected;//selected item that will be send to the new window

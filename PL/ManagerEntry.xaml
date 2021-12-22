@@ -18,7 +18,7 @@
         <Button Margin="310,320,270,29" Style="{StaticResource myButton}" BorderThickness="3" Content="התחבר" Click="startclick" FontFamily="Tahoma" FontSize="38" FontWeight="Bold">
 
         </Button>
-        <TextBox x:Name="passwordText" HorizontalAlignment="Left" Margin="270,216,0,0" Text="הכנס סיסמא" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="61" FontFamily="Tahoma" FontSize="24" TextAlignment="Center" PreviewKeyDown="OnlyNumbers" GotFocus="focusPassword"/>
+        <TextBox x:Name="passwordText" HorizontalAlignment="Left" Margin="270,216,0,0" Text="הכנס סיסמא" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="61" FontFamily="Tahoma" FontSize="24" TextAlignment="Center" GotFocus="focusPassword"/>
 
     </Grid>
 </Window>

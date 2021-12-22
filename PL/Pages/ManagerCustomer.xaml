@@ -70,7 +70,7 @@
             <ComboBoxItem Content="No parcels on way"></ComboBoxItem>
         </ComboBox>
         <TextBlock HorizontalAlignment="Left" Margin="659,50,0,0" Text="סינון על פי חבילות בדרך" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
-        <RadioButton Content="מיון לפי תז" GroupName="key1" HorizontalAlignment="Left" Margin="138,88,0,0" VerticalAlignment="Top" Checked="idCheck"/>
+        <RadioButton x:Name="id" Content="מיון לפי תז" GroupName="key1" HorizontalAlignment="Left" Margin="138,88,0,0" VerticalAlignment="Top" Checked="idCheck"/>
         <RadioButton Content="מיון לפי שם " GroupName="key1" HorizontalAlignment="Left" Margin="274,87,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="80" Checked="nameCheck">
             <RadioButton.RenderTransform>
                 <TransformGroup>

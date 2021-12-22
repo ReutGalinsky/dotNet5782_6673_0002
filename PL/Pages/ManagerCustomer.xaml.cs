@@ -33,7 +33,11 @@ namespace PL.Pages
                 listCustomers.Add(s);         
             CustomerListView.DataContext = listCustomers;
             Location.SelectedItem = Location.Items[0];
+            id.IsChecked = true;
+            update += updated;
         }
+
+        public EventHandler update;
         private BLApi.IBL bl;
         private BO.CustomerToList selected;
         private ObservableCollection<BO.CustomerToList> listCustomers = new ObservableCollection<BO.CustomerToList>();

@@ -22,6 +22,7 @@
     <None Remove="customer.png" />
     <None Remove="key.jpg" />
     <None Remove="manager.png" />
+    <None Remove="new.png" />
     <None Remove="Pages\Images\BackGround.png" />
     <None Remove="Pages\Images\Backing.png" />
     <None Remove="Pages\Images\Closing.png" />
@@ -52,6 +53,7 @@
     <None Remove="חבילה אחת.jpg" />
     <None Remove="חזור.jpg" />
     <None Remove="טעינה.png" />
+    <None Remove="יציאה.png" />
     <None Remove="לוגו רחפן.png" />
     <None Remove="לקוח.png" />
     <None Remove="מינוס.png" />
@@ -86,6 +88,7 @@
     <Resource Include="customer.png" />
     <Resource Include="key.jpg" />
     <Resource Include="manager.png" />
+    <Resource Include="new.png" />
     <Resource Include="Pages\Images\Customer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -158,6 +161,7 @@
     <Resource Include="חבילה אחת.jpg" />
     <Resource Include="חזור.jpg" />
     <Resource Include="טעינה.png" />
+    <Resource Include="יציאה.png" />
     <Resource Include="לוגו רחפן.png" />
     <Resource Include="לקוח.png" />
     <Resource Include="מינוס.png" />

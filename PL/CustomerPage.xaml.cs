@@ -28,6 +28,7 @@ namespace PL
             pageParcel = new CustomerParcel(bl, id);
             pagePersonal = new CustomerPersonalArea(bl, id);
         }
+
         BLApi.IBL bl;
         string id;
         private CustomerDelivery pageDelivery;
@@ -35,39 +36,34 @@ namespace PL
         private CustomerPersonalArea pagePersonal;
         private void ButtonParcel(object sender, RoutedEventArgs e)
         {
-            //Customer.Content = new Pages.CustomerParcel(bl,id);
+            pageParcel.update(sender,e);
             Customer.NavigationService.Navigate(pageParcel);
         }
-private void ButtonPersonalArea(object sender, RoutedEventArgs e)
+        private void ButtonPersonalArea(object sender, RoutedEventArgs e)
         {
-            //Customer.Content = new Pages.CustomerPersonalArea(bl,id);
             Customer.NavigationService.Navigate(pagePersonal);
 
         }
-        private void AddLineButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void ButtonDelivery(object sender, RoutedEventArgs e)
         {
-            //Customer.Content = new Pages.CustomerDelivery(bl,id);
+            pageDelivery.update(sender, e);
             Customer.NavigationService.Navigate(pageDelivery);
-
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            TypeOfUser typeOfUser = new TypeOfUser(bl);
-            typeOfUser.Show();
-            this.Close();
-        }
-
         private void move(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
 
+        }
+        private void closingButton(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void returnningButton(object sender, RoutedEventArgs e)
+        {
+            TypeOfUser typeOfUser = new TypeOfUser(bl);
+            typeOfUser.Show();
+            this.Close();
         }
     }
 }

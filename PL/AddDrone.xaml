@@ -45,14 +45,14 @@
             </Button.Template>
         </Button>
 
-        <TextBox x:Name="id" HorizontalAlignment="Left"  Margin="146,75,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="24"  TextChanged="focusID" Background="{x:Null}" PreviewKeyDown="OnlyNumbers_PreviewKeyDown"  />
-        <TextBox x:Name="Model" HorizontalAlignment="Left" Margin="146,20,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="26" Grid.Row="1" TextChanged="focusModel" Background="{x:Null}"/>
+        <TextBox x:Name="id" HorizontalAlignment="Left"  Margin="146,75,0,0" Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="24"  TextChanged="focusID" Background="{x:Null}" PreviewKeyDown="OnlyNumbers_PreviewKeyDown"  />
+        <TextBox x:Name="Model" HorizontalAlignment="Left" Margin="146,20,0,0" Text="{Binding Path=Model, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="26" Grid.Row="1" TextChanged="focusModel" Background="{x:Null}"/>
         <TextBox  x:Name="Station"  HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="24" Grid.Row="2" TextChanged="focusStaton" Background="{x:Null}" PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown"/>
         <Label Content="Id Number" HorizontalAlignment="Left" Margin="35,75,0,0" FontSize="14" VerticalAlignment="Top" Height="28" Width="106" FontFamily="Aharoni"/>
         <Label Content="Model" HorizontalAlignment="Left" Margin="41,20,0,31" Grid.Row="1" FontSize="14" FontFamily="Aharoni"/>
         <Label Content="Weight" HorizontalAlignment="Left" Margin="41,86,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="14" FontFamily="Aharoni"/>
         <Label Content="charge station" HorizontalAlignment="Left" FontSize="14" Margin="18,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontFamily="Aharoni"/>
-        <ComboBox x:Name="weight" HorizontalAlignment="Center" Margin="0,82,0,0" Grid.Row="1" VerticalAlignment="Top" Width="174" Height="30" SelectionChanged="focusSelected"/>
+        <ComboBox x:Name="weight" HorizontalAlignment="Center" SelectedValue="{Binding Path=MaxWeight, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" Margin="0,82,0,0" Grid.Row="1" VerticalAlignment="Top" Width="174" Height="30" SelectionChanged="focusSelected"/>
         <Button x:Name="add" Content="הוסף" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="270,12,0,0" VerticalAlignment="Top" Height="58" Width="120" Click="clickAdd" FontFamily="Tahoma" FontSize="24" FontWeight="Bold" Grid.Row="3"/>
         <Button x:Name="cancel" Content="ביטול" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="130,12,0,0" VerticalAlignment="Top" Height="58" Width="120" Click="Button_Click" FontFamily="Tahoma" FontSize="24" FontWeight="Bold" Grid.Row="3"/>
 

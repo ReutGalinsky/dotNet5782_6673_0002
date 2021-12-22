@@ -40,7 +40,10 @@ namespace PL.Pages
             foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the listView
                 parcels.Add(s);
             Delivery.ItemsSource = parcels;
+            update += updated;
         }
+
+        public EventHandler update;
         private BLApi.IBL bl;
         string id;
         private BO.ParcelOfList selected;//selected item that will be send to the new window

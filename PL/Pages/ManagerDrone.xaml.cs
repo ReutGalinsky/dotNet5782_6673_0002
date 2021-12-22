@@ -26,12 +26,10 @@ namespace PL.Pages
             weights.Insert(0, "All");
             Weight.DataContext = weights;
             Weight.SelectedItem = "All";
+            update += updated;
         }
 
-        Predicate<BO.DroneToList> stateCondition;
-        Predicate<BO.DroneToList> weightCondition;
-        
-
+        public EventHandler update;
         private BLApi.IBL bl;
         private BO.DroneToList selected;
         private ObservableCollection<BO.DroneToList> listDrones = new ObservableCollection<BO.DroneToList>();

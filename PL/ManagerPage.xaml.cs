@@ -28,55 +28,52 @@ namespace PL
             pageParcel = new ManagerParcel(bl);
             pageBaseStation = new ManagerBaseStation(bl);
         }
-        BLApi.IBL bl;
+
+        private BLApi.IBL bl;
         private ManagerDrone pageDrone;
         private ManagerCustomer pageCustomer;
         private ManagerParcel pageParcel;
         private ManagerBaseStation pageBaseStation;
 
+        //******buttons*******
         private void ButtonDrone(object sender, RoutedEventArgs e)
         {
-            //Manager.Content = new Pages.ManagerDrone(bl);
+            pageDrone.update(sender, e);
             Manager.NavigationService.Navigate(pageDrone);
         }
         private void ButtonParcel(object sender, RoutedEventArgs e)
         {
-            //Manager.Content = new Pages.ManagerParcel(bl);
             pageParcel.update(sender, e);
             Manager.NavigationService.Navigate(pageParcel);
 
         }
         private void ButtonCustomer(object sender, RoutedEventArgs e)
         {
-            //Manager.Content = new Pages.ManagerCustomer(bl);
+            pageCustomer.update(sender, e);
             Manager.NavigationService.Navigate(pageCustomer);
 
         }
-        private void AddLineButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-            TypeOfUser typeOfUser = new TypeOfUser(bl);
-            typeOfUser.Show();
-            this.Close();
-        }
-
         private void ButtonBaseStation(object sender, RoutedEventArgs e)
         {
-            //Manager.Content = new Pages.ManagerBaseStation(bl);
             pageBaseStation.update(sender, e);
             Manager.NavigationService.Navigate(pageBaseStation);
 
         }
+        private void closingButton(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void returningButton(object sender, RoutedEventArgs e)
+        {
+            TypeOfUser typeOfUser = new TypeOfUser(bl);
+            typeOfUser.Show();
+            this.Close();
 
-        private void move(object sender, MouseButtonEventArgs e)
+        }
+        private void movingWindow(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-
         }
     }
 }
