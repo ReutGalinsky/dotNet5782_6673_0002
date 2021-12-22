@@ -52,5 +52,12 @@ namespace PL
             if (user.Text == "שם משתמש")
                 user.Text = "";
         }
+
+        private void focusPassword(object sender, RoutedEventArgs e)
+        {
+            passwordText.Visibility = Visibility.Collapsed;
+            password.Focus();
+
+        }
     }
 }

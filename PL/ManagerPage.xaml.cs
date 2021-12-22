@@ -67,6 +67,7 @@ namespace PL
         private void ButtonBaseStation(object sender, RoutedEventArgs e)
         {
             //Manager.Content = new Pages.ManagerBaseStation(bl);
+            pageBaseStation.update(sender, e);
             Manager.NavigationService.Navigate(pageBaseStation);
 
         }

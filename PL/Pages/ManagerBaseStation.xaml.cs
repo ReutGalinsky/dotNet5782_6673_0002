@@ -32,18 +32,17 @@ namespace PL.Pages
             }
             StationsListView.DataContext = liststations;
             chargeSlot.SelectedItem = chargeSlot.Items[0];
+            update += updated;
         }
         public ObservableCollection<BO.BaseStationToList> liststations = new ObservableCollection<BO.BaseStationToList>();
 
         private BLApi.IBL bl;
         private BO.BaseStationToList selected;
-
+        public EventHandler update;
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             chargeSlot.SelectedItem = "all";
             StationsListView.ItemsSource = bl.GetBaseStations();
-            var current = Window.GetWindow(this);
-            current.Opacity = 1;
         }
        
         private void removeButton_Click(object sender, RoutedEventArgs e)

@@ -57,5 +57,11 @@ namespace PL
                 user.Text = "";
 
         }
+
+        private void focusPassword(object sender, RoutedEventArgs e)
+        {
+            passwordText.Visibility = Visibility.Collapsed;
+            password.Focus();
+        }
     }
 }

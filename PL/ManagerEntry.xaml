@@ -14,9 +14,11 @@
         <TextBox x:Name="user" HorizontalAlignment="Left" Text="שם משתמש" Margin="270,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="58" FontFamily="Tahoma" FontSize="24" TextAlignment="Center" GotFocus="focus"/>
         <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="270,216,0,0" VerticalAlignment="Top" Width="300" Height="61" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Tahoma" FontSize="24"/>
         <Image HorizontalAlignment="Left" Height="58" Margin="187,109,0,0" VerticalAlignment="Top" Width="60" Source="/Pages/מנהל2.png" RenderTransformOrigin="0.207,-0.193"/>
-        <Image HorizontalAlignment="Left" Height="82" Margin="166,207,0,0" VerticalAlignment="Top" Width="99" Source="/Pages/מפתח.jpg"/>
+        <Image HorizontalAlignment="Left" Height="58" Margin="186,216,0,0" VerticalAlignment="Top" Width="66" Source="/תמונה5.png"/>
         <Button Margin="310,320,270,29" Style="{StaticResource myButton}" BorderThickness="3" Content="התחבר" Click="startclick" FontFamily="Tahoma" FontSize="38" FontWeight="Bold">
 
         </Button>
+        <TextBox x:Name="passwordText" HorizontalAlignment="Left" Margin="270,216,0,0" Text="הכנס סיסמא" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="61" FontFamily="Tahoma" FontSize="24" TextAlignment="Center" PreviewKeyDown="OnlyNumbers" GotFocus="focusPassword"/>
+
     </Grid>
 </Window>
