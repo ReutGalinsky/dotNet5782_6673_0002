@@ -25,7 +25,7 @@ namespace PL
             bl = b;
         }
         private BLApi.IBL bl;
-        private void startclick(object sender, RoutedEventArgs e)
+        private void logInButton(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -46,6 +46,17 @@ namespace PL
                 MessageBox.Show($"there is no manager with the id of {user.Text}");
             }
         }
+        private void move(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            TypeOfUser typeOfUser = new TypeOfUser(bl);
+            typeOfUser.Show();
+            this.Close();
+        }
 
         private void focus(object sender, RoutedEventArgs e)
         {
@@ -58,6 +69,10 @@ namespace PL
             passwordText.Visibility = Visibility.Collapsed;
             password.Focus();
 
+        }
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

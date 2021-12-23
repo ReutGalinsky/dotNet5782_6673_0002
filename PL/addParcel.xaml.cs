@@ -25,17 +25,17 @@ namespace PL
             bl = b;
             id = i;
             Weight.ItemsSource = Enum.GetValues( typeof(BO.WeightCategories));
-            Prioprity.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
+            Priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
         }
         private BLApi.IBL bl;
         private string id;
         public event EventHandler updateList;
 
-        private void adButton(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                BO.ParcelOfList parcel = new BO.ParcelOfList() { Priority=(BO.Priorities)Prioprity.SelectedItem, Weight= (BO.WeightCategories)Weight.SelectedItem , Geter=IdGeter.Text, Sender=id};//?האם ההמרה זו הייתה הבעיה
+                BO.ParcelOfList parcel = new BO.ParcelOfList() { Priority=(BO.Priorities)Priority.SelectedItem, Weight= (BO.WeightCategories)Weight.SelectedItem , Geter=IdGeter.Text, Sender=id};//?האם ההמרה זו הייתה הבעיה
                 bl.AddParcelToDelivery(parcel);
                 this.Close();
             }
@@ -45,21 +45,8 @@ namespace PL
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                BO.ParcelOfList parcel=new BO.ParcelOfList() { Geter=id=IdGeter.Text, Priority=(BO.Priorities)Prioprity.SelectedItem, Weight= (BO.WeightCategories)Weight.SelectedItem, Sender=id };
-                bl.AddParcelToDelivery(parcel);
-                updateList(sender, e);
-                this.Close();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("error");
-            }
-        }
-        private void closing(object sender, RoutedEventArgs e)
+    
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -71,9 +58,6 @@ namespace PL
 
         }
 
-        private void closeing(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        
     }
 }

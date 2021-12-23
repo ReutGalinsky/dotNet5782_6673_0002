@@ -37,7 +37,7 @@ namespace PL
         public event EventHandler updateList;
 
 
-        private void closing(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

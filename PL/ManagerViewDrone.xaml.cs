@@ -26,7 +26,7 @@ namespace PL
             id = i;
             convertToPo(drone, bl.GetDrone(id));
             Id.DataContext = drone;
-            MaxWeight.DataContext = drone;
+            Weight.DataContext = drone;
             Model.DataContext = drone;
             Battery.DataContext = drone;
             State.DataContext = drone;
@@ -56,12 +56,12 @@ namespace PL
             dronePo.Latitude = LocationFormat.sexagesimalFormat(d.Location.Latitude, false); ;
             dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true); ;
         }
-        private void closing(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             updateList(sender, e);
             this.Close();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -183,5 +183,7 @@ namespace PL
             }
 
         }
+
+
     }
 }

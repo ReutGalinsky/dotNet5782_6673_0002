@@ -38,8 +38,7 @@ namespace PL.Pages
             Weight.SelectedItem = "All";
             State.SelectedItem = "All";
             DroneListView.ItemsSource = bl.GetDrones();
-            var t = Window.GetWindow(this);
-            t.Opacity = 1;
+            
         }
 
         private void addingDrone_Click(object sender, RoutedEventArgs e)

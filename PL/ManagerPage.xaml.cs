@@ -59,18 +59,17 @@ namespace PL
             Manager.NavigationService.Navigate(pageBaseStation);
 
         }
-        private void closingButton(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        private void returningButton(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             TypeOfUser typeOfUser = new TypeOfUser(bl);
             typeOfUser.Show();
             this.Close();
-
         }
-        private void movingWindow(object sender, MouseButtonEventArgs e)
+        private void move(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();

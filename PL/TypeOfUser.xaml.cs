@@ -26,15 +26,16 @@ namespace PL
         }
         private BLApi.IBL bl;
 
-        private void managerButton_Click(object sender, RoutedEventArgs e)
+        private void Manager_Click(object sender, RoutedEventArgs e)
         {
-            ManagerEntry entry = new ManagerEntry(bl);
+            //ManagerEntry entry = new ManagerEntry(bl);
+            ManagerPage entry = new ManagerPage(bl);
             entry.Show();
             this.Close();
 
         }
 
-        private void customerButton_Click(object sender, RoutedEventArgs e)
+        private void Customer_Click(object sender, RoutedEventArgs e)
         {
             CustomerEntry entry = new CustomerEntry(bl);//רק לצורך הדוגמא
             entry.Show();
@@ -48,12 +49,12 @@ namespace PL
                 this.DragMove();
         }
 
-        private void colsing(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

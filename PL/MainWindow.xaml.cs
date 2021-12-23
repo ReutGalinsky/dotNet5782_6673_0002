@@ -27,25 +27,11 @@ namespace PL
             bl = BLApi.BLFactory.GetBl();
         }
         private BLApi.IBL bl;
-        private void changeColor(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void returnColor(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void closeButton(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        private void AddLineButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void startclick(object sender, RoutedEventArgs e)
+        private void Start_Click(object sender, RoutedEventArgs e)
         {
             TypeOfUser entry = new TypeOfUser(bl);
             entry.Show();

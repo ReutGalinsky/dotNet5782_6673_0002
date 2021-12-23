@@ -9,43 +9,30 @@
         ResizeMode="NoResize"
         Title="ManagerPage" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="377*"/>
-        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="movingWindow" Grid.ColumnSpan="2"/>
-        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top" Grid.ColumnSpan="2">
-            <Button x:Name="DroneInManager" Content="DRONE" BorderThickness="2.5" BorderBrush="#FF052C4E" MinWidth="100" Height="33" FontSize="13"  Margin="190,0,0,0" Click="ButtonDrone" FontFamily="Segoe UI Black">
-                <Button.Background>
-                    <SolidColorBrush Color="#FFE2F1FF"></SolidColorBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="ParcelInManager" Background="#FFE2F1FF"  FontFamily="Segoe UI Black" Content="PARCEL" BorderThickness="2.5" BorderBrush="#FF052C4E" MinWidth="100" Margin="10,0,0,0" Click="ButtonParcel" FontSize="13"/>
-            <Button x:Name="BaseStationInManager" Background="#FFE2F1FF" Margin="10,0,0,0" FontFamily="Segoe UI Black" Content="BASESTATION" MinWidth="100" BorderThickness="2.5" BorderBrush="#FF052C4E" Click="ButtonBaseStation" FontSize="13"/>
-            <Button x:Name="CustomerInManager" Background="#FFE2F1FF" Margin="10,0,0,0" FontFamily="Segoe UI Black" Content="CUSTOMER" MinWidth="100" BorderThickness="2.5" BorderBrush="#FF052C4E" Click="ButtonCustomer" FontSize="13"/>
-        </StackPanel>
-        <Button Background="{x:Null}" Height="35" Width="35" Click="returningButton" VerticalAlignment="Top"
-                    Margin="5,0,0,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/חזור.jpg" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Background="{x:Null}" Height="35" Width="35" Click="closingButton" VerticalAlignment="Top"
-                    Margin="706,0,0,0" Grid.Column="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="4" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="3" Margin="-511,575,0,0"/>
+        <Button Background="{x:Null}" Click="Close_Click"
+                    Grid.Column="5" Grid.Row="0" Margin="100,0,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -61,15 +48,30 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Frame x:Name="Manager" Margin="0,45,0,0" NavigationUIVisibility="Hidden" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
-            <Frame.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="0.762"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-5.32"/>
-                </TransformGroup>
-            </Frame.RenderTransform>
-        </Frame>
+        <Button Background="{x:Null}" Height="35" Width="35" Click="Back_Click" VerticalAlignment="Top"
+                    Margin="0,0,100,0" Grid.ColumnSpan="1">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/חזור.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="5" Margin="0,0,91,0">
+            <Button x:Name="ParcelInManager" Content="My Parcels" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" Background="{x:Null}" MinWidth="100" Click="ButtonParcel" Grid.Row="0" Grid.Column="1"/>
+            <Button x:Name="BaseStationInManager" Content="My Base Stations" Click="ButtonBaseStation" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" Background="{x:Null}" MinWidth="100" Grid.Row="0" Grid.Column="2"/>
+            <Button x:Name="CustomerInManager" Content="My Customer" Click="ButtonCustomer" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" Background="{x:Null}" MinWidth="100" Grid.Row="0" Grid.Column="3"/>
+            <Button x:Name="DroneInManager" Content="My Drones" MinWidth="100" Click="ButtonDrone" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" Background="{x:Null}" Grid.Row="0" Grid.Column="4"/>
+        </StackPanel>
+        <Frame x:Name="Manager" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="6" Width="800" Grid.RowSpan="4"/>
     </Grid>
 </Window>

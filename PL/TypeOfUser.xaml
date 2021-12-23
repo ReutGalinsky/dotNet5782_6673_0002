@@ -12,22 +12,27 @@
         <Grid.Background>
             <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
-
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Frame x:Name="frame" Height="auto" Grid.Row="1"></Frame>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Center" Height="35" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" MouseDown="move"/>
-        <Button Background="{x:Null}" Height="35" Width="35" VerticalAlignment="Center" 
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
 
-                    Margin="755,0,10,0" Click="colsing">
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="3"/>
+        <Button Background="{x:Null}" Click="Close_Click"
+                    Grid.Column="3" Grid.Row="0" Margin="120,0,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="Pages/Images/Closing.png" />
+                            <ImageBrush ImageSource="/סגירה.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>
@@ -38,13 +43,13 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Background="{x:Null}" Height="35" Width="35" VerticalAlignment="Center"
-                    Margin="10,0,755,0" Click="Button_Click">
+        <Button Background="{x:Null}" Height="35" Width="35" Click="Back_Click"
+                    Margin="0,0,160,0" Grid.ColumnSpan="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="Pages/Images/Backing.png" />
+                            <ImageBrush ImageSource="/חזור.jpg" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>
@@ -55,8 +60,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Background="{x:Null}" Height="165" Click="customerButton_Click" VerticalAlignment="Top" Grid.Row="1"
-                    Margin="200,75,428,0">
+
+        <Button x:Name="CustomerIcon" Background="{x:Null}" Height="90" Click="Customer_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Width="100">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse StrokeThickness="3">
@@ -72,8 +77,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="manegerIcon" Background="{x:Null}" Height="172" Click="managerButton_Click" VerticalAlignment="Top" Grid.Row="1"
-                    Margin="449,68,163,0">
+        <Button x:Name="ManagerIcon" Background="{x:Null}" Click="Manager_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" Height="90" Width="100">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse StrokeThickness="3">
@@ -89,8 +93,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="502,245,0,0" Grid.Row="1" Text="מנהל" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="135" FontFamily="Tahoma" FontWeight="Bold" FontSize="26"/>
-        <TextBlock HorizontalAlignment="Left" Margin="252,245,0,0" Grid.Row="1" Text="לקוח" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="68" FontFamily="Tahoma" FontWeight="Bold" FontSize="26"/>
+        <TextBlock HorizontalAlignment="Center"  Grid.Row="2" Text="Manager" Grid.Column="2" VerticalAlignment="Bottom" Height="30" Width="135" FontFamily="Tahoma" FontWeight="Bold" FontSize="26"/>
+        <TextBlock HorizontalAlignment="Center"  Grid.Row="2" Text="Customer" Grid.Column="1" VerticalAlignment="Bottom" Height="30" Width="150" FontFamily="Tahoma" FontWeight="Bold" FontSize="26"/>
 
     </Grid>
 </Window>

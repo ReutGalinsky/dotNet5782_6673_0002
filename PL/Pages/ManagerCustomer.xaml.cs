@@ -89,8 +89,7 @@ namespace PL.Pages
         {
             Location.SelectedItem = "All";
             CustomerListView.ItemsSource = bl.GetCustomers();
-            var t = Window.GetWindow(this);
-            t.Opacity = 1;
+            
         }
 
         private void deleteCustomer(object sender, RoutedEventArgs e)

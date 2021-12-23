@@ -10,16 +10,23 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/רקע פרוקיט.jpg"></ImageBrush>
+            <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition/>
+           
         </Grid.RowDefinitions>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="2"/>
-        <Button Background="{x:Null}" Height="35" Width="35" Click="AddLineButton_Click" VerticalAlignment="Center"
-                    Margin="761,0,4,0">
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="3"/>
+        <Button Background="{x:Null}" Click="Close_Click"
+                    Grid.Column="2" Grid.Row="0" Margin="200,0,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -35,8 +42,9 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Image HorizontalAlignment="Center" Height="310" VerticalAlignment="Top" Width="609" Source="/לוגו רחפן.png" Grid.RowSpan="2" Grid.Row="1"/>
-        <Button Margin="300,67,300,40" BorderThickness="3"  Grid.Row="2" BorderBrush="#FFF0F0F3" Content="התחל" Click="startclick" FontFamily="Tahoma" FontSize="44" FontWeight="Bold" Background="#FFD3DBEB">
+       
+        <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/לוגו רחפן.png" Grid.ColumnSpan="3" Grid.Row="1"/>
+        <Button BorderThickness="3" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="#FFF0F0F3" Content="Let's Start" Click="Start_Click" FontFamily="Tahoma" FontSize="44" Background="#FFD3DBEB">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20"/>

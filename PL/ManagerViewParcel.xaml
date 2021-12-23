@@ -5,35 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
         Title="ManagerViewParcel" Height="400" Width="500">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
+            <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
 
         </Grid.RowDefinitions>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Height="35" Margin="2,0,-2,0" Stroke="Black" VerticalAlignment="Center" MouseDown="move"/>
-        <Button Background="{x:Null}" Height="35" Width="35" VerticalAlignment="Center"
-                    Margin="465,0,0,0" RenderTransformOrigin="0.5,0.5" Click="closing">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="3"/>
+        <Button Background="{x:Null}" Click="Close_Click"
+                    Grid.Column="2" Grid.Row="0" Margin="120,0,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -49,35 +53,31 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TextBox x:Name="Id" Grid.Row="1" IsEnabled="False" HorizontalAlignment="Left"  Margin="137,0,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="24" Background="{x:Null}"  />
-        <TextBox x:Name="SenderName" Grid.Row="2" IsEnabled="False" HorizontalAlignment="Left" Margin="137,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="98" Height="26"  Background="{x:Null}"/>
-        <TextBox  x:Name="SenderId" Grid.Row="2" IsEnabled="False" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="98" Height="24" Background="{x:Null}" Margin="243,0,0,0"/>
-        <Label Content="Id Number" Grid.Row="1" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" VerticalAlignment="Top" Height="28" Width="106" FontFamily="Aharoni"/>
-        <Label Content="Sender:" Grid.Row="2" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni"/>
-        <Label Content="Geter:" Grid.Row="3" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" />
-        <TextBox x:Name="GeterName" IsEnabled="False" HorizontalAlignment="Left" Margin="137,3,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="26" Background="{x:Null}" Grid.Row="3"/>
-        <TextBox x:Name="GeterId" IsEnabled="False"  HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="24" Background="{x:Null}" Margin="243,4,0,0" Grid.Row="3"/>
-        <Label Content="Weight:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="4" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <Label Content="Priority:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="5"/>
-        <TextBox x:Name="PriorityBox" IsEnabled="False" HorizontalAlignment="Left" Margin="186,0,0,0" Text="{Binding Path=Priority}" TextWrapping="Wrap" VerticalAlignment="Center" Width="102" Height="26"  Background="{x:Null}" Grid.Row="5"/>
-        <TextBox x:Name="WeightBox" IsEnabled="False" HorizontalAlignment="Left" Margin="186,10,0,0" Text="{Binding Path=Weight}" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
-        <Label Content="Create Time:"  HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="6"/>
-        <TextBox x:Name="Create" IsEnabled="False" HorizontalAlignment="Left" Text="{Binding Path=CreateParcelTime}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="23" Background="{x:Null}" Grid.Row="6" Margin="137,10,0,0" />
-        <Label Content="Match time:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="7"/>
-        <TextBox x:Name="Match" IsEnabled="False" HorizontalAlignment="Left" Margin="137,14,0,0" Text="{Binding Path=MatchForDroneTime}" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="20"  Background="{x:Null}" Grid.Row="7"/>
-        <Label Content="Picking Time:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="8"/>
-        <TextBox x:Name="Pick" IsEnabled="False" HorizontalAlignment="Left" Margin="137,0,0,0" Text="{Binding Path=CollectingDroneTime}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="20"  Background="{x:Null}" Grid.Row="8"/>
-        <Label Content="Supplying Time:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="9"/>
-        <TextBox x:Name="Supply" IsEnabled="False" HorizontalAlignment="Left" Margin="139,0,0,0" Text="{Binding Path=ArrivingDroneTime}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="21" Background="{x:Null}" Grid.Row="9"/>
 
+
+
+        <TextBlock Text="Id Parcel number:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+        <TextBox x:Name="Id" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="1" Grid.Column="1"   />
+        <TextBlock Text="Sender Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+        <TextBox x:Name="SenderName" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="1"   />
+        <TextBlock Text="Sender Id:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+        <TextBox x:Name="SenderId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="3" Grid.Column="1"   />
+        <TextBlock Text="Geter Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
+        <TextBox x:Name="GeterName" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1"   />
+        <TextBlock Text="Geter Id:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
+        <TextBox x:Name="GeterId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1"   />
+        <TextBlock Text="Parcel Priority:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" />
+        <TextBox x:Name="PriorityBox" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="6" Grid.Column="1" />
+        <TextBlock Text="Parcel Weight:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" />
+        <TextBox x:Name="WeightBox" Background="{x:Null}" Text="{Binding Path=Weight}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="7" Grid.Column="1" />
+        <TextBlock Text="Create Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0" />
+        <TextBox x:Name="Create" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=CreateParcelTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="8" Grid.Column="1"   />
+        <TextBlock Text="Match time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" />
+        <TextBox x:Name="Match" IsEnabled="False" Text="{Binding Path=MatchForDroneTime}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="9" Grid.Column="1"   />
+        <TextBlock Text="Collecting Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="10" Grid.Column="0" />
+        <TextBox x:Name="Collect" IsEnabled="False" Text="{Binding Path=CollectingDroneTime}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="10" Grid.Column="1"   />
+        <TextBlock Text="Arriving Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="11" Grid.Column="0" />
+        <TextBox x:Name="Arrive" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ArrivingDroneTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="11" Grid.Column="1"   />
+        <Button x:Name="OK" Content="OK" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="12" Grid.Column="1"/>
     </Grid>
 </Window>

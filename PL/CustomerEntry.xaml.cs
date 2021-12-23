@@ -53,15 +53,29 @@ namespace PL
 
         private void focus(object sender, RoutedEventArgs e)
         {
-            if (user.Text == "הכנס תעודת זהות")
+            if (user.Text == "Enter Your Id:")
                 user.Text = "";
-
         }
-
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            TypeOfUser typeOfUser = new TypeOfUser(bl);
+            typeOfUser.Show();
+            this.Close();
+        }
         private void focusPassword(object sender, RoutedEventArgs e)
         {
             passwordText.Visibility = Visibility.Collapsed;
             password.Focus();
+        }
+        private void move(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+
         }
     }
 }

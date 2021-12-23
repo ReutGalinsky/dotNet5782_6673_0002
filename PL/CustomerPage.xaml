@@ -9,37 +9,46 @@
         ResizeMode="NoResize"
         Title="CustomerPage" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="35*"/>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="95*"/>
-            <ColumnDefinition Width="678*"/>
-        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="4"/>
-        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top" Grid.ColumnSpan="4">
-            <Button x:Name="ParcelInManager" Content="PARCEL" BorderBrush="#FF052C4E" BorderThickness="2.5" MinWidth="100" Margin="200,0,0,0" Click="ButtonParcel" FontFamily="Segoe UI Black">
-                <Button.Background>
-                    <SolidColorBrush Color="#FFE2F1FF"></SolidColorBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="PersonalAreaInManager" Content="PERSONAL AREA" BorderBrush="#FF052C4E" MinWidth="100" Margin="10,0,0,0" BorderThickness="2.5" Click="ButtonPersonalArea" FontFamily="Segoe UI Black">
-                <Button.Background>
-                    <SolidColorBrush Color="#FFE2F1FF"></SolidColorBrush>
-                </Button.Background>
-            </Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
 
-            <Button x:Name="DeliveryInManager" Content="DELIVERY" MinWidth="100" Margin="10,0,0,0" BorderBrush="#FF052C4E" Click="ButtonDelivery" BorderThickness="2.5" FontFamily="Segoe UI Black">
-                <Button.Background>
-                    <SolidColorBrush Color="#FFE2F1FF"></SolidColorBrush>
-                </Button.Background>
-            </Button>
-        </StackPanel>
-        <Frame x:Name="Customer" Margin="0,35,0,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="4"/>
-        <Button Background="{x:Null}" Height="35" Width="35" Click="returnningButton" VerticalAlignment="Top"
-                    Margin="10,0,88,0" Grid.ColumnSpan="3">
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="5"/>
+        <Button Background="{x:Null}" Click="Close_Click"
+                    Grid.Column="4" Grid.Row="0" Margin="100,0,0,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/סגירה.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Background="{x:Null}" Height="35" Width="35" Click="Back_Click" VerticalAlignment="Top"
+                    Margin="0,0,100,0" Grid.ColumnSpan="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -56,23 +65,11 @@
             </Button.Template>
         </Button>
 
-
-        <Button Background="{x:Null}" Height="35" Width="35" Click="closingButton" VerticalAlignment="Top"
-                    Margin="628,0,0,0" Grid.Column="3">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/סגירה.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="5" Margin="0,0,91,0">
+            <Button x:Name="ParcelInManager" Content="PARCEL" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" Background="{x:Null}" MinWidth="100" Click="ButtonParcel" Grid.Row="0" Grid.Column="1"/>
+            <Button x:Name="PersonalAreaInManager" Content="PERSONAL AREA" Click="ButtonPersonalArea" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" Background="{x:Null}" MinWidth="100" Grid.Row="0" Grid.Column="2"/>
+            <Button x:Name="DeliveryInManager" Content="DELIVERY" Click="ButtonDelivery" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" Background="{x:Null}" MinWidth="100" Grid.Row="0" Grid.Column="3"/>
+        </StackPanel>
+        <Frame x:Name="Customer" Margin="0,35,0,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="5"/>
     </Grid>
 </Window>

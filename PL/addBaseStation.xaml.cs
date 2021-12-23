@@ -29,12 +29,12 @@ namespace PL
         public event EventHandler updateList;
 
 
-        private void AddLineButton_Click(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void addClick(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {//להוסיף try להמרות
@@ -54,21 +54,12 @@ namespace PL
             Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
         }
 
-        private void OnlyNumber(object sender, KeyEventArgs e)
-        {
-            Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
-        }
 
         private void move(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
 
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
           

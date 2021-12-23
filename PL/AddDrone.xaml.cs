@@ -23,22 +23,23 @@ namespace PL
         {
             InitializeComponent();
             bl = b;
-            add.IsEnabled = false;
-            weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            id.DataContext = drone;
+            ADD.IsEnabled = false;
+            Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+            Id.DataContext = drone;
             Model.DataContext = drone;
-            weight.DataContext = drone;
+            Weight.DataContext = drone;
         }
 
         private BLApi.IBL bl;
         private BO.DroneToList drone = new BO.DroneToList();
         public event EventHandler updateList;
-        private void clickAdd(object sender, RoutedEventArgs e)//event of the adding button
+        private void Add_Click(object sender, RoutedEventArgs e)//event of the adding button
         {
             try
             {
                 bl.AddDrone(drone, Station.Text);
-                Button_Click_1(sender, e);
+                updateList(sender, e);
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -46,11 +47,11 @@ namespace PL
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)//event of the cancel button
+        private void Close_Click(object sender, RoutedEventArgs e)//event of the cancel button
         {
-            var t = Window.GetWindow(this);
-            updateList(sender, e);
-            t.Close();
+            //var t = Window.GetWindow(this);
+            //updateList(sender, e);
+            this.Close();
         }
 
         private void focusModel(object sender, RoutedEventArgs e)//event to define if the add button is availible
@@ -67,13 +68,13 @@ namespace PL
                 Model.BorderBrush = Brushes.Red;
             }
 
-            if (id.Text != "" && Model.Text != "" && weight.SelectedItem != null && Station.Text != "")
-                add.IsEnabled = true;
+            if (Id.Text != "" && Model.Text != "" && Weight.SelectedItem != null && Station.Text != "")
+                ADD.IsEnabled = true;
             else
-                add.IsEnabled = false;
+                ADD.IsEnabled = false;
         }
 
-        private void focusStaton(object sender, RoutedEventArgs e)//event to define if the add button is availible
+        private void focusStation(object sender, RoutedEventArgs e)//event to define if the add button is availible
         {
             try
             {
@@ -87,14 +88,14 @@ namespace PL
                 Station.BorderBrush = Brushes.Red;
             }
 
-            if (id.Text != "" && Model.Text != "" && weight.SelectedItem != null && Station.Text != "")
+            if (Id.Text != "" && Model.Text != "" &&Weight.SelectedItem != null && Station.Text != "")
             {
 
-                add.IsEnabled = true;
+                ADD.IsEnabled = true;
             }
             else
             {
-                add.IsEnabled = false;
+                ADD.IsEnabled = false;
             }
         }
 
@@ -102,31 +103,31 @@ namespace PL
         {
             try
             {
-                if (int.Parse(id.Text) == 0 || id.Text == "")
-                    id.BorderBrush = Brushes.Red;
+                if (int.Parse(Id.Text) == 0 || Id.Text == "")
+                    Id.BorderBrush = Brushes.Red;
                 else
-                    id.BorderBrush = Brushes.Gray;
+                    Id.BorderBrush = Brushes.Gray;
             }
             catch (Exception ex)
             {
-                id.BorderBrush = Brushes.Red;
+                Id.BorderBrush = Brushes.Red;
             }
-            if (id.Text != "" && Model.Text != "" && weight.SelectedItem != null && Station.Text != "")
-                add.IsEnabled = true;
+            if (Id.Text != "" && Model.Text != "" && Weight.SelectedItem != null && Station.Text != "")
+                ADD.IsEnabled = true;
             else
             {
-                add.IsEnabled = false;
+                ADD.IsEnabled = false;
             }
         }
 
-        private void focusSelected(object sender, SelectionChangedEventArgs e)//event to define if the add button is availible
+        private void focusWeight(object sender, SelectionChangedEventArgs e)//event to define if the add button is availible
         {
 
-            if (id.Text != "" && Model.Text != "" && Station.Text != "")
-                add.IsEnabled = true;
+            if (Id.Text != "" && Model.Text != "" && Station.Text != "")
+                ADD.IsEnabled = true;
             else
             {
-                add.IsEnabled = false;
+                ADD.IsEnabled = false;
             }
         }
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -168,18 +169,14 @@ namespace PL
             TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            updateList(sender, e);
-            this.Close();
-        }
-
         private void move(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
 
         }
+
+     
     }
 }
 

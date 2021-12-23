@@ -27,7 +27,7 @@ namespace PL
             baseStation = bl.GetBaseStation(id);
             Id.DataContext = baseStation;
             Name.DataContext = baseStation;
-            ChargeSlot.DataContext = baseStation;
+            ChargeSlots.DataContext = baseStation;
             Latitude.Text = baseStation.Location.Latitude.ToString();
             Longitude.Text = baseStation.Location.Longitude.ToString();     
         }
@@ -36,11 +36,11 @@ namespace PL
         private BO.BaseStation baseStation;
         public event EventHandler updateList;
 
-        private void closing(object sender, RoutedEventArgs e)
-    {
-        this.Close();
-    }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -55,9 +55,6 @@ namespace PL
 
             }
         }
-        
-
-
         private void move(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)

@@ -5,34 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
         Title="ManagerViewBaseStation" Height="400" Width="500">
     <Grid>
-
         <Grid.Background>
-            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
+            <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
 
         </Grid.RowDefinitions>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Center" Height="35" Margin="0,-10,0,0" Stroke="Black" VerticalAlignment="Top" MouseDown="move"/>
-
-        <Button Background="{x:Null}" Height="35" Width="35" VerticalAlignment="Top"
-                    Margin="468,-10,0,0" RenderTransformOrigin="0.5,0.5" Click="closing">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="3"/>
+        <Button Background="{x:Null}" Click="Close_Click"
+                    Grid.Column="2" Grid.Row="0" Margin="120,0,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -48,19 +48,21 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
-        <TextBox x:Name="Id" Grid.Row="1" IsEnabled="False" HorizontalAlignment="Center" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" Height="24" Background="{x:Null}"  />
-        <TextBox x:Name="Name" Grid.Row="2" HorizontalAlignment="Left" Margin="143,12,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" Height="28"  Background="{x:Null}"/>
-        <Label Content="Id Number" Grid.Row="1" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" VerticalAlignment="Top" Height="28" Width="106" FontFamily="Aharoni" RenderTransformOrigin="0.539,-0.577"/>
-        <Label Content="Name:" Grid.Row="2" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni"/>
-        <Label Content="Charge slots:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="3"/>
-        <TextBox x:Name="ChargeSlot" HorizontalAlignment="Left" Margin="143,0,0,0" Text="{Binding Path=ChargeSlots}" TextWrapping="Wrap" VerticalAlignment="Center" Width="198" Height="22" Background="{x:Null}" Grid.Row="3"/>
-        <Label Content="Latitude:" HorizontalAlignment="Left" Margin="250,9,0,15" FontSize="14" FontFamily="Aharoni" Grid.Row="4"/>
-        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="26,10,0,0" FontSize="14" FontFamily="Aharoni" Grid.Row="4"/>
-        <TextBox x:Name="Longitude" IsEnabled="False" HorizontalAlignment="Left" Margin="110,7,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
-        <TextBox x:Name="Latitude" IsEnabled="False" HorizontalAlignment="Left" Margin="349,4,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="26"  Background="{x:Null}" Grid.Row="4"/>
-        <Button Content="עדכן" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click" Margin="0,2,0,0" Grid.Row="6"/>
-
+        <TextBlock Text="Id number:"  HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+        <TextBox x:Name="Id" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="1" Grid.Column="1" />
+        <TextBlock Text="Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+        <TextBox x:Name="Name" Background="{x:Null}" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="1" />
+        <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Charge Slots:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+        <TextBox Background="{x:Null}" x:Name="ChargeSlots" HorizontalAlignment="Center" Text="{Binding Path=ChargeSlots}" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="3" Grid.Column="1" />
+        <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Longitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
+        <TextBox Background="{x:Null}" x:Name="Longitude" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1" />
+        <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Latitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
+        <TextBox Background="{x:Null}" x:Name="Latitude" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" />
+        <Button x:Name="UPDATE" Content="UPDATE" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Update_Click" Grid.Row="6" Grid.Column="1"/>
+        <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="7" Grid.Column="1"/>
 
     </Grid>
 </Window>
+
+
+

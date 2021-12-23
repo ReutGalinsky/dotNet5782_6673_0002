@@ -5,20 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
         Title="ManagerEntry" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/רקע פרוקיט.jpg"></ImageBrush>
+            <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
         </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
 
-        <TextBox x:Name="user" HorizontalAlignment="Left" Text="שם משתמש" Margin="270,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="58" FontFamily="Tahoma" FontSize="24" TextAlignment="Center" GotFocus="focus"/>
-        <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="270,216,0,0" VerticalAlignment="Top" Width="300" Height="61" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Tahoma" FontSize="24"/>
-        <Image HorizontalAlignment="Left" Height="58" Margin="187,109,0,0" VerticalAlignment="Top" Width="60" Source="/Pages/מנהל2.png" RenderTransformOrigin="0.207,-0.193"/>
-        <Image HorizontalAlignment="Left" Height="58" Margin="186,216,0,0" VerticalAlignment="Top" Width="66" Source="/תמונה5.png"/>
-        <Button Margin="310,320,270,29" Style="{StaticResource myButton}" BorderThickness="3" Content="התחבר" Click="startclick" FontFamily="Tahoma" FontSize="38" FontWeight="Bold">
+            <ColumnDefinition />
 
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="3"/>
+        <Button Background="{x:Null}" Click="Close_Click"
+                    Grid.Column="2" Grid.Row="0" Margin="212,0,0,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/סגירה.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
-        <TextBox x:Name="passwordText" HorizontalAlignment="Left" Margin="270,216,0,0" Text="הכנס סיסמא" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="61" FontFamily="Tahoma" FontSize="24" TextAlignment="Center" GotFocus="focusPassword"/>
+        <Button Background="{x:Null}" Height="35" Width="35" Click="Back_Click"
+                    Margin="0,0,230,0" Grid.ColumnSpan="1">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/חזור.jpg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <TextBox x:Name="user" TextWrapping="Wrap" Background="{x:Null}" HorizontalAlignment="Center" Text="Enter Your Id:" VerticalAlignment="Center" Width="240" Height="80" Style="{StaticResource UsualFont}" FontWeight="Medium" FontSize="24" TextAlignment="Center" GotFocus="focus" Grid.Column="1" Grid.Row="1"/>
+        <PasswordBox x:Name="password" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="240" Height="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource UsualFont}" FontSize="24" Grid.Row="2" Grid.Column="1"/>
+        <Image HorizontalAlignment="Center" Height="58" VerticalAlignment="Center" Source="/Pages/מנהל2.png" Grid.Row="1" Grid.Column="0"/>
+        <Image HorizontalAlignment="Center" Height="58" VerticalAlignment="Center" Source="/תמונה5.png" Grid.Row="2" Grid.Column="0"/>
+        <Button x:Name="login" Style="{StaticResource myButton}" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" Height="40" Width="120" Click="logInButton" Grid.Row="3" Grid.Column="1"/>
+        <TextBox x:Name="passwordText" Background="{x:Null}" HorizontalAlignment="Center" Text="enter your password:" VerticalAlignment="Center" Width="240" Height="80" Style="{StaticResource UsualFont}" FontSize="24" TextAlignment="Center" GotFocus="focusPassword" Grid.Row="2" Grid.Column="1"/>
+        <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="120" FontSize="22" Click="Back_Click" Grid.Row="4" Grid.Column="1"/>
 
     </Grid>
 </Window>

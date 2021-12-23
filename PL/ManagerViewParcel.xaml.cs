@@ -34,15 +34,15 @@ namespace PL
             WeightBox.DataContext = parcel;
             Create.DataContext = parcel;
             Match.DataContext = parcel;
-            Supply.DataContext = parcel;
-            Pick.DataContext = parcel;
+            Arrive.DataContext = parcel;
+            Collect.DataContext = parcel;
             
         }
         private BLApi.IBL bl;
         private string id;
         private BO.Parcel parcel;
 
-        private void closing(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
