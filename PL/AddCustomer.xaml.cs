@@ -23,26 +23,18 @@ namespace PL
         {
             InitializeComponent();
             bl = b;
+            Id.DataContext = customer;
+            Name.DataContext = customer;
+            Phone.DataContext = customer;
         }
         BLApi.IBL bl;
+        private BO.Customer customer=new BO.Customer();
         public event EventHandler updateList;
 
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            //משהו כזה אבל בנתונים של לקוח
-            //try
-            //{
-            //    BO.DroneToList d = new BO.DroneToList() { IdNumber = id.Text, MaxWeight = (IBL.BO.WeightCategories)weight.SelectedItem, Model = Model.Text };
-            //    bl.AddDrone(d, Station.Text);
-            //    var t = Window.GetWindow(this);
-            //    t.Close();
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("can't add");
-            //}
         }
         private void Onlynumbers(object sender, KeyEventArgs e)
         {
@@ -56,17 +48,39 @@ namespace PL
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+            
             try
-            {//להוסיף try להמרות
-                BO.Customer customer = new BO.Customer() { Name = Name.Text, Phone=Phone.Text, IdNumber = Id.Text, Location = new BO.Location() { Latitude = double.Parse(Latitude.Text), Longitude = double.Parse(Longitude.Text) } };
+            {
+                double temp;
+                if(double.TryParse(Longitude.Text,out temp)==false)
+                {
+                    MessageBox.Show("Longitude suppose to be double");
+                }
+                customer.Location = new BO.Location();
+                customer.Location.Longitude = temp;
+                if (double.TryParse(Longitude.Text, out temp) == false)
+                {
+                    MessageBox.Show("Latitude suppose to be double");
+                }
+                customer.Location.Latitude = temp;
                 bl.AddCustomer(customer);
                 updateList(sender, e);
                 this.Close();
             }
             catch (Exception ex)//לטפל בחריגות
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Focus(object sender, TextChangedEventArgs e)
+        {
+            if (customer.IdNumber == "" || Longitude.Text == "" || Latitude.Text == "" || customer.Name == "" || customer.Phone == "")
+            {
+                ADD.IsEnabled = false;
+            }
+            else
+                ADD.IsEnabled = true;
         }
     }
 }

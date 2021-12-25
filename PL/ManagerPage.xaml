@@ -30,7 +30,7 @@
 
 
         </Grid.RowDefinitions>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="4" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="3" Margin="-511,575,0,0"/>
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Center" MouseDown="move" Grid.ColumnSpan="6"/>
         <Button Background="{x:Null}" Click="Close_Click"
                     Grid.Column="5" Grid.Row="0" Margin="100,0,0,0">
             <Button.Template>

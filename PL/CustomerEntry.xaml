@@ -65,15 +65,15 @@
             </Button.Template>
         </Button>
 
-         
+
 
         <TextBox x:Name="user" TextWrapping="Wrap" Background="{x:Null}" HorizontalAlignment="Center" Text="Enter Your Id:" VerticalAlignment="Center" Width="240" Height="80" Style="{StaticResource UsualFont}" FontWeight="Medium" FontSize="24" TextAlignment="Center" PreviewKeyDown="OnlyNumbers" GotFocus="focus" Grid.Column="1" Grid.Row="1"/>
         <PasswordBox x:Name="password" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="240" Height="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource UsualFont}" FontSize="24" Grid.Row="2" Grid.Column="1"/>
         <Image HorizontalAlignment="Center" VerticalAlignment="Center" Height="58" Source="/Pages/לקוח.png" Grid.Row="1" Grid.Column="0"/>
         <Image HorizontalAlignment="Center" VerticalAlignment="Center" Height="58" Source="/תמונה5.png" Grid.Row="2" Grid.Column="0"/>
-        <Button x:Name="login" Style="{StaticResource myButton}" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" Height="40" Width="120" Click="logInButton" Grid.Row="3" Grid.Column="1"/>
+        <Button x:Name="login" Style="{StaticResource myButton}" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="28" Height="50" Width="120" Click="logInButton" Grid.Row="3" Grid.Column="1" Margin="0,52,0,0"/>
         <TextBox x:Name="passwordText" Background="{x:Null}" HorizontalAlignment="Center" Text="enter your password:" VerticalAlignment="Center" Width="240" Height="80" Style="{StaticResource UsualFont}" FontSize="24" TextAlignment="Center" PreviewKeyDown="OnlyNumbers" GotFocus="focusPassword" Grid.Row="2" Grid.Column="1"/>
-        <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="120" FontSize="22" Click="Back_Click" Grid.Row="4" Grid.Column="1"/>
+        <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="57" Width="120" FontSize="22" Click="Back_Click" Grid.Row="4" Grid.Column="1"/>
 
     </Grid>
 </Window>

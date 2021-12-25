@@ -8,6 +8,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Title="ManagerViewParcel" Height="400" Width="500">
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
@@ -57,27 +58,27 @@
 
 
         <TextBlock Text="Id Parcel number:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <TextBox x:Name="Id" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="1" Grid.Column="1"   />
+        <TextBox x:Name="Id" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="1" Grid.Column="1"   />
         <TextBlock Text="Sender Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-        <TextBox x:Name="SenderName" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="1"   />
+        <TextBox x:Name="SenderName" Text="{Binding Path=Name}" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="2" Grid.Column="1"   />
         <TextBlock Text="Sender Id:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-        <TextBox x:Name="SenderId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="3" Grid.Column="1"   />
+        <TextBox x:Name="SenderId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" Text="{Binding Path=IdNumber}" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="3" Grid.Column="1"   />
         <TextBlock Text="Geter Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
-        <TextBox x:Name="GeterName" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1"   />
+        <TextBox x:Name="GeterName" IsEnabled="False" Text="{Binding Path=Name}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="4" Grid.Column="1"   />
         <TextBlock Text="Geter Id:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
-        <TextBox x:Name="GeterId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1"   />
+        <TextBox x:Name="GeterId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" Text="{Binding Path=IdNumber}" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="5" Grid.Column="1"   />
         <TextBlock Text="Parcel Priority:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" />
-        <TextBox x:Name="PriorityBox" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="6" Grid.Column="1" />
+        <TextBox x:Name="PriorityBox" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="6" Grid.Column="1" />
         <TextBlock Text="Parcel Weight:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" />
-        <TextBox x:Name="WeightBox" Background="{x:Null}" Text="{Binding Path=Weight}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="7" Grid.Column="1" />
+        <TextBox x:Name="WeightBox" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Weight}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="7" Grid.Column="1" />
         <TextBlock Text="Create Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0" />
-        <TextBox x:Name="Create" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=CreateParcelTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="8" Grid.Column="1"   />
-        <TextBlock Text="Match time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" />
-        <TextBox x:Name="Match" IsEnabled="False" Text="{Binding Path=MatchForDroneTime}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="9" Grid.Column="1"   />
-        <TextBlock Text="Collecting Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="10" Grid.Column="0" />
-        <TextBox x:Name="Collect" IsEnabled="False" Text="{Binding Path=CollectingDroneTime}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="10" Grid.Column="1"   />
-        <TextBlock Text="Arriving Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="11" Grid.Column="0" />
-        <TextBox x:Name="Arrive" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ArrivingDroneTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="11" Grid.Column="1"   />
-        <Button x:Name="OK" Content="OK" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="12" Grid.Column="1"/>
+        <TextBox x:Name="Create" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=CreateParcelTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="8" Grid.Column="1"   />
+        <TextBlock x:Name="matchLabel" Text="Match time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" />
+        <TextBox x:Name="Match" IsEnabled="False" Text="{Binding Path=MatchForDroneTime}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="9" Grid.Column="1"   />
+        <TextBlock  x:Name="collectLabel" Text="Collecting Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="10" Grid.Column="0" />
+        <TextBox x:Name="Collect" IsEnabled="False" Text="{Binding Path=CollectingDroneTime}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="10" Grid.Column="1"   />
+        <TextBlock x:Name="arriveLabel" Text="Arriving Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="11" Grid.Column="0" />
+        <TextBox x:Name="Arrive" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ArrivingDroneTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="11" Grid.Column="1"   />
+        <Button x:Name="OK" Content="OK" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="67" FontSize="22" Click="Close_Click" Grid.Row="12" Grid.Column="1"/>
     </Grid>
 </Window>

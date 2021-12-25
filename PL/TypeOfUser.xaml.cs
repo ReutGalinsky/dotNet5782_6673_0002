@@ -32,7 +32,6 @@ namespace PL
             ManagerPage entry = new ManagerPage(bl);
             entry.Show();
             this.Close();
-
         }
 
         private void Customer_Click(object sender, RoutedEventArgs e)
@@ -44,7 +43,6 @@ namespace PL
 
         private void move(object sender, MouseButtonEventArgs e)
         {
-            
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }

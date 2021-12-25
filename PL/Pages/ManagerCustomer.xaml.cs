@@ -30,7 +30,7 @@ namespace PL.Pages
                        orderby item.Name
                        select item;
             foreach (BO.CustomerToList s in temp)//create the source for the liseView
-                listCustomers.Add(s);         
+                listCustomers.Add(s);
             CustomerListView.DataContext = listCustomers;
             Location.SelectedItem = Location.Items[0];
             id.IsChecked = true;
@@ -42,59 +42,52 @@ namespace PL.Pages
         private BO.CustomerToList selected;
         private ObservableCollection<BO.CustomerToList> listCustomers = new ObservableCollection<BO.CustomerToList>();
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            AddCustomer customer =new AddCustomer(bl);
-            customer.ShowDialog();
-        }
-      
-        private void reset_Click(object sender, RoutedEventArgs e)
-        {
-
-            listCustomers.Clear();
-            foreach (var item in bl.GetCustomers())
-                listCustomers.Add(item);
-        }
-
         private void selectionChange(object sender, SelectionChangedEventArgs e)
-        {    
-                selected = (BO.CustomerToList)CustomerListView.SelectedItem;      
+        {
+            selected = (BO.CustomerToList)CustomerListView.SelectedItem;
         }
-        
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
             if (selected != null)
             {
-
                 ManagerViewCustomer customer = new ManagerViewCustomer(bl, selected.IdNumber);
                 customer.updateList += updated;
                 customer.Show();
             }
         }
-        
-        
-
         private void Location_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var LocationItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
-            CustomerListView.ItemsSource = LocationItem.Content.ToString() switch
+            listCustomers.Clear();
+            switch (LocationItem.Content.ToString())
             {
-                "Parcels on way" => bl.GetAllCustomersBy(x => x.ParcelOnTheWay != 0 || x.ParcelGet != 0),
-                "No parcels on way" => bl.GetAllCustomersBy(x => x.ParcelOnTheWay == 0 || x.ParcelGet == 0),
-                _ => bl.GetCustomers(),
-            };
+                case "Parcels on way":
+                    foreach (var item in bl.GetAllCustomersBy(x => x.ParcelOnTheWay != 0 || x.ParcelGet != 0))
+                        listCustomers.Add(item);
+                    break;
+                case "No parcels on way":
+                    foreach (var item in bl.GetAllCustomersBy(x => x.ParcelOnTheWay == 0 && x.ParcelGet == 0))
+                        listCustomers.Add(item);
+                    break;
+                default:
+                    foreach (var item in bl.GetCustomers().OrderBy(x => x.Name))
+                        listCustomers.Add(item);
+                    break;
+            }   
         }
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             Location.SelectedItem = "All";
-            CustomerListView.ItemsSource = bl.GetCustomers();
-            
+            var temp = from item in bl.GetCustomers()
+                       orderby item.Name
+                       select item;
+            foreach (BO.CustomerToList s in temp)//create the source for the liseView
+                listCustomers.Add(s);
+            id.IsChecked = true;
         }
-
         private void deleteCustomer(object sender, RoutedEventArgs e)
         {
-            var dialogResult = MessageBox.Show($"are you sure?", "Delete Customer", MessageBoxButton.YesNo);
+            var dialogResult = MessageBox.Show($"are you sure?", "Delete Customer", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (dialogResult == MessageBoxResult.Yes)
             {
                 try
@@ -105,19 +98,29 @@ namespace PL.Pages
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.Message, "Delete Customer", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-
-            }
-
+        }
+        //***********
         private void idCheck(object sender, RoutedEventArgs e)
         {
-            CustomerListView.ItemsSource = bl.GetCustomers().OrderBy(x => int.Parse(x.IdNumber));
+            listCustomers.Clear();
+            foreach (var item in bl.GetCustomers().OrderBy(x => int.Parse(x.IdNumber)))
+                listCustomers.Add(item);
         }
 
         private void nameCheck(object sender, RoutedEventArgs e)
         {
-            CustomerListView.ItemsSource = bl.GetCustomers().OrderBy(x => x.Name);
+            listCustomers.Clear();
+            foreach (var item in bl.GetCustomers().OrderBy(x =>x.Name))
+                listCustomers.Add(item);
+        }
+        //**************
+        private void addButton(object sender, RoutedEventArgs e)
+        {
+            AddCustomer customer = new AddCustomer(bl);
+            customer.ShowDialog();
         }
     }
     //צריך להוסיף:

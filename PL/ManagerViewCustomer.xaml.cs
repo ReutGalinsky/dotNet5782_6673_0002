@@ -28,15 +28,13 @@ namespace PL
             Id.DataContext = customer;
             Phone.DataContext = customer;
             Name.DataContext = customer;
-            Longitude.Text = customer.Location.Longitude.ToString();
-            Latitude.Text = customer.Location.Latitude.ToString();
+            Longitude.DataContext = customer.Location;
+            Latitude.DataContext = customer.Location;
         }
         private BLApi.IBL bl;
         private BO.Customer customer;
         private string id;
         public event EventHandler updateList;
-
-
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -44,9 +42,29 @@ namespace PL
 
         private void move(object sender, MouseButtonEventArgs e)
         {
+            
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+        }
 
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdatingDetailsOfCustomer(customer.IdNumber, customer.Name, customer.Phone);
+                MessageBox.Show($"the base station number {customer.IdNumber} updated successfully!");
+                updateList(sender, e);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+        private void OnlyNumbers(object sender, KeyEventArgs e)
+        {
+            Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
         }
     }
 }

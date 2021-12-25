@@ -30,8 +30,8 @@
 
         </Grid.RowDefinitions>
         <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="5"/>
-        <Button Background="{x:Null}" Click="Close_Click"
-                    Grid.Column="4" Grid.Row="0" Margin="100,0,0,0">
+        <Button Background="{x:Null}" Width="35" Click="Close_Click"
+                    Grid.Column="4" Grid.Row="0" Margin="125,0,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -47,8 +47,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Background="{x:Null}" Height="35" Width="35" Click="Back_Click" VerticalAlignment="Top"
-                    Margin="0,0,100,0" Grid.ColumnSpan="1">
+        <Button Background="{x:Null}" Height="35" Width="35" Click="Back_Click" VerticalAlignment="Center"
+                    Margin="0,0,125,0" Grid.ColumnSpan="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -70,6 +70,6 @@
             <Button x:Name="PersonalAreaInManager" Content="PERSONAL AREA" Click="ButtonPersonalArea" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" Background="{x:Null}" MinWidth="100" Grid.Row="0" Grid.Column="2"/>
             <Button x:Name="DeliveryInManager" Content="DELIVERY" Click="ButtonDelivery" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" Background="{x:Null}" MinWidth="100" Grid.Row="0" Grid.Column="3"/>
         </StackPanel>
-        <Frame x:Name="Customer" Margin="0,35,0,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="5"/>
+        <Frame x:Name="Customer" NavigationUIVisibility="Hidden" Grid.ColumnSpan="5" Grid.RowSpan="4" Grid.Row="1"/>
     </Grid>
 </Window>

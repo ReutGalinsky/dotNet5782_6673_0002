@@ -11,9 +11,9 @@
         <Style x:Key="myButton" TargetType="Button">
             <Setter Property="BorderBrush" Value="#FFF0F0F3"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
-            <Setter Property="FontFamily" Value="Tahoma"></Setter>
             <Setter Property="FontSize" Value="44"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontFamily" Value="C:\Users\רעות גלינסקי\source\repos\ReutGalinsky\dotNet5782_6673_0002\PL\Fonts\Usual.ttf #Luxurious Roman"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="Background" Value="#FFD3DBEB"></Setter>
 
             <Style.Resources>
@@ -27,6 +27,13 @@
                     <Setter Property="Opacity" Value="0.5"></Setter>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <Style x:Key="comboBox" TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="AliceBlue"></Setter>
+            <Setter Property="BorderBrush" Value="AliceBlue"></Setter>
+            <Setter Property="Foreground" Value="RoyalBlue"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
         </Style>
     </Application.Resources>
 </Application>

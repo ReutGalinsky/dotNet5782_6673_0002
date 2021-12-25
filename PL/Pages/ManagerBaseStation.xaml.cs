@@ -34,51 +34,25 @@ namespace PL.Pages
             chargeSlot.SelectedItem = chargeSlot.Items[0];
             update += updated;
         }
-        public ObservableCollection<BO.BaseStationToList> liststations = new ObservableCollection<BO.BaseStationToList>();
 
+        public ObservableCollection<BO.BaseStationToList> liststations = new ObservableCollection<BO.BaseStationToList>();
         private BLApi.IBL bl;
         private BO.BaseStationToList selected;
         public EventHandler update;
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
-            chargeSlot.SelectedItem = "all";
-            StationsListView.ItemsSource = bl.GetBaseStations();
+            chargeSlot.SelectedItem = chargeSlot.Items[0];
+            liststations.Clear();
+            foreach (var item in bl.GetBaseStations())
+            {
+                liststations.Add(item);
+            }
         }
-       
-        private void removeButton_Click(object sender, RoutedEventArgs e)
-        {
-            addButton.IsEnabled = false;
-        }
-
-        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-            selected = (BO.BaseStationToList)StationsListView.SelectedItem;
-        }
-
-
-
         private void addBaseStation(object sender, RoutedEventArgs e)
         {
             AddBaseStation baseStation = new AddBaseStation(bl);
             baseStation.updateList += updated;
-            var t = Window.GetWindow(this);
-            t.Opacity = 0.75;
             baseStation.ShowDialog();
-     
-        }
-
-        private void reset_Click(object sender, RoutedEventArgs e)
-        {
-
-            liststations.Clear();
-            foreach (var item in bl.GetBaseStations())
-                liststations.Add(item);
-        }
-
-
-        private void listBaseStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selected = (BO.BaseStationToList)StationsListView.SelectedItem;
         }
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
@@ -89,37 +63,45 @@ namespace PL.Pages
                 showBase.Show();
             }
         }
-
-
         private void changeFilterCharge(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
-            StationsListView.ItemsSource = comboBoxItem.Content.ToString() switch
+            liststations.Clear();
+            switch(comboBoxItem.Content.ToString())
             {
-                "With available charging slots" => bl.GetAllBaseStationsBy(x => x.ChargeSlots > 0),
-                "Without available charging slots" => bl.GetAllBaseStationsBy(x => x.ChargeSlots == 0),
-                _ => bl.GetBaseStations(),
-            };
+                case "With available charging slots":
+                    foreach (var item in bl.GetAllBaseStationsBy(x => x.ChargeSlots > 0))
+                        liststations.Add(item);
+                    break;
+                case "Without available charging slots":
+                    foreach (var item in bl.GetAllBaseStationsBy(x => x.ChargeSlots == 0))
+                        liststations.Add(item);
+                    break;
+                default:
+                    foreach (var item in bl.GetBaseStations())
+                        liststations.Add(item);
+                    break;
 
+            }
         }
-
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
             selected = (BO.BaseStationToList)StationsListView.SelectedItem;
         }
         private void deleteStation(object sender, RoutedEventArgs e)
         {
-            var dialogResult = MessageBox.Show($"are you sure?", "Delede Parcel", MessageBoxButton.YesNo);
+            var dialogResult = MessageBox.Show($"are you sure?", "Delede Station", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (dialogResult == MessageBoxResult.Yes)
             {
                 try
                 {
-                    BO.BaseStationToList BaseStationToDelete = ((sender as Button).DataContext) as BO.BaseStationToList;
-                    bl.RemoveBaseStation(BaseStationToDelete.IdNumber);
-                    StationsListView.ItemsSource = bl.GetBaseStations();
+                    BO.BaseStationToList stationToDelete = ((sender as Button).DataContext) as BO.BaseStationToList;
+                    bl.RemoveBaseStation(stationToDelete.IdNumber);
+                    update(sender, e);
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.Message + "\n you shuld try again later", "error", MessageBoxButton.OK, MessageBoxImage.Hand);
 
                 }
             }

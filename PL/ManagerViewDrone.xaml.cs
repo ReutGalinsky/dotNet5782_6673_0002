@@ -36,9 +36,30 @@ namespace PL
         private BLApi.IBL bl;
         private bool isClosed = true;
         private string id;
-        private PO.DronePO drone=new PO.DronePO();
+        private PO.DronePO drone = new PO.DronePO();
         public event EventHandler updateList;
 
+        private void assignVisibility()
+        {
+            if (drone.State == BO.DroneState.Available)
+            {
+                chargingButton.Visibility = Visibility.Visible;
+                shippingButton.Visibility = Visibility.Visible;
+            }
+            if (drone.State == BO.DroneState.maintaince)
+                releaseButton.Visibility = Visibility.Visible;
+            if (drone.State == BO.DroneState.shipping)
+            {
+                if (bl.GetParcel(drone.NumberOfParcel).CollectingDroneTime == null)
+                {
+                    pickButton.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    suppltingButton.Visibility = Visibility.Visible;
+                }
+            }
+        }
         /// <summary>
         /// ///להוסיפ שורה של כל החבילות
         /// </summary>
@@ -73,7 +94,6 @@ namespace PL
                 MessageBox.Show($"the model {Model.Text} is illegal. please enter again", "Model Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void move(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -83,17 +103,20 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            switch(isClosed)
+            switch (isClosed)
             {
                 case true:
                     isClosed = false;
-                    shippingButton.Visibility =Visibility.Visible;
-                    chargingButton.Visibility = Visibility.Visible;
+                    assignVisibility();
                     break;
                 case false:
                     isClosed = true;
-                    shippingButton.Visibility = Visibility.Hidden;
-                    chargingButton.Visibility = Visibility.Hidden;
+                    releaseButton.Visibility = Visibility.Collapsed;
+                    chargingButton.Visibility = Visibility.Collapsed;
+                    pickButton.Visibility = Visibility.Collapsed;
+                    suppltingButton.Visibility = Visibility.Collapsed;
+                    shippingButton.Visibility = Visibility.Collapsed;
+
                     break;
                 default:
             }
@@ -101,89 +124,92 @@ namespace PL
         }
         private void charge(object sender, RoutedEventArgs e)
         {
-            switch(drone.State)
+
+            try
             {
-                case BO.DroneState.Available:
-                    try 
-                    {
-                        bl.DroneToCharging(drone.IdNumber);
-                        convertToPo(drone, bl.GetDrone(id));
-                        MessageBox.Show("start charge");
+                bl.DroneToCharging(drone.IdNumber);
+                convertToPo(drone, bl.GetDrone(id));
+                MessageBox.Show("start charge");
+                Button_Click_1(sender, e);;
+                Button_Click_1(sender, e);
 
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("error");
-                    }
-                    break;
-                case BO.DroneState.maintaince:
-                    try
-                    {
-                        bl.DroneFromCharging(drone.IdNumber);
-                        convertToPo(drone, bl.GetDrone(id));
-                        MessageBox.Show("release charge");
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("error");
-                    }
-                    break;
-                case BO.DroneState.shipping:
-                    MessageBox.Show("error");
-                    break;
 
             }
-        }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error");
+            }
 
-        private void shipButton(object sender, RoutedEventArgs e)
+
+        }
+    
+
+    private void shipButton(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            switch (drone.State)
-            {
-                case BO.DroneState.Available:
-                    try
-                    {
-                        bl.MatchingParcelToDrone(drone.IdNumber);
-                        convertToPo(drone,bl.GetDrone(id));
-                        MessageBox.Show("match");
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("error");
-                    }
-                    break;
-                case BO.DroneState.maintaince:
-                    MessageBox.Show("error");
-                    break;
-                case BO.DroneState.shipping:
-                    try
-                    {
-                        if(bl.GetParcel(drone.NumberOfParcel).CollectingDroneTime==null)
-                        {
-                            bl.PickingParcelByDrone(drone.IdNumber);
-                            convertToPo(drone, bl.GetDrone(id));
-                            MessageBox.Show("pick");
-
-
-                        }
-                        else
-                        {
-                            bl.SupplyingParcelByDrone(drone.IdNumber);
-                            convertToPo(drone, bl.GetDrone(id));
-                            MessageBox.Show("supply");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("error");
-                    }
-                    break;
-
-            }
+            bl.MatchingParcelToDrone(drone.IdNumber);
+            convertToPo(drone, bl.GetDrone(id));
+            MessageBox.Show("match");
+                Button_Click_1(sender, e);
+                Button_Click_1(sender, e);
 
         }
-
+        catch (Exception ex)
+        {
+            MessageBox.Show("error");
+        }
 
     }
+    private void supplyButton(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            bl.SupplyingParcelByDrone(drone.IdNumber);
+            convertToPo(drone, bl.GetDrone(id));
+            MessageBox.Show("supply");
+                Button_Click_1(sender, e);
+                Button_Click_1(sender, e);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("error");
+        }
+    }
+    private void pickingButton(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (bl.GetParcel(drone.NumberOfParcel).CollectingDroneTime == null)
+            {
+                bl.PickingParcelByDrone(drone.IdNumber);
+                convertToPo(drone, bl.GetDrone(id));
+                MessageBox.Show("pick");
+                Button_Click_1(sender, e);
+                    Button_Click_1(sender, e);
+
+                }
+            }
+        catch (Exception ex)
+        {
+            MessageBox.Show("error");
+        }
+    }
+
+    private void releaseMethod(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            bl.DroneFromCharging(drone.IdNumber);
+            convertToPo(drone, bl.GetDrone(id));
+            MessageBox.Show("release charge");
+                Button_Click_1(sender, e);
+                Button_Click_1(sender, e);
+            }
+            catch (Exception ex)
+        {
+            MessageBox.Show("error");
+        }
+    }
+}
 }

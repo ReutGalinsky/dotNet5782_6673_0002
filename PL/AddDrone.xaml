@@ -48,14 +48,15 @@
         </Button>
        
         <TextBlock Text="Id number:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focusID" Grid.Row="1" Grid.Column="1"  PreviewKeyDown="OnlyNumbers_PreviewKeyDown" />
+        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focus" Grid.Row="1" Grid.Column="1"  PreviewKeyDown="OnlyNumbers_PreviewKeyDown" />
         <TextBlock Text="Model:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-        <TextBox x:Name="Model" Background="{x:Null}"  Text="{Binding Path=Model, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focusModel" Grid.Row="2" Grid.Column="1"  PreviewKeyDown="OnlyNumbers_PreviewKeyDown" />
-        <TextBlock Text="Charge Stations:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-        <TextBox x:Name="Station" Background="{x:Null}"  Text="{Binding Path=Station, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focusStation" Grid.Row="3" Grid.Column="1"  PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" />
+        <TextBox x:Name="Model" Background="{x:Null}"  Text="{Binding Path=Model, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focus" Grid.Row="2" Grid.Column="1" />
+        <TextBlock Text="Charge Station" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+        <TextBox x:Name="Station" Background="{x:Null}"  Text="{Binding Path=Station, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focus" Grid.Row="3" Grid.Column="1"  PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" />
         <TextBlock Text="Maximum Weight:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
         <ComboBox x:Name="Weight" Background="{x:Null}"  Text="{Binding Path=MaxWeight, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1"  PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown"/>
-        <Button x:Name="ADD" Content="ADD" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Add_Click" Grid.Row="5" Grid.Column="1"/>
-        <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="6" Grid.Column="1"/>
+        <Button x:Name="ADD" Content="ADD" IsEnabled="False" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Add_Click" Grid.Row="5" Grid.Column="1"/>
+        <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="6" Grid.Column="1">
+        </Button>
     </Grid>
 </Window>

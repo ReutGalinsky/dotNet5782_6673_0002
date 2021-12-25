@@ -28,8 +28,9 @@ namespace PL
             Id.DataContext = baseStation;
             Name.DataContext = baseStation;
             ChargeSlots.DataContext = baseStation;
-            Latitude.Text = baseStation.Location.Latitude.ToString();
-            Longitude.Text = baseStation.Location.Longitude.ToString();     
+            Latitude.DataContext = baseStation.Location;
+            Longitude.DataContext = baseStation.Location;
+            Drone.DataContext = baseStation.Drones;
         }
         private BLApi.IBL bl;
         private string id;
@@ -51,7 +52,7 @@ namespace PL
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"can't update the base station");
+                MessageBox.Show(ex.Message,"error", MessageBoxButton.OK,MessageBoxImage.Error);
 
             }
         }
@@ -59,6 +60,15 @@ namespace PL
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+
+        }
+        private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
+        }
+
+        private void openDrone(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }

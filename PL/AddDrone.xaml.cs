@@ -28,6 +28,7 @@ namespace PL
             Id.DataContext = drone;
             Model.DataContext = drone;
             Weight.DataContext = drone;
+            Weight.SelectedItem = Weight.Items[0];
         }
 
         private BLApi.IBL bl;
@@ -37,7 +38,7 @@ namespace PL
         {
             try
             {
-                bl.AddDrone(drone, Station.Text);
+                bl.AddDrone(drone, Station.Text.ToString());
                 updateList(sender, e);
                 this.Close();
             }
@@ -49,87 +50,9 @@ namespace PL
 
         private void Close_Click(object sender, RoutedEventArgs e)//event of the cancel button
         {
-            //var t = Window.GetWindow(this);
-            //updateList(sender, e);
             this.Close();
         }
-
-        private void focusModel(object sender, RoutedEventArgs e)//event to define if the add button is availible
-        {
-            try
-            {
-                if (Model.Text == "")
-                    Model.BorderBrush = Brushes.Red;
-                else
-                    Model.BorderBrush = Brushes.Gray;
-            }
-            catch (Exception ex)
-            {
-                Model.BorderBrush = Brushes.Red;
-            }
-
-            if (Id.Text != "" && Model.Text != "" && Weight.SelectedItem != null && Station.Text != "")
-                ADD.IsEnabled = true;
-            else
-                ADD.IsEnabled = false;
-        }
-
-        private void focusStation(object sender, RoutedEventArgs e)//event to define if the add button is availible
-        {
-            try
-            {
-                if (int.Parse(Station.Text) == 0 || Station.Text == null)
-                    Station.BorderBrush = Brushes.Red;
-                else
-                    Station.BorderBrush = Brushes.Gray;
-            }
-            catch (Exception ex)
-            {
-                Station.BorderBrush = Brushes.Red;
-            }
-
-            if (Id.Text != "" && Model.Text != "" &&Weight.SelectedItem != null && Station.Text != "")
-            {
-
-                ADD.IsEnabled = true;
-            }
-            else
-            {
-                ADD.IsEnabled = false;
-            }
-        }
-
-        private void focusID(object sender, TextChangedEventArgs e)//event to define if the add button is availible
-        {
-            try
-            {
-                if (int.Parse(Id.Text) == 0 || Id.Text == "")
-                    Id.BorderBrush = Brushes.Red;
-                else
-                    Id.BorderBrush = Brushes.Gray;
-            }
-            catch (Exception ex)
-            {
-                Id.BorderBrush = Brushes.Red;
-            }
-            if (Id.Text != "" && Model.Text != "" && Weight.SelectedItem != null && Station.Text != "")
-                ADD.IsEnabled = true;
-            else
-            {
-                ADD.IsEnabled = false;
-            }
-        }
-
-        private void focusWeight(object sender, SelectionChangedEventArgs e)//event to define if the add button is availible
-        {
-
-            if (Id.Text != "" && Model.Text != "" && Station.Text != "")
-                ADD.IsEnabled = true;
-            else
-            {
-                ADD.IsEnabled = false;
-            }
-        }
+    
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
@@ -176,7 +99,16 @@ namespace PL
 
         }
 
-     
+        private void focus(object sender, TextChangedEventArgs e)
+        {
+            if (drone.IdNumber == "" || drone.Model == "" || Station.Text == "")
+                ADD.IsEnabled = false;
+            else
+            {
+                ADD.IsEnabled = true;
+            }
+
+        }
     }
 }
 

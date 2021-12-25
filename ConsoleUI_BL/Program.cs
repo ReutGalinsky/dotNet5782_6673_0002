@@ -215,7 +215,7 @@ namespace ConsoleUI_BL
             TimeSpan t = new TimeSpan(Hours, Min, Sec);
             try
             {
-                system.DroneFromCharging(num, t);
+                system.DroneFromCharging(num);
             }
             catch (Exception e)
             {

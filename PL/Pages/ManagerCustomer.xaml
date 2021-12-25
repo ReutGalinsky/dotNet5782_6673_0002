@@ -46,7 +46,7 @@
     <Grid>
 
         <Button Background="{x:Null}" Height="88" VerticalAlignment="Top"
-                    Margin="659,223,47,0" Click="Button_Click">
+                    Margin="659,223,47,0" Click="addButton">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
@@ -64,14 +64,14 @@
         </Button>
         <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}"/>
 
-        <ComboBox x:Name="Location" HorizontalAlignment="Left" Margin="631,10,0,0" VerticalAlignment="Top" Width="144" Height="35" SelectionChanged="Location_SelectionChanged">
+        <ComboBox x:Name="Location" HorizontalAlignment="Left" Margin="634,108,0,0" VerticalAlignment="Top" Width="144" Height="27" SelectionChanged="Location_SelectionChanged">
             <ComboBoxItem Content="All"></ComboBoxItem>
             <ComboBoxItem Content="Parcels on way"></ComboBoxItem>
             <ComboBoxItem Content="No parcels on way"></ComboBoxItem>
         </ComboBox>
-        <TextBlock HorizontalAlignment="Left" Margin="659,50,0,0" Text="סינון על פי חבילות בדרך" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
-        <RadioButton x:Name="id" Content="מיון לפי תז" GroupName="key1" HorizontalAlignment="Left" Margin="138,88,0,0" VerticalAlignment="Top" Checked="idCheck"/>
-        <RadioButton Content="מיון לפי שם " GroupName="key1" HorizontalAlignment="Left" Margin="274,87,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="80" Checked="nameCheck">
+        <TextBlock HorizontalAlignment="Left" Margin="676,92,0,0" Text="סינון על פי חבילות בדרך" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
+        <RadioButton x:Name="id" Content="מיון לפי תז" GroupName="key1" HorizontalAlignment="Left" Margin="42,88,0,0" VerticalAlignment="Top" Checked="idCheck"/>
+        <RadioButton Content="מיון לפי שם " GroupName="key1" HorizontalAlignment="Left" Margin="144,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="80" Checked="nameCheck">
             <RadioButton.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

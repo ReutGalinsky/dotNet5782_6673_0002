@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace PL
 {
@@ -26,17 +27,31 @@ namespace PL
             id = i;
             parcel = bl.GetParcel(id);
             Id.DataContext = parcel;
-            SenderId.Text = parcel.SenderCustomer.IdNumber;
-            SenderName.Text = parcel.SenderCustomer.Name;
-            GeterId.Text = parcel.GeterCustomer.IdNumber;
-            GeterName.Text = parcel.GeterCustomer.Name;
+            SenderId.DataContext = parcel.SenderCustomer;
+            SenderName.DataContext = parcel.SenderCustomer;
+            GeterId.DataContext = parcel.GeterCustomer;
+            GeterName.DataContext = parcel.GeterCustomer;
             PriorityBox.DataContext = parcel;
             WeightBox.DataContext = parcel;
             Create.DataContext = parcel;
             Match.DataContext = parcel;
             Arrive.DataContext = parcel;
             Collect.DataContext = parcel;
-            
+            if(parcel.MatchForDroneTime==null)
+            {
+                Match.Visibility = Visibility.Collapsed;
+                matchLabel.Visibility = Visibility.Collapsed;
+            }
+            if (parcel.CollectingDroneTime==null)
+            {
+                Collect.Visibility = Visibility.Collapsed;
+                collectLabel.Visibility = Visibility.Collapsed;
+            }
+            if (parcel.ArrivingDroneTime==null)
+            {
+                Arrive.Visibility = Visibility.Collapsed;
+                arriveLabel.Visibility = Visibility.Collapsed;
+            }
         }
         private BLApi.IBL bl;
         private string id;
@@ -51,9 +66,8 @@ namespace PL
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-
         }
 
-   
+ 
     }
 }

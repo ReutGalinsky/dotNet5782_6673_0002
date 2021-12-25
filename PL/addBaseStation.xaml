@@ -25,7 +25,7 @@
 
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="52.143"/>
             <RowDefinition/>
             <RowDefinition/>
 
@@ -49,16 +49,16 @@
             </Button.Template>
         </Button>
         <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Id number:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <TextBox Background="{x:Null}" x:Name="Id" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="1" Grid.Column="1" />
+        <TextBox Background="{x:Null}" x:Name="Id" HorizontalAlignment="Center" Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="1" Grid.Column="1" TextChanged="Focus" />
         <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Name:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-        <TextBox Background="{x:Null}" x:Name="Name" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="2" Grid.Column="1" />
+        <TextBox Background="{x:Null}" x:Name="Name" Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="1" TextChanged="Focus" />
         <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Charge Slots:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-        <TextBox Background="{x:Null}" x:Name="ChargeSlots" HorizontalAlignment="Center" Text="" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="3" Grid.Column="1" />
+        <TextBox Background="{x:Null}" Text="" x:Name="ChargeSlots" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="3" Grid.Column="1" TextChanged="Focus" />
         <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Longitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
-        <TextBox Background="{x:Null}" x:Name="Longitude" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="4" Grid.Column="1" />
+        <TextBox Background="{x:Null}" x:Name="Longitude" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1" TextChanged="Focus" />
         <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Latitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
-        <TextBox Background="{x:Null}" x:Name="Latitude" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="5" Grid.Column="1" />
-        <Button x:Name="ADD" Content="ADD" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Add_Click" Grid.Row="6" Grid.Column="1"/>
+        <TextBox Background="{x:Null}" x:Name="Latitude" HorizontalAlignment="Center" VerticalAlignment="Center" Text="" Width="90" Height="30" Grid.Row="5" Grid.Column="1" TextChanged="Focus" />
+        <Button x:Name="ADD" IsEnabled="False" Content="ADD" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Add_Click" Grid.Row="6" Grid.Column="1"/>
         <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="7" Grid.Column="1"/>
     </Grid>
 </Window>

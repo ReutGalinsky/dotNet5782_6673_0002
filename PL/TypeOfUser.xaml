@@ -25,9 +25,9 @@
             <RowDefinition/>
 
         </Grid.RowDefinitions>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="3"/>
-        <Button Background="{x:Null}" Click="Close_Click"
-                    Grid.Column="3" Grid.Row="0" Margin="120,0,0,0">
+        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Center" MouseDown="move" Grid.ColumnSpan="4"/>
+        <Button Background="{x:Null}" Click="Close_Click" Width="35" Height="35"
+                    Grid.Column="3" Grid.Row="0" Margin="165,0,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">

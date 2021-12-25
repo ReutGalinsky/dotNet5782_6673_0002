@@ -44,12 +44,18 @@
     <None Remove="Pages\Images\רקע2.png" />
     <None Remove="Pages\Images\תחנה.png" />
     <None Remove="Pages\Images\תחנת בסיס.png" />
+    <None Remove="Pages\הוסף.png" />
     <None Remove="Pages\התחבר.png" />
+    <None Remove="Pages\חבילה.jpg" />
     <None Remove="Pages\לקוח.png" />
     <None Remove="Pages\מחיקה.jpg" />
     <None Remove="Pages\מנהל2.png" />
     <None Remove="Pages\מפתח.jpg" />
+    <None Remove="Pages\עפרון.png" />
     <None Remove="Pages\פלוס.jpg" />
+    <None Remove="pick.png" />
+    <None Remove="supply.jpg" />
+    <None Remove="אספקה.png" />
     <None Remove="חבילה אחת.jpg" />
     <None Remove="חזור.jpg" />
     <None Remove="טעינה.png" />
@@ -68,6 +74,7 @@
     <None Remove="רחפן עגול.png" />
     <None Remove="רקע פרוקיט.jpg" />
     <None Remove="רקע2.png" />
+    <None Remove="שחרור.png" />
     <None Remove="שליחה.png" />
     <None Remove="תחנה.png" />
     <None Remove="תחנת בסיס.png" />
@@ -152,12 +159,18 @@
     <Resource Include="Pages\Images\תחנת בסיס.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Pages\הוסף.png" />
     <Resource Include="Pages\התחבר.png" />
+    <Resource Include="Pages\חבילה.jpg" />
     <Resource Include="Pages\לקוח.png" />
     <Resource Include="Pages\מחיקה.jpg" />
     <Resource Include="Pages\מנהל2.png" />
     <Resource Include="Pages\מפתח.jpg" />
+    <Resource Include="Pages\עפרון.png" />
     <Resource Include="Pages\פלוס.jpg" />
+    <Resource Include="pick.png" />
+    <Resource Include="supply.jpg" />
+    <Resource Include="אספקה.png" />
     <Resource Include="חבילה אחת.jpg" />
     <Resource Include="חזור.jpg" />
     <Resource Include="טעינה.png" />
@@ -176,6 +189,7 @@
     <Resource Include="רחפן עגול.png" />
     <Resource Include="רקע פרוקיט.jpg" />
     <Resource Include="רקע2.png" />
+    <Resource Include="שחרור.png" />
     <Resource Include="שליחה.png" />
     <Resource Include="תחנה.png" />
     <Resource Include="תחנת בסיס.png" />
