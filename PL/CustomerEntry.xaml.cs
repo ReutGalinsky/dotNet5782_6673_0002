@@ -25,7 +25,7 @@ namespace PL
         }
         private BLApi.IBL bl;
 
-        private void logInButton(object sender, RoutedEventArgs e)
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace PL
         }
         private void focusPassword(object sender, RoutedEventArgs e)
         {
-            passwordText.Visibility = Visibility.Collapsed;
+            password.Visibility = Visibility.Collapsed;
             password.Focus();
         }
         private void move(object sender, MouseButtonEventArgs e)
@@ -76,6 +76,10 @@ namespace PL
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
 
+        }
+        private void Check_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

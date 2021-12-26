@@ -28,8 +28,8 @@ namespace PL
 
         private void Manager_Click(object sender, RoutedEventArgs e)
         {
-            //ManagerEntry entry = new ManagerEntry(bl);
-            ManagerPage entry = new ManagerPage(bl);
+            ManagerEntry entry = new ManagerEntry(bl);
+            //ManagerPage entry = new ManagerPage(bl);
             entry.Show();
             this.Close();
         }

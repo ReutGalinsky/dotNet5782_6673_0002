@@ -120,26 +120,26 @@
                     </Button.Template>
                 </Button>
             </StackPanel>
-        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="560,-365,-610,85" Panel.ZIndex="-1">
-            <Grid.RenderTransform>
-                <RotateTransform Angle="70"/>
-            </Grid.RenderTransform>
-            <StackPanel Orientation="Horizontal" Margin="-350,250,-255,-250">
-                <StackPanel>
-                    <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,15,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,15,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,15,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,15,0" CornerRadius="20"/>
+            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="460,-455,-610,85" Panel.ZIndex="-1">
+                <Grid.RenderTransform>
+                    <RotateTransform Angle="50"/>
+                </Grid.RenderTransform>
+                <StackPanel Orientation="Horizontal" Margin="-350,250,-255,-250">
+                    <StackPanel>
+                        <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,150,0" CornerRadius="20"/>
+                        <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,150,0" CornerRadius="20"/>
+                        <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,150,0" CornerRadius="20"/>
+                        <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,150,0" CornerRadius="20"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,150,0" CornerRadius="20"/>
+                        <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,150,0" CornerRadius="20"/>
+                        <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,150,0" CornerRadius="20"/>
+                        <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,150,0" CornerRadius="20"/>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel>
-                    <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,-15,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,-15,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,-15,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,-7,0" CornerRadius="20"/>
-                </StackPanel>
-            </StackPanel>
-            
-        </Grid>
+
+            </Grid>
            
         </Grid>
     </Border>

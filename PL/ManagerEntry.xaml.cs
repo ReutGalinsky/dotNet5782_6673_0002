@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.OleDb;
+using System.ComponentModel;
+
 
 namespace PL
 {
@@ -25,7 +28,7 @@ namespace PL
             bl = b;
         }
         private BLApi.IBL bl;
-        private void logInButton(object sender, RoutedEventArgs e)
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -60,19 +63,20 @@ namespace PL
 
         private void focus(object sender, RoutedEventArgs e)
         {
-            if (user.Text == "שם משתמש")
+            if (user.Text == "Username")
                 user.Text = "";
         }
 
-        private void focusPassword(object sender, RoutedEventArgs e)
-        {
-            passwordText.Visibility = Visibility.Collapsed;
-            password.Focus();
-
-        }
+      
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private void Check_Click(object sender, RoutedEventArgs e)
+        {
+        
+             
+
         }
     }
 }

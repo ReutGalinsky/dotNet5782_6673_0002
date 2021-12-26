@@ -6,7 +6,7 @@
     <Application.Resources>
         <Style x:Key="UsualFont">
             <Setter Property="TextElement.FontFamily"
-                    Value="/Fonts/#Usual"></Setter>
+                    Value="/Fonts/#regular"></Setter>
         </Style>
         <Style x:Key="myButton" TargetType="Button">
             <Setter Property="BorderBrush" Value="#FFF0F0F3"></Setter>
