@@ -272,7 +272,7 @@ namespace BL
                 {
                     case 0://the drone will be in maintaince mode
                         drone.Battery = rand.Next(0, 20);
-                        var station = dal.GetBaseStations().Select(x => new { station = x, Location = x.GetLocation() }).ToList();
+                        var station = dal.GetBaseStations().Where(x=>x.ChargeSlots>0).Select(x => new { station = x, Location = x.GetLocation() }).ToList();
                         if (station.Count == 0) throw new AddingProblemException("there are no base stations");
                         int num = rand.Next(0, station.Count());
                         var element = station.ElementAt(num);

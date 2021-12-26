@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagerCustomer">
-    <Page.Resources>
+   <!-- <Page.Resources>
         <DataTemplate x:Key="MyDataTemplate"
  DataType="local:BO.CustomerToList">
             <Grid>
@@ -42,7 +42,7 @@
                 </Button>
             </Grid>
         </DataTemplate>
-    </Page.Resources>
+    </Page.Resources>-->
     <Grid>
 
         <Button Background="{x:Null}" Height="88" VerticalAlignment="Top"
@@ -62,7 +62,58 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}"/>
+        <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Margin="42,108,239,30" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Number" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=IdNumber}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" VerticalAlignment="Center" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Phone Number" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Phone}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Name" Width="70">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="" Width="110">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Delete" Width="70">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteCustomer">
+                                    <Button.Content>
+                                        <Image Source="/Pages/מחיקה.jpg" VerticalAlignment="Center" Width="25" Height="25"></Image>
+                                    </Button.Content>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <ComboBox x:Name="Location" HorizontalAlignment="Left" Margin="634,108,0,0" VerticalAlignment="Top" Width="144" Height="27" SelectionChanged="Location_SelectionChanged">
             <ComboBoxItem Content="All"></ComboBoxItem>
@@ -71,7 +122,7 @@
         </ComboBox>
         <TextBlock HorizontalAlignment="Left" Margin="676,92,0,0" Text="סינון על פי חבילות בדרך" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
         <RadioButton x:Name="id" Content="מיון לפי תז" GroupName="key1" HorizontalAlignment="Left" Margin="42,88,0,0" VerticalAlignment="Top" Checked="idCheck"/>
-        <RadioButton Content="מיון לפי שם " GroupName="key1" HorizontalAlignment="Left" Margin="144,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="80" Checked="nameCheck">
+        <RadioButton x:Name="name" Content="מיון לפי שם " GroupName="key1" HorizontalAlignment="Left" Margin="144,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="80" Checked="nameCheck">
             <RadioButton.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

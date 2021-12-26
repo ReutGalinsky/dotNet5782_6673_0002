@@ -11,7 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.Collections.ObjectModel;
+using BLApi;
 namespace PL
 {
     /// <summary>
@@ -24,19 +25,24 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
+            
             baseStation = bl.GetBaseStation(id);
+            if (baseStation.Drones.Count()==0)
+                dronesInCharge.Visibility = Visibility.Collapsed;
             Id.DataContext = baseStation;
             Name.DataContext = baseStation;
             ChargeSlots.DataContext = baseStation;
             Latitude.DataContext = baseStation.Location;
             Longitude.DataContext = baseStation.Location;
-            Drone.DataContext = baseStation.Drones;
+            dronesInCharge.DataContext = drones;
+            foreach (var item in baseStation.Drones)
+                drones.Add(item);
         }
         private BLApi.IBL bl;
         private string id;
         private BO.BaseStation baseStation;
         public event EventHandler updateList;
-
+        private ObservableCollection<BO.DroneInCharge> drones=new ObservableCollection<BO.DroneInCharge>();
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
