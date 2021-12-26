@@ -21,6 +21,8 @@
     <None Remove="2מפתח.jpg" />
     <None Remove="customer.png" />
     <None Remove="key.jpg" />
+    <None Remove="logo.png" />
+    <None Remove="logo.png.png" />
     <None Remove="manager.png" />
     <None Remove="new.png" />
     <None Remove="Pages\Images\BackGround.png" />
@@ -94,6 +96,8 @@
     <Resource Include="2מפתח.jpg" />
     <Resource Include="customer.png" />
     <Resource Include="key.jpg" />
+    <Resource Include="logo.png" />
+    <Resource Include="logo.png.png" />
     <Resource Include="manager.png" />
     <Resource Include="new.png" />
     <Resource Include="Pages\Images\Customer.png">
@@ -232,6 +236,7 @@
 
   <ItemGroup>
     <Folder Include="Fonts\" />
+    <Folder Include="Images\" />
   </ItemGroup>
 
 </Project>

@@ -7,97 +7,144 @@
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Title="TypeOfUser" Height="450" Width="800">
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
-        </Grid.Background>
+        Background="Transparent"
+        AllowsTransparency="True"
+        Title="TypeOfUser" Height="500" Width="900">
+    <Border CornerRadius="20">
+        <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition />
             <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition  Width="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Width="800" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Center" MouseDown="move" Grid.ColumnSpan="4"/>
-        <Button Background="{x:Null}" Click="Close_Click" Width="35" Height="35"
-                    Grid.Column="3" Grid.Row="0" Margin="165,0,0,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/סגירה.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Background="{x:Null}" Height="35" Width="35" Click="Back_Click"
-                    Margin="0,0,160,0" Grid.ColumnSpan="1">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/חזור.jpg" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+        <Grid Background="SteelBlue" Grid.ColumnSpan="4" MouseDown="Grid_MouseDown"/>
+            <StackPanel Orientation="Horizontal" Height="35" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0">
+                <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" Margin="200,0,0,0" Source="/logo.png.png" RenderTransformOrigin="0.648,-1.857" />
+                <TextBlock Text="New Meaning For Delivery." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="20" Margin="5,0,0,0" FontWeight="Medium" FontFamily="Fonts/#regular"/>
 
-        <Button x:Name="CustomerIcon" Background="{x:Null}" Height="90" Click="Customer_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Width="100">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="Pages/Images/Customer.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button x:Name="ManagerIcon" Background="{x:Null}" Click="Manager_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" Height="90" Width="100">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush x:Name="icon" ImageSource="Pages/Images/Manager.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <TextBlock HorizontalAlignment="Center"  Grid.Row="2" Text="Manager" Grid.Column="2" VerticalAlignment="Bottom" Height="30" Width="135" FontFamily="Tahoma" FontWeight="Bold" FontSize="26"/>
-        <TextBlock HorizontalAlignment="Center"  Grid.Row="2" Text="Customer" Grid.Column="1" VerticalAlignment="Bottom" Height="30" Width="150" FontFamily="Tahoma" FontWeight="Bold" FontSize="26"/>
+            </StackPanel>
+            <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="3">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                        <Setter Property="Background" Value="Gray"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="75" Height="15" CornerRadius="8" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
-    </Grid>
+            <Button Content="Back" Click="Back_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="0">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="75" Height="15" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+      
+
+                <StackPanel Orientation="Horizontal" Height="80" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3">
+            <Button Content="I'm A Customer" Click="Customer_Click" Foreground="White" FontSize="28" FontWeight="Medium" Width="200" Margin="50,0,0,0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                        <Setter Property="Background" Value="Gray"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="200" Height="50" CornerRadius="12" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+                <Button Content="I'm A Manager" Click="Manager_Click" Foreground="White" FontSize="28" FontWeight="Medium" Width="200" Margin="30,0,0,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                            <Setter Property="Background" Value="Gray"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="200" Height="50" CornerRadius="12" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="560,-365,-610,85" Panel.ZIndex="-1">
+            <Grid.RenderTransform>
+                <RotateTransform Angle="70"/>
+            </Grid.RenderTransform>
+            <StackPanel Orientation="Horizontal" Margin="-350,250,-255,-250">
+                <StackPanel>
+                    <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,15,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,15,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,15,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,15,0" CornerRadius="20"/>
+                </StackPanel>
+                <StackPanel>
+                    <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,-15,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,-15,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,-15,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,-7,0" CornerRadius="20"/>
+                </StackPanel>
+            </StackPanel>
+            
+        </Grid>
+           
+        </Grid>
+    </Border>
 </Window>
 
+ 
 
 
