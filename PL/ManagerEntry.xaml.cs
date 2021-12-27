@@ -32,6 +32,7 @@ namespace PL
         {
             try
             {
+                check.IsChecked = false;
                 var User = bl.GetUser(user.Text);
                 if (User.UserPassword == password.Password && User.isManager == true)
                 {
@@ -63,8 +64,13 @@ namespace PL
 
         private void focus(object sender, RoutedEventArgs e)
         {
-            if (user.Text == "Username")
-                user.Text = "";
+            if (textPassword.Text == "Password:")
+            {
+                textPassword.Visibility = Visibility.Collapsed;
+                password.Focus();
+            }
+
+
         }
 
       
@@ -76,6 +82,36 @@ namespace PL
         {
         
              
+
+        }
+
+        private void focusPassword(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void showPassword(object sender, RoutedEventArgs e)
+        {
+            
+            textPassword.Visibility = Visibility.Collapsed;
+            password.Visibility = Visibility.Visible;
+            password.Password = textPassword.Text;
+            password.Focus();
+        }
+
+        private void showText(object sender, RoutedEventArgs e)
+        {
+            textPassword.Text = password.Password;
+            textPassword.Visibility = Visibility.Visible;
+            password.Visibility = Visibility.Collapsed;
+            textPassword.Focus();
+
+        }
+
+        private void focusUser(object sender, RoutedEventArgs e)
+        {
+            if (user.Text == "Username:")
+                user.Text = "";
 
         }
     }

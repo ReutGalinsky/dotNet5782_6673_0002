@@ -108,7 +108,7 @@
         </Button>
         <Button HorizontalAlignment="Left" Margin="67,36,0,13" x:Name="suppltingButton" Visibility="Collapsed" Content="" Style="{StaticResource myActionButton}" Grid.Row="3" Grid.RowSpan="3" FontSize="15" Width="71" Click="supplyButton" Grid.Column="2">
             <Button.Background>
-                <ImageBrush ImageSource="/אספקה.png" Stretch="UniformToFill"></ImageBrush>
+                <ImageBrush ImageSource="/supply.jpg" Stretch="UniformToFill"></ImageBrush>
             </Button.Background>
         </Button>
         <Button HorizontalAlignment="Left" Margin="67,40,0,10" x:Name="pickButton" Visibility="Collapsed" Content="" Style="{StaticResource myActionButton}" Grid.Row="3" Grid.RowSpan="3" FontSize="15" Width="71" Click="pickingButton" Grid.Column="2">

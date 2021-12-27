@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="400" d:DesignWidth="700"
       Title="CustomerDelivery">
     <Page.Resources>
         <DataTemplate x:Key="MyDataTemplate"
@@ -106,9 +106,9 @@
             </ListView.View>
 
         </ListView>
-        <ComboBox x:Name="State" HorizontalAlignment="Left" Margin="631,10,0,0" VerticalAlignment="Top" Width="144" Height="35" SelectionChanged="SelectionChanged"/>
-        <ComboBox x:Name="Weight" HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" Width="133" Height="35" SelectionChanged="SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="640,50,0,0" Text="סינון על פי מצב החבילה " TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
-        <TextBlock HorizontalAlignment="Left" Margin="490,50,0,0" Text="סינון על פי משקל החבילה " TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
+        <ComboBox x:Name="State" HorizontalAlignment="Left" Margin="508,184,0,0" VerticalAlignment="Top" Width="132" Height="35" SelectionChanged="SelectionChanged"/>
+        <ComboBox x:Name="Weight" HorizontalAlignment="Left" Margin="508,109,0,0" VerticalAlignment="Top" Width="132" Height="35" SelectionChanged="SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="507,164,0,0" Text="סינון על פי מצב החבילה " TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
+        <TextBlock HorizontalAlignment="Left" Margin="508,87,0,0" Text="סינון על פי משקל החבילה " TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="160" FontFamily="Aharoni"/>
     </Grid>
 </Page>
