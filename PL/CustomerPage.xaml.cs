@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 using PL.Pages;
 namespace PL
 {
@@ -65,5 +66,19 @@ namespace PL
             typeOfUser.Show();
             this.Close();
         }
+        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
+            GridMenu.Width = 70;
+
+        }
+        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
+        {
+            GridMenu.Width = 200;
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+        }
+
     }
 }

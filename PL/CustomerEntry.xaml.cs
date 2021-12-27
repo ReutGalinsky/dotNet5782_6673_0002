@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 namespace PL
 {
     /// <summary>
@@ -22,6 +23,7 @@ namespace PL
         {
             InitializeComponent();
             bl = b;
+            
         }
         private BLApi.IBL bl;
 
@@ -63,6 +65,7 @@ namespace PL
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             TypeOfUser typeOfUser = new TypeOfUser(bl);
+
             typeOfUser.Show();
             this.Close();
         }
@@ -79,7 +82,7 @@ namespace PL
         }
         private void Check_Click(object sender, RoutedEventArgs e)
         {
-            
+           
         }
     }
 }

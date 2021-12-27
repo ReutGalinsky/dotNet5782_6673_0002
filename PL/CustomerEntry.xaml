@@ -79,7 +79,7 @@
         <PasswordBox x:Name="password" ScrollViewer.HorizontalScrollBarVisibility="Disabled" PasswordChar='*' Background="Transparent" Width="333" Grid.Row="2" Grid.Column="1" FontFamily="/Fonts/regular" FontWeight="Medium" Margin="115,112,0,9" FontSize="24" GotFocus="focus" Opacity="0.5" Foreground="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
         <Border Height="2" Background="Black" Opacity="0.5" Grid.Row="2" Grid.Column="1" Margin="113,144,182,9"/>
         <iconPacks:PackIconMaterial Kind="Key" Foreground="Black" Grid.Row="2" Grid.Column="1" Opacity="0.5" Width="47" Height="42" RenderTransformOrigin="0.525,0.48" Margin="472,100,0,0" VerticalAlignment="Center"  />
-        <CheckBox x:Name="check" Click="Check_Click" Content="Show Password" Cursor="Hand"  Grid.Column="1" Grid.Row="3" Margin="110,0,0,0"/>
+        <CheckBox x:Name="checkBox" Click="Check_Click" Content="Show Password" Grid.Column="1" Grid.Row="3" Margin="110,0,0,0"/>
         <Button Content="Login" Click="Login_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="1" Grid.Row="3" Margin="-200,0,0,0">
             <Button.Style>
                 <Style TargetType="Button">

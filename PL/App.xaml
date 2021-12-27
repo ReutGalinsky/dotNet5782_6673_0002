@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
         <Style x:Key="UsualFont">
             <Setter Property="TextElement.FontFamily"
                     Value="/Fonts/#regular"></Setter>
@@ -13,7 +14,7 @@
             <Setter Property="BorderThickness" Value="3"></Setter>
             <Setter Property="FontSize" Value="44"></Setter>
             <Setter Property="FontFamily" Value="C:\Users\osnat\OneDrive\שולחן העבודה\exciting\PL\Fonts\regular.ttf #regular"></Setter>
-                <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="Background" Value="#FFD3DBEB"></Setter>
 
             <Style.Resources>
@@ -28,7 +29,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
         <Style x:Key="comboBox" TargetType="ComboBoxItem">
             <Setter Property="Background" Value="AliceBlue"></Setter>
             <Setter Property="BorderBrush" Value="AliceBlue"></Setter>

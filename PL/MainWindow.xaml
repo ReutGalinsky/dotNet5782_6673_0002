@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:local="clr-namespace:PL" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -48,18 +48,26 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                     <Image Width="100" Height="100" Source="/logo.png.png" RenderOptions.BitmapScalingMode="Fant" RenderTransformOrigin="0.533,0.5"/>
-            </StackPanel>
-            <TextBlock Text="New" Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>
-            <TextBlock Text="Meaning" Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>
-            <TextBlock Text="For" Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>
-            <TextBlock Text="Delivery." Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>
+                </StackPanel>
+                <TextBlock Text="New" Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>
+                <TextBlock Text="Meaning" Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>
+                <TextBlock Text="For" Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>
+                <TextBlock Text="Delivery." Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>
                 <TextBlock Text="Welcome to Deli Drone, the reliable and safe delivery system. Enjoy a huge world of possibilities!" Foreground="Black" FontSize="12" FontWeight="Medium" FontFamily="Fonts/#regular" TextWrapping="Wrap" Margin="0,10,0,0" Height="40"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="50">
-                <Button Content="Start" Click="Start_Click" Foreground="White" FontSize="14" FontWeight="Medium" Margin="0,15,0,0">
+            <StackPanel Orientation="Horizontal" Height="45">
+                <Button Content="Start" Click="Start_Click" Foreground="White" Width="111" FontSize="14" FontWeight="Medium" RenderTransformOrigin="0.5,0.5" Height="31">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.562"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="0.49"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
                     <Button.Style>
-                        <Style TargetType="Button">
+                        <Style TargetType="{x:Type Button}">
                             <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
                             <Setter Property="Background" Value="Gray"/>
                             <Setter Property="Cursor" Value="Hand"/>
@@ -71,18 +79,19 @@
                         </Style>
                     </Button.Style>
                     <Button.Template>
-                        <ControlTemplate TargetType="Button">
+                        <ControlTemplate TargetType="{x:Type Button}">
                             <Border Width="100" Height="25" CornerRadius="12" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                
+                <iconPacks:PackIconMaterial VerticalAlignment="Center" Kind="PlayCircle" Foreground="Black" Opacity="0.5" Width="30" Height="30" RenderTransformOrigin="0.451,0.462"  />
+
             </StackPanel>
-            
-            
-            
+
+
+
         </StackPanel>
         <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="160,-365,-610,85" Panel.ZIndex="-1">
             <Grid.RenderTransform>
@@ -90,10 +99,10 @@
             </Grid.RenderTransform>
             <StackPanel Orientation="Horizontal" Margin="-350,250,-255,-250">
                 <StackPanel>
-                <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,0,0" CornerRadius="20"/>
-                <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,0,0" CornerRadius="20"/>
-                <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,0,0" CornerRadius="20"/>
-                <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,0,0" CornerRadius="20"/>
                 </StackPanel>
                 <StackPanel>
                     <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,0,0" CornerRadius="20"/>
@@ -102,12 +111,12 @@
                     <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,0,0" CornerRadius="20"/>
                 </StackPanel>
             </StackPanel>
-            
-            
-            
+
+
+
         </Grid>
-        
-            
-       
+
+
+
     </Grid>
 </Window>

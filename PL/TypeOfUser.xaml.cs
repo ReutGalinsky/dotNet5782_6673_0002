@@ -36,7 +36,8 @@ namespace PL
 
         private void Customer_Click(object sender, RoutedEventArgs e)
         {
-            CustomerEntry entry = new CustomerEntry(bl);//רק לצורך הדוגמא
+            //CustomerEntry entry = new CustomerEntry(bl);//רק לצורך הדוגמא
+            CustomerPage entry = new CustomerPage(bl,"8");
             entry.Show();
             this.Close();
         }
