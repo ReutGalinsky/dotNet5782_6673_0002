@@ -80,5 +80,6 @@ namespace PL
             ButtonCloseMenu.Visibility = Visibility.Visible;
         }
 
+      
     }
 }
