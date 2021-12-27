@@ -26,14 +26,9 @@ namespace PL.Pages
         {
             InitializeComponent();
             bl = b;
-            var temp = from item in bl.GetCustomers()
-                       orderby item.Name
-                       select item;
-            foreach (BO.CustomerToList s in temp)//create the source for the liseView
-                listCustomers.Add(s);
             CustomerListView.DataContext = listCustomers;
             Location.SelectedItem = Location.Items[0];
-            id.IsChecked = true;
+            name.IsChecked = true;
             update += updated;
         }
 
@@ -53,6 +48,7 @@ namespace PL.Pages
                 ManagerViewCustomer customer = new ManagerViewCustomer(bl, selected.IdNumber);
                 customer.updateList += updated;
                 customer.Show();
+                selected = null;
             }
         }
         private void Location_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -77,13 +73,14 @@ namespace PL.Pages
         }
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
+            listCustomers.Clear();
             Location.SelectedItem = "All";
             var temp = from item in bl.GetCustomers()
                        orderby item.Name
                        select item;
             foreach (BO.CustomerToList s in temp)//create the source for the liseView
                 listCustomers.Add(s);
-            id.IsChecked = true;
+            name.IsChecked = true;
         }
         private void deleteCustomer(object sender, RoutedEventArgs e)
         {

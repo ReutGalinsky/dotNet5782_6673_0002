@@ -29,19 +29,20 @@ namespace PL.Pages
             var states = BO.ParcelState.GetNames(typeof(BO.ParcelState)).ToList();
             states.Insert(0, "All");
             State.ItemsSource = states;
-            State.SelectedItem = "All";
+            //State.SelectedItem = "All";
             var priority = BO.Priorities.GetNames(typeof(BO.Priorities)).ToList();
             priority.Insert(0, "All");
-            Priority.SelectedItem = "All";
+            //Priority.SelectedItem = "All";
             Priority.ItemsSource = priority;
+            //Date.SelectedItem = Date.Items[0];
             update += updated;
         }
-        private IEnumerable<IGrouping<BO.ParcelState,BO.ParcelOfList>> parcelsByState()
-        {
-               var list = from item in bl.GetParcels()
-                       group item by item.ParcelState;
-            return list;
-        }
+        //private IEnumerable<IGrouping<BO.ParcelState,BO.ParcelOfList>> parcelsByState()
+        //{
+        //       var list = from item in bl.GetParcels()
+        //               group item by item.ParcelState;
+        //    return list;
+        //}
         private BLApi.IBL bl;
         public EventHandler update;
         private BO.ParcelOfList selected;
@@ -93,6 +94,7 @@ namespace PL.Pages
             {
                 ManagerViewParcel showParcel = new ManagerViewParcel(bl, selected.IdNumber);
                 showParcel.ShowDialog();
+                selected = null;
             }
         }
         private void deleteParcel(object sender, RoutedEventArgs e)
@@ -113,6 +115,31 @@ namespace PL.Pages
                 }
             }
         }
+        private void CancelGroup(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            view.GroupDescriptions.Clear();
+            senderCheck.IsChecked = false;
+            geterCheck.IsChecked = false;
+            }
+
+        private void GroupGeter(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Geter");
+            view.GroupDescriptions.Add(groupDescription);
+            //view.GroupDescriptions.OrderBy(x=>x.GroupNames);
+
+        }
+
+        private void GroupSender(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Sender");
+            view.GroupDescriptions.Add(groupDescription);
+        }
+
+
     }
    
 }

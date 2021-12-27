@@ -33,12 +33,14 @@ namespace PL.Pages
             StationsListView.DataContext = liststations;
             chargeSlot.SelectedItem = chargeSlot.Items[0];
             update += updated;
+
         }
 
         public ObservableCollection<BO.BaseStationToList> liststations = new ObservableCollection<BO.BaseStationToList>();
         private BLApi.IBL bl;
         private BO.BaseStationToList selected;
         public EventHandler update;
+       
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             chargeSlot.SelectedItem = chargeSlot.Items[0];
@@ -61,6 +63,7 @@ namespace PL.Pages
                 ManagerViewBaseStation showBase = new ManagerViewBaseStation(bl, selected.IdNumber);
                 showBase.updateList += updated;
                 showBase.Show();
+                selected = null;
             }
         }
         private void changeFilterCharge(object sender, SelectionChangedEventArgs e)
@@ -105,6 +108,30 @@ namespace PL.Pages
 
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
+            //PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChargeSlots");
+            //view.GroupDescriptions.Remove(groupDescription);
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
+            view.GroupDescriptions.Clear() ;
+
+           // update(sender, e);
+        }
+
+        private void GroupAmount(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChargeSlots");
+            view.GroupDescriptions.Add(groupDescription);
+        }
+
+        private void cancelGroup(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
+            view.GroupDescriptions.Clear();
         }
     }
 }

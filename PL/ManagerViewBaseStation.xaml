@@ -10,7 +10,7 @@
         Title="ManagerViewBaseStation" Height="400" Width="500">
     <Window.Resources>
         <DataTemplate x:Key="MyDataTemplate"
- DataType="local:BO.DroneToList">
+ DataType="local:BO.DroneInCharge">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -84,7 +84,7 @@
         <TextBox Background="{x:Null}" x:Name="Latitude" Text="{Binding Path=Latitude}" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" />
         <Button x:Name="UPDATE" Content="UPDATE" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="52" Width="90" FontSize="22" Click="Update_Click" Grid.Row="6" Grid.Column="1"/>
         <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="52" Width="121" FontSize="22" Click="Close_Click" Grid.Row="7" Grid.Column="1"/>
-        <ComboBox x:Name="Drone" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" Grid.Column="2" HorizontalAlignment="Center" Margin="0,3,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120"/>
+        <ListView Grid.Column="2" Grid.Row="5" Background="{x:Null}" Margin="1,0,23,52" Grid.RowSpan="2" x:Name="dronesInCharge" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}"/>
         <!-- <ListView x:Name="Drone" Grid.Column="1" Grid.Row="1" Background="{x:Null}" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" Grid.ColumnSpan="2" Margin="166,52,0,10" Grid.RowSpan="3">
 
         </ListView>-->
