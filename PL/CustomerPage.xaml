@@ -12,7 +12,7 @@
         AllowsTransparency="True"
         Background="AliceBlue">
     <Window.Resources>
-        <Storyboard x:Key="MenuOpen">
+        <!--<Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="GridMenu">
                 <EasingDoubleKeyFrame KeyTime="0" Value="35"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
@@ -23,16 +23,16 @@
                 <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="35"/>
             </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
+        </Storyboard>-->
     </Window.Resources>
 
     <Window.Triggers>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+        <!--<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
             <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
             <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
-        </EventTrigger>
+        </EventTrigger>-->
     </Window.Triggers>
 
 
@@ -75,7 +75,7 @@
                         <materialDesign:PackIcon Kind="Menu" Foreground="Black" Width="25" Height="25"/>
                     </Button>
                 </Grid>
-                <!--<ListView>
+                <ListView>
                     <ListViewItem Foreground="Black" Width="160">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ViewDashboard" VerticalAlignment="Center"/>
@@ -96,12 +96,12 @@
 
                         </StackPanel>
                     </ListViewItem>
-                </ListView>-->
+                </ListView>
             </StackPanel>
         </Grid>
 
 
-        <TextBlock Text="Welcome To Deli-Drone" Margin="0,50,0,0" FontWeight="Light" FontFamily="/Fonts/regular" Grid.Column="0" HorizontalAlignment="Center" FontSize="50" Width="505"/>
+        <TextBlock Text="Welcome To Deli-Drone" Margin="0,50,0,378" FontWeight="Light" FontFamily="/Fonts/regular" HorizontalAlignment="Center" FontSize="50" Width="504"/>
 
 
 

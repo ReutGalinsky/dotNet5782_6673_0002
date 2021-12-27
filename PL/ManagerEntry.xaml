@@ -72,7 +72,7 @@
             </Button.Template>
         </Button>
 
-        <TextBlock Text="Sigh-Up To Deli-Drone" Margin="0,50,0,0" FontWeight="Light" FontFamily="/Fonts/regular" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontSize="50"/>
+        <TextBlock Text="Sign-Up To Deli-Drone" Margin="0,50,0,0" FontWeight="Light" FontFamily="/Fonts/regular" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontSize="50"/>
         <TextBox x:Name="user" Background="Transparent" Text="Username:" Width="355" Grid.Row="2" Grid.Column="1" FontFamily="/Fonts/regular" FontWeight="Medium" Margin="120,75,0,48" FontSize="24" GotFocus="focus" Opacity="0.5" Foreground="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
         <iconPacks:PackIconMaterial Kind="AccountTie" Foreground="Black" Grid.Row="2" Grid.Column="1" Opacity="0.5" Width="47" Height="42" RenderTransformOrigin="0.525,0.48" Margin="472,0,0,0" VerticalAlignment="Center"  />
         <Border Height="2" Background="Black" Opacity="0.5" Grid.Row="2" Grid.Column="1" Margin="113,104,182,49"/>
