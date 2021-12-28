@@ -32,6 +32,7 @@ namespace PL
             State.DataContext = drone;
             Latitude.Text = drone.Latitude;
             Longitude.Text = drone.Longitude;
+
         }
         private BLApi.IBL bl;
         private bool isClosed = true;

@@ -91,26 +91,29 @@ namespace PL
 
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-            var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
-            switch(item.Tag)
+            if (ButtonCloseMenu.Visibility == Visibility.Visible)
             {
-                case "drone":
-                    pageDrone.update(sender, e);
-                    Manager.NavigationService.Navigate(pageDrone);
-                    break;
-                case "customer":
-                    pageCustomer.update(sender, e);
-                    Manager.NavigationService.Navigate(pageCustomer);
-                    break;
-                case "stations":
-                    pageBaseStation.update(sender, e);
-                    Manager.NavigationService.Navigate(pageBaseStation);
-                    break;
-                case "parcel":
-                    pageParcel.update(sender, e);
-                    Manager.NavigationService.Navigate(pageParcel);
-                    break;
+                var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
+                switch (item.Tag)
+                {
+                    case "drone":
+                        pageDrone.update(sender, e);
+                        Manager.NavigationService.Navigate(pageDrone);
+                        break;
+                    case "customer":
+                        pageCustomer.update(sender, e);
+                        Manager.NavigationService.Navigate(pageCustomer);
+                        break;
+                    case "stations":
+                        pageBaseStation.update(sender, e);
+                        Manager.NavigationService.Navigate(pageBaseStation);
+                        break;
+                    case "parcel":
+                        pageParcel.update(sender, e);
+                        Manager.NavigationService.Navigate(pageParcel);
+                        break;
 
+                }
             }
         }
     }

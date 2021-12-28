@@ -86,7 +86,7 @@
         <Button x:Name="UPDATE" Content="UPDATE" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Update_Click" Grid.Row="8" Grid.Column="1"/>
         <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="9" Grid.Column="1"/>
 
-        <Button Content="" Style="{StaticResource myActionButton}" Grid.Row="2" Grid.RowSpan="2"  Grid.Column="2" Click="Button_Click_1" RenderTransformOrigin="0.507,0.41" Margin="69,0,29,16">
+        <Button x:Name="buttonMenue" Content="" Style="{StaticResource myActionButton}" Grid.Row="2" Grid.RowSpan="2"  Grid.Column="2" Click="Button_Click_1" RenderTransformOrigin="0.507,0.41" Margin="69,0,29,16">
             <Button.Background>
                 <ImageBrush x:Name="action" ImageSource="/פעולות.png" Stretch="UniformToFill"></ImageBrush>
             </Button.Background>
@@ -116,7 +116,5 @@
                 <ImageBrush ImageSource="/pick.png" Stretch="Uniform"></ImageBrush>
             </Button.Background>
         </Button>
-
-
     </Grid>
 </Window>

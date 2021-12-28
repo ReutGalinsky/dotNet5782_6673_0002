@@ -84,7 +84,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="546,112,0,0" Text="סינון על פי עדיפות החבילה " TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
         <TextBlock HorizontalAlignment="Left" Margin="551,59,0,0" Text="סינון על פי מצב החבילה " TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="160" FontFamily="Aharoni" RenderTransformOrigin="-0.025,-1.994"/>
 
-        <ComboBox x:Name="State" HorizontalAlignment="Left" Margin="551,80,0,0" VerticalAlignment="Top" Width="132" Height="21" SelectionChanged="ComboBoxChange" FontFamily="Aharoni" />
+        <ComboBox x:Name="State" HorizontalAlignment="Left" Margin="551,80,0,0" VerticalAlignment="Top" Width="132" Height="21" SelectionChanged="ComboBoxChange" FontFamily="Aharoni" >
+        </ComboBox>
         <CheckBox x:Name="senderCheck" Content="Group By Sender" HorizontalAlignment="Left" Margin="561,197,0,0" VerticalAlignment="Top" Checked="GroupSender" Unchecked="CancelGroup"/>
         <CheckBox x:Name="geterCheck" Content="Group By Geter" HorizontalAlignment="Left" Margin="561,225,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupGeter"/>
         <!-- <DatePicker x:Name="start" HorizontalAlignment="Left" Margin="639,298,0,0" VerticalAlignment="Top" SelectedDate="{Binding Path, Mode=TwoWay}" SelectedDateChanged="changed"/>

@@ -65,7 +65,7 @@
         <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Margin="10,69,339,69" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Number" Width="auto">
+                    <GridViewColumn Header="Number" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=IdNumber}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" VerticalAlignment="Center" />
