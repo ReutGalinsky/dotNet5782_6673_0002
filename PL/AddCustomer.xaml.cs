@@ -58,7 +58,7 @@ namespace PL
                 }
                 customer.Location = new BO.Location();
                 customer.Location.Longitude = temp;
-                if (double.TryParse(Longitude.Text, out temp) == false)
+                if (double.TryParse(Latitude.Text, out temp) == false)
                 {
                     MessageBox.Show("Latitude suppose to be double");
                 }

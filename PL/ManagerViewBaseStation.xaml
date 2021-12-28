@@ -61,7 +61,7 @@
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/סגירה.png" />
+                            <ImageBrush ImageSource="Images/סגירה.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>

@@ -117,6 +117,7 @@ namespace PL.Pages
         private void addButton(object sender, RoutedEventArgs e)
         {
             AddCustomer customer = new AddCustomer(bl);
+            customer.updateList += updated;
             customer.ShowDialog();
         }
     }

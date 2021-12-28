@@ -11,7 +11,7 @@
     
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/רקע2.png" Opacity="0.895"></ImageBrush>
+            <ImageBrush ImageSource="Images/רקע2.png" Opacity="0.895"></ImageBrush>
         </Grid.Background>
 
         <Grid.RowDefinitions>

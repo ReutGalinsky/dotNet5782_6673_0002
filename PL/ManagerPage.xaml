@@ -15,7 +15,7 @@
         <Grid>
             <Grid Height="35" VerticalAlignment="Top" Background="SteelBlue" MouseDown="move">
                 <TextBlock Text="New Meaning For Delivery." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="20" Margin="5,0,0,0" FontWeight="Medium" FontFamily="Fonts/#regular"/>
-                <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" RenderOptions.BitmapScalingMode="Fant" Margin="290,0,0,0" Source="/logo.png.png"  />
+            <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" RenderOptions.BitmapScalingMode="Fant" Margin="290,0,0,0" Source="Images/logo.png.png"  />
 
                 <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" HorizontalAlignment="right" Margin="0,0,10,0" >
                     <Button.Style>

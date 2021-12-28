@@ -58,7 +58,7 @@
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/סגירה.png" />
+                            <ImageBrush ImageSource="Images/סגירה.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>
@@ -88,32 +88,32 @@
 
         <Button x:Name="buttonMenue" Content="" Style="{StaticResource myActionButton}" Grid.Row="2" Grid.RowSpan="2"  Grid.Column="2" Click="Button_Click_1" RenderTransformOrigin="0.507,0.41" Margin="69,0,29,16">
             <Button.Background>
-                <ImageBrush x:Name="action" ImageSource="/פעולות.png" Stretch="UniformToFill"></ImageBrush>
+                <ImageBrush x:Name="action" ImageSource="Images/פעולות.png"  Stretch="UniformToFill"></ImageBrush>
             </Button.Background>
         </Button>
         <Button HorizontalAlignment="Left" Margin="67,36,0,13" x:Name="shippingButton" Visibility="Collapsed" Content="" Style="{StaticResource myActionButton}" Grid.Row="3" Grid.RowSpan="3" FontSize="15" Width="71" Click="shipButton" Grid.Column="2">
             <Button.Background>
-                <ImageBrush ImageSource="/שליחה.png" Stretch="UniformToFill"></ImageBrush>
+                <ImageBrush ImageSource="Images/שליחה.png" Stretch="UniformToFill"></ImageBrush>
             </Button.Background>
         </Button>
         <Button HorizontalAlignment="Left" x:Name="chargingButton" Visibility="Collapsed" Content="" Style="{StaticResource myActionButton}"  Grid.Row="5" Grid.RowSpan="3" FontSize="15" Width="71" Click="charge" Grid.Column="2" Margin="67,36,0,18">
             <Button.Background>
-                <ImageBrush ImageSource="/טעינה.png" Stretch="UniformToFill"></ImageBrush>
+                <ImageBrush ImageSource="Images/טעינה.png" Stretch="UniformToFill"></ImageBrush>
             </Button.Background>
         </Button>
         <Button HorizontalAlignment="Left" x:Name="releaseButton" Visibility="Collapsed" Content="" Style="{StaticResource myActionButton}"  Grid.Row="5" Grid.RowSpan="3" FontSize="15" Width="71" Click="releaseMethod" Grid.Column="2" Margin="67,35,0,20">
             <Button.Background>
-                <ImageBrush ImageSource="/שחרור.png" Stretch="UniformToFill"></ImageBrush>
+                <ImageBrush ImageSource="Images/שחרור.png" Stretch="UniformToFill"></ImageBrush>
             </Button.Background>
         </Button>
         <Button HorizontalAlignment="Left" Margin="67,36,0,13" x:Name="suppltingButton" Visibility="Collapsed" Content="" Style="{StaticResource myActionButton}" Grid.Row="3" Grid.RowSpan="3" FontSize="15" Width="71" Click="supplyButton" Grid.Column="2">
             <Button.Background>
-                <ImageBrush ImageSource="/supply.jpg" Stretch="UniformToFill"></ImageBrush>
+                <ImageBrush ImageSource="Images/supply.jpg" Stretch="UniformToFill"></ImageBrush>
             </Button.Background>
         </Button>
         <Button HorizontalAlignment="Left" Margin="67,40,0,10" x:Name="pickButton" Visibility="Collapsed" Content="" Style="{StaticResource myActionButton}" Grid.Row="3" Grid.RowSpan="3" FontSize="15" Width="71" Click="pickingButton" Grid.Column="2">
             <Button.Background>
-                <ImageBrush ImageSource="/pick.png" Stretch="Uniform"></ImageBrush>
+                <ImageBrush ImageSource="Images/pick.png" Stretch="Uniform"></ImageBrush>
             </Button.Background>
         </Button>
     </Grid>

@@ -39,7 +39,7 @@ namespace Dal
                 if (File.Exists(filePath))
                 {
                     List<T> list;
-                    XmlSerializer x = new XmlSerializer(typeof(List<T>));
+                    XmlSerializer x = new XmlSerializer(typeof(List<T>),new XmlRootAttribute("Array"));
                     FileStream file = new FileStream(filePath, FileMode.Open);
                     list = (List<T>)x.Deserialize(file);
                     file.Close();
@@ -58,7 +58,7 @@ namespace Dal
             try
             {
                 FileStream file = new FileStream(filePath, FileMode.Create);
-                XmlSerializer x = new XmlSerializer(list.GetType());
+                XmlSerializer x = new XmlSerializer(list.GetType(), new XmlRootAttribute("Array"));
                 x.Serialize(file, list);
                 file.Close();
             }

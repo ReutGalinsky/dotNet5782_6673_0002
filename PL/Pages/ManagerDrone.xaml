@@ -40,7 +40,7 @@
  Text="{Binding Path=MaxWeight}" />
                 <Button Grid.Column="6" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteDrone">
                     <Button.Content>
-                        <Image Source="/Pages/מחיקה.jpg" Width="25" Height="25"></Image>
+                        <Image Source="Images/מחיקה.jpg" Width="25" Height="25"></Image>
                     </Button.Content>
                 </Button>
             </Grid>
@@ -55,7 +55,7 @@
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/פלוס.jpg" />
+                            <ImageBrush ImageSource="Images/פלוס.jpg" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>
@@ -113,7 +113,7 @@
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteDrone">
                                     <Button.Content>
-                                        <Image Source="/Pages/מחיקה.jpg" Width="25" Height="25"></Image>
+                                        <Image Source="Images/מחיקה.jpg" Width="25" Height="25"></Image>
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>
@@ -121,14 +121,21 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+
         </ListView>
         <TextBlock HorizontalAlignment="Left" Margin="468,76,0,0" Text="סינון על פי משקל חבילה מירבי" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
         <TextBlock HorizontalAlignment="Left" Margin="479,33,0,0" Text="סינון על פי מצב רחפן" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
-
-        <ComboBox x:Name="State" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="468,49,0,0" VerticalAlignment="Top" Width="144" Height="27" SelectionChanged="groupState" FontFamily="Tahoma">
-            <ComboBoxItem Content="Show All"></ComboBoxItem>
-            <ComboBoxItem Content="Show By State"></ComboBoxItem>
-        </ComboBox>
         <ComboBox x:Name="Weight" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="468,91,0,0" VerticalAlignment="Top" Width="144" Height="25" SelectionChanged="ComboBox"/>
         <ListView x:Name="AvilibleList" ItemsSource="{Binding}" Visibility="Collapsed" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="32,30,184,298" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}"/>
         <ListView x:Name="MaintanceList" ItemsSource="{Binding}" Visibility="Collapsed" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="32,166,184,166" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}"/>
@@ -136,6 +143,7 @@
         <Label x:Name="availibleLabel" Visibility="Collapsed" Content="Availible:" HorizontalAlignment="Left" Margin="127,4,0,0" VerticalAlignment="Top"/>
         <Label x:Name="maintanceLabel" Visibility="Collapsed" Content="Maintance:" HorizontalAlignment="Left" Margin="127,134,0,0" VerticalAlignment="Top"/>
         <Label x:Name="shipLabel" Content="Shipping:" Visibility="Collapsed" HorizontalAlignment="Left" Margin="127,272,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="StateCheck" Content="Show By State" HorizontalAlignment="Left" Margin="493,146,0,0" VerticalAlignment="Top" Checked="checkedState" Unchecked="uncheckedState"/>
 
     </Grid>
 </Page>

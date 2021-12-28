@@ -176,6 +176,21 @@ namespace PL.Pages
         {
             
         }
+
+        private void checkedState(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("State");
+            view.GroupDescriptions.Add(groupDescription);
+
+        }
+
+        private void uncheckedState(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);
+            view.GroupDescriptions.Clear();
+
+        }
     }
 }
 

@@ -51,7 +51,7 @@
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/פלוס.jpg" />
+                            <ImageBrush ImageSource="Images/פלוס.jpg" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>
@@ -93,7 +93,7 @@
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteCustomer">
                                     <Button.Content>
-                                        <Image Source="/Pages/מחיקה.jpg" VerticalAlignment="Center" Width="25" Height="25"></Image>
+                                        <Image Source="Images/מחיקה.jpg" VerticalAlignment="Center" Width="25" Height="25"></Image>
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>

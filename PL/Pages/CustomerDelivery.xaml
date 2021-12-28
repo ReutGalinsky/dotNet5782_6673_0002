@@ -37,7 +37,7 @@
  Text="{Binding Path=ParcelState}" />
                 <Button Grid.Column="6" Height="40" Width="40" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel">
                     <Button.Content>
-                        <Image Source="/Pages/מחיקה.jpg" Width="40" Height="40"></Image>
+                        <Image Source="Images/מחיקה.jpg" Width="40" Height="40"></Image>
                     </Button.Content>
                 </Button>
             </Grid>
@@ -96,7 +96,7 @@
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel">
                                     <Button.Content>
-                                        <Image Source="/Pages/מחיקה.jpg" VerticalAlignment="Center" Width="25" Height="25"></Image>
+                                        <Image Source="Images/מחיקה.jpg" VerticalAlignment="Center" Width="25" Height="25"></Image>
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>

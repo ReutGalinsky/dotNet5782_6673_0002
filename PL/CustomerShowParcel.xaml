@@ -10,7 +10,7 @@
         Title="CustomerShowParcel" Height="400" Width="500">
     <Grid Height="400" VerticalAlignment="Top">
         <Grid.Background>
-            <ImageBrush ImageSource="/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
+            <ImageBrush ImageSource="Images/רקע פרוקיט.jpg" Opacity="0.78"></ImageBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
@@ -37,7 +37,7 @@
                 <ControlTemplate TargetType="Button">
                     <Ellipse Stroke="#FF15486C" StrokeThickness="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/סגירה.png" />
+                            <ImageBrush ImageSource="Images/סגירה.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <ControlTemplate.Triggers>

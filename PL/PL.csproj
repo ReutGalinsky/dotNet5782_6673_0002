@@ -18,8 +18,9 @@
 	</ItemGroup>
 	
   <ItemGroup>
-    <None Remove="2מפתח.jpg" />
     <None Remove="customer.png" />
+    <None Remove="Images\logo.png.png" />
+    <None Remove="Images\אספקה.png" />
     <None Remove="key.jpg" />
     <None Remove="logo.png" />
     <None Remove="logo.png.png" />
@@ -30,22 +31,14 @@
     <None Remove="Pages\Images\Closing.png" />
     <None Remove="Pages\Images\customer.png" />
     <None Remove="Pages\Images\manager.png" />
-    <None Remove="Pages\Images\התחבר.png" />
-    <None Remove="Pages\Images\חבילה אחת.jpg" />
     <None Remove="Pages\Images\לוגו רחפן.png" />
     <None Remove="Pages\Images\לקוח.png" />
     <None Remove="Pages\Images\מינוס.png" />
-    <None Remove="Pages\Images\מנהל.png" />
     <None Remove="Pages\Images\מנהל2.png" />
-    <None Remove="Pages\Images\מפתח.jpg" />
     <None Remove="Pages\Images\עגלה.jpg" />
     <None Remove="Pages\Images\פלוס.jpg" />
-    <None Remove="Pages\Images\קריאה.jpg" />
-    <None Remove="Pages\Images\רחפן יחיד.png" />
     <None Remove="Pages\Images\רחפן עגול.png" />
     <None Remove="Pages\Images\רקע2.png" />
-    <None Remove="Pages\Images\תחנה.png" />
-    <None Remove="Pages\Images\תחנת בסיס.png" />
     <None Remove="Pages\הוסף.png" />
     <None Remove="Pages\התחבר.png" />
     <None Remove="Pages\חבילה.jpg" />
@@ -93,23 +86,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="2מפתח.jpg" />
     <Resource Include="customer.png" />
-    <Resource Include="key.jpg" />
-    <Resource Include="logo.png" />
-    <Resource Include="logo.png.png" />
-    <Resource Include="manager.png" />
-    <Resource Include="new.png" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\logo.png.png" />
+    <Resource Include="Images\manager.png" />
     <Resource Include="Pages\Images\Customer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Pages\Images\Manager.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Pages\Images\התחבר.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Pages\Images\חבילה אחת.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Pages\Images\Backing.png">
@@ -118,36 +102,18 @@
     <Resource Include="Pages\Images\לוגו רחפן.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Pages\Images\לקוח.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Pages\Images\לקוח.png" />
     <Resource Include="Pages\Images\מינוס.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Pages\Images\מנהל.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Pages\Images\מנהל2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Pages\Images\מפתח.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Pages\Images\מנהל2.png" />
     <Resource Include="Pages\Images\Closing.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Pages\Images\עגלה.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Pages\Images\פלוס.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Pages\Images\קריאה.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Pages\Images\רחפן יחיד.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Pages\Images\פלוס.jpg" />
     <Resource Include="Pages\Images\רחפן עגול.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -157,49 +123,37 @@
     <Resource Include="Pages\Images\רקע2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Pages\Images\תחנה.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Pages\Images\תחנת בסיס.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Pages\הוסף.png" />
-    <Resource Include="Pages\התחבר.png" />
-    <Resource Include="Pages\חבילה.jpg" />
-    <Resource Include="Pages\לקוח.png" />
-    <Resource Include="Pages\מחיקה.jpg" />
-    <Resource Include="Pages\מנהל2.png" />
-    <Resource Include="Pages\מפתח.jpg" />
-    <Resource Include="Pages\עפרון.png" />
-    <Resource Include="Pages\פלוס.jpg" />
-    <Resource Include="pick.png" />
-    <Resource Include="supply.jpg" />
+    <Resource Include="Pages\Images\הוסף.png" />
+    <Resource Include="Pages\Images\חבילה.jpg" />
+    <Resource Include="Pages\Images\מחיקה.jpg" />
+    <Resource Include="Pages\Images\עפרון.png" />
+    <Resource Include="Images\pick.png" />
+    <Resource Include="Images\supply.jpg" />
     <Resource Include="Images\אספקה.png" />
-    <Resource Include="אספקה.png" />
-    <Resource Include="חבילה אחת.jpg" />
-    <Resource Include="חזור.jpg" />
-    <Resource Include="טעינה.png" />
-    <Resource Include="יציאה.png" />
-    <Resource Include="לוגו רחפן.png" />
-    <Resource Include="לקוח.png" />
-    <Resource Include="מינוס.png" />
-    <Resource Include="מנהל.png" />
-    <Resource Include="מנהל2.png" />
-    <Resource Include="סגירה.png" />
-    <Resource Include="עגלה.jpg" />
-    <Resource Include="פלוס.jpg" />
-    <Resource Include="פעולות.png" />
-    <Resource Include="קריאה.jpg" />
-    <Resource Include="רחפן יחיד.png" />
-    <Resource Include="רחפן עגול.png" />
-    <Resource Include="רקע פרוקיט.jpg" />
-    <Resource Include="רקע2.png" />
-    <Resource Include="שחרור.png" />
-    <Resource Include="שליחה.png" />
-    <Resource Include="תחנה.png" />
-    <Resource Include="תחנת בסיס.png" />
-    <Resource Include="תמונה2.png" />
-    <Resource Include="תמונה5.png" />
+    <Resource Include="Images\חבילה אחת.jpg" />
+    <Resource Include="Images\חזור.jpg" />
+    <Resource Include="Images\טעינה.png" />
+    <Resource Include="Images\יציאה.png" />
+    <Resource Include="Images\לוגו רחפן.png" />
+    <Resource Include="Images\לקוח.png" />
+    <Resource Include="Images\מינוס.png" />
+    <Resource Include="Images\מנהל.png" />
+    <Resource Include="Images\מנהל2.png" />
+    <Resource Include="Images\סגירה.png" />
+    <Resource Include="Images\עגלה.jpg" />
+    <Resource Include="Images\פלוס.jpg" />
+    <Resource Include="Images\פעולות.png" />
+    <Resource Include="Images\קריאה.jpg" />
+    <Resource Include="Images\רחפן יחיד.png" />
+    <Resource Include="Images\רחפן עגול.png" />
+    <Resource Include="Images\רקע פרוקיט.jpg" />
+    <Resource Include="Images\רקע2.png" />
+    <Resource Include="Images\שחרור.png" />
+    <Resource Include="Images\שליחה.png" />
+    <Resource Include="Images\תחנה.png" />
+    <Resource Include="Images\תחנת בסיס.png" />
+    <Resource Include="Images\תמונה2.png" />
+    <Resource Include="Images\תמונה5.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -212,12 +166,6 @@
     <Compile Update="ManegerParcel.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Pages\Images\עין.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

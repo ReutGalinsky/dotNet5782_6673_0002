@@ -275,7 +275,7 @@ namespace Dal
             parcel.IdNumber = runningNumber.Value;
 
             var listParcels = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath);
-            if (listParcels.FirstOrDefault(d => d.IdNumber == parcel.IdNumber).IdNumber == null)
+            if (listParcels.FirstOrDefault(d => d.IdNumber == parcel.IdNumber).IdNumber != null)
             {
                 throw new ExistingException($"the parcel with the id:{parcel.IdNumber} is already exist");
             }
@@ -389,7 +389,7 @@ namespace Dal
         public void AddBaseStation(BaseStation baseStation)
         {
             var listBaseStation = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
-            if (listBaseStation.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber == null)
+            if (listBaseStation.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber != null)
             {
                 throw new ExistingException($"the base station with the id:{baseStation.IdNumber} is exist");
             }
@@ -649,7 +649,7 @@ namespace Dal
             var user = XmlMethods.LoadListFromXMLSerializer<User>(userPath).FirstOrDefault(x => x.UserName == userName);
             if (user.UserName == null)
                 throw new NotExistingException($"the user with the user-name:{userName} is not exist");
-            return user;
+             return user;
             //User user = DataSource.Users.FirstOrDefault(d => d.UserName == userName);
             //if (user.UserName == null)
             //    throw new NotExistingException($"the customer with the id:{user.UserName} is not exist");

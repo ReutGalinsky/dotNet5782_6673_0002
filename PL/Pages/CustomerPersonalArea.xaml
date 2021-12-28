@@ -22,7 +22,7 @@
         <Button x:Name="updatingButton" Content="עדכן" Style="{StaticResource myButton}" Visibility="Collapsed" HorizontalAlignment="Left" Margin="365,250,0,0" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click"/>
         <Button x:Name="edit" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="597,66,0,0" VerticalAlignment="Top" Height="72" Width="69" Click="edit_Click">
             <Button.Background>
-                <ImageBrush ImageSource="/Pages/עפרון.png"></ImageBrush>
+                <ImageBrush ImageSource="Images/עפרון.png"></ImageBrush>
             </Button.Background>
         </Button>
 
