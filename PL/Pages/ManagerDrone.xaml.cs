@@ -23,7 +23,7 @@ namespace PL.Pages
             AvilibleList.DataContext = availibleLists;
             MaintanceList.DataContext = maintanceLists;
             ShippingList.DataContext = shipLists;
-            State.SelectedItem=State.Items[0];
+            //State.SelectedItem=State.Items[0];
             var weights = BO.WeightCategories.GetNames(typeof(BO.WeightCategories)).ToList();
             weights.Insert(0, "All");
             Weight.DataContext = weights;
@@ -41,7 +41,7 @@ namespace PL.Pages
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             Weight.SelectedItem = "All";
-            State.SelectedItem=State.Items[0];
+            //State.SelectedItem=State.Items[0];
             reset();
         }
         private void addingDrone_Click(object sender, RoutedEventArgs e)
@@ -52,23 +52,23 @@ namespace PL.Pages
         }
         private void ComboBox(object sender, SelectionChangedEventArgs e)
         {
-            if(Weight.SelectedItem==null||State.SelectedItem==null)
-            {
-                return;
-            }
-            object item;
-            Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
-            listDrones.Clear();
-            switch(item)
-            {
-                case null:
-                    update(sender, e);
-                    break;
-                default:
-                    foreach (var obj in bl.GetAllDronesBy(x => x.MaxWeight == (BO.WeightCategories)item))
-                        listDrones.Add(obj);
-                    break;
-            }
+            //if(Weight.SelectedItem==null||State.SelectedItem==null)
+            //{
+            //    return;
+            //}
+            //object item;
+            //Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
+            //listDrones.Clear();
+            //switch(item)
+            //{
+            //    case null:
+            //        update(sender, e);
+            //        break;
+            //    default:
+            //        foreach (var obj in bl.GetAllDronesBy(x => x.MaxWeight == (BO.WeightCategories)item))
+            //            listDrones.Add(obj);
+            //        break;
+            //}
            
         }
         private void selectionChange(object sender, SelectionChangedEventArgs e)
@@ -106,47 +106,47 @@ namespace PL.Pages
         }
         private void groupState(object sender, SelectionChangedEventArgs e)
         {
-            if (Weight.SelectedItem == null || State.SelectedItem == null)
-            {
-                return;
-            }
-            var comboBoxItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
-            if (comboBoxItem.Content.ToString()!="Show All")
-            {
-                Weight.Visibility = Visibility.Collapsed;
-                DroneListView.Visibility = Visibility.Collapsed;
-                AvilibleList.Visibility = Visibility.Visible;
-                MaintanceList.Visibility = Visibility.Visible;
-                ShippingList.Visibility = Visibility.Visible;
-                availibleLabel.Visibility = Visibility.Visible;
-                maintanceLabel.Visibility = Visibility.Visible;
-                shipLabel.Visibility = Visibility.Visible;
+            //if (Weight.SelectedItem == null || State.SelectedItem == null)
+            //{
+            //    return;
+            //}
+            //var comboBoxItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
+            //if (comboBoxItem.Content.ToString()!="Show All")
+            //{
+            //    Weight.Visibility = Visibility.Collapsed;
+            //    DroneListView.Visibility = Visibility.Collapsed;
+            //    AvilibleList.Visibility = Visibility.Visible;
+            //    MaintanceList.Visibility = Visibility.Visible;
+            //    ShippingList.Visibility = Visibility.Visible;
+            //    availibleLabel.Visibility = Visibility.Visible;
+            //    maintanceLabel.Visibility = Visibility.Visible;
+            //    shipLabel.Visibility = Visibility.Visible;
 
-                var group = from item in bl.GetDrones()
-                            group item by item.State;
-                foreach (var item in group)
-                {
-                    switch (item.Key)
-                    {
-                        case BO.DroneState.Available:
-                            foreach (var g in item)
-                                availibleLists.Add(g);
-                            break;
-                        case BO.DroneState.maintaince:
-                            foreach (var g in item)
-                                maintanceLists.Add(g);
-                            break;
-                        case BO.DroneState.shipping:
-                            foreach (var g in item)
-                                shipLists.Add(g);
-                            break;
-                    }
-                }
-            }
-            else
-            {
-                reset();
-            }
+            //    var group = from item in bl.GetDrones()
+            //                group item by item.State;
+            //    foreach (var item in group)
+            //    {
+            //        switch (item.Key)
+            //        {
+            //            case BO.DroneState.Available:
+            //                foreach (var g in item)
+            //                    availibleLists.Add(g);
+            //                break;
+            //            case BO.DroneState.maintaince:
+            //                foreach (var g in item)
+            //                    maintanceLists.Add(g);
+            //                break;
+            //            case BO.DroneState.shipping:
+            //                foreach (var g in item)
+            //                    shipLists.Add(g);
+            //                break;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    reset();
+            //}
         }
         private void reset()
         {
