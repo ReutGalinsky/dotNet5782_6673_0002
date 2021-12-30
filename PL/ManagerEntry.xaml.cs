@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.ComponentModel;
 
-
 namespace PL
 {
     /// <summary>
@@ -73,26 +72,35 @@ namespace PL
 
         }
 
-      
+
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
         private void Check_Click(object sender, RoutedEventArgs e)
         {
-        
-             
+
+
 
         }
 
-        private void focusPassword(object sender, RoutedEventArgs e)
+        private void Forget_Click(object sender, RoutedEventArgs e)
         {
+            ForgetPassword forgetPassword = new ForgetPassword(bl);
+            forgetPassword.Show();
+            this.Close();
+        }
 
+        private void Account_Click(object sender, RoutedEventArgs e)
+        {
+            Account account = new Account(bl);
+            account.Show();
+            this.Close();
         }
 
         private void showPassword(object sender, RoutedEventArgs e)
         {
-            
+
             textPassword.Visibility = Visibility.Collapsed;
             password.Visibility = Visibility.Visible;
             password.Password = textPassword.Text;
@@ -116,3 +124,4 @@ namespace PL
         }
     }
 }
+

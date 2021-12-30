@@ -15,39 +15,37 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for CustomerEntry.xaml
+    /// Interaction logic for Account.xaml
     /// </summary>
-    public partial class CustomerEntry : Window
+    public partial class Account : Window
     {
-        public CustomerEntry(BLApi.IBL b)
+        public Account(BLApi.IBL b)
         {
             InitializeComponent();
             bl = b;
-
         }
         private BLApi.IBL bl;
-
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                check.IsChecked = false;
                 var User = bl.GetUser(user.Text);
-                if (User.UserPassword == password.Password && User.isManager == false)
+                if (User.UserPassword == password.Password && User.isManager == true)
                 {
-                    CustomerPage pagecustomer = new CustomerPage(bl, User.UserName);
-                    pagecustomer.Show();
+                    ManagerPage pageManager = new ManagerPage(bl);
+                    pageManager.Show();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show($"there is no customer with the id of {User.UserName}");
+                    MessageBox.Show($"there is no manager with the id of {User.UserName}");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"there is no customer with the id of {user.Text}");
+                MessageBox.Show($"there is no manager with the id of {user.Text}");
             }
-
         }
         private void move(object sender, MouseButtonEventArgs e)
         {

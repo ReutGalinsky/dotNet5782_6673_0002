@@ -2,6 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
@@ -10,95 +12,29 @@
         Background="Transparent"
         AllowsTransparency="True"
         Title="TypeOfUser" Height="500" Width="900">
-    <Border CornerRadius="20">
-        <Grid Background="AliceBlue">
-        <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition  Width="100"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid Background="SteelBlue" Grid.ColumnSpan="4" MouseDown="Grid_MouseDown"/>
-            <StackPanel Orientation="Horizontal" Height="35" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0">
-                <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" Margin="200,0,0,0" Source="Images/logo.png.png" RenderTransformOrigin="0.648,-1.857" />
-                <TextBlock Text="New Meaning For Delivery." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="20" Margin="5,0,0,0" FontWeight="Medium" FontFamily="Fonts/#regular"/>
+ 
+        <Border CornerRadius="20">
+            <Grid Background="AliceBlue">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition  Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Background="SteelBlue" Grid.ColumnSpan="4" MouseDown="Grid_MouseDown"/>
+                <StackPanel Orientation="Horizontal" Height="35" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0">
+                    <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" Margin="200,0,0,0" Source="Images/logo.png.png" RenderTransformOrigin="0.648,-1.857" />
+                    <TextBlock Text="New Meaning For Delivery." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="20" Margin="5,0,0,0" FontWeight="Medium" FontFamily="Fonts/#regular"/>
 
-            </StackPanel>
-            <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="3">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
-                        <Setter Property="Background" Value="Gray"/>
-                        <Setter Property="Cursor" Value="Hand"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Black"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="75" Height="15" CornerRadius="8" Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
-            <Button Content="Back" Click="Back_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="0">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
-                    <Setter Property="Background" Value="Gray"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="Black"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border Width="75" Height="15" CornerRadius="8" Background="{TemplateBinding Background}">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-      
-
-                <StackPanel Orientation="Horizontal" Height="80" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3">
-            <Button Content="I'm A Customer" Click="Customer_Click" Foreground="White" FontSize="28" FontWeight="Medium" Width="200" Margin="50,0,0,0">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
-                        <Setter Property="Background" Value="Gray"/>
-                        <Setter Property="Cursor" Value="Hand"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="black"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="200" Height="50" CornerRadius="12" Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-                <Button Content="I'm A Manager" Click="Manager_Click" Foreground="White" FontSize="28" FontWeight="Medium" Width="200" Margin="30,0,0,0">
+                </StackPanel>
+                <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="3">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -106,44 +42,115 @@
                             <Setter Property="Cursor" Value="Hand"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="black"/>
+                                    <Setter Property="Background" Value="Black"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="200" Height="50" CornerRadius="12" Background="{TemplateBinding Background}">
+                            <Border Width="75" Height="15" CornerRadius="8" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-            </StackPanel>
-            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="460,-455,-610,85" Panel.ZIndex="-1">
-                <Grid.RenderTransform>
-                    <RotateTransform Angle="50"/>
-                </Grid.RenderTransform>
-                <StackPanel Orientation="Horizontal" Margin="-350,250,-255,-250">
-                    <StackPanel>
-                        <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,150,0" CornerRadius="20"/>
-                        <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,150,0" CornerRadius="20"/>
-                        <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,150,0" CornerRadius="20"/>
-                        <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,150,0" CornerRadius="20"/>
-                    </StackPanel>
-                    <StackPanel>
-                        <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,150,0" CornerRadius="20"/>
-                        <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,150,0" CornerRadius="20"/>
-                        <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,150,0" CornerRadius="20"/>
-                        <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,150,0" CornerRadius="20"/>
-                    </StackPanel>
+
+                <Button Content="Back" Click="Back_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                            <Setter Property="Background" Value="Gray"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="75" Height="15" CornerRadius="8" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <TextBlock Text="Welcome To Deli-Drone" Margin="54,61,0,106" FontWeight="Light" FontFamily="/Fonts/regular" HorizontalAlignment="Left" FontSize="50" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+                <iconPacks:PackIconMaterial Kind="Information" Foreground="Black" Opacity="0.5" Width="30" Height="30" Grid.Row="2" Grid.Column="1" Margin="130,60,0,0" />
+                <iconPacks:PackIconMaterial Kind="PlayCircle" Foreground="Black" Opacity="0.5" Width="30" Height="30" Grid.Row="2" Grid.Column="1" Margin="170,60,0,0" />
+                <iconPacks:PackIconMaterial Kind="HeartCircle" Foreground="Black" Opacity="0.5" Width="30" Height="30" Grid.Row="2" Grid.Column="1" Margin="210,60,0,0" />
+                <TextBlock Text="Login:" FontWeight="Light" FontFamily="/Fonts/regular" HorizontalAlignment="Left" FontSize="50" Grid.Row="2" Grid.Column="1" Margin="122,88,0,82" Grid.RowSpan="2" Width="140"/>
+
+                <StackPanel Orientation="Horizontal" Height="80" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3">
+                    <Button Content="I'm A Customer" Click="Customer_Click" Foreground="White" FontSize="28" FontWeight="Medium" Width="200" Margin="50,0,0,0">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="220" Height="50" CornerRadius="12" Background="{TemplateBinding Background}" Margin="0,0,-33,0">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Content="I'm A Manager" Click="Manager_Click" Foreground="White" FontSize="28" FontWeight="Medium" Width="200" Margin="30,0,0,0">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="220" Height="50" CornerRadius="12" Background="{TemplateBinding Background}" Margin="0,0,-30,0">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </StackPanel>
+                <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="460,-455,-610,85" Panel.ZIndex="-1">
+                    <Grid.RenderTransform>
+                        <RotateTransform Angle="50"/>
+                    </Grid.RenderTransform>
+                    <StackPanel Orientation="Horizontal" Margin="-350,250,-255,-250">
+                        <StackPanel>
+                            <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,150,0" CornerRadius="20"/>
+                            <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,150,0" CornerRadius="20"/>
+                            <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,150,0" CornerRadius="20"/>
+                            <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,150,0" CornerRadius="20"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <Border Width="700" Height="35" Background="SteelBlue" Margin="0,15,150,0" CornerRadius="20"/>
+                            <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,150,0" CornerRadius="20"/>
+                            <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,150,0" CornerRadius="20"/>
+                            <Border Width="700" Height="35" Background="CadetBlue" Margin="150,15,150,0" CornerRadius="20"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </Grid>
 
             </Grid>
-           
-        </Grid>
-    </Border>
-</Window>
+        </Border>
+    </Window>
 
  
 
