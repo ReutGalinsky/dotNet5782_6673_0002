@@ -13,6 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using PL.Pages;
+using PL.MenuItems;
+using MaterialDesignThemes.Wpf;
+using System.Windows.Controls;
+
 namespace PL
 {
     /// <summary>
@@ -27,7 +31,8 @@ namespace PL
             id = i;
             pageDelivery = new CustomerDelivery(bl,id);
             pageParcel = new CustomerParcel(bl, id);
-            pagePersonal = new CustomerPersonalArea(bl, id);
+            pagePersonal = new CustomerPersonalArea(bl, id);           
+
         }
 
         BLApi.IBL bl;

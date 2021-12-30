@@ -74,13 +74,22 @@
                         <materialDesign:PackIcon Kind="Menu" Foreground="Black" Width="25" Height="25" VerticalAlignment="Center"/>
                     </Button>
                 </Grid>
+
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="463" Background="SkyBlue">
-                    <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,30,0,0">
-                        <StackPanel Orientation="Horizontal" Width="173">
-                            <materialDesign:PackIcon Kind="TruckFast" VerticalAlignment="Center" Height="35" Width="51"/>
-                            <Button x:Name="ParcelInManager" Content="My Deliveries"  VerticalAlignment="Center" FontWeight="Medium" Background="{x:Null}" BorderBrush="Transparent" FontSize="15" Click="ButtonParcel" Height="49" Width="140" />
-                        </StackPanel>
+                    <ListViewItem x:Name="line1" Foreground="Black" Width="178" Height="91" Margin="0,30,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26*"/>
+                                <ColumnDefinition Width="16*"/>
+                                <ColumnDefinition Width="131*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Width="173" Grid.ColumnSpan="3">
+                                <materialDesign:PackIcon Kind="TruckFast" VerticalAlignment="Center" Height="35" Width="51"/>
+                                <Button x:Name="ParcelInManager" Content="My Deliveries"  VerticalAlignment="Center" FontWeight="Medium" Background="{x:Null}" BorderBrush="Transparent" FontSize="15" Click="ButtonParcel" Height="49" Width="140" />
+                            </StackPanel>
+                        </Grid>
                     </ListViewItem>
+
                     <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,30,0,0">
                         <StackPanel Orientation="Horizontal" >
                             <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Height="35" Width="51"/>
