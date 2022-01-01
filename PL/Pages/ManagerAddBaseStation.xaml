@@ -39,7 +39,7 @@
             <TextBlock HorizontalAlignment="Center"  Text="Latitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
             <TextBox Background="{x:Null}" x:Name="Latitude" HorizontalAlignment="Center" VerticalAlignment="Center" Text="" Width="90" Height="30" Grid.Row="5" Grid.Column="1" TextChanged="Focus" />
             <Button x:Name="ADD" IsEnabled="False" Content="ADD" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Add_Click" Grid.Row="6" Grid.Column="1"/>
-            <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="7" Grid.Column="1"/>
+            <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Grid.Row="7" Grid.Column="1"/>
         </Grid>
 
 </Page>

@@ -38,21 +38,6 @@ namespace PL.Pages
             private BO.DroneToList drone = new BO.DroneToList();
             public event EventHandler updateList;
 
-            private void Add_Click(object sender, RoutedEventArgs e)//event of the adding button
-            {
-                try
-                {
-                    bl.AddDrone(drone, Station.Text.ToString());
-                    updateList(sender, e);
-                ManagerDrone managerDrone = new ManagerDrone(bl);
-                Manager.NavigationService.Navigate(managerDrone);
-            }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-
             private void Close_Click(object sender, RoutedEventArgs e)//event of the cancel button
             {
             updateList(sender, e);
@@ -97,13 +82,6 @@ namespace PL.Pages
                 TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
             }
 
-            private void move(object sender, MouseButtonEventArgs e)
-            {
-                if (e.ChangedButton == MouseButton.Left)
-                    this.DragMove();
-
-            }
-
             private void focus(object sender, TextChangedEventArgs e)
             {
                 if (drone.IdNumber == "" || drone.Model == "" || Station.Text == "")
@@ -118,6 +96,4 @@ namespace PL.Pages
     }
 
 
-}
-    }
-}
+

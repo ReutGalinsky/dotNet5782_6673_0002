@@ -80,16 +80,23 @@ namespace PL
             pageParcel.update(sender, e);
             Manager.NavigationService.Navigate(pageParcel);
         }
+        private void closeSubPages()
+        {
+            AddDrone.Visibility = Visibility.Collapsed;
+            AddBaseStation.Visibility = Visibility.Collapsed;
+            AddCustomer.Visibility = Visibility.Collapsed;
+        }
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-            if (ButtonCloseMenu.Visibility == Visibility.Visible)
-            {
+            
                 var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
                 switch (item.Tag)
                 {
                     case "All drones":
                         pageDrone.update(sender, e);
                         Manager.NavigationService.Navigate(pageDrone);
+                        closeSubPages();
+                        AddDrone.Visibility = Visibility.Visible;
                         break;
                     case "Add new drone":
                         ManagerAddDrone addDrone=new ManagerAddDrone(bl);
@@ -97,8 +104,10 @@ namespace PL
                         Manager.NavigationService.Navigate(addDrone);
                         break;
                     case "All customers":
-                        pageDrone.update(sender, e);
-                        Manager.NavigationService.Navigate(pageDrone);
+                        pageCustomer.update(sender, e);
+                        Manager.NavigationService.Navigate(pageCustomer);
+                        closeSubPages();
+                        AddCustomer.Visibility = Visibility.Visible;
                         break;
                     case "Add new customer":
                         ManagerAddCustomer addCustomer = new ManagerAddCustomer(bl);
@@ -106,8 +115,10 @@ namespace PL
                         Manager.NavigationService.Navigate(addCustomer);
                         break;
                     case "All base stations":
-                        pageDrone.update(sender, e);
-                        Manager.NavigationService.Navigate(pageDrone);
+                        pageBaseStation.update(sender, e);
+                        Manager.NavigationService.Navigate(pageBaseStation);
+                        closeSubPages();
+                        AddBaseStation.Visibility = Visibility.Visible;
                         break;
                     case "Add new base station":
                         ManagerAddBaseStation addBaseStation = new ManagerAddBaseStation(bl);
@@ -115,11 +126,12 @@ namespace PL
                         Manager.NavigationService.Navigate(addBaseStation);
                         break;
                     case "All parcels":
-                        pageBaseStation.update(sender, e);
-                        Manager.NavigationService.Navigate(pageBaseStation);
+                        pageParcel.update(sender, e);
+                        Manager.NavigationService.Navigate(pageParcel);
+                        closeSubPages();
                         break;
                 }
-            }
+            
         }
     }
 }

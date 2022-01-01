@@ -27,14 +27,6 @@ namespace PL.Pages
             bl = b;
             id = i;
             parcels = new ObservableCollection<BO.ParcelOfList>();
-            var states = BO.ParcelState.GetNames(typeof(BO.ParcelState)).ToList();
-            states.Insert(0, "All");
-            State.ItemsSource = states;
-            State.SelectedItem = "All";
-            var weights = BO.WeightCategories.GetNames(typeof(BO.WeightCategories)).ToList();
-            weights.Insert(0, "All");
-            Weight.ItemsSource = weights;
-            Weight.SelectedItem = "All";
             foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the listView
                 parcels.Add(s);
             Delivery.DataContext = parcels;
@@ -61,18 +53,9 @@ namespace PL.Pages
         }
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
-            Weight.SelectedItem = "All";
-            State.SelectedItem = "All";
             parcels.Clear();
             foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the listView
                 parcels.Add(s);
-        }
-        private void addParcel(object sender, RoutedEventArgs e)
-        {
-            addParcel addWindow = new addParcel(bl, id);
-            addWindow.updateList += updated;
-            addWindow.ShowDialog();
-
         }
         private void deleteParcel(object sender, RoutedEventArgs e)
         {
@@ -94,38 +77,28 @@ namespace PL.Pages
                 }
             }
         }
-        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-            if (Weight.SelectedItem == null || State.SelectedItem == null)
-            {
-                return;
-            }
-            object item;
-            var b = Weight.SelectedItem;
-            Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
-            object check;
-            Enum.TryParse(typeof(BO.ParcelState), State.SelectedItem.ToString(), out check);
-            parcels.Clear();
-            IEnumerable<BO.ParcelOfList> list;
-            list = item switch
-            {
-                null => check switch
-                {
-                    null => bl.GetAllParcelsBy(x => x.Geter == id),
-                    _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check && x.Geter == id),
-                },
-                _ => check switch
-                {
-                    null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.Geter == id),
-                    _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check && x.Geter == id),
-                },
-            };
-            foreach (var obj in list)
-                parcels.Add(obj);
+        private void WeightCheck(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(Delivery.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Weight");
+            view.GroupDescriptions.Add(groupDescription);
 
         }
 
+        private void unCheck(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(Delivery.ItemsSource);
+            view.GroupDescriptions.Clear();
+
+        }
+        private void StateCheck(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(Delivery.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ParcelState");
+            view.GroupDescriptions.Add(groupDescription);
+
+        }
     }
 
 

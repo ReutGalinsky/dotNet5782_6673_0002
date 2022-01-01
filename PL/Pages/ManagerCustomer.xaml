@@ -44,24 +44,6 @@
         </DataTemplate>
     </Page.Resources>-->
     <Grid>
-
-        <Button Background="{x:Null}" Height="88" VerticalAlignment="Top"
-                    Margin="503,200,110,0" Click="addButton">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="Images/פלוס.jpg" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
         <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Margin="10,69,339,69" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.View>
                 <GridView>
@@ -103,12 +85,12 @@
             </ListView.View>
         </ListView>
 
-        <ComboBox x:Name="Location" HorizontalAlignment="Left" Margin="518,103,0,0" VerticalAlignment="Top" Width="144" Height="27" SelectionChanged="Location_SelectionChanged">
+        <ComboBox x:Name="Location" HorizontalAlignment="Left" Margin="474,117,0,0" VerticalAlignment="Top" Width="144" Height="27" >
             <ComboBoxItem Content="All"></ComboBoxItem>
             <ComboBoxItem Content="Parcels on way"></ComboBoxItem>
             <ComboBoxItem Content="No parcels on way"></ComboBoxItem>
         </ComboBox>
-        <TextBlock HorizontalAlignment="Left" Margin="518,87,0,0" Text="סינון על פי חבילות בדרך" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
+        <TextBlock HorizontalAlignment="Left" Margin="491,96,0,0" Text="סינון על פי חבילות בדרך" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
         <RadioButton x:Name="id" Content="מיון לפי תז" GroupName="key1" HorizontalAlignment="Left" Margin="48,30,0,0" VerticalAlignment="Top" Checked="idCheck"/>
         <RadioButton x:Name="name" Content="מיון לפי שם " GroupName="key1" HorizontalAlignment="Left" Margin="165,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="80" Checked="nameCheck">
             <RadioButton.RenderTransform>

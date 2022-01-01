@@ -26,14 +26,6 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             ParcelListView.DataContext = listParcels;
-            var states = BO.ParcelState.GetNames(typeof(BO.ParcelState)).ToList();
-            states.Insert(0, "All");
-            State.ItemsSource = states;
-            //State.SelectedItem = "All";
-            var priority = BO.Priorities.GetNames(typeof(BO.Priorities)).ToList();
-            priority.Insert(0, "All");
-            //Priority.SelectedItem = "All";
-            Priority.ItemsSource = priority;
             //Date.SelectedItem = Date.Items[0];
             update += updated;
         }
@@ -52,37 +44,6 @@ namespace PL.Pages
             listParcels.Clear();
             foreach (var item in bl.GetParcels())
                 listParcels.Add(item);
-            Priority.SelectedItem = "All";
-            State.SelectedItem = "All";
-        }
-        private void ComboBoxChange(object sender, SelectionChangedEventArgs e)
-        {
-            if (Priority.SelectedItem == null || State.SelectedItem == null)
-            {
-                return;
-            }
-            object item;
-            Enum.TryParse(typeof(BO.Priorities), Priority.SelectedItem.ToString(), out item);
-            object check;
-            Enum.TryParse(typeof(BO.ParcelState), State.SelectedItem.ToString(), out check);
-            listParcels.Clear();
-            IEnumerable<BO.ParcelOfList> temp;
-            temp = item switch
-            {
-                null => check switch
-                {
-                    null => bl.GetParcels(),
-                    _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check),
-                },
-                _ => check switch
-                {
-                    null => bl.GetAllParcelsBy(x => x.Priority == (BO.Priorities)item),
-                    _ => bl.GetAllParcelsBy(x => x.Priority == (BO.Priorities)item && x.ParcelState == (BO.ParcelState)check),
-                },
-            };
-            foreach (var obj in temp)
-                listParcels.Add(obj);
-
         }
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
@@ -139,7 +100,21 @@ namespace PL.Pages
             view.GroupDescriptions.Add(groupDescription);
         }
 
+        private void GroupState(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ParcelState");
+            view.GroupDescriptions.Add(groupDescription);
 
+        }
+
+        private void GroupPriority(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Priority");
+            view.GroupDescriptions.Add(groupDescription);
+
+        }
     }
    
 }

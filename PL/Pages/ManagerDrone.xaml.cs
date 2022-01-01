@@ -20,60 +20,21 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             DroneListView.DataContext = listDrones;
-            AvilibleList.DataContext = availibleLists;
-            MaintanceList.DataContext = maintanceLists;
-            ShippingList.DataContext = shipLists;
-            var weights = BO.WeightCategories.GetNames(typeof(BO.WeightCategories)).ToList();
-            weights.Insert(0, "All");
-            Weight.DataContext = weights;
-            Weight.SelectedItem = "All";
             update += updated;
         }
         public EventHandler update;
         private BLApi.IBL bl;
         private BO.DroneToList selected;
         private ObservableCollection<BO.DroneToList> listDrones = new ObservableCollection<BO.DroneToList>();
-        private ObservableCollection<BO.DroneToList> availibleLists = new ObservableCollection<BO.DroneToList>();
-        private ObservableCollection<BO.DroneToList> maintanceLists = new ObservableCollection<BO.DroneToList>();
-        private ObservableCollection<BO.DroneToList> shipLists = new ObservableCollection<BO.DroneToList>();
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
-            Weight.SelectedItem = "All";
-            //State.SelectedItem=State.Items[0];
             reset();
         }
-        private void addingDrone_Click(object sender, RoutedEventArgs e)
-        {
-            AddDrone drone = new AddDrone(bl);
-            drone.updateList += updated;
-            drone.ShowDialog();
-        }
-        private void ComboBox(object sender, SelectionChangedEventArgs e)
-        {
-            //if(Weight.SelectedItem==null||State.SelectedItem==null)
-            //{
-            //    return;
-            //}
-            //object item;
-            //Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
-            //listDrones.Clear();
-            //switch(item)
-            //{
-            //    case null:
-            //        update(sender, e);
-            //        break;
-            //    default:
-            //        foreach (var obj in bl.GetAllDronesBy(x => x.MaxWeight == (BO.WeightCategories)item))
-            //            listDrones.Add(obj);
-            //        break;
-            //}
-           
-        }
+   
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
 
             selected = (BO.DroneToList)(sender as ListView).SelectedItem;
-                //selected = (BO.DroneToList)DroneListView.SelectedItem;
             
         }
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
@@ -102,64 +63,10 @@ namespace PL.Pages
                 }
             }
         }
-        private void groupState(object sender, SelectionChangedEventArgs e)
-        {
-            //if (Weight.SelectedItem == null || State.SelectedItem == null)
-            //{
-            //    return;
-            //}
-            //var comboBoxItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
-            //if (comboBoxItem.Content.ToString()!="Show All")
-            //{
-            //    Weight.Visibility = Visibility.Collapsed;
-            //    DroneListView.Visibility = Visibility.Collapsed;
-            //    AvilibleList.Visibility = Visibility.Visible;
-            //    MaintanceList.Visibility = Visibility.Visible;
-            //    ShippingList.Visibility = Visibility.Visible;
-            //    availibleLabel.Visibility = Visibility.Visible;
-            //    maintanceLabel.Visibility = Visibility.Visible;
-            //    shipLabel.Visibility = Visibility.Visible;
-
-            //    var group = from item in bl.GetDrones()
-            //                group item by item.State;
-            //    foreach (var item in group)
-            //    {
-            //        switch (item.Key)
-            //        {
-            //            case BO.DroneState.Available:
-            //                foreach (var g in item)
-            //                    availibleLists.Add(g);
-            //                break;
-            //            case BO.DroneState.maintaince:
-            //                foreach (var g in item)
-            //                    maintanceLists.Add(g);
-            //                break;
-            //            case BO.DroneState.shipping:
-            //                foreach (var g in item)
-            //                    shipLists.Add(g);
-            //                break;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    reset();
-            //}
-        }
         private void reset()
         {
-            Weight.Visibility = Visibility.Visible;
-            availibleLabel.Visibility = Visibility.Collapsed;
-            maintanceLabel.Visibility = Visibility.Collapsed;
-            shipLabel.Visibility = Visibility.Collapsed;
             DroneListView.Visibility = Visibility.Visible;
-            AvilibleList.Visibility = Visibility.Collapsed;
-            MaintanceList.Visibility = Visibility.Collapsed;
-            ShippingList.Visibility = Visibility.Collapsed;
             listDrones.Clear();
-            availibleLists.Clear();
-            maintanceLists.Clear();
-            shipLists.Clear();
             foreach (BO.DroneToList s in bl.GetDrones())//create the source for the liseView
                 listDrones.Add(s);
         }
@@ -187,6 +94,14 @@ namespace PL.Pages
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);
             view.GroupDescriptions.Clear();
+
+        }
+
+        private void WeightCheck(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("MaxWeight");
+            view.GroupDescriptions.Add(groupDescription);
 
         }
     }

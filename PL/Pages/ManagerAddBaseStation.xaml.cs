@@ -30,10 +30,6 @@ namespace PL.Pages
             private BLApi.IBL bl;
             private BO.BaseStation baseStation = new BO.BaseStation();
             public event EventHandler updateList;
-            private void Close_Click(object sender, RoutedEventArgs e)
-            {
-                
-            }
             private void Add_Click(object sender, RoutedEventArgs e)
             {
                 try
@@ -61,7 +57,6 @@ namespace PL.Pages
                     baseStation.Location.Longitude = help;
                     bl.AddBaseStation(baseStation);
                     updateList(sender, e);
-                    this.Close();
                 }
                 catch (Exception ex)//לטפל בחריגות
                 {
@@ -72,12 +67,7 @@ namespace PL.Pages
             {
                 Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
             }
-            private void move(object sender, MouseButtonEventArgs e)
-            {
-                if (e.ChangedButton == MouseButton.Left)
-                    this.DragMove();
-
-            }
+         
             private void Focus(object sender, TextChangedEventArgs e)
             {
 
@@ -93,4 +83,3 @@ namespace PL.Pages
 
 }
     }
-}

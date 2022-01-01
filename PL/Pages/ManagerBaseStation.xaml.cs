@@ -50,12 +50,6 @@ namespace PL.Pages
                 liststations.Add(item);
             }
         }
-        private void addBaseStation(object sender, RoutedEventArgs e)
-        {
-            AddBaseStation baseStation = new AddBaseStation(bl);
-            baseStation.updateList += updated;
-            baseStation.ShowDialog();
-        }
         private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
         {
             if (selected != null)

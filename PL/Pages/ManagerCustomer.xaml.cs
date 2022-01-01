@@ -51,26 +51,6 @@ namespace PL.Pages
                 selected = null;
             }
         }
-        private void Location_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var LocationItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
-            listCustomers.Clear();
-            switch (LocationItem.Content.ToString())
-            {
-                case "Parcels on way":
-                    foreach (var item in bl.GetAllCustomersBy(x => x.ParcelOnTheWay != 0 || x.ParcelGet != 0))
-                        listCustomers.Add(item);
-                    break;
-                case "No parcels on way":
-                    foreach (var item in bl.GetAllCustomersBy(x => x.ParcelOnTheWay == 0 && x.ParcelGet == 0))
-                        listCustomers.Add(item);
-                    break;
-                default:
-                    foreach (var item in bl.GetCustomers().OrderBy(x => x.Name))
-                        listCustomers.Add(item);
-                    break;
-            }   
-        }
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             listCustomers.Clear();
@@ -114,12 +94,7 @@ namespace PL.Pages
                 listCustomers.Add(item);
         }
         //**************
-        private void addButton(object sender, RoutedEventArgs e)
-        {
-            AddCustomer customer = new AddCustomer(bl);
-            customer.updateList += updated;
-            customer.ShowDialog();
-        }
+       
     }
     //צריך להוסיף:
     //קומבובוקס לסינון אנשים לפי איזה אופציה שנבחר

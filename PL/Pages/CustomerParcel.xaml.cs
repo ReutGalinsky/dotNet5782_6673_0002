@@ -30,16 +30,6 @@ namespace PL.Pages
             foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Sender == id))//create the source for the liseView
                 listParcels.Add(s);
             ParcelListView.DataContext = listParcels;
-            State.ItemsSource = Enum.GetValues(typeof(BO.DroneState));
-            Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            var states = BO.ParcelState.GetNames(typeof(BO.ParcelState)).ToList();
-            states.Insert(0, "All");
-            State.ItemsSource = states;
-            State.SelectedItem = "All";
-            var weights = BO.WeightCategories.GetNames(typeof(BO.WeightCategories)).ToList();
-            weights.Insert(0, "All");
-            Weight.ItemsSource = weights;
-            Weight.SelectedItem = "All";
             update += updated;
         }
 
@@ -63,18 +53,9 @@ namespace PL.Pages
             }
         }
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
-        {
-            Weight.SelectedItem = "All";
-            State.SelectedItem = "All";
-            listParcels.Clear();
+        {            listParcels.Clear();
             foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Sender == id))//create the source for the liseView
                 listParcels.Add(s);
-        }
-        private void addParcel(object sender, RoutedEventArgs e)
-        {
-            addParcel addWindow = new addParcel(bl, id);
-            addWindow.updateList += updated;
-            addWindow.ShowDialog();
         }
         private void deleteParcel(object sender, RoutedEventArgs e)
         {
@@ -96,36 +77,28 @@ namespace PL.Pages
             }
 
         }
-        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void WeightCheck(object sender, RoutedEventArgs e)
         {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Weight");
+            view.GroupDescriptions.Add(groupDescription);
 
-            if (Weight.SelectedItem == null || State.SelectedItem == null)
-            {
-                return;
-            }
-            object item;
-            var b = Weight.SelectedItem;
-            Enum.TryParse(typeof(BO.WeightCategories), Weight.SelectedItem.ToString(), out item);
-            object check;
-            Enum.TryParse(typeof(BO.ParcelState), State.SelectedItem.ToString(), out check);
-            listParcels.Clear();
-            IEnumerable<BO.ParcelOfList> list;
-            list = item switch
-            {
-                null => check switch
-                {
-                    null => bl.GetAllParcelsBy(x => x.Sender == id),
-                    _ => bl.GetAllParcelsBy(x => x.ParcelState == (BO.ParcelState)check && x.Sender == id),
-                },
-                _ => check switch
-                {
-                    null => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.Sender == id),
-                    _ => bl.GetAllParcelsBy(x => x.Weight == (BO.WeightCategories)item && x.ParcelState == (BO.ParcelState)check && x.Sender == id),
-                },
-            };
-            foreach (var obj in list)
-                listParcels.Add(obj);
         }
-    }      
- }
+
+        private void unCheck(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            view.GroupDescriptions.Clear();
+
+        }
+        private void StateCheck(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ParcelState");
+            view.GroupDescriptions.Add(groupDescription);
+        }
+    }
+}      
+
+ 
  

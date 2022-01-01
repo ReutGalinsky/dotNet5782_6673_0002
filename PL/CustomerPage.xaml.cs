@@ -77,6 +77,11 @@ namespace PL
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
             ButtonCloseMenu.Visibility = Visibility.Visible;
         }
+        private void closeSubPages()
+        {
+            AddDelivery.Visibility = Visibility.Collapsed;
+            Password.Visibility = Visibility.Collapsed;
+        }
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
             if (ButtonCloseMenu.Visibility == Visibility.Visible)
@@ -86,6 +91,8 @@ namespace PL
                 {
                     case "PersonalArea":
                         Customer.NavigationService.Navigate(pagePersonal);
+                        closeSubPages();
+                        Password.Visibility = Visibility.Visible;
                         break;
                     case "ChangePassword":
                         CustomerChangePassword ChangePassword = new CustomerChangePassword(bl, id);
@@ -95,6 +102,8 @@ namespace PL
                     case "AllDeliveries":
                         pageDelivery.update(sender, e);
                         Customer.NavigationService.Navigate(pageDelivery);
+                        closeSubPages();
+                        AddDelivery.Visibility = Visibility.Visible;
                         break;
                     case "AddNewDelivery":
                         CustomerAddDelivery addDelivery = new CustomerAddDelivery(bl, id);
@@ -104,6 +113,7 @@ namespace PL
                     case "AllParcels":
                         pageParcel.update(sender, e);
                         Customer.NavigationService.Navigate(pageParcel);
+                        closeSubPages();
                         break;
                 }
             }

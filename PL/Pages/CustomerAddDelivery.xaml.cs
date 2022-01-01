@@ -23,8 +23,30 @@ namespace PL.Pages
         public CustomerAddDelivery(BLApi.IBL b, string i)
         {
             InitializeComponent();
+            bl = b;
+            id = i;
+            Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+            Priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
         }
+        private BLApi.IBL bl;
+        private string id;
         public event EventHandler updateList;
 
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BO.ParcelOfList parcel = new BO.ParcelOfList() { Priority = (BO.Priorities)Priority.SelectedItem, Weight = (BO.WeightCategories)Weight.SelectedItem, Geter = IdGeter.Text, Sender = id };//?האם ההמרה זו הייתה הבעיה
+                bl.AddParcelToDelivery(parcel);
+                updateList(sender, e);
+            }
+            catch (Exception ex)//חריגה לא מדוייקת
+            {
+                MessageBox.Show("the geter customer is not existing in the system, please enter again correct details", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
+
+    

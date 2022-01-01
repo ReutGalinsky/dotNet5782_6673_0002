@@ -80,16 +80,12 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <ComboBox x:Name="Priority" HorizontalAlignment="Left" Margin="550,133,0,0" VerticalAlignment="Top" Width="134" Height="22" SelectionChanged="ComboBoxChange" Background="{x:Null}" FontFamily="Aharoni"/>
-        <TextBlock HorizontalAlignment="Left" Margin="546,112,0,0" Text="סינון על פי עדיפות החבילה " TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="161" FontFamily="Aharoni"/>
-        <TextBlock HorizontalAlignment="Left" Margin="551,59,0,0" Text="סינון על פי מצב החבילה " TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="160" FontFamily="Aharoni" RenderTransformOrigin="-0.025,-1.994"/>
-
-        <ComboBox x:Name="State" HorizontalAlignment="Left" Margin="551,80,0,0" VerticalAlignment="Top" Width="132" Height="21" SelectionChanged="ComboBoxChange" FontFamily="Aharoni" >
-        </ComboBox>
         <CheckBox x:Name="senderCheck" Content="Group By Sender" HorizontalAlignment="Left" Margin="561,197,0,0" VerticalAlignment="Top" Checked="GroupSender" Unchecked="CancelGroup"/>
         <CheckBox x:Name="geterCheck" Content="Group By Geter" HorizontalAlignment="Left" Margin="561,225,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupGeter"/>
         <!-- <DatePicker x:Name="start" HorizontalAlignment="Left" Margin="639,298,0,0" VerticalAlignment="Top" SelectedDate="{Binding Path, Mode=TwoWay}" SelectedDateChanged="changed"/>
         <DatePicker x:Name="end" HorizontalAlignment="Left" Margin="639,327,0,0" VerticalAlignment="Top"/>-->
+        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="562,275,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupState"/>
+        <CheckBox Content="Group By Priority" HorizontalAlignment="Left" Margin="560,245,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupPriority"/>
 
     </Grid>
 </Page>

@@ -72,18 +72,18 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TextBlock Text="Id number:"  HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+        <TextBlock Text="Id number:"  HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
         <TextBox x:Name="Id" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="1" Grid.Column="1" />
-        <TextBlock Text="Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+        <TextBlock Text="Name:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
         <TextBox x:Name="Name" Background="{x:Null}" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="1" />
-        <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Charge Slots:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+        <TextBlock HorizontalAlignment="Center"  Text="Charge Slots:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
         <TextBox Background="{x:Null}" x:Name="ChargeSlots" HorizontalAlignment="Center" Text="{Binding Path=ChargeSlots, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="3" Grid.Column="1" PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" />
-        <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Longitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
+        <TextBlock HorizontalAlignment="Center"  Text="Longitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
         <TextBox Background="{x:Null}" x:Name="Longitude" Text="{Binding Path=Longitude}"  IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1" />
-        <TextBlock HorizontalAlignment="Center" Style="{StaticResource UsualFont}" Text="Latitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
+        <TextBlock HorizontalAlignment="Center" Text="Latitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
         <TextBox Background="{x:Null}" x:Name="Latitude" Text="{Binding Path=Latitude}" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" />
-        <Button x:Name="UPDATE" Content="UPDATE" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="52" Width="90" FontSize="22" Click="Update_Click" Grid.Row="6" Grid.Column="1"/>
-        <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="52" Width="121" FontSize="22" Click="Close_Click" Grid.Row="7" Grid.Column="1"/>
+        <Button x:Name="UPDATE" Content="UPDATE"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="52" Width="90" FontSize="22" Click="Update_Click" Grid.Row="6" Grid.Column="1"/>
+        <Button x:Name="CANCEL" Content="CANCEL"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="52" Width="121" FontSize="22" Click="Close_Click" Grid.Row="7" Grid.Column="1"/>
         <ListView Grid.Column="2" Grid.Row="5" Background="{x:Null}" Margin="1,0,23,52" Grid.RowSpan="2" x:Name="dronesInCharge" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}"/>
         <!-- <ListView x:Name="Drone" Grid.Column="1" Grid.Row="1" Background="{x:Null}" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" Grid.ColumnSpan="2" Margin="166,52,0,10" Grid.RowSpan="3">
 

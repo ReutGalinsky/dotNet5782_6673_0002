@@ -52,31 +52,31 @@
                     <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,7,0,0" Tag="PersonalArea">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="   My details"></TextBlock>
+                            <TextBlock  Text="   My details" FontFamily="Gill Sans MT" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Foreground="Black" Width="200" Height="40" Margin="0,7,0,0" Tag="ChangePassword">
+                    <ListViewItem Visibility="Collapsed" x:Name="Password" Foreground="Black" Width="200" Height="40" Margin="0,7,0,0" Tag="ChangePassword" Background="AliceBlue">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Password" VerticalAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="   Cange password"></TextBlock>
+                            <TextBlock  Text="   Cange password" FontFamily="Gill Sans MT" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,7,0,0" Tag="AllDeliveries">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="TruckDelivery" VerticalAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="   My Deliveries"></TextBlock>
+                            <TextBlock  Text="   My Deliveries" FontFamily="Gill Sans MT" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Foreground="Black" Width="200" Height="40" Margin="0,7,0,0" Tag="AddNewDelivery">
+                    <ListViewItem Visibility="Collapsed" x:Name="AddDelivery" Foreground="Black" Width="200" Height="40" Margin="0,7,0,0" Tag="AddNewDelivery" Background="AliceBlue">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="   Add new delivery"></TextBlock>
+                            <TextBlock  Text="   Add new delivery" FontFamily="Gill Sans MT" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,7,0,0 " Tag="AllParcels">
                         <StackPanel Orientation="Horizontal" >
                             <materialDesign:PackIcon Kind="Cart" VerticalAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="   My Parcels"></TextBlock>
+                            <TextBlock  Text="   My Parcels" FontFamily="Gill Sans MT" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
@@ -110,6 +110,7 @@
             </StackPanel>
 
         </Grid>
+
     </Grid>
 </Window>
         

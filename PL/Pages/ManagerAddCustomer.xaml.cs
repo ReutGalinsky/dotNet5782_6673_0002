@@ -33,19 +33,10 @@ namespace PL.Pages
             public event EventHandler updateList;
 
 
-            private void Close_Click(object sender, RoutedEventArgs e)
-            {
-            Manager.
-            }
+
             private void Onlynumbers(object sender, KeyEventArgs e)
             {
                 Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
-            }
-            private void move(object sender, MouseButtonEventArgs e)
-            {
-                if (e.ChangedButton == MouseButton.Left)
-                    this.DragMove();
-
             }
             private void Add_Click(object sender, RoutedEventArgs e)
             {
@@ -66,7 +57,6 @@ namespace PL.Pages
                     customer.Location.Latitude = temp;
                     bl.AddCustomer(customer);
                     updateList(sender, e);
-                    this.Close();
                 }
                 catch (Exception ex)//לטפל בחריגות
                 {
@@ -86,5 +76,4 @@ namespace PL.Pages
         }
     }
 
-}
 
