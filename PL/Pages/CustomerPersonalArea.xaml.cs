@@ -33,6 +33,8 @@ namespace PL.Pages
         }
         private BLApi.IBL bl;
         private BO.Customer customer;
+        public EventHandler update;
+        public event EventHandler updateList;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

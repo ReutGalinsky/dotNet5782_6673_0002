@@ -11,36 +11,10 @@
         Height="500" Width="900"
         AllowsTransparency="True"
         Background="AliceBlue">
-    <!--<Window.Resources>
-        <Storyboard x:Key="MenuOpen">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="GridMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="35"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="MenuClose">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="GridMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="35"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-    </Window.Resources>
-
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
-            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
-        </EventTrigger>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
-            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
-        </EventTrigger>
-    </Window.Triggers>-->
-
-
     <Grid>
         <Grid Height="35" VerticalAlignment="Top" Background="SteelBlue" MouseDown="move">
             <TextBlock Text="New Meaning For Delivery." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="20" Margin="5,0,0,0" FontWeight="Medium" FontFamily="Fonts/#regular"/>
             <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" RenderOptions.BitmapScalingMode="Fant" Margin="290,0,0,0" Source="Images/logo.png.png"  />
-
             <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" HorizontalAlignment="right" Margin="0,0,10,0" >
                 <Button.Style>
                     <Style TargetType="Button">
@@ -70,42 +44,44 @@
                     <Button x:Name="ButtonCloseMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="50" Height="35"  Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_Click">
                         <materialDesign:PackIcon Kind="ArrowLeft" Foreground="Black" Width="25" Height="25" VerticalAlignment="Center"/>
                     </Button>
-                    <Button x:Name="ButtonOpenMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="50" Height="35" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ButtonOpenMenu_Click" RenderTransformOrigin="-0.2,0.629">
+                    <Button x:Name="ButtonOpenMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="50" Height="35" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ButtonOpenMenu_Click" RenderTransformOrigin="-0.2,0.629" AutomationProperties.IsOffscreenBehavior="Offscreen" Visibility="Visible" BorderThickness="0,1,1,1">
                         <materialDesign:PackIcon Kind="Menu" Foreground="Black" Width="25" Height="25" VerticalAlignment="Center"/>
                     </Button>
                 </Grid>
-
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="463" Background="SkyBlue">
-                    <ListViewItem x:Name="line1" Foreground="Black" Width="178" Height="91" Margin="0,30,0,0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="26*"/>
-                                <ColumnDefinition Width="16*"/>
-                                <ColumnDefinition Width="131*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Orientation="Horizontal" Width="173" Grid.ColumnSpan="3">
-                                <materialDesign:PackIcon Kind="TruckFast" VerticalAlignment="Center" Height="35" Width="51"/>
-                                <Button x:Name="ParcelInManager" Content="My Deliveries"  VerticalAlignment="Center" FontWeight="Medium" Background="{x:Null}" BorderBrush="Transparent" FontSize="15" Click="ButtonParcel" Height="49" Width="140" />
-                            </StackPanel>
-                        </Grid>
-                    </ListViewItem>
-
-                    <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,30,0,0">
-                        <StackPanel Orientation="Horizontal" >
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="463" Background="SkyBlue" SelectionChanged="changedSelection">
+                    <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,7,0,0" Tag="PersonalArea">
+                        <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Height="35" Width="51"/>
-                            <Button x:Name="PersonalAreaInManager" Content="Personal Area" Click="ButtonPersonalArea" FontWeight="Medium" Background="{x:Null}" BorderBrush="Transparent" FontSize="15" Width="138"/>
-
+                            <TextBlock  Text="   My details"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,30,0,0">
+                    <ListViewItem Foreground="Black" Width="200" Height="40" Margin="0,7,0,0" Tag="ChangePassword">
+                        <StackPanel Orientation="Horizontal" Width="173">
+                            <materialDesign:PackIcon Kind="Password" VerticalAlignment="Center" Height="35" Width="51"/>
+                            <TextBlock  Text="   Cange password"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,7,0,0" Tag="AllDeliveries">
+                        <StackPanel Orientation="Horizontal" Width="173">
+                            <materialDesign:PackIcon Kind="TruckDelivery" VerticalAlignment="Center" Height="35" Width="51"/>
+                            <TextBlock  Text="   My Deliveries"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Foreground="Black" Width="200" Height="40" Margin="0,7,0,0" Tag="AddNewDelivery">
+                        <StackPanel Orientation="Horizontal" Width="173">
+                            <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Height="35" Width="51"/>
+                            <TextBlock  Text="   Add new delivery"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,7,0,0 " Tag="AllParcels">
                         <StackPanel Orientation="Horizontal" >
                             <materialDesign:PackIcon Kind="Cart" VerticalAlignment="Center" Height="35" Width="51"/>
-                            <Button x:Name="DeliveryInManager" Content="My Shopping Cart" Click="ButtonDelivery" VerticalAlignment="Center" FontWeight="Medium" Background="{x:Null}" BorderBrush="Transparent" FontSize="15" Height="39" Width="142"/>
-
+                            <TextBlock  Text="   My Parcels"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
             </StackPanel>
+
         </Grid>
 
         <TextBlock Text="Dear Customer" VerticalAlignment="Top" Margin="388,36,0,0" FontWeight="Light" FontFamily="/Fonts/regular" HorizontalAlignment="Left" FontSize="40" Width="258"/>
@@ -134,11 +110,11 @@
             </StackPanel>
 
         </Grid>
-
-
-
     </Grid>
 </Window>
+        
+
+
 
 
          

@@ -27,39 +27,12 @@ namespace PL
             pageCustomer = new ManagerCustomer(bl);
             pageParcel = new ManagerParcel(bl);
             pageBaseStation = new ManagerBaseStation(bl);
-
         }
-
         private BLApi.IBL bl;
         private ManagerDrone pageDrone;
         private ManagerCustomer pageCustomer;
         private ManagerParcel pageParcel;
         private ManagerBaseStation pageBaseStation;
-
-        //******buttons*******
-        private void ButtonDrone(object sender, RoutedEventArgs e)
-        {
-            pageDrone.update(sender, e);
-            Manager.NavigationService.Navigate(pageDrone);
-        }
-        private void ButtonParcel(object sender, RoutedEventArgs e)
-        {
-            pageParcel.update(sender, e);
-            Manager.NavigationService.Navigate(pageParcel);
-
-        }
-        private void ButtonCustomer(object sender, RoutedEventArgs e)
-        {
-            pageCustomer.update(sender, e);
-            Manager.NavigationService.Navigate(pageCustomer);
-
-        }
-        private void ButtonBaseStation(object sender, RoutedEventArgs e)
-        {
-            pageBaseStation.update(sender, e);
-            Manager.NavigationService.Navigate(pageBaseStation);
-
-        }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -80,7 +53,6 @@ namespace PL
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             GridMenu.Width = 70;
-
         }
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -88,7 +60,26 @@ namespace PL
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
             ButtonCloseMenu.Visibility = Visibility.Visible;
         }
-
+        private void BackToDrone(object sender, EventArgs e)
+        {
+            pageDrone.update(sender, e);
+            Manager.NavigationService.Navigate(pageDrone);
+        }
+        private void BackToCustomer(object sender, EventArgs e)
+        {
+            pageCustomer.update(sender, e);
+            Manager.NavigationService.Navigate(pageCustomer);
+        }
+        private void BackToBaseStation(object sender, EventArgs e)
+        {
+            pageBaseStation.update(sender, e);
+            Manager.NavigationService.Navigate(pageBaseStation);
+        }
+        private void BackToParcel(object sender, EventArgs e)
+        {
+            pageParcel.update(sender, e);
+            Manager.NavigationService.Navigate(pageParcel);
+        }
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
             if (ButtonCloseMenu.Visibility == Visibility.Visible)
@@ -96,23 +87,37 @@ namespace PL
                 var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
                 switch (item.Tag)
                 {
-                    case "drone":
+                    case "All drones":
                         pageDrone.update(sender, e);
                         Manager.NavigationService.Navigate(pageDrone);
                         break;
-                    case "customer":
-                        pageCustomer.update(sender, e);
-                        Manager.NavigationService.Navigate(pageCustomer);
+                    case "Add new drone":
+                        ManagerAddDrone addDrone=new ManagerAddDrone(bl);
+                        addDrone.updateList += BackToDrone;
+                        Manager.NavigationService.Navigate(addDrone);
                         break;
-                    case "stations":
+                    case "All customers":
+                        pageDrone.update(sender, e);
+                        Manager.NavigationService.Navigate(pageDrone);
+                        break;
+                    case "Add new customer":
+                        ManagerAddCustomer addCustomer = new ManagerAddCustomer(bl);
+                        addCustomer.updateList += BackToCustomer;
+                        Manager.NavigationService.Navigate(addCustomer);
+                        break;
+                    case "All base stations":
+                        pageDrone.update(sender, e);
+                        Manager.NavigationService.Navigate(pageDrone);
+                        break;
+                    case "Add new base station":
+                        ManagerAddBaseStation addBaseStation = new ManagerAddBaseStation(bl);
+                        addBaseStation.updateList += BackToBaseStation;
+                        Manager.NavigationService.Navigate(addBaseStation);
+                        break;
+                    case "All parcels":
                         pageBaseStation.update(sender, e);
                         Manager.NavigationService.Navigate(pageBaseStation);
                         break;
-                    case "parcel":
-                        pageParcel.update(sender, e);
-                        Manager.NavigationService.Navigate(pageParcel);
-                        break;
-
                 }
             }
         }

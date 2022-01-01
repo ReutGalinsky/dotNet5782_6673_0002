@@ -4,7 +4,17 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
+
+            <ResourceDictionary>
+
+                <!--<ResourceDictionary.MergedDictionaries>
+
+                    <ResourceDictionary Source="FontList.xaml" />
+
+                </ResourceDictionary.MergedDictionaries>-->
+
+            </ResourceDictionary>
+
         <Style x:Key="UsualFont">
             <Setter Property="TextElement.FontFamily"
                     Value="/Fonts/#regular"></Setter>

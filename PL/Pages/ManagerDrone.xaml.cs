@@ -23,14 +23,12 @@ namespace PL.Pages
             AvilibleList.DataContext = availibleLists;
             MaintanceList.DataContext = maintanceLists;
             ShippingList.DataContext = shipLists;
-            //State.SelectedItem=State.Items[0];
             var weights = BO.WeightCategories.GetNames(typeof(BO.WeightCategories)).ToList();
             weights.Insert(0, "All");
             Weight.DataContext = weights;
             Weight.SelectedItem = "All";
             update += updated;
         }
-
         public EventHandler update;
         private BLApi.IBL bl;
         private BO.DroneToList selected;

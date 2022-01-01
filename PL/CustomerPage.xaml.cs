@@ -14,8 +14,6 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using PL.Pages;
 using PL.MenuItems;
-using MaterialDesignThemes.Wpf;
-using System.Windows.Controls;
 
 namespace PL
 {
@@ -24,42 +22,38 @@ namespace PL
     /// </summary>
     public partial class CustomerPage : Window
     {
-        public CustomerPage(BLApi.IBL b,string i)
+        public CustomerPage(BLApi.IBL b, string i)
         {
             InitializeComponent();
             bl = b;
             id = i;
-            pageDelivery = new CustomerDelivery(bl,id);
+            pageDelivery = new CustomerDelivery(bl, id);
             pageParcel = new CustomerParcel(bl, id);
-            pagePersonal = new CustomerPersonalArea(bl, id);           
-
+            pagePersonal = new CustomerPersonalArea(bl, id);
         }
-
         BLApi.IBL bl;
         string id;
         private CustomerDelivery pageDelivery;
         private CustomerParcel pageParcel;
         private CustomerPersonalArea pagePersonal;
-        private void ButtonParcel(object sender, RoutedEventArgs e)
-        {
-            pageParcel.update(sender,e);
-            Customer.NavigationService.Navigate(pageParcel);
-        }
-        private void ButtonPersonalArea(object sender, RoutedEventArgs e)
-        {
-            Customer.NavigationService.Navigate(pagePersonal);
-
-        }
-        private void ButtonDelivery(object sender, RoutedEventArgs e)
-        {
-            pageDelivery.update(sender, e);
-            Customer.NavigationService.Navigate(pageDelivery);
-        }
         private void move(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-
+        }
+        private void BackToPersonal(object sender, EventArgs e)
+        {
+            Customer.NavigationService.Navigate(pagePersonal);
+        }
+        private void BackToDelivery(object sender, EventArgs e)
+        {
+            pageDelivery.update(sender, e);
+            Customer.NavigationService.Navigate(pageDelivery);
+        }
+        private void BackToParcel(object sender, EventArgs e)
+        {
+            pageParcel.update(sender, e);
+            Customer.NavigationService.Navigate(pageParcel);
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -76,7 +70,6 @@ namespace PL
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             GridMenu.Width = 70;
-
         }
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -84,7 +77,38 @@ namespace PL
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
             ButtonCloseMenu.Visibility = Visibility.Visible;
         }
-
-      
+        private void changedSelection(object sender, SelectionChangedEventArgs e)
+        {
+            if (ButtonCloseMenu.Visibility == Visibility.Visible)
+            {
+                var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
+                switch (item.Tag)
+                {
+                    case "PersonalArea":
+                        Customer.NavigationService.Navigate(pagePersonal);
+                        break;
+                    case "ChangePassword":
+                        CustomerChangePassword ChangePassword = new CustomerChangePassword(bl, id);
+                        ChangePassword.updateList += BackToPersonal;
+                        Customer.NavigationService.Navigate(ChangePassword);
+                        break;
+                    case "AllDeliveries":
+                        pageDelivery.update(sender, e);
+                        Customer.NavigationService.Navigate(pageDelivery);
+                        break;
+                    case "AddNewDelivery":
+                        CustomerAddDelivery addDelivery = new CustomerAddDelivery(bl, id);
+                        addDelivery.updateList += BackToDelivery;
+                        Customer.NavigationService.Navigate(addDelivery);
+                        break;
+                    case "AllParcels":
+                        pageParcel.update(sender, e);
+                        Customer.NavigationService.Navigate(pageParcel);
+                        break;
+                }
+            }
+        }
     }
 }
+
+

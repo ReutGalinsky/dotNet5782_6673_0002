@@ -44,6 +44,8 @@ namespace PL.Pages
         }
 
         public EventHandler update;
+        public event EventHandler updateList;
+
         private BLApi.IBL bl;
         string id;
         private BO.ParcelOfList selected;//selected item that will be send to the new window
