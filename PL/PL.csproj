@@ -19,8 +19,6 @@
 	
   <ItemGroup>
     <None Remove="customer.png" />
-    <None Remove="Images\logo.png.png" />
-    <None Remove="Images\אספקה.png" />
     <None Remove="key.jpg" />
     <None Remove="logo.png" />
     <None Remove="logo.png.png" />
@@ -87,9 +85,6 @@
 
   <ItemGroup>
     <Resource Include="customer.png" />
-    <Resource Include="Images\logo.png" />
-    <Resource Include="Images\logo.png.png" />
-    <Resource Include="Images\manager.png" />
     <Resource Include="Pages\Images\Customer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -127,33 +122,6 @@
     <Resource Include="Pages\Images\חבילה.jpg" />
     <Resource Include="Pages\Images\מחיקה.jpg" />
     <Resource Include="Pages\Images\עפרון.png" />
-    <Resource Include="Images\pick.png" />
-    <Resource Include="Images\supply.jpg" />
-    <Resource Include="Images\אספקה.png" />
-    <Resource Include="Images\חבילה אחת.jpg" />
-    <Resource Include="Images\חזור.jpg" />
-    <Resource Include="Images\טעינה.png" />
-    <Resource Include="Images\יציאה.png" />
-    <Resource Include="Images\לוגו רחפן.png" />
-    <Resource Include="Images\לקוח.png" />
-    <Resource Include="Images\מינוס.png" />
-    <Resource Include="Images\מנהל.png" />
-    <Resource Include="Images\מנהל2.png" />
-    <Resource Include="Images\סגירה.png" />
-    <Resource Include="Images\עגלה.jpg" />
-    <Resource Include="Images\פלוס.jpg" />
-    <Resource Include="Images\פעולות.png" />
-    <Resource Include="Images\קריאה.jpg" />
-    <Resource Include="Images\רחפן יחיד.png" />
-    <Resource Include="Images\רחפן עגול.png" />
-    <Resource Include="Images\רקע פרוקיט.jpg" />
-    <Resource Include="Images\רקע2.png" />
-    <Resource Include="Images\שחרור.png" />
-    <Resource Include="Images\שליחה.png" />
-    <Resource Include="Images\תחנה.png" />
-    <Resource Include="Images\תחנת בסיס.png" />
-    <Resource Include="Images\תמונה2.png" />
-    <Resource Include="Images\תמונה5.png" />
   </ItemGroup>
 
   <ItemGroup>

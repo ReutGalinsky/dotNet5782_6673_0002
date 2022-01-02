@@ -10,17 +10,39 @@
 
     <Grid>
 
-        <TextBlock HorizontalAlignment="Left" Margin="112,66,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="27" FontSize="24" FontFamily="Aharoni"/>
-        <TextBox x:Name="Id" HorizontalAlignment="Left" IsEnabled="False" Margin="316,66,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Height="27"/>
-        <TextBlock HorizontalAlignment="Left" Margin="119,109,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677" FontSize="24" FontFamily="Aharoni"/>
-        <TextBox x:Name="Phone" HorizontalAlignment="Left" IsEnabled="False" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="24" Margin="317,153,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="119,153,0,0" Text="phone" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Aharoni" RenderTransformOrigin="0.261,0.537"/>
-        <TextBox x:Name="Name" HorizontalAlignment="Left" IsEnabled="False" Margin="317,109,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="27"/>
-        <TextBlock HorizontalAlignment="Left" Margin="119,186,0,0" Text="Location" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="109" FontSize="24" FontFamily="Aharoni"/>
-        <TextBox x:Name="Longitude" HorizontalAlignment="Left" IsEnabled="False" Margin="429,192,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" Height="22"/>
-        <TextBox x:Name="Latitude" HorizontalAlignment="Left" IsEnabled="False" Margin="317,192,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" Height="22" TextChanged="Latitude_TextChanged"/>
-        <Button x:Name="updatingButton" Content="update" Style="{StaticResource myButton}" Visibility="Collapsed" HorizontalAlignment="Left" Margin="365,250,0,0" VerticalAlignment="Top" Height="63" Width="124" FontSize="24" Click="Button_Click"/>
-        <Button x:Name="edit" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="317,264,0,0" VerticalAlignment="Top" Height="72" Width="69" Click="edit_Click">
+        <TextBlock HorizontalAlignment="Left" Margin="150,100,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="25" FontSize="24" FontFamily="Aharoni"/>
+        <TextBox x:Name="Id" HorizontalAlignment="Left" IsEnabled="False" Margin="350,100,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="150,130,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677" FontSize="24" FontFamily="Aharoni" Width="150" Height="25"/>
+        <TextBox x:Name="Phone" HorizontalAlignment="Left" IsEnabled="False" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" Margin="350,160,0,0"/>
+        <TextBlock HorizontalAlignment="Left" Margin="150,160,0,0" Text="phone" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Aharoni" RenderTransformOrigin="0.261,0.537" Width="150" Height="25"/>
+        <TextBox x:Name="Name" HorizontalAlignment="Left" IsEnabled="False" Margin="350,130,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="150,190,0,0" Text="Longitude" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Aharoni" Width="150" Height="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="150,220,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Aharoni" Width="150" Height="25"/>
+        <TextBox x:Name="Longitude" HorizontalAlignment="Left" IsEnabled="False" Margin="350,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
+        <TextBox x:Name="Latitude" HorizontalAlignment="Left" IsEnabled="False" Margin="350,220,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" TextChanged="Latitude_TextChanged"/>
+        <Button x:Name="updatingButton" Visibility="Collapsed" Content="Update Please" Click="Button_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="370,282,177,67">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="100" Height="25" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="edit" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="432,251,0,0" VerticalAlignment="Top" Height="30" Width="29" Click="edit_Click">
             <Button.Background>
                 <ImageBrush ImageSource="Images/עפרון.png"></ImageBrush>
             </Button.Background>

@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:local="clr-namespace:PL.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="700"
@@ -44,59 +45,78 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <ListView x:Name="ParcelListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Margin="177,78,10,24" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
+        <ListView x:Name="ParcelListView" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="150,0,0,0" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Height="272" Width="440">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Number" Width="auto">
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="Identifier" Width="58" Foreground="Black" />
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=IdNumber}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding Path=IdNumber}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" VerticalAlignment="Center" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
-                    <GridViewColumn Header="Sender" Width="70">
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOff" Width="58" Foreground="Black" />
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Sender}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                <TextBlock Text="{Binding Path=Sender}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
-                    <GridViewColumn Header="Geter" Width="70">
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOutline" Width="58" Foreground="Black" />
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Geter}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                <TextBlock Text="{Binding Path=Geter}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Weight" Width="70">
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="WeightKilogram" Width="58" Foreground="Black" />
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Weight}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                <TextBlock Text="{Binding Path=Weight}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Priority" Width="100">
+                    <GridViewColumn >
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="PriorityHigh" Width="58" Foreground="Black" />
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Priority}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                <TextBlock Text="{Binding Path=Priority}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="State" Width="90">
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="Shovel" Width="58" Foreground="Black" />
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=ParcelState}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                <TextBlock Text="{Binding Path=ParcelState}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Delete" Width="70">
+                    <GridViewColumn Width="auto">
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="Delete" Width="58" Foreground="Black" />
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel">
                                     <Button.Content>
-                                        <Image Source="Images/מחיקה.jpg" VerticalAlignment="Center" Width="25" Height="25"></Image>
+                                        <iconPacks:PackIconMaterial Kind="Delete" Width="15" Foreground="Black" />
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>
@@ -104,9 +124,20 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
-        <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="48,141,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheck"/>
-        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="48,185,0,0" VerticalAlignment="Top" Unchecked="unCheck" Checked="StateCheck"/>
-
+        <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="25,65,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheck"/>
+        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top" Unchecked="unCheck" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741"/>
+        
     </Grid>
 </Page>

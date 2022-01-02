@@ -81,7 +81,7 @@
             <Border Height="2" Background="Black" Opacity="0.5" Grid.Row="2" Grid.Column="1" Margin="113,144,182,9"/>
             <iconPacks:PackIconMaterial Kind="Key" Foreground="Black" Grid.Row="2" Grid.Column="1" Opacity="0.5" Width="47" Height="42" RenderTransformOrigin="0.525,0.48" Margin="472,100,0,0" VerticalAlignment="Center"  />
             <CheckBox x:Name="check" Click="Check_Click" Content="Show Password" Cursor="Hand"  Grid.Column="1" Grid.Row="3" Margin="110,0,0,0" Unchecked="showPassword" Checked="showText"/>
-            <Button Content="Login" Click="Login_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="190,50,250,50" Grid.Column="1">
+            <Button Content="Login" Click="Login_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="250,50,140,50" Grid.Column="1">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -102,7 +102,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Content="Forget password?" Click="Forget_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="40,50,400,50" Grid.Column="1">
+            <Button Content="Forget password?" Click="Forget_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="120,50,300,50" Grid.Column="1">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -123,27 +123,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Content="Don't have an account?" Click="Account_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="1" Grid.Row="3" Margin="340,50,100,50">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
-                        <Setter Property="Background" Value="LightGray"/>
-                        <Setter Property="Cursor" Value="Hand"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Black"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="125" Height="25" CornerRadius="8" Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+           
             <TextBox x:Name="textPassword" Background="Transparent" Text="Password:" Width="355" Grid.Row="2" Grid.Column="1" FontFamily="/Fonts/regular" FontWeight="Medium" Margin="120,111,0,12" FontSize="24" GotFocus="focus" Opacity="0.5" Foreground="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
 
 

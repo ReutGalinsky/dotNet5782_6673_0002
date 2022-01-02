@@ -59,7 +59,7 @@ namespace PL
         {
             this.Close();
         }
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             TypeOfUser typeOfUser = new TypeOfUser(bl);
             typeOfUser.Show();
@@ -69,11 +69,11 @@ namespace PL
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
-            GridMenu.Width = 70;
+            GridMenu.Width = 60;
         }
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
-            GridMenu.Width = 200;
+            GridMenu.Width = 215;
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
             ButtonCloseMenu.Visibility = Visibility.Visible;
         }
@@ -91,7 +91,7 @@ namespace PL
                 {
                     case "PersonalArea":
                         Customer.NavigationService.Navigate(pagePersonal);
-                        closeSubPages();
+                        //closeSubPages();
                         Password.Visibility = Visibility.Visible;
                         break;
                     case "ChangePassword":
@@ -102,7 +102,7 @@ namespace PL
                     case "AllDeliveries":
                         pageDelivery.update(sender, e);
                         Customer.NavigationService.Navigate(pageDelivery);
-                        closeSubPages();
+                        //closeSubPages();
                         AddDelivery.Visibility = Visibility.Visible;
                         break;
                     case "AddNewDelivery":
@@ -113,7 +113,7 @@ namespace PL
                     case "AllParcels":
                         pageParcel.update(sender, e);
                         Customer.NavigationService.Navigate(pageParcel);
-                        closeSubPages();
+                        //closeSubPages();
                         break;
                 }
             }

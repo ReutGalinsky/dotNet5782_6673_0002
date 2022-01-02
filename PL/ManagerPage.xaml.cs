@@ -37,7 +37,7 @@ namespace PL
         {
             this.Close();
         }
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             TypeOfUser typeOfUser = new TypeOfUser(bl);
             typeOfUser.Show();

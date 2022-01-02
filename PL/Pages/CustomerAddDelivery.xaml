@@ -9,29 +9,38 @@
       Title="CustomerAddDelivery">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
 
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-
-        </Grid.RowDefinitions>
-        <TextBlock Text="Id number:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <TextBox x:Name="IdGeter" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="1" Grid.Column="1"   />
-        <TextBlock Text="Parcel Priority:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-        <ComboBox x:Name="Priority" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="1" />
-        <TextBlock Text="Parcel Weight:" HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-        <ComboBox x:Name="Weight" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="3" Grid.Column="1" />
-        <Button x:Name="ADD" Content="ADD" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Add_Click" Grid.Row="4" Grid.Column="1"/>
-        <Button x:Name="CANCEL" Content="CANCEL" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Grid.Row="5" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="150,100,0,0" Text="Id number:" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="25" FontSize="24" FontFamily="Aharoni"/>
+        <TextBox x:Name="IdGeter" HorizontalAlignment="Left" Margin="350,100,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="150,130,0,0" Text="Parcel Priority:" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677" FontSize="24" FontFamily="Aharoni" Width="206" Height="25"/>
+        <ComboBox x:Name="Priority" HorizontalAlignment="Left" Text="{Binding Path=Phone}"  VerticalAlignment="Top" Width="200" Height="25" Margin="350,160,0,0"/>
+        <TextBlock HorizontalAlignment="Left" Margin="150,160,0,0" Text="Parcel Weight:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Aharoni" RenderTransformOrigin="0.261,0.537" Width="207" Height="24"/>
+        <ComboBox x:Name="Weight" HorizontalAlignment="Left" Margin="350,130,0,0" Text="{Binding Path=Name}" VerticalAlignment="Top" Width="200" Height="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="150,190,0,0" Text="Longitude" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Aharoni" Width="150" Height="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="150,220,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Aharoni" Width="150" Height="25"/>
+        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="350,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
+        <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="350,220,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
+        <Button Content="Add" Click="Add_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="104,100,-104,-63">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="100" Height="20" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 
