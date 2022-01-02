@@ -7,11 +7,32 @@
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="700"
       Title="CustomerAddDelivery">
-
+    <Page.Resources>
+        <DataTemplate x:Key="MyDataTemplate"
+ DataType="local:BO.CustomerToList">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0"
+ Text="Id Number: " />
+                <TextBlock Grid.Column="1" Grid.Row="0"
+ Text="{Binding Path=IdNumber}" />
+                <TextBlock Grid.Column="0" Grid.Row="1"
+ Text="Name: " />
+                <TextBlock Grid.Column="1" Grid.Row="1"
+ Text="{Binding Path=Name}" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
 
         <TextBlock HorizontalAlignment="Left" Margin="150,100,0,0" Text="Id number:" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="25" FontSize="24" FontFamily="Aharoni"/>
-        <TextBox x:Name="IdGeter" HorizontalAlignment="Left" Margin="350,100,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
         <TextBlock HorizontalAlignment="Left" Margin="150,130,0,0" Text="Parcel Priority:" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677" FontSize="24" FontFamily="Aharoni" Width="206" Height="25"/>
         <ComboBox x:Name="Priority" HorizontalAlignment="Left" Text="{Binding Path=Phone}"  VerticalAlignment="Top" Width="200" Height="25" Margin="350,160,0,0"/>
         <TextBlock HorizontalAlignment="Left" Margin="150,160,0,0" Text="Parcel Weight:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Aharoni" RenderTransformOrigin="0.261,0.537" Width="207" Height="24"/>
@@ -20,7 +41,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="150,220,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Aharoni" Width="150" Height="25"/>
         <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="350,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
         <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="350,220,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
-        <Button Content="Add" Click="Add_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="104,100,-104,-63">
+        <Button Content="Add" Click="Add_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="299,282,205,49">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -41,6 +62,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <ComboBox x:Name="Geters" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" HorizontalAlignment="Left" Margin="350,95,0,0" VerticalAlignment="Top" Width="200" IsTextSearchEnabled="true" TextSearch.TextPath="Name" Height="30"/>
 
     </Grid>
 

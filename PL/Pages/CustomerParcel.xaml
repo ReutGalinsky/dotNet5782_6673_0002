@@ -48,9 +48,13 @@
         <ListView x:Name="ParcelListView" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="150,0,0,0" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Height="272" Width="440">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn>
+                    <GridViewColumn> 
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="Identifier" Width="58" Foreground="Black" />
+                            <iconPacks:PackIconMaterial Kind="Identifier" Width="58" Foreground="Black">
+                                <iconPacks:PackIconMaterial.ToolTip>
+                                    <TextBlock Text="Id" FontFamily="Ink Free"></TextBlock>
+                                </iconPacks:PackIconMaterial.ToolTip>
+                            </iconPacks:PackIconMaterial>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -60,7 +64,11 @@
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOff" Width="58" Foreground="Black" />
+                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOff" Width="58" Foreground="Black" >
+                                <iconPacks:PackIconMaterial.ToolTip>
+                                    <TextBlock Text="Sender" FontFamily="Ink Free"></TextBlock>
+                                </iconPacks:PackIconMaterial.ToolTip>
+                            </iconPacks:PackIconMaterial>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -70,7 +78,11 @@
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOutline" Width="58" Foreground="Black" />
+                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOutline" Width="58" Foreground="Black">
+                                <iconPacks:PackIconMaterial.ToolTip>
+                                    <TextBlock Text="Geter" FontFamily="Ink Free"></TextBlock>
+                                </iconPacks:PackIconMaterial.ToolTip>
+                            </iconPacks:PackIconMaterial>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -80,7 +92,11 @@
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="WeightKilogram" Width="58" Foreground="Black" />
+                            <iconPacks:PackIconMaterial Kind="WeightKilogram" Width="58" Foreground="Black">
+                                <iconPacks:PackIconMaterial.ToolTip>
+                                    <TextBlock Text="Max Weight" FontFamily="Ink Free"></TextBlock>
+                                </iconPacks:PackIconMaterial.ToolTip>
+                            </iconPacks:PackIconMaterial>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -90,7 +106,11 @@
                     </GridViewColumn>
                     <GridViewColumn >
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="PriorityHigh" Width="58" Foreground="Black" />
+                            <iconPacks:PackIconMaterial Kind="PriorityHigh" Width="58" Foreground="Black">
+                                <iconPacks:PackIconMaterial.ToolTip>
+                                    <TextBlock Text="Priority" FontFamily="Ink Free"></TextBlock>
+                                </iconPacks:PackIconMaterial.ToolTip>
+                            </iconPacks:PackIconMaterial>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -100,7 +120,11 @@
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="Shovel" Width="58" Foreground="Black" />
+                            <iconPacks:PackIconMaterial Kind="Shovel" Width="58" Foreground="Black">
+                                <iconPacks:PackIconMaterial.ToolTip>
+                                    <TextBlock Text="State" FontFamily="Ink Free"></TextBlock>
+                                </iconPacks:PackIconMaterial.ToolTip>
+                            </iconPacks:PackIconMaterial>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

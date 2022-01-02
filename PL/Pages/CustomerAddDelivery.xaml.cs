@@ -27,6 +27,7 @@ namespace PL.Pages
             id = i;
             Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             Priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
+            Geters.DataContext = bl.GetAllCustomersBy(x=>x.IdNumber!=i);
         }
         private BLApi.IBL bl;
         private string id;
@@ -37,7 +38,8 @@ namespace PL.Pages
         {
             try
             {
-                BO.ParcelOfList parcel = new BO.ParcelOfList() { Priority = (BO.Priorities)Priority.SelectedItem, Weight = (BO.WeightCategories)Weight.SelectedItem, Geter = IdGeter.Text, Sender = id };//?האם ההמרה זו הייתה הבעיה
+                BO.ParcelOfList parcel = new BO.ParcelOfList() { Priority = (BO.Priorities)Priority.SelectedItem, Weight = (BO.WeightCategories)Weight.SelectedItem, Sender = id };
+                parcel.Geter = ((BO.CustomerToList)(Geters.SelectedItem)).IdNumber;//?האם ההמרה זו הייתה הבעיה
                 bl.AddParcelToDelivery(parcel);
                 updateList(sender, e);
             }

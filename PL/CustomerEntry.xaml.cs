@@ -68,8 +68,6 @@ namespace PL
                 textPassword.Visibility = Visibility.Collapsed;
                 password.Focus();
             }
-
-
         }
 
 

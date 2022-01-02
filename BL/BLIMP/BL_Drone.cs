@@ -88,7 +88,7 @@ namespace BL
                 dal.UpdateBaseStation(stationDO);
                 Drones.Add(droneToAdd);
                 //DO.DroneCharge charge = new DroneCharge() { DroneId = droneToAdd.IdNumber, StationId = IdNumber };
-                dal.AddDroneCharge(new DroneCharge() { DroneId = droneToAdd.IdNumber, StationId = IdNumber });
+                dal.AddDroneCharge(new DroneCharge() { DroneId = droneToAdd.IdNumber, StationId = IdNumber, startCharging=DateTime.Now });
             }
             catch (Exception ex)
             { throw new AddingProblemException($"Can't add the drone {droneToAdd.IdNumber}", ex); }

@@ -3,12 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
         Title="ManagerViewCustomer" Height="400" Width="500">
-    <Grid>
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -26,27 +27,29 @@
 
 
         </Grid.RowDefinitions>
-        <Grid.Background>
-            <ImageBrush ImageSource="Pages/Images/BackGround.png" Opacity="0.8"></ImageBrush>
-        </Grid.Background>
-        <Rectangle Fill="#FFD7EEF3" StrokeThickness="0" Grid.Row="0" Width="500" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" MouseDown="move" Grid.ColumnSpan="3"/>
-        <Button Background="{x:Null}" Click="Close_Click"
-                    Grid.Column="2" Grid.Row="0" Margin="120,0,0,0">
+        <Grid Background="#FFE2A536" Grid.ColumnSpan="3" MouseDown="Grid_MouseDown"/>
+        <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="2">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Ellipse Stroke="#FF15486C" StrokeThickness="3">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="Images/סגירה.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
+                    <Border Width="75" Height="15" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                 </ControlTemplate>
             </Button.Template>
         </Button>
+
         <TextBlock Text="Id number:" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
         <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30"  Grid.Row="1" Grid.Column="1" />
         <TextBlock Text="Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
@@ -57,8 +60,81 @@
         <TextBox x:Name="Longitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1" />
         <TextBlock Text="Latitude:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
         <TextBox x:Name="Latitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" />
-        <Button x:Name="UPDATE" Content="UPDATE" Style="{StaticResource myButton}" VerticalAlignment="Center" Height="30" FontSize="22" Click="Update_Click" Grid.Row="6" Grid.ColumnSpan="2" Margin="160,0,83,0"/>
-        <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,20,133,0"/>
+        <Button Content="Update" x:Name="UPDATE" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.ColumnSpan="2" Margin="111,13,83,13" Grid.Row="6">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="80" Height="20" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="Cancel" x:Name="CANCEL" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="1" Grid.ColumnSpan="2" Margin="83,13,112,13" Grid.Row="6">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="80" Height="20" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="160,-365,-610,85" Panel.ZIndex="-1">
+            <Grid.RenderTransform>
+                <RotateTransform Angle="50"/>
+            </Grid.RenderTransform>
+            <StackPanel Orientation="Horizontal" Margin="-500,250,-255,-250">
+                <StackPanel>
+                    <Border Width="700" Height="35" Background="#B2FFD300" Margin="0,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#FFD97C47" Margin="150,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="Orange" Margin="75,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#83DABD06" Margin="150,15,0,0" CornerRadius="20"/>
+                </StackPanel>
+                <StackPanel>
+                    <Border Width="700" Height="35" Background="#B2FFD300" Margin="0,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#FFD97C47" Margin="150,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="Orange" Margin="75,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#83DABD06" Margin="150,15,0,0" CornerRadius="20"/>
+                </StackPanel>
+            </StackPanel>
 
+
+
+        </Grid>
+        <ComboBox x:Name="listParcels" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="166,14,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2" SelectionChanged="enableShow"/>
+        <Button x:Name="showParcel" HorizontalAlignment="Left" Margin="125,15,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.Column="2" IsEnabled="False" Click="showTheParcel">
+            <Button.Content>
+                <StackPanel>
+                    <iconPacks:PackIconMaterial x:Name="contentt" Kind="AspectRatio">
+                    </iconPacks:PackIconMaterial>
+                </StackPanel>
+            </Button.Content>
+            <Button.ToolTip>
+                <TextBlock Text="View Parcel" FontFamily="Ink Free" ></TextBlock>
+            </Button.ToolTip>
+        </Button>
     </Grid>
 </Window>

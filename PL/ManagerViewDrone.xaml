@@ -3,12 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:PL"
+       xmlns:PL.Convert="clr-namespace:PL.Convert"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
         Title="ManagerViewDrone" Height="400" Width="500">
     <Window.Resources>
+        <PL.Convert:ConvertParcelToEnable x:Key="ParcelToEnable"/>
         <Style x:Key="myActionButton" TargetType="Button">
             <Setter Property="BorderBrush" Value="#FFF0F0F3"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
@@ -16,7 +19,6 @@
             <Setter Property="FontSize" Value="44"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="Background" Value="#FFD3DBEB"></Setter>
-
             <Style.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20"></Setter>
@@ -85,7 +87,7 @@
         <TextBlock Text="Latitude:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" />
         <TextBox x:Name="Latitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="7" Grid.Column="1" />
 
-        <Button Content="Update" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="8" Height="50" Width="100">
+        <Button x:Name="updateButton" Content="Update" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="8" Height="50" Width="100">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -108,10 +110,10 @@
         </Button>
 
 
-        <Button x:Name="buttonMenue" Content="" Style="{StaticResource myActionButton}" Grid.Row="2" Grid.Column="2" Click="Button_Click_1" VerticalAlignment="Top" HorizontalAlignment="Center" RenderTransformOrigin="0.507,0.41" Width="40">
-            <Button.Background>
-                <ImageBrush x:Name="action" ImageSource="Images/פעולות.png"  Stretch="UniformToFill"></ImageBrush>
-            </Button.Background>
+        <Button x:Name="buttonMenue" Style="{StaticResource myActionButton}" Grid.Row="2" Grid.Column="2" Click="Button_Click_1" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.507,0.41" Width="40" Height="40">
+            <Button.Content>
+                <iconPacks:PackIconMaterial Kind="wrench"/>
+            </Button.Content>
         </Button>
         <Button Content="Start Shipping" Visibility="Collapsed" Click="shipButton" x:Name="shippingButton" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="3" Height="50" Width="100">
             <Button.Style>
@@ -218,6 +220,17 @@
                     </Border>
                 </ControlTemplate>
             </Button.Template>
+        </Button>
+        <Button x:Name="buttonb" Grid.Column="2" IsEnabled="{Binding Path=NumberOfParcel, Converter={StaticResource  ParcelToEnable}}" HorizontalAlignment="Left" Margin="25,13,0,0" Grid.Row="7" VerticalAlignment="Top" Click="openParcel" Height="28" Grid.RowSpan="2" Width="30">
+            <Button.Content>
+                <StackPanel>
+                    <iconPacks:PackIconMaterial x:Name="contentt" Kind="PackageVariant">
+                    </iconPacks:PackIconMaterial>
+                </StackPanel>
+            </Button.Content>
+            <Button.ToolTip>
+                <TextBlock Text="View Parcel" FontFamily="Ink Free" ></TextBlock>
+            </Button.ToolTip>
         </Button>
 
         <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="160,-365,-610,85" Panel.ZIndex="-1">

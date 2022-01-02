@@ -92,7 +92,20 @@ namespace PL.Pages
                 }
 
             }
+
+        private void addDrone(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.AddDrone(drone, Station.Text);
+                Close_Click(sender,e);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+    }
     }
 
 

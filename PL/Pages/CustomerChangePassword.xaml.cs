@@ -23,9 +23,32 @@ namespace PL.Pages
         public CustomerChangePassword(BLApi.IBL b,string i)
         {
             InitializeComponent();
+            bl = b;
+            id = i;
         }
         public event EventHandler updateList;
-
- 
+        private BLApi.IBL bl;
+        private string id;
+        private void changePassword(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var User = bl.GetUser(id);
+                if(User.UserPassword==old.Text)
+                {
+                    if (newPassword.Text != "")
+                    { bl.UpdatingDetailsOfUser(id, newPassword.Text);
+                        return;
+                    }
+                   // throw new PL.ConnectionException("");
+                }
+               // throw new PL.ConnectionException("");
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

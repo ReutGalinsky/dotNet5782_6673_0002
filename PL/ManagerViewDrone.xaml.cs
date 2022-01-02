@@ -34,6 +34,25 @@ namespace PL
             Longitude.Text = drone.Longitude;
 
         }
+        public ManagerViewDrone(BLApi.IBL b, string i,bool flag)
+        {
+            InitializeComponent();
+            bl = b;
+            id = i;
+            convertToPo(drone, bl.GetDrone(id));
+            Id.DataContext = drone;
+            Weight.DataContext = drone;
+            Model.DataContext = drone;
+            Battery.DataContext = drone;
+            State.DataContext = drone;
+            Latitude.Text = drone.Latitude;
+            Longitude.Text = drone.Longitude;
+            buttonMenue.Visibility = Visibility.Hidden;
+            buttonb.DataContext = drone;
+            updateButton.Visibility = Visibility.Hidden;
+            Model.IsEnabled = false;
+
+        }
         private BLApi.IBL bl;
         private bool isClosed = true;
         private string id;
@@ -160,7 +179,6 @@ namespace PL
         {
             MessageBox.Show("error");
         }
-
     }
     private void supplyButton(object sender, RoutedEventArgs e)
     {
@@ -218,6 +236,12 @@ namespace PL
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
 
+        }
+
+        private void openParcel(object sender, RoutedEventArgs e)
+        {
+            ManagerViewParcel parcel = new ManagerViewParcel(bl, drone.NumberOfParcel);
+            parcel.ShowDialog();
         }
     }
 }

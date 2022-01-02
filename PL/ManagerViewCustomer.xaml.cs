@@ -30,6 +30,7 @@ namespace PL
             Name.DataContext = customer;
             Longitude.DataContext = customer.Location;
             Latitude.DataContext = customer.Location;
+            listParcels.DataContext = bl.GetAllParcelsBy(x => x.Sender == i || x.Geter == i);
         }
         private BLApi.IBL bl;
         private BO.Customer customer;
@@ -38,13 +39,6 @@ namespace PL
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void move(object sender, MouseButtonEventArgs e)
-        {
-            
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
@@ -59,12 +53,29 @@ namespace PL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
         }
         private void OnlyNumbers(object sender, KeyEventArgs e)
         {
             Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void showTheParcel(object sender, RoutedEventArgs e)
+        {
+
+            ManagerViewParcel parcel = new ManagerViewParcel(bl,((BO.ParcelOfCustomer)(listParcels.SelectedItem)).IdNumber);
+            parcel.ShowDialog();
+        }
+
+        private void enableShow(object sender, SelectionChangedEventArgs e)
+        {
+            showParcel.IsEnabled = true;
         }
     }
 }

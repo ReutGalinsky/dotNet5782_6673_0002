@@ -22,104 +22,57 @@ namespace PL
         public Account(BLApi.IBL b)
         {
             InitializeComponent();
-            bl = b;
+            Id.DataContext = customer;
+            Name.DataContext = customer;
+            Phone.DataContext = customer;
         }
-        private BLApi.IBL bl;
-        private void Login_Click(object sender, RoutedEventArgs e)
+        BLApi.IBL bl;
+        private BO.Customer customer = new BO.Customer();
+        public event EventHandler updateList;
+
+
+
+        private void Onlynumbers(object sender, KeyEventArgs e)
         {
+            Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
+        }
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+
             try
             {
-                check.IsChecked = false;
-                var User = bl.GetUser(user.Text);
-                if (User.UserPassword == password.Password && User.isManager == true)
+                double temp;
+                if (double.TryParse(Longitude.Text, out temp) == false)
                 {
-                    ManagerPage pageManager = new ManagerPage(bl);
-                    pageManager.Show();
-                    this.Close();
+                    MessageBox.Show("Longitude suppose to be double");
                 }
-                else
+                customer.Location = new BO.Location();
+                customer.Location.Longitude = temp;
+                if (double.TryParse(Latitude.Text, out temp) == false)
                 {
-                    MessageBox.Show($"there is no manager with the id of {User.UserName}");
+                    MessageBox.Show("Latitude suppose to be double");
                 }
+                customer.Location.Latitude = temp;
+                bl.AddCustomer(customer);
+                updateList(sender, e);
+                bl.AddUser(new BO.User() { isManager = false, UserName = customer.IdNumber, UserPassword = password.Password });
             }
-            catch (Exception ex)
+            catch (Exception ex)//לטפל בחריגות
             {
-                MessageBox.Show($"there is no manager with the id of {user.Text}");
+                MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void move(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            TypeOfUser typeOfUser = new TypeOfUser(bl);
-            typeOfUser.Show();
-            this.Close();
-        }
 
-        private void focus(object sender, RoutedEventArgs e)
+        private void Focus(object sender, TextChangedEventArgs e)
         {
-            if (textPassword.Text == "Password:")
+            if (customer.IdNumber == "" || Longitude.Text == "" || Latitude.Text == "" || customer.Name == "" || customer.Phone == "")
             {
-                textPassword.Visibility = Visibility.Collapsed;
-                password.Focus();
+                ADD.IsEnabled = false;
             }
-
-
-        }
-
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-        private void Check_Click(object sender, RoutedEventArgs e)
-        {
-
-
-
-        }
-
-        private void Forget_Click(object sender, RoutedEventArgs e)
-        {
-            ForgetPassword forgetPassword = new ForgetPassword(bl);
-            forgetPassword.Show();
-            this.Close();
-        }
-
-        private void Account_Click(object sender, RoutedEventArgs e)
-        {
-            Account account = new Account(bl);
-            account.Show();
-            this.Close();
-        }
-
-        private void showPassword(object sender, RoutedEventArgs e)
-        {
-
-            textPassword.Visibility = Visibility.Collapsed;
-            password.Visibility = Visibility.Visible;
-            password.Password = textPassword.Text;
-            password.Focus();
-        }
-
-        private void showText(object sender, RoutedEventArgs e)
-        {
-            textPassword.Text = password.Password;
-            textPassword.Visibility = Visibility.Visible;
-            password.Visibility = Visibility.Collapsed;
-            textPassword.Focus();
-
-        }
-
-        private void focusUser(object sender, RoutedEventArgs e)
-        {
-            if (user.Text == "Username:")
-                user.Text = "";
-
+            else
+                ADD.IsEnabled = true;
         }
     }
 }
+
 

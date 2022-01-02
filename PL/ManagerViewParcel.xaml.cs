@@ -37,7 +37,8 @@ namespace PL
             Match.DataContext = parcel;
             Arrive.DataContext = parcel;
             Collect.DataContext = parcel;
-            if(parcel.MatchForDroneTime==null)
+            buttonb.DataContext = parcel;
+            if (parcel.MatchForDroneTime==null)
             {
                 Match.Visibility = Visibility.Collapsed;
                 matchLabel.Visibility = Visibility.Collapsed;
@@ -62,12 +63,23 @@ namespace PL
             this.Close();
         }
 
-        private void move(object sender, MouseButtonEventArgs e)
+
+        private void openDrone(object sender, RoutedEventArgs e)
+        {
+            ManagerViewDrone drone = new ManagerViewDrone(bl, parcel.Drone.IdNumber,true);
+            drone.ShowDialog();
+        }
+
+        private void changeToText(object sender, MouseEventArgs e)
+        {
+            (sender as Button).Content = "Open Drone";
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-        }
 
- 
+        }
     }
 }

@@ -99,6 +99,11 @@ namespace PL.Pages
             view.GroupDescriptions.Add(groupDescription);
 
         }
+
+        private void PackIconMaterial_ToolTipClosing(object sender, ToolTipEventArgs e)
+        {
+
+        }
     }
 
 

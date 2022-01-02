@@ -79,19 +79,17 @@ namespace PL
         }
         private void closeSubPages()
         {
-            AddDelivery.Visibility = Visibility.Collapsed;
-            Password.Visibility = Visibility.Collapsed;
+            AddDelivery.Visibility = Visibility.Hidden;
+            Password.Visibility = Visibility.Hidden;
         }
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-            if (ButtonCloseMenu.Visibility == Visibility.Visible)
-            {
                 var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
                 switch (item.Tag)
                 {
                     case "PersonalArea":
                         Customer.NavigationService.Navigate(pagePersonal);
-                        //closeSubPages();
+                        closeSubPages();
                         Password.Visibility = Visibility.Visible;
                         break;
                     case "ChangePassword":
@@ -102,7 +100,7 @@ namespace PL
                     case "AllDeliveries":
                         pageDelivery.update(sender, e);
                         Customer.NavigationService.Navigate(pageDelivery);
-                        //closeSubPages();
+                        closeSubPages();
                         AddDelivery.Visibility = Visibility.Visible;
                         break;
                     case "AddNewDelivery":
@@ -113,10 +111,10 @@ namespace PL
                     case "AllParcels":
                         pageParcel.update(sender, e);
                         Customer.NavigationService.Navigate(pageParcel);
-                        //closeSubPages();
+                        closeSubPages();
                         break;
                 }
-            }
+            
         }
     }
 }

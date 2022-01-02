@@ -86,7 +86,8 @@ namespace PL.Pages
 
         private void GroupGeter(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            
+             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Geter");
             view.GroupDescriptions.Add(groupDescription);
             //view.GroupDescriptions.OrderBy(x=>x.GroupNames);

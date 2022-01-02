@@ -25,16 +25,15 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
-            
             baseStation = bl.GetBaseStation(id);
-            if (baseStation.Drones.Count()==0)
-                dronesInCharge.Visibility = Visibility.Collapsed;
+            foreach (var item in baseStation.Drones)
+                drones.Add(item);
             Id.DataContext = baseStation;
             Name.DataContext = baseStation;
             ChargeSlots.DataContext = baseStation;
             Latitude.DataContext = baseStation.Location;
             Longitude.DataContext = baseStation.Location;
-            dronesInCharge.DataContext = drones;
+            listDrones.DataContext = drones;
             foreach (var item in baseStation.Drones)
                 drones.Add(item);
         }
@@ -62,12 +61,6 @@ namespace PL
 
             }
         }
-        private void move(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-
-        }
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
@@ -76,6 +69,23 @@ namespace PL
         private void openDrone(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+
+        }
+        private void showTheParcel(object sender, RoutedEventArgs e)
+        {
+            ManagerViewDrone drone = new ManagerViewDrone(bl, ((BO.DroneInCharge)(listDrones.SelectedItem)).IdNumber,true);
+            drone.ShowDialog();
+        }
+
+        private void enableShow(object sender, SelectionChangedEventArgs e)
+        {
+            showParcel.IsEnabled = true;
         }
     }
 }

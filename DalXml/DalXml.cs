@@ -280,7 +280,7 @@ namespace Dal
                 throw new ExistingException($"the parcel with the id:{parcel.IdNumber} is already exist");
             }
             listParcels.Add(parcel);
-            XmlMethods.SaveListToXMLSerializer<Parcel>(listParcels, chargePath);
+            XmlMethods.SaveListToXMLSerializer<Parcel>(listParcels, parcelPath);
             runningNumber.Value = runningNumber.Value+1;
             configureRoot.Save(configurePath);
             return parcel.IdNumber;
