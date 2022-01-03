@@ -10,36 +10,55 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="35"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
             <RowDefinition/>
 
 
         </Grid.RowDefinitions>
-        <TextBlock Text="Id number:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="1" Grid.Column="1" TextChanged="Focus" />
-        <TextBlock Text="Name:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-        <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="1" TextChanged="Focus" />
-        <TextBlock Text="Phone:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-        <TextBox x:Name="Phone" Background="{x:Null}"  Text="{Binding Path=Phone, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="3" Grid.Column="1" TextChanged="Focus" />
-        <TextBlock Text="Longitude:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
-        <TextBox x:Name="Longitude" Background="{x:Null}"  Text="{Binding Path=Location.Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1" TextChanged="Focus" />
-        <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
-        <TextBox x:Name="Latitude" Background="{x:Null}"  Text="{Binding Path=Location.Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" TextChanged="Focus" />
-        <Button x:Name="ADD" IsEnabled="False" Content="ADD" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Add_Click" Grid.Row="6" Grid.Column="1"/>
-        <Button x:Name="CANCEL" Content="CANCEL" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Grid.Row="7" Grid.Column="1"/>
+        <Border Background="LightBlue" Opacity="0.5" Margin="1,106,2,97" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.RowSpan="7" Grid.Column="1"/>
 
+        <TextBlock Text="Id number:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="2" Grid.Column="1" TextChanged="Focus" />
+        <TextBlock Text="Name:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="2" TextChanged="Focus" />
+        <TextBlock Text="Phone:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <TextBox x:Name="Phone" Background="{x:Null}"  Text="{Binding Path=Phone, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="3" Grid.Column="2" TextChanged="Focus" />
+        <TextBlock Text="Longitude:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
+        <TextBox x:Name="Longitude" Background="{x:Null}"  Text="{Binding Path=Location.Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="2" TextChanged="Focus" />
+        <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
+        <TextBox x:Name="Latitude" Background="{x:Null}"  Text="{Binding Path=Location.Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="2" TextChanged="Focus" />
+        <Button x:Name="ADD" Content="Add" Foreground="White" FontSize="10" FontWeight="Medium" Margin="127,8,139,112" Grid.Column="1" Click="Add_Click" Grid.ColumnSpan="2" Grid.Row="6">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="125" Height="25" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
 
 

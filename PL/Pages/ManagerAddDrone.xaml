@@ -5,37 +5,59 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="900"
+      d:DesignHeight="400" d:DesignWidth="700"
       Title="ManagerAddDrone">
-   <Grid>
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+    <Grid>
 
-            </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+
+            <ColumnDefinition />
+            <ColumnDefinition />
+
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="35"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
             <RowDefinition/>
 
         </Grid.RowDefinitions>
-        <TextBlock Text="Id number:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-            <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focus" Grid.Row="1" Grid.Column="1"  PreviewKeyDown="OnlyNumbers_PreviewKeyDown" />
-            <TextBlock Text="Model:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-            <TextBox x:Name="Model" Background="{x:Null}"  Text="{Binding Path=Model, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focus" Grid.Row="2" Grid.Column="1" />
-            <TextBlock Text="Charge Station" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-            <TextBox x:Name="Station" Background="{x:Null}"  Text="{Binding Path=Station, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focus" Grid.Row="3" Grid.Column="1"  PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" />
-            <TextBlock Text="Maximum Weight:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
-            <ComboBox x:Name="Weight" Background="{x:Null}"  Text="{Binding Path=MaxWeight, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1"  PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown"/>
-            <Button x:Name="ADD" Content="ADD" IsEnabled="False" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Grid.Row="5" Grid.Column="1" Click="addDrone"/>
-            <Button x:Name="CANCEL" Content="CANCEL" Style="{StaticResource myButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="90" FontSize="22" Click="Close_Click" Grid.Row="6" Grid.Column="1">
-            </Button>
-        </Grid>
+        <TextBlock Text="Id number:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focus" Grid.Row="1" Grid.Column="2"  PreviewKeyDown="OnlyNumbers_PreviewKeyDown" />
+        <TextBlock Text="Model:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <TextBox x:Name="Model" Background="{x:Null}"  Text="{Binding Path=Model, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focus" Grid.Row="2" Grid.Column="2" />
+        <TextBlock Text="Charge Station" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <TextBox x:Name="Station" Background="{x:Null}"  Text="{Binding Path=Station, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" TextChanged="focus" Grid.Row="3" Grid.Column="2"  PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" />
+        <TextBlock Text="Maximum Weight:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
+        <ComboBox x:Name="Weight" Background="{x:Null}"  Text="{Binding Path=MaxWeight, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="2"  PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown"/>
+        <Border Background="LightBlue" Opacity="0.5" Margin="0,101,3,75" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.RowSpan="7" Grid.Column="1"/>
+        <Button x:Name="ADD" Content="Add" Foreground="White" FontSize="10" FontWeight="Medium" Margin="99,21,108,87" Grid.Column="1" Click="Add_Click" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="2">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="125" Height="25" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+    </Grid>
 
 </Page>

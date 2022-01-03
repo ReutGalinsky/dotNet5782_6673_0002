@@ -9,37 +9,40 @@
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Title="ManagerViewParcel" Height="400" Width="500">
+        Title="ManagerViewParcel" Height="440" Width="700">
     <Window.Resources>
         <PL.Convert:ConvertDroneToEnable x:Key="ParcelToEnable"/>
     </Window.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="167*" />
-            <ColumnDefinition Width="167*" />
-            <ColumnDefinition Width="163*" />
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="170*" />
+            <ColumnDefinition Width="154*" />
+
+            <ColumnDefinition Width="169*" />
+            <ColumnDefinition Width="207*" />
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
 
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+
             <RowDefinition/>
 
         </Grid.RowDefinitions>
-        <Grid Background="#FFE2A536" Grid.ColumnSpan="3" MouseDown="Grid_MouseDown"/>
-        <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="2">
+        <Grid Background="#FFE2A536" Grid.ColumnSpan="4" MouseDown="Grid_MouseDown"/>
+        <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="3" Margin="127,0,0,0">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -60,63 +63,64 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <TextBlock Text="My Drone:" Margin="17,11,0,0" FontWeight="Light" FontSize="30" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <Border Background="Black" Opacity="0.5" Margin="12,51,24,47" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
+        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="18,70,33,2" RenderTransformOrigin="0.752,0.498" Grid.Row="1" Grid.RowSpan="11"/>
 
-        <TextBlock Text="Id Parcel number:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" />
-        <TextBox x:Name="Id" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="1" Grid.Column="1"   />
-        <TextBlock Text="Sender Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" />
-        <TextBox x:Name="SenderName" Text="{Binding Path=Name}" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="2" Grid.Column="1"   />
-        <TextBlock Text="Sender Id:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" />
-        <TextBox x:Name="SenderId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" Text="{Binding Path=IdNumber}" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="3" Grid.Column="1"   />
-        <TextBlock Text="Geter Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" />
-        <TextBox x:Name="GeterName" IsEnabled="False" Text="{Binding Path=Name}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="4" Grid.Column="1"   />
-        <TextBlock Text="Geter Id:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" />
-        <TextBox x:Name="GeterId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Center" Text="{Binding Path=IdNumber}" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="5" Grid.Column="1"   />
-        <TextBlock Text="Parcel Priority:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" />
-        <TextBox x:Name="PriorityBox" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="6" Grid.Column="1" />
-        <TextBlock Text="Parcel Weight:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="7" />
-        <TextBox x:Name="WeightBox" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Weight}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="7" Grid.Column="1" />
-        <TextBlock Text="Create Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" />
-        <TextBox x:Name="Create" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=CreateParcelTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="8" Grid.Column="1"   />
-        <TextBlock x:Name="matchLabel" Text="Match time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="9" />
-        <TextBox x:Name="Match" IsEnabled="False" Text="{Binding Path=MatchForDroneTime}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="9" Grid.Column="1"   />
-        <TextBlock  x:Name="collectLabel" Text="Collecting Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="10" />
-        <TextBox x:Name="Collect" IsEnabled="False" Text="{Binding Path=CollectingDroneTime}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="10" Grid.Column="1"   />
-        <TextBlock x:Name="arriveLabel" Text="Arriving Time:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="11" />
-        <TextBox x:Name="Arrive" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ArrivingDroneTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="11" Grid.Column="1"   />
-        <Button Content="Ok" x:Name="OK" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="1" Margin="1,0,2,-4" Grid.Row="12">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
-                    <Setter Property="Background" Value="Gray"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="Black"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border Width="75" Height="15" CornerRadius="8" Background="{TemplateBinding Background}">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+        <TextBlock Text="My options:" Margin="16,8,0,0" FontWeight="Light" FontSize="30" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1"/>
+        <Border Background="Black" Opacity="0.5" Margin="12,51,24,47" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
+        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="168,68,9,2" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="168,0,9,1" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="7" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
 
-        <Button x:Name="buttonb" Grid.Column="2" IsEnabled="{Binding Path=Drone, Converter={StaticResource ParcelToEnable}}" HorizontalAlignment="Left" Grid.RowSpan="2" Grid.Row="7" VerticalAlignment="Top" Click="openDrone" Height="38" Width="45">
+        <Border Background="Gray" Opacity="0.5" Margin="1,67,29,1" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="11" Grid.ColumnSpan="2"/>
+
+        <TextBlock Text="My parcel:" Margin="63,34,0,0" FontWeight="Light" FontSize="40" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
+        <Border Background="Black" Opacity="0.5" Margin="27,49,50,49" Height="2" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+
+
+        <TextBlock Text="Id Parcel number:" Style="{StaticResource UsualFont}" FontSize="14" FontWeight="Medium" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="14" Width="120" Grid.Column="1" Margin="10,76,0,0" />
+        <TextBox x:Name="Id" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="20" Grid.Row="1" Grid.Column="2" Margin="8,72,0,0"   />
+        <TextBlock Text="Sender Name:" FontSize="14" Style="{StaticResource UsualFont}"  FontWeight="Medium" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Height="14" Width="90" Grid.Column="1" Margin="12,0,0,7"/>
+        <TextBox x:Name="SenderName" Text="{Binding Path=Name}" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="2" Grid.Column="2" Margin="7,0,0,0"   />
+        <TextBlock Text="Sender Id:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Height="14" Width="78" Grid.Column="1" Margin="12,0,0,0"/>
+        <TextBox x:Name="SenderId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Left" Text="{Binding Path=IdNumber}" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="3" Grid.Column="2" Margin="7,0,0,0"   />
+        <TextBlock Text="Geter Name:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Height="14" Width="86" Grid.Column="1" Margin="14,0,0,0"/>
+        <TextBox x:Name="GeterName" IsEnabled="False" Text="{Binding Path=Name}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="4" Grid.Column="2" Margin="7,0,0,0"/>
+        <TextBlock Text="Geter Id:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Height="14" Width="86" Grid.Column="1" Margin="16,0,0,0" />
+        <TextBox x:Name="GeterId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Left" Text="{Binding Path=IdNumber}" VerticalAlignment="Top" Width="90" Height="20" Grid.Row="5" Grid.Column="2" Margin="7,0,0,0"    />
+        <TextBlock Text="Parcel Priority:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Height="14" Width="88" Grid.Column="1" Margin="13,0,0,0"  />
+        <TextBox x:Name="PriorityBox"  IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="6" Grid.Column="2" Margin="7,0,0,0" />
+        <TextBlock Text="Parcel Weight:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="7" Height="14" Width="88" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Margin="11,0,0,0" >
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.675"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBox x:Name="WeightBox" Margin="9,0,0,0"  Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Weight}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="7" Grid.Column="2" />
+        <TextBlock Text="Create Time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Bottom" Grid.Row="8" Height="16" Width="92" Grid.Column="1" Margin="13,0,0,6"  />
+        <TextBox x:Name="Create" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=CreateParcelTime}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="8" Grid.Column="2" Margin="9,0,0,0"    />
+        <TextBlock x:Name="matchLabel" Text="Match time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="9" Height="16" Width="86" Grid.Column="1" Margin="12,0,0,0" />
+        <TextBox x:Name="Match" Margin="9,0,0,0"  IsEnabled="False" Text="{Binding Path=MatchForDroneTime}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="9" Grid.Column="2"   />
+        <TextBlock  x:Name="collectLabel" Text="Collecting Time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="10" Height="20" Width="114" Grid.Column="1" Margin="11,0,0,0" />
+        <TextBox x:Name="Collect"  Margin="9,0,0,0" IsEnabled="False" Text="{Binding Path=CollectingDroneTime}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="10" Grid.Column="2"   />
+        <TextBlock x:Name="arriveLabel" Text="Arriving Time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="11" Height="22" Width="96" Grid.Column="1" Margin="14,0,0,0" />
+        <TextBox x:Name="Arrive" Margin="9,0,0,0" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ArrivingDroneTime}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="11" Grid.Column="2" RenderTransformOrigin="1.464,0.106"   />
+
+        <Button x:Name="buttonb" IsEnabled="{Binding Path=Drone, Converter={StaticResource ParcelToEnable}}" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Click="openDrone" Height="26" Width="117" Margin="20,72,0,0">
             <Button.Content>
                 <StackPanel>
-                    <iconPacks:PackIconMaterial x:Name="contentt" Kind="Drone">
-                    </iconPacks:PackIconMaterial>
+                    <iconPacks:PackIconMaterial x:Name="contentt" Kind="Drone" Height="15" Width="111" BorderBrush="Transparent" Background="Transparent"/>
                 </StackPanel>
             </Button.Content>
             <Button.ToolTip>
                 <TextBlock Text="View Drone" FontFamily="Ink Free" ></TextBlock>
             </Button.ToolTip>
         </Button>
-        <Button x:Name="ShowSender" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Click="openSender" Height="31" Width="34">
+        <Button x:Name="ShowSender" Grid.Column="2" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Click="openSender" Height="25" Width="197" Margin="168,69,0,0" Grid.ColumnSpan="2">
             <Button.Content>
                 <StackPanel>
                     <iconPacks:PackIconMaterial Kind="AccountArrowRight">
@@ -127,7 +131,7 @@
                 <TextBlock Text="View Sender" FontFamily="Ink Free" ></TextBlock>
             </Button.ToolTip>
         </Button>
-        <Button x:Name="ShowGeter" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Click="openGeter" Height="31" Width="34">
+        <Button x:Name="ShowGeter" BorderBrush="Transparent" Background="Transparent" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Click="openGeter" Height="32" Width="199" Margin="168,0,0,0" Grid.ColumnSpan="2">
             <Button.Content>
                 <StackPanel>
                     <iconPacks:PackIconMaterial Kind="AccountArrowLeft">
@@ -139,22 +143,22 @@
             </Button.ToolTip>
         </Button>
 
-        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="160,-365,-610,85" Panel.ZIndex="-1">
+        <Grid Grid.Column="2" Margin="26,-330,-352,55" Panel.ZIndex="-1" Grid.ColumnSpan="2">
             <Grid.RenderTransform>
                 <RotateTransform Angle="50"/>
             </Grid.RenderTransform>
             <StackPanel Orientation="Horizontal" Margin="-500,250,-255,-250">
                 <StackPanel>
-                    <Border Width="700" Height="35" Background="#B2FFD300" Margin="0,15,0,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="#FFD97C47" Margin="150,15,0,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="Orange" Margin="75,15,0,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="#83DABD06" Margin="150,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#B2FFD300" Margin="0,15,10,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#FFD97C47" Margin="150,15,20,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="Orange" Margin="75,15,30,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#83DABD06" Margin="150,15,20,0" CornerRadius="20"/>
                 </StackPanel>
                 <StackPanel>
-                    <Border Width="700" Height="35" Background="#B2FFD300" Margin="0,15,0,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="#FFD97C47" Margin="150,15,0,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="Orange" Margin="75,15,0,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="#83DABD06" Margin="150,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#B2FFD300" Margin="0,15,-400,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#FFD97C47" Margin="150,15,-200,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="Orange" Margin="75,15,-70,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#83DABD06" Margin="150,15,80,0" CornerRadius="20"/>
                 </StackPanel>
             </StackPanel>
 

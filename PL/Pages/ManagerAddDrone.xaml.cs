@@ -93,7 +93,7 @@ namespace PL.Pages
 
             }
 
-        private void addDrone(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {
