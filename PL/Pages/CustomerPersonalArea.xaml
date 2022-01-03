@@ -2,6 +2,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL.Pages"
       mc:Ignorable="d" 
@@ -20,7 +21,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="150,220,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Aharoni" Width="150" Height="25"/>
         <TextBox x:Name="Longitude" HorizontalAlignment="Left" IsEnabled="False" Margin="350,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
         <TextBox x:Name="Latitude" HorizontalAlignment="Left" IsEnabled="False" Margin="350,220,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" TextChanged="Latitude_TextChanged"/>
-        <Button x:Name="updatingButton" Visibility="Collapsed" Content="Update Please" Click="Button_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="370,282,177,67">
+        <Button x:Name="updatingButton" Visibility="Collapsed" Content="Update Please" Click="Button_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="385,285,156,58">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -41,12 +42,31 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
-        <Button x:Name="edit" Style="{StaticResource myButton}" HorizontalAlignment="Left" Margin="432,251,0,0" VerticalAlignment="Top" Height="30" Width="29" Click="edit_Click">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/עפרון.png"></ImageBrush>
-            </Button.Background>
+        <Button x:Name="edit" Click="edit_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="401,238,179,99">
+            <Button.Content>
+                <iconPacks:PackIconMaterial Kind="Pencil" Width="55" Foreground="Black" />
+            </Button.Content>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="100" Height="25" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
+           
 
 
     </Grid>

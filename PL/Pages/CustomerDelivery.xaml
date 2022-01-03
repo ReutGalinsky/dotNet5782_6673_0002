@@ -59,7 +59,7 @@
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOff" Width="58" Foreground="Black" />
+                            <iconPacks:PackIconMaterial Kind="AccountArrowLeft" Width="58" Foreground="Black" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -69,7 +69,7 @@
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOutline" Width="58" Foreground="Black" />
+                            <iconPacks:PackIconMaterial Kind="AccountArrowRight" Width="58" Foreground="Black" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -99,7 +99,7 @@
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="Shovel" Width="58" Foreground="Black" />
+                            <iconPacks:PackIconMaterial Kind="BatteryCharging" Width="58" Foreground="Black" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

@@ -45,10 +45,10 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <ListView x:Name="ParcelListView" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="150,0,0,0" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Height="272" Width="440">
+        <ListView x:Name="ParcelListView" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="150,0,0,0" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Height="272" Width="431">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn> 
+                    <GridViewColumn>
                         <GridViewColumn.Header>
                             <iconPacks:PackIconMaterial Kind="Identifier" Width="58" Foreground="Black">
                                 <iconPacks:PackIconMaterial.ToolTip>
@@ -58,13 +58,13 @@
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=IdNumber}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding Path=IdNumber}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" VerticalAlignment="Center" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOff" Width="58" Foreground="Black" >
+                            <iconPacks:PackIconMaterial Kind="AccountArrowLeft" Width="58" Foreground="Black" >
                                 <iconPacks:PackIconMaterial.ToolTip>
                                     <TextBlock Text="Sender" FontFamily="Ink Free"></TextBlock>
                                 </iconPacks:PackIconMaterial.ToolTip>
@@ -72,13 +72,13 @@
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Sender}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
+                                <TextBlock Text="{Binding Path=Sender}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="ToggleSwitchOutline" Width="58" Foreground="Black">
+                            <iconPacks:PackIconMaterial Kind="AccountArrowRight" Width="58" Foreground="Black">
                                 <iconPacks:PackIconMaterial.ToolTip>
                                     <TextBlock Text="Geter" FontFamily="Ink Free"></TextBlock>
                                 </iconPacks:PackIconMaterial.ToolTip>
@@ -86,7 +86,7 @@
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Geter}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
+                                <TextBlock Text="{Binding Path=Geter}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -100,7 +100,7 @@
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Weight}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
+                                <TextBlock Text="{Binding Path=Weight}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -114,13 +114,13 @@
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Priority}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
+                                <TextBlock Text="{Binding Path=Priority}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="Shovel" Width="58" Foreground="Black">
+                            <iconPacks:PackIconMaterial Kind="BatteryCharging" Width="58" Foreground="Black">
                                 <iconPacks:PackIconMaterial.ToolTip>
                                     <TextBlock Text="State" FontFamily="Ink Free"></TextBlock>
                                 </iconPacks:PackIconMaterial.ToolTip>
@@ -128,11 +128,11 @@
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=ParcelState}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
+                                <TextBlock Text="{Binding Path=ParcelState}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="auto">
+                    <GridViewColumn Width="40">
                         <GridViewColumn.Header>
                             <iconPacks:PackIconMaterial Kind="Delete" Width="58" Foreground="Black" />
                         </GridViewColumn.Header>
@@ -140,7 +140,7 @@
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel">
                                     <Button.Content>
-                                        <iconPacks:PackIconMaterial Kind="Delete" Width="15" Foreground="Black" />
+                                        <iconPacks:PackIconMaterial Kind="Cancel" Width="15" Foreground="Black" />
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>
@@ -162,6 +162,6 @@
         </ListView>
         <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="25,65,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheck"/>
         <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top" Unchecked="unCheck" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741"/>
-        
+
     </Grid>
 </Page>

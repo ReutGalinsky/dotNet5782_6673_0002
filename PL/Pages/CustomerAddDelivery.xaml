@@ -39,8 +39,8 @@
         <ComboBox x:Name="Weight" HorizontalAlignment="Left" Margin="350,130,0,0" Text="{Binding Path=Name}" VerticalAlignment="Top" Width="200" Height="25"/>
         <TextBlock HorizontalAlignment="Left" Margin="150,190,0,0" Text="Longitude" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Aharoni" Width="150" Height="25"/>
         <TextBlock HorizontalAlignment="Left" Margin="150,220,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Aharoni" Width="150" Height="25"/>
-        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="350,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
-        <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="350,220,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
+        <TextBox x:Name="Longitude" Text="min 34.2 max 35.8" GotFocus="focus_Click" HorizontalAlignment="Left" Margin="350,190,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
+        <TextBox x:Name="Latitude" Text="min 32.2 max 34.8" GotFocus="focus_Click1" HorizontalAlignment="Left" Margin="350,220,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
         <Button Content="Add" Click="Add_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="299,282,205,49">
             <Button.Style>
                 <Style TargetType="Button">

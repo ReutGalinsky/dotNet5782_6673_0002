@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace PL
 {
@@ -59,12 +61,25 @@ namespace PL
         {
             this.Close();
         }
-
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            MediaElement1.Visibility = Visibility.Hidden;
+        }
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+            MediaElement1.Visibility = Visibility.Visible;
+            MediaElement1.Source = new Uri(@"C:\Users\osnat\OneDrive\שולחן העבודה\new\PL\bin\Debug" + @"\video.mp4");
+        }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        private void MediaElement1_MediaEnded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
