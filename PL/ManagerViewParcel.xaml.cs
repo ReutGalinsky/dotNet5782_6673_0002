@@ -25,6 +25,11 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
+            CtorFunction();
+            IsInner = false;
+        }
+        private void CtorFunction()
+        {
             parcel = bl.GetParcel(id);
             Id.DataContext = parcel;
             SenderId.DataContext = parcel.SenderCustomer;
@@ -38,22 +43,33 @@ namespace PL
             Arrive.DataContext = parcel;
             Collect.DataContext = parcel;
             buttonb.DataContext = parcel;
-            if (parcel.MatchForDroneTime==null)
+            if (parcel.MatchForDroneTime == null)
             {
                 Match.Visibility = Visibility.Collapsed;
                 matchLabel.Visibility = Visibility.Collapsed;
             }
-            if (parcel.CollectingDroneTime==null)
+            if (parcel.CollectingDroneTime == null)
             {
                 Collect.Visibility = Visibility.Collapsed;
                 collectLabel.Visibility = Visibility.Collapsed;
             }
-            if (parcel.ArrivingDroneTime==null)
+            if (parcel.ArrivingDroneTime == null)
             {
                 Arrive.Visibility = Visibility.Collapsed;
                 arriveLabel.Visibility = Visibility.Collapsed;
             }
         }
+        public ManagerViewParcel(BLApi.IBL b, string i,bool isInner)
+        {
+            InitializeComponent();
+
+            bl = b;
+            id = i;
+            CtorFunction();
+            IsInner = true;
+        }
+
+        private bool IsInner;
         private BLApi.IBL bl;
         private string id;
         private BO.Parcel parcel;
@@ -80,6 +96,19 @@ namespace PL
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
 
+        }
+
+        private void openGeter(object sender, RoutedEventArgs e)
+        {
+            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.GeterCustomer.IdNumber,true);
+            customer.ShowDialog();
+
+        }
+
+        private void openSender(object sender, RoutedEventArgs e)
+        {
+            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.SenderCustomer.IdNumber,true);
+            customer.ShowDialog();
         }
     }
 }

@@ -24,6 +24,11 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
+            CtorFunction(i);
+            IsInner = false;
+        }
+        private void CtorFunction(string i)
+        {
             customer = bl.GetCustomer(id);
             Id.DataContext = customer;
             Phone.DataContext = customer;
@@ -32,6 +37,15 @@ namespace PL
             Latitude.DataContext = customer.Location;
             listParcels.DataContext = bl.GetAllParcelsBy(x => x.Sender == i || x.Geter == i);
         }
+        public ManagerViewCustomer(BLApi.IBL b, string i,bool inner)
+        {
+            InitializeComponent();
+            bl = b;
+            id = i;
+            CtorFunction(i);
+            IsInner = true;
+        }
+        private bool IsInner;
         private BLApi.IBL bl;
         private BO.Customer customer;
         private string id;
@@ -47,7 +61,8 @@ namespace PL
             {
                 bl.UpdatingDetailsOfCustomer(customer.IdNumber, customer.Name, customer.Phone);
                 MessageBox.Show($"the base station number {customer.IdNumber} updated successfully!");
-                updateList(sender, e);
+                if(IsInner==false)
+                    updateList(sender, e);
                 this.Close();
             }
             catch (Exception ex)
@@ -69,7 +84,7 @@ namespace PL
         private void showTheParcel(object sender, RoutedEventArgs e)
         {
 
-            ManagerViewParcel parcel = new ManagerViewParcel(bl,((BO.ParcelOfCustomer)(listParcels.SelectedItem)).IdNumber);
+            ManagerViewParcel parcel = new ManagerViewParcel(bl,((BO.ParcelOfList)(listParcels.SelectedItem)).IdNumber,true);
             parcel.ShowDialog();
         }
 

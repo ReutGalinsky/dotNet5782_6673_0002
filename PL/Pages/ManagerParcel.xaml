@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL.Pages"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="700"
       Title="ManagerParcel">
@@ -69,7 +70,9 @@
                 </GridView>
             </ListView.View>
             <ListView.GroupStyle>
+               
                 <GroupStyle>
+                    
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
                             <Grid>
@@ -82,10 +85,12 @@
         </ListView>
         <CheckBox x:Name="senderCheck" Content="Group By Sender" HorizontalAlignment="Left" Margin="561,197,0,0" VerticalAlignment="Top" Checked="GroupSender" Unchecked="CancelGroup"/>
         <CheckBox x:Name="geterCheck" Content="Group By Geter" HorizontalAlignment="Left" Margin="561,225,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupGeter"/>
-        <!-- <DatePicker x:Name="start" HorizontalAlignment="Left" Margin="639,298,0,0" VerticalAlignment="Top" SelectedDate="{Binding Path, Mode=TwoWay}" SelectedDateChanged="changed"/>
-        <DatePicker x:Name="end" HorizontalAlignment="Left" Margin="639,327,0,0" VerticalAlignment="Top"/>-->
         <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="562,275,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupState"/>
         <CheckBox Content="Group By Priority" HorizontalAlignment="Left" Margin="560,245,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupPriority"/>
+        <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="569,92,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime"/>
+        <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="569,132,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime"/>
+        <TextBlock HorizontalAlignment="Left" Margin="572,79,0,0" Text="Start Date:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" FontFamily="Yu Gothic UI Semibold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="572,119,0,0" Text="End Date:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" FontFamily="Yu Gothic UI Semibold"/>
 
     </Grid>
 </Page>

@@ -10,26 +10,14 @@
         ResizeMode="NoResize"
         Title="ManagerViewBaseStation" Height="400" Width="500">
     <Window.Resources>
-        <DataTemplate x:Key="MyDataTemplate"
- DataType="local:BO.DroneInCharge">
+        <DataTemplate x:Key="myDroneInCharge">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0"
- Text="Id: " />
-                <TextBlock Grid.Column="1"
- Text="{Binding Path=IdNumber}" />
-                <TextBlock Grid.Column="2"
- Text="Battery: " />
-                <TextBlock Grid.Column="3"
- Text="{Binding Path=Battery}" />
+                <TextBlock Text="{Binding Path=IdNumber}" Grid.Column="0"></TextBlock>
+                <TextBlock Text="{Binding Path=Battery}" Grid.Column="1"></TextBlock>
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -82,7 +70,7 @@
         <TextBox Background="{x:Null}" x:Name="Longitude" Text="{Binding Path=Longitude}"  IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1" />
         <TextBlock HorizontalAlignment="Center" Text="Latitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
         <TextBox Background="{x:Null}" x:Name="Latitude" Text="{Binding Path=Latitude}" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" />
-        <ComboBox x:Name="listDrones" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="166,14,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2" SelectionChanged="enableShow"/>
+        <ComboBox x:Name="listDrones" ItemsSource="{Binding}" ItemTemplate="{StaticResource myDroneInCharge}" HorizontalAlignment="Left" Margin="166,14,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2" SelectionChanged="enableShow"/>
         <Button x:Name="showParcel" HorizontalAlignment="Left" Margin="125,15,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.Column="2" IsEnabled="False" Click="showTheParcel">
             <Button.Content>
                 <StackPanel>

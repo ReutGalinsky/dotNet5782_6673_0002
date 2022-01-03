@@ -68,7 +68,7 @@ namespace PL
         private void Play_Click(object sender, RoutedEventArgs e)
         {
             MediaElement1.Visibility = Visibility.Visible;
-            MediaElement1.Source = new Uri(@"C:\Users\osnat\OneDrive\שולחן העבודה\new\PL\bin\Debug" + @"\video.mp4");
+            MediaElement1.Source = new Uri(@"C:\Users\רעות גלינסקי\source\repos\ReutGalinsky\dotNet5782_6673_0002\bin" + @"\video.mp4");
         }
         private void Back_Click(object sender, RoutedEventArgs e)
         {

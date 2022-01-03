@@ -30,15 +30,23 @@ namespace PL
         private BO.Customer customer = new BO.Customer();
         public event EventHandler updateList;
 
-
-
         private void Onlynumbers(object sender, KeyEventArgs e)
         {
             Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
         }
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void Focus(object sender, TextChangedEventArgs e)
+        {
+            if (customer.IdNumber == "" || Longitude.Text == "" || Latitude.Text == "" || customer.Name == "" || customer.Phone == "")
+            {
+                ADD.IsEnabled = false;
+            }
+            else
+                ADD.IsEnabled = true;
+        }
+
+        private void addUser(object sender, RoutedEventArgs e)
+        {
             try
             {
                 double temp;
@@ -61,16 +69,6 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void Focus(object sender, TextChangedEventArgs e)
-        {
-            if (customer.IdNumber == "" || Longitude.Text == "" || Latitude.Text == "" || customer.Name == "" || customer.Phone == "")
-            {
-                ADD.IsEnabled = false;
-            }
-            else
-                ADD.IsEnabled = true;
         }
     }
 }

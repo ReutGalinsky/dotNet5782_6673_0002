@@ -116,6 +116,68 @@ namespace PL.Pages
             view.GroupDescriptions.Add(groupDescription);
 
         }
+
+        private void selectedStart(object sender, SelectionChangedEventArgs e)
+        {
+            if(endDate.SelectedDate==null)
+            {
+                var tempList = from item in bl.GetParcels()
+                               let parcel = bl.GetParcel(item.IdNumber)
+                               where parcel.CreateParcelTime > startDate.SelectedDate
+                               select item;
+                listParcels.Clear();
+                foreach (var item in tempList)
+                    listParcels.Add(item);
+            }
+            else
+            {
+                var tempList = from item in bl.GetParcels()
+                               let parcel = bl.GetParcel(item.IdNumber)
+                               where parcel.CreateParcelTime > startDate.SelectedDate&&parcel.CreateParcelTime<endDate.SelectedDate
+                               select item;
+                listParcels.Clear();
+                foreach (var item in tempList)
+                    listParcels.Add(item);
+            }
+        }
+
+        private void changeTime(object sender, SelectionChangedEventArgs e)
+        {
+            if (endDate.SelectedDate == null&&startDate.SelectedDate!=null)
+            {
+                var tempList = from item in bl.GetParcels()
+                               let parcel = bl.GetParcel(item.IdNumber)
+                               where parcel.CreateParcelTime >= startDate.SelectedDate
+                               select item;
+                listParcels.Clear();
+                foreach (var item in tempList)
+                    listParcels.Add(item);
+                return;
+            }
+            if (endDate.SelectedDate != null && startDate.SelectedDate == null)
+            {
+                    var tempList = from item in bl.GetParcels()
+                                   let parcel = bl.GetParcel(item.IdNumber)
+                                   where parcel.CreateParcelTime <= endDate.SelectedDate
+                                   select item;
+                    listParcels.Clear();
+                    foreach (var item in tempList)
+                        listParcels.Add(item);
+                return;
+            }
+            if (endDate.SelectedDate != null && startDate.SelectedDate != null)
+            { 
+                var tempList = from item in bl.GetParcels()
+                                   let parcel = bl.GetParcel(item.IdNumber)
+                                   where parcel.CreateParcelTime >= startDate.SelectedDate && parcel.CreateParcelTime <= endDate.SelectedDate
+                                   select item;
+                    listParcels.Clear();
+                    foreach (var item in tempList)
+                        listParcels.Add(item);
+                return;
+                
+            }
+        }
     }
    
 }

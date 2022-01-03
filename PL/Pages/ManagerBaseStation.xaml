@@ -49,7 +49,10 @@
         <ListView x:Name="StationsListView" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" HorizontalContentAlignment="Stretch" Margin="0,79,281,59" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Number" Width="auto">
+                    <GridViewColumn Width="auto">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Number" FontFamily="Bahnschrift SemiCondensed" ></TextBlock>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=IdNumber}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" VerticalAlignment="Center" />
@@ -57,7 +60,11 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Name" Width="100">
+                    <GridViewColumn Width="100">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Name" FontFamily="Bahnschrift SemiCondensed" ></TextBlock>
+                        </GridViewColumn.Header>
+
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
@@ -65,14 +72,21 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Availible Charge Slots" Width="130">
+                    <GridViewColumn Width="130">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Availible Charge Slots" FontFamily="Bahnschrift SemiCondensed" ></TextBlock>
+                        </GridViewColumn.Header>
+
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=ChargeSlots}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Full Charge Slots" Width="130">
+                    <GridViewColumn Width="130">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Full Charge Slots" FontFamily="Bahnschrift SemiCondensed" ></TextBlock>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=FullChargeSlots}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
@@ -112,7 +126,7 @@
             <ComboBoxItem Tag="full" Content="Without available charging slots"></ComboBoxItem>
         </ComboBox>
         <TextBlock HorizontalAlignment="Left" Margin="555,70,0,0" Text="סינון על פי מספר עמדות טעינה" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="162" FontFamily="Aharoni"/>
-        <CheckBox Content="Group By Amount Of Charge Slots" HorizontalAlignment="Left" Margin="457,188,0,0" VerticalAlignment="Top" Checked="GroupAmount" Unchecked="cancelGroup"/>
+        <CheckBox Content="Group By Amount Of Charge Slots" HorizontalAlignment="Left" Margin="457,188,0,0" VerticalAlignment="Top" Checked="GroupAmount" Unchecked="cancelGroup" FontFamily="Bahnschrift Condensed"/>
 
 
     </Grid>

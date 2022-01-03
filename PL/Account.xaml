@@ -80,7 +80,7 @@
         <Border Height="2" Background="Black" Opacity="0.5" Grid.Row="2" Grid.Column="1" Margin="113,144,182,9"/>
         <iconPacks:PackIconMaterial Kind="Key" Foreground="Black" Grid.Row="2" Grid.Column="1" Opacity="0.5" Width="47" Height="42" RenderTransformOrigin="0.525,0.48" Margin="472,100,0,0" VerticalAlignment="Center"  />
         <CheckBox x:Name="check" Content="Show Password" Cursor="Hand"  Grid.Column="1" Grid.Row="3" Margin="110,0,0,0"/>
-        <Button x:Name="ADD" Content="Sign-Up"  Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="190,50,250,50" Grid.Column="1">
+        <Button x:Name="ADD" Content="Sign-Up"  Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="190,50,250,50" Grid.Column="1" Click="addUser">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -126,8 +126,8 @@
         </Grid>
 
 
-        <TextBlock Text="Id number:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="1" Grid.Column="1" TextChanged="Focus" />
+        <TextBlock Text="Id number:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Margin="110,116,0,0" />
+        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="1" Grid.Column="1" TextChanged="Focus" Margin="0,102,0,0" />
         <TextBlock Text="Name:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
         <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="1" TextChanged="Focus" />
         <TextBlock Text="Phone:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />

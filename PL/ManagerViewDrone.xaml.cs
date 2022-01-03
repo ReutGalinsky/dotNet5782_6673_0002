@@ -240,7 +240,7 @@ namespace PL
 
         private void openParcel(object sender, RoutedEventArgs e)
         {
-            ManagerViewParcel parcel = new ManagerViewParcel(bl, drone.NumberOfParcel);
+            ManagerViewParcel parcel = new ManagerViewParcel(bl, drone.NumberOfParcel,true);
             parcel.ShowDialog();
         }
     }

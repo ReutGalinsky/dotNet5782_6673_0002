@@ -25,6 +25,12 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
+            ConstructorFuction();
+            IsInner = false;
+
+        }
+        private void ConstructorFuction()
+        {
             baseStation = bl.GetBaseStation(id);
             foreach (var item in baseStation.Drones)
                 drones.Add(item);
@@ -37,6 +43,15 @@ namespace PL
             foreach (var item in baseStation.Drones)
                 drones.Add(item);
         }
+        public ManagerViewBaseStation(BLApi.IBL b, string i,bool inner)
+        {
+            InitializeComponent();
+            bl = b;
+            id = i;
+            ConstructorFuction();
+            IsInner = true;
+        }
+        private bool IsInner;
         private BLApi.IBL bl;
         private string id;
         private BO.BaseStation baseStation;
@@ -52,7 +67,8 @@ namespace PL
             {
                 bl.UpdatingDetailsOfBaseStation(baseStation.IdNumber,baseStation.Name,baseStation.ChargeSlots.ToString());
                 MessageBox.Show($"the base station number {baseStation.IdNumber} updated successfully!");
-                updateList(sender, e);
+                if(IsInner==false)
+                    updateList(sender, e);
                 this.Close();
             }
             catch (Exception ex)

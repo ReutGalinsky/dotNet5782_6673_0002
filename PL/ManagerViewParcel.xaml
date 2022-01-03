@@ -105,7 +105,7 @@
             </Button.Template>
         </Button>
 
-        <Button x:Name="buttonb" Grid.Column="2" IsEnabled="{Binding Path=Drone, Converter={StaticResource ParcelToEnable}}" HorizontalAlignment="Left" Margin="0,15,0,0" Grid.RowSpan="2" Grid.Row="4" VerticalAlignment="Top" Click="openDrone" Height="38" Width="45">
+        <Button x:Name="buttonb" Grid.Column="2" IsEnabled="{Binding Path=Drone, Converter={StaticResource ParcelToEnable}}" HorizontalAlignment="Left" Grid.RowSpan="2" Grid.Row="7" VerticalAlignment="Top" Click="openDrone" Height="38" Width="45">
             <Button.Content>
                 <StackPanel>
                     <iconPacks:PackIconMaterial x:Name="contentt" Kind="Drone">
@@ -116,6 +116,29 @@
                 <TextBlock Text="View Drone" FontFamily="Ink Free" ></TextBlock>
             </Button.ToolTip>
         </Button>
+        <Button x:Name="ShowSender" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Click="openSender" Height="31" Width="34">
+            <Button.Content>
+                <StackPanel>
+                    <iconPacks:PackIconMaterial Kind="AccountArrowRight">
+                    </iconPacks:PackIconMaterial>
+                </StackPanel>
+            </Button.Content>
+            <Button.ToolTip>
+                <TextBlock Text="View Sender" FontFamily="Ink Free" ></TextBlock>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="ShowGeter" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Click="openGeter" Height="31" Width="34">
+            <Button.Content>
+                <StackPanel>
+                    <iconPacks:PackIconMaterial Kind="AccountArrowLeft">
+                    </iconPacks:PackIconMaterial>
+                </StackPanel>
+            </Button.Content>
+            <Button.ToolTip>
+                <TextBlock Text="View Geter" FontFamily="Ink Free" ></TextBlock>
+            </Button.ToolTip>
+        </Button>
+
         <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="160,-365,-610,85" Panel.ZIndex="-1">
             <Grid.RenderTransform>
                 <RotateTransform Angle="50"/>
