@@ -34,7 +34,7 @@ namespace PL
             Longitude.Text = drone.Longitude;
 
         }
-        public ManagerViewDrone(BLApi.IBL b, string i,bool flag)
+        public ManagerViewDrone(BLApi.IBL b, string i, bool flag)
         {
             InitializeComponent();
             bl = b;
@@ -114,12 +114,11 @@ namespace PL
                 MessageBox.Show($"the model {Model.Text} is illegal. please enter again", "Model Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void move(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-
-        }
+        //private void move(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.ChangedButton == MouseButton.Left)
+        //        this.DragMove();
+        //}
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -127,10 +126,14 @@ namespace PL
             {
                 case true:
                     isClosed = false;
+                    GridOptions.Visibility = Visibility.Visible;
+                    CloseOptions.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ArrowLeft;
                     assignVisibility();
                     break;
                 case false:
                     isClosed = true;
+                    CloseOptions.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.Wrench;
+                    GridOptions.Visibility = Visibility.Hidden;
                     releaseButton.Visibility = Visibility.Collapsed;
                     chargingButton.Visibility = Visibility.Collapsed;
                     pickButton.Visibility = Visibility.Collapsed;
@@ -144,103 +147,91 @@ namespace PL
         }
         private void charge(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 bl.DroneToCharging(drone.IdNumber);
                 convertToPo(drone, bl.GetDrone(id));
                 MessageBox.Show("start charge");
-                Button_Click_1(sender, e);;
+                Button_Click_1(sender, e); ;
                 Button_Click_1(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void shipButton(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.MatchingParcelToDrone(drone.IdNumber);
+                convertToPo(drone, bl.GetDrone(id));
+                MessageBox.Show("match");
+                Button_Click_1(sender, e);
+                Button_Click_1(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void supplyButton(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.SupplyingParcelByDrone(drone.IdNumber);
+                convertToPo(drone, bl.GetDrone(id));
+                MessageBox.Show("supply");
+                Button_Click_1(sender, e);
+                Button_Click_1(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void pickingButton(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (bl.GetParcel(drone.NumberOfParcel).CollectingDroneTime == null)
+                {
+                    bl.PickingParcelByDrone(drone.IdNumber);
+                    convertToPo(drone, bl.GetDrone(id));
+                    MessageBox.Show("pick");
+                    Button_Click_1(sender, e);
+                    Button_Click_1(sender, e);
 
-
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("error");
             }
-
-
         }
-    
-
-    private void shipButton(object sender, RoutedEventArgs e)
-    {
-        try
+        private void releaseMethod(object sender, RoutedEventArgs e)
         {
-            bl.MatchingParcelToDrone(drone.IdNumber);
-            convertToPo(drone, bl.GetDrone(id));
-            MessageBox.Show("match");
-                Button_Click_1(sender, e);
-                Button_Click_1(sender, e);
-
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("error");
-        }
-    }
-    private void supplyButton(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            bl.SupplyingParcelByDrone(drone.IdNumber);
-            convertToPo(drone, bl.GetDrone(id));
-            MessageBox.Show("supply");
-                Button_Click_1(sender, e);
-                Button_Click_1(sender, e);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("error");
-        }
-    }
-    private void pickingButton(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            if (bl.GetParcel(drone.NumberOfParcel).CollectingDroneTime == null)
+            try
             {
-                bl.PickingParcelByDrone(drone.IdNumber);
+                bl.DroneFromCharging(drone.IdNumber);
                 convertToPo(drone, bl.GetDrone(id));
-                MessageBox.Show("pick");
-                Button_Click_1(sender, e);
-                    Button_Click_1(sender, e);
-
-                }
-            }
-        catch (Exception ex)
-        {
-            MessageBox.Show("error");
-        }
-    }
-
-    private void releaseMethod(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            bl.DroneFromCharging(drone.IdNumber);
-            convertToPo(drone, bl.GetDrone(id));
-            MessageBox.Show("release charge");
+                MessageBox.Show("release charge");
                 Button_Click_1(sender, e);
                 Button_Click_1(sender, e);
             }
             catch (Exception ex)
-        {
-            MessageBox.Show("error");
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-    }
-
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-
         }
-
         private void openParcel(object sender, RoutedEventArgs e)
         {
-            ManagerViewParcel parcel = new ManagerViewParcel(bl, drone.NumberOfParcel,true);
+            ManagerViewParcel parcel = new ManagerViewParcel(bl, drone.NumberOfParcel);
             parcel.ShowDialog();
         }
     }

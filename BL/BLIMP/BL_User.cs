@@ -69,7 +69,7 @@ namespace BL
         {
             if (userToAdd.UserName == "")
                 throw new AddingProblemException("invalid Name of user: you didn't enter a name");
-            if (userToAdd.UserPassword == " ")
+            if (userToAdd.UserPassword == "")
                 throw new AddingProblemException("invalid password of user: you didn't enter a name");
             if (userToAdd.UserPassword.Length < 6)
                 throw new AddingProblemException("invalid password of user: password should include at least 6 characters");

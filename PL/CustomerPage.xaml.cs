@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using PL.Pages;
-using PL.MenuItems;
 
 namespace PL
 {

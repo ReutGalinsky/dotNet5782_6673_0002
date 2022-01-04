@@ -84,7 +84,7 @@ namespace PL
         private void showTheParcel(object sender, RoutedEventArgs e)
         {
 
-            ManagerViewParcel parcel = new ManagerViewParcel(bl,((BO.ParcelOfList)(listParcels.SelectedItem)).IdNumber,true);
+            ManagerViewParcel parcel = new ManagerViewParcel(bl,((BO.ParcelOfList)(listParcels.SelectedItem)).IdNumber);
             parcel.ShowDialog();
         }
 

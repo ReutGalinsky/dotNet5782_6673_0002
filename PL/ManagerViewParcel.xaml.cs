@@ -20,16 +20,14 @@ namespace PL
     /// </summary>
     public partial class ManagerViewParcel : Window
     {
+        private BLApi.IBL bl;
+        private string id;
+        private BO.Parcel parcel;
         public ManagerViewParcel(BLApi.IBL b, string i)
         {
             InitializeComponent();
             bl = b;
             id = i;
-            CtorFunction();
-            IsInner = false;
-        }
-        private void CtorFunction()
-        {
             parcel = bl.GetParcel(id);
             Id.DataContext = parcel;
             SenderId.DataContext = parcel.SenderCustomer;
@@ -43,71 +41,38 @@ namespace PL
             Arrive.DataContext = parcel;
             Collect.DataContext = parcel;
             buttonb.DataContext = parcel;
-            if (parcel.MatchForDroneTime == null)
-            {
-                Match.Visibility = Visibility.Collapsed;
-                matchLabel.Visibility = Visibility.Collapsed;
-            }
-            if (parcel.CollectingDroneTime == null)
-            {
-                Collect.Visibility = Visibility.Collapsed;
-                collectLabel.Visibility = Visibility.Collapsed;
-            }
-            if (parcel.ArrivingDroneTime == null)
-            {
-                Arrive.Visibility = Visibility.Collapsed;
-                arriveLabel.Visibility = Visibility.Collapsed;
-            }
+            Match.DataContext = parcel;
+            matchLabel.DataContext = parcel;
+            Collect.DataContext = parcel;
+            collectLabel.DataContext = parcel;
+            Arrive.DataContext = parcel;
+            arriveLabel.DataContext = parcel;
         }
-        public ManagerViewParcel(BLApi.IBL b, string i,bool isInner)
-        {
-            InitializeComponent();
-
-            bl = b;
-            id = i;
-            CtorFunction();
-            IsInner = true;
-        }
-
-        private bool IsInner;
-        private BLApi.IBL bl;
-        private string id;
-        private BO.Parcel parcel;
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-
         private void openDrone(object sender, RoutedEventArgs e)
         {
-            ManagerViewDrone drone = new ManagerViewDrone(bl, parcel.Drone.IdNumber,true);
+            ManagerViewDrone drone = new ManagerViewDrone(bl, parcel.Drone.IdNumber, true);
             drone.ShowDialog();
-        }
-
-        private void changeToText(object sender, MouseEventArgs e)
-        {
-            (sender as Button).Content = "Open Drone";
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-
         }
-
         private void openGeter(object sender, RoutedEventArgs e)
         {
-            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.GeterCustomer.IdNumber,true);
+            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.GeterCustomer.IdNumber, true);
             customer.ShowDialog();
-
         }
-
         private void openSender(object sender, RoutedEventArgs e)
         {
-            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.SenderCustomer.IdNumber,true);
+            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.SenderCustomer.IdNumber, true);
             customer.ShowDialog();
         }
     }

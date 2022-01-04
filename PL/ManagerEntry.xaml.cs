@@ -20,17 +20,28 @@ namespace PL
     /// Interaction logic for ManagerEntry.xaml
     /// </summary>
     public partial class ManagerEntry : Window
-    {
+    {       
+        private BLApi.IBL bl;
+
         public ManagerEntry(BLApi.IBL b)
         {
             InitializeComponent();
             bl = b;
         }
-        private BLApi.IBL bl;
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                if(password.Password=="Password:")
+                {
+                    MessageBox.Show("The Password Was Not Entered", "Error-Password", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (user.Text == "Username:")
+                {
+                    MessageBox.Show("The UserName Was Not Entered", "Error-User", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 check.IsChecked = false;
                 var User = bl.GetUser(user.Text);
                 if (User.UserPassword == password.Password && User.isManager == true)
@@ -60,7 +71,6 @@ namespace PL
             typeOfUser.Show();
             this.Close();
         }
-
         private void focus(object sender, RoutedEventArgs e)
         {
             if (textPassword.Text == "Password:")
@@ -68,59 +78,36 @@ namespace PL
                 textPassword.Visibility = Visibility.Collapsed;
                 password.Focus();
             }
-
-
         }
-
-
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            Tools.RemoveCharges(bl);
             this.Close();
         }
-        private void Check_Click(object sender, RoutedEventArgs e)
-        {
-
-
-
-        }
-
-        private void Forget_Click(object sender, RoutedEventArgs e)
-        {
-            ForgetPassword forgetPassword = new ForgetPassword(bl);
-            forgetPassword.Show();
-            this.Close();
-        }
-
-        private void Account_Click(object sender, RoutedEventArgs e)
-        {
-            Account account = new Account(bl);
-            account.Show();
-            this.Close();
-        }
-
         private void showPassword(object sender, RoutedEventArgs e)
         {
-
             textPassword.Visibility = Visibility.Collapsed;
             password.Visibility = Visibility.Visible;
             password.Password = textPassword.Text;
             password.Focus();
         }
-
         private void showText(object sender, RoutedEventArgs e)
         {
             textPassword.Text = password.Password;
             textPassword.Visibility = Visibility.Visible;
             password.Visibility = Visibility.Collapsed;
             textPassword.Focus();
-
         }
-
         private void focusUser(object sender, RoutedEventArgs e)
         {
             if (user.Text == "Username:")
                 user.Text = "";
-
+        }
+        private void Forget_Click(object sender, RoutedEventArgs e)
+        {
+            ForgetPassword forgetPassword = new ForgetPassword(bl);
+            forgetPassword.Show();
+            this.Close();
         }
     }
 }
