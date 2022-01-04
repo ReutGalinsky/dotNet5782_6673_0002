@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="400" d:DesignWidth="700"
       Title="ManagerAddCustomer">
 
     <Grid>
@@ -26,10 +26,10 @@
 
 
         </Grid.RowDefinitions>
-        <Border Background="LightBlue" Opacity="0.5" Margin="1,106,2,97" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.RowSpan="7" Grid.Column="1"/>
+        <Border Background="LightBlue" Opacity="0.5" Margin="152,101,154,36" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="7"/>
 
         <TextBlock Text="Id number:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
-        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="2" Grid.Column="1" TextChanged="Focus" />
+        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="1" Grid.Column="2" TextChanged="Focus" />
         <TextBlock Text="Name:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
         <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="2" TextChanged="Focus" />
         <TextBlock Text="Phone:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
@@ -38,7 +38,7 @@
         <TextBox x:Name="Longitude" Background="{x:Null}"  Text="{Binding Path=Location.Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="2" TextChanged="Focus" />
         <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
         <TextBox x:Name="Latitude" Background="{x:Null}"  Text="{Binding Path=Location.Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="2" TextChanged="Focus" />
-        <Button x:Name="ADD" Content="Add" Foreground="White" FontSize="10" FontWeight="Medium" Margin="127,8,139,112" Grid.Column="1" Click="Add_Click" Grid.ColumnSpan="2" Grid.Row="6">
+        <Button x:Name="ADD" Content="Add" Foreground="White" FontSize="10" FontWeight="Medium" Margin="82,8,80,34" Grid.Column="1" Click="Add_Click" Grid.ColumnSpan="2" Grid.Row="6">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>

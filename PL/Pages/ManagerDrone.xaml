@@ -47,7 +47,7 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <Border Background="Gray" Opacity="0.5" Margin="22,38,35,337" RenderTransformOrigin="0.5,0.5"/>
+        <Border Background="Gray" Opacity="0.5" Margin="22,38,35,331"/>
 
         <ListView x:Name="DroneListView" ItemsSource="{Binding}" HorizontalContentAlignment="Center" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="22,67,34,21" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.RenderTransform>

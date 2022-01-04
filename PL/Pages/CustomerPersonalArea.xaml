@@ -42,7 +42,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="edit" Click="edit_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="401,238,179,99">
+        <Button x:Name="edit" Click="edit_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="350,247,153,83">
             <Button.Content>
                 <iconPacks:PackIconMaterial Kind="Pencil" Width="55" Foreground="Black" />
             </Button.Content>

@@ -46,7 +46,7 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <Border Background="Gray" Opacity="0.5" Margin="22,38,51,337" RenderTransformOrigin="0.5,0.5"/>
+        <Border Background="Gray" Opacity="0.5" Margin="22,38,51,327" RenderTransformOrigin="0.5,0.5"/>
 
         <ListView x:Name="StationsListView" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" HorizontalContentAlignment="Stretch" Margin="23,74,52,29" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.View>
@@ -121,12 +121,12 @@
             </ListView.GroupStyle>
 
         </ListView>
-        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="488,40,0,0" VerticalAlignment="Top" Width="129" Height="21" SelectionChanged="changeFilterCharge" >
+        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="488,45,0,0" VerticalAlignment="Top" Width="129" Height="21" SelectionChanged="changeFilterCharge" >
             <ComboBoxItem Tag="all" Content="All" ></ComboBoxItem>
             <ComboBoxItem Tag="availible" Content="With available charging slots"></ComboBoxItem>
             <ComboBoxItem Tag="full" Content="Without available charging slots"></ComboBoxItem>
         </ComboBox>
-        <CheckBox Content="Group By Amount Of Charge Slots" HorizontalAlignment="Left" Margin="304,42,0,0" VerticalAlignment="Top" Checked="GroupAmount" Unchecked="cancelGroup" FontFamily="Bahnschrift Condensed"/>
+        <CheckBox Content="Group By Amount Of Charge Slots" HorizontalAlignment="Left" Margin="257,46,0,0" VerticalAlignment="Top" Checked="GroupAmount" Unchecked="cancelGroup"/>
 
 
     </Grid>
