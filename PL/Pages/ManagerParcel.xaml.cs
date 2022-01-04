@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Windows.Markup;
+
 
 namespace PL.Pages
 {
@@ -28,6 +30,9 @@ namespace PL.Pages
             ParcelListView.DataContext = listParcels;
             //Date.SelectedItem = Date.Items[0];
             update += updated;
+            startDate.Language = XmlLanguage.GetLanguage(System.Globalization.CultureInfo.GetCultureInfo(9).IetfLanguageTag);
+            endDate.Language = XmlLanguage.GetLanguage(System.Globalization.CultureInfo.GetCultureInfo(9).IetfLanguageTag);
+
         }
         //private IEnumerable<IGrouping<BO.ParcelState,BO.ParcelOfList>> parcelsByState()
         //{
@@ -39,6 +44,9 @@ namespace PL.Pages
         public EventHandler update;
         private BO.ParcelOfList selected;
         private ObservableCollection<BO.ParcelOfList> listParcels = new ObservableCollection<BO.ParcelOfList>();
+        PropertyGroupDescription groupGeter = new PropertyGroupDescription("Geter");
+        PropertyGroupDescription groupSender = new PropertyGroupDescription("Sender");
+
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             listParcels.Clear();
@@ -79,8 +87,9 @@ namespace PL.Pages
         private void CancelGroup(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            view.GroupDescriptions.Clear();
-            senderCheck.IsChecked = false;
+            view.GroupDescriptions.Remove(groupGeter);
+           // view.GroupDescriptions.Clear();
+           // senderCheck.IsChecked = false;
             geterCheck.IsChecked = false;
             }
 
@@ -89,7 +98,8 @@ namespace PL.Pages
             
              CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Geter");
-            view.GroupDescriptions.Add(groupDescription);
+            view.GroupDescriptions.Add(groupGeter);
+            
             //view.GroupDescriptions.OrderBy(x=>x.GroupNames);
 
         }
@@ -98,7 +108,7 @@ namespace PL.Pages
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Sender");
-            view.GroupDescriptions.Add(groupDescription);
+            view.GroupDescriptions.Add(groupSender);
         }
 
         private void GroupState(object sender, RoutedEventArgs e)

@@ -14,36 +14,36 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BL;
 
-
-
 namespace PL
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    ///        
+    
+
+
     public partial class MainWindow : Window
-    {
+    {    
+        private BLApi.IBL bl;
+
         public MainWindow()
         {
             InitializeComponent();
             bl = BLApi.BLFactory.GetBl();
         }
-        private BLApi.IBL bl;
+
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            Tools.RemoveCharges(bl);
             this.Close();
         }
+
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             TypeOfUser entry = new TypeOfUser(bl);
             entry.Show();
             this.Close();
-        }
-
-        private void move(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -53,6 +53,13 @@ namespace PL
                 DragMove();
             }
         }
+
+        //private void move(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.ChangedButton == MouseButton.Left)
+        //        this.DragMove();
+        //}
+
     }
 }
 

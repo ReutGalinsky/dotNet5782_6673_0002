@@ -20,13 +20,14 @@ namespace PL
     /// Interaction logic for TypeOfUser.xaml
     /// </summary>
     public partial class TypeOfUser : Window
-    {
+    {   
+        private BLApi.IBL bl;
+
         public TypeOfUser(BLApi.IBL b)
         {
             InitializeComponent();
             bl = b;
         }
-        private BLApi.IBL bl;
 
         private void Manager_Click(object sender, RoutedEventArgs e)
         {
@@ -44,11 +45,6 @@ namespace PL
             this.Close();
         }
 
-        private void move(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -59,14 +55,18 @@ namespace PL
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            Tools.RemoveCharges(bl);
             this.Close();
         }
+
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
+            MediaElement1.IsMuted=true;
             MediaElement1.Visibility = Visibility.Hidden;
         }
         private void Play_Click(object sender, RoutedEventArgs e)
         {
+            MediaElement1.IsMuted = false;
             MediaElement1.Visibility = Visibility.Visible;
             MediaElement1.Source = new Uri(@"C:\Users\רעות גלינסקי\source\repos\ReutGalinsky\dotNet5782_6673_0002\bin" + @"\video.mp4");
         }
@@ -76,11 +76,11 @@ namespace PL
             mainWindow.Show();
             this.Close();
         }
-
-        private void MediaElement1_MediaEnded(object sender, RoutedEventArgs e)
-        {
-
-        }
+        //private void move(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.ChangedButton == MouseButton.Left)
+        //        this.DragMove();
+        //}
     }
 }
 

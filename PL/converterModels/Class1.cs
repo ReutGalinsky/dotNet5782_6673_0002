@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using PL.PO;
 using BO;
+using System.Windows;
+
 namespace PL.Convert
 {
     public class ConvertParcelToEnable : IValueConverter
@@ -23,6 +25,7 @@ namespace PL.Convert
             throw new NotImplementedException();
         }
     }
+
     public class ConvertDroneToEnable : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -31,6 +34,20 @@ namespace PL.Convert
             if (myArea == null)
                 return false;
             return true;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class ConvertToVisibility : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+                return Visibility.Collapsed;
+            return Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -24,6 +24,7 @@
             <RowDefinition Height="35"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Border Background="LightBlue" Opacity="0.5" Margin="133,69,152,31" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="7"/>
         <TextBlock HorizontalAlignment="Center"  Text="Id number:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <TextBox Background="{x:Null}" x:Name="Id" HorizontalAlignment="Center" Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="1" Grid.Column="2" TextChanged="Focus" />
         <TextBlock HorizontalAlignment="Center"  Text="Name:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
@@ -55,7 +56,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Border Background="LightBlue" Opacity="0.5" Margin="133,69,152,31" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="7"/>
 
 
 
