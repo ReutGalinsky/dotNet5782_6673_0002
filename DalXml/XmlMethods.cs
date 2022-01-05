@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace Dal
 {
     public static class XmlMethods
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void SaveToXml(string FileName, XElement root)
         {
             if (FileName != null)
@@ -18,6 +20,8 @@ namespace Dal
             else { }
             //
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public static XElement LoadFromXml(string FileName)
         {
             try
@@ -32,6 +36,8 @@ namespace Dal
             }
 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public static List<T> LoadListFromXMLSerializer<T>(string filePath)
         {
             try
@@ -53,6 +59,8 @@ namespace Dal
                 throw;
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public static void SaveListToXMLSerializer<T>(List<T> list, string filePath)
         {
             try

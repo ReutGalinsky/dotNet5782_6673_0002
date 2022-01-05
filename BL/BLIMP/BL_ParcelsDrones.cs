@@ -7,7 +7,7 @@ using DO;
 using BO;
 using static BO.DroneState;
 using static BO.ParcelState;
-
+using System.Runtime.CompilerServices;
 namespace BL
 {
     /// <summary>
@@ -20,6 +20,7 @@ namespace BL
         /// <summary>
         ///matching parcel to a proper drone
         /// </summary> 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void MatchingParcelToDrone(string droneId)
         {
             DroneToList drone = Drones.FirstOrDefault(x => x.IdNumber == droneId);
@@ -39,12 +40,16 @@ namespace BL
                 var usagee = battarUseag(drone, parcel);
                 if (drone.Battery >= usagee)
                 {
-                    drone.State = DroneState.shipping;
-                    drone.NumberOfParcel = parcel.IdNumber;
-                    DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
-                    parcelDO.DroneId = drone.IdNumber;
-                    parcelDO.MatchForDroneTime = DateTime.Now;
-                    dal.UpdateParcel(parcelDO);
+                    lock (dal)
+                    {
+
+                        drone.State = DroneState.shipping;
+                        drone.NumberOfParcel = parcel.IdNumber;
+                        DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
+                        parcelDO.DroneId = drone.IdNumber;
+                        parcelDO.MatchForDroneTime = DateTime.Now;
+                        dal.UpdateParcel(parcelDO);
+                    }
                     return;
                 }
             }
@@ -78,6 +83,7 @@ namespace BL
         /// <summary>
         ///Collecting parcel from sender customer by a drone
         /// </summary>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PickingParcelByDrone(string id)
         {
             //initialized
@@ -99,18 +105,22 @@ namespace BL
                 throw new ConnectionException($"the drone with the id {id} is not shipping");
             if (!(parcel.MatchForDroneTime != null && parcel.CollectingDroneTime == null))
                 throw new ConnectionException("the parcel is not match");
+            lock (dal)
+            {
 
-            //update
-            drone.Battery -= calculateSomthing(drone.Location.DistanceTo(GetCustomer(parcel.SenderCustomer.IdNumber).Location), _available);
-            //drone.Location = (Location)GetCustomer(parcel.SenderCustomer.IdNumber).Location.CopyPropertiesToNew(typeof(Location));
-            drone.Location = GetCustomer(parcel.SenderCustomer.IdNumber).Location.GetLocation();
-            DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
-            parcelDO.CollectingDroneTime = DateTime.Now;
-            dal.UpdateParcel(parcelDO);
+                //update
+                drone.Battery -= calculateSomthing(drone.Location.DistanceTo(GetCustomer(parcel.SenderCustomer.IdNumber).Location), _available);
+                //drone.Location = (Location)GetCustomer(parcel.SenderCustomer.IdNumber).Location.CopyPropertiesToNew(typeof(Location));
+                drone.Location = GetCustomer(parcel.SenderCustomer.IdNumber).Location.GetLocation();
+                DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
+                parcelDO.CollectingDroneTime = DateTime.Now;
+                dal.UpdateParcel(parcelDO);
+            }
         }
         #endregion
 
         #region SupplyingParcelByDrone
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SupplyingParcelByDrone(string id)
         /// <summary>
         ///function that supply the parcel to the destination
@@ -150,9 +160,13 @@ namespace BL
             drone.State = DroneState.Available;
             try
             {
-                DO.Parcel dparcel = dal.GetParcel(parcel.IdNumber);
-                dparcel.ArrivingDroneTime = DateTime.Now;
-                dal.UpdateParcel(dparcel);
+                lock (dal)
+                {
+
+                    DO.Parcel dparcel = dal.GetParcel(parcel.IdNumber);
+                    dparcel.ArrivingDroneTime = DateTime.Now;
+                    dal.UpdateParcel(dparcel);
+                }
             }
             catch (Exception e)
             {

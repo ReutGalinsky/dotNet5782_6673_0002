@@ -9,6 +9,7 @@ using DalApi;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 
 namespace Dal
@@ -27,6 +28,7 @@ namespace Dal
         //    Initialize();
         }
 
+
         public static IDal Instance
         {
             get { return Nested.instance; }
@@ -41,6 +43,7 @@ namespace Dal
         string customerPath = @"Customers.xml";//XElement
         string configurePath = @"Configure.xml";
         //*****Drones***********
+        [MethodImpl(MethodImplOptions.Synchronized)]
 
         #region AddDrone
         public void AddDrone(Drone drone)
@@ -62,6 +65,7 @@ namespace Dal
             XmlMethods.SaveToXml(dronePath,droneRoot);
         }
         #endregion
+        [MethodImpl(MethodImplOptions.Synchronized)]
 
         #region GetDrone
         public Drone GetDrone(string id)
@@ -85,6 +89,8 @@ namespace Dal
         #endregion
 
         #region GetDrones
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Drone> GetDrones()
         {
             XElement droneRoot = XmlMethods.LoadFromXml(dronePath);
@@ -100,6 +106,8 @@ namespace Dal
         #endregion
 
         #region DeleteDrone
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteDrone(string id)
         {
             XElement droneRoot = XmlMethods.LoadFromXml(dronePath);
@@ -124,7 +132,9 @@ namespace Dal
         #endregion
 
         #region UpdateDrone
-            public void UpdateDrone(Drone toUpdate)
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
+        public void UpdateDrone(Drone toUpdate)
         {
             XElement droneRoot = XmlMethods.LoadFromXml(dronePath);
             XElement drone = (from item in droneRoot.Elements()
@@ -151,11 +161,13 @@ namespace Dal
         //    }
         //}
         //throw new NotExistingException($"the drone with the id:{toUpdate.IdNumber} is not exist");
-    
-    #endregion
+
+        #endregion
 
         #region GetAllDronesBy
-    public IEnumerable<Drone> GetAllDronesBy(Predicate<Drone> condition)
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
+        public IEnumerable<Drone> GetAllDronesBy(Predicate<Drone> condition)
     {
         XElement droneRoot = XmlMethods.LoadFromXml(dronePath);
             var droneToAdd = (from droneItem in droneRoot.Elements()
@@ -173,6 +185,8 @@ namespace Dal
         //*******charge********
 
         #region AddDroneCharge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddDroneCharge(DroneCharge dronecharge)
         {
 
@@ -185,6 +199,8 @@ namespace Dal
         #endregion
 
         #region GetDroneCharge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public DroneCharge GetDroneCharge(string id)
         {
             var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath).FirstOrDefault(x=>x.DroneId == id);
@@ -200,6 +216,8 @@ namespace Dal
         #endregion
 
         #region GetDroneCharges
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<DroneCharge> GetDroneCharges()
         {
             var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath);
@@ -213,6 +231,8 @@ namespace Dal
         #endregion
 
         #region DeleteDroneCharge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteDroneCharge(string id)
         {
             var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath);
@@ -229,6 +249,8 @@ namespace Dal
         #endregion
 
         #region UpdateDroneCharge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateDroneCharge(DroneCharge toUpdate)
         {
             var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath);
@@ -249,6 +271,8 @@ namespace Dal
         #endregion
 
         #region GetAllChargeDronesBy
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<DroneCharge> GetAllChargeDronesBy(Predicate<DroneCharge> condition)
         {
             var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath);
@@ -267,6 +291,8 @@ namespace Dal
         //*******parcel********
 
         #region AddParcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public string AddParcel(Parcel parcel)
         {
 
@@ -294,6 +320,8 @@ namespace Dal
         #endregion
 
         #region GetParcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public Parcel GetParcel(string id)
         {
             var parcel = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath).FirstOrDefault(x => x.IdNumber == id);
@@ -309,6 +337,8 @@ namespace Dal
         #endregion
 
         #region GetParcels
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Parcel> GetParcels()
         {
             var listParcels = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -322,6 +352,8 @@ namespace Dal
         #endregion
 
         #region DeleteParcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteParcel(string id)
         {
             var listParcels = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -339,6 +371,8 @@ namespace Dal
         #endregion
 
         #region UpdateParcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateParcel(Parcel toUpdate)
         {
             var listParcels = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -368,6 +402,8 @@ namespace Dal
         #endregion
 
         #region GetAllParcelsBy
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Parcel> GetAllParcelsBy(Predicate<Parcel> condition)
         {
             var listParcels = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -386,6 +422,8 @@ namespace Dal
         //*******base station********
 
         #region AddBaseStation
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddBaseStation(BaseStation baseStation)
         {
             var listBaseStation = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
@@ -402,6 +440,8 @@ namespace Dal
         #endregion
 
         #region GetBaseStation
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public BaseStation GetBaseStation(string id)
         {
             var baseStation = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath).FirstOrDefault(x => x.IdNumber == id);
@@ -416,6 +456,8 @@ namespace Dal
         #endregion
 
         #region GetBaseStations
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BaseStation> GetBaseStations()
         {
             var listBaseStations = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
@@ -429,7 +471,10 @@ namespace Dal
         }
         #endregion
 
+
         #region DeleteBaseStation
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteBaseStation(string id)
         {
             var listBaseStations = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
@@ -446,6 +491,8 @@ namespace Dal
         #endregion
 
         #region UpdateBaseStation
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateBaseStation(BaseStation toUpdate)
         {
             var listBaseStations = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
@@ -484,6 +531,8 @@ namespace Dal
         #endregion
 
         #region GetAllBaseStationsBy
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BaseStation> GetAllBaseStationsBy(Predicate<BaseStation> condition)
         {
             var listBaseStation = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
@@ -502,6 +551,8 @@ namespace Dal
         //*******customer********
 
         #region AddCustomer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddCustomer(Customer customer)
         {
             var listCustomers = XmlMethods.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -515,10 +566,12 @@ namespace Dal
         //    throw new ExistingException($"the customer with the id:{customer.IdNumber} is already exist");
         //DataSource.Customers.Add(customer);
     }
-    #endregion
+        #endregion
 
         #region GetCustomer
-    public Customer GetCustomer(string id)
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
+        public Customer GetCustomer(string id)
         {
             var customer = XmlMethods.LoadListFromXMLSerializer<Customer>(customerPath).FirstOrDefault(x => x.IdNumber == id);
             if (customer.IdNumber == null)
@@ -533,6 +586,8 @@ namespace Dal
         #endregion
 
         #region GetCustomers
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Customer> GetCustomers()
         {
             var listCustomers = XmlMethods.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -547,6 +602,8 @@ namespace Dal
         #endregion
 
         #region DeleteCustomer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteCustomer(string id)
         {
             var listCustomer = XmlMethods.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -564,6 +621,8 @@ namespace Dal
         #endregion
 
         #region UpdateCustomer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateCustomer(Customer toUpdate)
         {
             var listCustomers = XmlMethods.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -602,6 +661,8 @@ namespace Dal
         #endregion
 
         #region GetAllCustomersBy
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Customer> GetAllCustomersBy(Predicate<Customer> condition)
         {
             var listCustomers = XmlMethods.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -617,6 +678,8 @@ namespace Dal
         }
         #endregion
         //********User*************
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddUser(User user)
         {
             var listUsers = XmlMethods.LoadListFromXMLSerializer<User>(userPath);
@@ -630,6 +693,8 @@ namespace Dal
             //DataSource.Users.Add(user);
 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteUser(string userName)
         {
             var listUsers = XmlMethods.LoadListFromXMLSerializer<User>(userPath);
@@ -644,6 +709,8 @@ namespace Dal
             //    throw new NotExistingException($"the User with the name:{user.UserName} is not exist");
             //DataSource.Users.Remove(user);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public User GetUser(string userName)
         {
             var user = XmlMethods.LoadListFromXMLSerializer<User>(userPath).FirstOrDefault(x => x.UserName == userName);
@@ -655,6 +722,8 @@ namespace Dal
             //    throw new NotExistingException($"the customer with the id:{user.UserName} is not exist");
             //return user;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateUser(User toUpdate)
         {
             var listUsers = XmlMethods.LoadListFromXMLSerializer<User>(userPath);
@@ -687,6 +756,8 @@ namespace Dal
             //}
             //throw new NotExistingException($"the user with the name:{toUpdate.UserName} is not exist");
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<User> GetUsers()
         {
             var listUsers = XmlMethods.LoadListFromXMLSerializer<User>(userPath);
@@ -698,6 +769,8 @@ namespace Dal
             //                select item;
             //return Customers;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<User> GetAllUsersBy(Predicate<User> condition)
         {
             var listUsers = XmlMethods.LoadListFromXMLSerializer<User>(userPath);
@@ -715,11 +788,14 @@ namespace Dal
 
         //*******electricity********
 
+
         #region UsingElectricity
         /// <summary>
         /// returnnig the values of the battery change
         /// </summary>
         /// <returns>the values of the battery loose and gain</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public double[] UsingElectricity()
         //function that return the electricity values
         {

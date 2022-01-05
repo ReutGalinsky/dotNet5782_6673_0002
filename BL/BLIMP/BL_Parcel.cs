@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using BO;
-
+using System.Runtime.CompilerServices;
 namespace BL
 {
     /// <summary>
@@ -17,6 +17,7 @@ namespace BL
         /// <summary>
         // adding a new customer
         /// </summary>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(BO.Customer customerToAdd)
         {
             //validation
@@ -38,12 +39,17 @@ namespace BL
                 DO.Customer customer = (DO.Customer)customerToAdd.CopyPropertiesToNew(typeof(DO.Customer));
                 customer.Longitude = customerToAdd.Location.Longitude;
                 customer.Latitude = customerToAdd.Location.Latitude;
-                dal.AddCustomer(customer);
+                lock (dal)
+                {
+
+                    dal.AddCustomer(customer);
+                }
             }
             catch (Exception e)
             { throw new AddingProblemException("can't add the customer", e); }
         }
         #endregion
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveParcel(string number)
         {
             try
@@ -51,16 +57,20 @@ namespace BL
                 var parcel = GetParcel(number);
                 if (parcel.Drone != null && parcel.ArrivingDroneTime == null && parcel.MatchForDroneTime != null)
                     throw new DeletingException("can't delete parcel that passing");
-                dal.DeleteParcel(number);
-                var d=Drones.FirstOrDefault(x => x.NumberOfParcel == number);
-                 if (d!=null)   d.State=DroneState.Available;
+                lock (dal)
+                {
+
+                    dal.DeleteParcel(number);
+                    var d = Drones.FirstOrDefault(x => x.NumberOfParcel == number);
+                    if (d != null) d.State = DroneState.Available;
+                }
             }
             catch (Exception e)
             {
                 throw new DeletingException(e.Message, e);
             }
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveCustomer(string number)
         {
             try
@@ -70,7 +80,11 @@ namespace BL
                     throw new DeletingException("can't delete customer that sending");
                 if (customer.ToCustomer.FirstOrDefault(x => x.State != ParcelState.supply) != null)
                     throw new DeletingException("can't delete customer that waiting to parcel");
-                dal.DeleteCustomer(number);
+                lock (dal)
+                {
+
+                    dal.DeleteCustomer(number);
+                }
             }
             catch (Exception e)
             {
@@ -82,6 +96,7 @@ namespace BL
         /// <summary>
         ///adding new parcel to the data base
         /// </summary>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public string AddParcelToDelivery(BO.ParcelOfList parcel)
         {
             //validation
@@ -93,24 +108,25 @@ namespace BL
                 throw new AddingProblemException("This weight is not an option");
             if (parcel.Priority != BO.Priorities.Emergency && parcel.Priority != BO.Priorities.Regular && parcel.Priority != BO.Priorities.speed)
                 throw new AddingProblemException("This priority is not an option");
-
-            //check existence of customers
-            dal.GetCustomer(parcel.Sender);
-            dal.GetCustomer(parcel.Geter);
-
-            //add
-            try
+            lock (dal)
             {
-                DO.Parcel parcelDO = (DO.Parcel)parcel.CopyPropertiesToNew(typeof(DO.Parcel));
-                //p.DroneId = null;
-                parcelDO.CreateParcelTime = DateTime.Now;
-                //p.MatchForDroneTime = null;
-                //p.ArrivingDroneTime = null;
-                //p.CollectingDroneTime = null;
-                return dal.AddParcel(parcelDO);//retrun the id of the parcel
+
+                //check existence of customers
+                dal.GetCustomer(parcel.Sender);
+                dal.GetCustomer(parcel.Geter);
+
+                //add
+                try
+                {
+                    DO.Parcel parcelDO = (DO.Parcel)parcel.CopyPropertiesToNew(typeof(DO.Parcel));
+                    parcelDO.CreateParcelTime = DateTime.Now;
+                    return dal.AddParcel(parcelDO);//retrun the id of the parcel
+
+                }
+
+                catch (Exception e)
+                { throw new AddingProblemException("can't add the parcel", e); }
             }
-            catch (Exception e)
-            { throw new AddingProblemException("can't add the parcel", e); }
         }
         #endregion
 
@@ -118,12 +134,17 @@ namespace BL
         /// <summary>
         ///adding new parcel to the data base
         /// </summary>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdatingDetailsOfCustomer(string id, string Name, string phone)
         {
             DO.Customer temp;
             try
             {
-                temp = dal.GetCustomer(id);
+                lock (dal)
+                {
+
+                    temp = dal.GetCustomer(id);
+                }
             }
             catch (Exception e)
             {
@@ -144,7 +165,11 @@ namespace BL
             //update
             try
             {
-                dal.UpdateCustomer(temp);
+                lock (dal)
+                {
+
+                    dal.UpdateCustomer(temp);
+                }
             }
             catch (Exception e)
             { throw new UpdatingException("can't update the customer", e); }
@@ -155,17 +180,24 @@ namespace BL
         /// <summary>
         ///return all the customers of the data base
         /// </summary>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.CustomerToList> GetCustomers()
         {
-            var list = from item in dal.GetCustomers() select (BO.CustomerToList)item.CopyPropertiesToNew(typeof(BO.CustomerToList));
-            foreach (var item in list)//calculate the amount of parcel
+            lock (dal)
             {
-                item.ParcelOnTheWay = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.pick);
-                item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.supply);
-                item.ParcelGet = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.supply);
-                item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.supply);
+
+                var list = from item in dal.GetCustomers() select (BO.CustomerToList)item.CopyPropertiesToNew(typeof(BO.CustomerToList));
+
+                foreach (var item in list)//calculate the amount of parcel
+                {
+                    item.ParcelOnTheWay = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.pick);
+                    item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.supply);
+                    item.ParcelGet = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.supply);
+                    item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.supply);
+                }
+
+                return list;
             }
-            return list;
         }
         #endregion
 
@@ -173,19 +205,25 @@ namespace BL
         /// <summary>
         ///return a single customer
         /// </summary>  
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Customer GetCustomer(string id)
         {
             try
             {
-                DO.Customer customerDO = dal.GetCustomer(id);
-                BO.Customer customer = (BO.Customer)customerDO.CopyPropertiesToNew(typeof(BO.Customer));
-                customer.Location = customerDO.GetLocation();
-                //customer.Location = new Location();
-                //customer.Location.Latitude = customerDO.Latitude;
-                //customer.Location.Longitude = customerDO.Longitude;
-                customer.FromCustomer = dal.GetAllParcelsBy(p => (p.Sender) == id).Select(p => GetPOC(p.IdNumber, true)).ToList();//the parcels that the customer send
-                customer.ToCustomer = dal.GetAllParcelsBy(p => (p.Geter) == id).Select(p => GetPOC(p.IdNumber, false)).ToList();
-                return customer;
+                lock (dal)
+                {
+
+                    DO.Customer customerDO = dal.GetCustomer(id);
+                    BO.Customer customer = (BO.Customer)customerDO.CopyPropertiesToNew(typeof(BO.Customer));
+                    customer.Location = customerDO.GetLocation();
+                    //customer.Location = new Location();
+                    //customer.Location.Latitude = customerDO.Latitude;
+                    //customer.Location.Longitude = customerDO.Longitude;
+                    customer.FromCustomer = dal.GetAllParcelsBy(p => (p.Sender) == id).Select(p => GetPOC(p.IdNumber, true)).ToList();//the parcels that the customer send
+                    customer.ToCustomer = dal.GetAllParcelsBy(p => (p.Geter) == id).Select(p => GetPOC(p.IdNumber, false)).ToList();
+                    return customer;
+                }
             }
             catch (Exception e)
             { throw new GettingProblemException("the customer is not exist", e); }
@@ -196,6 +234,7 @@ namespace BL
         /// <summary>
         /// customer predicate
         /// </summary> 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.CustomerToList> GetAllCustomersBy(Predicate<BO.CustomerToList> condition)
         {
             var list = from item in GetCustomers()
@@ -210,34 +249,28 @@ namespace BL
         {
             try
             {
-                DO.Parcel parcel = dal.GetParcel(id);
-                BO.ParcelOfCustomer parcelOfCustomer = (BO.ParcelOfCustomer)parcel.CopyPropertiesToNew(typeof(BO.ParcelOfCustomer));
-                //if (p.MatchForDroneTime == null)//define the parcel state:
-                //    parcelOfCustomer.State = ParcelState.Define;
-                //else
-                //    if (p.CollectingDroneTime == null)
-                //    parcelOfCustomer.State = ParcelState.match;
-                //else
-                //    if (p.ArrivingDroneTime == null)
-                //    parcelOfCustomer.State = ParcelState.pick;
-                //else
-                //    parcelOfCustomer.State = ParcelState.supply;
-                if (senderOrReciever == true) parcelOfCustomer.SourceOrDestinaton = GetCustomerOfParcel(parcel.Geter);
-                else parcelOfCustomer.SourceOrDestinaton = GetCustomerOfParcel(parcel.Sender);
-                parcelOfCustomer.State = parcel.MatchForDroneTime switch
+                lock (dal)
                 {
-                    null => ParcelState.Define,
-                    _ => parcel.CollectingDroneTime switch
+
+                    DO.Parcel parcel = dal.GetParcel(id);
+                    BO.ParcelOfCustomer parcelOfCustomer = (BO.ParcelOfCustomer)parcel.CopyPropertiesToNew(typeof(BO.ParcelOfCustomer));
+                    if (senderOrReciever == true) parcelOfCustomer.SourceOrDestinaton = GetCustomerOfParcel(parcel.Geter);
+                    else parcelOfCustomer.SourceOrDestinaton = GetCustomerOfParcel(parcel.Sender);
+                    parcelOfCustomer.State = parcel.MatchForDroneTime switch
                     {
-                        null => ParcelState.match,
-                        _ => parcel.ArrivingDroneTime switch
+                        null => ParcelState.Define,
+                        _ => parcel.CollectingDroneTime switch
                         {
-                            null => ParcelState.pick,
-                            _ => ParcelState.supply,
+                            null => ParcelState.match,
+                            _ => parcel.ArrivingDroneTime switch
+                            {
+                                null => ParcelState.pick,
+                                _ => ParcelState.supply,
+                            },
                         },
-                    },
-                };
-                return parcelOfCustomer;
+                    };
+                    return parcelOfCustomer;
+                }
             }
             catch (Exception e)
             {
@@ -251,7 +284,11 @@ namespace BL
         {
             try
             {
-                return (BO.CustomerOfParcel)dal.GetCustomer(id).CopyPropertiesToNew(typeof(BO.CustomerOfParcel));
+                lock (dal)
+                {
+
+                    return (BO.CustomerOfParcel)dal.GetCustomer(id).CopyPropertiesToNew(typeof(BO.CustomerOfParcel));
+                }
             }
             catch (Exception e)
             {

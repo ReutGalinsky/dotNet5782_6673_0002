@@ -4,22 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BO;
-
+using System.Runtime.CompilerServices;
 namespace BL
 {
     internal partial class BL : BLApi.IBL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveUser(string name)
         {
             try
             {
-                dal.DeleteUser(name);
+                lock (dal)
+                {
+
+                    dal.DeleteUser(name);
+                }
             }
             catch (Exception e)
             {
                 throw new DeletingException(e.Message, e);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<User> GetAllUsersBy(Predicate<User> condition)
         {
             var list = from item in GetUsers()
@@ -28,24 +34,34 @@ namespace BL
                        select item;
             return list;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<User> GetUsers()
         {
-            var list = from item in dal.GetUsers() select (BO.User)item.CopyPropertiesToNew(typeof(BO.User));
-            return list;
+            lock (dal)
+            {
 
+                var list = from item in dal.GetUsers() select (BO.User)item.CopyPropertiesToNew(typeof(BO.User));
+                return list;
+            }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public User GetUser(string name)
         {
             try
             {
-                DO.User user = dal.GetUser(name);
-                return (BO.User)user.CopyPropertiesToNew(typeof(BO.User));
+                lock (dal)
+                {
+
+                    DO.User user = dal.GetUser(name);
+                    return (BO.User)user.CopyPropertiesToNew(typeof(BO.User));
+                }
             }
             catch (Exception e)
             { throw new GettingProblemException($"the user with the name {name} is not exist", e); }
 
 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdatingDetailsOfUser(string name, string password)
         {
             //validation
@@ -58,13 +74,18 @@ namespace BL
             //add
             try
             {
-                DO.User user = dal.GetUser(name);
-                user.UserPassword = password;
-                dal.UpdateUser(user);
+                lock (dal)
+                {
+
+                    DO.User user = dal.GetUser(name);
+                    user.UserPassword = password;
+                    dal.UpdateUser(user);
+                }
             }
             catch (Exception ex)
             { throw new UpdatingException($"Can't update user with the name {name}", ex); }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddUser(User userToAdd)
         {
             if (userToAdd.UserName == "")
@@ -75,8 +96,12 @@ namespace BL
                 throw new AddingProblemException("invalid password of user: password should include at least 6 characters");
             try
             {
-                DO.User user = (DO.User)userToAdd.CopyPropertiesToNew(typeof(DO.User));
-                dal.AddUser(user);
+                lock (dal)
+                {
+
+                    DO.User user = (DO.User)userToAdd.CopyPropertiesToNew(typeof(DO.User));
+                    dal.AddUser(user);
+                }
             }
             catch(Exception e)
             {

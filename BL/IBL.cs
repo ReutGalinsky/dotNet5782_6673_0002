@@ -44,6 +44,7 @@ namespace BLApi
         public User GetUser(string name);
         public void UpdatingDetailsOfUser(string name, string password);
         public void AddUser(User userToAdd);
+        public void Simulator(string id, Action updatePl, Func<bool> checkStop);
 
 
 

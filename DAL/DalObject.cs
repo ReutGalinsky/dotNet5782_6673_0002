@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Reflection;
 using DO;
 using DalApi;
+using System.Runtime.CompilerServices;
+
 namespace Dal
 {
     public class DalObject : DalApi.IDal
@@ -28,6 +30,8 @@ namespace Dal
         //*****Drones***********
 
         #region AddDrone
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddDrone(Drone drone)
         {
             if (DataSource.Drones.FirstOrDefault(d => d.IdNumber == drone.IdNumber).IdNumber != null)
@@ -37,6 +41,8 @@ namespace Dal
         #endregion
 
         #region GetDrone
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public Drone GetDrone(string id)
         {
             Drone drone = DataSource.Drones.FirstOrDefault(d => d.IdNumber == id);
@@ -47,6 +53,8 @@ namespace Dal
         #endregion
 
         #region GetDrones
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Drone> GetDrones()
         {
             var Drones = from item in DataSource.Drones
@@ -56,6 +64,8 @@ namespace Dal
         #endregion
 
         #region DeleteDrone
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteDrone(string id)
         {
             Drone drone = DataSource.Drones.FirstOrDefault(d => d.IdNumber == id);
@@ -66,6 +76,8 @@ namespace Dal
         #endregion
 
         #region UpdateDrone
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateDrone(Drone toUpdate)
         {
             for (int i = 0; i < DataSource.Drones.Count; i++)
@@ -85,6 +97,8 @@ namespace Dal
         #endregion
 
         #region GetAllDronesBy
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Drone> GetAllDronesBy(Predicate<Drone> condition)
         {
             var list = from item in DataSource.Drones
@@ -97,6 +111,8 @@ namespace Dal
         //*******charge********
 
         #region AddDroneCharge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddDroneCharge(DroneCharge dronecharge)
         {
             if (DataSource.Charges.FirstOrDefault(d => d.DroneId == dronecharge.DroneId).DroneId != null)
@@ -106,6 +122,8 @@ namespace Dal
         #endregion
 
         #region GetDroneCharge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public DroneCharge GetDroneCharge(string id)
         {
             DroneCharge droneCharge = DataSource.Charges.FirstOrDefault(d => d.DroneId == id);
@@ -116,6 +134,8 @@ namespace Dal
         #endregion
 
         #region GetDroneCharges
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<DroneCharge> GetDroneCharges()
         {
             var charges = from item in DataSource.Charges
@@ -125,6 +145,8 @@ namespace Dal
         #endregion
 
         #region DeleteDroneCharge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteDroneCharge(string id)
         {
             DroneCharge droneCharge = DataSource.Charges.FirstOrDefault(d => d.DroneId == id);
@@ -135,6 +157,8 @@ namespace Dal
         #endregion
 
         #region UpdateDroneCharge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateDroneCharge(DroneCharge toUpdate)
         {
             for (int i = 0; i < DataSource.Charges.Count; i++)
@@ -153,6 +177,8 @@ namespace Dal
         #endregion
 
         #region GetAllChargeDronesBy
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<DroneCharge> GetAllChargeDronesBy(Predicate<DroneCharge> condition)
         {
             var list = from item in DataSource.Charges
@@ -165,6 +191,8 @@ namespace Dal
         //*******parcel********
 
         #region AddParcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public string AddParcel(Parcel parcel)
         {
             parcel.IdNumber = DataSource.Config.RunningNumber++.ToString();
@@ -176,6 +204,8 @@ namespace Dal
         #endregion
 
         #region GetParcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public Parcel GetParcel(string id)
         {
             Parcel parcel = DataSource.Parcels.FirstOrDefault(d => d.IdNumber == id);
@@ -186,6 +216,8 @@ namespace Dal
         #endregion
 
         #region GetParcels
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Parcel> GetParcels()
         {
             var parcels = from item in DataSource.Parcels
@@ -195,6 +227,8 @@ namespace Dal
         #endregion
 
         #region DeleteParcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteParcel(string id)
         {
             Parcel parcel = DataSource.Parcels.FirstOrDefault(d => d.IdNumber == id);
@@ -205,6 +239,8 @@ namespace Dal
         #endregion
 
         #region UpdateParcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateParcel(Parcel toUpdate)
         {
             for (int i = 0; i < DataSource.Parcels.Count; i++)
@@ -231,6 +267,8 @@ namespace Dal
         #endregion
 
         #region GetAllParcelsBy
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Parcel> GetAllParcelsBy(Predicate<Parcel> condition)
         {
             var list = from item in DataSource.Parcels
@@ -243,6 +281,8 @@ namespace Dal
         //*******base station********
 
         #region AddBaseStation
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddBaseStation(BaseStation baseStation)
         {
             if (DataSource. Stations.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber != null)
@@ -252,6 +292,8 @@ namespace Dal
         #endregion
 
         #region GetBaseStation
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public BaseStation GetBaseStation(string id)
         {
             BaseStation baseStation = DataSource.Stations.FirstOrDefault(d => d.IdNumber == id);
@@ -262,6 +304,8 @@ namespace Dal
         #endregion
 
         #region GetBaseStations
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BaseStation> GetBaseStations()
         {
             var BaseStations = from item in DataSource.Stations
@@ -271,6 +315,8 @@ namespace Dal
         #endregion
 
         #region DeleteBaseStation
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteBaseStation(string id)
         {
             BaseStation baseStation = DataSource.Stations.FirstOrDefault(d => d.IdNumber == id);
@@ -281,6 +327,8 @@ namespace Dal
         #endregion
 
         #region UpdateBaseStation
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateBaseStation(BaseStation toUpdate)
         {
             for (int i = 0; i < DataSource.Stations.Count; i++)
@@ -302,6 +350,8 @@ namespace Dal
         #endregion
 
         #region GetAllBaseStationsBy
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BaseStation> GetAllBaseStationsBy(Predicate<BaseStation> condition)
         {
             var list = from item in DataSource.Stations
@@ -314,6 +364,8 @@ namespace Dal
         //*******customer********
 
         #region AddCustomer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddCustomer(Customer customer)
         {
             if (DataSource.Customers.FirstOrDefault(d => d.IdNumber == customer.IdNumber).IdNumber != null)
@@ -323,6 +375,8 @@ namespace Dal
         #endregion
 
         #region GetCustomer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public Customer GetCustomer(string id)
         {
             Customer customer = DataSource.Customers.FirstOrDefault(d => d.IdNumber == id);
@@ -333,6 +387,8 @@ namespace Dal
         #endregion
 
         #region GetCustomers
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Customer> GetCustomers()
         {
             var Customers = from item in DataSource.Customers
@@ -342,6 +398,8 @@ namespace Dal
         #endregion
 
         #region DeleteCustomer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteCustomer(string id)
         {
             Customer customer = DataSource.Customers.FirstOrDefault(d => d.IdNumber == id);
@@ -352,6 +410,8 @@ namespace Dal
         #endregion
 
         #region UpdateCustomer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateCustomer(Customer toUpdate)
         {
             for (int i = 0; i < DataSource.Customers.Count; i++)
@@ -373,6 +433,8 @@ namespace Dal
         #endregion
 
         #region GetAllCustomersBy
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Customer> GetAllCustomersBy(Predicate<Customer> condition)
         {
             var list = from item in DataSource.Customers
@@ -382,6 +444,8 @@ namespace Dal
         }
         #endregion
         //********User*************
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddUser(User user)
         {
             if (DataSource.Users.FirstOrDefault(d => d.UserName == user.UserName).UserName != null)
@@ -389,6 +453,8 @@ namespace Dal
             DataSource.Users.Add(user);
 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteUser(string userName)
         {
             User user = DataSource.Users.FirstOrDefault(d => d.UserName == userName);
@@ -396,6 +462,8 @@ namespace Dal
                 throw new NotExistingException($"the User with the name:{user.UserName} is not exist");
             DataSource.Users.Remove(user);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public User GetUser(string userName)
         {
             User user = DataSource.Users.FirstOrDefault(d => d.UserName == userName);
@@ -403,6 +471,8 @@ namespace Dal
                 throw new NotExistingException($"the customer with the id:{user.UserName} is not exist");
             return user;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateUser(User toUpdate)
         {
             for (int i = 0; i < DataSource.Users.Count; i++)
@@ -419,12 +489,16 @@ namespace Dal
             }
             throw new NotExistingException($"the user with the name:{toUpdate.UserName} is not exist");
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<User> GetUsers()
         {
             var Customers = from item in DataSource.Users
                             select item;
             return Customers;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<User> GetAllUsersBy(Predicate<User> condition)
         {
             var list = from item in DataSource.Users
@@ -441,6 +515,8 @@ namespace Dal
         /// returnnig the values of the battery change
         /// </summary>
         /// <returns>the values of the battery loose and gain</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public double[] UsingElectricity()
         //function that return the electricity values
         {
