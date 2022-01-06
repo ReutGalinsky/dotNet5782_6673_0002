@@ -42,7 +42,6 @@ namespace BL
                 {
                     lock (dal)
                     {
-
                         drone.State = DroneState.shipping;
                         drone.NumberOfParcel = parcel.IdNumber;
                         DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
@@ -57,14 +56,14 @@ namespace BL
         }
         #endregion 
 
-        private int calculateSomthing(double distance, double factorBattery)
+        private double calculateSomthing(double distance, double factorBattery)
         {
-            return (int)(distance * factorBattery);
+            return (distance * factorBattery);
         }
 
-        private int battarUseag(BO.DroneToList drone, BO.ParcelOfList parcel)
+        private double battarUseag(BO.DroneToList drone, BO.ParcelOfList parcel)
         {
-            int battery = 0;
+            double battery = 0;
             BO.Customer sender = GetCustomer(parcel.Sender);
             BO.Customer geter = GetCustomer(parcel.Geter);
             DO.BaseStation baseStation = ClosestStation(GetCustomer(parcel.Geter).Location);
@@ -73,7 +72,7 @@ namespace BL
             {
                 BO.WeightCategories.Heavy => calculateSomthing(sender.Location.DistanceTo(geter.Location), _heavy),
                 BO.WeightCategories.Light => calculateSomthing(sender.Location.DistanceTo(geter.Location), _light),
-                BO.WeightCategories.Middle => (calculateSomthing(sender.Location.DistanceTo(geter.Location), _medium)),
+                BO.WeightCategories.Middle =>calculateSomthing(sender.Location.DistanceTo(geter.Location), _medium),
                 _ => throw new NotImplementedException(),
             };
             return battery;

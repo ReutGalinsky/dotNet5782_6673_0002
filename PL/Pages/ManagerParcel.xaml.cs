@@ -46,6 +46,8 @@ namespace PL.Pages
         private ObservableCollection<BO.ParcelOfList> listParcels = new ObservableCollection<BO.ParcelOfList>();
         PropertyGroupDescription groupGeter = new PropertyGroupDescription("Geter");
         PropertyGroupDescription groupSender = new PropertyGroupDescription("Sender");
+        PropertyGroupDescription groupPriority = new PropertyGroupDescription("Priority");
+        PropertyGroupDescription groupState = new PropertyGroupDescription("ParcelState");
 
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
@@ -79,61 +81,67 @@ namespace PL.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message+"\n you shuld try again later","error" ,MessageBoxButton.OK, MessageBoxImage.Hand);
+                    MessageBox.Show(ex.Message + "\n you shuld try again later", "error", MessageBoxButton.OK, MessageBoxImage.Hand);
 
                 }
             }
         }
-        private void CancelGroup(object sender, RoutedEventArgs e)
+        private void CancelGroupGeter(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
             view.GroupDescriptions.Remove(groupGeter);
-           // view.GroupDescriptions.Clear();
-           // senderCheck.IsChecked = false;
-            geterCheck.IsChecked = false;
-            }
+            //geterCheck.IsChecked = false;
+        }
+        private void CancelGroupSeter(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            view.GroupDescriptions.Remove(groupSender);
+        }
+        private void CancelGroupState(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            view.GroupDescriptions.Remove(groupState);
+        }
+        private void CancelGroupPriority(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            view.GroupDescriptions.Remove(groupPriority);
+        }
+
 
         private void GroupGeter(object sender, RoutedEventArgs e)
         {
-            
-             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Geter");
-            view.GroupDescriptions.Add(groupGeter);
-            
-            //view.GroupDescriptions.OrderBy(x=>x.GroupNames);
 
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            view.GroupDescriptions.Add(groupGeter);
         }
 
         private void GroupSender(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Sender");
             view.GroupDescriptions.Add(groupSender);
         }
 
         private void GroupState(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ParcelState");
-            view.GroupDescriptions.Add(groupDescription);
+            view.GroupDescriptions.Add(groupState);
 
         }
 
         private void GroupPriority(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Priority");
-            view.GroupDescriptions.Add(groupDescription);
-
+            view.GroupDescriptions.Add(groupPriority);
         }
 
         private void selectedStart(object sender, SelectionChangedEventArgs e)
         {
-            if(endDate.SelectedDate==null)
+            if (endDate.SelectedDate == null)
             {
                 var tempList = from item in bl.GetParcels()
                                let parcel = bl.GetParcel(item.IdNumber)
-                               where parcel.CreateParcelTime > startDate.SelectedDate
+                               where parcel.CreateParcelTime >= startDate.SelectedDate
                                select item;
                 listParcels.Clear();
                 foreach (var item in tempList)
@@ -143,7 +151,7 @@ namespace PL.Pages
             {
                 var tempList = from item in bl.GetParcels()
                                let parcel = bl.GetParcel(item.IdNumber)
-                               where parcel.CreateParcelTime > startDate.SelectedDate&&parcel.CreateParcelTime<endDate.SelectedDate
+                               where parcel.CreateParcelTime >= startDate.SelectedDate && parcel.CreateParcelTime <= endDate.SelectedDate
                                select item;
                 listParcels.Clear();
                 foreach (var item in tempList)
@@ -153,7 +161,7 @@ namespace PL.Pages
 
         private void changeTime(object sender, SelectionChangedEventArgs e)
         {
-            if (endDate.SelectedDate == null&&startDate.SelectedDate!=null)
+            if (endDate.SelectedDate == null && startDate.SelectedDate != null)
             {
                 var tempList = from item in bl.GetParcels()
                                let parcel = bl.GetParcel(item.IdNumber)
@@ -166,30 +174,30 @@ namespace PL.Pages
             }
             if (endDate.SelectedDate != null && startDate.SelectedDate == null)
             {
-                    var tempList = from item in bl.GetParcels()
-                                   let parcel = bl.GetParcel(item.IdNumber)
-                                   where parcel.CreateParcelTime <= endDate.SelectedDate
-                                   select item;
-                    listParcels.Clear();
-                    foreach (var item in tempList)
-                        listParcels.Add(item);
+                var tempList = from item in bl.GetParcels()
+                               let parcel = bl.GetParcel(item.IdNumber)
+                               where parcel.CreateParcelTime <= endDate.SelectedDate
+                               select item;
+                listParcels.Clear();
+                foreach (var item in tempList)
+                    listParcels.Add(item);
                 return;
             }
             if (endDate.SelectedDate != null && startDate.SelectedDate != null)
-            { 
+            {
                 var tempList = from item in bl.GetParcels()
-                                   let parcel = bl.GetParcel(item.IdNumber)
-                                   where parcel.CreateParcelTime >= startDate.SelectedDate && parcel.CreateParcelTime <= endDate.SelectedDate
-                                   select item;
-                    listParcels.Clear();
-                    foreach (var item in tempList)
-                        listParcels.Add(item);
+                               let parcel = bl.GetParcel(item.IdNumber)
+                               where parcel.CreateParcelTime >= startDate.SelectedDate && parcel.CreateParcelTime <= endDate.SelectedDate
+                               select item;
+                listParcels.Clear();
+                foreach (var item in tempList)
+                    listParcels.Add(item);
                 return;
-                
+
             }
         }
     }
-   
+
 }
 
 

@@ -75,10 +75,10 @@
                     <ListViewItem Foreground="Black" Width="200" Height="80" Margin="0,7,0,0" Tag="All drones">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Drone" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="My Drones" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="20" Height="31" Width="122"/>
+                            <TextBlock  Text="  My Drones" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="20" Height="31" Width="122"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Visibility="Collapsed" x:Name="AddDrone" Foreground="White" Width="200" Height="30" Margin="0,7,0,0" Tag="Add new drone" Background="Gray">
+                    <ListViewItem Visibility="Hidden" x:Name="AddDrone" Foreground="White" Width="200" Height="30" Margin="0,7,0,0" Tag="Add new drone" Background="Gray">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Width="51"/>
                             <TextBlock  Text="Add new Drone" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="12"></TextBlock>
@@ -88,11 +88,11 @@
                     <ListViewItem Foreground="Black" Width="200" Height="80" Margin="0,7,0,0" Tag="All customers">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="My Customers" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="20" VerticalAlignment="Center" Width="122" Height="22"/>
+                            <TextBlock  Text="  My Customers" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="20" VerticalAlignment="Center" Width="122" Height="22"/>
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Visibility="Collapsed" x:Name="AddCustomer" Foreground="White" Width="200" Height="30" Margin="0,7,0,0" Tag="Add new customer" Background="Gray">
+                    <ListViewItem Visibility="Hidden" x:Name="AddCustomer" Foreground="White" Width="200" Height="30" Margin="0,7,0,0" Tag="Add new customer" Background="Gray">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Width="51"/>
                             <TextBlock  Text="Add new customer" FontFamily="Corbel" FontWeight="ExtraLight" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"></TextBlock>
@@ -105,7 +105,7 @@
                             <TextBlock  Text="My Base Stations" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="20" Width="142" Height="25"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Visibility="Collapsed" x:Name="AddBaseStation" Foreground="White" Width="200" Height="30" Margin="0,7,0,0" Tag="Add new base station" Background="Gray">
+                    <ListViewItem Visibility="Hidden" x:Name="AddBaseStation" Foreground="White" Width="200" Height="30" Margin="0,7,0,0" Tag="Add new base station" Background="Gray">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Width="51"/>
                             <TextBlock  Text="Add new base station" FontFamily="Corbel" FontWeight="ExtraLight" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"></TextBlock>
@@ -114,8 +114,8 @@
 
                     <ListViewItem Foreground="Black" Width="200" Height="80" Margin="0,7,0,0" Tag="All parcels">
                         <StackPanel Orientation="Horizontal"  Width="197" Height="78">
-                            <materialDesign:PackIcon Kind="box" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="My parcels" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="20" Width="142" Height="25"/>
+                            <materialDesign:PackIcon Kind="PackageVariant" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Width="51"/>
+                            <TextBlock  Text="   My parcels" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="20" Width="142" Height="26"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>

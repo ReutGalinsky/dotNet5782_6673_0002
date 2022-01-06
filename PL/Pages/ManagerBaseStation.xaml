@@ -121,12 +121,12 @@
             </ListView.GroupStyle>
 
         </ListView>
-        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="488,45,0,0" VerticalAlignment="Top" Width="129" Height="21" SelectionChanged="changeFilterCharge" >
+        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="488,45,0,0" VerticalAlignment="Top" Width="144" Height="21" SelectionChanged="changeFilterCharge" >
             <ComboBoxItem Tag="all" Content="All" ></ComboBoxItem>
             <ComboBoxItem Tag="availible" Content="With available charging slots"></ComboBoxItem>
             <ComboBoxItem Tag="full" Content="Without available charging slots"></ComboBoxItem>
         </ComboBox>
-        <CheckBox Content="Group By Amount Of Charge Slots" HorizontalAlignment="Left" Margin="257,46,0,0" VerticalAlignment="Top" Checked="GroupAmount" Unchecked="cancelGroup"/>
+        <CheckBox Content="Group By Amount Of Charge Slots" HorizontalAlignment="Left" Margin="34,48,0,0" VerticalAlignment="Top" Checked="GroupAmount" Unchecked="cancelGroup" FontFamily="Yu Gothic Medium"/>
 
 
     </Grid>

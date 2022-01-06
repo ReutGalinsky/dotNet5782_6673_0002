@@ -15,7 +15,7 @@ namespace BO
         public string IdNumber { set; get; }
         public string Model { set; get; }
         public WeightCategories MaxWeight { set; get; }
-        public int Battery { set; get; }
+        public double Battery { set; get; }
         public DroneState State { set; get; }
         public Location Location { set; get; }
         public string NumberOfParcel { set; get; }

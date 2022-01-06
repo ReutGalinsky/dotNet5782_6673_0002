@@ -3,53 +3,21 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                   xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:local="clr-namespace:PL.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="700"
       Title="ManagerCustomer">
-    <!-- <Page.Resources>
-        <DataTemplate x:Key="MyDataTemplate"
- DataType="local:BO.CustomerToList">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0"
- Text="Id Number: " />
-                <TextBlock Grid.Column="1"
- Text="{Binding Path=IdNumber}" />
-                <TextBlock Grid.Column="2"
- Text="Name: " />
-                <TextBlock Grid.Column="3"
- Text="{Binding Path=Name}" />
-                <TextBlock Grid.Column="4"
- Text="Phone Number: " />
-                <TextBlock Grid.Column="5"
- Text="{Binding Path=Phone}" />
-                <Button Grid.Column="6" Height="40" Width="40" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteCustomer">
-                    <Button.Content>
-                        <Image Source="/Pages/מחיקה.jpg" Width="40" Height="40"></Image>
-                    </Button.Content>
-                </Button>
-            </Grid>
-        </DataTemplate>
-    </Page.Resources>-->
     <Grid>
         <Border Background="Gray" Opacity="0.5" Margin="44,38,44,330"/>
 
         <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Margin="41,69,43,69" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Number" Width="150">
+                    <GridViewColumn Width="150">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Number" FontFamily="Yu Gothic Medium"></TextBlock>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=IdNumber}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" VerticalAlignment="Center" />
@@ -57,7 +25,11 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Phone Number" Width="150">
+                    <GridViewColumn  Width="150">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Phone Number" FontFamily="Yu Gothic Medium"></TextBlock>
+                        </GridViewColumn.Header>
+
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Phone}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
@@ -65,14 +37,20 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Name" Width="150">
+                    <GridViewColumn Width="150">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Name" FontFamily="Yu Gothic Medium"></TextBlock>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Delete" Width="170">
+                    <GridViewColumn Width="170">
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="Delete"></iconPacks:PackIconMaterial>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteCustomer">
@@ -87,13 +65,13 @@
             </ListView.View>
         </ListView>
 
-        <ComboBox x:Name="Location" HorizontalAlignment="Left" Margin="499,44,0,0" VerticalAlignment="Top" Width="144" Height="20" >
+        <ComboBox x:Name="OnWay" HorizontalAlignment="Left" Margin="507,44,0,0" VerticalAlignment="Top" Width="144" Height="20" SelectionChanged="OnWaySelector" >
             <ComboBoxItem Content="All"></ComboBoxItem>
             <ComboBoxItem Content="Parcels on way"></ComboBoxItem>
             <ComboBoxItem Content="No parcels on way"></ComboBoxItem>
         </ComboBox>
-        <RadioButton x:Name="id" Content="מיון לפי תז" GroupName="key1" HorizontalAlignment="Left" Margin="45,51,0,0" VerticalAlignment="Top" Checked="idCheck"/>
-        <RadioButton x:Name="name" Content="מיון לפי שם " GroupName="key1" HorizontalAlignment="Left" Margin="126,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="80" Checked="nameCheck">
+        <RadioButton x:Name="id" Content="Order By Id" GroupName="key1" HorizontalAlignment="Left" Margin="45,51,0,0" VerticalAlignment="Top" Checked="idCheck"/>
+        <RadioButton x:Name="name" Content="Order By Name " GroupName="key1" HorizontalAlignment="Left" Margin="144,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="111" Checked="nameCheck">
             <RadioButton.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

@@ -3,12 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+     xmlns:PL.Convert="clr-namespace:PL.Convert"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:local="clr-namespace:PL.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="700"
       Title="CustomerDelivery">
     <Page.Resources>
+        <PL.Convert:ConvertStateToEnable x:Key="ParcelToEnable"/>
         <DataTemplate x:Key="MyDataTemplate"
  DataType="local:BO.ParcelOfList">
             <Grid>
@@ -44,12 +46,14 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <ListView x:Name="Delivery" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="150,0,0,0" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Height="272" Width="440">
+        <Border Background="Gray" Opacity="0.5" Margin="22,38,51,303" RenderTransformOrigin="0.5,0.5"/>
+
+        <ListView x:Name="Delivery" HorizontalContentAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="22,73,0,0" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Height="289" Width="627">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="Identifier" Width="58" Foreground="Black" />
+                            <TextBlock Text="Number" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -57,9 +61,9 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn>
+                    <GridViewColumn Width="100">
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="AccountArrowLeft" Width="58" Foreground="Black" />
+                            <TextBlock Text="Sender" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -67,9 +71,9 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn>
+                    <GridViewColumn Width="90">
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="AccountArrowRight" Width="58" Foreground="Black" />
+                            <TextBlock Text="Geter" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -77,9 +81,9 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn>
+                    <GridViewColumn Width="120">
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="WeightKilogram" Width="58" Foreground="Black" />
+                            <TextBlock Text="Max Weight" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -87,9 +91,9 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn >
+                    <GridViewColumn Width="100">
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="PriorityHigh" Width="58" Foreground="Black" />
+                            <TextBlock Text="Priority" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -97,9 +101,9 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn>
+                    <GridViewColumn Width="90">
                         <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="BatteryCharging" Width="58" Foreground="Black" />
+                            <TextBlock Text="State" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -107,15 +111,15 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="auto">
+                    <GridViewColumn Width="60">
                         <GridViewColumn.Header>
                             <iconPacks:PackIconMaterial Kind="Delete" Width="58" Foreground="Black" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel">
+                                <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel" IsEnabled="{Binding Path=ParcelState, Converter={StaticResource ParcelToEnable} }">
                                     <Button.Content>
-                                        <iconPacks:PackIconMaterial Kind="Delete" Width="15" Foreground="Black" />
+                                        <iconPacks:PackIconMaterial Kind="Cancel" Width="15" Foreground="Black" />
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>
@@ -135,8 +139,8 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="25,65,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheck"/>
-        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top" Unchecked="unCheck" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741"/>
+        <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="149,45,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheckWeight" FontFamily="Yu Gothic Medium"/>
+        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top" Unchecked="unCheckState" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741" FontFamily="Yu Gothic Medium"/>
 
     </Grid>
 </Page>

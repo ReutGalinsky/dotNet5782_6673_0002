@@ -25,29 +25,42 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             id = i;
+            user = bl.GetUser(id);
         }
         public event EventHandler updateList;
+        private BO.User user;
         private BLApi.IBL bl;
         private string id;
         private void changePassword(object sender, RoutedEventArgs e)
         {
             try
             {
-                var User = bl.GetUser(id);
-                if(User.UserPassword==old.Text)
+                if(user.UserPassword==old.Text)
                 {
                     if (newPassword.Text != "")
                     { bl.UpdatingDetailsOfUser(id, newPassword.Text);
+                        MessageBox.Show("Successfully Change");
+                        updateList(sender, e);
                         return;
                     }
-                   // throw new PL.ConnectionException("");
+
+                    MessageBox.Show("illegal new password");
+                    return;
                 }
-               // throw new PL.ConnectionException("");
-                
+                MessageBox.Show("The Old Password Is Not Correct, Please Try Again");
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void focus(object sender, RoutedEventArgs e)
+        {
+            if ((sender as TextBox).Text == "Old Password:" || (sender as TextBox).Text == "New Password:")
+            {
+                (sender as TextBox).Text = "";
             }
         }
     }

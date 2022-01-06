@@ -26,11 +26,13 @@ namespace PL.Pages
         private BLApi.IBL bl;
         private BO.DroneToList selected;
         private ObservableCollection<BO.DroneToList> listDrones = new ObservableCollection<BO.DroneToList>();
+        PropertyGroupDescription groupState = new PropertyGroupDescription("State");
+        PropertyGroupDescription groupWeight = new PropertyGroupDescription("MaxWeight");
+
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             reset();
         }
-   
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
 
@@ -76,35 +78,28 @@ namespace PL.Pages
                 ManagerViewParcel showParcel = new ManagerViewParcel(bl, parcelToView.NumberOfParcel);
                 showParcel.ShowDialog();
         }
-
-        private void doubleClick(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
-
         private void checkedState(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("State");
-            view.GroupDescriptions.Add(groupDescription);
-
+            view.GroupDescriptions.Add(groupState);
         }
 
         private void uncheckedState(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("MaxWeight");
-            //view.GroupDescriptions.FirstOrDefault();
-            view.GroupDescriptions.Clear();
-
+            view.GroupDescriptions.Remove(groupState);
         }
 
         private void WeightCheck(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("MaxWeight");
-            view.GroupDescriptions.Add(groupDescription);
+            view.GroupDescriptions.Add(groupWeight);
+        }
 
+        private void uncheckedWeight(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DroneListView.ItemsSource);
+            view.GroupDescriptions.Remove(groupWeight);
         }
     }
 }

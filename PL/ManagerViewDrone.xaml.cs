@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace PL
     /// </summary>
     public partial class ManagerViewDrone : Window
     {
+        private BackgroundWorker worker;
         public ManagerViewDrone(BLApi.IBL b, string i)
         {
             InitializeComponent();
@@ -32,7 +34,6 @@ namespace PL
             State.DataContext = drone;
             Latitude.Text = drone.Latitude;
             Longitude.Text = drone.Longitude;
-
         }
         public ManagerViewDrone(BLApi.IBL b, string i, bool flag)
         {
@@ -48,7 +49,6 @@ namespace PL
             Latitude.Text = drone.Latitude;
             Longitude.Text = drone.Longitude;
             buttonMenue.Visibility = Visibility.Hidden;
-            buttonb.DataContext = drone;
             updateButton.Visibility = Visibility.Hidden;
             Model.IsEnabled = false;
 
@@ -88,7 +88,7 @@ namespace PL
         public void convertToPo(PO.DronePO dronePo, BO.Drone d)
         //function that get the drone and update it to the current values as given from the bl
         {
-            dronePo.Battery = d.Battery;
+            dronePo.Battery = (int)d.Battery;
             dronePo.IdNumber = d.IdNumber;
             dronePo.State = d.State;
             dronePo.MaxWeight = d.MaxWeight;
@@ -129,6 +129,7 @@ namespace PL
                     GridOptions.Visibility = Visibility.Visible;
                     CloseOptions.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ArrowLeft;
                     assignVisibility();
+                    Auto.Visibility = Visibility.Visible;
                     break;
                 case false:
                     isClosed = true;
@@ -139,7 +140,7 @@ namespace PL
                     pickButton.Visibility = Visibility.Collapsed;
                     suppltingButton.Visibility = Visibility.Collapsed;
                     shippingButton.Visibility = Visibility.Collapsed;
-
+                    Auto.Visibility = Visibility.Collapsed;
                     break;
                 default:
             }
@@ -233,6 +234,42 @@ namespace PL
         {
             ManagerViewParcel parcel = new ManagerViewParcel(bl, drone.NumberOfParcel);
             parcel.ShowDialog();
+        }
+        private void updateDrone() => worker.ReportProgress(0);
+        private bool Cancel() => worker.CancellationPending;
+        private void StartSimulation_Click(object sender, RoutedEventArgs e)
+        {
+            worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.DoWork += Worker_DoWork;
+            worker.RunWorkerCompleted += Complited;
+            worker.RunWorkerAsync(id);
+        }
+        
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            bl.Simulator(id, updateDrone, Cancel);
+            if ((worker.CancellationPending == true))
+            {
+                e.Cancel = true;
+            }
+
+        }
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+           // MessageBox.Show("hii");
+            convertToPo(drone, bl.GetDrone(id));
+        }
+        private void Complited(object sender, RunWorkerCompletedEventArgs e)
+        {
+            worker = null;
+        }
+        private void stop(object sender, RoutedEventArgs e)
+        {
+            if (worker.IsBusy == true && worker.WorkerSupportsCancellation == true)
+            {
+                worker.CancelAsync();
+            }
         }
     }
 }

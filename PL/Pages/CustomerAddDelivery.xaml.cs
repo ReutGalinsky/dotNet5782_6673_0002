@@ -48,18 +48,18 @@ namespace PL.Pages
                 MessageBox.Show("the geter customer is not existing in the system, please enter again correct details", "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void focus_Click(object sender, RoutedEventArgs e)
-        {
-            if (Longitude.Text == "min 34.2 max 35.8")
-                Longitude.Text = "";
+        //private void focus_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (Longitude.Text == "min 34.2 max 35.8")
+        //        Longitude.Text = "";
            
-        }
-        private void focus_Click1(object sender, RoutedEventArgs e)
-        {
-            if (Latitude.Text == "min 32.2 max 34.8")
-                Latitude.Text = "";
+        //}
+        //private void focus_Click1(object sender, RoutedEventArgs e)
+        //{
+        //    if (Latitude.Text == "min 32.2 max 34.8")
+        //        Latitude.Text = "";
 
-        }
+        //}
     }
 }
 

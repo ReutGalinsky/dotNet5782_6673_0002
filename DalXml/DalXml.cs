@@ -307,7 +307,8 @@ namespace Dal
             }
             listParcels.Add(parcel);
             XmlMethods.SaveListToXMLSerializer<Parcel>(listParcels, parcelPath);
-            runningNumber.Value = runningNumber.Value+1;
+            int run = int.Parse(runningNumber.Value);
+            runningNumber.Value = (run+1).ToString();
             configureRoot.Save(configurePath);
             return parcel.IdNumber;
 
@@ -686,7 +687,7 @@ namespace Dal
             if (listUsers.FirstOrDefault(d => d.UserName == user.UserName).UserName != null)
                 throw new ExistingException($"the user with the user-name:{user.UserName} is already exist");
             listUsers.Add(user);
-            XmlMethods.SaveListToXMLSerializer<User>(listUsers, customerPath);
+            XmlMethods.SaveListToXMLSerializer<User>(listUsers, userPath);
 
             //if (DataSource.Users.FirstOrDefault(d => d.UserName == user.UserName).UserName != null)
             //    throw new ExistingException($"the user with the name:{user.UserName} is already exist");

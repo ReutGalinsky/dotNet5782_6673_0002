@@ -27,7 +27,7 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             CustomerListView.DataContext = listCustomers;
-            Location.SelectedItem = Location.Items[0];
+            OnWay.SelectedItem = OnWay.Items[0];
             name.IsChecked = true;
             update += updated;
         }
@@ -54,7 +54,7 @@ namespace PL.Pages
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             listCustomers.Clear();
-            Location.SelectedItem = "All";
+            OnWay.SelectedItem = "All";
             var temp = from item in bl.GetCustomers()
                        orderby item.Name
                        select item;
@@ -93,16 +93,13 @@ namespace PL.Pages
             foreach (var item in bl.GetCustomers().OrderBy(x =>x.Name))
                 listCustomers.Add(item);
         }
-        //**************
-       
-    }
-    //צריך להוסיף:
-    //קומבובוקס לסינון אנשים לפי איזה אופציה שנבחר
-    //להציג רשימת לקוחות
-    //לעשות פונקציה של לחיצה כפולה שפותחת חלון קטן עם כל הפרטים ואפשר לעדכן או למחוק
-    //להוסיף חלון חדש שמוסיף לקוח
-    //לעשות איפוס לסינונים
+        private void OnWaySelector(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
+        //**************
+
+    }
 }
 
 

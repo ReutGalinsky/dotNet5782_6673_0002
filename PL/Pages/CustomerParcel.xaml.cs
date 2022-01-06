@@ -40,6 +40,9 @@ namespace PL.Pages
         string id;
         private BO.ParcelOfList selected;//selected item that will be send to the new window
         private ObservableCollection<BO.ParcelOfList> listParcels = new ObservableCollection<BO.ParcelOfList>();
+        PropertyGroupDescription groupState = new PropertyGroupDescription("ParcelState");
+        PropertyGroupDescription groupWeight = new PropertyGroupDescription("Weight");
+
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
             selected = (BO.ParcelOfList)ParcelListView.SelectedItem;
@@ -80,22 +83,23 @@ namespace PL.Pages
         private void WeightCheck(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Weight");
-            view.GroupDescriptions.Add(groupDescription);
-
+            view.GroupDescriptions.Add(groupWeight);
         }
-
-        private void unCheck(object sender, RoutedEventArgs e)
+        private void unCheckState(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            view.GroupDescriptions.Clear();
+            view.GroupDescriptions.Remove(groupState);
 
         }
         private void StateCheck(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ParcelState");
-            view.GroupDescriptions.Add(groupDescription);
+            view.GroupDescriptions.Add(groupState);
+        }
+        private void unCheckWeight(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            view.GroupDescriptions.Remove(groupWeight);
         }
     }
 }      

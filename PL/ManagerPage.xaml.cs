@@ -52,7 +52,7 @@ namespace PL
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
-            GridMenu.Width = 70;
+            GridMenu.Width = 60;
         }
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {

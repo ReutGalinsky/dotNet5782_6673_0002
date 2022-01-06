@@ -5,10 +5,14 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:PL.Convert="clr-namespace:PL.Convert"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Title="CustomerShowParcel" Height="300" Width="500">
+        Title="CustomerShowParcel" Height="400" Width="550">
+    <Window.Resources>
+        <PL.Convert:ConvertNotArriving x:Key="myConverter"></PL.Convert:ConvertNotArriving>
+</Window.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="162*" />
@@ -19,23 +23,19 @@
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-
-
-
-            <RowDefinition Height="*"/>
-
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition Height="3*" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="2*"/>
 
         </Grid.RowDefinitions>
         <Grid Background="#FFE2A536" Grid.ColumnSpan="4" MouseDown="move"/>
@@ -61,10 +61,10 @@
             </Button.Template>
         </Button>
 
-        <Border Background="Gray" Opacity="0.5" Margin="43,0,70,14" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="11" Grid.ColumnSpan="4"/>
+        <Border Background="Gray" CornerRadius="10" Opacity="0.5" Margin="99,57,100,37" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="12" Grid.ColumnSpan="4"/>
 
         <TextBlock Text="My parcel:" Margin="0,24,0,0" FontWeight="Light" FontSize="40" Width="228" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="1" Height="53" Grid.RowSpan="2"/>
-        <Border Background="Black" Opacity="0.5" Margin="14,39,62,9" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+        <Border Background="Black" Opacity="0.5" Margin="14,43,62,29" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
 
 
         <TextBlock Text="Id Parcel number:" Style="{StaticResource UsualFont}" FontSize="14" FontWeight="Medium" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="14" Width="120" Grid.Column="1" Margin="10,76,0,0" />
@@ -85,12 +85,12 @@
         <TextBox x:Name="WeightBox" Margin="9,0,0,0"  Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Weight}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="7" Grid.Column="2" />
         <TextBlock Text="Create Time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" Height="16" Width="92" Grid.Column="1" Margin="13,0,0,0"  />
         <TextBox x:Name="Create" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=CreateParcelTime}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="8" Grid.Column="2" Margin="9,0,0,0"    />
-        <TextBlock x:Name="matchLabel" Text="Match time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="9" Height="16" Width="86" Grid.Column="1" Margin="12,0,0,0" />
-        <TextBox x:Name="Match" Margin="9,0,0,0"  IsEnabled="False" Text="{Binding Path=MatchForDroneTime}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="9" Grid.Column="2"   />
+        <TextBlock x:Name="matchLabel"  Text="Match time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="9" Height="16" Width="86" Grid.Column="1" Margin="12,0,0,0" />
+        <TextBox x:Name="Match" Margin="9,0,0,0"  IsEnabled="False" Text="{Binding Path=MatchForDroneTime,Converter={StaticResource myConverter}}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="9" Grid.Column="2"   />
         <TextBlock  x:Name="collectLabel" Text="Collecting Time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="10" Height="20" Width="114" Grid.Column="1" Margin="11,0,0,0" />
-        <TextBox x:Name="Collect"  Margin="9,0,0,0" IsEnabled="False" Text="{Binding Path=CollectingDroneTime}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="10" Grid.Column="2"   />
+        <TextBox x:Name="Collect"  Margin="9,0,0,0" IsEnabled="False" Text="{Binding Path=CollectingDroneTime,Converter={StaticResource myConverter}}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="10" Grid.Column="2"   />
         <TextBlock x:Name="arriveLabel" Text="Arriving Time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="11" Height="22" Width="96" Grid.Column="1" Margin="14,0,0,0" />
-        <TextBox x:Name="Arrive" Margin="9,0,0,0" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ArrivingDroneTime}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="11" Grid.Column="2" RenderTransformOrigin="1.464,0.106"   />
+        <TextBox x:Name="Arrive" Margin="9,0,0,0" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ArrivingDroneTime,Converter={StaticResource myConverter}}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="11" Grid.Column="2" RenderTransformOrigin="1.464,0.106"   />
         <Grid Grid.Column="2" Margin="26,-330,-352,55" Panel.ZIndex="-1" Grid.ColumnSpan="2">
             <Grid.RenderTransform>
                 <RotateTransform Angle="50"/>

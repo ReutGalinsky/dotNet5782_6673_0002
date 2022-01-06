@@ -26,10 +26,10 @@ namespace PL
             id = i;
             parcel = bl.GetParcel(id);
             Id.DataContext = parcel;
-            SenderId.Text = parcel.SenderCustomer.IdNumber;
-            SenderName.Text = parcel.SenderCustomer.Name;
-            GeterId.Text = parcel.GeterCustomer.IdNumber;
-            GeterName.Text = parcel.GeterCustomer.Name;
+            SenderId.DataContext = parcel.SenderCustomer;
+            SenderName.DataContext = parcel.SenderCustomer;
+            GeterId.DataContext = parcel.GeterCustomer;
+            GeterName.DataContext = parcel.GeterCustomer;
             PriorityBox.DataContext = parcel;
             WeightBox.DataContext = parcel;
             Create.DataContext = parcel;

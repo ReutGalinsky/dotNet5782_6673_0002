@@ -15,12 +15,12 @@ namespace BL
     internal partial class BL : BLApi.IBL
     {
         internal DalApi.IDal dal;
-        private List<BO.DroneToList> Drones = new List<DroneToList>();
-        private double _available;
-        private double _heavy;
-        private double _light;
-        private double _medium;
-        private double _speed;
+        internal List<BO.DroneToList> Drones = new List<DroneToList>();
+        internal double _available;
+        internal double _heavy;
+        internal double _light;
+        internal double _medium;
+        internal double _speed;
 
         #region singelton
         class Nested
@@ -236,7 +236,7 @@ namespace BL
                         };
                         BO.ParcelOfList parcel3 = (BO.ParcelOfList)parcel1.CopyPropertiesToNew(typeof(BO.ParcelOfList));
 
-                        drone.Battery = rand.Next(battarUseag(drone, parcel3), 101);
+                        drone.Battery = rand.Next((int)battarUseag(drone, parcel3), 101);
                         drone.NumberOfParcel = parcel1.IdNumber;
                         drone.State = DroneState.shipping;
                         return drone;

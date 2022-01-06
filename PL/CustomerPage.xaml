@@ -70,11 +70,11 @@
                         <materialDesign:PackIcon Kind="Menu" Foreground="Black" Width="25" Height="25" VerticalAlignment="Center"/>
                     </Button>
                 </Grid>
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="463" Background="LightGray" SelectionChanged="changedSelection">
+                <ListView x:Name="MenuListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="463" Background="LightGray" SelectionChanged="changedSelection">
                     <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,7,0,0" Tag="PersonalArea">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="My details" FontFamily="Corbel" VerticalAlignment="Center" FontWeight="ExtraLight" FontSize="20" Height="33" Width="122"/>
+                            <TextBlock  Text="  My details" FontFamily="Corbel" VerticalAlignment="Center" FontWeight="ExtraLight" FontSize="20" Height="33" Width="122"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Visibility="Hidden" x:Name="Password" Foreground="White" Width="200" Height="40" Margin="0,7,0,0" Tag="ChangePassword" Background="Gray">
@@ -86,7 +86,7 @@
                     <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,7,0,0" Tag="AllDeliveries">
                         <StackPanel Orientation="Horizontal" Width="173">
                             <materialDesign:PackIcon Kind="TruckDelivery" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="My Deliveries" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="20" VerticalAlignment="Center" Width="122" Height="37"/>
+                            <TextBlock  Text="  My Deliveries" FontFamily="Corbel" FontWeight="ExtraLight" FontSize="20" VerticalAlignment="Center" Width="122" Height="37"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Visibility="Hidden" x:Name="AddDelivery" Foreground="White" Width="200" Height="40" Margin="0,7,0,0" Tag="AddNewDelivery" Background="Gray">
@@ -98,7 +98,7 @@
                     <ListViewItem Foreground="Black" Width="200" Height="100" Margin="0,7,0,0 " Tag="AllParcels">
                         <StackPanel Orientation="Horizontal" >
                             <materialDesign:PackIcon Kind="Cart" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Height="35" Width="51"/>
-                            <TextBlock  Text="My Parcels" FontFamily="Gill Sans MT" FontSize="20" FontWeight="ExtraLight"></TextBlock>
+                            <TextBlock  Text="    My Parcels" FontFamily="Corbel" FontSize="20" FontWeight="ExtraLight"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>

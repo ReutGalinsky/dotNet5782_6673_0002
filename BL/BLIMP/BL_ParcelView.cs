@@ -112,7 +112,7 @@ namespace BL
         }
         public void Simulator(string id, Action updatePl, Func<bool> checkStop)
         {
-
+            DroneSimulator simulator = new DroneSimulator(this,id, updatePl, checkStop);
         }
 
     }

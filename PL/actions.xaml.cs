@@ -26,7 +26,7 @@ namespace PL
             InitializeComponent();
             b = bl;
             drone = new PO.DronePO();
-            drone.Battery = a.Battery;
+            drone.Battery = (int)a.Battery;
             drone.IdNumber = a.IdNumber;
             drone.State = a.State;
             drone.MaxWeight = a.MaxWeight;
@@ -84,7 +84,7 @@ namespace PL
         public void convertToPo(PO.DronePO dronePo, BO.Drone d)
         //function that get the drone and update it to the current values as given from the bl
         {
-            dronePo.Battery = d.Battery;
+            dronePo.Battery = (int)d.Battery;
             dronePo.IdNumber = d.IdNumber;
             dronePo.State = d.State;
             dronePo.MaxWeight = d.MaxWeight;

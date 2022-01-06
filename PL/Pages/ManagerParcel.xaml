@@ -9,12 +9,15 @@
       d:DesignHeight="400" d:DesignWidth="700"
       Title="ManagerParcel">
     <Grid>
-        <Border Background="Gray" Opacity="0.5" Margin="22,38,23,337" RenderTransformOrigin="0.5,0.5"/>
+        <Border Background="Gray" Opacity="0.5" Margin="21,38,24,332" RenderTransformOrigin="0.5,0.5"/>
 
         <ListView x:Name="ParcelListView" ItemsSource="{Binding}" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Margin="0,71,0,11" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Width="658">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Number" Width="50">
+                    <GridViewColumn Width="50">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Number" FontFamily="Yu Gothic Medium"></TextBlock>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=IdNumber}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" VerticalAlignment="Center" />
@@ -22,7 +25,11 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Sender" Width="120">
+                    <GridViewColumn Width="120">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Sender" FontFamily="Yu Gothic Medium"></TextBlock>
+                        </GridViewColumn.Header>
+
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Sender}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
@@ -30,35 +37,52 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Geter" Width="120">
+                    <GridViewColumn  Width="120">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Geter" FontFamily="Yu Gothic Medium"></TextBlock>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Geter}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Weight" Width="70">
+                    <GridViewColumn Width="70">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Weight" FontFamily="Yu Gothic Medium"></TextBlock>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Weight}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Priority" Width="120">
+                    <GridViewColumn Width="120">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Priority" FontFamily="Yu Gothic Medium"></TextBlock>
+                        </GridViewColumn.Header>
+
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Priority}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="State" Width="120">
+                    <GridViewColumn  Width="120">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="State" FontFamily="Yu Gothic Medium"></TextBlock>
+                        </GridViewColumn.Header>
+
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=ParcelState}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Delete" Width="50">
+                    <GridViewColumn Width="50">
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="Delete"></iconPacks:PackIconMaterial>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel">
@@ -85,14 +109,14 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <CheckBox x:Name="senderCheck" Content="Group By Sender" HorizontalAlignment="Left" Margin="76,45,0,0" VerticalAlignment="Top" Checked="GroupSender" Unchecked="CancelGroup" RenderTransformOrigin="-0.07,0.682"/>
-        <CheckBox x:Name="geterCheck" Content="Group By Geter" HorizontalAlignment="Left" Margin="197,45,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupGeter"/>
-        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="509,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupState"/>
-        <CheckBox Content="Group By Priority" HorizontalAlignment="Left" Margin="388,45,0,0" VerticalAlignment="Top" Unchecked="CancelGroup" Checked="GroupPriority"/>
-        <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="199,14,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime"/>
-        <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="361,14,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime"/>
-        <TextBlock HorizontalAlignment="Left" Margin="139,14,0,0" Text="Start Date:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" FontFamily="Yu Gothic UI Semibold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="306,11,0,0" Text="End Date:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" FontFamily="Yu Gothic UI Semibold"/>
+        <CheckBox x:Name="senderCheck" Content="Group By Sender" HorizontalAlignment="Left" Margin="76,45,0,0" VerticalAlignment="Top" Checked="GroupSender" Unchecked="CancelGroupSeter" RenderTransformOrigin="-0.07,0.682" FontFamily="Yu Gothic Medium"/>
+        <CheckBox x:Name="geterCheck" Content="Group By Geter"  FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="197,45,0,0" VerticalAlignment="Top" Unchecked="CancelGroupGeter" Checked="GroupGeter"/>
+        <CheckBox Content="Group By State" HorizontalAlignment="Left"  FontFamily="Yu Gothic Medium" Margin="509,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroupState" Checked="GroupState"/>
+        <CheckBox Content="Group By Priority" HorizontalAlignment="Left"  FontFamily="Yu Gothic Medium" Margin="388,45,0,0" VerticalAlignment="Top" Unchecked="CancelGroupPriority" Checked="GroupPriority"/>
+        <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="196,11,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime" FontFamily="Yu Gothic Medium"/>
+        <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="362,11,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime" FontFamily="Yu Gothic Medium"/>
+        <TextBlock HorizontalAlignment="Left" Margin="139,14,0,0" Text="Start Date:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" FontFamily="Yu Gothic Medium"/>
+        <TextBlock HorizontalAlignment="Left" Margin="306,11,0,0" Text="End Date:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" FontFamily="Yu Gothic Medium"/>
 
     </Grid>
 </Page>

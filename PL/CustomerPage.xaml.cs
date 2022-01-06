@@ -42,17 +42,21 @@ namespace PL
         }
         private void BackToPersonal(object sender, EventArgs e)
         {
-            Customer.NavigationService.Navigate(pagePersonal);
+            MenuListView.SelectedItem = MenuListView.Items[0];
+            // Customer.NavigationService.Navigate(pagePersonal);
+
         }
         private void BackToDelivery(object sender, EventArgs e)
         {
-            pageDelivery.update(sender, e);
-            Customer.NavigationService.Navigate(pageDelivery);
+            MenuListView.SelectedItem = MenuListView.Items[2];
+            //pageDelivery.update(sender, e);
+            //Customer.NavigationService.Navigate(pageParcel);
         }
         private void BackToParcel(object sender, EventArgs e)
         {
-            pageParcel.update(sender, e);
-            Customer.NavigationService.Navigate(pageParcel);
+            MenuListView.SelectedItem = MenuListView.Items[4];
+            //pageParcel.update(sender, e);
+            //Customer.NavigationService.Navigate(pageDelivery);
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -83,37 +87,38 @@ namespace PL
         }
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-                var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
-                switch (item.Tag)
-                {
-                    case "PersonalArea":
-                        Customer.NavigationService.Navigate(pagePersonal);
-                        closeSubPages();
-                        Password.Visibility = Visibility.Visible;
-                        break;
-                    case "ChangePassword":
-                        CustomerChangePassword ChangePassword = new CustomerChangePassword(bl, id);
-                        ChangePassword.updateList += BackToPersonal;
-                        Customer.NavigationService.Navigate(ChangePassword);
-                        break;
-                    case "AllDeliveries":
-                        pageDelivery.update(sender, e);
-                        Customer.NavigationService.Navigate(pageDelivery);
-                        closeSubPages();
-                        AddDelivery.Visibility = Visibility.Visible;
-                        break;
-                    case "AddNewDelivery":
-                        CustomerAddDelivery addDelivery = new CustomerAddDelivery(bl, id);
-                        addDelivery.updateList += BackToDelivery;
-                        Customer.NavigationService.Navigate(addDelivery);
-                        break;
-                    case "AllParcels":
-                        pageParcel.update(sender, e);
-                        Customer.NavigationService.Navigate(pageParcel);
-                        closeSubPages();
-                        break;
-                }
-            
+            var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
+            switch (item.Tag)
+            {
+                case "PersonalArea":
+                    Customer.NavigationService.Navigate(pagePersonal);
+                    closeSubPages();
+                    Password.Visibility = Visibility.Visible;
+                    break;
+                case "ChangePassword":
+                    CustomerChangePassword ChangePassword = new CustomerChangePassword(bl, id);
+                    ChangePassword.updateList += BackToPersonal;
+                    Customer.NavigationService.Navigate(ChangePassword);
+                    break;
+                case "AllDeliveries":
+                    pageParcel.update(sender, e);
+                    Customer.NavigationService.Navigate(pageParcel);
+                    closeSubPages();
+                    AddDelivery.Visibility = Visibility.Visible;
+                    break;
+                case "AddNewDelivery":
+                    CustomerAddDelivery addDelivery = new CustomerAddDelivery(bl, id);
+                    addDelivery.updateList += BackToDelivery;
+                    Customer.NavigationService.Navigate(addDelivery);
+                    break;
+                case "AllParcels":
+                    pageDelivery.update(sender, e);
+
+                    Customer.NavigationService.Navigate(pageDelivery);
+                    closeSubPages();
+                    break;
+            }
+
         }
     }
 }

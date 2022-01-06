@@ -48,8 +48,8 @@ namespace BL
                     throw new Exception("no station available");
 
                 //check battery availabilty
-                int tempBattery = drone.Battery;
-                tempBattery -= (int)(_available * closestStation.distance);
+                double tempBattery = drone.Battery;
+                tempBattery -= (_available * closestStation.distance);
                 if (tempBattery < 0)
                     throw new ChargingException($"there is not enough battery in the drone with the id:{droneId} to get the closest base station");
 
