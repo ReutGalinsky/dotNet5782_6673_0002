@@ -140,8 +140,8 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="174,43,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheckWeight" FontFamily="Yu Gothic Medium"/>
-        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="31,40,0,0" VerticalAlignment="Top" Unchecked="unCheckState" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741" FontFamily="Yu Gothic Medium"/>
+        <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="261,59,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheckWeight" FontFamily="Yu Gothic Medium"/>
+        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="483,58,0,0" VerticalAlignment="Top" Unchecked="unCheckState" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741" FontFamily="Yu Gothic Medium"/>
 
     </Grid>
 </Page>

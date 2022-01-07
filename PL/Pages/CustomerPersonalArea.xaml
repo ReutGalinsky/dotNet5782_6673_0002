@@ -10,18 +10,19 @@
       Title="CustomerPersonalArea">
 
     <Grid>
+        <Border Background="LightBlue" CornerRadius="10" Opacity="0.5" Margin="60,53,60,63" RenderTransformOrigin="0.5,0.5"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="75,60,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="39" FontSize="24" FontFamily="Yu Gothic Medium"/>
-        <TextBox x:Name="Id" HorizontalAlignment="Left" IsEnabled="False" Margin="253,67,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" Height="25"/>
-        <TextBlock HorizontalAlignment="Left" Margin="75,109,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677" FontSize="24" FontFamily="Yu Gothic Medium" Width="150" Height="30"/>
-        <TextBox x:Name="Phone" HorizontalAlignment="Left" IsEnabled="False" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" Margin="253,165,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="75,158,0,0" Text="phone" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Yu Gothic Medium" RenderTransformOrigin="0.261,0.537" Width="150" Height="35"/>
-        <TextBox x:Name="Name" HorizontalAlignment="Left" IsEnabled="False" Margin="253,116,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
-        <TextBlock HorizontalAlignment="Left" Margin="75,197,0,0" Text="Longitude" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Yu Gothic Medium" Width="150" Height="49"/>
-        <TextBlock HorizontalAlignment="Left" Margin="75,251,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Yu Gothic Medium" Width="150" Height="37"/>
-        <TextBox x:Name="Longitude" HorizontalAlignment="Left" IsEnabled="False" Margin="253,209,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
-        <TextBox x:Name="Latitude" HorizontalAlignment="Left" IsEnabled="False" Margin="253,258,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" TextChanged="Latitude_TextChanged"/>
-        <Button x:Name="updatingButton" Visibility="Collapsed" Content="Update Please" Click="Button_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="385,285,156,58">
+        <TextBlock HorizontalAlignment="Left" Margin="173,65,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="39" FontSize="24" FontFamily="Yu Gothic Medium"/>
+        <TextBox x:Name="Id" HorizontalAlignment="Left" IsEnabled="False" Margin="303,73,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap"  VerticalAlignment="Top" Width="214" Height="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="192,110,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677" FontSize="24" FontFamily="Yu Gothic Medium" Width="82" Height="30"/>
+        <TextBox x:Name="Phone" HorizontalAlignment="Left" IsEnabled="False" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Height="25" Margin="302,162,0,0"/>
+        <TextBlock HorizontalAlignment="Left" Margin="188,155,0,0" Text="Phone" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Yu Gothic Medium" RenderTransformOrigin="0.261,0.537" Width="93" Height="35"/>
+        <TextBox x:Name="Name" HorizontalAlignment="Left" IsEnabled="False" Margin="303,117,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="172,202,0,0" Text="Longitude" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Yu Gothic Medium" Width="130" Height="34"/>
+        <TextBlock HorizontalAlignment="Left" Margin="184,247,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Yu Gothic Medium" Width="103" Height="37"/>
+        <TextBox x:Name="Longitude" HorizontalAlignment="Left" IsEnabled="False" Margin="303,208,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Height="25"/>
+        <TextBox x:Name="Latitude" HorizontalAlignment="Left" IsEnabled="False" Margin="303,253,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Height="25" TextChanged="Latitude_TextChanged"/>
+        <Button x:Name="updatingButton" Visibility="Collapsed" Content="Update Please" Click="Button_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="253,288,250,42">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -42,7 +43,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="edit" Click="edit_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="253,288,250,42">
+        <Button x:Name="edit" Click="edit_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="252,273,251,57">
             <Button.Content>
                 <iconPacks:PackIconMaterial Kind="Pencil" Width="55" Foreground="Black" />
             </Button.Content>
