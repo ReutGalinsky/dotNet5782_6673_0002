@@ -24,11 +24,6 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
-            CtorFunction(i);
-            IsInner = false;
-        }
-        private void CtorFunction(string i)
-        {
             customer = bl.GetCustomer(id);
             Id.DataContext = customer;
             Phone.DataContext = customer;
@@ -36,20 +31,14 @@ namespace PL
             Longitude.DataContext = customer.Location;
             Latitude.DataContext = customer.Location;
             listParcels.DataContext = bl.GetAllParcelsBy(x => x.Sender == i || x.Geter == i);
-        }
-        public ManagerViewCustomer(BLApi.IBL b, string i,bool inner)
-        {
-            InitializeComponent();
-            bl = b;
-            id = i;
-            CtorFunction(i);
-            IsInner = true;
+            ParcelGrid.DataContext = parcel;
         }
         private bool IsInner;
         private BLApi.IBL bl;
         private BO.Customer customer;
         private string id;
         public event EventHandler updateList;
+        private BO.ParcelOfList parcel;
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -90,6 +79,7 @@ namespace PL
 
         private void enableShow(object sender, SelectionChangedEventArgs e)
         {
+            parcel = listParcels.SelectedItem as BO.ParcelOfList;
             showParcel.IsEnabled = true;
         }
     }

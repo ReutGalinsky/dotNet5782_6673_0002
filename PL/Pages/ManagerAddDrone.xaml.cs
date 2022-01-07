@@ -32,6 +32,7 @@ namespace PL.Pages
                 Model.DataContext = drone;
                 Weight.DataContext = drone;
                 Weight.SelectedItem = Weight.Items[0];
+                stationNumber.DataContext = bl.GetAllBaseStationsBy(x => x.ChargeSlots > 0);
             }
 
             private BLApi.IBL bl;
@@ -84,7 +85,7 @@ namespace PL.Pages
 
             private void focus(object sender, TextChangedEventArgs e)
             {
-                if (drone.IdNumber == "" || drone.Model == "" || Station.Text == "")
+                if (drone.IdNumber == "" || drone.Model == "" || stationNumber.SelectedItem ==null||Weight.SelectedItem==null)
                     ADD.IsEnabled = false;
                 else
                 {
@@ -97,7 +98,7 @@ namespace PL.Pages
         {
             try
             {
-                bl.AddDrone(drone, Station.Text);
+                bl.AddDrone(drone, (stationNumber.SelectedItem as BO.BaseStationToList).IdNumber);
                 Close_Click(sender,e);
             }
             catch(Exception ex)

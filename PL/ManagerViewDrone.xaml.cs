@@ -27,6 +27,7 @@ namespace PL
             bl = b;
             id = i;
             convertToPo(drone, bl.GetDrone(id));
+            parcel = bl.GetAllParcelsBy(x => x.IdNumber == drone.NumberOfParcel).FirstOrDefault();
             Id.DataContext = drone;
             Weight.DataContext = drone;
             Model.DataContext = drone;
@@ -34,26 +35,12 @@ namespace PL
             State.DataContext = drone;
             Latitude.Text = drone.Latitude;
             Longitude.Text = drone.Longitude;
+            ParcelGrid.DataContext = parcel;
+            textParcel.DataContext = parcel;
         }
-        public ManagerViewDrone(BLApi.IBL b, string i, bool flag)
-        {
-            InitializeComponent();
-            bl = b;
-            id = i;
-            convertToPo(drone, bl.GetDrone(id));
-            Id.DataContext = drone;
-            Weight.DataContext = drone;
-            Model.DataContext = drone;
-            Battery.DataContext = drone;
-            State.DataContext = drone;
-            Latitude.Text = drone.Latitude;
-            Longitude.Text = drone.Longitude;
-            buttonMenue.Visibility = Visibility.Hidden;
-            updateButton.Visibility = Visibility.Hidden;
-            Model.IsEnabled = false;
-
-        }
+        
         private BLApi.IBL bl;
+        private BO.ParcelOfList parcel;
         private bool isClosed = true;
         private string id;
         private PO.DronePO drone = new PO.DronePO();
@@ -61,6 +48,7 @@ namespace PL
 
         private void assignVisibility()
         {
+            Auto.Visibility = Visibility.Visible;
             if (drone.State == BO.DroneState.Available)
             {
                 chargingButton.Visibility = Visibility.Visible;
@@ -135,6 +123,8 @@ namespace PL
                     isClosed = true;
                     CloseOptions.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.Wrench;
                     GridOptions.Visibility = Visibility.Hidden;
+                    Auto.Visibility = Visibility.Collapsed;
+                    Manual.Visibility = Visibility.Collapsed;
                     releaseButton.Visibility = Visibility.Collapsed;
                     chargingButton.Visibility = Visibility.Collapsed;
                     pickButton.Visibility = Visibility.Collapsed;
@@ -239,6 +229,8 @@ namespace PL
         private bool Cancel() => worker.CancellationPending;
         private void StartSimulation_Click(object sender, RoutedEventArgs e)
         {
+            Auto.Visibility = Visibility.Collapsed;
+            Manual.Visibility = Visibility.Visible;
             worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
             worker.ProgressChanged += Worker_ProgressChanged;
             worker.DoWork += Worker_DoWork;
@@ -263,6 +255,7 @@ namespace PL
         private void Complited(object sender, RunWorkerCompletedEventArgs e)
         {
             worker = null;
+           
         }
         private void stop(object sender, RoutedEventArgs e)
         {
@@ -270,6 +263,9 @@ namespace PL
             {
                 worker.CancelAsync();
             }
+            Auto.Visibility = Visibility.Visible;
+            Manual.Visibility = Visibility.Collapsed;
+
         }
     }
 }

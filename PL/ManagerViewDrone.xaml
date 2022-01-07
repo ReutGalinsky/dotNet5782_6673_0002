@@ -11,7 +11,8 @@
         ResizeMode="NoResize"
         Title="ManagerViewDrone" Height="440" Width="650">
     <Window.Resources>
-        <PL.Convert:ConvertParcelToEnable x:Key="ParcelToEnable"/>
+        <PL.Convert:ConvertToVisibility x:Key="VisibleParcel"/>
+        <PL.Convert:ConveryDisVisibility x:Key="DisVisibleText"/>
         <Style x:Key="myActionButton" TargetType="Button">
             <Setter Property="BorderBrush" Value="#FFF0F0F3"></Setter>
             <Setter Property="BorderThickness" Value="3"></Setter>
@@ -73,7 +74,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Border Background="Gray" Opacity="0.5" Margin="16,38,14,0" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="8" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <Border Background="Gray" CornerRadius="10" Opacity="0.5" Margin="16,38,14,0" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="8" Grid.ColumnSpan="2" Grid.Column="1"/>
         <TextBlock Text="My Drone:" Margin="64,18,0,0" FontWeight="Light" FontSize="40" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
         <Border Background="Black" Opacity="0.5" Margin="30,31,48,12" Height="2" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
         <Grid x:Name="GridOptions" Background="LightGray" Visibility="Hidden" Margin="0,44,62,0" Grid.Row="1" Grid.RowSpan="9">
@@ -97,7 +98,20 @@
         <TextBox x:Name="Longitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="7" Grid.Column="2" />
         <TextBlock Text="Latitude:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" />
         <TextBox x:Name="Latitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="8" Grid.Column="2" />
-        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="168,68,9,2" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="6,23,9,0" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="7">
+            <Grid x:Name="ParcelGrid" Visibility="{Binding Converter={StaticResource VisibleParcel}}">
+                <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center"  Height="15" Width="120" Margin="0,42,0,0" />
+                <TextBox x:Name="IdParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,42,0,0"   />
+                <TextBlock Text="Weight:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="22" Width="120" Margin="10,80,0,0" />
+                <TextBox x:Name="WeightParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Weight}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,77,0,0"   />
+                <TextBlock Text="Priority:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="21" Width="120" Margin="10,115,0,0" />
+                <TextBox x:Name="PriorityParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,112,0,0"   />
+                <TextBlock Text="State:" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Width="120" Margin="10,146,0,0" Height="15" VerticalAlignment="Top" />
+                <TextBox x:Name="StateParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ParcelState}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,146,0,0"   />
+
+            </Grid>
+        </Border>
+
         <iconPacks:PackIconMaterial Kind="PackageVariant" Grid.Column="3" Margin="0,23,0,0" Grid.Row="2" Height="22" Width="55" HorizontalAlignment="Center"></iconPacks:PackIconMaterial>
         <Button x:Name="updateButton" Content="Update" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="9" Height="50" Width="100" Margin="112,0,0,0" Grid.ColumnSpan="2">
             <Button.Style>
@@ -120,7 +134,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
+        <TextBlock x:Name="textParcel" Visibility="{Binding Converter={StaticResource DisVisibleText}}" Text="There isn't delivery" Grid.Column="3" Margin="10,32,-10,23" Grid.RowSpan="2" Grid.Row="3" FontFamily="Ink Free" FontSize="16"/>
 
         <Button x:Name="buttonMenue" Click="Button_Click_1" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.507,0.41" Width="100" Height="45" Grid.Row="1">
             <Button.Content>
@@ -233,7 +247,28 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Automatic" Click="StartSimulation_Click" Visibility="Collapsed" x:Name="Auto" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="3" Height="50" Width="100" Margin="0,30,0,0" Grid.RowSpan="2">
+        <Button Content="Automatic" Click="StartSimulation_Click" Visibility="Collapsed" x:Name="Auto" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="4" Height="50" Width="100" Margin="0,18,0,0" Grid.RowSpan="2">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="100" Height="20" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="Manual" Click="stop" Visibility="Collapsed" x:Name="Manual" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="4" Height="50" Width="100" Margin="0,18,0,0" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -277,7 +312,6 @@
 
 
         </Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="40,15,0,0" Grid.Row="7" Height="20" VerticalAlignment="Top" Click="stop" Grid.Column="3"/>
 
     </Grid>
 

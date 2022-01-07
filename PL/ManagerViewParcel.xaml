@@ -12,7 +12,8 @@
         Title="ManagerViewParcel" Height="440" Width="700">
     <Window.Resources>
         <PL.Convert:ConvertToVisibility x:Key="myConverter"></PL.Convert:ConvertToVisibility>
-    <PL.Convert:ConvertDroneToEnable x:Key="ParcelToEnable"/>
+        <PL.Convert:ConvertParcelDrone x:Key="droneDetail"/>
+        <PL.Convert:ConvertTextDrone x:Key="TextConvert"/>
     </Window.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -66,12 +67,46 @@
         </Button>
         <TextBlock Text="My Drone:" Margin="17,11,0,0" FontWeight="Light" FontSize="30" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Row="1"/>
         <Border Background="Black" Opacity="0.5" Margin="12,51,24,47" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
-        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="18,70,33,2" RenderTransformOrigin="0.752,0.498" Grid.Row="1" Grid.RowSpan="11"/>
+        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="18,70,33,2" RenderTransformOrigin="0.752,0.498" Grid.Row="1" Grid.RowSpan="11">
+            <Grid x:Name="GridDrone" Visibility="{Binding Converter={StaticResource droneDetail}}">
+                <Grid x:Name="innerDrone">
+                    <TextBlock Text="Id number:" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Top" Margin="6,29,0,0" />
+                <TextBox x:Name="IdDrone" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Height="16" Margin="29,48,0,0" />
+                <TextBlock Text="Drone Battery:" IsEnabled="False" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Top" Margin="7,69,0,0" />
+                <TextBox x:Name="Battery" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Battery}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="83" Height="16" Margin="29,88,0,0" />
+                <TextBlock Text="Drone Max Weight:" IsEnabled="False" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Top" Margin="3,120,0,0" />
+                <TextBox x:Name="Weight" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=MaxWeight}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Margin="29,0,0,0" />
+                <TextBlock Text="Longitude:" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Top" Margin="10,174,0,0" />
+                <TextBox x:Name="Longitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="18" Margin="26,193,0,0" />
+                <TextBlock Text="Latitude:" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Top" Margin="12,230,0,0" />
+                <TextBox x:Name="Latitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="20" Margin="26,249,0,0" />
+                </Grid>
+            </Grid>
+        </Border>
 
         <TextBlock Text="My options:" Margin="16,8,0,0" FontWeight="Light" FontSize="30" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1"/>
         <Border Background="Black" Opacity="0.5" Margin="12,51,24,47" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
-        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="168,68,9,2" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
-        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="168,0,9,1" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="7" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="168,68,9,2" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="2">
+            <Grid x:Name="GridSender">
+                <TextBlock Text="Id number:" HorizontalAlignment="Left" IsEnabled="False"  FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="17,31,0,0" />
+                <TextBox x:Name="IdCustomer1" Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="18" Margin="100,31,0,0" />
+                <TextBlock Text="Name:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="28,74,0,0" RenderTransformOrigin="0.475,-0.213" />
+                <TextBox x:Name="Name" Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Height="22" Margin="100,0,0,49" />
+                <TextBlock Text="Phone:" HorizontalAlignment="Left" FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="27,114,0,0" />
+                <TextBox x:Name="Phone" Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="21" Margin="100,111,0,0" />
+            </Grid>
+        </Border>
+        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="168,0,9,1" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="7" Grid.RowSpan="5" Grid.ColumnSpan="2">
+            <Grid x:Name="GridGeter">
+                <TextBlock Text="Id number:" HorizontalAlignment="Left" IsEnabled="False"  FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="17,31,0,0" />
+                <TextBox Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="18" Margin="100,31,0,0" />
+                <TextBlock Text="Name:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="28,74,0,0" RenderTransformOrigin="0.475,-0.213" />
+                <TextBox Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Height="22" Margin="100,0,0,49" />
+                <TextBlock Text="Phone:" HorizontalAlignment="Left" FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="27,114,0,0" />
+                <TextBox Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="21" Margin="100,111,0,0" />
+            </Grid>
+
+        </Border>
 
         <Border Background="Gray" Opacity="0.5" Margin="1,67,29,1" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="11" Grid.ColumnSpan="2"/>
 
@@ -110,8 +145,10 @@
         <TextBox x:Name="Collect"  Margin="9,0,0,0" Visibility="{Binding Path=CollectingDroneTime,Converter={StaticResource myConverter}}" IsEnabled="False" Text="{Binding Path=CollectingDroneTime}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="10" Grid.Column="2"   />
         <TextBlock x:Name="arriveLabel" Visibility="{Binding Path=ArrivingDroneTime,Converter={StaticResource myConverter}}" Text="Arriving Time:" FontSize="14" HorizontalAlignment="Left" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="11" Height="22" Width="96" Grid.Column="1" Margin="14,0,0,0" />
         <TextBox x:Name="Arrive" Margin="9,0,0,0" Visibility="{Binding Path=ArrivingDroneTime,Converter={StaticResource myConverter}}" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ArrivingDroneTime}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="11" Grid.Column="2" RenderTransformOrigin="1.464,0.106"   />
+        <TextBlock x:Name="note1" Visibility="{Binding Converter={StaticResource TextConvert}}" Text="Ther Isn't Drone" FontSize="14" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="11" Height="22" Width="150" Grid.Column="1" Margin="-150,-400,100,70" FontFamily="Ink Free"  />
+        <TextBlock x:Name="note2" Visibility="{Binding Converter={StaticResource TextConvert}}" Text="that delivered now" FontSize="14" HorizontalAlignment="Left" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="11" Height="22" Width="150" Grid.Column="1" Margin="-150,-365,100,70" FontFamily="Ink Free" />
 
-        <Button x:Name="buttonb" IsEnabled="{Binding Path=Drone, Converter={StaticResource ParcelToEnable}}" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Click="openDrone" Height="26" Width="117" Margin="20,72,0,0">
+        <Button x:Name="buttonb" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top"  Height="26" Width="117" Margin="20,72,0,0">
             <Button.Content>
                 <StackPanel>
                     <iconPacks:PackIconMaterial x:Name="contentt" Kind="Drone" Height="15" Width="111" BorderBrush="Transparent" Background="Transparent"/>
@@ -132,7 +169,7 @@
                 <TextBlock Text="View Sender" FontFamily="Ink Free" ></TextBlock>
             </Button.ToolTip>
         </Button>
-        <Button x:Name="ShowGeter" BorderBrush="Transparent" Background="Transparent" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Click="openGeter" Height="32" Width="199" Margin="168,0,0,0" Grid.ColumnSpan="2">
+        <!--<Button x:Name="ShowGeter" BorderBrush="Transparent" Background="Transparent" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Click="openGeter" Height="32" Width="199" Margin="168,0,0,0" Grid.ColumnSpan="2">
             <Button.Content>
                 <StackPanel>
                     <iconPacks:PackIconMaterial Kind="AccountArrowLeft">
@@ -142,7 +179,12 @@
             <Button.ToolTip>
                 <TextBlock Text="View Geter" FontFamily="Ink Free" ></TextBlock>
             </Button.ToolTip>
-        </Button>
+        </Button>-->
+        <iconPacks:PackIconMaterial Kind="AccountArrowLeft" Grid.Column="3" Margin="91,0,0,0" Grid.Row="7" VerticalAlignment="Center">
+            <iconPacks:PackIconMaterial.ToolTip>
+                <TextBlock Text="View Geter" FontFamily="Ink Free" ></TextBlock>
+            </iconPacks:PackIconMaterial.ToolTip>
+        </iconPacks:PackIconMaterial>
 
         <Grid Grid.Column="2" Margin="26,-330,-352,55" Panel.ZIndex="-1" Grid.ColumnSpan="2">
             <Grid.RenderTransform>
@@ -162,9 +204,6 @@
                     <Border Width="700" Height="35" Background="#83DABD06" Margin="150,15,80,0" CornerRadius="20"/>
                 </StackPanel>
             </StackPanel>
-
-
-
         </Grid>
 
     </Grid>

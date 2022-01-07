@@ -70,7 +70,6 @@ namespace PL.Pages
          
             private void Focus(object sender, TextChangedEventArgs e)
             {
-
                 if (baseStation.IdNumber == "" || Longitude.Text == "" || Latitude.Text == "" || baseStation.Name == "" || ChargeSlots.Text == "")
                 {
                     ADD.IsEnabled = false;
@@ -79,7 +78,7 @@ namespace PL.Pages
                     ADD.IsEnabled = true;
 
 
-    }
+            }
 
 }
     }

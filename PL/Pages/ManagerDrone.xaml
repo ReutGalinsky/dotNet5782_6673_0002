@@ -48,7 +48,7 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <Border Background="Gray" Opacity="0.5" Margin="22,38,35,331"/>
+        <Border Background="Gray" Opacity="0.5" Margin="22,38,35,309"/>
 
         <ListView x:Name="DroneListView" ItemsSource="{Binding}" HorizontalContentAlignment="Center" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="22,67,34,21" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.RenderTransform>
@@ -137,8 +137,8 @@
             </ListView.GroupStyle>
 
         </ListView>
-        <CheckBox x:Name="StateCheck" FontFamily="Yu Gothic Medium" Content="Show By State" HorizontalAlignment="Left" Margin="428,44,0,0" VerticalAlignment="Top" Checked="checkedState" Unchecked="uncheckedState"/>
-        <CheckBox Content="Group By Weight" FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="221,45,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="uncheckedWeight"/>
+        <CheckBox x:Name="StateCheck" FontFamily="Yu Gothic Medium" Content="Show By State" HorizontalAlignment="Left" Margin="249,46,0,0" VerticalAlignment="Top" Checked="checkedState" Unchecked="uncheckedState"/>
+        <CheckBox Content="Group By Weight" FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="61,44,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="uncheckedWeight"/>
 
     </Grid>
 </Page>

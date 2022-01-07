@@ -95,7 +95,7 @@ namespace PL
         }
         private void showTheParcel(object sender, RoutedEventArgs e)
         {
-            ManagerViewDrone drone = new ManagerViewDrone(bl, ((BO.DroneInCharge)(listDrones.SelectedItem)).IdNumber,true);
+            ManagerViewDrone drone = new ManagerViewDrone(bl, ((BO.DroneInCharge)(listDrones.SelectedItem)).IdNumber);
             drone.ShowDialog();
         }
 

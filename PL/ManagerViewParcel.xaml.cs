@@ -23,12 +23,23 @@ namespace PL
         private BLApi.IBL bl;
         private string id;
         private BO.Parcel parcel;
+        private BO.Customer sender;
+        private BO.Customer geter;
+        private BO.Drone drone;
+
+
         public ManagerViewParcel(BLApi.IBL b, string i)
         {
             InitializeComponent();
             bl = b;
             id = i;
             parcel = bl.GetParcel(id);
+            sender = bl.GetCustomer(parcel.SenderCustomer.IdNumber);
+            geter = bl.GetCustomer(parcel.GeterCustomer.IdNumber);
+            if (parcel.Drone != null)
+                drone = bl.GetDrone(parcel.Drone.IdNumber);
+            else
+                drone = new BO.Drone();
             Id.DataContext = parcel;
             SenderId.DataContext = parcel.SenderCustomer;
             SenderName.DataContext = parcel.SenderCustomer;
@@ -47,6 +58,12 @@ namespace PL
             collectLabel.DataContext = parcel;
             Arrive.DataContext = parcel;
             arriveLabel.DataContext = parcel;
+            GridSender.DataContext = sender;
+            GridGeter.DataContext = geter;
+            GridDrone.DataContext = parcel;
+            note1.DataContext = parcel;
+            note2.DataContext = parcel;
+            innerDrone.DataContext = drone;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -54,11 +71,11 @@ namespace PL
             this.Close();
         }
 
-        private void openDrone(object sender, RoutedEventArgs e)
-        {
-            ManagerViewDrone drone = new ManagerViewDrone(bl, parcel.Drone.IdNumber, true);
-            drone.ShowDialog();
-        }
+        //private void openDrone(object sender, RoutedEventArgs e)
+        //{
+        //    ManagerViewDrone drone = new ManagerViewDrone(bl, parcel.Drone.IdNumber, true);
+        //    drone.ShowDialog();
+        //}
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -67,12 +84,12 @@ namespace PL
         }
         private void openGeter(object sender, RoutedEventArgs e)
         {
-            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.GeterCustomer.IdNumber, true);
+            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.GeterCustomer.IdNumber);
             customer.ShowDialog();
         }
         private void openSender(object sender, RoutedEventArgs e)
         {
-            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.SenderCustomer.IdNumber, true);
+            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.SenderCustomer.IdNumber);
             customer.ShowDialog();
         }
     }
