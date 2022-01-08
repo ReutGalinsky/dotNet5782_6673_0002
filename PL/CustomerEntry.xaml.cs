@@ -114,8 +114,7 @@ namespace PL
         private void Account_Click(object sender, RoutedEventArgs e)
         {
             Account account = new Account(bl);
-            account.Show();
-            this.Close();
+            account.ShowDialog();
         }
 
     }

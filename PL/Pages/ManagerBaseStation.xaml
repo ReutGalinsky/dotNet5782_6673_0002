@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:local="clr-namespace:PL.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="700"
@@ -94,7 +95,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Delete" Width="100">
+                    <GridViewColumn Width="100">
+                        <GridViewColumn.Header>
+                            <iconPacks:PackIconMaterial Kind="Delete"></iconPacks:PackIconMaterial>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteStation">
@@ -121,7 +125,7 @@
             </ListView.GroupStyle>
 
         </ListView>
-        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="493,45,0,0" VerticalAlignment="Top" Width="144" Height="21" SelectionChanged="changeFilterCharge" >
+        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="504,45,0,0" VerticalAlignment="Top" Width="144" Height="21" SelectionChanged="changeFilterCharge" >
             <ComboBoxItem Tag="all" Content="All" ></ComboBoxItem>
             <ComboBoxItem Tag="availible" Content="With available charging slots"></ComboBoxItem>
             <ComboBoxItem Tag="full" Content="Without available charging slots"></ComboBoxItem>

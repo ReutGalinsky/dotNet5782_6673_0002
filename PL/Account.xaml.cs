@@ -22,31 +22,21 @@ namespace PL
         public Account(BLApi.IBL b)
         {
             InitializeComponent();
+            bl = b;
             Id.DataContext = customer;
             Name.DataContext = customer;
             Phone.DataContext = customer;
         }
         BLApi.IBL bl;
         private BO.Customer customer = new BO.Customer();
-        public event EventHandler updateList;
 
         private void Onlynumbers(object sender, KeyEventArgs e)
         {
             Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
         }
-
-        private void Focus(object sender, TextChangedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (customer.IdNumber == "" || Longitude.Text == "" || Latitude.Text == "" || customer.Name == "" || customer.Phone == "")
-            {
-                ADD.IsEnabled = false;
-            }
-            else
-                ADD.IsEnabled = true;
-        }
 
-        private void addUser(object sender, RoutedEventArgs e)
-        {
             try
             {
                 double temp;
@@ -62,13 +52,26 @@ namespace PL
                 }
                 customer.Location.Latitude = temp;
                 bl.AddCustomer(customer);
-                updateList(sender, e);
-                bl.AddUser(new BO.User() { isManager = false, UserName = customer.IdNumber, UserPassword = password.Password });
+                Random rand = new Random();
+                int password = rand.Next();
+                bl.AddUser(new BO.User() { isManager = false, UserName = customer.IdNumber, UserPassword = password.ToString() });
+                MessageBox.Show($"your pawwword is +{password}");
+                this.Close();
             }
             catch (Exception ex)//לטפל בחריגות
             {
                 MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Focus(object sender, TextChangedEventArgs e)
+        {
+            if (customer.IdNumber == "" || Longitude.Text == "" || Latitude.Text == "" || customer.Name == "" || customer.Phone == "")
+            {
+                ADD.IsEnabled = false;
+            }
+            else
+                ADD.IsEnabled = true;
         }
     }
 }

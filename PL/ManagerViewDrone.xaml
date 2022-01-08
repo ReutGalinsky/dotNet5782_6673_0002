@@ -84,23 +84,26 @@
                 <ColumnDefinition Width="62*"/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <TextBlock Text="Id number:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <TextBlock Text="Id number:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
         <TextBox x:Name="Id" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="2" />
-        <TextBlock Text="Model:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <TextBlock Text="Model:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
         <TextBox x:Name="Model" Background="{x:Null}" Text="{Binding Path=Model}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30"  Grid.Row="3" Grid.Column="2" />
-        <TextBlock Text="Drone State:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
+        <TextBlock Text="Drone State:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
         <TextBox x:Name="State" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=State}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="2" />
-        <TextBlock Text="Drone Battery:" IsEnabled="False" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
+        <TextBlock Text="Drone Battery:" IsEnabled="False" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
         <TextBox x:Name="Battery" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Battery}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="2" />
-        <TextBlock Text="Drone Max Weight:" IsEnabled="False" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
+        <TextBlock Text="Drone Max Weight:" IsEnabled="False" HorizontalAlignment="Center" 
+                   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
         <TextBox x:Name="Weight" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=MaxWeight}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="6" Grid.Column="2" />
-        <TextBlock Text="Longitude:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" />
+        <TextBlock Text="Longitude:" HorizontalAlignment="Center" 
+                   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" />
         <TextBox x:Name="Longitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="7" Grid.Column="2" />
-        <TextBlock Text="Latitude:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" />
+        <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" />
         <TextBox x:Name="Latitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="8" Grid.Column="2" />
-        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="6,23,9,0" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="7">
+        <Border   CornerRadius="10" Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="6,23,9,0" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="7">
             <Grid x:Name="ParcelGrid" Visibility="{Binding Converter={StaticResource VisibleParcel}}">
-                <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center"  Height="15" Width="120" Margin="0,42,0,0" />
+                <Grid x:Name="innerParcelGrid">
+                    <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center"  Height="15" Width="120" Margin="0,42,0,0" />
                 <TextBox x:Name="IdParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,42,0,0"   />
                 <TextBlock Text="Weight:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="22" Width="120" Margin="10,80,0,0" />
                 <TextBox x:Name="WeightParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Weight}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,77,0,0"   />
@@ -108,7 +111,7 @@
                 <TextBox x:Name="PriorityParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,112,0,0"   />
                 <TextBlock Text="State:" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Width="120" Margin="10,146,0,0" Height="15" VerticalAlignment="Top" />
                 <TextBox x:Name="StateParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ParcelState}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,146,0,0"   />
-
+                </Grid>
             </Grid>
         </Border>
 

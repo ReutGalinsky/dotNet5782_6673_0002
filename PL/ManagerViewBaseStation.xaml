@@ -62,8 +62,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Border Background="Gray" Opacity="0.5" Margin="10,48,154,0" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="3"/>
-        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="102,0,25,12" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
+        <Border Background="Gray"  CornerRadius="10" Opacity="0.5" Margin="10,48,154,0" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="3"/>
+        <Border Background="LightGray"  CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="102,0,25,12" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
         <iconPacks:PackIconMaterial Kind="Drone" Grid.Column="3" Margin="11,0,0,0" Grid.Row="3" Height="22" Width="55"/>
         <TextBlock Text="My Station:" Margin="83,0,0,0" FontWeight="Light" FontSize="40" Width="265" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Row="1"/>
         <Border Background="Black" Opacity="0.5" Margin="15,48,62,8" Height="2" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5"/>

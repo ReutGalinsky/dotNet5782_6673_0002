@@ -41,10 +41,6 @@ namespace PL
             else
                 drone = new BO.Drone();
             Id.DataContext = parcel;
-            SenderId.DataContext = parcel.SenderCustomer;
-            SenderName.DataContext = parcel.SenderCustomer;
-            GeterId.DataContext = parcel.GeterCustomer;
-            GeterName.DataContext = parcel.GeterCustomer;
             PriorityBox.DataContext = parcel;
             WeightBox.DataContext = parcel;
             Create.DataContext = parcel;

@@ -27,7 +27,6 @@ namespace PL
             bl = b;
             id = i;
             convertToPo(drone, bl.GetDrone(id));
-            parcel = bl.GetAllParcelsBy(x => x.IdNumber == drone.NumberOfParcel).FirstOrDefault();
             Id.DataContext = drone;
             Weight.DataContext = drone;
             Model.DataContext = drone;
@@ -35,17 +34,28 @@ namespace PL
             State.DataContext = drone;
             Latitude.Text = drone.Latitude;
             Longitude.Text = drone.Longitude;
-            ParcelGrid.DataContext = parcel;
+            ParcelGrid.DataContext = drone.NumberOfParcel ;
+            innerParcelGrid.DataContext = parcel;
             textParcel.DataContext = parcel;
         }
-        
         private BLApi.IBL bl;
-        private BO.ParcelOfList parcel;
+        private PO.ParcelPO parcel;
         private bool isClosed = true;
         private string id;
         private PO.DronePO drone = new PO.DronePO();
         public event EventHandler updateList;
 
+        private void CovertParcelTOPO(PO.ParcelPO parcelPO, BO.ParcelOfList p)
+        {
+            if (p != null) parcelPO = new PO.ParcelPO();
+            else { parcelPO = null; return; }
+            parcelPO.IdNumber = p.IdNumber;
+            parcelPO.Geter = p.Geter;
+            parcelPO.Sender = p.Sender;
+            parcelPO.ParcelState = p.ParcelState;
+            parcelPO.Priority = p.Priority;
+            parcelPO.Weight = p.Weight;
+        }
         private void assignVisibility()
         {
             Auto.Visibility = Visibility.Visible;
@@ -82,8 +92,9 @@ namespace PL
             dronePo.MaxWeight = d.MaxWeight;
             dronePo.Model = d.Model;
             dronePo.NumberOfParcel = d.PassedParcel?.IdNumber;
-            dronePo.Latitude = LocationFormat.sexagesimalFormat(d.Location.Latitude, false); ;
-            dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true); ;
+            dronePo.Latitude = LocationFormat.sexagesimalFormat(d.Location.Latitude, false); 
+            dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true);
+            CovertParcelTOPO(parcel, bl.GetAllParcelsBy(x => x.IdNumber == drone.NumberOfParcel).FirstOrDefault());
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -249,7 +260,6 @@ namespace PL
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-           // MessageBox.Show("hii");
             convertToPo(drone, bl.GetDrone(id));
         }
         private void Complited(object sender, RunWorkerCompletedEventArgs e)
