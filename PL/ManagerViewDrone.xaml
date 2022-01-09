@@ -100,10 +100,10 @@
         <TextBox x:Name="Longitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="7" Grid.Column="2" />
         <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" />
         <TextBox x:Name="Latitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="8" Grid.Column="2" />
-        <Border   CornerRadius="10" Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="6,23,9,0" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="7">
+        <Border CornerRadius="10" Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="6,23,9,0" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="7">
             <Grid x:Name="ParcelGrid" Visibility="{Binding Converter={StaticResource VisibleParcel}}">
-                <Grid x:Name="innerParcelGrid">
-                    <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center"  Height="15" Width="120" Margin="0,42,0,0" />
+                <Grid>
+                 <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center"  Height="15" Width="120" Margin="0,42,0,0" />
                 <TextBox x:Name="IdParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,42,0,0"   />
                 <TextBlock Text="Weight:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="22" Width="120" Margin="10,80,0,0" />
                 <TextBox x:Name="WeightParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Weight}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,77,0,0"   />

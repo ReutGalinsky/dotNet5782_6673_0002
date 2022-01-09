@@ -69,7 +69,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <ComboBox x:Name="stationNumber" ItemTemplate="{StaticResource myStationView }" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="152"/>
+        <ComboBox x:Name="stationNumber" ItemTemplate="{StaticResource myStationView }" ItemsSource="{Binding}" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="152"/>
 
     </Grid>
 

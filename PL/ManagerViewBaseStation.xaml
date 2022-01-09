@@ -16,8 +16,8 @@
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Path=IdNumber}" Grid.Column="0"></TextBlock>
-                <TextBlock Text="{Binding Path=Battery}" Grid.Column="1"></TextBlock>
+                <TextBlock Text="{Binding Path=IdNumber}" Grid.Column="0" FontFamily="Ink Free" ></TextBlock>
+                <TextBlock Text="{Binding Path=Battery}" Grid.Column="1" FontFamily="Ink Free" ></TextBlock>
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -63,7 +63,18 @@
             </Button.Template>
         </Button>
         <Border Background="Gray"  CornerRadius="10" Opacity="0.5" Margin="10,48,154,0" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="3"/>
-        <Border Background="LightGray"  CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="102,0,25,12" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
+        <Border Background="LightGray"  CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="102,0,25,12" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Grid.RowSpan="4" Grid.ColumnSpan="2">
+            <Grid x:Name="DronesGrid" Visibility="Collapsed">
+                <TextBlock Text="Id number:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Top" Margin="14,59,0,0" />
+                <TextBox x:Name="IdNum" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="17" Margin="113,80,0,0" />
+                <TextBlock Text="Model:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Center" Margin="14,0,0,0" />
+                <TextBox x:Name="Model" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Model}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="15" Margin="113,123,0,0" />
+                <TextBlock Text="Drone Max Weight:" IsEnabled="False" HorizontalAlignment="Left" 
+                   FontWeight="Medium" VerticalAlignment="Top" Margin="10,143,0,0" />
+                <TextBox x:Name="Weight" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=MaxWeight}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="17" Margin="113,167,0,0" />
+
+            </Grid>
+        </Border>
         <iconPacks:PackIconMaterial Kind="Drone" Grid.Column="3" Margin="11,0,0,0" Grid.Row="3" Height="22" Width="55"/>
         <TextBlock Text="My Station:" Margin="83,0,0,0" FontWeight="Light" FontSize="40" Width="265" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Row="1"/>
         <Border Background="Black" Opacity="0.5" Margin="15,48,62,8" Height="2" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5"/>
@@ -78,18 +89,7 @@
         <TextBox Background="{x:Null}" x:Name="Longitude" Text="{Binding Path=Longitude}"  IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" />
         <TextBlock HorizontalAlignment="Center" Text="Latitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" />
         <TextBox Background="{x:Null}" x:Name="Latitude" Text="{Binding Path=Latitude}" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="6" Grid.Column="1" />
-        <ComboBox x:Name="listDrones" ItemsSource="{Binding}" ItemTemplate="{StaticResource myDroneInCharge}" HorizontalAlignment="Left" Margin="87,5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="198" Grid.Column="2" Grid.ColumnSpan="2" SelectionChanged="enableShow" Height="24"/>
-        <Button x:Name="showParcel" HorizontalAlignment="Left" Margin="125,5,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.Column="3" IsEnabled="False" Click="showTheParcel" Height="24" Width="30">
-            <Button.Content>
-                <StackPanel>
-                    <iconPacks:PackIconMaterial x:Name="contentt" Kind="AspectRatio">
-                    </iconPacks:PackIconMaterial>
-                </StackPanel>
-            </Button.Content>
-            <Button.ToolTip>
-                <TextBlock Text="View Parcel" FontFamily="Ink Free" ></TextBlock>
-            </Button.ToolTip>
-        </Button>
+        <ComboBox x:Name="listDrones" ItemsSource="{Binding}" ItemTemplate="{StaticResource myDroneInCharge}" HorizontalAlignment="Left" Margin="107,13,0,0" Grid.Row="2" VerticalAlignment="Top" Width="198" Grid.Column="2" Grid.ColumnSpan="2" SelectionChanged="enableShow" Height="24"/>
 
         <Button x:Name="UPDATE" Content="Update" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="1" Grid.ColumnSpan="2" Margin="83,55,109,14" Grid.RowSpan="2" Grid.Row="6">
             <Button.Style>
@@ -156,6 +156,7 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
+        <TextBlock x:Name="NotPicked" HorizontalAlignment="Left" Margin="154,25,0,0" Grid.Row="4" Text="Pick Drone" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Column="2" Height="52" Width="151" FontSize="24" FontFamily="Ink Free" Grid.RowSpan="2"/>
     </Grid>
 </Window>
 
