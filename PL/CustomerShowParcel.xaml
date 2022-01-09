@@ -12,7 +12,7 @@
         Title="CustomerShowParcel" Height="400" Width="550">
     <Window.Resources>
         <PL.Convert:ConvertNotArriving x:Key="myConverter"></PL.Convert:ConvertNotArriving>
-</Window.Resources>
+    </Window.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="162*" />
@@ -31,7 +31,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="25" />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -74,9 +74,9 @@
         <TextBox x:Name="SenderName" Text="{Binding Path=Name}" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="2" Grid.Column="2" Margin="7,0,0,0"   />
         <TextBlock Text="Sender Id:" FontSize="14" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Height="14" Width="78" Grid.Column="1" Margin="12,0,0,0"/>
         <TextBox x:Name="SenderId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Left" Text="{Binding Path=IdNumber}" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="3" Grid.Column="2" Margin="7,0,0,0"   />
-        <TextBlock Text="Geter Name:" FontSize="14" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Height="14" Width="86" Grid.Column="1" Margin="14,0,0,0"/>
+        <TextBlock Text="Geter Name:" FontSize="14" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Height="26" Width="86" Grid.Column="1" Margin="14,0,0,0"/>
         <TextBox x:Name="GeterName" IsEnabled="False" Text="{Binding Path=Name}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="4" Grid.Column="2" Margin="7,0,0,0"/>
-        <TextBlock Text="Geter Id:" FontSize="14" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Height="14" Width="86" Grid.Column="1" Margin="16,0,0,0" />
+        <TextBlock Text="Geter Id:" FontSize="14" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Height="41" Width="86" Grid.Column="1" Margin="10,0,0,0" Grid.RowSpan="2" />
         <TextBox x:Name="GeterId" IsEnabled="False" Background="{x:Null}" HorizontalAlignment="Left" Text="{Binding Path=IdNumber}" VerticalAlignment="Top" Width="90" Height="20" Grid.Row="5" Grid.Column="2" Margin="7,0,0,0"    />
         <TextBlock Text="Parcel Priority:" FontSize="14" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Height="14" Width="88" Grid.Column="1" Margin="13,0,0,0"  />
         <TextBox x:Name="PriorityBox"  IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="20" Grid.Row="6" Grid.Column="2" Margin="7,0,0,0" />

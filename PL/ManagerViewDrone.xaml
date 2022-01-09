@@ -91,7 +91,9 @@
         <TextBlock Text="Drone State:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
         <TextBox x:Name="State" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=State}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="2" />
         <TextBlock Text="Drone Battery:" IsEnabled="False" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
-        <TextBox x:Name="Battery" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Battery}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="2" />
+        <TextBox x:Name="Battery" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Battery}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="2">
+
+        </TextBox>
         <TextBlock Text="Drone Max Weight:" IsEnabled="False" HorizontalAlignment="Center" 
                    FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
         <TextBox x:Name="Weight" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=MaxWeight}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="6" Grid.Column="2" />
@@ -103,14 +105,14 @@
         <Border CornerRadius="10" Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="6,23,9,0" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="7">
             <Grid x:Name="ParcelGrid" Visibility="{Binding Converter={StaticResource VisibleParcel}}">
                 <Grid>
-                 <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center"  Height="15" Width="120" Margin="0,42,0,0" />
-                <TextBox x:Name="IdParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,42,0,0"   />
-                <TextBlock Text="Weight:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="22" Width="120" Margin="10,80,0,0" />
-                <TextBox x:Name="WeightParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Weight}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,77,0,0"   />
-                <TextBlock Text="Priority:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="21" Width="120" Margin="10,115,0,0" />
-                <TextBox x:Name="PriorityParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,112,0,0"   />
-                <TextBlock Text="State:" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Width="120" Margin="10,146,0,0" Height="15" VerticalAlignment="Top" />
-                <TextBox x:Name="StateParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ParcelState}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,146,0,0"   />
+                    <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center"  Height="15" Width="120" Margin="0,42,0,0" />
+                    <TextBox x:Name="IdParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,42,0,0"   />
+                    <TextBlock Text="Weight:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="22" Width="120" Margin="10,80,0,0" />
+                    <TextBox x:Name="WeightParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Weight}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,77,0,0"   />
+                    <TextBlock Text="Priority:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="21" Width="120" Margin="10,115,0,0" />
+                    <TextBox x:Name="PriorityParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Priority}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,112,0,0"   />
+                    <TextBlock Text="State:" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Width="120" Margin="10,146,0,0" Height="15" VerticalAlignment="Top" />
+                    <TextBox x:Name="StateParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=ParcelState}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,146,0,0"   />
                 </Grid>
             </Grid>
         </Border>
@@ -315,7 +317,7 @@
 
 
         </Grid>
-
+        <Rectangle Grid.Column="2" Fill="Green" HorizontalAlignment="Center" Height="30" Grid.Row="5" Stroke="Black" VerticalAlignment="Center" Width="90"/>
     </Grid>
 
 </Window>

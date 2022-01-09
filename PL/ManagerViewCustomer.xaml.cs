@@ -86,8 +86,9 @@ namespace PL
 
         private void enableShow(object sender, SelectionChangedEventArgs e)
         {
+            ParcelGrid.Visibility = Visibility.Visible;
+            pickLabel.Visibility = Visibility.Collapsed;
             CovertParcelTOPO(parcel,  listParcels.SelectedItem as BO.ParcelOfList);
-            showParcel.IsEnabled = true;
         }
     }
 }

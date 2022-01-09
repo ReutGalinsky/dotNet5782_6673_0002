@@ -114,7 +114,7 @@
             </Button.Template>
         </Button>
         <Border Background="LightGray" CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="10,2,10,36" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Grid.RowSpan="4">
-            <Grid x:Name="ParcelGrid" Visibility="{Binding Converter={StaticResource VisibleParcel}}">
+            <Grid x:Name="ParcelGrid" Visibility="Collapsed">
                 <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="15" Width="120" Margin="18,43,0,0" />
                 <TextBox x:Name="IdParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,42,0,0"   />
                 <TextBlock Text="Weight:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="22" Width="120" Margin="10,80,0,0" />
@@ -151,17 +151,7 @@
 
 
         </Grid>
-        <ComboBox x:Name="listParcels" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="10,29,0,0" Grid.Row="2" VerticalAlignment="Top" Width="168" Grid.Column="2" SelectionChanged="enableShow"/>
-        <Button x:Name="showParcel" HorizontalAlignment="Left" Margin="183,30,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.Column="2" IsEnabled="False">
-            <Button.Content>
-                <StackPanel>
-                    <iconPacks:PackIconMaterial x:Name="contentt" Kind="AspectRatio">
-                    </iconPacks:PackIconMaterial>
-                </StackPanel>
-            </Button.Content>
-            <Button.ToolTip>
-                <TextBlock Text="View Parcel" FontFamily="Ink Free" ></TextBlock>
-            </Button.ToolTip>
-        </Button>
+        <ComboBox x:Name="listParcels" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="10,29,0,0" Grid.Row="2" VerticalAlignment="Top" Width="188" Grid.Column="2" SelectionChanged="enableShow"/>
+        <TextBlock x:Name="pickLabel" HorizontalAlignment="Center" Margin="0,7,0,0" Grid.Row="4" Text="Pick Parcel" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Ink Free" FontSize="24" Grid.Column="2"/>
     </Grid>
 </Window>

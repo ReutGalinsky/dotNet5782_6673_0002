@@ -70,7 +70,10 @@ namespace PL.Pages
             DroneListView.Visibility = Visibility.Visible;
             listDrones.Clear();
             foreach (BO.DroneToList s in bl.GetDrones())//create the source for the liseView
-                listDrones.Add(s);
+            {
+                s.Battery = (int)s.Battery;
+                listDrones.Add(s); 
+            }
         }
         private void parcel(object sender, RoutedEventArgs e)
         {
