@@ -48,7 +48,7 @@
                 <StackPanel Grid.Row="1" Grid.Column="0">
 
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Image Width="100" Height="100" Source="Images/logo.png.png" RenderOptions.BitmapScalingMode="Fant" RenderTransformOrigin="0.533,0.5"/>
+                    <Image Width="100" Height="100" Source="Pages\Images\Logo.png" RenderOptions.BitmapScalingMode="Fant" RenderTransformOrigin="0.533,0.5"/>
                     </StackPanel>
                     <TextBlock Text="New" Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>
                     <TextBlock Text="Meaning" Foreground="Black" FontSize="25" FontWeight="Medium" FontFamily="Fonts/#regular"/>

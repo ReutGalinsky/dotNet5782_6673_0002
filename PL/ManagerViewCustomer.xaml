@@ -60,15 +60,16 @@
         </Button>
         <Border Background="Gray" CornerRadius="10" Opacity="0.5" Margin="35,0,16,13" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
 
-        <TextBlock Text="Id number:" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+        <TextBlock Text="Id number:" HorizontalAlignment="Center" IsEnabled="False"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
         <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30"  Grid.Row="2" Grid.Column="1" />
-        <TextBlock Text="Name:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+        <TextBlock Text="Name:" HorizontalAlignment="Center" 
+                   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
         <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="90" Height="30" Grid.Row="3" Grid.Column="1" Margin="0,0,0,16" />
-        <TextBlock Text="Phone:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
+        <TextBlock Text="Phone:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
         <TextBox x:Name="Phone" Background="{x:Null}"  Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1" PreviewKeyDown="OnlyNumbers" />
-        <TextBlock Text="Longitude:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
+        <TextBlock Text="Longitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
         <TextBox x:Name="Longitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" />
-        <TextBlock Text="Latitude:" HorizontalAlignment="Center" Style="{StaticResource UsualFont}"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" />
+        <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" />
         <TextBox x:Name="Latitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="6" Grid.Column="1" />
         <Button Content="Update" x:Name="UPDATE" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.ColumnSpan="2" Margin="100,5,96,21" Grid.Row="7">
             <Button.Style>
@@ -112,8 +113,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Border Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="10,2,10,36" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Grid.RowSpan="4">
-            <Grid x:Name="ParcelGrid" Visibility="{Binding Converter={StaticResource VisibleParcel}}">
+        <Border Background="LightGray" CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="10,2,10,36" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Grid.RowSpan="4">
+            <Grid x:Name="ParcelGrid" Visibility="Collapsed">
                 <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="15" Width="120" Margin="18,43,0,0" />
                 <TextBox x:Name="IdParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,42,0,0"   />
                 <TextBlock Text="Weight:"  FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="22" Width="120" Margin="10,80,0,0" />
@@ -150,17 +151,7 @@
 
 
         </Grid>
-        <ComboBox x:Name="listParcels" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="10,29,0,0" Grid.Row="2" VerticalAlignment="Top" Width="168" Grid.Column="2" SelectionChanged="enableShow"/>
-        <Button x:Name="showParcel" HorizontalAlignment="Left" Margin="183,30,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.Column="2" IsEnabled="False">
-            <Button.Content>
-                <StackPanel>
-                    <iconPacks:PackIconMaterial x:Name="contentt" Kind="AspectRatio">
-                    </iconPacks:PackIconMaterial>
-                </StackPanel>
-            </Button.Content>
-            <Button.ToolTip>
-                <TextBlock Text="View Parcel" FontFamily="Ink Free" ></TextBlock>
-            </Button.ToolTip>
-        </Button>
+        <ComboBox x:Name="listParcels" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="10,29,0,0" Grid.Row="2" VerticalAlignment="Top" Width="188" Grid.Column="2" SelectionChanged="enableShow"/>
+        <TextBlock x:Name="pickLabel" HorizontalAlignment="Center" Margin="0,7,0,0" Grid.Row="4" Text="Pick Parcel" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Ink Free" FontSize="24" Grid.Column="2"/>
     </Grid>
 </Window>

@@ -61,11 +61,20 @@ namespace PL
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
+            stop.Visibility = Visibility.Collapsed;
+            play.Visibility = Visibility.Visible;
+            conLabel.Visibility = Visibility.Visible;
+            conArr.Visibility = Visibility.Visible;
+
             MediaElement1.IsMuted=true;
             MediaElement1.Visibility = Visibility.Hidden;
         }
         private void Play_Click(object sender, RoutedEventArgs e)
         {
+            conLabel.Visibility = Visibility.Collapsed;
+            conArr.Visibility = Visibility.Collapsed;
+            play.Visibility = Visibility.Collapsed;
+            stop.Visibility = Visibility.Visible;
             MediaElement1.IsMuted = false;
             MediaElement1.Visibility = Visibility.Visible;
             MediaElement1.Source = new Uri(@"C:\Users\רעות גלינסקי\source\repos\ReutGalinsky\dotNet5782_6673_0002\bin" + @"\video.mp4");
@@ -81,6 +90,18 @@ namespace PL
         //    if (e.ChangedButton == MouseButton.Left)
         //        this.DragMove();
         //}
+        private void PackIconMaterial_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            info.Visibility = Visibility.Visible;
+            infob.Visibility = Visibility.Visible;
+        }
+
+        private void PackIconMaterial_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            contact.Visibility = Visibility.Visible;
+            contactb.Visibility = Visibility.Visible;
+        }
+
     }
 }
 

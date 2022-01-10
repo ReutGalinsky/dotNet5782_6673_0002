@@ -33,15 +33,23 @@ namespace PL
             listParcels.DataContext = bl.GetAllParcelsBy(x => x.Sender == i || x.Geter == i);
             ParcelGrid.DataContext = parcel;
         }
-        private bool IsInner;
         private BLApi.IBL bl;
+        private PO.ParcelPO parcel=new PO.ParcelPO();
         private BO.Customer customer;
         private string id;
         public event EventHandler updateList;
-        private BO.ParcelOfList parcel;
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private void CovertParcelTOPO(PO.ParcelPO parcelPO, BO.ParcelOfList p)
+        {
+            parcelPO.IdNumber = p.IdNumber;
+            parcelPO.Geter = p.Geter;
+            parcelPO.Sender = p.Sender;
+            parcelPO.ParcelState = p.ParcelState;
+            parcelPO.Priority = p.Priority;
+            parcelPO.Weight = p.Weight;
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
@@ -50,8 +58,7 @@ namespace PL
             {
                 bl.UpdatingDetailsOfCustomer(customer.IdNumber, customer.Name, customer.Phone);
                 MessageBox.Show($"the base station number {customer.IdNumber} updated successfully!");
-                if(IsInner==false)
-                    updateList(sender, e);
+                updateList(sender, e);
                 this.Close();
             }
             catch (Exception ex)
@@ -79,8 +86,9 @@ namespace PL
 
         private void enableShow(object sender, SelectionChangedEventArgs e)
         {
-            parcel = listParcels.SelectedItem as BO.ParcelOfList;
-            showParcel.IsEnabled = true;
+            ParcelGrid.Visibility = Visibility.Visible;
+            pickLabel.Visibility = Visibility.Collapsed;
+            CovertParcelTOPO(parcel,  listParcels.SelectedItem as BO.ParcelOfList);
         }
     }
 }

@@ -48,7 +48,11 @@ namespace PL.Pages
         PropertyGroupDescription groupSender = new PropertyGroupDescription("Sender");
         PropertyGroupDescription groupPriority = new PropertyGroupDescription("Priority");
         PropertyGroupDescription groupState = new PropertyGroupDescription("ParcelState");
-
+        /// <summary>
+        /// check
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void updated(object sender, EventArgs e)//the event that will update the details of the listView
         {
             listParcels.Clear();

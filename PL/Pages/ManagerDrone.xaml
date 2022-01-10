@@ -95,8 +95,18 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn Width="75">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="Battery" FontFamily="Yu Gothic Medium" ></TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Battery}" HorizontalAlignment="Center" FontSize="12" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
-                    <GridViewColumn  Width="200">
+                    <GridViewColumn  Width="150">
                         <GridViewColumn.Header>
                             <TextBlock Text="State" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
@@ -116,7 +126,7 @@
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteDrone">
                                     <Button.Content>
-                                        <Image Source="Images/מחיקה.jpg" Width="25" Height="25"></Image>
+                                        <iconPacks:PackIconMaterial Kind="Cancel"></iconPacks:PackIconMaterial>
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>
@@ -137,8 +147,8 @@
             </ListView.GroupStyle>
 
         </ListView>
-        <CheckBox x:Name="StateCheck" FontFamily="Yu Gothic Medium" Content="Show By State" HorizontalAlignment="Left" Margin="249,46,0,0" VerticalAlignment="Top" Checked="checkedState" Unchecked="uncheckedState"/>
-        <CheckBox Content="Group By Weight" FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="61,44,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="uncheckedWeight"/>
+        <CheckBox x:Name="StateCheck" FontFamily="Yu Gothic Medium" Content="Show By State" HorizontalAlignment="Left" Margin="378,46,0,0" VerticalAlignment="Top" Checked="checkedState" Unchecked="uncheckedState"/>
+        <CheckBox Content="Group By Weight" FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="179,44,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="uncheckedWeight"/>
 
     </Grid>
 </Page>

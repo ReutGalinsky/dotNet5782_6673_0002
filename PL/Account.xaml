@@ -10,25 +10,53 @@
         Title="ManagerEntry" Height="500" Width="900"
         AllowsTransparency="True"
         Background="AliceBlue">
-    <Grid>
 
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100" />
             <ColumnDefinition />
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
         </Grid.RowDefinitions>
         <Grid Background="SteelBlue" Grid.ColumnSpan="3"/>
         <StackPanel Orientation="Horizontal" Height="35" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0">
-            <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" Margin="200,0,0,0" Source="Images/logo.png.png" RenderTransformOrigin="0.648,-1.857" />
+            <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" Margin="200,0,0,0" Source="Pages/Images/Logo.png" RenderTransformOrigin="0.648,-1.857" />
             <TextBlock Text="New Meaning For Delivery." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="20" Margin="5,0,0,0" FontWeight="Medium" FontFamily="Fonts/#regular"/>
-
         </StackPanel>
+        <Border Background="LightBlue" CornerRadius="10" Opacity="0.5" Margin="52,80,54,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="7"/>
+
+        <TextBlock Text="Id number:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Top" Margin="156,10,0,0" Grid.Column="1" Grid.Row="2" FontSize="24" />
+        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="31" PreviewKeyDown="Onlynumbers" Margin="389,10,0,0" Grid.Column="1" TextChanged="Focus" Grid.Row="2" />
+        <TextBlock Text="Name:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Margin="158,16,0,0" RenderTransformOrigin="0.486,-1.068" FontSize="24" />
+        <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="30" Grid.Row="3" Grid.Column="1" TextChanged="Focus" Margin="390,0,0,0" />
+        <TextBlock Text="Phone:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1" Margin="161,16,0,0" FontSize="24" />
+        <TextBox x:Name="Phone" Background="{x:Null}"  Text="{Binding Path=Phone, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="4" Grid.Column="1" TextChanged="Focus" Margin="390,0,0,0" />
+        <TextBlock Text="Longitude:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" Margin="158,0,0,0" FontSize="24" />
+        <TextBox x:Name="Longitude" Background="{x:Null}"  Text="{Binding Path=Location.Longitude}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Height="30" Grid.Row="5" Grid.Column="1" TextChanged="Focus" Margin="390,12,0,0" />
+        <TextBlock Text="Latitude:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Top" Grid.Row="6" Grid.Column="1" Margin="163,14,0,0" FontSize="24" />
+        <TextBox x:Name="Latitude" Background="{x:Null}"  Text="{Binding Path=Location.Latitude}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Height="30" Grid.Row="5" Grid.Column="1" TextChanged="Focus" Margin="390,57,0,0" Grid.RowSpan="2" />
+        <iconPacks:PackIconMaterial Kind="Information" Grid.Column="1" Margin="529,4,0,0" Grid.Row="6" Height="19" Width="20">
+            <iconPacks:PackIconMaterial.ToolTip>
+                <TextBlock Text="Latitude in israel its between 29.5 to 33.3" FontFamily="Ink Free"></TextBlock>
+            </iconPacks:PackIconMaterial.ToolTip>
+        </iconPacks:PackIconMaterial>
+        <iconPacks:PackIconMaterial Kind="Information" Grid.Column="1" Margin="529,15,0,0" Grid.Row="5" Height="19" Width="20">
+            <iconPacks:PackIconMaterial.ToolTip>
+                <TextBlock Text="Longitude in israel its between 34.5 to 35.6" FontFamily="Ink Free"></TextBlock>
+            </iconPacks:PackIconMaterial.ToolTip>
+        </iconPacks:PackIconMaterial>
+
         <Button Content="Close" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="2">
             <Button.Style>
                 <Style TargetType="Button">
@@ -72,15 +100,8 @@
             </Button.Template>
         </Button>
 
-        <TextBlock Text="Sign-Up To Deli-Drone" Margin="0,50,0,0" FontWeight="Light" FontFamily="/Fonts/regular" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontSize="50"/>
-        <TextBox x:Name="user" Background="Transparent" Text="Username:" Width="355" Grid.Row="2" Grid.Column="1" FontFamily="/Fonts/regular" FontWeight="Medium" Margin="117,73,0,50" FontSize="24" Opacity="0.5" Foreground="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
-        <iconPacks:PackIconMaterial Kind="Account" Foreground="Black" Grid.Row="2" Grid.Column="1" Opacity="0.5" Width="47" Height="42" RenderTransformOrigin="0.525,0.48" Margin="472,0,0,0" VerticalAlignment="Center"  />
-        <Border Height="2" Background="Black" Opacity="0.5" Grid.Row="2" Grid.Column="1" Margin="113,104,182,49"/>
-        <PasswordBox x:Name="password" ScrollViewer.HorizontalScrollBarVisibility="Disabled" PasswordChar='*' Background="Transparent" Width="333" Grid.Row="2" Grid.Column="1" FontFamily="/Fonts/regular" FontWeight="Medium" Margin="115,112,0,9" FontSize="24" Opacity="0.5" Foreground="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
-        <Border Height="2" Background="Black" Opacity="0.5" Grid.Row="2" Grid.Column="1" Margin="113,144,182,9"/>
-        <iconPacks:PackIconMaterial Kind="Key" Foreground="Black" Grid.Row="2" Grid.Column="1" Opacity="0.5" Width="47" Height="42" RenderTransformOrigin="0.525,0.48" Margin="472,100,0,0" VerticalAlignment="Center"  />
-        <CheckBox x:Name="check" Content="Show Password" Cursor="Hand"  Grid.Column="1" Grid.Row="3" Margin="110,0,0,0"/>
-        <Button x:Name="ADD" Content="Sign-Up"  Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="190,50,250,50" Grid.Column="1" Click="addUser">
+        <TextBlock Text="Sign-Up To Deli-Drone" Margin="0,5,0,10" FontWeight="Light" Grid.Column="1" HorizontalAlignment="Center" FontSize="50" Grid.Row="1"/>
+        <Button x:Name="ADD" Content="Sign-Up"  Foreground="White" FontSize="10" FontWeight="Medium" IsEnabled="False"  Margin="220,53,220,10" Grid.Column="1" Click="Add_Click" Grid.Row="6" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -101,10 +122,9 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TextBox x:Name="textPassword" Background="Transparent" Text="Password:" Width="355" Grid.Row="2" Grid.Column="1" FontFamily="/Fonts/regular" FontWeight="Medium" Margin="120,111,0,12" FontSize="24" Opacity="0.5" Foreground="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
 
 
-        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="160,-365,-610,85" Panel.ZIndex="-1">
+        <Grid Grid.Column="1" Grid.ColumnSpan="2"  Margin="160,-365,-610,85" Panel.ZIndex="-1">
             <Grid.RenderTransform>
                 <RotateTransform Angle="50"/>
             </Grid.RenderTransform>
@@ -124,21 +144,6 @@
             </StackPanel>
 
         </Grid>
-
-
-        <TextBlock Text="Id number:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Margin="110,116,0,0" />
-        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="1" Grid.Column="1" TextChanged="Focus" Margin="0,102,0,0" />
-        <TextBlock Text="Name:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-        <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="1" TextChanged="Focus" />
-        <TextBlock Text="Phone:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-        <TextBox x:Name="Phone" Background="{x:Null}"  Text="{Binding Path=Phone, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="3" Grid.Column="1" TextChanged="Focus" />
-        <TextBlock Text="Longitude:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" />
-        <TextBox x:Name="Longitude" Background="{x:Null}"  Text="{Binding Path=Location.Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1" TextChanged="Focus" />
-        <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" />
-        <TextBox x:Name="Latitude" Background="{x:Null}"  Text="{Binding Path=Location.Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" TextChanged="Focus" />
-
-
-
 
     </Grid>
 </Window>

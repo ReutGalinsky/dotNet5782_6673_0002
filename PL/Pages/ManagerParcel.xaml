@@ -109,10 +109,10 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <CheckBox x:Name="senderCheck" Content="Group By Sender" HorizontalAlignment="Left" Margin="50,46,0,0" VerticalAlignment="Top" Checked="GroupSender" Unchecked="CancelGroupSeter" RenderTransformOrigin="-0.07,0.682" FontFamily="Yu Gothic Medium"/>
+        <CheckBox x:Name="senderCheck" Content="Group By Sender" HorizontalAlignment="Left" Margin="64,46,0,0" VerticalAlignment="Top" Checked="GroupSender" Unchecked="CancelGroupSeter" RenderTransformOrigin="-0.07,0.682" FontFamily="Yu Gothic Medium"/>
         <CheckBox x:Name="geterCheck" Content="Group By Geter"  FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="196,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroupGeter" Checked="GroupGeter"/>
-        <CheckBox Content="Group By State" HorizontalAlignment="Left"  FontFamily="Yu Gothic Medium" Margin="500,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroupState" Checked="GroupState"/>
-        <CheckBox Content="Group By Priority" HorizontalAlignment="Left"  FontFamily="Yu Gothic Medium" Margin="348,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroupPriority" Checked="GroupPriority"/>
+        <CheckBox Content="Group By State" HorizontalAlignment="Left"  FontFamily="Yu Gothic Medium" Margin="514,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroupState" Checked="GroupState"/>
+        <CheckBox Content="Group By Priority" HorizontalAlignment="Left"  FontFamily="Yu Gothic Medium" Margin="388,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroupPriority" Checked="GroupPriority"/>
         <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="196,11,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime" FontFamily="Yu Gothic Medium"/>
         <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="362,11,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime" FontFamily="Yu Gothic Medium"/>
         <TextBlock HorizontalAlignment="Left" Margin="139,14,0,0" Text="Start Date:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" FontFamily="Yu Gothic Medium"/>

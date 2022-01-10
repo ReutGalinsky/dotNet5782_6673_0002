@@ -82,9 +82,9 @@ namespace PL
         }
         private void closeSubPages()
         {
-            AddDrone.Visibility = Visibility.Collapsed;
-            AddBaseStation.Visibility = Visibility.Collapsed;
-            AddCustomer.Visibility = Visibility.Collapsed;
+            AddDrone.Visibility = Visibility.Hidden;
+            AddBaseStation.Visibility = Visibility.Hidden;
+            AddCustomer.Visibility = Visibility.Hidden;
         }
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {

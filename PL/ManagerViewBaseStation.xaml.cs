@@ -25,12 +25,6 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
-            ConstructorFuction();
-            IsInner = false;
-
-        }
-        private void ConstructorFuction()
-        {
             baseStation = bl.GetBaseStation(id);
             foreach (var item in baseStation.Drones)
                 drones.Add(item);
@@ -40,34 +34,41 @@ namespace PL
             Latitude.DataContext = baseStation.Location;
             Longitude.DataContext = baseStation.Location;
             listDrones.DataContext = drones;
-            foreach (var item in baseStation.Drones)
-                drones.Add(item);
+            //foreach (var item in baseStation.Drones)
+            //    drones.Add(item);
+            if (baseStation.Drones == null)
+                listDrones.IsEnabled = false;
+            DronesGrid.DataContext = drone;
         }
-        public ManagerViewBaseStation(BLApi.IBL b, string i,bool inner)
-        {
-            InitializeComponent();
-            bl = b;
-            id = i;
-            ConstructorFuction();
-            IsInner = true;
-        }
-        private bool IsInner;
+        
         private BLApi.IBL bl;
         private string id;
         private BO.BaseStation baseStation;
         public event EventHandler updateList;
+        private PO.DronePO drone=new PO.DronePO();
         private ObservableCollection<BO.DroneInCharge> drones=new ObservableCollection<BO.DroneInCharge>();
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        private void Update_Click(object sender, RoutedEventArgs e)
+        public void convertToPo(PO.DronePO dronePo, BO.Drone d)
+        //function that get the drone and update it to the current values as given from the bl
+        {
+            dronePo.Battery = (int)d.Battery;
+            dronePo.IdNumber = d.IdNumber;
+            dronePo.State = d.State;
+            dronePo.MaxWeight = d.MaxWeight;
+            dronePo.Model = d.Model;
+            dronePo.NumberOfParcel = d.PassedParcel?.IdNumber;
+            dronePo.Latitude = LocationFormat.sexagesimalFormat(d.Location.Latitude, false);
+            dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true);
+        }
+            private void Update_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 bl.UpdatingDetailsOfBaseStation(baseStation.IdNumber,baseStation.Name,baseStation.ChargeSlots.ToString());
                 MessageBox.Show($"the base station number {baseStation.IdNumber} updated successfully!");
-                if(IsInner==false)
                     updateList(sender, e);
                 this.Close();
             }
@@ -101,7 +102,9 @@ namespace PL
 
         private void enableShow(object sender, SelectionChangedEventArgs e)
         {
-            showParcel.IsEnabled = true;
+            DronesGrid.Visibility = Visibility.Visible;
+            NotPicked.Visibility = Visibility.Collapsed;
+            convertToPo(drone, bl.GetDrone((listDrones.SelectedItem as BO.DroneInCharge).IdNumber));
         }
     }
 }

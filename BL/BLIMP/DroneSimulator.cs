@@ -107,6 +107,7 @@ namespace BL
                 DO.Parcel parcelDO = bl.dal.GetParcel(parcel1.IdNumber);
                 parcelDO.ArrivingDroneTime = DateTime.Now;
                 drone.State = DroneState.Available;
+                drone.NumberOfParcel = null;
                 bl.dal.UpdateParcel(parcelDO);
             }
             reportProggress();
