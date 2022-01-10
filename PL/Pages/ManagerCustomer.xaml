@@ -55,7 +55,7 @@
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteCustomer">
                                     <Button.Content>
-                                        <Image Source="Images/מחיקה.jpg" VerticalAlignment="Center" Width="25" Height="25"></Image>
+                                        <iconPacks:PackIconMaterial Kind="Cancel"></iconPacks:PackIconMaterial>
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>
@@ -66,12 +66,12 @@
         </ListView>
 
         <ComboBox x:Name="OnWay" HorizontalAlignment="Left" Margin="507,44,0,0" VerticalAlignment="Top" Width="144" Height="20" SelectionChanged="OnWaySelector" >
-            <ComboBoxItem Content="All"></ComboBoxItem>
-            <ComboBoxItem Content="Parcels on way"></ComboBoxItem>
-            <ComboBoxItem Content="No parcels on way"></ComboBoxItem>
+            <ComboBoxItem Tag="all" Content="All"></ComboBoxItem>
+            <ComboBoxItem Tag="onWay" Content="Parcels on way"></ComboBoxItem>
+            <ComboBoxItem Tag="notOnWay" Content="No parcels on way"></ComboBoxItem>
         </ComboBox>
-        <RadioButton x:Name="id" Content="Order By Id" GroupName="key1" HorizontalAlignment="Left" Margin="45,51,0,0" VerticalAlignment="Top" Checked="idCheck"/>
-        <RadioButton x:Name="name" Content="Order By Name " GroupName="key1" HorizontalAlignment="Left" Margin="144,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="111" Checked="nameCheck">
+        <RadioButton x:Name="id" Content="Order By Number" GroupName="key1" HorizontalAlignment="Left" Margin="45,51,0,0" VerticalAlignment="Top" Checked="idCheck" FontFamily="Yu Gothic Medium" Width="124"/>
+        <RadioButton x:Name="name" Content="Order By Name " GroupName="key1" HorizontalAlignment="Left" Margin="193,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="111" Checked="nameCheck" FontFamily="Yu Gothic Medium">
             <RadioButton.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

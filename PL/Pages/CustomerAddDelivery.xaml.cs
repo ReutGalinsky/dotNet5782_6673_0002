@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace PL.Pages
 {
-    /// <summary>
-    /// Interaction logic for CustomerAddDelivery.xaml
-    /// </summary>
     public partial class CustomerAddDelivery : Page
     {
         public CustomerAddDelivery(BLApi.IBL b, string i)
@@ -32,23 +29,20 @@ namespace PL.Pages
         private BLApi.IBL bl;
         private string id;
         public event EventHandler updateList;
-
-
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 BO.ParcelOfList parcel = new BO.ParcelOfList() { Priority = (BO.Priorities)Priority.SelectedItem, Weight = (BO.WeightCategories)Weight.SelectedItem, Sender = id };
-                parcel.Geter = ((BO.CustomerToList)(Geters.SelectedItem)).IdNumber;//?האם ההמרה זו הייתה הבעיה
+                parcel.Geter = ((BO.CustomerToList)(Geters.SelectedItem)).IdNumber;
                 bl.AddParcelToDelivery(parcel);
                 updateList(sender, e);
             }
-            catch (Exception ex)//חריגה לא מדוייקת
+            catch (Exception ex)
             {
-                MessageBox.Show("the geter customer is not existing in the system, please enter again correct details", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void focus(object sender, SelectionChangedEventArgs e)
         {
             if (Geters.SelectedItem == null || Priority.SelectedItem == null || Weight.SelectedItem == null)
@@ -56,18 +50,6 @@ namespace PL.Pages
             else
                 ADD.IsEnabled = true;
         }
-        //private void focus_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (Longitude.Text == "min 34.2 max 35.8")
-        //        Longitude.Text = "";
-
-        //}
-        //private void focus_Click1(object sender, RoutedEventArgs e)
-        //{
-        //    if (Latitude.Text == "min 32.2 max 34.8")
-        //        Latitude.Text = "";
-
-        //}
     }
 }
 

@@ -64,7 +64,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TextBlock Text="My Drone:" Margin="17,11,0,0" FontWeight="Light" FontSize="30" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <TextBlock Text="Delivering Drone:" Margin="4,22,0,0" FontWeight="Light" FontSize="24" Width="178" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Row="1"/>
         <Border Background="Black" Opacity="0.5" Margin="12,51,24,47" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
         <Border  CornerRadius="10" Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="18,70,33,48" RenderTransformOrigin="0.752,0.498" Grid.Row="1" Grid.RowSpan="12">
             <Grid x:Name="GridDrone" Visibility="{Binding Converter={StaticResource droneDetail}}">
@@ -88,7 +88,7 @@
             </Grid>
         </Border>
 
-        <TextBlock Text="My Options:" Margin="16,8,0,0" FontWeight="Light" FontSize="30" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1"/>
+        <TextBlock Text="Customers:" Margin="18,17,0,0" FontWeight="Light" FontSize="25" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1"/>
         <Border Background="Black" Opacity="0.5" Margin="12,51,24,47" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
         <Border Background="LightGray"  CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="168,68,9,27" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="2">
             <Grid x:Name="GridSender">
@@ -155,7 +155,7 @@
                 <TextBlock Text="View Drone" FontFamily="Ink Free" ></TextBlock>
             </Button.ToolTip>
         </Button>
-        <Button x:Name="ShowSender" Grid.Column="2" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left" Grid.Row="1" Click="openSender" Width="197" Margin="168,69,0,6" Grid.ColumnSpan="2">
+        <Button x:Name="ShowSender" Grid.Column="2" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left" Grid.Row="1" Width="197" Margin="168,69,0,6" Grid.ColumnSpan="2">
             <Button.Content>
                 <StackPanel>
                     <iconPacks:PackIconMaterial Kind="AccountArrowRight">
@@ -166,17 +166,7 @@
                 <TextBlock Text="View Sender" FontFamily="Ink Free" ></TextBlock>
             </Button.ToolTip>
         </Button>
-        <!--<Button x:Name="ShowGeter" BorderBrush="Transparent" Background="Transparent" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Click="openGeter" Height="32" Width="199" Margin="168,0,0,0" Grid.ColumnSpan="2">
-            <Button.Content>
-                <StackPanel>
-                    <iconPacks:PackIconMaterial Kind="AccountArrowLeft">
-                    </iconPacks:PackIconMaterial>
-                </StackPanel>
-            </Button.Content>
-            <Button.ToolTip>
-                <TextBlock Text="View Geter" FontFamily="Ink Free" ></TextBlock>
-            </Button.ToolTip>
-        </Button>-->
+
         <iconPacks:PackIconMaterial Kind="AccountArrowLeft" Grid.Column="3" Margin="89,11,0,0" Grid.Row="10">
             <iconPacks:PackIconMaterial.ToolTip>
                 <TextBlock Text="View Geter" FontFamily="Ink Free" ></TextBlock>

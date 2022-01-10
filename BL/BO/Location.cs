@@ -12,7 +12,13 @@ namespace BO
     /// </summary>
     public class Location
     {
+        /// <summary>
+        /// the latitude of the location
+        /// </summary>
         public double Latitude { set; get; }
+        /// <summary>
+        /// the longitude of the location
+        /// </summary>
         public double Longitude { set; get; }
 
         public override string ToString()

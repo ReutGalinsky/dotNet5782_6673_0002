@@ -13,11 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace PL
-{
-    /// <summary>
-    /// Interaction logic for Account.xaml
-    /// </summary>
-    public partial class Account : Window
+{    public partial class Account : Window
     {
         public Account(BLApi.IBL b)
         {
@@ -36,7 +32,6 @@ namespace PL
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 double temp;
@@ -58,7 +53,7 @@ namespace PL
                 MessageBox.Show($"your pawwword is +{password}");
                 this.Close();
             }
-            catch (Exception ex)//לטפל בחריגות
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

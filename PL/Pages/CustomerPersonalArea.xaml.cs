@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace PL.Pages
 {
-    /// <summary>
-    /// Interaction logic for CustomerPersonalArea.xaml
-    /// </summary>
     public partial class CustomerPersonalArea : Page
     {
         public CustomerPersonalArea(BLApi.IBL b, string i)
@@ -52,12 +49,6 @@ namespace PL.Pages
                 MessageBox.Show($"the phone number {Phone.Text} is illegal. please enter again", "Phone Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        private void Latitude_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void edit_Click(object sender, RoutedEventArgs e)
         {
             Name.IsEnabled = true;

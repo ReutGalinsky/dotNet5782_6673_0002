@@ -18,9 +18,6 @@ using System.Windows.Markup;
 
 namespace PL.Pages
 {
-    /// <summary>
-    /// Interaction logic for ManagerParcel.xaml
-    /// </summary>
     public partial class ManagerParcel : Page
     {
         public ManagerParcel(BLApi.IBL b)
@@ -28,18 +25,11 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             ParcelListView.DataContext = listParcels;
-            //Date.SelectedItem = Date.Items[0];
             update += updated;
             startDate.Language = XmlLanguage.GetLanguage(System.Globalization.CultureInfo.GetCultureInfo(9).IetfLanguageTag);
             endDate.Language = XmlLanguage.GetLanguage(System.Globalization.CultureInfo.GetCultureInfo(9).IetfLanguageTag);
 
         }
-        //private IEnumerable<IGrouping<BO.ParcelState,BO.ParcelOfList>> parcelsByState()
-        //{
-        //       var list = from item in bl.GetParcels()
-        //               group item by item.ParcelState;
-        //    return list;
-        //}
         private BLApi.IBL bl;
         public EventHandler update;
         private BO.ParcelOfList selected;
@@ -48,13 +38,10 @@ namespace PL.Pages
         PropertyGroupDescription groupSender = new PropertyGroupDescription("Sender");
         PropertyGroupDescription groupPriority = new PropertyGroupDescription("Priority");
         PropertyGroupDescription groupState = new PropertyGroupDescription("ParcelState");
-        /// <summary>
-        /// check
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+        private void updated(object sender, EventArgs e)
         {
+            startDate.SelectedDate = null;
+            endDate.SelectedDate = null;
             listParcels.Clear();
             foreach (var item in bl.GetParcels())
                 listParcels.Add(item);
@@ -94,7 +81,6 @@ namespace PL.Pages
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
             view.GroupDescriptions.Remove(groupGeter);
-            //geterCheck.IsChecked = false;
         }
         private void CancelGroupSeter(object sender, RoutedEventArgs e)
         {
@@ -111,11 +97,8 @@ namespace PL.Pages
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
             view.GroupDescriptions.Remove(groupPriority);
         }
-
-
         private void GroupGeter(object sender, RoutedEventArgs e)
         {
-
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
             view.GroupDescriptions.Add(groupGeter);
         }
@@ -138,31 +121,6 @@ namespace PL.Pages
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
             view.GroupDescriptions.Add(groupPriority);
         }
-
-        private void selectedStart(object sender, SelectionChangedEventArgs e)
-        {
-            if (endDate.SelectedDate == null)
-            {
-                var tempList = from item in bl.GetParcels()
-                               let parcel = bl.GetParcel(item.IdNumber)
-                               where parcel.CreateParcelTime >= startDate.SelectedDate
-                               select item;
-                listParcels.Clear();
-                foreach (var item in tempList)
-                    listParcels.Add(item);
-            }
-            else
-            {
-                var tempList = from item in bl.GetParcels()
-                               let parcel = bl.GetParcel(item.IdNumber)
-                               where parcel.CreateParcelTime >= startDate.SelectedDate && parcel.CreateParcelTime <= endDate.SelectedDate
-                               select item;
-                listParcels.Clear();
-                foreach (var item in tempList)
-                    listParcels.Add(item);
-            }
-        }
-
         private void changeTime(object sender, SelectionChangedEventArgs e)
         {
             if (endDate.SelectedDate == null && startDate.SelectedDate != null)

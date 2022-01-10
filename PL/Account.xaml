@@ -31,27 +31,27 @@
         </Grid.RowDefinitions>
         <Grid Background="SteelBlue" Grid.ColumnSpan="3"/>
         <StackPanel Orientation="Horizontal" Height="35" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0">
-            <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" Margin="200,0,0,0" Source="Pages/Images/Logo.png" RenderTransformOrigin="0.648,-1.857" />
+            <Image Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" Margin="200,0,0,0" Source="/Logo.png" RenderTransformOrigin="0.648,-1.857" />
             <TextBlock Text="New Meaning For Delivery." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="20" Margin="5,0,0,0" FontWeight="Medium" FontFamily="Fonts/#regular"/>
         </StackPanel>
         <Border Background="LightBlue" CornerRadius="10" Opacity="0.5" Margin="52,80,54,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="7"/>
 
         <TextBlock Text="Id number:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Top" Margin="156,10,0,0" Grid.Column="1" Grid.Row="2" FontSize="24" />
         <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="31" PreviewKeyDown="Onlynumbers" Margin="389,10,0,0" Grid.Column="1" TextChanged="Focus" Grid.Row="2" />
-        <TextBlock Text="Name:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Margin="158,16,0,0" RenderTransformOrigin="0.486,-1.068" FontSize="24" />
+        <TextBlock Text="Name:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Margin="158,0,0,0" RenderTransformOrigin="0.486,-1.068" FontSize="24" />
         <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="30" Grid.Row="3" Grid.Column="1" TextChanged="Focus" Margin="390,0,0,0" />
-        <TextBlock Text="Phone:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1" Margin="161,16,0,0" FontSize="24" />
+        <TextBlock Text="Phone:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Margin="161,0,0,0" FontSize="24" />
         <TextBox x:Name="Phone" Background="{x:Null}"  Text="{Binding Path=Phone, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="4" Grid.Column="1" TextChanged="Focus" Margin="390,0,0,0" />
         <TextBlock Text="Longitude:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" Margin="158,0,0,0" FontSize="24" />
         <TextBox x:Name="Longitude" Background="{x:Null}"  Text="{Binding Path=Location.Longitude}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Height="30" Grid.Row="5" Grid.Column="1" TextChanged="Focus" Margin="390,12,0,0" />
-        <TextBlock Text="Latitude:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Top" Grid.Row="6" Grid.Column="1" Margin="163,14,0,0" FontSize="24" />
-        <TextBox x:Name="Latitude" Background="{x:Null}"  Text="{Binding Path=Location.Latitude}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Height="30" Grid.Row="5" Grid.Column="1" TextChanged="Focus" Margin="390,57,0,0" Grid.RowSpan="2" />
-        <iconPacks:PackIconMaterial Kind="Information" Grid.Column="1" Margin="529,4,0,0" Grid.Row="6" Height="19" Width="20">
+        <TextBlock Text="Latitude:" HorizontalAlignment="Left"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Margin="159,0,0,0" FontSize="24" />
+        <TextBox x:Name="Latitude" Background="{x:Null}"  Text="{Binding Path=Location.Latitude}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="30" Grid.Row="6" Grid.Column="1" TextChanged="Focus" Margin="390,0,0,0" />
+        <iconPacks:PackIconMaterial Kind="Information" Grid.Column="1" Margin="529,10,0,0" Grid.Row="6" Height="19" Width="20">
             <iconPacks:PackIconMaterial.ToolTip>
                 <TextBlock Text="Latitude in israel its between 29.5 to 33.3" FontFamily="Ink Free"></TextBlock>
             </iconPacks:PackIconMaterial.ToolTip>
         </iconPacks:PackIconMaterial>
-        <iconPacks:PackIconMaterial Kind="Information" Grid.Column="1" Margin="529,15,0,0" Grid.Row="5" Height="19" Width="20">
+        <iconPacks:PackIconMaterial Kind="Information" Grid.Column="1" Margin="529,19,0,0" Grid.Row="5" Height="19" Width="20">
             <iconPacks:PackIconMaterial.ToolTip>
                 <TextBlock Text="Longitude in israel its between 34.5 to 35.6" FontFamily="Ink Free"></TextBlock>
             </iconPacks:PackIconMaterial.ToolTip>
@@ -128,18 +128,18 @@
             <Grid.RenderTransform>
                 <RotateTransform Angle="50"/>
             </Grid.RenderTransform>
-            <StackPanel Orientation="Horizontal" Margin="-350,250,-255,-250">
+            <StackPanel Orientation="Horizontal" Margin="-300,120,-270,-250">
                 <StackPanel>
-                    <Border Width="700" Height="35" Background="SteelBlue" Margin="-50,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="SteelBlue" Margin="-10,15,0,0" CornerRadius="20"/>
                     <Border Width="700" Height="35" Background="DodgerBlue" Margin="120,15,0,0" CornerRadius="20"/>
                     <Border Width="700" Height="35" Background="CornflowerBlue" Margin="55,15,0,0" CornerRadius="20"/>
                     <Border Width="700" Height="35" Background="CadetBlue" Margin="-30,15,0,0" CornerRadius="20"/>
                 </StackPanel>
                 <StackPanel>
-                    <Border Width="700" Height="35" Background="SteelBlue" Margin="170,15,0,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="DodgerBlue" Margin="150,15,0,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="CornflowerBlue" Margin="75,15,0,0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="CadetBlue" Margin="0,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="SteelBlue" Margin="200,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="DodgerBlue" Margin="250,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="CornflowerBlue" Margin="120,15,0,0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="CadetBlue" Margin="300,15,0,0" CornerRadius="20"/>
                 </StackPanel>
             </StackPanel>
 

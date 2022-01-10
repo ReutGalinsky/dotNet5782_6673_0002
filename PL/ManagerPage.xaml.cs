@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 using PL.Pages;
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for ManagerPage.xaml
-    /// </summary>
     public partial class ManagerPage : Window
     {
         public ManagerPage(BLApi.IBL b)
@@ -35,6 +32,7 @@ namespace PL
         private ManagerBaseStation pageBaseStation;
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            Tools.RemoveCharges(bl);
             this.Close();
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -62,23 +60,15 @@ namespace PL
         }
         private void BackToDrone(object sender, EventArgs e)
         {
-            pageDrone.update(sender, e);
-            Manager.NavigationService.Navigate(pageDrone);
+            MenuListView.SelectedItem = MenuListView.Items[0];
         }
         private void BackToCustomer(object sender, EventArgs e)
         {
-            pageCustomer.update(sender, e);
-            Manager.NavigationService.Navigate(pageCustomer);
+            MenuListView.SelectedItem = MenuListView.Items[2];
         }
         private void BackToBaseStation(object sender, EventArgs e)
         {
-            pageBaseStation.update(sender, e);
-            Manager.NavigationService.Navigate(pageBaseStation);
-        }
-        private void BackToParcel(object sender, EventArgs e)
-        {
-            pageParcel.update(sender, e);
-            Manager.NavigationService.Navigate(pageParcel);
+            MenuListView.SelectedItem = MenuListView.Items[4];
         }
         private void closeSubPages()
         {
@@ -88,50 +78,49 @@ namespace PL
         }
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-            
-                var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
-                switch (item.Tag)
-                {
-                    case "All drones":
-                        pageDrone.update(sender, e);
-                        Manager.NavigationService.Navigate(pageDrone);
-                        closeSubPages();
-                        AddDrone.Visibility = Visibility.Visible;
-                        break;
-                    case "Add new drone":
-                        ManagerAddDrone addDrone=new ManagerAddDrone(bl);
-                        addDrone.updateList += BackToDrone;
-                        Manager.NavigationService.Navigate(addDrone);
-                        break;
-                    case "All customers":
-                        pageCustomer.update(sender, e);
-                        Manager.NavigationService.Navigate(pageCustomer);
-                        closeSubPages();
-                        AddCustomer.Visibility = Visibility.Visible;
-                        break;
-                    case "Add new customer":
-                        ManagerAddCustomer addCustomer = new ManagerAddCustomer(bl);
-                        addCustomer.updateList += BackToCustomer;
-                        Manager.NavigationService.Navigate(addCustomer);
-                        break;
-                    case "All base stations":
-                        pageBaseStation.update(sender, e);
-                        Manager.NavigationService.Navigate(pageBaseStation);
-                        closeSubPages();
-                        AddBaseStation.Visibility = Visibility.Visible;
-                        break;
-                    case "Add new base station":
-                        ManagerAddBaseStation addBaseStation = new ManagerAddBaseStation(bl);
-                        addBaseStation.updateList += BackToBaseStation;
-                        Manager.NavigationService.Navigate(addBaseStation);
-                        break;
-                    case "All parcels":
-                        pageParcel.update(sender, e);
-                        Manager.NavigationService.Navigate(pageParcel);
-                        closeSubPages();
-                        break;
-                }
-            
+            var item = (sender as ListView).Items[(sender as ListView).SelectedIndex] as ListViewItem;
+            switch (item.Tag)
+            {
+                case "All drones":
+                    pageDrone.update(sender, e);
+                    Manager.NavigationService.Navigate(pageDrone);
+                    closeSubPages();
+                    AddDrone.Visibility = Visibility.Visible;
+                    break;
+                case "Add new drone":
+                    ManagerAddDrone addDrone = new ManagerAddDrone(bl);
+                    addDrone.updateList += BackToDrone;
+                    Manager.NavigationService.Navigate(addDrone);
+                    break;
+                case "All customers":
+                    pageCustomer.update(sender, e);
+                    Manager.NavigationService.Navigate(pageCustomer);
+                    closeSubPages();
+                    AddCustomer.Visibility = Visibility.Visible;
+                    break;
+                case "Add new customer":
+                    ManagerAddCustomer addCustomer = new ManagerAddCustomer(bl);
+                    addCustomer.updateList += BackToCustomer;
+                    Manager.NavigationService.Navigate(addCustomer);
+                    break;
+                case "All base stations":
+                    pageBaseStation.update(sender, e);
+                    Manager.NavigationService.Navigate(pageBaseStation);
+                    closeSubPages();
+                    AddBaseStation.Visibility = Visibility.Visible;
+                    break;
+                case "Add new base station":
+                    ManagerAddBaseStation addBaseStation = new ManagerAddBaseStation(bl);
+                    addBaseStation.updateList += BackToBaseStation;
+                    Manager.NavigationService.Navigate(addBaseStation);
+                    break;
+                case "All parcels":
+                    pageParcel.update(sender, e);
+                    Manager.NavigationService.Navigate(pageParcel);
+                    closeSubPages();
+                    break;
+            }
+
         }
     }
 }

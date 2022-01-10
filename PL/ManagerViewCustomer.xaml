@@ -12,6 +12,18 @@
         Title="ManagerViewCustomer" Height="440" Width="640">
     <Window.Resources>
         <PL.Convert:ConvertToVisibility x:Key="VisibleParcel"/>
+        <DataTemplate x:Key="myParcel" DataType="local:BO.ParcelOfList">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Number:   " Grid.Column="0" FontFamily="Ink Free" ></TextBlock>
+                <TextBlock Text="{Binding Path=IdNumber}" Grid.Column="1" FontFamily="Ink Free" ></TextBlock>
+            </Grid>
+        </DataTemplate>
+
     </Window.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -71,7 +83,7 @@
         <TextBox x:Name="Longitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" />
         <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" />
         <TextBox x:Name="Latitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="6" Grid.Column="1" />
-        <Button Content="Update" x:Name="UPDATE" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.ColumnSpan="2" Margin="100,5,96,21" Grid.Row="7">
+        <Button Content="Update" x:Name="UPDATE" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.ColumnSpan="2" Margin="74,7,186,19" Grid.Row="7">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -92,7 +104,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Cancel" x:Name="CANCEL" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="1" Grid.ColumnSpan="2" Margin="45,5,153,21" Grid.Row="7">
+        <Button Content="Cancel" x:Name="CANCEL" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="7,7,101,19" Grid.Row="7" Grid.Column="1">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -151,7 +163,7 @@
 
 
         </Grid>
-        <ComboBox x:Name="listParcels" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="10,29,0,0" Grid.Row="2" VerticalAlignment="Top" Width="188" Grid.Column="2" SelectionChanged="enableShow"/>
+        <ComboBox x:Name="listParcels" ItemTemplate="{StaticResource myParcel}" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="10,29,0,0" Grid.Row="2" VerticalAlignment="Top" Width="188" Grid.Column="2" SelectionChanged="enableShow"/>
         <TextBlock x:Name="pickLabel" HorizontalAlignment="Center" Margin="0,7,0,0" Grid.Row="4" Text="Pick Parcel" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Ink Free" FontSize="24" Grid.Column="2"/>
     </Grid>
 </Window>

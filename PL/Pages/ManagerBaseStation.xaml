@@ -103,7 +103,7 @@
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteStation">
                                     <Button.Content>
-                                        <Image Source="Images/מחיקה.jpg" VerticalAlignment="Center" Width="25" Height="25"></Image>
+                                        <iconPacks:PackIconMaterial Kind="Cancel"></iconPacks:PackIconMaterial>
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>
@@ -125,7 +125,7 @@
             </ListView.GroupStyle>
 
         </ListView>
-        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="504,45,0,0" VerticalAlignment="Top" Width="144" Height="21" SelectionChanged="changeFilterCharge" >
+        <ComboBox x:Name="chargeSlot" HorizontalAlignment="Left" Margin="491,45,0,0" VerticalAlignment="Top" Width="144" Height="21" SelectionChanged="changeFilterCharge" >
             <ComboBoxItem Tag="all" Content="All" ></ComboBoxItem>
             <ComboBoxItem Tag="availible" Content="With available charging slots"></ComboBoxItem>
             <ComboBoxItem Tag="full" Content="Without available charging slots"></ComboBoxItem>

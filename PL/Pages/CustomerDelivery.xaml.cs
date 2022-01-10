@@ -27,7 +27,7 @@ namespace PL.Pages
             bl = b;
             id = i;
             parcels = new ObservableCollection<BO.ParcelOfList>();
-            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the listView
+            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))
                 parcels.Add(s);
             Delivery.DataContext = parcels;
             update += updated;
@@ -37,7 +37,7 @@ namespace PL.Pages
         public EventHandler update;
         private BLApi.IBL bl;
         string id;
-        private BO.ParcelOfList selected;//selected item that will be send to the new window
+        private BO.ParcelOfList selected;
         private ObservableCollection<BO.ParcelOfList> parcels;
         PropertyGroupDescription groupState = new PropertyGroupDescription("ParcelState");
         PropertyGroupDescription groupWeight = new PropertyGroupDescription("Weight");
@@ -46,7 +46,7 @@ namespace PL.Pages
         {
             selected = (BO.ParcelOfList)Delivery.SelectedItem;
         }
-        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+        private void Action(object sender, MouseButtonEventArgs e)
         {
             if (selected != null)
             {
@@ -54,17 +54,17 @@ namespace PL.Pages
                 showParcel.Show();
             }
         }
-        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+        private void updated(object sender, EventArgs e)
         {
             parcels.Clear();
-            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))//create the source for the listView
+            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))
                 parcels.Add(s);
         }
         private void deleteParcel(object sender, RoutedEventArgs e)
         {
             var dialogResult = MessageBox.Show($"are you sure?", "Delete Parcel", MessageBoxButton.YesNo,MessageBoxImage.Question);
             BO.ParcelOfList ParcelToDelte = ((sender as Button).DataContext) as BO.ParcelOfList;
-            if (dialogResult == MessageBoxResult.Yes && ParcelToDelte.ParcelState == BO.ParcelState.Define)//לחשוב אם רוצים לכלול גם אופציה שנשלח רחפן אך לא אסף עדיין את החבילה
+            if (dialogResult == MessageBoxResult.Yes && ParcelToDelte.ParcelState == BO.ParcelState.Define)
             {
                 try
                 {

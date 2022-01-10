@@ -27,14 +27,14 @@ namespace Dal
         }
         #endregion
 
-        //*****Drones***********
+
 
         #region AddDrone
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void AddDrone(Drone drone)
         {
-            if (DataSource.Drones.FirstOrDefault(d => d.IdNumber == drone.IdNumber).IdNumber != null)
+            if (DataSource.Drones.Exists(d => d.IdNumber == drone.IdNumber)==true)
                 throw new ExistingException($"the drone with the id:{drone.IdNumber} is already exist");
             DataSource.Drones.Add(drone);
         }
@@ -108,7 +108,7 @@ namespace Dal
         }
         #endregion
 
-        //*******charge********
+
 
         #region AddDroneCharge
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -188,7 +188,7 @@ namespace Dal
         }
         #endregion
 
-        //*******parcel********
+
 
         #region AddParcel
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -196,7 +196,7 @@ namespace Dal
         public string AddParcel(Parcel parcel)
         {
             parcel.IdNumber = DataSource.Config.RunningNumber++.ToString();
-            if (DataSource.Parcels.FirstOrDefault(d => d.IdNumber == parcel.IdNumber).IdNumber != null)
+            if (DataSource.Parcels.Exists(d => d.IdNumber == parcel.IdNumber)==true)
                 throw new ExistingException($"the parcel with the id:{parcel.IdNumber} is already exist");
             DataSource.Parcels.Add(parcel);
             return parcel.IdNumber;
@@ -278,7 +278,7 @@ namespace Dal
         }
         #endregion
 
-        //*******base station********
+
 
         #region AddBaseStation
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -361,7 +361,7 @@ namespace Dal
         }
         #endregion
 
-        //*******customer********
+
 
         #region AddCustomer
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -443,16 +443,21 @@ namespace Dal
             return list;
         }
         #endregion
-        //********User*************
+
+        #region AddUser
+
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void AddUser(User user)
         {
-            if (DataSource.Users.FirstOrDefault(d => d.UserName == user.UserName).UserName != null)
+            if (DataSource.Users.Exists(d => d.UserName == user.UserName)==true)
                 throw new ExistingException($"the user with the name:{user.UserName} is already exist");
             DataSource.Users.Add(user);
 
         }
+        #endregion
+        #region DeleteUser
+
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void DeleteUser(string userName)
@@ -462,6 +467,9 @@ namespace Dal
                 throw new NotExistingException($"the User with the name:{user.UserName} is not exist");
             DataSource.Users.Remove(user);
         }
+        #endregion
+        #region GetUser
+
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public User GetUser(string userName)
@@ -471,6 +479,8 @@ namespace Dal
                 throw new NotExistingException($"the customer with the id:{user.UserName} is not exist");
             return user;
         }
+        #endregion
+        #region UpdateUser
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void UpdateUser(User toUpdate)
@@ -489,6 +499,8 @@ namespace Dal
             }
             throw new NotExistingException($"the user with the name:{toUpdate.UserName} is not exist");
         }
+        #endregion
+        #region GetUsers
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public IEnumerable<User> GetUsers()
@@ -497,6 +509,8 @@ namespace Dal
                             select item;
             return Customers;
         }
+        #endregion
+        #region GetAllUsersBy
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public IEnumerable<User> GetAllUsersBy(Predicate<User> condition)
@@ -506,19 +520,14 @@ namespace Dal
                        select item;
             return list;
         }
+        #endregion
 
 
-        //*******electricity********
 
         #region UsingElectricity
-        /// <summary>
-        /// returnnig the values of the battery change
-        /// </summary>
-        /// <returns>the values of the battery loose and gain</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public double[] UsingElectricity()
-        //function that return the electricity values
         {
             double[] arr = new double[5] { DataSource.Config.Available, DataSource.Config.Heavy, DataSource.Config.Light, DataSource.Config.Medium, DataSource.Config._speed };
             return arr;

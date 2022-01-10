@@ -24,4 +24,13 @@ namespace DO
         protected NotExistingException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
     }
+
+    public class AccessToDataBaseException : Exception
+    {
+        public AccessToDataBaseException() : base() { }
+        public AccessToDataBaseException(string Messege) : base(Messege) { }
+        public AccessToDataBaseException(string Messege, Exception inner) : base(Messege, inner) { }
+        protected AccessToDataBaseException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+    }
 }

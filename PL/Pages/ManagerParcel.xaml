@@ -87,7 +87,7 @@
                             <DataTemplate>
                                 <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel">
                                     <Button.Content>
-                                        <Image Source="Images/מחיקה.jpg" VerticalAlignment="Center" Width="25" Height="25"></Image>
+                                        <iconPacks:PackIconMaterial Kind="Cancel"></iconPacks:PackIconMaterial>
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>

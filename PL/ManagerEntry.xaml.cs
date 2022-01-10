@@ -16,9 +16,6 @@ using System.ComponentModel;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for ManagerEntry.xaml
-    /// </summary>
     public partial class ManagerEntry : Window
     {       
         private BLApi.IBL bl;
@@ -102,12 +99,6 @@ namespace PL
         {
             if (user.Text == "Username:")
                 user.Text = "";
-        }
-        private void Forget_Click(object sender, RoutedEventArgs e)
-        {
-            ForgetPassword forgetPassword = new ForgetPassword(bl);
-            forgetPassword.Show();
-            this.Close();
         }
     }
 }

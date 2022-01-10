@@ -48,7 +48,6 @@ namespace BL
                 {
                     if (item.GetValue(t, null) == null) continue;
                     temp += string.Format(item.Name + ":\n{0}\n", item.GetValue(t, null));
-
                 }
             }
             return temp;

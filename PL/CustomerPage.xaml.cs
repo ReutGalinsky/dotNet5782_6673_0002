@@ -16,9 +16,6 @@ using PL.Pages;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for CustomerPage.xaml
-    /// </summary>
     public partial class CustomerPage : Window
     {
         public CustomerPage(BLApi.IBL b, string i)
@@ -43,23 +40,18 @@ namespace PL
         private void BackToPersonal(object sender, EventArgs e)
         {
             MenuListView.SelectedItem = MenuListView.Items[0];
-            // Customer.NavigationService.Navigate(pagePersonal);
-
         }
         private void BackToDelivery(object sender, EventArgs e)
         {
             MenuListView.SelectedItem = MenuListView.Items[2];
-            //pageDelivery.update(sender, e);
-            //Customer.NavigationService.Navigate(pageParcel);
         }
         private void BackToParcel(object sender, EventArgs e)
         {
             MenuListView.SelectedItem = MenuListView.Items[4];
-            //pageParcel.update(sender, e);
-            //Customer.NavigationService.Navigate(pageDelivery);
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            Tools.RemoveCharges(bl);
             this.Close();
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -113,12 +105,10 @@ namespace PL
                     break;
                 case "AllParcels":
                     pageDelivery.update(sender, e);
-
                     Customer.NavigationService.Navigate(pageDelivery);
                     closeSubPages();
                     break;
             }
-
         }
     }
 }

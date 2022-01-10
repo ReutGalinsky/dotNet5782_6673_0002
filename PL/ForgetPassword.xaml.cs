@@ -20,13 +20,10 @@ namespace PL
     /// </summary>
     public partial class ForgetPassword : Window
     {
-        public ForgetPassword(BLApi.IBL b)
+        public ForgetPassword()
         {
             InitializeComponent();
-            bl = b;
-        }
-        private BLApi.IBL bl;
-   
+        }   
         private void move(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -34,25 +31,14 @@ namespace PL
         }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            TypeOfUser typeOfUser = new TypeOfUser(bl);
-            typeOfUser.Show();
             this.Close();
         }
-
-
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-
-        private void focusUser(object sender, RoutedEventArgs e)
-        {
-            if (user.Text == "E-mail:")
-                user.Text = "";
-
-        }
     }
 }
 

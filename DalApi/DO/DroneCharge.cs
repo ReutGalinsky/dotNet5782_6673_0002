@@ -11,8 +11,17 @@ namespace DO
     /// </summary>
     public struct DroneCharge
     {
+        /// <summary>
+        /// the drone id of that charge slot
+        /// </summary>
         public string DroneId { get; set; }
+        /// <summary>
+        /// the station id of that charge slot
+        /// </summary>
         public string StationId { get; set; }
+        /// <summary>
+        /// the charging start time
+        /// </summary>
         public DateTime? startCharging { get; set; }
         public override string ToString()
         {

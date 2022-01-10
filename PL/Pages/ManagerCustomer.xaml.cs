@@ -36,12 +36,11 @@ namespace PL.Pages
         private BLApi.IBL bl;
         private BO.CustomerToList selected;
         private ObservableCollection<BO.CustomerToList> listCustomers = new ObservableCollection<BO.CustomerToList>();
-
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
             selected = (BO.CustomerToList)CustomerListView.SelectedItem;
         }
-        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+        private void Action(object sender, MouseButtonEventArgs e)
         {
             if (selected != null)
             {
@@ -51,14 +50,14 @@ namespace PL.Pages
                 selected = null;
             }
         }
-        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+        private void updated(object sender, EventArgs e)
         {
             listCustomers.Clear();
             OnWay.SelectedItem = "All";
             var temp = from item in bl.GetCustomers()
                        orderby item.Name
                        select item;
-            foreach (BO.CustomerToList s in temp)//create the source for the liseView
+            foreach (BO.CustomerToList s in temp)
                 listCustomers.Add(s);
             name.IsChecked = true;
         }
@@ -79,14 +78,12 @@ namespace PL.Pages
                 }
             }
         }
-        //***********
         private void idCheck(object sender, RoutedEventArgs e)
         {
             listCustomers.Clear();
             foreach (var item in bl.GetCustomers().OrderBy(x => int.Parse(x.IdNumber)))
                 listCustomers.Add(item);
         }
-
         private void nameCheck(object sender, RoutedEventArgs e)
         {
             listCustomers.Clear();
@@ -95,9 +92,34 @@ namespace PL.Pages
         }
         private void OnWaySelector(object sender, SelectionChangedEventArgs e)
         {
-
+            var item = OnWay.SelectedItem as ComboBoxItem;
+            switch(item.Tag)
+            {
+                case "all":
+                    updated(sender, e);
+                    break;
+                case "onWay":
+                    listCustomers.Clear();
+                    var temp = from customer in bl.GetAllCustomersBy(x=>x.ParcelOnTheWay>0||x.ParcelSendAndNotGet>0)
+                               select customer;
+                    foreach (BO.CustomerToList s in temp)//create the source for the liseView
+                        listCustomers.Add(s);
+                    name.IsChecked = false;
+                    id.IsChecked = false;
+                    break;
+                case "notOnWay":
+                    listCustomers.Clear();
+                    var help = from customer in bl.GetAllCustomersBy(x => x.ParcelOnTheWay== 0 && x.ParcelSendAndNotGet == 0)
+                               select customer;
+                    foreach (BO.CustomerToList s in help)//create the source for the liseView
+                        listCustomers.Add(s);
+                    name.IsChecked = false;
+                    id.IsChecked = false;
+                    break;
+                default:
+                    break;
+            }
         }
-        //**************
 
     }
 }

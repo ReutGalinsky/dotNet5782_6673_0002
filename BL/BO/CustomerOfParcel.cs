@@ -12,7 +12,13 @@ namespace BO
     /// </summary>
     public class CustomerOfParcel
     {
+        /// <summary>
+        /// the id of the customer
+        /// </summary>
         public string IdNumber { set; get; }
+        /// <summary>
+        /// the name of the customer
+        /// </summary>
         public string Name { set; get; }
         public override string ToString() {return this.stringProperty();}
     }

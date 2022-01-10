@@ -31,9 +31,6 @@ namespace BL
         static BL() { }
         public static BLApi.IBL Instance
         { get { return Nested.instance; } }
-        /// <summary>
-        /// constructor that create the list of drones for BL layer
-        /// </summary>
         BL()
         {
             dal = DalApi.DLFactory.GetDal();
@@ -48,50 +45,42 @@ namespace BL
                 try
                 { Drones.Add(GetDroneToList(item.IdNumber)); }
                 catch (Exception e)
-                { throw new AddingProblemException("", e); }
+                { throw new AddingProblemException("Error in the Constructor", e); }
             }
         }
         #endregion
 
-        //**********************************
 
         #region AddDrone
-        /// <summary>
-        /// adding a new drone  
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(BO.DroneToList droneToAdd, string IdNumber)
         {
-            //validaion
             if (droneToAdd.MaxWeight != BO.WeightCategories.Heavy && droneToAdd.MaxWeight != BO.WeightCategories.Middle && droneToAdd.MaxWeight != BO.WeightCategories.Light)
                 throw new AddingProblemException($"The weight of the drone {droneToAdd.IdNumber} is not an option");
             if (droneToAdd.Model == "")
                 throw new AddingProblemException($"The model of the drone {droneToAdd.IdNumber} wasn't entered");
             int tempInteger;
             if (int.TryParse(droneToAdd.IdNumber, out tempInteger) == false)
-                throw new AddingProblemException($"The drone {droneToAdd.IdNumber} can't add");
+                throw new AddingProblemException($"The id {droneToAdd.IdNumber} of the drone is illegal");
+            if(tempInteger==0)
+                throw new AddingProblemException($"The id {droneToAdd.IdNumber} of the drone is illegal");
 
-            //add
             try //assumption: drone need to get charging when it's being added
             {
                 Random rand = new Random();
                 droneToAdd.Battery = rand.Next(20, 40);
                 droneToAdd.Location = GetBaseStation(IdNumber).Location.GetLocation();
-                //Location location = (Location)GetBaseStation(number).Location.CopyPropertiesToNew(typeof(Location));
-                //droneToAdd.Location = location;
                 lock (dal)
                 {
 
                     var stationDO = dal.GetBaseStation(IdNumber);
-                    //check charge slots in the base station
                     if (stationDO.ChargeSlots == 0)
                         throw new ChargingException($"there is not any slot for charging in base station with id {IdNumber}");
-                    dal.AddDrone((DO.Drone)droneToAdd.CopyPropertiesToNew(typeof(DO.Drone)));//add to DAL
+                    dal.AddDrone((DO.Drone)droneToAdd.CopyPropertiesToNew(typeof(DO.Drone)));
                     droneToAdd.State = DroneState.maintaince;
                     stationDO.ChargeSlots--;
                     dal.UpdateBaseStation(stationDO);
                     Drones.Add(droneToAdd);
-                    //DO.DroneCharge charge = new DroneCharge() { DroneId = droneToAdd.IdNumber, StationId = IdNumber };
                     dal.AddDroneCharge(new DroneCharge() { DroneId = droneToAdd.IdNumber, StationId = IdNumber, startCharging = DateTime.Now });
                 }
             }
@@ -101,9 +90,6 @@ namespace BL
         #endregion
 
         #region GetDrones
-        /// <summary>
-        /// return all drones 
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.DroneToList> GetDrones()
         {
@@ -112,45 +98,31 @@ namespace BL
         #endregion
 
         #region GetDrone
-        /// <summary>
-        /// return a single drone
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Drone GetDrone(string id)
         {
-            //validation
             BO.DroneToList droneBL = Drones.FirstOrDefault(x => x.IdNumber == id);
             if (droneBL == null)
                 throw new GettingProblemException($"the drone with the id {id} is not exist");
             BO.Drone drone = (BO.Drone)droneBL.CopyPropertiesToNew(typeof(BO.Drone));
             drone.Location = droneBL.Location.GetLocation();
-            //drone.Location = new Location();
-            //drone.Location.Latitude = droneBL.Location.Latitude;
-            //drone.Location.Longitude = droneBL.Location.Longitude;
             drone.State = droneBL.State;
             drone.Battery = droneBL.Battery;
-            drone.PassedParcel = droneBL.NumberOfParcel != null ? GetPIP(droneBL.NumberOfParcel) : null;
-            //if (droneBL.NumberOfParcel != null)
-            //    drone.PassedParcel = GetPIP(droneBL.NumberOfParcel);
+            drone.PassedParcel = droneBL.NumberOfParcel != null ? GetParcelInPassing(droneBL.NumberOfParcel) : null;
             return drone;
         }
         #endregion
 
         #region UpdatingDetailsOfDrone
-        /// <summary>
-        //updating drone
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdatingDetailsOfDrone(string Model, string id)
         {
-            //validation
             if (Model == "")
                 throw new UpdatingException($"The model of drone number{id}is illegal");
             BO.DroneToList drone = Drones.FirstOrDefault(x => x.IdNumber == id);
             if (drone == null)
                 throw new UpdatingException($"Drone number {id} is not existing");
 
-            //update
             drone.Model = Model;
             try
             {
@@ -168,9 +140,6 @@ namespace BL
         #endregion
 
         #region GetAllDronesBy
-        /// <summary>
-        // drone predicate
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.DroneToList> GetAllDronesBy(Predicate<BO.DroneToList> condition)
         {
@@ -179,25 +148,49 @@ namespace BL
                        select item;
             return list;
         }
-        #endregion 
-        //***********return inner objects*************
-        #region GetPIP
-        private BO.ParcelInPassing GetPIP(string id)
+        #endregion
+
+        #region RemoveDrone
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
+        public void RemoveDrone(string number)
+        {
+            try
+            {
+                lock (dal)
+                {
+                    var drone = GetDrone(number);
+                    if (drone.State == DroneState.shipping)
+                        throw new DeletingException("can't delete drone that shipping");
+                    if (drone.State == DroneState.maintaince)
+                        DroneFromCharging(number);
+                    dal.DeleteDrone(number);
+                    Drones.RemoveAll(x => x.IdNumber == number);
+                }
+            }
+            catch(Exception e)
+            {
+                throw new DeletingException(e.Message, e);
+            }
+        }
+        #endregion
+
+
+        #region GetParcelInPassing
         /// <summary>
-        //private function that return object of ParcelInPassing
+        /// returning the correct parcel as 'parcel in passing'
         /// </summary>
+        /// <param name="id">the id of the parcel</param>
+        /// <returns></returns>
+        private BO.ParcelInPassing GetParcelInPassing(string id)
         {
             lock (dal)
             {
-
                 DO.Parcel parcel = dal.GetParcel(id);
                 BO.ParcelInPassing temp = (BO.ParcelInPassing)parcel.CopyPropertiesToNew(typeof(BO.ParcelInPassing));
                 temp.Destination = dal.GetCustomer(parcel.Geter).GetLocation();
-                //Location get = new Location() { Latitude = dal.GetCustomer(p.Geter).Latitude, Longitude = dal.GetCustomer(p.Geter).Longitude };
-                //Location send = new Location() { Latitude = dal.GetCustomer(p.Sender).Latitude, Longitude = dal.GetCustomer(p.Sender).Longitude };
                 temp.Packing = dal.GetCustomer(parcel.Sender).GetLocation();
                 temp.Distance = temp.Destination.DistanceTo(temp.Packing);
-                //temp.Destination = get;
                 temp.Senderer = GetCustomerOfParcel(parcel.Sender);
                 temp.Getterer = GetCustomerOfParcel(parcel.Geter);
                 temp.isCollected = parcel.CollectingDroneTime switch
@@ -205,24 +198,22 @@ namespace BL
                     null => false,
                     _ => true,
                 };
-                //if (parcel.CollectingDroneTime == null)//the boolian value
-                //    temp.isCollected = true;
-                //else
-                //    temp.isCollected = false;
                 return temp;
             }
         }
         #endregion
+        #region GetDroneToList
+        /// <summary>
+        /// initialized the dal-drone as 'drone to list'
+        /// </summary>
+        /// <param name="id">the id of the drone</param>
+        /// <returns></returns>
         private BO.DroneToList GetDroneToList(string id)
-        //function that return object of DroneToList for constructor
         {
             try
             {
                 lock (dal)
                 {
-
-
-
                     BO.DroneToList drone = (BO.DroneToList)dal.GetDrone(id).CopyPropertiesToNew(typeof(BO.DroneToList));
                     var parcel1 = dal.GetParcels().Where(x => x.DroneId == id && x.ArrivingDroneTime == null).FirstOrDefault();
                     Random rand = new Random();
@@ -236,7 +227,7 @@ namespace BL
                         };
                         BO.ParcelOfList parcel3 = (BO.ParcelOfList)parcel1.CopyPropertiesToNew(typeof(BO.ParcelOfList));
 
-                        drone.Battery = rand.Next((int)battarUseag(drone, parcel3), 101);
+                        drone.Battery = rand.Next((int)batteryUssage(drone, parcel3), 101);
                         drone.NumberOfParcel = parcel1.IdNumber;
                         drone.State = DroneState.shipping;
                         return drone;
@@ -253,7 +244,6 @@ namespace BL
                             var element = station.ElementAt(num);
                             DO.BaseStation baseStaion = element.station;
                             drone.Location = element.Location;
-                            //drone.Location = new Location() { Latitude = baseStaion.Latitude, Longitude = baseStaion.Longitude };
                             drone.State = DroneState.maintaince;
                             baseStaion.ChargeSlots--;
                             dal.UpdateBaseStation(baseStaion);
@@ -276,7 +266,6 @@ namespace BL
                                 num = rand.Next(0, list.Count());
                                 DO.Parcel P = list1.ElementAt(num);
                                 drone.Location = dal.GetCustomer(((P.Geter))).GetLocation();
-                                //Location d = new Location() { Latitude = ClosestStation(drone.Location).Latitude, Longitude = ClosestStation(drone.Location).Longitude };
                                 drone.Battery = rand.Next((int)(drone.Location.DistanceTo(ClosestStation(drone.Location).GetLocation()) * _available), 101);
                             }
                             drone.State = DroneState.Available;
@@ -293,6 +282,13 @@ namespace BL
             }
 
         }
+        #endregion
+        #region parcelState
+        /// <summary>
+        /// match formal state by the parcel's times
+        /// </summary>
+        /// <param name="parcel">the given parcel</param>
+        /// <returns></returns>
         private ParcelState parcelState(DO.Parcel parcel)
         {
             if (parcel.CreateParcelTime != null && parcel.MatchForDroneTime == null)
@@ -303,56 +299,25 @@ namespace BL
                 return BO.ParcelState.pick;
             return BO.ParcelState.supply;
         }
-        private DO.BaseStation ClosestStation(Location l)
-        //private function that return the closest base station to a given location
+        #endregion
+        #region ClosestStation
+        /// <summary>
+        /// returning the closest base station to a given location
+        /// </summary>
+        /// <param name="local"> the given Location</param>
+        /// <returns></returns>
+        private DO.BaseStation ClosestStation(Location local)
         {
-            //var list = dal.GetBaseStations();
-
-            //DO.BaseStation baseStationToReturn;
             lock (dal)
             {
-
                 var station = (from item in dal.GetBaseStations()
-                               orderby l.DistanceTo(new Location() { Latitude = item.Latitude, Longitude = item.Longitude })
+                               orderby local.DistanceTo(new Location() { Latitude = item.Latitude, Longitude = item.Longitude })
                                select item)
                        .FirstOrDefault();
                 return station;
             }
-            //Location temp = new Location() { Latitude = list.First().Latitude, Longitude = list.First().Longitude };
-            //baseStationToReturn = list.First();
-            //foreach (var item in list)
-            //{
-            //    Location l2 = new Location() { Latitude = item.Latitude, Longitude = item.Longitude };
-            //    if (l.DistanceTo(l2) < temp.DistanceTo(l))
-            //    {
-            //        temp = l2;
-            //        baseStationToReturn = item;
-            //    }
-            //}
-            //return baseStationToReturn;
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public void RemoveDrone(string number)
-        {
-            try
-            {
-                lock (dal)
-                {
-
-                    var drone = GetDrone(number);
-                    if (drone.State == DroneState.shipping)
-                        throw new DeletingException("can't delete drone that shipping");
-                    if (drone.State == DroneState.maintaince)
-                        DroneFromCharging(number);
-                    dal.DeleteDrone(number);
-                    Drones.RemoveAll(x => x.IdNumber == number);
-                }
-            }
-            catch(Exception e)
-            {
-                throw new DeletingException(e.Message, e);
-            }
-        }
+        #endregion
 
     }
 }

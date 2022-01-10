@@ -100,10 +100,9 @@ namespace BL
                 drone.Battery -= batteryDown;
                 reportProggress();
             }
-            drone.Location = (Location)geter.Location.CopyPropertiesToNew(typeof(Location));
             lock (bl) lock(bl.dal)
             {
-
+                drone.Location = (Location)geter.Location.CopyPropertiesToNew(typeof(Location));
                 DO.Parcel parcelDO = bl.dal.GetParcel(parcel1.IdNumber);
                 parcelDO.ArrivingDroneTime = DateTime.Now;
                 drone.State = DroneState.Available;
@@ -115,14 +114,13 @@ namespace BL
         private void goToCharge()
         {lock (bl) lock (bl.dal)
                 {
-                    var closestStation = bl.dal.GetAllBaseStationsBy(x => x.ChargeSlots > 0)
+                 var closestStation = bl.dal.GetAllBaseStationsBy(x => x.ChargeSlots > 0)
                 .Select(s => new { station = s, distance = drone.Location.DistanceTo(s.GetLocation()) })
                 .OrderBy(s => s.distance)
                 .FirstOrDefault();
 
-                    if (closestStation != null)
+                    if (closestStation != null&&bl._available*closestStation.distance<drone.Battery)
                     {
-
                         drone.State = DroneState.maintaince;
                         var distance = closestStation.distance;
                         while (distance > 0)
@@ -139,7 +137,6 @@ namespace BL
                         DO.DroneCharge charge = new DO.DroneCharge() { DroneId = drone.IdNumber, StationId = station.IdNumber, startCharging = DateTime.Now };
                         bl.dal.AddDroneCharge(charge);
                         reportProggress();
-
                     }
                     else
                     {
@@ -156,7 +153,6 @@ namespace BL
                         }
                         drone.Location = station.station.GetLocation();
                         reportProggress();
-
                     }
                 }
         }
@@ -165,7 +161,7 @@ namespace BL
             while (drone.Battery < 100)
             {
                 Thread.Sleep(DELAY);
-                drone.Battery +=bl._speed;
+                drone.Battery +=bl._speed/6;
                 if (drone.Battery > 100) drone.Battery = 100;
                 reportProggress();
             }

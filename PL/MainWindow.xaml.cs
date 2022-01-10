@@ -16,13 +16,6 @@ using BL;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    ///        
-    
-
-
     public partial class MainWindow : Window
     {    
         private BLApi.IBL bl;
@@ -32,7 +25,6 @@ namespace PL
             InitializeComponent();
             bl = BLApi.BLFactory.GetBl();
         }
-
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Tools.RemoveCharges(bl);
@@ -53,13 +45,6 @@ namespace PL
                 DragMove();
             }
         }
-
-        //private void move(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (e.ChangedButton == MouseButton.Left)
-        //        this.DragMove();
-        //}
-
     }
 }
 

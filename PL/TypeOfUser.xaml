@@ -266,17 +266,17 @@
                     </TransformGroup>
                 </iconPacks:PackIconMaterial.RenderTransform>
             </iconPacks:PackIconMaterial>
-            <Border x:Name="infob" Visibility="Collapsed" Background="Gray" CornerRadius="28" Opacity="0.5" Margin="246,71,34,64" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2" Grid.RowSpan="2"/>
-            <Label x:Name="info" Visibility="Collapsed" Content="that working by drones." HorizontalAlignment="Left" Margin="262,11,0,34" Width="153" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" />
-            <Label x:Name="infoa" Visibility="Collapsed"  Content="DeliDrone is a delivery system" HorizontalAlignment="Left" Margin="246,105,0,56" Width="170" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" />
-            <Label x:Name="infoc" Visibility="Collapsed" Content="So, what is DeliDrone?" HorizontalAlignment="Left" Margin="269,85,0,2" Width="126" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" />
-            <Border x:Name="contactb" Visibility="Collapsed" Background="Gray" CornerRadius="28" Opacity="0.5" Margin="144,19,53,2" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
-            <Label x:Name="contact" Visibility="Collapsed" Content="Always can contact by:" HorizontalAlignment="Left" Margin="157,41,0,4" Width="136" Grid.Column="1" Grid.Row="2" />
-            <Label x:Name="contacta" Visibility="Collapsed" Content="DeliDrone@gmail.com" HorizontalAlignment="Left" Margin="157,67,0,104" Width="141" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" />
+            <Border x:Name="infob" Visibility="Collapsed" Background="LightBlue" CornerRadius="28" Opacity="0.5" Margin="246,71,10,64" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2" Grid.RowSpan="2"/>
+            <Label x:Name="info" Visibility="Collapsed" Content="based on drones." HorizontalAlignment="Left" Margin="290,10,0,36" Width="153" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" FontFamily="Kristen ITC" />
+            <Label x:Name="infoa" Visibility="Collapsed"  Content="DeliDrone is a delivery system" HorizontalAlignment="Left" Margin="250,105,0,98" Width="190" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" FontFamily="Kristen ITC" />
+            <Label x:Name="infoc" Visibility="Collapsed" Content="So, what is DeliDrone?" HorizontalAlignment="Left" Margin="267,87,0,0" Width="150" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Kristen ITC" />
+            <Border x:Name="contactb" Visibility="Collapsed" Background="LightBlue" CornerRadius="28" Opacity="0.5" Margin="101,15,53,2" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Label x:Name="contact" Visibility="Collapsed" Content="Always can contact by:" HorizontalAlignment="Left" Margin="130,38,0,8" Width="156" Grid.Column="1" Grid.Row="2" FontFamily="Kristen ITC" />
+            <Label x:Name="contacta" Visibility="Collapsed" Content="Deli.Drone.system@gmail.com" HorizontalAlignment="Left" Margin="106,65,0,107" Width="201" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" FontFamily="Kristen ITC" />
 
-            <Label Content="Some Information!" HorizontalAlignment="Left" Margin="228,24,0,52" Width="117" Height="40" Grid.Column="2" Grid.Row="1" />
-            <Label x:Name="conLabel"  Content="Contact us:)" HorizontalAlignment="Left" Margin="302,67,0,10" Width="74" Height="40" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" />
-            <Label Content="Try me!" HorizontalAlignment="Left" Margin="344,89,0,104" Width="52" Height="40" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+            <Label Content="Some Information!" HorizontalAlignment="Left" Margin="228,24,0,52" Width="117" Height="40" Grid.Column="2" Grid.Row="1" FontFamily="Ink Free" />
+            <Label x:Name="conLabel"  Content="Contact us:)" HorizontalAlignment="Left" Margin="302,67,0,10" Width="74" Height="40" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" FontFamily="Ink Free" />
+            <Label Content="Try me!" HorizontalAlignment="Left" Margin="344,89,0,104" Width="52" Height="40" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" FontFamily="Ink Free" />
 
 
         </Grid>

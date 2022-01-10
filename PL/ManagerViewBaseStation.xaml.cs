@@ -15,9 +15,6 @@ using System.Collections.ObjectModel;
 using BLApi;
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for CustomerViewBaseStation.xaml
-    /// </summary>
     public partial class ManagerViewBaseStation : Window
     {
         public ManagerViewBaseStation(BLApi.IBL b, string i)
@@ -34,25 +31,22 @@ namespace PL
             Latitude.DataContext = baseStation.Location;
             Longitude.DataContext = baseStation.Location;
             listDrones.DataContext = drones;
-            //foreach (var item in baseStation.Drones)
-            //    drones.Add(item);
-            if (baseStation.Drones == null)
+            if (baseStation.Drones.Count()==0)
                 listDrones.IsEnabled = false;
             DronesGrid.DataContext = drone;
         }
-        
+
         private BLApi.IBL bl;
         private string id;
         private BO.BaseStation baseStation;
         public event EventHandler updateList;
-        private PO.DronePO drone=new PO.DronePO();
-        private ObservableCollection<BO.DroneInCharge> drones=new ObservableCollection<BO.DroneInCharge>();
+        private PO.DronePO drone = new PO.DronePO();
+        private ObservableCollection<BO.DroneInCharge> drones = new ObservableCollection<BO.DroneInCharge>();
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
         public void convertToPo(PO.DronePO dronePo, BO.Drone d)
-        //function that get the drone and update it to the current values as given from the bl
         {
             dronePo.Battery = (int)d.Battery;
             dronePo.IdNumber = d.IdNumber;
@@ -63,18 +57,18 @@ namespace PL
             dronePo.Latitude = LocationFormat.sexagesimalFormat(d.Location.Latitude, false);
             dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true);
         }
-            private void Update_Click(object sender, RoutedEventArgs e)
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                bl.UpdatingDetailsOfBaseStation(baseStation.IdNumber,baseStation.Name,baseStation.ChargeSlots.ToString());
+                bl.UpdatingDetailsOfBaseStation(baseStation.IdNumber, baseStation.Name, baseStation.ChargeSlots.ToString());
                 MessageBox.Show($"the base station number {baseStation.IdNumber} updated successfully!");
-                    updateList(sender, e);
+                updateList(sender, e);
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"error", MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
         }
@@ -82,24 +76,11 @@ namespace PL
         {
             Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
         }
-
-        private void openDrone(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-
         }
-        private void showTheParcel(object sender, RoutedEventArgs e)
-        {
-            ManagerViewDrone drone = new ManagerViewDrone(bl, ((BO.DroneInCharge)(listDrones.SelectedItem)).IdNumber);
-            drone.ShowDialog();
-        }
-
         private void enableShow(object sender, SelectionChangedEventArgs e)
         {
             DronesGrid.Visibility = Visibility.Visible;

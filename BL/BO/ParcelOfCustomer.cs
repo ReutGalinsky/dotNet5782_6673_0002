@@ -12,10 +12,25 @@ namespace BO
     /// </summary>
     public class ParcelOfCustomer
     {
+        /// <summary>
+        /// the id of the parcel
+        /// </summary>
         public string IdNumber { set; get; }
+        /// <summary>
+        /// the weight category of the parcel
+        /// </summary>
         public WeightCategories Weight { set; get; }
+        /// <summary>
+        /// the priority category of the parcel
+        /// </summary>
         public Priorities Priority { set; get; }
+        /// <summary>
+        /// the parcel state
+        /// </summary>
         public ParcelState State { set; get; }
+        /// <summary>
+        /// the other customer 
+        /// </summary>
         public CustomerOfParcel SourceOrDestinaton { set; get; }
         public override string ToString() { return this.stringProperty(); }
     }

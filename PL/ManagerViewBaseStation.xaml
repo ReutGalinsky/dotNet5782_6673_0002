@@ -10,14 +10,15 @@
         ResizeMode="NoResize"
         Title="ManagerViewBaseStation" Height="440" Width="660">
     <Window.Resources>
-        <DataTemplate x:Key="myDroneInCharge">
+        <DataTemplate x:Key="myDroneInCharge" DataType="local:BO.DroneInCharge">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Path=IdNumber}" Grid.Column="0" FontFamily="Ink Free" ></TextBlock>
-                <TextBlock Text="{Binding Path=Battery}" Grid.Column="1" FontFamily="Ink Free" ></TextBlock>
+                
+                <TextBlock Text="Number:   " Grid.Column="0" FontFamily="Ink Free" ></TextBlock>
+                <TextBlock Text="{Binding Path=IdNumber}" Grid.Column="1" FontFamily="Ink Free" ></TextBlock>
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -90,11 +91,9 @@
         <TextBlock HorizontalAlignment="Center" Text="Latitude:" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" />
         <TextBox Background="{x:Null}" x:Name="Latitude" Text="{Binding Path=Latitude}" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="6" Grid.Column="1" />
         <ComboBox x:Name="listDrones" ItemsSource="{Binding}" ItemTemplate="{StaticResource myDroneInCharge}" HorizontalAlignment="Left" Margin="107,13,0,0" Grid.Row="2" VerticalAlignment="Top" Width="198" Grid.Column="2" Grid.ColumnSpan="2" SelectionChanged="enableShow" Height="24">
-            <Border CornerRadius="50">
-            </Border>
         </ComboBox>
 
-        <Button x:Name="UPDATE" Content="Update" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="1" Grid.ColumnSpan="2" Margin="83,55,109,14" Grid.RowSpan="2" Grid.Row="6">
+        <Button x:Name="UPDATE" Content="Update" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="162,1,30,10" Grid.Row="7" Grid.ColumnSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -116,7 +115,7 @@
             </Button.Template>
         </Button>
 
-        <Button x:Name="CANCEL" Content="Cancel" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.ColumnSpan="2" Margin="108,58,0,11" Grid.RowSpan="2" Grid.Row="6" HorizontalAlignment="Left" Width="140">
+        <Button x:Name="CANCEL" Content="Cancel" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.ColumnSpan="2" Margin="54,58,0,11" Grid.RowSpan="2" Grid.Row="6" HorizontalAlignment="Left" Width="140">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -137,9 +136,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <!-- <ListView x:Name="Drone" Grid.Column="1" Grid.Row="1" Background="{x:Null}" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" Grid.ColumnSpan="2" Margin="166,52,0,10" Grid.RowSpan="3">
-
-        </ListView>-->
         <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="160,-365,-610,85" Panel.ZIndex="-1">
             <Grid.RenderTransform>
                 <RotateTransform Angle="50"/>

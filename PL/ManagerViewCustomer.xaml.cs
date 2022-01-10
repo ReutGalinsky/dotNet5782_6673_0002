@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for ManagerViewCustomer.xaml
-    /// </summary>
     public partial class ManagerViewCustomer : Window
     {
         public ManagerViewCustomer(BLApi.IBL b, string i)
@@ -51,7 +48,6 @@ namespace PL
             parcelPO.Priority = p.Priority;
             parcelPO.Weight = p.Weight;
         }
-
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -76,14 +72,6 @@ namespace PL
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
-
-        private void showTheParcel(object sender, RoutedEventArgs e)
-        {
-
-            ManagerViewParcel parcel = new ManagerViewParcel(bl,((BO.ParcelOfList)(listParcels.SelectedItem)).IdNumber);
-            parcel.ShowDialog();
-        }
-
         private void enableShow(object sender, SelectionChangedEventArgs e)
         {
             ParcelGrid.Visibility = Visibility.Visible;

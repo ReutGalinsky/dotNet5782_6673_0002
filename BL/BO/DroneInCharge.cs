@@ -12,7 +12,13 @@ namespace BO
     /// </summary>
     public class DroneInCharge
     {
+        /// <summary>
+        /// the id of the drone 
+        /// </summary>
         public string IdNumber { set; get; }
+        /// <summary>
+        /// the battery of the drone
+        /// </summary>
         public double Battery { set; get; }
         public override string ToString() {return this.stringProperty();}
     }

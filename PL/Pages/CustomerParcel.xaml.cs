@@ -17,9 +17,6 @@ using System.Collections.ObjectModel;
 
 namespace PL.Pages
 {
-    /// <summary>
-    /// Interaction logic for CustomerParcel.xaml
-    /// </summary>
     public partial class CustomerParcel : Page
     {
         public CustomerParcel(BLApi.IBL b, string i)
@@ -27,7 +24,7 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             id = i;
-            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Sender == id))//create the source for the liseView
+            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Sender == id))
                 listParcels.Add(s);
             ParcelListView.DataContext = listParcels;
             update += updated;
@@ -38,7 +35,7 @@ namespace PL.Pages
 
         private BLApi.IBL bl;
         string id;
-        private BO.ParcelOfList selected;//selected item that will be send to the new window
+        private BO.ParcelOfList selected;
         private ObservableCollection<BO.ParcelOfList> listParcels = new ObservableCollection<BO.ParcelOfList>();
         PropertyGroupDescription groupState = new PropertyGroupDescription("ParcelState");
         PropertyGroupDescription groupWeight = new PropertyGroupDescription("Weight");
@@ -47,7 +44,7 @@ namespace PL.Pages
         {
             selected = (BO.ParcelOfList)ParcelListView.SelectedItem;
         }
-        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+        private void Action(object sender, MouseButtonEventArgs e) 
         {
             if (selected != null)
             {
@@ -55,7 +52,7 @@ namespace PL.Pages
                 showParcel.Show();
             }
         }
-        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+        private void updated(object sender, EventArgs e)
         {            listParcels.Clear();
             foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Sender == id))//create the source for the liseView
                 listParcels.Add(s);

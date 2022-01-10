@@ -18,15 +18,14 @@ namespace PL
     /// Interaction logic for CustomerEntry.xaml
     /// </summary>
     public partial class CustomerEntry : Window
-    {
+    {       
+        private BLApi.IBL bl;
+
         public CustomerEntry(BLApi.IBL b)
         {
             InitializeComponent();
             bl = b;
-
         }
-        private BLApi.IBL bl;
-
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -50,7 +49,7 @@ namespace PL
                 }
                 else
                 {
-                    MessageBox.Show($"there is no customer with the id of {User.UserName}");
+                    MessageBox.Show($"there is no customer with the id of {User.UserName} and the entered password");
                 }
             }
             catch (Exception ex)
@@ -97,19 +96,16 @@ namespace PL
             textPassword.Visibility = Visibility.Visible;
             password.Visibility = Visibility.Collapsed;
             textPassword.Focus();
-
         }
         private void focusUser(object sender, RoutedEventArgs e)
         {
             if (user.Text == "Username:")
                 user.Text = "";
-
         }
         private void Forget_Click(object sender, RoutedEventArgs e)
         {
-            ForgetPassword forgetPassword = new ForgetPassword(bl);
+            ForgetPassword forgetPassword = new ForgetPassword();
             forgetPassword.Show();
-            this.Close();
         }
         private void Account_Click(object sender, RoutedEventArgs e)
         {

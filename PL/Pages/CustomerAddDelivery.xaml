@@ -34,7 +34,7 @@
     <Grid>
         <Border Background="LightBlue" CornerRadius="10" Opacity="0.5" Margin="60,53,60,113" RenderTransformOrigin="0.5,0.5"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="159,74,0,0" Text="Destination:" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="44" FontSize="24" FontFamily="Yu Gothic Medium"/>
+        <TextBlock HorizontalAlignment="Left" Margin="151,74,0,0" Text="Destination:" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="44" FontSize="24" FontFamily="Yu Gothic Medium"/>
         <TextBlock HorizontalAlignment="Left" Margin="150,169,0,0" Text="Parcel Priority:" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677" FontSize="24" FontFamily="Yu Gothic Medium" Width="174" Height="32"/>
         <ComboBox x:Name="Priority" HorizontalAlignment="Left" Text="{Binding Path=Phone}"  VerticalAlignment="Top" Width="200" Height="25" Margin="336,175,0,0" SelectionChanged="focus"/>
         <TextBlock HorizontalAlignment="Left" Margin="150,122,0,0" Text="Parcel Weight:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Yu Gothic Medium" RenderTransformOrigin="0.261,0.537" Width="169" Height="32"/>

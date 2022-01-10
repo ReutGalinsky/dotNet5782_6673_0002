@@ -7,11 +7,9 @@ using System.Runtime.CompilerServices;
 using BO;
 namespace BL
 {
-    /// <summary>
-    /// all possible actions on base stations 
-    /// </summary>
     internal partial class BL : BLApi.IBL
     {
+        #region RemoveBaseStation
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void RemoveBaseStation(string number)
         {
@@ -19,7 +17,6 @@ namespace BL
             {
                 lock (dal)
                 {
-
                     var baseStation = GetBaseStation(number);
                     if (baseStation.Drones.Count() != 0)
                         throw new DeletingException("can't delete base station with charged drones");
@@ -31,14 +28,12 @@ namespace BL
                 throw new DeletingException(e.Message, e);
             }
         }
+        #endregion
+
         #region AddBaseStation
-        /// <summary>
-        /// adding a new base station
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddBaseStation(BO.BaseStation baseStationToAdd)
         {
-            //validation
             if (baseStationToAdd.Name == "")
                 throw new AddingProblemException("invalid Name of base station: you didn't enter a name");
             int tempInteger;
@@ -51,33 +46,27 @@ namespace BL
             if (baseStationToAdd.ChargeSlots < 0)
                 throw new AddingProblemException($"{baseStationToAdd.ChargeSlots} is illegal number of charge slots");
 
-            //add
             try
             {
                 lock (dal)
                 {
-
                     DO.BaseStation station = (DO.BaseStation)baseStationToAdd.CopyPropertiesToNew(typeof(DO.BaseStation));
-                    station.Latitude = baseStationToAdd.Location.Latitude;//add the location
-                    station.Longitude = baseStationToAdd.Location.Longitude;//add the location
+                    station.Latitude = baseStationToAdd.Location.Latitude;
+                    station.Longitude = baseStationToAdd.Location.Longitude;
                     dal.AddBaseStation(station);
                 }
             }
             catch (Exception ex)
-            { throw new AddingProblemException($"Can't add base station with the id {baseStationToAdd.IdNumber}", ex); }
+            { throw new AddingProblemException(ex.Message, ex); }
         }
         #endregion
 
         #region GetBaseStations
-        /// <summary>
-        /// return all base stations 
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.BaseStationToList> GetBaseStations()
         {
             lock (dal)
             {
-
                 var list = from item in dal.GetBaseStations() select GetBaseStationOfList(item.IdNumber);
                 return list;
             }
@@ -85,19 +74,14 @@ namespace BL
         #endregion   
 
         #region UpdatingDetailsOfBaseStation
-        /// <summary>
-        /// updating a single base station
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdatingDetailsOfBaseStation(string id, string Name, string numberOfCharge)
         {
             DO.BaseStation tempBaseStation;
             try
-
-            {//initialized
+            {
                 lock (dal)
                 {
-
                     tempBaseStation = dal.GetBaseStation(id);
                 }
             }
@@ -108,24 +92,18 @@ namespace BL
             BO.BaseStation baseStation = (BO.BaseStation)tempBaseStation.CopyPropertiesToNew(typeof(BO.BaseStation));
             baseStation.Location = tempBaseStation.GetLocation();
 
-            //validation
             if (Name != "") baseStation.Name = Name;
             int tempInteger = 0;
-
             if (numberOfCharge != "" && (int.TryParse(numberOfCharge, out tempInteger) == false)||tempInteger<0)
                 throw new UpdatingException($"{numberOfCharge} is an illegal number for charging drones");
-   
-            if(baseStation.Drones!=null&&baseStation.Drones.Count()>tempInteger)
+               if(baseStation.Drones!=null && baseStation.Drones.Count()>tempInteger)
                 throw new UpdatingException($"{numberOfCharge} is an illegal number for this base station");
-
             baseStation.ChargeSlots = tempInteger;
 
-            //update
             try
             {
                 lock (dal)
                 {
-
                     DO.BaseStation station = (DO.BaseStation)baseStation.CopyPropertiesToNew(typeof(DO.BaseStation));
                     station.Latitude = baseStation.Location.Latitude;
                     station.Longitude = baseStation.Location.Longitude;
@@ -133,16 +111,13 @@ namespace BL
                 }
             }
             catch (Exception e)
-            { throw new UpdatingException($"can't update the base station with id {id}", e); }
+            { throw new UpdatingException(e.Message, e); }
         }
 
 
         #endregion
 
         #region GetBaseStation
-        /// <summary>
-        /// return a single base station
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.BaseStation GetBaseStation(string id)
         {
@@ -150,7 +125,6 @@ namespace BL
             {
                 lock (dal)
                 {
-
                     DO.BaseStation station = dal.GetBaseStation(id);
                     BO.BaseStation getBaseStation = (BO.BaseStation)station.CopyPropertiesToNew(typeof(BO.BaseStation));
                     getBaseStation.Location = station.GetLocation();
@@ -164,10 +138,8 @@ namespace BL
         }
         #endregion
 
+
         #region GetAllBaseStationsBy
-        /// <summary>
-        /// base station predicate
-        /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.BaseStationToList> GetAllBaseStationsBy(Predicate<BO.BaseStationToList> condition)
         {
@@ -177,27 +149,29 @@ namespace BL
             return list;
         }
         #endregion
-
-        //********return inner objects***********
         #region GetDroneInCharge
+
         /// <summary>
-        /// private function. return a single charging drone
+        /// returning drone as 'drone in charge'
         /// </summary>
+        /// <param name="droneId"> the drone id</param>
+        /// <returns></returns>
+
         private BO.DroneInCharge GetDroneInCharge(string droneId)
         {
             return (BO.DroneInCharge)Drones.FirstOrDefault(x => x.IdNumber == droneId).CopyPropertiesToNew(typeof(BO.DroneInCharge));
         }
         #endregion
-
         #region GetBaseStationOfList
         /// <summary>
-        /// private function: viewing a single base station
+        /// returning base station as 'base station to list'
         /// </summary>
+        /// <param name="id">the id of the base station</param>
+        /// <returns></returns>
         private BO.BaseStationToList GetBaseStationOfList(string id)
         {
             lock (dal)
             {
-
                 BO.BaseStationToList b = (BO.BaseStationToList)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(BO.BaseStationToList));
                 b.FullChargeSlots = (from item in dal.GetDroneCharges() where (item.StationId == id) select item).Count();
                 return b;

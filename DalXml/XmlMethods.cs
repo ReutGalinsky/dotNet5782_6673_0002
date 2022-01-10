@@ -12,30 +12,54 @@ namespace Dal
 {
     public static class XmlMethods
     {
+        #region SaveXelement
+        /// <summary>
+        /// function that save an Xelement in xml file
+        /// </summary>
+        /// <param name="FileName">the name of the file we want to save</param>
+        /// <param name="root">the main element</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public static void SaveToXml(string FileName, XElement root)
         {
             if (FileName != null)
                 root.Save(FileName);
-            else { }
-            //
+            else 
+            {
+                throw new DO.AccessToDataBaseException("Can't save the Xelement to the file");
+            }
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
+        #endregion
 
+        #region LoadXelement
+        /// <summary>
+        /// load the main element from xml file
+        /// </summary>
+        /// <param name="FileName">the file name</param>
+        /// <returns></returns>
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static XElement LoadFromXml(string FileName)
         {
             try
             {
-
                 XElement root = XElement.Load(FileName);
                 return root;
             }
             catch (Exception)
-            { //
-                throw;
+            {
+                throw new DO.AccessToDataBaseException("Can't load the Xelement from the file");
             }
 
         }
+        #endregion
+
+        #region LoadList
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T">the type of the list elements</typeparam>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public static List<T> LoadListFromXMLSerializer<T>(string filePath)
@@ -56,9 +80,18 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                throw;
+                throw new DO.AccessToDataBaseException("Can't load the list from the file");
             }
         }
+        #endregion
+
+        #region SaveList
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T">the type of the list elements</typeparam>
+        /// <param name="list">the list to save</param>
+        /// <param name="filePath">the file name</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public static void SaveListToXMLSerializer<T>(List<T> list, string filePath)
@@ -72,9 +105,9 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                throw;
+                throw new DO.AccessToDataBaseException("Can't save the list to the file");
             }
         }
-
+        #endregion
     }
 }

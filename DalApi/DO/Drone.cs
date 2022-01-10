@@ -11,8 +11,17 @@ namespace DO
     /// </summary>
     public struct Drone
     {
+        /// <summary>
+        /// the id of the drone
+        /// </summary>
         public string IdNumber { get; set; }
+        /// <summary>
+        /// the model of the drone
+        /// </summary>
         public string Model { get; set; }
+        /// <summary>
+        /// the max weight that the drone can deliver
+        /// </summary>
         public WeightCategories MaxWeight { get; set; }
         public override string ToString()
         {

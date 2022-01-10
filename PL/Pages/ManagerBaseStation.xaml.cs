@@ -17,9 +17,6 @@ using System.Collections.ObjectModel;
 
 namespace PL.Pages
 {
-    /// <summary>
-    /// Interaction logic for ManagerBaseStation.xaml
-    /// </summary>
     public partial class ManagerBaseStation : Page
     {
         public ManagerBaseStation(BLApi.IBL b)
@@ -33,7 +30,6 @@ namespace PL.Pages
             StationsListView.DataContext = liststations;
             chargeSlot.SelectedItem = chargeSlot.Items[0];
             update += updated;
-
         }
 
         public ObservableCollection<BO.BaseStationToList> liststations = new ObservableCollection<BO.BaseStationToList>();
@@ -41,7 +37,7 @@ namespace PL.Pages
         private BO.BaseStationToList selected;
         public EventHandler update;
        
-        private void updated(object sender, EventArgs e)//the event that will update the details of the listView
+        private void updated(object sender, EventArgs e)
         {
             chargeSlot.SelectedItem = chargeSlot.Items[0];
             liststations.Clear();
@@ -50,7 +46,7 @@ namespace PL.Pages
                 liststations.Add(item);
             }
         }
-        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+        private void Action(object sender, MouseButtonEventArgs e)
         {
             if (selected != null)
             {
@@ -60,7 +56,7 @@ namespace PL.Pages
                 selected = null;
             }
         }
-        private void changeFilterCharge(object sender, SelectionChangedEventArgs e)
+        private void changeFilterCharge(object sender,SelectionChangedEventArgs e)
         {
             var comboBoxItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
             liststations.Clear();
@@ -78,7 +74,6 @@ namespace PL.Pages
                     foreach (var item in bl.GetBaseStations())
                         liststations.Add(item);
                     break;
-
             }
         }
         private void selectionChange(object sender, SelectionChangedEventArgs e)
@@ -99,29 +94,15 @@ namespace PL.Pages
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message + "\n you shuld try again later", "error", MessageBoxButton.OK, MessageBoxImage.Hand);
-
                 }
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
-            //PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChargeSlots");
-            //view.GroupDescriptions.Remove(groupDescription);
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
-            view.GroupDescriptions.Clear() ;
-
-           // update(sender, e);
-        }
-
         private void GroupAmount(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChargeSlots");
             view.GroupDescriptions.Add(groupDescription);
         }
-
         private void cancelGroup(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);

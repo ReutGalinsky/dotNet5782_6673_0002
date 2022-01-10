@@ -12,11 +12,29 @@ namespace BO
     /// </summary>
     public class Customer
     {
+        /// <summary>
+        /// the id of the customer
+        /// </summary>
         public string IdNumber { set; get; }
+        /// <summary>
+        /// the name of the customer
+        /// </summary>
         public string Name { set; get; }
+        /// <summary>
+        /// the phone number of the customer
+        /// </summary>
         public string Phone { set; get; }
+        /// <summary>
+        /// the location of the customer
+        /// </summary>
         public Location Location { set; get; }
+        /// <summary>
+        /// the parcels that the customer send
+        /// </summary>
         public List<ParcelOfCustomer> FromCustomer { set; get; }
+        /// <summary>
+        /// the parcels that send to the customer
+        /// </summary>
         public List<ParcelOfCustomer> ToCustomer { set; get; }
         public override string ToString()
         {

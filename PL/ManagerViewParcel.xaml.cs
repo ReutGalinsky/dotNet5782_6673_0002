@@ -15,9 +15,6 @@ using System.Globalization;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for ManagerViewParcel.xaml
-    /// </summary>
     public partial class ManagerViewParcel : Window
     {
         private BLApi.IBL bl;
@@ -26,7 +23,6 @@ namespace PL
         private BO.Customer sender;
         private BO.Customer geter;
         private BO.Drone drone;
-
 
         public ManagerViewParcel(BLApi.IBL b, string i)
         {
@@ -66,27 +62,10 @@ namespace PL
         {
             this.Close();
         }
-
-        //private void openDrone(object sender, RoutedEventArgs e)
-        //{
-        //    ManagerViewDrone drone = new ManagerViewDrone(bl, parcel.Drone.IdNumber, true);
-        //    drone.ShowDialog();
-        //}
-
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-        }
-        private void openGeter(object sender, RoutedEventArgs e)
-        {
-            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.GeterCustomer.IdNumber);
-            customer.ShowDialog();
-        }
-        private void openSender(object sender, RoutedEventArgs e)
-        {
-            ManagerViewCustomer customer = new ManagerViewCustomer(bl, parcel.SenderCustomer.IdNumber);
-            customer.ShowDialog();
         }
     }
 }

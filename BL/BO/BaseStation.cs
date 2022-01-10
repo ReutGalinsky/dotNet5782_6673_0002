@@ -12,10 +12,25 @@ namespace BO
     /// </summary>
     public class BaseStation
     {
+        /// <summary>
+        /// the id of the station
+        /// </summary>
         public string IdNumber { set; get; }
+        /// <summary>
+        /// the name of the station
+        /// </summary>
         public string Name { set; get; }
+        /// <summary>
+        /// the availible slots of the station
+        /// </summary>
         public int ChargeSlots { set; get; }
+        /// <summary>
+        /// the location of the station
+        /// </summary>
         public Location Location { set; get; }
+        /// <summary>
+        /// the drones that being charged in the station
+        /// </summary>
         public List<DroneInCharge> Drones { set; get; }
         public override string ToString()
         {

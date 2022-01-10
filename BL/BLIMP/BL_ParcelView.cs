@@ -13,28 +13,22 @@ namespace BL
         #region GetParcel
         [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Parcel GetParcel(string id)
-        //return single parcel
         {
             try
             {
                 lock (dal)
                 {
-
                     DO.Parcel parcelDO = dal.GetParcel(id);
                     BO.Parcel parcel = (BO.Parcel)parcelDO.CopyPropertiesToNew(typeof(BO.Parcel));
                     parcel.SenderCustomer = GetCustomerOfParcel(parcelDO.Sender);
                     parcel.GeterCustomer = GetCustomerOfParcel(parcelDO.Geter);
                     parcel.Drone = parcelDO.DroneId != null ? GetDroneInParcel(parcelDO.DroneId) : null;
-               
-                //if (parcelDO.DroneId != null)
-                //{
-                //    parcel.Drone = GetDroneInParcel(parcelDO.DroneId);//return the drone that match this parcel 
-                //}
-                return parcel; }
+                    return parcel;
+                }
             }
             catch (Exception e)
             {
-                throw new GettingProblemException("the pacrel is not exist", e);
+                throw new GettingProblemException(e.Message, e);
             }
         }
         #endregion
@@ -42,12 +36,10 @@ namespace BL
         #region GetParcels
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.ParcelOfList> GetParcels()
-        //function that return all the parcels for view
         {
             lock (dal)
             {
-
-                var list = from item in dal.GetParcels() select GetPOL(item.IdNumber);
+                var list = from item in dal.GetParcels() select GetParcelOfList(item.IdNumber);
                 return list;
             }
         }
@@ -64,36 +56,33 @@ namespace BL
         }
         #endregion
 
-        //********return inner objects********
+
+        #region GetDroneInParcel
+        /// <summary>
+        /// returning the drone as 'drone in parcel'
+        /// </summary>
+        /// <param name="id">the drone id</param>
+        /// <returns></returns>
         private BO.DroneInParcel GetDroneInParcel(string id)
-        //private function that return object of "DroneInParcel"
         {
-            BO.Drone drone = GetDrone(id);//get the drone
+            BO.Drone drone = GetDrone(id);
             BO.DroneInParcel droneInParcel = (BO.DroneInParcel)drone.CopyPropertiesToNew(typeof(BO.DroneInParcel));
             droneInParcel.Location = drone.Location.GetLocation();
-            //droneInParcel.Location = new Location();//add the location
-            //droneInParcel.Location.Latitude = d.Location.Latitude;
-            //droneInParcel.Location.Longitude = d.Location.Longitude;
             return droneInParcel;
         }
-        private BO.ParcelOfList GetPOL(string id)
-        //private function that return object of ParcelOfList
+        #endregion
+        #region GetParcelOfList
+        /// <summary>
+        /// returning the parcel as 'parcel of list'
+        /// </summary>
+        /// <param name="id">the parcel id</param>
+        /// <returns></returns>
+        private BO.ParcelOfList GetParcelOfList(string id)
         {
             lock (dal)
             {
-
                 DO.Parcel parcel = dal.GetParcel(id);
                 BO.ParcelOfList parcelOfList = (BO.ParcelOfList)parcel.CopyPropertiesToNew(typeof(BO.ParcelOfList));
-                //if (parcel.MatchForDroneTime == null)
-                //    parcelOfList.ParcelState = ParcelState.Define;//define the parcel state
-                //else
-                //    if (parcel.CollectingDroneTime == null)
-                //    parcelOfList.ParcelState = ParcelState.match;
-                //else
-                //    if (parcel.ArrivingDroneTime == null)
-                //    parcelOfList.ParcelState = ParcelState.pick;
-                //else
-                //    parcelOfList.ParcelState = ParcelState.supply;
                 parcelOfList.ParcelState = parcel.MatchForDroneTime switch
                 {
                     null => ParcelState.Define,
@@ -110,10 +99,14 @@ namespace BL
                 return parcelOfList;
             }
         }
+        #endregion
+
+        #region Simulator
         public void Simulator(string id, Action updatePl, Func<bool> checkStop)
         {
-            DroneSimulator simulator = new DroneSimulator(this,id, updatePl, checkStop);
+            DroneSimulator simulator = new DroneSimulator(this, id, updatePl, checkStop);
         }
+        #endregion
 
     }
 }

@@ -12,8 +12,17 @@ namespace BO
     /// </summary>
     public class DroneInParcel
     {
+        /// <summary>
+        /// the id of the drone
+        /// </summary>
         public string IdNumber { set; get; }
+        /// <summary>
+        /// the battery of the drone
+        /// </summary>
         public double Battery { set; get; }
+        /// <summary>
+        /// the location of the drone
+        /// </summary>
         public Location Location { set; get; }
         public override string ToString() {return this.stringProperty();}
     }

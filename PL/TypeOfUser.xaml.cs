@@ -32,15 +32,13 @@ namespace PL
         private void Manager_Click(object sender, RoutedEventArgs e)
         {
             ManagerEntry entry = new ManagerEntry(bl);
-            //ManagerPage entry = new ManagerPage(bl);
             entry.Show();
             this.Close();
         }
 
         private void Customer_Click(object sender, RoutedEventArgs e)
         {
-            //CustomerEntry entry = new CustomerEntry(bl);//רק לצורך הדוגמא
-            CustomerPage entry = new CustomerPage(bl, "8");
+            CustomerEntry entry = new CustomerEntry(bl);
             entry.Show();
             this.Close();
         }
@@ -65,7 +63,6 @@ namespace PL
             play.Visibility = Visibility.Visible;
             conLabel.Visibility = Visibility.Visible;
             conArr.Visibility = Visibility.Visible;
-
             MediaElement1.IsMuted = true;
             MediaElement1.Visibility = Visibility.Hidden;
         }
@@ -90,13 +87,14 @@ namespace PL
                 infob.Visibility = Visibility.Hidden;
                 infoa.Visibility = Visibility.Hidden;
                 info.Visibility = Visibility.Hidden;
-
             }
-            else {
+            else
+            {
                 info.Visibility = Visibility.Visible;
                 infoc.Visibility = Visibility.Visible;
                 infob.Visibility = Visibility.Visible;
-                infoa.Visibility = Visibility.Visible; }
+                infoa.Visibility = Visibility.Visible;
+            }
         }
         private void Heart_Click(object sender, RoutedEventArgs e)
         {
@@ -109,32 +107,16 @@ namespace PL
             else
             {
                 contactb.Visibility = Visibility.Visible;
-                contacta.Visibility = Visibility.Visible; 
-            contact.Visibility = Visibility.Visible;
+                contacta.Visibility = Visibility.Visible;
+                contact.Visibility = Visibility.Visible;
             }
-    } 
+        }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
         }
-      
-        private void PackIconMaterial_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            info.Visibility = Visibility.Visible;
-            infob.Visibility = Visibility.Visible;
-            infoc.Visibility = Visibility.Visible;
-
-        }
-        private void PackIconMaterial_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
-        {
-            contact.Visibility = Visibility.Visible;
-            contactb.Visibility = Visibility.Visible;
-            contacta.Visibility = Visibility.Visible;
-
-        }
-
     }
 }
 

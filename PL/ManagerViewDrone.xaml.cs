@@ -40,8 +40,10 @@ namespace PL
             WeightParcel.DataContext = parcel;
             PriorityParcel.DataContext = parcel;
             StateParcel.DataContext = parcel;
+            batteryRectangle.DataContext = drone;
         }
         private BLApi.IBL bl;
+        private bool closeRequest=false;
         private PO.ParcelPO parcel=new PO.ParcelPO();
         private bool isClosed = true;
         private string id;
@@ -84,11 +86,6 @@ namespace PL
                 }
             }
         }
-        /// <summary>
-        /// ///להוסיפ שורה של כל החבילות
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void convertToPo(PO.DronePO dronePo, BO.Drone d)
         //function that get the drone and update it to the current values as given from the bl
         {
@@ -112,11 +109,21 @@ namespace PL
                 ParcelGrid.Visibility = Visibility.Collapsed;
 
             }
+
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            closeRequest = true; 
             updateList(sender, e);
-            this.Close();
+            if(worker!=null&&worker.IsBusy==true)
+            {
+                worker.CancelAsync();
+            }
+            else
+            {
+                this.Close();
+            }
+           // this.Close();
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
@@ -129,12 +136,7 @@ namespace PL
             {
                 MessageBox.Show($"the model {Model.Text} is illegal. please enter again", "Model Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-        //private void move(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (e.ChangedButton == MouseButton.Left)
-        //        this.DragMove();
-        //}
+        }        
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -257,6 +259,12 @@ namespace PL
         private bool Cancel() => worker.CancellationPending;
         private void StartSimulation_Click(object sender, RoutedEventArgs e)
         {
+            releaseButton.Visibility = Visibility.Collapsed;
+            chargingButton.Visibility = Visibility.Collapsed;
+            pickButton.Visibility = Visibility.Collapsed;
+            suppltingButton.Visibility = Visibility.Collapsed;
+            shippingButton.Visibility = Visibility.Collapsed;
+            Auto.Visibility = Visibility.Collapsed;
             Auto.Visibility = Visibility.Collapsed;
             Manual.Visibility = Visibility.Visible;
             worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
@@ -277,12 +285,14 @@ namespace PL
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            updateList(sender, e);
             convertToPo(drone, bl.GetDrone(id));
         }
         private void Complited(object sender, RunWorkerCompletedEventArgs e)
         {
             worker = null;
-           
+            if (closeRequest == true)
+                this.Close();
         }
         private void stop(object sender, RoutedEventArgs e)
         {
@@ -292,6 +302,7 @@ namespace PL
             }
             Auto.Visibility = Visibility.Visible;
             Manual.Visibility = Visibility.Collapsed;
+            assignVisibility();
 
         }
     }

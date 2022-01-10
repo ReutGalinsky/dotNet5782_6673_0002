@@ -43,19 +43,16 @@ namespace PL.Pages
                         updateList(sender, e);
                         return;
                     }
-
                     MessageBox.Show("illegal new password");
                     return;
                 }
                 MessageBox.Show("The Old Password Is Not Correct, Please Try Again");
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void focus(object sender, RoutedEventArgs e)
         {
             if ((sender as TextBox).Text == "Old Password:" || (sender as TextBox).Text == "New Password:")

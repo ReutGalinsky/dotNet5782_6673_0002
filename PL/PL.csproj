@@ -20,7 +20,7 @@
   <ItemGroup>
     <None Remove="customer.png" />
     <None Remove="key.jpg" />
-    <None Remove="logo.png" />
+    <None Remove="Logo.png" />
     <None Remove="logo.png.png" />
     <None Remove="manager.png" />
     <None Remove="new.png" />
@@ -85,6 +85,7 @@
 
   <ItemGroup>
     <Resource Include="customer.png" />
+    <Resource Include="Logo.png" />
     <Resource Include="Pages\Images\Customer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
