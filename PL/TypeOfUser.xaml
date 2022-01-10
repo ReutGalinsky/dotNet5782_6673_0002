@@ -77,7 +77,6 @@
                 </Button.Template>
             </Button>
             <TextBlock Text="Welcome To Deli-Drone" Margin="88,61,0,106" FontWeight="Light" FontFamily="/Fonts/regular" HorizontalAlignment="Left" FontSize="50" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1" Width="548"/>
-            <iconPacks:PackIconMaterial Kind="Information" Foreground="Black" Opacity="0.5" Width="30" Height="30" Grid.Row="1" Grid.Column="2" Margin="137,20,0,0" />
             <Button x:Name="stop" Click="Stop_Click" Visibility="Collapsed" Foreground="Transparent" Grid.Row="3" Grid.Column="3" Margin="9,24,31,31">
                 <Button.Content>
                     <iconPacks:PackIconMaterial Kind="StopCircle" Width="30" Foreground="Black" Height="30" RenderTransformOrigin="0.5,0.5" />
@@ -100,9 +99,9 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="play" Click="Play_Click" Foreground="White" Grid.Row="3" Grid.Column="3" Margin="10,16,31,38">
+            <Button x:Name="play" Click="Play_Click" Foreground="Transparent" Grid.Row="3" Grid.Column="3" Margin="2,6,30,31">
                 <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="PlayCircle" Width="30" Foreground="Black" Height="29" />
+                    <iconPacks:PackIconMaterial Kind="PlayCircle" Width="34" Foreground="Black" Height="34" HorizontalAlignment="Center" />
                 </Button.Content>
                 <Button.Style>
                     <Style TargetType="Button">
@@ -123,7 +122,52 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <iconPacks:PackIconMaterial Kind="HeartCircle" Foreground="Black" Opacity="0.5" Width="30" Height="30" Grid.Row="2" Grid.Column="2" Margin="71,59,0,0" />
+            <Button x:Name="plinfoay" Click="Information_Click" Foreground="Transparent" Grid.Column="2" Margin="132,18,140,53" Grid.RowSpan="2" >
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="information" Width="34" Foreground="Black" Height="34" HorizontalAlignment="Center" />
+                </Button.Content>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="30" Background="{TemplateBinding Background}" Margin="0,34,29,0">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="heart" Click="Heart_Click" Foreground="Transparent" Grid.Row="2" Grid.Column="2" Margin="63,13,208,8"  >
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="HeartCircle" Width="34" Foreground="Black" Height="34" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button.Content>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="30" Background="{TemplateBinding Background}" Margin="0,34,29,0">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
             <StackPanel Orientation="Horizontal" Height="80" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="570">
                 <Button Content="I'm A Customer" Click="Customer_Click" Foreground="White" FontSize="28" FontWeight="Medium" Width="200" Margin="50,0,0,0">
@@ -192,44 +236,47 @@
             </Grid>
             <Label Content="Label" Grid.Column="3" HorizontalAlignment="Left" Margin="280,34,0,0" Grid.Row="3" VerticalAlignment="Top"/>
 
-            <iconPacks:PackIconMaterial x:Name="conArr" Kind="ArrowLeftTopBold" Foreground="Black" Opacity="0.5" Width="30" Height="30" Margin="41,87,0,0" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" >
+            <iconPacks:PackIconMaterial x:Name="conArr" Kind="CallReceived" Foreground="Black" Opacity="0.5" Width="30" Height="30" Margin="29,67,0,0" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.5,0.5" >
                 <iconPacks:PackIconMaterial.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="127.899"/>
+                        <RotateTransform Angle="226.318"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </iconPacks:PackIconMaterial.RenderTransform>
             </iconPacks:PackIconMaterial>
-            <iconPacks:PackIconMaterial Kind="ArrowLeftTopBold" Foreground="Black" Opacity="0.5" Width="44" Height="32" Margin="174,5,0,0" Grid.Column="2" Grid.Row="1" RenderTransformOrigin="0.5,0.5"  >
+            <iconPacks:PackIconMaterial Kind="CallReceived" Foreground="Black" Opacity="0.5" Width="72" Height="32" Margin="163,21,0,0" Grid.Column="2" Grid.Row="1" RenderTransformOrigin="0.5,0.5"  >
                 <iconPacks:PackIconMaterial.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-36.193"/>
+                        <RotateTransform Angle="46.075"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </iconPacks:PackIconMaterial.RenderTransform>
             </iconPacks:PackIconMaterial>
-            <iconPacks:PackIconMaterial Kind="ArrowLeftTopBold" Foreground="Black" Opacity="0.5" Width="30" Height="30" Margin="325,12,0,0" Grid.Column="2" Grid.Row="3" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" >
+            <iconPacks:PackIconMaterial Kind="CallReceived" Foreground="Black" Opacity="0.5" Width="27" Height="30" Margin="8,6,0,0" Grid.Column="3" Grid.Row="3" RenderTransformOrigin="0.5,0.5" >
                 <iconPacks:PackIconMaterial.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-144.441"/>
+                        <RotateTransform Angle="-42.624"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </iconPacks:PackIconMaterial.RenderTransform>
             </iconPacks:PackIconMaterial>
-            <Border x:Name="infob" Background="Gray" Visibility="Hidden" CornerRadius="28" Opacity="0.5" Margin="256,7,41,11" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2"/>
-            <Label x:Name="info" Visibility="Hidden" Content="so, what is DeliDrone? DeliDrone is a system that sending parcels by drone fast and reliable:)" HorizontalAlignment="Left" Margin="267,23,0,21" Width="126" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" />
-            <Border x:Name="contactb" Visibility="Hidden" Background="Gray" CornerRadius="28" Opacity="0.5" Margin="179,32,18,105" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"/>
-            <Label x:Name="contact" Visibility="Hidden" Content="Always can contact us: DeliDrone@gmail.com:)" HorizontalAlignment="Left" Margin="189,41,0,4" Width="126" Grid.Column="1" Grid.Row="2" />
+            <Border x:Name="infob" Visibility="Collapsed" Background="Gray" CornerRadius="28" Opacity="0.5" Margin="246,71,34,64" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2" Grid.RowSpan="2"/>
+            <Label x:Name="info" Visibility="Collapsed" Content="that working by drones." HorizontalAlignment="Left" Margin="262,11,0,34" Width="153" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" />
+            <Label x:Name="infoa" Visibility="Collapsed"  Content="DeliDrone is a delivery system" HorizontalAlignment="Left" Margin="246,105,0,56" Width="170" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            <Label x:Name="infoc" Visibility="Collapsed" Content="So, what is DeliDrone?" HorizontalAlignment="Left" Margin="269,85,0,2" Width="126" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" />
+            <Border x:Name="contactb" Visibility="Collapsed" Background="Gray" CornerRadius="28" Opacity="0.5" Margin="144,19,53,2" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="1"/>
+            <Label x:Name="contact" Visibility="Collapsed" Content="Always can contact by:" HorizontalAlignment="Left" Margin="157,41,0,4" Width="136" Grid.Column="1" Grid.Row="2" />
+            <Label x:Name="contacta" Visibility="Collapsed" Content="DeliDrone@gmail.com" HorizontalAlignment="Left" Margin="157,67,0,104" Width="141" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" />
 
-            <Label Content="Information" HorizontalAlignment="Left" Margin="180,24,0,52" Width="78" Height="40" Grid.Column="2" Grid.Row="1" />
-            <Label x:Name="conLabel"  Content="Contact us" HorizontalAlignment="Left" Margin="340,77,0,116" Width="74" Height="40" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" />
-            <Label Content="Try me" HorizontalAlignment="Left" Margin="317,96,0,97" Width="52" Height="40" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            <Label Content="Some Information!" HorizontalAlignment="Left" Margin="228,24,0,52" Width="117" Height="40" Grid.Column="2" Grid.Row="1" />
+            <Label x:Name="conLabel"  Content="Contact us:)" HorizontalAlignment="Left" Margin="302,67,0,10" Width="74" Height="40" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" />
+            <Label Content="Try me!" HorizontalAlignment="Left" Margin="344,89,0,104" Width="52" Height="40" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" />
 
 
         </Grid>

@@ -20,7 +20,7 @@ namespace PL
     /// Interaction logic for TypeOfUser.xaml
     /// </summary>
     public partial class TypeOfUser : Window
-    {   
+    {
         private BLApi.IBL bl;
 
         public TypeOfUser(BLApi.IBL b)
@@ -66,7 +66,7 @@ namespace PL
             conLabel.Visibility = Visibility.Visible;
             conArr.Visibility = Visibility.Visible;
 
-            MediaElement1.IsMuted=true;
+            MediaElement1.IsMuted = true;
             MediaElement1.Visibility = Visibility.Hidden;
         }
         private void Play_Click(object sender, RoutedEventArgs e)
@@ -75,31 +75,64 @@ namespace PL
             conArr.Visibility = Visibility.Collapsed;
             play.Visibility = Visibility.Collapsed;
             stop.Visibility = Visibility.Visible;
+            contacta.Visibility = Visibility.Hidden;
+            contactb.Visibility = Visibility.Hidden;
+            contact.Visibility = Visibility.Hidden;
             MediaElement1.IsMuted = false;
             MediaElement1.Visibility = Visibility.Visible;
             MediaElement1.Source = new Uri(@"C:\Users\רעות גלינסקי\source\repos\ReutGalinsky\dotNet5782_6673_0002\bin" + @"\video.mp4");
         }
+        private void Information_Click(object sender, RoutedEventArgs e)
+        {
+            if (infob.Visibility == Visibility.Visible)
+            {
+                infoc.Visibility = Visibility.Hidden;
+                infob.Visibility = Visibility.Hidden;
+                infoa.Visibility = Visibility.Hidden;
+                info.Visibility = Visibility.Hidden;
+
+            }
+            else {
+                info.Visibility = Visibility.Visible;
+                infoc.Visibility = Visibility.Visible;
+                infob.Visibility = Visibility.Visible;
+                infoa.Visibility = Visibility.Visible; }
+        }
+        private void Heart_Click(object sender, RoutedEventArgs e)
+        {
+            if (contacta.Visibility == Visibility.Visible)
+            {
+                contacta.Visibility = Visibility.Hidden;
+                contactb.Visibility = Visibility.Hidden;
+                contact.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                contactb.Visibility = Visibility.Visible;
+                contacta.Visibility = Visibility.Visible; 
+            contact.Visibility = Visibility.Visible;
+            }
+    } 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
         }
-        //private void move(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (e.ChangedButton == MouseButton.Left)
-        //        this.DragMove();
-        //}
+      
         private void PackIconMaterial_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             info.Visibility = Visibility.Visible;
             infob.Visibility = Visibility.Visible;
-        }
+            infoc.Visibility = Visibility.Visible;
 
+        }
         private void PackIconMaterial_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
             contact.Visibility = Visibility.Visible;
             contactb.Visibility = Visibility.Visible;
+            contacta.Visibility = Visibility.Visible;
+
         }
 
     }
