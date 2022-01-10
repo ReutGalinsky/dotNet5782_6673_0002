@@ -97,7 +97,7 @@
             </Grid.RenderTransform>
             <StackPanel Orientation="Horizontal" Margin="-500,250,-255,-250">
                 <StackPanel>
-                    <Border Width="677" Height="35" Background="#B2FFD300" Margin="0,15,0,0" CornerRadius="20"/>
+                    <Border Width="678" Height="35" Background="#B2FFD300" Margin="0,15,0,0" CornerRadius="20"/>
                     <Border Width="563" Height="35" Background="#FFD97C47" Margin="150,15,20,0" CornerRadius="20"/>
                     <Border Width="700" Height="35" Background="Orange" Margin="75,15,30,0" CornerRadius="20"/>
                     <Border Width="567" Height="35" Background="#83DABD06" Margin="150,15,20,0" CornerRadius="20"/>
