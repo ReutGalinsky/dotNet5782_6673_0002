@@ -8,7 +8,7 @@ using BL;
 namespace BO
 {
     /// <summary>
-    /// viewing of a customer. including just hos name and id  
+    /// viewing of a customer. including just his name and id  
     /// </summary>
     public class CustomerOfParcel
     {

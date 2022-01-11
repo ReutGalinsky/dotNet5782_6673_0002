@@ -77,7 +77,6 @@ namespace BL
                 bl.dal.UpdateParcel(parcelDO);
             }
             reportProggress();
-
         }
         private void startSupplying()
         {

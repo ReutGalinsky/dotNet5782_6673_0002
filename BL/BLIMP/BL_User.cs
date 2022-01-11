@@ -70,10 +70,9 @@ namespace BL
             if (name == "")
                 throw new AddingProblemException("invalid Name of user: you didn't enter a name");
             if(password=="")
-                throw new AddingProblemException("invalid password of user: you didn't enter a name");
+                throw new AddingProblemException("invalid password of user: you didn't enter a password");
             if(password.Length<6)
                 throw new AddingProblemException("invalid password of user: password should include at least 6 characters");
-           
             try
             {
                 lock (dal)
@@ -94,7 +93,7 @@ namespace BL
             if (userToAdd.UserName == "")
                 throw new AddingProblemException("invalid Name of user: you didn't enter a name");
             if (userToAdd.UserPassword == "")
-                throw new AddingProblemException("invalid password of user: you didn't enter a name");
+                throw new AddingProblemException("invalid password of user: you didn't enter a password");
             if (userToAdd.UserPassword.Length < 6)
                 throw new AddingProblemException("invalid password of user: password should include at least 6 characters");
             try
