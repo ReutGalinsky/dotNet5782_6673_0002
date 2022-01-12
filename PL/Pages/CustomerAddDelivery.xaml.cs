@@ -24,7 +24,14 @@ namespace PL.Pages
             id = i;
             Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             Priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
-            Geters.DataContext = bl.GetAllCustomersBy(x=>x.IdNumber!=i);
+            try
+            {
+                Geters.DataContext = bl.GetAllCustomersBy(x => x.IdNumber != i);
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Error in the customer's loading, please try again later");
+            }
         }
         private BLApi.IBL bl;
         private string id;

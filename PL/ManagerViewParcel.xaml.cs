@@ -29,13 +29,29 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
-            parcel = bl.GetParcel(id);
-            sender = bl.GetCustomer(parcel.SenderCustomer.IdNumber);
-            geter = bl.GetCustomer(parcel.GeterCustomer.IdNumber);
-            if (parcel.Drone != null)
-                drone = bl.GetDrone(parcel.Drone.IdNumber);
-            else
-                drone = new BO.Drone();
+            try
+            {
+                parcel = bl.GetParcel(id);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcel, please try again later"); }
+            try
+            {
+                sender = bl.GetCustomer(parcel.SenderCustomer.IdNumber);
+                geter = bl.GetCustomer(parcel.GeterCustomer.IdNumber);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the customer, please try again later"); }
+            try
+            {
+                if (parcel.Drone != null)
+                    drone = bl.GetDrone(parcel.Drone.IdNumber);
+                else
+                    drone = new BO.Drone();
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the drone, please try again later"); }
+
             Id.DataContext = parcel;
             PriorityBox.DataContext = parcel;
             WeightBox.DataContext = parcel;

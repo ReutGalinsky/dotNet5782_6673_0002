@@ -24,7 +24,13 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
-            parcel = bl.GetParcel(id);
+            try
+            {
+                parcel = bl.GetParcel(id);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcel, please try again later"); }
+
             Id.DataContext = parcel;
             SenderId.DataContext = parcel.SenderCustomer;
             SenderName.DataContext = parcel.SenderCustomer;

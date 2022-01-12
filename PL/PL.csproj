@@ -18,7 +18,6 @@
 	</ItemGroup>
 	
   <ItemGroup>
-    <None Remove="customer.png" />
     <None Remove="key.jpg" />
     <None Remove="Logo.png" />
     <None Remove="logo.png.png" />
@@ -84,7 +83,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="customer.png" />
     <Resource Include="Logo.png" />
     <Resource Include="Pages\Images\Customer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

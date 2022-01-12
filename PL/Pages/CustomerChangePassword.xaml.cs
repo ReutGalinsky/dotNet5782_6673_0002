@@ -25,7 +25,12 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             id = i;
-            user = bl.GetUser(id);
+            try
+            {
+                user = bl.GetUser(id);
+            }
+            catch(Exception)
+            { MessageBox.Show("Error in loading the user, please try again later"); }
         }
         public event EventHandler updateList;
         private BO.User user;

@@ -26,7 +26,12 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
-            convertToPo(drone, bl.GetDrone(id));
+            try
+            {
+                convertToPo(drone, bl.GetDrone(id));
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the drone, please try again later"); }
             Id.DataContext = drone;
             Weight.DataContext = drone;
             Model.DataContext = drone;
@@ -76,18 +81,22 @@ namespace PL
                 releaseButton.Visibility = Visibility.Visible;
             if (drone.State == BO.DroneState.shipping)
             {
-                if (bl.GetParcel(drone.NumberOfParcel).CollectingDroneTime == null)
+                try
                 {
-                    pickButton.Visibility = Visibility.Visible;
+                    if (bl.GetParcel(drone.NumberOfParcel).CollectingDroneTime == null)
+                    {
+                        pickButton.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        suppltingButton.Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    suppltingButton.Visibility = Visibility.Visible;
-                }
+                catch (Exception)
+                { MessageBox.Show("Error in loading the parcel, please try again later"); }
             }
         }
         public void convertToPo(PO.DronePO dronePo, BO.Drone d)
-        //function that get the drone and update it to the current values as given from the bl
         {
             dronePo.Battery = (int)d.Battery;
             dronePo.IdNumber = d.IdNumber;
@@ -107,7 +116,6 @@ namespace PL
             {
                 textParcel.Visibility = Visibility.Visible;
                 ParcelGrid.Visibility = Visibility.Collapsed;
-
             }
 
         }
@@ -115,15 +123,15 @@ namespace PL
         {
             closeRequest = true; 
             updateList(sender, e);
-            if(worker!=null&&worker.IsBusy==true)
+            if (worker!=null&&worker.IsBusy==true)
             {
+                MessageBox.Show("the window will be closed at the end of this action");
                 worker.CancelAsync();
             }
             else
             {
                 this.Close();
             }
-           // this.Close();
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
@@ -281,16 +289,27 @@ namespace PL
             {
                 e.Cancel = true;
             }
-
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            updateList(sender, e);
-            convertToPo(drone, bl.GetDrone(id));
+            try
+            {
+                updateList(sender, e);
+                convertToPo(drone, bl.GetDrone(id));
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the drone, please try again later"); }
+
         }
         private void Complited(object sender, RunWorkerCompletedEventArgs e)
         {
             worker = null;
+            Auto.Visibility = Visibility.Visible;
+            Manual.Visibility = Visibility.Collapsed;
+            assignVisibility();
+            Manual.Content = "Manual";
+            Manual.IsEnabled = true;
+
             if (closeRequest == true)
                 this.Close();
         }
@@ -299,11 +318,10 @@ namespace PL
             if (worker.IsBusy == true && worker.WorkerSupportsCancellation == true)
             {
                 worker.CancelAsync();
+                Manual.Content = "Loading...";
+                Manual.IsEnabled = false;
             }
-            Auto.Visibility = Visibility.Visible;
-            Manual.Visibility = Visibility.Collapsed;
-            assignVisibility();
-
+            
         }
     }
 }

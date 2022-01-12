@@ -39,13 +39,13 @@ namespace PL.Pages
             selected = (BO.DroneToList)(sender as ListView).SelectedItem;
             
         }
-        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+        private void Action(object sender, MouseButtonEventArgs e)
         {
             if (selected != null)
             {
                 ManagerViewDrone showDrone = new ManagerViewDrone(bl, selected.IdNumber);
                 showDrone.updateList += updated;
-                showDrone.Show();
+                showDrone.ShowDialog();
             }
         }
         private void deleteDrone(object sender, RoutedEventArgs e)
@@ -69,7 +69,7 @@ namespace PL.Pages
         {
             DroneListView.Visibility = Visibility.Visible;
             listDrones.Clear();
-            foreach (BO.DroneToList s in bl.GetDrones())//create the source for the liseView
+            foreach (BO.DroneToList s in bl.GetDrones())
             {
                 s.Battery = (int)s.Battery;
                 listDrones.Add(s); 

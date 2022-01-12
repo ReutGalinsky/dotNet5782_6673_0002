@@ -24,8 +24,13 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             id = i;
-            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Sender == id))
-                listParcels.Add(s);
+            try
+            {
+                foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Sender == id))
+                    listParcels.Add(s);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcels, please try again later"); }
             ParcelListView.DataContext = listParcels;
             update += updated;
         }
@@ -44,7 +49,7 @@ namespace PL.Pages
         {
             selected = (BO.ParcelOfList)ParcelListView.SelectedItem;
         }
-        private void Action(object sender, MouseButtonEventArgs e) 
+        private void Action(object sender, MouseButtonEventArgs e)
         {
             if (selected != null)
             {
@@ -53,9 +58,16 @@ namespace PL.Pages
             }
         }
         private void updated(object sender, EventArgs e)
-        {            listParcels.Clear();
-            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Sender == id))//create the source for the liseView
-                listParcels.Add(s);
+        {
+            try
+            {
+                listParcels.Clear();
+                foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Sender == id))//create the source for the liseView
+                    listParcels.Add(s);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcels, please try again later"); }
+
         }
         private void deleteParcel(object sender, RoutedEventArgs e)
         {
@@ -99,7 +111,6 @@ namespace PL.Pages
             view.GroupDescriptions.Remove(groupWeight);
         }
     }
-}      
+}
 
- 
- 
+

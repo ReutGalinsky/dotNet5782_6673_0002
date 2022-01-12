@@ -21,13 +21,25 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
-            customer = bl.GetCustomer(id);
+            try
+            {
+                customer = bl.GetCustomer(id);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the customer, please try again later"); }
+
             Id.DataContext = customer;
             Phone.DataContext = customer;
             Name.DataContext = customer;
             Longitude.DataContext = customer.Location;
             Latitude.DataContext = customer.Location;
-            listParcels.DataContext = bl.GetAllParcelsBy(x => x.Sender == i || x.Geter == i);
+            try
+            {
+                listParcels.DataContext = bl.GetAllParcelsBy(x => x.Sender == i || x.Geter == i);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcels, please try again later"); }
+
             ParcelGrid.DataContext = parcel;
         }
         private BLApi.IBL bl;

@@ -10,7 +10,14 @@ namespace PL.PO
    public class BaseStationPO: INotifyPropertyChanged
     {
 
+        /// <summary>
+        /// the id of the station
+        /// </summary>
         private string _IdNumber;
+        /// <summary>
+        /// the id of the station
+        /// </summary>
+
         public string IdNumber
         {
             get { return _IdNumber; }
@@ -23,7 +30,15 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the name of the station
+        /// </summary>
+
         private string _Name;
+        /// <summary>
+        /// the id of the station
+        /// </summary>
+
         public string Name
         {
             get { return _Name; }
@@ -36,7 +51,15 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the amount of availible charge slots of the station
+        /// </summary>
+
         private int _ChargeSlots;
+        /// <summary>
+        /// the amount of availible charge slots of the station
+        /// </summary>
+
         public int ChargeSlots
         {
             get { return _ChargeSlots; }
@@ -49,7 +72,14 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the longitude of the station
+        /// </summary>
         private string _Longitude;
+        /// <summary>
+        /// the longitude of the station
+        /// </summary>
+
         public string Longitude
         {
             get { return _Longitude; }
@@ -62,7 +92,15 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the latitude of the station
+        /// </summary>
+
         private string _Latitude;
+        /// <summary>
+        /// the latitude of the station
+        /// </summary>
+
         public string Latitude
         {
             get { return _Latitude; }

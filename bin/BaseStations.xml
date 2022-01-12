@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<Array xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BaseStation>
+    <IdNumber>17038</IdNumber>
+    <Name>Tel Aviv-Savidor Center</Name>
+    <ChargeSlots>10</ChargeSlots>
+    <Latitude>32.083</Latitude>
+    <Longitude>34.798</Longitude>
+  </BaseStation>
+  <BaseStation>
+    <IdNumber>17016</IdNumber>
+    <Name>Haifa Center- Hashmona</Name>
+    <ChargeSlots>12</ChargeSlots>
+    <Latitude>32.822</Latitude>
+    <Longitude>34.997</Longitude>
+  </BaseStation>
+  <BaseStation>
+    <IdNumber>17014</IdNumber>
+    <Name>Nahariya</Name>
+    <ChargeSlots>5</ChargeSlots>
+    <Latitude>33.004</Latitude>
+    <Longitude>35.098</Longitude>
+  </BaseStation>
+  <BaseStation>
+    <IdNumber>10446</IdNumber>
+    <Name>Eilat- Big Center</Name>
+    <ChargeSlots>5</ChargeSlots>
+    <Latitude>29.566</Latitude>
+    <Longitude>34.959</Longitude>
+  </BaseStation>
+  <BaseStation>
+    <IdNumber>751</IdNumber>
+    <Name>Beer sheva- Ben Gurion</Name>
+    <ChargeSlots>12</ChargeSlots>
+    <Latitude>31.261</Latitude>
+    <Longitude>34.799</Longitude>
+  </BaseStation>
+  <BaseStation>
+    <IdNumber>614</IdNumber>
+    <Name>Ashkelon Central Station</Name>
+    <ChargeSlots>7</ChargeSlots>
+    <Latitude>31.663</Latitude>
+    <Longitude>34.566</Longitude>
+  </BaseStation>
+  <BaseStation>
+    <IdNumber>3908</IdNumber>
+    <Name>Jerusalem Central Station</Name>
+    <ChargeSlots>15</ChargeSlots>
+    <Latitude>31.789</Latitude>
+    <Longitude>35.203</Longitude>
+  </BaseStation>
+  <BaseStation>
+    <IdNumber>67365</IdNumber>
+    <Name>Ariel University</Name>
+    <ChargeSlots>5</ChargeSlots>
+    <Latitude>32.103046</Latitude>
+    <Longitude>35.2077</Longitude>
+  </BaseStation>
+</Array>

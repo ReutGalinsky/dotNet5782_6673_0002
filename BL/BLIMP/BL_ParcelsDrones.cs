@@ -18,33 +18,37 @@ namespace BL
         public void MatchingParcelToDrone(string droneId)
         {
             DroneToList drone = Drones.FirstOrDefault(x => x.IdNumber == droneId);
-
+            if (drone == null)
+                throw new NotExistingException($"the drone with the id {droneId} is not exist");
             if (drone.State != Available)
                 throw new ConnectionException($"the drone with the id {droneId} is not available");
-
-            var parcelQueue = GetAllParcelsBy(x => x.ParcelState == Define && (int)x.Weight <= (int)drone.MaxWeight)
-                .OrderByDescending(p => (int)p.Priority)
-                .ThenByDescending(p => (int)p.Weight)
-                .ThenBy(p => dal.GetCustomer(p.Sender).GetLocation().DistanceTo(drone.Location));
-
-            foreach (var parcel in parcelQueue)
+            try
             {
-                var usagee = batteryUssage(drone, parcel);
-                if (drone.Battery >= usagee)
+                var parcelQueue = GetAllParcelsBy(x => x.ParcelState == Define && (int)x.Weight <= (int)drone.MaxWeight)
+                    .OrderByDescending(p => (int)p.Priority)
+                    .ThenByDescending(p => (int)p.Weight)
+                    .ThenBy(p => dal.GetCustomer(p.Sender).GetLocation().DistanceTo(drone.Location));
+                foreach (var parcel in parcelQueue)
                 {
-                    lock (dal)
+                    var usagee = batteryUssage(drone, parcel);
+                    if (drone.Battery >= usagee)
                     {
-                        drone.State = DroneState.shipping;
-                        drone.NumberOfParcel = parcel.IdNumber;
-                        DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
-                        parcelDO.DroneId = drone.IdNumber;
-                        parcelDO.MatchForDroneTime = DateTime.Now;
-                        dal.UpdateParcel(parcelDO);
+                        lock (dal)
+                        {
+                            drone.State = DroneState.shipping;
+                            drone.NumberOfParcel = parcel.IdNumber;
+                            DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
+                            parcelDO.DroneId = drone.IdNumber;
+                            parcelDO.MatchForDroneTime = DateTime.Now;
+                            dal.UpdateParcel(parcelDO);
+                        }
+                        return;
                     }
-                    return;
                 }
+                throw new UpdatingException($"cant find proper parcel for the drone with id {droneId}");
             }
-            throw new UpdatingException($"cant find proper parcel for the drone with id {droneId}");//didn't find parcel
+            catch (Exception e)
+            { throw new ConnectionException(e.Message, e); }
         }
         #endregion
 
@@ -67,14 +71,20 @@ namespace BL
                 throw new ConnectionException($"the drone with the id {id} is not shipping");
             if (!(parcel.MatchForDroneTime != null && parcel.CollectingDroneTime == null))
                 throw new ConnectionException("the parcel is not match");
-            lock (dal)
+            try
             {
-                drone.Battery -= CalcutateBatteryPerDistance(drone.Location.DistanceTo(GetCustomer(parcel.SenderCustomer.IdNumber).Location), _available);
-                drone.Location = GetCustomer(parcel.SenderCustomer.IdNumber).Location.GetLocation();
-                DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
-                parcelDO.CollectingDroneTime = DateTime.Now;
-                dal.UpdateParcel(parcelDO);
+                lock (dal)
+                {
+                    drone.Battery -= CalcutateBatteryPerDistance(drone.Location.DistanceTo(GetCustomer(parcel.SenderCustomer.IdNumber).Location), _available);
+                    drone.Location = GetCustomer(parcel.SenderCustomer.IdNumber).Location.GetLocation();
+                    DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
+                    parcelDO.CollectingDroneTime = DateTime.Now;
+                    dal.UpdateParcel(parcelDO);
+                }
             }
+            catch (Exception e)
+            { throw new ConnectionException(e.Message, e); }
+
         }
         #endregion
 
@@ -92,15 +102,13 @@ namespace BL
             {
                 throw new ConnectionException(e.Message, e);
             }
-
+            try
+            {
             if (droneBO.State != DroneState.shipping)
                 throw new ConnectionException($"the drone with the id {id} is not shipping");
             BO.Parcel parcel = GetParcel(droneBO.PassedParcel.IdNumber);
             if (!(parcel.CollectingDroneTime != null && parcel.ArrivingDroneTime == null))
                 throw new ConnectionException("the parcel is not picking yet");
-
-            try
-            {
                 lock (dal)
                 {
                     drone.Location = GetCustomer(parcel.GeterCustomer.IdNumber).Location.GetLocation();
@@ -138,22 +146,29 @@ namespace BL
             return (distance * factorBattery);
         }
         #endregion
+
         #region batteryUssage
         private double batteryUssage(BO.DroneToList drone, BO.ParcelOfList parcel)
         {
-            double battery = 0;
-            BO.Customer sender = GetCustomer(parcel.Sender);
-            BO.Customer geter = GetCustomer(parcel.Geter);
-            DO.BaseStation baseStation = ClosestStation(GetCustomer(parcel.Geter).Location);
-            battery = CalcutateBatteryPerDistance(drone.Location.DistanceTo(sender.Location) + geter.Location.DistanceTo(baseStation.GetLocation()), _available);
-            battery += parcel.Weight switch
+            try
             {
-                BO.WeightCategories.Heavy => CalcutateBatteryPerDistance(sender.Location.DistanceTo(geter.Location), _heavy),
-                BO.WeightCategories.Light => CalcutateBatteryPerDistance(sender.Location.DistanceTo(geter.Location), _light),
-                BO.WeightCategories.Middle => CalcutateBatteryPerDistance(sender.Location.DistanceTo(geter.Location), _medium),
-                _ => throw new NotImplementedException(),
-            };
-            return battery;
+                double battery = 0;
+                BO.Customer sender = GetCustomer(parcel.Sender);
+                BO.Customer geter = GetCustomer(parcel.Geter);
+                DO.BaseStation baseStation = ClosestStation(GetCustomer(parcel.Geter).Location);
+                battery = CalcutateBatteryPerDistance(drone.Location.DistanceTo(sender.Location) + geter.Location.DistanceTo(baseStation.GetLocation()), _available);
+                battery += parcel.Weight switch
+                {
+                    BO.WeightCategories.Heavy => CalcutateBatteryPerDistance(sender.Location.DistanceTo(geter.Location), _heavy),
+                    BO.WeightCategories.Light => CalcutateBatteryPerDistance(sender.Location.DistanceTo(geter.Location), _light),
+                    BO.WeightCategories.Middle => CalcutateBatteryPerDistance(sender.Location.DistanceTo(geter.Location), _medium),
+                    _ => throw new NotImplementedException(),
+                };
+                return battery;
+            }
+            catch (Exception e)
+            { throw new ConnectionException(e.Message, e); }
+
         }
         #endregion
     }

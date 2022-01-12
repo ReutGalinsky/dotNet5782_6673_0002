@@ -101,15 +101,29 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Drone GetDrone(string id)
         {
-            BO.DroneToList droneBL = Drones.FirstOrDefault(x => x.IdNumber == id);
-            if (droneBL == null)
-                throw new GettingProblemException($"the drone with the id {id} is not exist");
-            BO.Drone drone = (BO.Drone)droneBL.CopyPropertiesToNew(typeof(BO.Drone));
-            drone.Location = droneBL.Location.GetLocation();
-            drone.State = droneBL.State;
-            drone.Battery = droneBL.Battery;
-            drone.PassedParcel = droneBL.NumberOfParcel != null ? GetParcelInPassing(droneBL.NumberOfParcel) : null;
-            return drone;
+            try
+            {
+                BO.DroneToList droneBL = Drones.FirstOrDefault(x => x.IdNumber == id);
+                if (droneBL == null)
+                    throw new GettingProblemException($"the drone with the id {id} is not exist");
+                BO.Drone drone = (BO.Drone)droneBL.CopyPropertiesToNew(typeof(BO.Drone));
+                drone.Location = droneBL.Location.GetLocation();
+                drone.State = droneBL.State;
+                drone.Battery = droneBL.Battery;
+                drone.PassedParcel = droneBL.NumberOfParcel != null ? GetParcelInPassing(droneBL.NumberOfParcel) : null;
+                if (drone.PassedParcel != null)
+                {
+                    if (drone.PassedParcel.isCollected == true)
+                        drone.PassedParcel.Distance = drone.PassedParcel.Packing.DistanceTo(drone.PassedParcel.Destination);
+                    else
+                        drone.PassedParcel.Distance = drone.Location.DistanceTo(drone.PassedParcel.Packing);
+                }
+                return drone;
+            }
+            catch(Exception e)
+            {
+                throw new GettingProblemException(e.Message, e);
+            }
         }
         #endregion
 
@@ -122,7 +136,7 @@ namespace BL
             BO.DroneToList drone = Drones.FirstOrDefault(x => x.IdNumber == id);
             if (drone == null)
                 throw new UpdatingException($"Drone number {id} is not existing");
-
+            string temp = drone.Model;
             drone.Model = Model;
             try
             {
@@ -134,6 +148,7 @@ namespace BL
             }
             catch (Exception e)
             {
+                drone.Model = temp;
                 throw new UpdatingException($"Can't update drone number {id}", e);
             }
         }
@@ -175,6 +190,13 @@ namespace BL
         }
         #endregion
 
+        #region Simulator
+        public void Simulator(string id, Action updatePl, Func<bool> checkStop)
+        {
+            DroneSimulator simulator = new DroneSimulator(this, id, updatePl, checkStop);
+        }
+        #endregion
+
 
         #region GetParcelInPassing
         /// <summary>
@@ -184,22 +206,26 @@ namespace BL
         /// <returns></returns>
         private BO.ParcelInPassing GetParcelInPassing(string id)
         {
-            lock (dal)
+            try
             {
-                DO.Parcel parcel = dal.GetParcel(id);
-                BO.ParcelInPassing temp = (BO.ParcelInPassing)parcel.CopyPropertiesToNew(typeof(BO.ParcelInPassing));
-                temp.Destination = dal.GetCustomer(parcel.Geter).GetLocation();
-                temp.Packing = dal.GetCustomer(parcel.Sender).GetLocation();
-                temp.Distance = temp.Destination.DistanceTo(temp.Packing);
-                temp.Senderer = GetCustomerOfParcel(parcel.Sender);
-                temp.Getterer = GetCustomerOfParcel(parcel.Geter);
-                temp.isCollected = parcel.CollectingDroneTime switch
+                lock (dal)
                 {
-                    null => false,
-                    _ => true,
-                };
-                return temp;
+                    DO.Parcel parcel = dal.GetParcel(id);
+                    BO.ParcelInPassing temp = (BO.ParcelInPassing)parcel.CopyPropertiesToNew(typeof(BO.ParcelInPassing));
+                    temp.Destination = dal.GetCustomer(parcel.Geter).GetLocation();
+                    temp.Packing = dal.GetCustomer(parcel.Sender).GetLocation();
+                    temp.Senderer = GetCustomerOfParcel(parcel.Sender);
+                    temp.Getterer = GetCustomerOfParcel(parcel.Geter);
+                    temp.isCollected = parcel.CollectingDroneTime switch
+                    {
+                        null => false,
+                        _ => true,
+                    };
+                    return temp;
+                }
             }
+            catch(Exception e)
+            { throw new GettingProblemException(e.Message, e); }
         }
         #endregion
         #region GetDroneToList

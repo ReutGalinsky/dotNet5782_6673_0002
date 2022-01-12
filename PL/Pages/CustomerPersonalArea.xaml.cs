@@ -21,7 +21,12 @@ namespace PL.Pages
         {
             InitializeComponent();
             bl = b;
-            customer = bl.GetCustomer(i);
+            try
+            {
+                customer = bl.GetCustomer(i);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the user, please try again later"); }
             Id.DataContext = customer;
             Phone.DataContext = customer;
             Name.DataContext = customer;
@@ -44,7 +49,7 @@ namespace PL.Pages
                 (sender as Button).Visibility = Visibility.Collapsed;
                 MessageBox.Show($"the customer number {customer.IdNumber} updated successfully!");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show($"the phone number {Phone.Text} is illegal. please enter again", "Phone Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

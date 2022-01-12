@@ -41,7 +41,12 @@ namespace PL
                 }
                 check.IsChecked = false;
                 var User = bl.GetUser(user.Text);
-                if (User.UserPassword == password.Password && User.isManager == true)
+                if(User.isManager==false)
+                {
+                    MessageBox.Show($"this user is not manager, please try to sign as customer");
+                    return;
+                }
+                if (User.UserPassword == password.Password)
                 {
                     ManagerPage pageManager = new ManagerPage(bl);
                     pageManager.Show();
@@ -49,7 +54,7 @@ namespace PL
                 }
                 else
                 {
-                    MessageBox.Show($"there is no manager with the id of {User.UserName}");
+                    MessageBox.Show($"the password is not correct, please try again");
                 }
             }
             catch (Exception ex)

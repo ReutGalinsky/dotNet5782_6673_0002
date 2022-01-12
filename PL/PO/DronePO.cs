@@ -7,10 +7,19 @@ using System.ComponentModel;
 
 namespace PL.PO
 {
+    /// <summary>
+    /// drone of the pl
+    /// </summary>
     public class DronePO : INotifyPropertyChanged
-    //PL drone- enable binding
     {
+        /// <summary>
+        /// the id of the drone
+        /// </summary>
         private string _IdNumber;
+        /// <summary>
+        /// the id of the drone
+        /// </summary>
+
         public string IdNumber
         {
             get { return _IdNumber; }
@@ -23,7 +32,13 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the model of the drone
+        /// </summary>
         private string _Model;
+        /// <summary>
+        /// the model of the drone
+        /// </summary>
         public string Model
         {
             get { return _Model; }
@@ -36,7 +51,14 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the weight of the drone
+        /// </summary>
+
         private BO.WeightCategories _MaxWeight;
+        /// <summary>
+        /// the weight of the drone
+        /// </summary>
         public BO.WeightCategories MaxWeight
         {
             get { return _MaxWeight; }
@@ -49,7 +71,14 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the longitude of the drone
+        /// </summary>
         private string _Longitude;
+        /// <summary>
+        /// the longitude of the drone
+        /// </summary>
+
         public string Longitude
         {
             get { return _Longitude; }
@@ -62,7 +91,14 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the latitude of the drone
+        /// </summary>
         private string _Latitude;
+        /// <summary>
+        /// the latitude of the drone
+        /// </summary>
+
         public string Latitude
         {
             get { return _Latitude; }
@@ -75,7 +111,14 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the battery of the drone
+        /// </summary>
         private int _Battery;
+        /// <summary>
+        /// the battery of the drone
+        /// </summary>
+
         public int Battery
         {
             get { return _Battery; }
@@ -88,7 +131,14 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the state of the drone
+        /// </summary>
         private BO.DroneState _State;
+        /// <summary>
+        /// the state of the drone
+        /// </summary>
+
         public BO.DroneState State
         {
             get { return _State; }
@@ -101,7 +151,14 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the number of the delivered parcel
+        /// </summary>
         public string _NumberOfParcel;
+
+        /// <summary>
+        /// the number of the delivered parcel
+        /// </summary>
 
         public string NumberOfParcel
         {

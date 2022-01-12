@@ -23,10 +23,15 @@ namespace PL.Pages
         {
             InitializeComponent();
             bl = b;
-            foreach (var item in bl.GetBaseStations())
+            try
             {
-                liststations.Add(item);
+                foreach (var item in bl.GetBaseStations())
+                {
+                    liststations.Add(item);
+                }
             }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the stations, please try again later"); }
             StationsListView.DataContext = liststations;
             chargeSlot.SelectedItem = chargeSlot.Items[0];
             update += updated;
@@ -36,15 +41,20 @@ namespace PL.Pages
         private BLApi.IBL bl;
         private BO.BaseStationToList selected;
         public EventHandler update;
-       
         private void updated(object sender, EventArgs e)
         {
             chargeSlot.SelectedItem = chargeSlot.Items[0];
             liststations.Clear();
-            foreach (var item in bl.GetBaseStations())
+            try
             {
-                liststations.Add(item);
+                foreach (var item in bl.GetBaseStations())
+                {
+                    liststations.Add(item);
+                }
             }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the stations, please try again later"); }
+
         }
         private void Action(object sender, MouseButtonEventArgs e)
         {
@@ -58,23 +68,29 @@ namespace PL.Pages
         }
         private void changeFilterCharge(object sender,SelectionChangedEventArgs e)
         {
-            var comboBoxItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
-            liststations.Clear();
-            switch(comboBoxItem.Content.ToString())
+            try
             {
-                case "With available charging slots":
-                    foreach (var item in bl.GetAllBaseStationsBy(x => x.ChargeSlots > 0))
-                        liststations.Add(item);
-                    break;
-                case "Without available charging slots":
-                    foreach (var item in bl.GetAllBaseStationsBy(x => x.ChargeSlots == 0))
-                        liststations.Add(item);
-                    break;
-                default:
-                    foreach (var item in bl.GetBaseStations())
-                        liststations.Add(item);
-                    break;
+                var comboBoxItem = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex] as ComboBoxItem;
+                liststations.Clear();
+                switch (comboBoxItem.Content.ToString())
+                {
+                    case "With available charging slots":
+                        foreach (var item in bl.GetAllBaseStationsBy(x => x.ChargeSlots > 0))
+                            liststations.Add(item);
+                        break;
+                    case "Without available charging slots":
+                        foreach (var item in bl.GetAllBaseStationsBy(x => x.ChargeSlots == 0))
+                            liststations.Add(item);
+                        break;
+                    default:
+                        foreach (var item in bl.GetBaseStations())
+                            liststations.Add(item);
+                        break;
+                }
             }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the stations, please try again later"); }
+
         }
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {

@@ -32,10 +32,16 @@ namespace PL.Pages
                 Model.DataContext = drone;
                 Weight.DataContext = drone;
                 Weight.SelectedItem = Weight.Items[0];
+            try
+            {
                 stationNumber.DataContext = bl.GetAllBaseStationsBy(x => x.ChargeSlots > 0);
             }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the stations, please try again later"); }
 
-            private BLApi.IBL bl;
+        }
+
+        private BLApi.IBL bl;
             private BO.DroneToList drone = new BO.DroneToList();
             public event EventHandler updateList;
 
@@ -105,6 +111,17 @@ namespace PL.Pages
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void focus1(object sender, SelectionChangedEventArgs e)
+        {
+            if (drone.IdNumber == "" || drone.Model == "" || stationNumber.SelectedItem == null || Weight.SelectedItem == null)
+                ADD.IsEnabled = false;
+            else
+            {
+                ADD.IsEnabled = true;
+            }
+
         }
     }
     }

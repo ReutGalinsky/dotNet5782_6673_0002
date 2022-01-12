@@ -33,7 +33,7 @@ namespace PL.Pages
             private void Add_Click(object sender, RoutedEventArgs e)
             {
                 try
-                {//להוסיף try להמרות
+                {
                     int temp;
                     if (int.TryParse(ChargeSlots.Text, out temp) == false)
                     {
@@ -76,8 +76,6 @@ namespace PL.Pages
                 }
                 else
                     ADD.IsEnabled = true;
-
-
             }
 
 }

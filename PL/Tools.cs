@@ -51,8 +51,14 @@ namespace PL
         }
         internal static void RemoveCharges(BLApi.IBL bl)
         {
-            foreach (var item in bl.GetAllDronesBy(x => x.State == BO.DroneState.maintaince))
-                bl.DroneFromCharging(item.IdNumber);
+            try
+            {
+                foreach (var item in bl.GetAllDronesBy(x => x.State == BO.DroneState.maintaince))
+                    bl.DroneFromCharging(item.IdNumber);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in removing the drones from charge"); }
+
         }
 
     }

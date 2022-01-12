@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Array xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <UserName>reut</UserName>
+    <UserPassword>reutreut</UserPassword>
+    <isManager>true</isManager>
+  </User>
+	<User>
+		<UserName>osnat</UserName>
+		<UserPassword>osnatosnat</UserPassword>
+		<isManager>true</isManager>
+	</User>
+	<User>
+		<UserName>nurit</UserName>
+		<UserPassword>nuritnurit</UserPassword>
+		<isManager>true</isManager>
+	</User>
+
+</Array>

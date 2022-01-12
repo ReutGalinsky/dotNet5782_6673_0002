@@ -26,6 +26,7 @@ namespace BL
             }
         }
         #endregion
+
         #region GetAllUsersBy
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<User> GetAllUsersBy(Predicate<User> condition)
@@ -36,6 +37,7 @@ namespace BL
             return list;
         }
         #endregion
+
         #region GetUsers
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<User> GetUsers()
@@ -47,6 +49,7 @@ namespace BL
             }
         }
         #endregion
+
         #region GetUser
         [MethodImpl(MethodImplOptions.Synchronized)]
         public User GetUser(string name)
@@ -63,6 +66,7 @@ namespace BL
             { throw new GettingProblemException($"the user with the name {name} is not exist", e); }
         }
         #endregion
+
         #region UpdatingDetailsOfUser
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdatingDetailsOfUser(string name, string password)
@@ -86,6 +90,7 @@ namespace BL
             { throw new UpdatingException($"Can't update user with the name {name}", ex); }
         }
         #endregion
+
         #region AddUser
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddUser(User userToAdd)

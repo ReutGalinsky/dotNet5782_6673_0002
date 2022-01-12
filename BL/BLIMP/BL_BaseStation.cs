@@ -65,10 +65,17 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.BaseStationToList> GetBaseStations()
         {
-            lock (dal)
+            try
             {
-                var list = from item in dal.GetBaseStations() select GetBaseStationOfList(item.IdNumber);
-                return list;
+                lock (dal)
+                {
+                    var list = from item in dal.GetBaseStations() select GetBaseStationOfList(item.IdNumber);
+                    return list;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new GettingProblemException(ex.Message,ex);
             }
         }
         #endregion   
@@ -134,7 +141,7 @@ namespace BL
                 }
             }
             catch (Exception e)
-            { throw new GettingProblemException($"the base station with the id {id} is not exist", e); }
+            { throw new GettingProblemException(e.Message, e); }
         }
         #endregion
 
@@ -143,10 +150,17 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.BaseStationToList> GetAllBaseStationsBy(Predicate<BO.BaseStationToList> condition)
         {
-            var list = from item in GetBaseStations()
-                       where condition(item)
-                       select item;
-            return list;
+            try
+            {
+                var list = from item in GetBaseStations()
+                           where condition(item)
+                           select item;
+                return list;
+            }
+            catch(Exception e)
+            {
+                throw new GettingProblemException(e.Message, e);
+            }
         }
         #endregion
         #region GetDroneInCharge
@@ -159,7 +173,10 @@ namespace BL
 
         private BO.DroneInCharge GetDroneInCharge(string droneId)
         {
-            return (BO.DroneInCharge)Drones.FirstOrDefault(x => x.IdNumber == droneId).CopyPropertiesToNew(typeof(BO.DroneInCharge));
+            var drone=(BO.DroneInCharge)Drones.FirstOrDefault(x => x.IdNumber == droneId).CopyPropertiesToNew(typeof(BO.DroneInCharge));
+            if (drone == null)
+                throw new GettingProblemException($"the drone with the id: {droneId} is not existing");
+            return drone;
         }
         #endregion
         #region GetBaseStationOfList
@@ -170,11 +187,18 @@ namespace BL
         /// <returns></returns>
         private BO.BaseStationToList GetBaseStationOfList(string id)
         {
-            lock (dal)
+            try
             {
-                BO.BaseStationToList b = (BO.BaseStationToList)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(BO.BaseStationToList));
-                b.FullChargeSlots = (from item in dal.GetDroneCharges() where (item.StationId == id) select item).Count();
-                return b;
+                lock (dal)
+                {
+                    BO.BaseStationToList b = (BO.BaseStationToList)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(BO.BaseStationToList));
+                    b.FullChargeSlots = (from item in dal.GetDroneCharges() where (item.StationId == id) select item).Count();
+                    return b;
+                }
+            }
+            catch(Exception e)
+            {
+                throw new GettingProblemException(e.Message, e);
             }
         }
         #endregion

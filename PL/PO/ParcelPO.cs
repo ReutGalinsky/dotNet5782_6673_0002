@@ -10,8 +10,16 @@ namespace PL.PO
 {
    public class ParcelPO :INotifyPropertyChanged
     {
-            
+
+        /// <summary>
+        /// the id of the parcel
+        /// </summary>
+
         private string _IdNumber;
+        /// <summary>
+        /// the id of the parcel
+        /// </summary>
+
         public string IdNumber
         {
             get { return _IdNumber; }
@@ -24,7 +32,15 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the id of the sender
+        /// </summary>
+
         private string _sender;
+        /// <summary>
+        /// the id of the sender
+        /// </summary>
+
         public string Sender
         {
             get { return _sender; }
@@ -37,7 +53,15 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the id of the geter
+        /// </summary>
+
         private string _geter;
+        /// <summary>
+        /// the id of the geter
+        /// </summary>
+
         public string Geter
         {
             get { return _geter; }
@@ -50,7 +74,15 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the weight of the parcel
+        /// </summary>
+
         private BO.WeightCategories _weight;
+        /// <summary>
+        /// the weight of the parcel
+        /// </summary>
+
         public BO.WeightCategories Weight
         {
             get { return _weight; }
@@ -63,8 +95,15 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the state of the parcel
+        /// </summary>
 
         private BO.ParcelState _parcelState;
+        /// <summary>
+        /// the state of the parcel
+        /// </summary>
+
         public BO.ParcelState ParcelState
         {
             get { return _parcelState; }
@@ -77,7 +116,15 @@ namespace PL.PO
                 }
             }
         }
+        /// <summary>
+        /// the priority of the parcel
+        /// </summary>
+
         private BO.Priorities _priority;
+        /// <summary>
+        /// the priority of the parcel
+        /// </summary>
+
         public BO.Priorities Priority
         {
             get { return _priority; }

@@ -10,36 +10,6 @@ namespace BL
 {
     internal partial class BL : BLApi.IBL
     {
-        #region AddCustomer
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddCustomer(BO.Customer customerToAdd)
-        {
-            if (customerToAdd.Name == "")
-                throw new AddingProblemException("invalid name of customer");
-            int tempInteger;
-            if (int.TryParse(customerToAdd.IdNumber, out tempInteger) == false)
-                throw new AddingProblemException("invalid Id of customer");
-            if (int.TryParse(customerToAdd.Phone, out tempInteger) == false)
-                throw new AddingProblemException("the phone number is illegal");
-            if (customerToAdd.Location.Latitude > 33.3 || customerToAdd.Location.Latitude < 29.5)
-                throw new AddingProblemException("the Latitude is out of israel");
-            if (customerToAdd.Location.Longitude > 35.6 || customerToAdd.Location.Longitude < 34.5)
-                throw new AddingProblemException("the Longitude is out of israel");
-
-            try
-            {
-                DO.Customer customer = (DO.Customer)customerToAdd.CopyPropertiesToNew(typeof(DO.Customer));
-                customer.Longitude = customerToAdd.Location.Longitude;
-                customer.Latitude = customerToAdd.Location.Latitude;
-                lock (dal)
-                {
-                    dal.AddCustomer(customer);
-                }
-            }
-            catch (Exception e)
-            { throw new AddingProblemException("can't add the customer", e); }
-        }
-        #endregion
 
         #region RemoveParcel
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -55,29 +25,6 @@ namespace BL
                     dal.DeleteParcel(number);
                     var d = Drones.FirstOrDefault(x => x.NumberOfParcel == number);
                     if (d != null) d.State = DroneState.Available;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new DeletingException(e.Message, e);
-            }
-        }
-        #endregion
-
-        #region RemoveCustomer
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public void RemoveCustomer(string number)
-        {
-            try
-            {
-                var customer = GetCustomer(number);
-                if (customer.FromCustomer.FirstOrDefault(x => x.State != ParcelState.supply) != null)
-                    throw new DeletingException("can't delete customer that sending");
-                if (customer.ToCustomer.FirstOrDefault(x => x.State != ParcelState.supply) != null)
-                    throw new DeletingException("can't delete customer that waiting to parcel");
-                lock (dal)
-                {
-                    dal.DeleteCustomer(number);
                 }
             }
             catch (Exception e)
@@ -115,116 +62,100 @@ namespace BL
         }
         #endregion
 
-        #region UpdatingDetailsOfCustomer
+        #region GetParcel
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void UpdatingDetailsOfCustomer(string id, string Name, string phone)
+        public BO.Parcel GetParcel(string id)
         {
-            DO.Customer temp;
             try
             {
                 lock (dal)
                 {
-                    temp = dal.GetCustomer(id);
+                    DO.Parcel parcelDO = dal.GetParcel(id);
+                    BO.Parcel parcel = (BO.Parcel)parcelDO.CopyPropertiesToNew(typeof(BO.Parcel));
+                    parcel.SenderCustomer = GetCustomerOfParcel(parcelDO.Sender);
+                    parcel.GeterCustomer = GetCustomerOfParcel(parcelDO.Geter);
+                    parcel.Drone = parcelDO.DroneId != null ? GetDroneInParcel(parcelDO.DroneId) : null;
+                    return parcel;
                 }
             }
             catch (Exception e)
             {
-                throw new UpdatingException(e.Message, e);
-            }
-
-            if (Name != "") temp.Name = Name;
-            if (phone != "")
-            {
-                int tempInteger;
-                if (int.TryParse(phone, out tempInteger) == false)
-                    throw new UpdatingException("the phone number is illegal");
-                temp.Phone = phone;
-            }
-
-            try
-            {
-                lock (dal)
-                {
-                    dal.UpdateCustomer(temp);
-                }
-            }
-            catch (Exception e)
-            { throw new UpdatingException("can't update the customer", e); }
-        }
-        #endregion
-
-        #region GetCustomers
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public IEnumerable<BO.CustomerToList> GetCustomers()
-        {
-            lock (dal)
-            {
-                var list = from item in dal.GetCustomers() select (BO.CustomerToList)item.CopyPropertiesToNew(typeof(BO.CustomerToList));
-                foreach (var item in list)//calculate the amount of parcel
-                {
-                    item.ParcelOnTheWay = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.pick);
-                    item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.supply);
-                    item.ParcelGet = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.supply);
-                    item.ParcelSendAndNotGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State != ParcelState.supply);
-                }
-                return list;
+                throw new GettingProblemException(e.Message, e);
             }
         }
         #endregion
 
-        #region GetCustomer
+        #region GetParcels
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public BO.Customer GetCustomer(string id)
+        public IEnumerable<BO.ParcelOfList> GetParcels()
         {
             try
             {
                 lock (dal)
                 {
-                    DO.Customer customerDO = dal.GetCustomer(id);
-                    BO.Customer customer = (BO.Customer)customerDO.CopyPropertiesToNew(typeof(BO.Customer));
-                    customer.Location = customerDO.GetLocation();
-                    customer.FromCustomer = dal.GetAllParcelsBy(p => (p.Sender) == id).Select(p => GetParcelOfCustomer(p.IdNumber, true)).ToList();//the parcels that the customer send
-                    customer.ToCustomer = dal.GetAllParcelsBy(p => (p.Geter) == id).Select(p => GetParcelOfCustomer(p.IdNumber, false)).ToList();
-                    return customer;
+                    var list = from item in dal.GetParcels() select GetParcelOfList(item.IdNumber);
+                    return list;
                 }
             }
             catch (Exception e)
             { throw new GettingProblemException(e.Message, e); }
+
         }
         #endregion
 
-        #region GetAllCustomersBy
+        #region GetAllParcelsBy
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public IEnumerable<BO.CustomerToList> GetAllCustomersBy(Predicate<BO.CustomerToList> condition)
+        public IEnumerable<BO.ParcelOfList> GetAllParcelsBy(Predicate<BO.ParcelOfList> condition)
         {
-            var list = from item in GetCustomers()
-                       where condition(item)
-                       select item;
-            return list;
+            try
+            {
+                var list = from item in GetParcels()
+                           where condition(item)
+                           select item;
+                return list;
+            }
+            catch (Exception e)
+            { throw new GettingProblemException(e.Message, e); }
+
         }
         #endregion
 
-
-
-
-        #region GetParcelOfCustomer
+        #region GetDroneInParcel
         /// <summary>
-        /// returning parcel as 'parcel of customer'
+        /// returning the drone as 'drone in parcel'
         /// </summary>
-        /// <param name="id">the id of the parcel</param>
-        /// <param name="isSender">flag that tells if this is the sender or geter</param>
+        /// <param name="id">the drone id</param>
         /// <returns></returns>
-        private BO.ParcelOfCustomer GetParcelOfCustomer(string id, bool isSender)
+        private BO.DroneInParcel GetDroneInParcel(string id)
+        {
+            try
+            {
+                BO.Drone drone = GetDrone(id);
+                BO.DroneInParcel droneInParcel = (BO.DroneInParcel)drone.CopyPropertiesToNew(typeof(BO.DroneInParcel));
+                droneInParcel.Location = drone.Location.GetLocation();
+                return droneInParcel;
+            }
+            catch (Exception e)
+            { throw new GettingProblemException(e.Message, e); }
+
+        }
+        #endregion
+
+        #region GetParcelOfList
+        /// <summary>
+        /// returning the parcel as 'parcel of list'
+        /// </summary>
+        /// <param name="id">the parcel id</param>
+        /// <returns></returns>
+        private BO.ParcelOfList GetParcelOfList(string id)
         {
             try
             {
                 lock (dal)
                 {
                     DO.Parcel parcel = dal.GetParcel(id);
-                    BO.ParcelOfCustomer parcelOfCustomer = (BO.ParcelOfCustomer)parcel.CopyPropertiesToNew(typeof(BO.ParcelOfCustomer));
-                    if (isSender == true) parcelOfCustomer.SourceOrDestinaton = GetCustomerOfParcel(parcel.Geter);
-                    else parcelOfCustomer.SourceOrDestinaton = GetCustomerOfParcel(parcel.Sender);
-                    parcelOfCustomer.State = parcel.MatchForDroneTime switch
+                    BO.ParcelOfList parcelOfList = (BO.ParcelOfList)parcel.CopyPropertiesToNew(typeof(BO.ParcelOfList));
+                    parcelOfList.ParcelState = parcel.MatchForDroneTime switch
                     {
                         null => ParcelState.Define,
                         _ => parcel.CollectingDroneTime switch
@@ -237,13 +168,11 @@ namespace BL
                             },
                         },
                     };
-                    return parcelOfCustomer;
+                    return parcelOfList;
                 }
             }
-            catch (Exception e)
-            {
-                throw new GettingProblemException($"error in Parcel number {id}", e);
-            }
+            catch(Exception e)
+            { throw new GettingProblemException(e.Message, e); }
         }
         #endregion
 

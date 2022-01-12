@@ -34,23 +34,27 @@ namespace PL.Pages
         public EventHandler update;
         private BO.ParcelOfList selected;
         private ObservableCollection<BO.ParcelOfList> listParcels = new ObservableCollection<BO.ParcelOfList>();
-        PropertyGroupDescription groupGeter = new PropertyGroupDescription("Geter");
-        PropertyGroupDescription groupSender = new PropertyGroupDescription("Sender");
         PropertyGroupDescription groupPriority = new PropertyGroupDescription("Priority");
         PropertyGroupDescription groupState = new PropertyGroupDescription("ParcelState");
         private void updated(object sender, EventArgs e)
         {
-            startDate.SelectedDate = null;
-            endDate.SelectedDate = null;
-            listParcels.Clear();
-            foreach (var item in bl.GetParcels())
-                listParcels.Add(item);
+            try
+            {
+                startDate.SelectedDate = null;
+                endDate.SelectedDate = null;
+                listParcels.Clear();
+                foreach (var item in bl.GetParcels())
+                    listParcels.Add(item);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcels, please try again later"); }
+
         }
         private void selectionChange(object sender, SelectionChangedEventArgs e)
         {
             selected = (BO.ParcelOfList)ParcelListView.SelectedItem;
         }
-        private void Action(object sender, MouseButtonEventArgs e)//event for double clicking on specific item 
+        private void Action(object sender, MouseButtonEventArgs e)
         {
             if (selected != null)
             {
@@ -79,13 +83,14 @@ namespace PL.Pages
         }
         private void CancelGroupGeter(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            view.GroupDescriptions.Remove(groupGeter);
+            senderCheck.IsEnabled = true;
+            updated(sender, e);
+
         }
         private void CancelGroupSeter(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            view.GroupDescriptions.Remove(groupSender);
+            geterCheck.IsEnabled = true;
+            updated(sender, e);
         }
         private void CancelGroupState(object sender, RoutedEventArgs e)
         {
@@ -99,14 +104,35 @@ namespace PL.Pages
         }
         private void GroupGeter(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            view.GroupDescriptions.Add(groupGeter);
+            senderCheck.IsEnabled = false;
+            try 
+            {
+                var groupedGeter = from item in bl.GetParcels()
+                                   group item by item.Geter;
+                listParcels.Clear();
+                foreach (var group in groupedGeter)
+                    foreach (var item in group)
+                        listParcels.Add(item);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcels, please try again later"); }
+
         }
 
         private void GroupSender(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            view.GroupDescriptions.Add(groupSender);
+            geterCheck.IsEnabled = false;
+            try
+            {
+                var groupedSender = from item in bl.GetParcels()
+                                   group item by item.Sender;
+                listParcels.Clear();
+                foreach (var group in groupedSender)
+                    foreach (var item in group)
+                        listParcels.Add(item);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcels, please try again later"); }
         }
 
         private void GroupState(object sender, RoutedEventArgs e)
@@ -122,41 +148,46 @@ namespace PL.Pages
             view.GroupDescriptions.Add(groupPriority);
         }
         private void changeTime(object sender, SelectionChangedEventArgs e)
-        {
-            if (endDate.SelectedDate == null && startDate.SelectedDate != null)
+        {   listParcels.Clear();
+            try
             {
-                var tempList = from item in bl.GetParcels()
-                               let parcel = bl.GetParcel(item.IdNumber)
-                               where parcel.CreateParcelTime >= startDate.SelectedDate
-                               select item;
-                listParcels.Clear();
-                foreach (var item in tempList)
-                    listParcels.Add(item);
-                return;
-            }
-            if (endDate.SelectedDate != null && startDate.SelectedDate == null)
-            {
-                var tempList = from item in bl.GetParcels()
-                               let parcel = bl.GetParcel(item.IdNumber)
-                               where parcel.CreateParcelTime <= endDate.SelectedDate
-                               select item;
-                listParcels.Clear();
-                foreach (var item in tempList)
-                    listParcels.Add(item);
-                return;
-            }
-            if (endDate.SelectedDate != null && startDate.SelectedDate != null)
-            {
-                var tempList = from item in bl.GetParcels()
-                               let parcel = bl.GetParcel(item.IdNumber)
-                               where parcel.CreateParcelTime >= startDate.SelectedDate && parcel.CreateParcelTime <= endDate.SelectedDate
-                               select item;
-                listParcels.Clear();
-                foreach (var item in tempList)
-                    listParcels.Add(item);
-                return;
+                if (endDate.SelectedDate == null && startDate.SelectedDate != null)
+                {
+                    var tempList = from item in bl.GetParcels()
+                                   let parcel = bl.GetParcel(item.IdNumber)
+                                   where parcel.CreateParcelTime >= startDate.SelectedDate
+                                   select item;
+                    foreach (var item in tempList)
+                        listParcels.Add(item);
+                    return;
+                }
+                if (endDate.SelectedDate != null && startDate.SelectedDate == null)
+                {
+                    var tempList = from item in bl.GetParcels()
+                                   let parcel = bl.GetParcel(item.IdNumber)
+                                   where parcel.CreateParcelTime <= endDate.SelectedDate
+                                   select item;
+                    listParcels.Clear();
+                    foreach (var item in tempList)
+                        listParcels.Add(item);
+                    return;
+                }
+                if (endDate.SelectedDate != null && startDate.SelectedDate != null)
+                {
+                    var tempList = from item in bl.GetParcels()
+                                   let parcel = bl.GetParcel(item.IdNumber)
+                                   where parcel.CreateParcelTime >= startDate.SelectedDate && parcel.CreateParcelTime <= endDate.SelectedDate
+                                   select item;
+                    listParcels.Clear();
+                    foreach (var item in tempList)
+                        listParcels.Add(item);
+                    return;
 
+                }
             }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcels, please try again later"); }
+
         }
     }
 

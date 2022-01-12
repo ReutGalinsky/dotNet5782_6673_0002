@@ -160,7 +160,7 @@ namespace BL
             while (drone.Battery < 100)
             {
                 Thread.Sleep(DELAY);
-                drone.Battery +=bl._speed/6;
+                drone.Battery +=bl._speed/(3600*2);
                 if (drone.Battery > 100) drone.Battery = 100;
                 reportProggress();
             }

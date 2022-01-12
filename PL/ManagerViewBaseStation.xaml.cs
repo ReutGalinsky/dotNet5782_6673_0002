@@ -22,7 +22,12 @@ namespace PL
             InitializeComponent();
             bl = b;
             id = i;
-            baseStation = bl.GetBaseStation(id);
+            try
+            {
+                baseStation = bl.GetBaseStation(id);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the station, please try again later"); }
             foreach (var item in baseStation.Drones)
                 drones.Add(item);
             Id.DataContext = baseStation;
@@ -83,9 +88,15 @@ namespace PL
         }
         private void enableShow(object sender, SelectionChangedEventArgs e)
         {
-            DronesGrid.Visibility = Visibility.Visible;
-            NotPicked.Visibility = Visibility.Collapsed;
-            convertToPo(drone, bl.GetDrone((listDrones.SelectedItem as BO.DroneInCharge).IdNumber));
+            try
+            {
+                DronesGrid.Visibility = Visibility.Visible;
+                NotPicked.Visibility = Visibility.Collapsed;
+                convertToPo(drone, bl.GetDrone((listDrones.SelectedItem as BO.DroneInCharge).IdNumber));
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the drone, please try again later"); }
+
         }
     }
 }

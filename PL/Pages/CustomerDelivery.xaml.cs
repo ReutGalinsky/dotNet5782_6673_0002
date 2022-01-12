@@ -27,8 +27,13 @@ namespace PL.Pages
             bl = b;
             id = i;
             parcels = new ObservableCollection<BO.ParcelOfList>();
-            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))
-                parcels.Add(s);
+            try
+            {
+                foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))
+                    parcels.Add(s);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcels, please try again later"); }
             Delivery.DataContext = parcels;
             update += updated;
         }
@@ -56,9 +61,15 @@ namespace PL.Pages
         }
         private void updated(object sender, EventArgs e)
         {
-            parcels.Clear();
-            foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))
-                parcels.Add(s);
+            try
+            {
+                parcels.Clear();
+                foreach (BO.ParcelOfList s in bl.GetAllParcelsBy(x => x.Geter == id))
+                    parcels.Add(s);
+            }
+            catch (Exception)
+            { MessageBox.Show("Error in loading the parcels, please try again later"); }
+
         }
         private void deleteParcel(object sender, RoutedEventArgs e)
         {
