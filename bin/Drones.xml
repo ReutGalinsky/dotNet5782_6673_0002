@@ -1,13 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Array xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
-    <IdNumber>250</IdNumber>
-    <Model>Dji Tello</Model>
-    <MaxWeight>Light</MaxWeight>
-  </Drone>
-  <Drone>
-    <IdNumber>500</IdNumber>
-    <Model>syma X8 PRO</Model>
+    <IdNumber>123</IdNumber>
+    <Model>gkjhgh</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
 </Array>

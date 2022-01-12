@@ -41,19 +41,19 @@
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Background="#FFE2A536" Grid.ColumnSpan="4" MouseDown="Grid_MouseDown"/>
-        <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="3" Margin="0,-3,0,3">
+        <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="3" Margin="34,-1,-34,1">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -74,34 +74,48 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Border Background="Gray" CornerRadius="10" Opacity="0.5" Margin="16,38,14,0" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="8" Grid.ColumnSpan="2" Grid.Column="1"/>
-        <TextBlock Text="My Drone:" Margin="64,18,0,0" FontWeight="Light" FontSize="40" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
-        <Border Background="Black" Opacity="0.5" Margin="30,31,48,12" Height="2" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
-        <Grid x:Name="GridOptions" Background="LightGray" Visibility="Hidden" Margin="0,44,62,0" Grid.Row="1" Grid.RowSpan="9">
+        <TextBlock Text="Parcel:" Margin="46,61,0,0" FontWeight="Light" FontSize="25" Width="178" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"/>
+        <Border Background="Black" Opacity="0.5" Margin="44,16,48,22" Grid.Column="3" Grid.Row="2" RenderTransformOrigin="0.5,0.5"  />
+        <TextBlock Text="Options:" Margin="28,35,0,0" FontWeight="Light" FontSize="25" Width="178" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Border Background="Black" Opacity="0.5" Margin="36,67,56,6" Grid.Row="1" RenderTransformOrigin="0.5,0.5"  />
+
+
+
+        <Border Background="Gray" CornerRadius="10" Opacity="0.5" Margin="143,3,14,18" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="8" Grid.ColumnSpan="3"/>
+        <TextBlock Text="My Drone:" Margin="64,15,0,0" FontWeight="Light" FontSize="40" Width="180" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+        <Border Background="Black" Opacity="0.5" Margin="66,60,86,13" Height="2" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+        <!--<Grid x:Name="GridOptions" Background="LightGray"   Margin="14,72,26,0" Grid.Row="1" Grid.RowSpan="8">
+           
+            <Grid.RowDefinitions>
+                <RowDefinition Height="185*"/>
+                <RowDefinition Height="187*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="22*"/>
                 <ColumnDefinition Width="17*"/>
                 <ColumnDefinition Width="62*"/>
             </Grid.ColumnDefinitions>
-        </Grid>
-        <TextBlock Text="Id number:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        </Grid>-->
+        <Border x:Name="GridOptions" Visibility="hidden" Background="LightGray" Margin="14,72,26,0" Grid.Row="1" Grid.RowSpan="8" CornerRadius="10"/>
+
+        <TextBlock Text="Id number:" HorizontalAlignment="Center" FontSize="24" FontFamily="Yu Gothic Medium"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Width="164" />
         <TextBox x:Name="Id" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Grid.Row="2" Grid.Column="2" />
-        <TextBlock Text="Model:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <TextBlock Text="Model:" HorizontalAlignment="Center"  FontSize="24" FontFamily="Yu Gothic Medium" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Width="159" />
         <TextBox x:Name="Model" Background="{x:Null}" Text="{Binding Path=Model}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30"  Grid.Row="3" Grid.Column="2" />
-        <TextBlock Text="Drone State:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
+        <TextBlock Text="Drone State:" HorizontalAlignment="Center"  FontSize="24" FontFamily="Yu Gothic Medium" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Width="164" />
         <TextBox x:Name="State" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=State}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Grid.Row="4" Grid.Column="2" />
-        <TextBlock Text="Drone Battery:" IsEnabled="False" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
+        <TextBlock Text="Drone Battery:" IsEnabled="False" HorizontalAlignment="Left" FontSize="24" FontFamily="Yu Gothic Medium"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.ColumnSpan="2" Margin="161,0,0,0" />
         <Rectangle x:Name="batteryRectangle" Fill="AliceBlue" Width="{Binding Path=Battery}" Grid.Column="2" Margin="32,8,0,8" Grid.Row="5" HorizontalAlignment="Left"/>
         <TextBox x:Name="Battery" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=Battery}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Grid.Row="5" Grid.Column="2">
 
         </TextBox>
-        <TextBlock Text="Drone Max Weight:" IsEnabled="False" HorizontalAlignment="Center" 
-                   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
+        <TextBlock Text="Max Weight:" IsEnabled="False" HorizontalAlignment="Center" FontSize="24" FontFamily="Yu Gothic Medium"
+                   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Width="164" />
         <TextBox x:Name="Weight" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=MaxWeight}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Grid.Row="6" Grid.Column="2" />
-        <TextBlock Text="Longitude:" HorizontalAlignment="Center" 
-                   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" />
+        <TextBlock Text="Longitude:" HorizontalAlignment="Center" FontSize="24" FontFamily="Yu Gothic Medium"
+                   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" Width="163" />
         <TextBox x:Name="Longitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Grid.Row="7" Grid.Column="2" />
-        <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" />
+        <TextBlock Text="Latitude:" HorizontalAlignment="Center"  FontSize="24" FontFamily="Yu Gothic Medium" FontWeight="Medium" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" Width="163" />
         <TextBox x:Name="Latitude" IsEnabled="False" Background="{x:Null}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Grid.Row="8" Grid.Column="2" />
         <Border CornerRadius="10" Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="6,23,9,0" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="7">
             <Grid x:Name="ParcelGrid" Visibility="{Binding Converter={StaticResource VisibleParcel}}">
@@ -118,8 +132,8 @@
             </Grid>
         </Border>
 
-        <iconPacks:PackIconMaterial Kind="PackageVariant" Grid.Column="3" Margin="0,23,0,0" Grid.Row="2" Height="22" Width="55" HorizontalAlignment="Center"></iconPacks:PackIconMaterial>
-        <Button x:Name="updateButton" Content="Update" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="9" Height="50" Width="100" Margin="112,0,0,0" Grid.ColumnSpan="2">
+        <iconPacks:PackIconMaterial Kind="PackageVariant" Grid.Column="3" Margin="0,23,0,0" Grid.Row="2" Height="39" Width="55" HorizontalAlignment="Center" Grid.RowSpan="2"></iconPacks:PackIconMaterial>
+        <Button x:Name="updateButton" Content="Update" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="8" Height="50" Width="100" Margin="94,34,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -142,12 +156,31 @@
         </Button>
         <TextBlock x:Name="textParcel" Visibility="{Binding Converter={StaticResource DisVisibleText}}" Text="There isn't delivery" Grid.Column="3" Margin="10,32,-10,23" Grid.RowSpan="2" Grid.Row="3" FontFamily="Ink Free" FontSize="16"/>
 
-        <Button x:Name="buttonMenue" Click="Button_Click_1" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.507,0.41" Width="100" Height="45" Grid.Row="1">
+        <Button x:Name="buttonMenue" Click="Button_Click_1" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" RenderTransformOrigin="0.507,0.41" Width="100" Height="82" Grid.Row="1" Margin="22,56,0,0" Grid.RowSpan="3">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="75" Height="35" CornerRadius="8" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
             <Button.Content>
                 <iconPacks:PackIconMaterial x:Name="CloseOptions" Kind="Wrench"/>
             </Button.Content>
         </Button>
-        <Button Content="Start Shipping" Visibility="Collapsed" Click="shipButton" x:Name="shippingButton" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Height="50" Width="100" Margin="0,25,0,0" Grid.RowSpan="2">
+        <Button Content="Start Shipping" Visibility="Collapsed" Click="shipButton" x:Name="shippingButton" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="3" Height="50" Width="100" Margin="22,19,0,0" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -168,7 +201,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Start Charging" Visibility="Collapsed" Click="charge" x:Name="chargingButton" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="3" Height="50" Width="100" Margin="0,22,0,0" Grid.RowSpan="2">
+        <Button Content="Start Charging"  Click="charge" x:Name="chargingButton" Visibility="Collapsed" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="4" Height="50" Width="100" Margin="24,11,0,0" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -189,7 +222,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Stop Charging" Visibility="Collapsed" Click="releaseMethod" x:Name="releaseButton" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="3" Height="50" Width="100" Margin="0,23,0,0" Grid.RowSpan="2">
+        <Button Content="Stop Charging" Click="releaseMethod" Visibility="Collapsed" x:Name="releaseButton" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="4" Height="50" Width="100" Margin="24,11,0,0" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -210,7 +243,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Supply Parcel" Visibility="Collapsed" Click="supplyButton" x:Name="suppltingButton" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Height="50" Width="100" Margin="0,25,0,0" Grid.RowSpan="2">
+        <Button Content="Supply Parcel" Click="supplyButton" x:Name="suppltingButton" Visibility="Collapsed" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="5" Height="50" Width="100" Margin="26,37,0,0" Grid.RowSpan="3">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -232,7 +265,7 @@
             </Button.Template>
         </Button>
 
-        <Button Content="Pick Parcel" Click="pickingButton" Visibility="Collapsed" x:Name="pickButton" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Height="50" Width="100" Margin="0,25,0,0" Grid.RowSpan="2">
+        <Button Content="Pick Parcel" Click="pickingButton" x:Name="pickButton" Visibility="Collapsed" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="5" Height="50" Width="100" Margin="24,3,0,0" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -253,7 +286,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Automatic" Click="StartSimulation_Click" Visibility="Collapsed" x:Name="Auto" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="4" Height="50" Width="100" Margin="0,18,0,0" Grid.RowSpan="2">
+        <Button Content="Automatic" Click="StartSimulation_Click"  x:Name="Auto" Visibility="Collapsed" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="6" Height="50" Width="100" Margin="24,31,0,0" Grid.RowSpan="3">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -274,7 +307,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Manual" Click="stop" Visibility="Collapsed" x:Name="Manual" Foreground="White" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="4" Height="50" Width="100" Margin="0,18,0,0" Grid.RowSpan="2">
+        <Button Content="Manual" Click="stop"  x:Name="Manual" Foreground="White" Visibility="Collapsed" FontSize="10" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="7" Height="50" Width="100" Margin="24,23,0,0" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>

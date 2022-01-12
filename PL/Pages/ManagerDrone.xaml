@@ -48,9 +48,9 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <Border Background="Gray" Opacity="0.5" Margin="22,38,35,309"/>
+        <Border Background="lightblue" Opacity="1" Margin="22,31,51,303" CornerRadius="10" RenderTransformOrigin="0.5,0.5"/>
 
-        <ListView x:Name="DroneListView" ItemsSource="{Binding}" HorizontalContentAlignment="Center" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="22,67,34,21" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
+        <ListView x:Name="DroneListView" ItemsSource="{Binding}" HorizontalContentAlignment="Center" ItemTemplate="{StaticResource MyDataTemplate}"  Margin="22,71,50,21" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -147,8 +147,8 @@
             </ListView.GroupStyle>
 
         </ListView>
-        <CheckBox x:Name="StateCheck" FontFamily="Yu Gothic Medium" Content="Show By State" HorizontalAlignment="Left" Margin="378,46,0,0" VerticalAlignment="Top" Checked="checkedState" Unchecked="uncheckedState"/>
-        <CheckBox Content="Group By Weight" FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="179,44,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="uncheckedWeight"/>
+        <CheckBox x:Name="StateCheck" FontFamily="Yu Gothic Medium" Foreground="white" Content="Show By State" HorizontalAlignment="Left" Margin="378,46,0,0" VerticalAlignment="Top" Checked="checkedState" Unchecked="uncheckedState" FontSize="16"/>
+        <CheckBox Content="Group By Weight" Foreground="white" FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="190,45,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="uncheckedWeight" FontSize="16"/>
 
     </Grid>
 </Page>

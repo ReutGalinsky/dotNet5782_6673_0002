@@ -9,12 +9,12 @@
       d:DesignHeight="400" d:DesignWidth="700"
       Title="ManagerParcel">
     <Grid>
-        <Border Background="Gray" Opacity="0.5" Margin="21,38,24,305" RenderTransformOrigin="0.5,0.5"/>
+        <Border Background="lightblue" Opacity="1" Margin="22,5,51,303" CornerRadius="10" RenderTransformOrigin="0.5,0.5"/>
 
-        <ListView x:Name="ParcelListView" ItemsSource="{Binding}" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Margin="0,71,0,11" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Width="658">
+        <ListView x:Name="ParcelListView" ItemsSource="{Binding}" VerticalContentAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="23,72,0,17" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Width="626">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="50">
+                    <GridViewColumn Width="70">
                         <GridViewColumn.Header>
                             <TextBlock Text="Number" FontFamily="Yu Gothic Medium"></TextBlock>
                         </GridViewColumn.Header>
@@ -25,7 +25,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Width="120">
+                    <GridViewColumn Width="100">
                         <GridViewColumn.Header>
                             <TextBlock Text="Sender" FontFamily="Yu Gothic Medium"></TextBlock>
                         </GridViewColumn.Header>
@@ -37,7 +37,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Width="120">
+                    <GridViewColumn  Width="100">
                         <GridViewColumn.Header>
                             <TextBlock Text="Geter" FontFamily="Yu Gothic Medium"></TextBlock>
                         </GridViewColumn.Header>
@@ -47,7 +47,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="70">
+                    <GridViewColumn Width="80">
                         <GridViewColumn.Header>
                             <TextBlock Text="Weight" FontFamily="Yu Gothic Medium"></TextBlock>
                         </GridViewColumn.Header>
@@ -57,7 +57,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="120">
+                    <GridViewColumn Width="100">
                         <GridViewColumn.Header>
                             <TextBlock Text="Priority" FontFamily="Yu Gothic Medium"></TextBlock>
                         </GridViewColumn.Header>
@@ -68,7 +68,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn  Width="120">
+                    <GridViewColumn  Width="100">
                         <GridViewColumn.Header>
                             <TextBlock Text="State" FontFamily="Yu Gothic Medium"></TextBlock>
                         </GridViewColumn.Header>
@@ -109,10 +109,10 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <CheckBox x:Name="senderCheck" Content="Group By Sender" HorizontalAlignment="Left" Margin="64,46,0,0" VerticalAlignment="Top" Checked="GroupSender" Unchecked="CancelGroupSeter" RenderTransformOrigin="-0.07,0.682" FontFamily="Yu Gothic Medium"/>
-        <CheckBox x:Name="geterCheck" Content="Group By Geter"  FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="196,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroupGeter" Checked="GroupGeter"/>
-        <CheckBox Content="Group By State" HorizontalAlignment="Left"  FontFamily="Yu Gothic Medium" Margin="514,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroupState" Checked="GroupState"/>
-        <CheckBox Content="Group By Priority" HorizontalAlignment="Left"  FontFamily="Yu Gothic Medium" Margin="388,46,0,0" VerticalAlignment="Top" Unchecked="CancelGroupPriority" Checked="GroupPriority"/>
+        <CheckBox x:Name="senderCheck" Content="Group By Sender" FontSize="16"  HorizontalAlignment="Left" Margin="29,47,0,0" VerticalAlignment="Top" Checked="GroupSender" Unchecked="CancelGroupSeter" RenderTransformOrigin="-0.07,0.682" FontFamily="Yu Gothic Medium"/>
+        <CheckBox x:Name="geterCheck" Content="Group By Geter" FontSize="16"  FontFamily="Yu Gothic Medium" HorizontalAlignment="Left" Margin="187,50,0,0" VerticalAlignment="Top" Unchecked="CancelGroupGeter" Checked="GroupGeter"/>
+        <CheckBox Content="Group By State" HorizontalAlignment="Left" FontSize="16"  FontFamily="Yu Gothic Medium" Margin="486,50,0,0" VerticalAlignment="Top" Unchecked="CancelGroupState" Checked="GroupState"/>
+        <CheckBox Content="Group By Priority" HorizontalAlignment="Left" FontSize="16"  FontFamily="Yu Gothic Medium" Margin="331,50,0,0" VerticalAlignment="Top" Unchecked="CancelGroupPriority" Checked="GroupPriority"/>
         <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="196,11,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime" FontFamily="Yu Gothic Medium"/>
         <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="362,11,0,0" VerticalAlignment="Top" SelectedDateChanged="changeTime" FontFamily="Yu Gothic Medium"/>
         <TextBlock HorizontalAlignment="Left" Margin="139,14,0,0" Text="Start Date:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="10" FontFamily="Yu Gothic Medium"/>

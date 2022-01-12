@@ -46,7 +46,7 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <Border Background="Gray" Opacity="0.5" Margin="22,38,51,303" RenderTransformOrigin="0.5,0.5"/>
+        <Border Background="lightblue" Opacity="1" Margin="22,31,51,303" CornerRadius="10" RenderTransformOrigin="0.5,0.5"/>
 
         <ListView x:Name="Delivery" HorizontalContentAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="22,73,0,0" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Height="289" Width="627">
             <ListView.View>
@@ -139,8 +139,8 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="264,50,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheckWeight" FontFamily="Yu Gothic Medium"/>
-        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="485,49,0,0" VerticalAlignment="Top" Unchecked="unCheckState" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741" FontFamily="Yu Gothic Medium"/>
+        <CheckBox Content="Group By Weight" Foreground="White"  HorizontalAlignment="Left" Margin="96,42,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheckWeight" FontFamily="Yu Gothic Medium" FontSize="16"/>
+        <CheckBox Content="Group By State" Foreground="White" HorizontalAlignment="Left" Margin="371,41,0,0" VerticalAlignment="Top" Unchecked="unCheckState" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741" FontFamily="Yu Gothic Medium" FontSize="16"/>
 
     </Grid>
 </Page>

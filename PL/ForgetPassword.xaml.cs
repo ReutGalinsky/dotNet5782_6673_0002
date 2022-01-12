@@ -23,22 +23,21 @@ namespace PL
         public ForgetPassword()
         {
             InitializeComponent();
-        }   
+          
+        }
+      
+   
         private void move(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+       
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
     }
 }
 

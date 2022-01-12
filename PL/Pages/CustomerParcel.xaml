@@ -47,12 +47,12 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <Border Background="Gray" Opacity="0.5" Margin="22,38,51,303" RenderTransformOrigin="0.5,0.5"/>
-
+        <Border Background="lightblue" Opacity="1" Margin="22,31,51,303" CornerRadius="10" RenderTransformOrigin="0.5,0.5"/>
+        
         <ListView x:Name="ParcelListView" HorizontalContentAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="22,73,0,0" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}" Height="291" Width="627">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn>
+                    <GridViewColumn Width="50">
                         <GridViewColumn.Header>
                             <TextBlock Text="Number" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
@@ -140,8 +140,8 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="267,57,0,0" VerticalAlignment="Top" Checked="WeightCheck" Unchecked="unCheckWeight" FontFamily="Yu Gothic Medium"/>
-        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="485,54,0,0" VerticalAlignment="Top" Unchecked="unCheckState" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741" FontFamily="Yu Gothic Medium"/>
+        <CheckBox Content="Group By Weight" HorizontalAlignment="Left" Margin="101,41,0,0" VerticalAlignment="Top" Foreground="White" Checked="WeightCheck" Unchecked="unCheckWeight" FontFamily="Yu Gothic Medium"  FontSize="16"/>
+        <CheckBox Content="Group By State" HorizontalAlignment="Left" Margin="410,43,0,0" VerticalAlignment="Top" Foreground="White" Unchecked="unCheckState" Checked="StateCheck" RenderTransformOrigin="0.187,-4.741" FontFamily="Yu Gothic Medium"  FontSize="16"/>
 
     </Grid>
 </Page>

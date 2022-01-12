@@ -1,3 +1,17 @@
 <?xml version="1.0"?>
 <Array xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer>
+    <IdNumber>12345</IdNumber>
+    <Name>user</Name>
+    <Phone>0584529888</Phone>
+    <Latitude>33.3</Latitude>
+    <Longitude>34.5</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>123</IdNumber>
+    <Name>ossa</Name>
+    <Phone>090</Phone>
+    <Latitude>33</Latitude>
+    <Longitude>34.5</Longitude>
+  </Customer>
 </Array>

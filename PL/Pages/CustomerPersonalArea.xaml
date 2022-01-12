@@ -22,7 +22,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="184,247,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Yu Gothic Medium" Width="103" Height="37"/>
         <TextBox x:Name="Longitude" HorizontalAlignment="Left" IsEnabled="False" Margin="303,208,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Height="25"/>
         <TextBox x:Name="Latitude" HorizontalAlignment="Left" IsEnabled="False" Margin="303,253,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Height="25"/>
-        <Button x:Name="updatingButton" Visibility="Collapsed" Content="Update Please" Click="Button_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="253,288,250,42">
+        <Button x:Name="updatingButton" Visibility="Collapsed" Content="Update Please" Click="Button_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="252,273,251,57">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>

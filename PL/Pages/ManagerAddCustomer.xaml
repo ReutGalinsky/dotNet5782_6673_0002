@@ -17,27 +17,27 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
             <RowDefinition/>
 
 
         </Grid.RowDefinitions>
-        <Border Background="LightBlue" CornerRadius="10" Opacity="0.5" Margin="152,101,154,36" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="7"/>
+        <Border Background="LightBlue" CornerRadius="10" Opacity="0.5" Margin="61,58,70,21" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4" Grid.RowSpan="7"/>
 
-        <TextBlock Text="Id number:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+        <TextBlock Text="Id number:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"  FontSize="24" FontFamily="Yu Gothic Medium" Width="179" />
         <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="1" Grid.Column="2" TextChanged="Focus" />
-        <TextBlock Text="Name:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <TextBlock Text="Name:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"  FontSize="24" FontFamily="Yu Gothic Medium" Width="137"/>
         <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="2" Grid.Column="2" TextChanged="Focus" />
-        <TextBlock Text="Phone:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <TextBlock Text="Phone:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"  FontSize="24" FontFamily="Yu Gothic Medium" Width="140"/>
         <TextBox x:Name="Phone" Background="{x:Null}"  Text="{Binding Path=Phone, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" PreviewKeyDown="Onlynumbers" Grid.Row="3" Grid.Column="2" TextChanged="Focus" />
-        <TextBlock Text="Longitude:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
+        <TextBlock Text="Longitude:" HorizontalAlignment="Center"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" FontSize="24" FontFamily="Yu Gothic Medium" Width="177" />
         <TextBox x:Name="Longitude" Background="{x:Null}"  Text="{Binding Path=Location.Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="2" TextChanged="Focus" />
-        <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
+        <TextBlock Text="Latitude:" HorizontalAlignment="Center"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1"  FontSize="24" FontFamily="Yu Gothic Medium" Width="177"/>
         <TextBox x:Name="Latitude" Background="{x:Null}"  Text="{Binding Path=Location.Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="2" TextChanged="Focus" />
         <iconPacks:PackIconMaterial Kind="Information" Grid.Column="2" Margin="138,6,0,0" Grid.Row="5" Height="19" Width="20">
             <iconPacks:PackIconMaterial.ToolTip>
@@ -49,7 +49,7 @@
                 <TextBlock Text="Longitude in israel its between 34.5 to 35.6" FontFamily="Ink Free"></TextBlock>
             </iconPacks:PackIconMaterial.ToolTip>
         </iconPacks:PackIconMaterial>
-        <Button x:Name="ADD" Content="Add" IsEnabled="False" Foreground="White" FontSize="10" FontWeight="Medium" Margin="82,8,80,34" Grid.Column="1" Click="Add_Click" Grid.ColumnSpan="2" Grid.Row="6">
+        <Button x:Name="ADD" Content="Add" IsEnabled="False" Foreground="White" FontSize="10" FontWeight="Medium" Margin="171,37,11,26" Click="Add_Click" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>

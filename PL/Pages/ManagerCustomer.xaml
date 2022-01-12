@@ -9,9 +9,9 @@
       d:DesignHeight="400" d:DesignWidth="700"
       Title="ManagerCustomer">
     <Grid>
-        <Border Background="Gray" Opacity="0.5" Margin="44,38,44,306"/>
+        <Border Background="lightblue" Opacity="1" Margin="22,31,51,303" CornerRadius="10" RenderTransformOrigin="0.5,0.5"/>
 
-        <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Margin="41,69,43,69" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
+        <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Margin="22,72,51,66" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="150">
@@ -65,13 +65,13 @@
             </ListView.View>
         </ListView>
 
-        <ComboBox x:Name="OnWay" HorizontalAlignment="Left" Margin="507,44,0,0" VerticalAlignment="Top" Width="144" Height="20" SelectionChanged="OnWaySelector" >
+        <ComboBox x:Name="OnWay" HorizontalAlignment="Left" Margin="491,44,0,0" VerticalAlignment="Top" Width="144" Height="20" SelectionChanged="OnWaySelector" >
             <ComboBoxItem Tag="all" Content="All"></ComboBoxItem>
             <ComboBoxItem Tag="onWay" Content="Parcels on way"></ComboBoxItem>
             <ComboBoxItem Tag="notOnWay" Content="No parcels on way"></ComboBoxItem>
         </ComboBox>
-        <RadioButton x:Name="id" Content="Order By Number" GroupName="key1" HorizontalAlignment="Left" Margin="45,51,0,0" VerticalAlignment="Top" Checked="idCheck" FontFamily="Yu Gothic Medium" Width="124"/>
-        <RadioButton x:Name="name" Content="Order By Name " GroupName="key1" HorizontalAlignment="Left" Margin="193,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="111" Checked="nameCheck" FontFamily="Yu Gothic Medium">
+        <RadioButton x:Name="id" Content="Order By Number" GroupName="key1" Foreground="white"  HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Checked="idCheck" FontFamily="Yu Gothic Medium" Width="124"/>
+        <RadioButton x:Name="name" Content="Order By Name " GroupName="key1" Foreground="white" HorizontalAlignment="Left" Margin="193,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="111" Checked="nameCheck" FontFamily="Yu Gothic Medium">
             <RadioButton.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

@@ -5,15 +5,24 @@
     <UserPassword>reutreut</UserPassword>
     <isManager>true</isManager>
   </User>
-	<User>
-		<UserName>osnat</UserName>
-		<UserPassword>osnatosnat</UserPassword>
-		<isManager>true</isManager>
-	</User>
-	<User>
-		<UserName>nurit</UserName>
-		<UserPassword>nuritnurit</UserPassword>
-		<isManager>true</isManager>
-	</User>
-
+  <User>
+    <UserName>osnat</UserName>
+    <UserPassword>osnatosnat</UserPassword>
+    <isManager>true</isManager>
+  </User>
+  <User>
+    <UserName>nurit</UserName>
+    <UserPassword>nuritnurit</UserPassword>
+    <isManager>true</isManager>
+  </User>
+  <User>
+    <UserName>12345</UserName>
+    <UserPassword>962541098</UserPassword>
+    <isManager>false</isManager>
+  </User>
+  <User>
+    <UserName>123</UserName>
+    <UserPassword>123456</UserPassword>
+    <isManager>false</isManager>
+  </User>
 </Array>

@@ -76,32 +76,10 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <TextBlock Text="Welcome To Deli-Drone" Margin="88,61,0,106" FontWeight="Light" FontFamily="/Fonts/regular" HorizontalAlignment="Left" FontSize="50" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1" Width="548"/>
-            <Button x:Name="stop" Click="Stop_Click" Visibility="Collapsed" Foreground="Transparent" Grid.Row="3" Grid.Column="3" Margin="9,24,31,31">
+            <TextBlock Text="Welcome To Deli-Drone" Margin="44,61,0,106" FontWeight="Light" FontFamily="/Fonts/regular" HorizontalAlignment="Left" FontSize="60" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1" Width="608"/>
+            <Button x:Name="stop" Click="Stop_Click" Visibility="Collapsed" Foreground="Transparent" Grid.Row="3" Grid.Column="3" Margin="2,6,30,31">
                 <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="StopCircle" Width="30" Foreground="Black" Height="30" RenderTransformOrigin="0.5,0.5" />
-                </Button.Content>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Cursor" Value="Hand"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="White"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="30" Background="{TemplateBinding Background}" Margin="0,28,29,0">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button x:Name="play" Click="Play_Click" Foreground="Transparent" Grid.Row="3" Grid.Column="3" Margin="2,6,30,31">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="PlayCircle" Width="34" Foreground="Black" Height="34" HorizontalAlignment="Center" />
+                    <iconPacks:PackIconMaterial Kind="StopCircle" Width="42" Foreground="Black" Height="34" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" />
                 </Button.Content>
                 <Button.Style>
                     <Style TargetType="Button">
@@ -109,7 +87,30 @@
                         <Setter Property="Cursor" Value="Hand"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Background" Value="transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="30" Background="{TemplateBinding Background}" Margin="0,34,29,0">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="play" Click="Play_Click" Foreground="Transparent" Grid.Row="3" Grid.Column="3" Margin="2,6,30,31">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="PlayCircle" Width="34" Foreground="Black" Height="34" />
+                </Button.Content>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="transparent"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -132,7 +133,7 @@
                         <Setter Property="Cursor" Value="Hand"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Background" Value="transparent"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -155,7 +156,7 @@
                         <Setter Property="Cursor" Value="Hand"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Background" Value="transparent"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>

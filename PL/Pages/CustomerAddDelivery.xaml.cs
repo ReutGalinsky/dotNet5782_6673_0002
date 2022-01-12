@@ -44,6 +44,7 @@ namespace PL.Pages
                 parcel.Geter = ((BO.CustomerToList)(Geters.SelectedItem)).IdNumber;
                 bl.AddParcelToDelivery(parcel);
                 updateList(sender, e);
+                MessageBox.Show("Your parcel been added successfully!");
             }
             catch (Exception ex)
             {

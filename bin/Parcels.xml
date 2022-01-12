@@ -1,3 +1,25 @@
 <?xml version="1.0"?>
 <Array xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Parcel>
+    <IdNumber>32</IdNumber>
+    <Sender>123</Sender>
+    <Geter>12345</Geter>
+    <Weight>Middle</Weight>
+    <Priority>Regular</Priority>
+    <CreateParcelTime>2022-01-12T10:52:57.2471747+02:00</CreateParcelTime>
+    <MatchForDroneTime xsi:nil="true" />
+    <CollectingDroneTime xsi:nil="true" />
+    <ArrivingDroneTime xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <IdNumber>33</IdNumber>
+    <Sender>123</Sender>
+    <Geter>12345</Geter>
+    <Weight>Middle</Weight>
+    <Priority>speed</Priority>
+    <CreateParcelTime>2022-01-12T10:53:23.4375191+02:00</CreateParcelTime>
+    <MatchForDroneTime xsi:nil="true" />
+    <CollectingDroneTime xsi:nil="true" />
+    <ArrivingDroneTime xsi:nil="true" />
+  </Parcel>
 </Array>

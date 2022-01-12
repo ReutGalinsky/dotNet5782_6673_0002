@@ -29,6 +29,8 @@
             <TextBlock Text="New Meaning For Delivery." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontSize="20" Margin="5,0,0,0" FontWeight="Medium" FontFamily="Fonts/#regular"/>
 
         </StackPanel>
+        <TextBlock Text="Log-In To Deli-Drone" Margin="0,50,0,0" FontWeight="Light" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontSize="60"/>
+
         <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="2">
             <Button.Style>
                 <Style TargetType="Button">
@@ -71,8 +73,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
-        <TextBlock Text="Log-In To Deli-Drone" Margin="0,50,0,0" FontWeight="Light" FontFamily="/Fonts/regular" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontSize="50"/>
         <TextBox x:Name="user" Background="Transparent" Text="Username:" Width="355" Grid.Row="2" Grid.Column="1" FontFamily="/Fonts/regular" FontWeight="Medium" Margin="120,75,0,48" FontSize="24" GotFocus="focusUser" Opacity="0.5" Foreground="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
         <iconPacks:PackIconMaterial Kind="Account" Foreground="Black" Grid.Row="2" Grid.Column="1" Opacity="0.5" Width="47" Height="42" RenderTransformOrigin="0.525,0.48" Margin="472,0,0,0" VerticalAlignment="Center"  />
         <Border Height="2" Background="Black" Opacity="0.5" Grid.Row="2" Grid.Column="1" Margin="113,104,182,49"/>
@@ -80,7 +80,7 @@
         <Border Height="2" Background="Black" Opacity="0.5" Grid.Row="2" Grid.Column="1" Margin="113,144,182,9"/>
         <iconPacks:PackIconMaterial Kind="Key" Foreground="Black" Grid.Row="2" Grid.Column="1" Opacity="0.5" Width="47" Height="42" RenderTransformOrigin="0.525,0.48" Margin="472,100,0,0" VerticalAlignment="Center"  />
         <CheckBox x:Name="check" Content="Show Password" Cursor="Hand"  Grid.Column="1" Grid.Row="3" Margin="110,0,472,136" Unchecked="showPassword" Checked="showText"/>
-        <Button Content="Login" Click="Login_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="190,50,250,50" Grid.Column="1">
+        <Button Content="Login" Click="Login_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="190,26,250,74" Grid.Column="1">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -101,7 +101,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Forget password?" Click="Forget_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="40,50,400,50" Grid.Column="1">
+        <Button Content="Forget password?" Click="Forget_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Row="3" Margin="40,26,400,74" Grid.Column="1">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -122,7 +122,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Don't have an account?" Click="Account_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="1" Grid.Row="3" Margin="340,50,100,50">
+        <Button Content="Don't have an account?" Click="Account_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="1" Grid.Row="3" Margin="340,26,100,74">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>

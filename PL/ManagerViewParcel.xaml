@@ -25,7 +25,7 @@
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="0"/>
             <RowDefinition Height="0"/>
@@ -43,7 +43,7 @@
 
         </Grid.RowDefinitions>
         <Grid Background="#FFE2A536" Grid.ColumnSpan="4" MouseDown="Grid_MouseDown"/>
-        <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="3" Margin="127,0,0,0">
+        <Button Content="Close" Click="Close_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.Column="3" Margin="127,-2,0,2">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="TextElement.FontFamily" Value="Fonts/#regular"/>
@@ -64,8 +64,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TextBlock Text="Delivering Drone:" Margin="4,22,0,0" FontWeight="Light" FontSize="24" Width="178" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Row="1"/>
-        <Border Background="Black" Opacity="0.5" Margin="12,51,24,47" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
+        <TextBlock Text="Delivering Drone:" Margin="2,22,0,0" FontWeight="Light" FontSize="24" Width="178" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <Border Background="Black" Opacity="0.5" Margin="8,51,4,47" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
         <Border  CornerRadius="10" Background="LightGray" BorderBrush="Gray" Opacity="0.5" Margin="18,70,33,48" RenderTransformOrigin="0.752,0.498" Grid.Row="1" Grid.RowSpan="12">
             <Grid x:Name="GridDrone" Visibility="{Binding Converter={StaticResource droneDetail}}">
                 <Grid x:Name="innerDrone">
@@ -88,8 +88,8 @@
             </Grid>
         </Border>
 
-        <TextBlock Text="Customers:" Margin="18,17,0,0" FontWeight="Light" FontSize="25" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1"/>
-        <Border Background="Black" Opacity="0.5" Margin="12,51,24,47" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
+        <TextBlock Text="Customers:" Margin="46,17,0,0" FontWeight="Light" FontSize="25" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1"/>
+        <Border Background="Black" Opacity="0.5" Margin="48,45,44,53" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
         <Border Background="LightGray"  CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="168,68,9,27" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="2">
             <Grid x:Name="GridSender">
                 <TextBlock Text="Id number:" HorizontalAlignment="Left" IsEnabled="False"  FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="17,31,0,0" />
@@ -115,7 +115,7 @@
         <Border Background="Gray" CornerRadius="10" Opacity="0.5" Margin="1,67,29,78" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="12" Grid.ColumnSpan="2"/>
 
         <TextBlock Text="My Parcel:" Margin="63,34,0,0" FontWeight="Light" FontSize="40" Width="179" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
-        <Border Background="Black" Opacity="0.5" Margin="27,49,50,49" Height="2" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+        <Border Background="Black" Opacity="0.5" Margin="63,53,94,45" Height="2" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
 
 
         <TextBlock Text="Id Parcel number:"  FontSize="14" FontWeight="Medium" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="21" Width="120" Grid.Column="1" Margin="10,76,0,0" />

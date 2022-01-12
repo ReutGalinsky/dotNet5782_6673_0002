@@ -58,6 +58,10 @@ namespace PL
                 MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
         private void Focus(object sender, TextChangedEventArgs e)
         {
