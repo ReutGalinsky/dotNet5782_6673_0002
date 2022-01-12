@@ -62,7 +62,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="130">
+                    <GridViewColumn Width="170">
                         <GridViewColumn.Header>
                             <TextBlock Text="Name" FontFamily="Bahnschrift SemiCondensed" ></TextBlock>
                         </GridViewColumn.Header>
@@ -74,7 +74,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Width="130">
+                    <GridViewColumn Width="120">
                         <GridViewColumn.Header>
                             <TextBlock Text="Availible Charge Slots" FontFamily="Bahnschrift SemiCondensed" ></TextBlock>
                         </GridViewColumn.Header>
@@ -85,7 +85,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="130">
+                    <GridViewColumn Width="120">
                         <GridViewColumn.Header>
                             <TextBlock Text="Full Charge Slots" FontFamily="Bahnschrift SemiCondensed" ></TextBlock>
                         </GridViewColumn.Header>
@@ -95,7 +95,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="100">
+                    <GridViewColumn Width="80">
                         <GridViewColumn.Header>
                             <iconPacks:PackIconMaterial Kind="Delete"></iconPacks:PackIconMaterial>
                         </GridViewColumn.Header>

@@ -42,6 +42,11 @@ namespace PL.Pages
             {
                 if(user.UserPassword==old.Text)
                 {
+                    if(newPassword.Text==old.Text)
+                    {
+                        MessageBox.Show("oops... you have entered same password to the old one");
+                        return;
+                    }
                     if (newPassword.Text != "")
                     { bl.UpdatingDetailsOfUser(id, newPassword.Text);
                         MessageBox.Show("Successfully Change");

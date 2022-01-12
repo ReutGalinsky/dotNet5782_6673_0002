@@ -85,7 +85,7 @@ namespace BL
                 }
             }
             catch (Exception ex)
-            { throw new AddingProblemException($"Can't add the drone {droneToAdd.IdNumber}", ex); }
+            { throw new AddingProblemException($"Can't add the drone {droneToAdd.IdNumber}: {ex.Message}", ex); }
         }
         #endregion
 
@@ -93,7 +93,7 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.DroneToList> GetDrones()
         {
-            return from item in Drones select item;
+            return from item in Drones select item.Clone();
         }
         #endregion
 
@@ -149,7 +149,7 @@ namespace BL
             catch (Exception e)
             {
                 drone.Model = temp;
-                throw new UpdatingException($"Can't update drone number {id}", e);
+                throw new UpdatingException($"Can't update drone number {id}: {e.Message}", e);
             }
         }
         #endregion
@@ -193,7 +193,14 @@ namespace BL
         #region Simulator
         public void Simulator(string id, Action updatePl, Func<bool> checkStop)
         {
-            DroneSimulator simulator = new DroneSimulator(this, id, updatePl, checkStop);
+            try
+            {
+                DroneSimulator simulator = new DroneSimulator(this, id, updatePl, checkStop);
+            }
+            catch(Exception e)
+            {
+                throw new ConnectionException($"error in the simulator: {e.Message}");
+            }
         }
         #endregion
 
@@ -302,7 +309,7 @@ namespace BL
                     return drone;
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 throw new AddingProblemException($"the drone number {id} is not correct, can't running this program");
             }

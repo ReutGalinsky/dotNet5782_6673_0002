@@ -13,7 +13,7 @@
  DataType="local:BO.CustomerToList">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -21,7 +21,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Column="0" Grid.Row="0"
- Text="Id Number: " />
+ Text="Id Number:   " />
                 <TextBlock Grid.Column="1" Grid.Row="0"
  Text="{Binding Path=IdNumber}" />
                 <TextBlock Grid.Column="0" Grid.Row="1"
@@ -39,10 +39,6 @@
         <ComboBox x:Name="Priority" HorizontalAlignment="Left" Text="{Binding Path=Phone}"  VerticalAlignment="Top" Width="200" Height="25" Margin="336,175,0,0" SelectionChanged="focus"/>
         <TextBlock HorizontalAlignment="Left" Margin="150,122,0,0" Text="Parcel Weight:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Yu Gothic Medium" RenderTransformOrigin="0.261,0.537" Width="169" Height="32"/>
         <ComboBox x:Name="Weight" HorizontalAlignment="Left" Margin="337,127,0,0" Text="{Binding Path=Name}" VerticalAlignment="Top" Width="200" Height="25" SelectionChanged="focus"/>
-        <!--<TextBlock HorizontalAlignment="Left" Margin="85,188,0,0" Text="Longitude" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Yu Gothic Medium" Width="150" Height="38"/>
-        <TextBlock HorizontalAlignment="Left" Margin="85,226,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Yu Gothic Medium" Width="150" Height="33"/>
-        <TextBox x:Name="Longitude" Text="min 34.2 max 35.8" GotFocus="focus_Click" HorizontalAlignment="Left" Margin="299,195,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25"/>
-        <TextBox x:Name="Latitude" Text="min 32.2 max 34.8" GotFocus="focus_Click1" HorizontalAlignment="Left" Margin="299,232,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="26"/>-->
         <Button Content="Add" x:Name="ADD" IsEnabled="False" Click="Add_Click" Foreground="White" FontSize="10" FontWeight="Medium" Margin="202,210,202,121">
             <Button.Style>
                 <Style TargetType="Button">
@@ -64,17 +60,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <!--<iconPacks:PackIconMaterial Kind="information" Margin="504,201,0,0" Height="25" Width="28">
-            <iconPacks:PackIconMaterial.ToolTip>
-                <TextBlock Text="Longitude Between 34.2 to 35.8" FontFamily="Ink Free" ></TextBlock>
-            </iconPacks:PackIconMaterial.ToolTip>
-        </iconPacks:PackIconMaterial>
-        <iconPacks:PackIconMaterial Kind="information" Margin="504,239,0,0" Height="25" Width="28">
-            <iconPacks:PackIconMaterial.ToolTip>
-                <TextBlock Text="Latitude Between 32.2 to 34.8" FontFamily="Ink Free" ></TextBlock>
-            </iconPacks:PackIconMaterial.ToolTip>
-        </iconPacks:PackIconMaterial>-->
-        <ComboBox x:Name="Geters" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" HorizontalAlignment="Left" Margin="338,81,0,0" VerticalAlignment="Top" Width="200" IsTextSearchEnabled="true" TextSearch.TextPath="Name" Height="26" SelectionChanged="focus"/>
+        <ComboBox x:Name="Geters" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyDataTemplate}" HorizontalAlignment="Left" Margin="338,74,0,0" VerticalAlignment="Top" Width="200" IsTextSearchEnabled="true" TextSearch.TextPath="Name" Height="40" SelectionChanged="focus"/>
 
     </Grid>
 

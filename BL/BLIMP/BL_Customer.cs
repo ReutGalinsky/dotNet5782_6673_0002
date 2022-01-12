@@ -45,7 +45,7 @@ namespace BL
                 }
             }
             catch (Exception e)
-            { throw new UpdatingException("can't update the customer", e); }
+            { throw new UpdatingException($"can't update the customer: {e.Message}", e); }
         }
         #endregion
 
@@ -144,7 +144,7 @@ namespace BL
                 }
             }
             catch (Exception e)
-            { throw new AddingProblemException("can't add the customer", e); }
+            { throw new AddingProblemException($"can't add the customer: {e.Message}", e); }
         }
         #endregion
 

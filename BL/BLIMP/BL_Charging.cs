@@ -51,7 +51,7 @@ namespace BL
                 }
                 catch (Exception e)
                 {
-                    throw new ChargingException($"the drone with the id:{ droneId } can't Charge", e);
+                    throw new ChargingException($"the drone with the id:{ droneId } can't Charge: {e.Message}", e);
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace BL
                     drone.State = DroneState.Available;
                 }
             }
-            catch (Exception e) { throw new DeletingException($"can't releasing the drone with the id:{ droneID } from Charge", e); }
+            catch (Exception e) { throw new DeletingException($"can't releasing the drone with the id:{ droneID } from Charge: {e.Message}", e); }
         }
         #endregion
     }

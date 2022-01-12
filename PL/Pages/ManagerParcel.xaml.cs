@@ -148,7 +148,8 @@ namespace PL.Pages
             view.GroupDescriptions.Add(groupPriority);
         }
         private void changeTime(object sender, SelectionChangedEventArgs e)
-        {   listParcels.Clear();
+        {   
+            listParcels.Clear();
             try
             {
                 if (endDate.SelectedDate == null && startDate.SelectedDate != null)
@@ -163,9 +164,12 @@ namespace PL.Pages
                 }
                 if (endDate.SelectedDate != null && startDate.SelectedDate == null)
                 {
+                    var end = endDate.SelectedDate;
+                    end=end.Value.AddDays(1) ;
+                    end=end.Value.AddSeconds(-1);
                     var tempList = from item in bl.GetParcels()
                                    let parcel = bl.GetParcel(item.IdNumber)
-                                   where parcel.CreateParcelTime <= endDate.SelectedDate
+                                   where parcel.CreateParcelTime <= end
                                    select item;
                     listParcels.Clear();
                     foreach (var item in tempList)
@@ -174,15 +178,17 @@ namespace PL.Pages
                 }
                 if (endDate.SelectedDate != null && startDate.SelectedDate != null)
                 {
+                    var end = endDate.SelectedDate;
+                    end = end.Value.AddDays(1);
+                    end = end.Value.AddSeconds(-1);
                     var tempList = from item in bl.GetParcels()
                                    let parcel = bl.GetParcel(item.IdNumber)
-                                   where parcel.CreateParcelTime >= startDate.SelectedDate && parcel.CreateParcelTime <= endDate.SelectedDate
+                                   where parcel.CreateParcelTime >= startDate.SelectedDate && parcel.CreateParcelTime <= end
                                    select item;
                     listParcels.Clear();
                     foreach (var item in tempList)
                         listParcels.Add(item);
                     return;
-
                 }
             }
             catch (Exception)

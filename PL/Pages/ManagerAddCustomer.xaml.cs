@@ -58,7 +58,7 @@ namespace PL.Pages
                 Random rand = new Random();
                 int password = rand.Next();
                 bl.AddUser(new BO.User() { isManager = false, UserName = customer.IdNumber, UserPassword = password.ToString() });
-                MessageBox.Show(password.ToString());
+                MessageBox.Show($"the customer password is: {password.ToString()}");
                 updateList(sender, e);
             }
             catch (Exception ex)

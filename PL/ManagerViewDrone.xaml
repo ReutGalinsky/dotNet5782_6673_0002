@@ -84,18 +84,6 @@
         <Border Background="Gray" CornerRadius="10" Opacity="0.5" Margin="143,3,14,18" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="8" Grid.ColumnSpan="3"/>
         <TextBlock Text="My Drone:" Margin="64,15,0,0" FontWeight="Light" FontSize="40" Width="180" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
         <Border Background="Black" Opacity="0.5" Margin="66,60,86,13" Height="2" Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
-        <!--<Grid x:Name="GridOptions" Background="LightGray"   Margin="14,72,26,0" Grid.Row="1" Grid.RowSpan="8">
-           
-            <Grid.RowDefinitions>
-                <RowDefinition Height="185*"/>
-                <RowDefinition Height="187*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="22*"/>
-                <ColumnDefinition Width="17*"/>
-                <ColumnDefinition Width="62*"/>
-            </Grid.ColumnDefinitions>
-        </Grid>-->
         <Border x:Name="GridOptions" Visibility="hidden" Background="LightGray" Margin="14,72,26,0" Grid.Row="1" Grid.RowSpan="8" CornerRadius="10"/>
 
         <TextBlock Text="Id number:" HorizontalAlignment="Center" FontSize="24" FontFamily="Yu Gothic Medium"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Width="164" />

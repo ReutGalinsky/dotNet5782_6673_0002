@@ -36,7 +36,6 @@ namespace PL.Pages
         }
 
         public EventHandler update;
-        public event EventHandler updateList;
 
         private BLApi.IBL bl;
         string id;

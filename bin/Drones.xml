@@ -2,7 +2,47 @@
 <Array xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
     <IdNumber>123</IdNumber>
-    <Model>gkjhgh</Model>
+    <Model>PRO Com</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>1234</IdNumber>
+    <Model>Pro 4</Model>
+    <MaxWeight>Middle</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>500</IdNumber>
+    <Model>Syma X8</Model>
+    <MaxWeight>Middle</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>150</IdNumber>
+    <Model>Syma X8SW-D</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>871</IdNumber>
+    <Model>Hubsan H50</Model>
+    <MaxWeight>Middle</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>106</IdNumber>
+    <Model>PRO- DAPW</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>2917</IdNumber>
+    <Model>SG-107</Model>
+    <MaxWeight>Middle</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>9971</IdNumber>
+    <Model>K99</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>556</IdNumber>
+    <Model>Pro x9</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
 </Array>

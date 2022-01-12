@@ -103,7 +103,7 @@ namespace Dal
                 drone.Remove();
                 droneRoot.Save(dronePath);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new DO.NotExistingException($"The drone with the id: {id} is not existing");
             }
@@ -477,7 +477,7 @@ namespace Dal
             if (CustomerToDelete.IdNumber == null)
                 throw new NotExistingException($"the customer with the id:{id} is not exist");
             listCustomer.Remove(CustomerToDelete);
-            XmlMethods.SaveListToXMLSerializer<Customer>(listCustomer, baseStationPath);
+            XmlMethods.SaveListToXMLSerializer<Customer>(listCustomer, customerPath);
         }
         #endregion
 

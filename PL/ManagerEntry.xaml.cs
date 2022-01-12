@@ -57,7 +57,7 @@ namespace PL
                     MessageBox.Show($"the password is not correct, please try again");
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 MessageBox.Show($"there is no manager with the id of {user.Text}");
             }

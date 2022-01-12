@@ -11,39 +11,6 @@
       Title="CustomerDelivery">
     <Page.Resources>
         <PL.Convert:ConvertStateToEnable x:Key="ParcelToEnable"/>
-        <DataTemplate x:Key="MyDataTemplate"
- DataType="local:BO.ParcelOfList">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0"
- Text="IdNumber: " />
-                <TextBlock Grid.Column="1"
- Text="{Binding Path=IdNumber}" />
-                <TextBlock Grid.Column="2"
- Text="Priority: " />
-                <TextBlock Grid.Column="3"
- Text="{Binding Path=Priority}" />
-                <TextBlock Grid.Column="4"
- Text="state" />
-                <TextBlock Grid.Column="5"
- Text="{Binding Path=ParcelState}" />
-                <Button Grid.Column="6" Height="auto" Width="58" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel">
-                    <Button.Content>
-                        <iconPacks:PackIconMaterial Kind="Delete" Width="58" Foreground="Black" />
-
-                    </Button.Content>
-                </Button>
-            </Grid>
-        </DataTemplate>
     </Page.Resources>
     <Grid>
         <Border Background="lightblue" Opacity="1" Margin="22,31,51,303" CornerRadius="10" RenderTransformOrigin="0.5,0.5"/>

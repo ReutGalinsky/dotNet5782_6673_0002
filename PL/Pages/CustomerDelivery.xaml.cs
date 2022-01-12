@@ -37,7 +37,6 @@ namespace PL.Pages
             Delivery.DataContext = parcels;
             update += updated;
         }
-        public event EventHandler updateList;
 
         public EventHandler update;
         private BLApi.IBL bl;

@@ -27,7 +27,6 @@ namespace PL.Pages
             InitializeComponent();
             bl = b;
             CustomerListView.DataContext = listCustomers;
-            OnWay.SelectedItem = OnWay.Items[0];
             name.IsChecked = true;
             update += updated;
         }
@@ -55,7 +54,6 @@ namespace PL.Pages
             try
             {
                 listCustomers.Clear();
-                OnWay.SelectedItem = "All";
                 var temp = from item in bl.GetCustomers()
                            orderby item.Name
                            select item;
@@ -103,42 +101,6 @@ namespace PL.Pages
                 listCustomers.Clear();
                 foreach (var item in bl.GetCustomers().OrderBy(x => x.Name))
                     listCustomers.Add(item);
-            }
-            catch (Exception)
-            { MessageBox.Show("Error in loading the customers, please try again later"); }
-
-        }
-        private void OnWaySelector(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                var item = OnWay.SelectedItem as ComboBoxItem;
-                switch (item.Tag)
-                {
-                    case "all":
-                        updated(sender, e);
-                        break;
-                    case "onWay":
-                        listCustomers.Clear();
-                        var temp = from customer in bl.GetAllCustomersBy(x => x.ParcelOnTheWay > 0 || x.ParcelSendAndNotGet > 0)
-                                   select customer;
-                        foreach (BO.CustomerToList s in temp)//create the source for the liseView
-                            listCustomers.Add(s);
-                        name.IsChecked = false;
-                        id.IsChecked = false;
-                        break;
-                    case "notOnWay":
-                        listCustomers.Clear();
-                        var help = from customer in bl.GetAllCustomersBy(x => x.ParcelOnTheWay == 0 && x.ParcelSendAndNotGet == 0)
-                                   select customer;
-                        foreach (BO.CustomerToList s in help)//create the source for the liseView
-                            listCustomers.Add(s);
-                        name.IsChecked = false;
-                        id.IsChecked = false;
-                        break;
-                    default:
-                        break;
-                }
             }
             catch (Exception)
             { MessageBox.Show("Error in loading the customers, please try again later"); }

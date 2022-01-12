@@ -1,17 +1,52 @@
 <?xml version="1.0"?>
 <Array xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>
-    <IdNumber>12345</IdNumber>
-    <Name>user</Name>
-    <Phone>0584529888</Phone>
-    <Latitude>33.3</Latitude>
-    <Longitude>34.5</Longitude>
+    <IdNumber>315</IdNumber>
+    <Name>Hagit</Name>
+    <Phone>0547815246</Phone>
+    <Latitude>31.887</Latitude>
+    <Longitude>35.009</Longitude>
   </Customer>
   <Customer>
-    <IdNumber>123</IdNumber>
-    <Name>ossa</Name>
-    <Phone>090</Phone>
-    <Latitude>33</Latitude>
-    <Longitude>34.5</Longitude>
+    <IdNumber>878</IdNumber>
+    <Name>Yosi </Name>
+    <Phone>0557845</Phone>
+    <Latitude>31.954</Latitude>
+    <Longitude>34.775</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>696</IdNumber>
+    <Name>David</Name>
+    <Phone>0547854212</Phone>
+    <Latitude>31.442</Latitude>
+    <Longitude>34.575</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>622</IdNumber>
+    <Name>Rinat</Name>
+    <Phone>05478521</Phone>
+    <Latitude>32.306</Latitude>
+    <Longitude>34.889</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>789</IdNumber>
+    <Name>Sharon</Name>
+    <Phone>024518641</Phone>
+    <Latitude>32.761</Latitude>
+    <Longitude>35.514</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>555</IdNumber>
+    <Name>Noga</Name>
+    <Phone>057845121</Phone>
+    <Latitude>31.764</Latitude>
+    <Longitude>35.247</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>222</IdNumber>
+    <Name>Avi</Name>
+    <Phone>05784421</Phone>
+    <Latitude>32.778</Latitude>
+    <Longitude>35.007</Longitude>
   </Customer>
 </Array>

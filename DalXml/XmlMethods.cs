@@ -78,7 +78,7 @@ namespace Dal
                 else
                     return new List<T>();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw new DO.AccessToDataBaseException("Can't load the list from the file");
             }
@@ -103,7 +103,7 @@ namespace Dal
                 x.Serialize(file, list);
                 file.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new DO.AccessToDataBaseException("Can't save the list to the file");
             }

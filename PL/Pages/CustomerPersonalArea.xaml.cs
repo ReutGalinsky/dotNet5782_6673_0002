@@ -26,7 +26,7 @@ namespace PL.Pages
                 customer = bl.GetCustomer(i);
             }
             catch (Exception)
-            { MessageBox.Show("Error in loading the user, please try again later"); }
+            { MessageBox.Show("Error in loading the user, please try again later");return; }
             Id.DataContext = customer;
             Phone.DataContext = customer;
             Name.DataContext = customer;
@@ -36,15 +36,24 @@ namespace PL.Pages
         private BLApi.IBL bl;
         private BO.Customer customer;
         public EventHandler update;
-        public event EventHandler updateList;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
+                {
+                if (Name.Text == customer.Name && Phone.Text == customer.Phone)
+                { MessageBox.Show("oops... it looks like you entered the same details");
+                    edit.Visibility = Visibility.Visible;
+                    Name.IsEnabled = false;
+                    Phone.IsEnabled = false;
+                    (sender as Button).Visibility = Visibility.Collapsed;
+                    return;
+                }
                 bl.UpdatingDetailsOfCustomer(customer.IdNumber, Name.Text, Phone.Text);
                 Name.IsEnabled = false;
                 Phone.IsEnabled = false;
+                customer.Name = Name.Text;
+                customer.Phone = Phone.Text;
                 edit.Visibility = Visibility.Visible;
                 (sender as Button).Visibility = Visibility.Collapsed;
                 MessageBox.Show($"the customer number {customer.IdNumber} updated successfully!");

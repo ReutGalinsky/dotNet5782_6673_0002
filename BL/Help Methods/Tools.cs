@@ -113,7 +113,21 @@ namespace BL
             distance = distance * 60 * 1.1515;
             return distance * 1.609344;
         }
-        #endregion  
+        #endregion
+        internal static T Clone<T>(this T original)
+        {
+            T copyToObject = (T)Activator.CreateInstance(original.GetType());
+
+            foreach (PropertyInfo sourcePropertyInfo in original.GetType().GetProperties())
+            {
+                //PropertyInfo destPropertyInfo = original.GetType().GetProperty(sourcePropertyInfo.Name);
+
+                sourcePropertyInfo.SetValue(copyToObject, sourcePropertyInfo.GetValue(original, null), null);
+            }
+
+            return copyToObject;
+        }
+
 
     }
 }

@@ -33,7 +33,7 @@ namespace ConsoleUI_BL
             {
                 Base1.ChargeSlots = int.Parse(Console.ReadLine());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine("invalid value for amount of charge slots");
                 return;
@@ -49,7 +49,7 @@ namespace ConsoleUI_BL
                 Base1.Location.Latitude = double.Parse(list[0]);
                 Base1.Location.Longitude = double.Parse(list[1]);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine("Latitude or Longitude is invalid"); return;
             }
@@ -107,7 +107,7 @@ namespace ConsoleUI_BL
                 Customer1.Location.Latitude = double.Parse(list[0]);
                 Customer1.Location.Longitude = double.Parse(list[1]);
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 Console.WriteLine("Latitude or Longitude is invalid"); return;
             }
@@ -207,7 +207,7 @@ namespace ConsoleUI_BL
                 Min = int.Parse(list[1]);
                 Sec = int.Parse(list[2]);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine("invalid input of time");
                 return;
@@ -496,7 +496,7 @@ namespace ConsoleUI_BL
                             break;
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine("illegal choose");
                 }

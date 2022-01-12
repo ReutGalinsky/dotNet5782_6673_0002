@@ -64,12 +64,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
-        <ComboBox x:Name="OnWay" HorizontalAlignment="Left" Margin="491,44,0,0" VerticalAlignment="Top" Width="144" Height="20" SelectionChanged="OnWaySelector" >
-            <ComboBoxItem Tag="all" Content="All"></ComboBoxItem>
-            <ComboBoxItem Tag="onWay" Content="Parcels on way"></ComboBoxItem>
-            <ComboBoxItem Tag="notOnWay" Content="No parcels on way"></ComboBoxItem>
-        </ComboBox>
         <RadioButton x:Name="id" Content="Order By Number" GroupName="key1" Foreground="white"  HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Checked="idCheck" FontFamily="Yu Gothic Medium" Width="124"/>
         <RadioButton x:Name="name" Content="Order By Name " GroupName="key1" Foreground="white" HorizontalAlignment="Left" Margin="193,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="111" Checked="nameCheck" FontFamily="Yu Gothic Medium">
             <RadioButton.RenderTransform>

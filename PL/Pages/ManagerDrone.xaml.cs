@@ -45,7 +45,7 @@ namespace PL.Pages
             {
                 ManagerViewDrone showDrone = new ManagerViewDrone(bl, selected.IdNumber);
                 showDrone.updateList += updated;
-                showDrone.ShowDialog();
+                showDrone.Show();
             }
         }
         private void deleteDrone(object sender, RoutedEventArgs e)

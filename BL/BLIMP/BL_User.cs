@@ -87,7 +87,7 @@ namespace BL
                 }
             }
             catch (Exception ex)
-            { throw new UpdatingException($"Can't update user with the name {name}", ex); }
+            { throw new UpdatingException($"Can't update user with the name {name}: {ex.Message}", ex); }
         }
         #endregion
 
@@ -111,7 +111,7 @@ namespace BL
             }
             catch(Exception e)
             {
-                throw new AddingProblemException($"Can't add user with the name {userToAdd.UserName}", e);
+                throw new AddingProblemException($"Can't add user with the name {userToAdd.UserName}: {e.Message}", e);
             }
         }
         #endregion

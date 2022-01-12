@@ -11,6 +11,9 @@ using System.Windows;
 
 namespace PL.Convert
 {
+ /// <summary>
+ /// converter: if null won't be enable
+ /// </summary>
     public class ConvertParcelToEnable : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -25,22 +28,9 @@ namespace PL.Convert
             throw new NotImplementedException();
         }
     }
-
-    public class ConvertDroneToEnable : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            BO.DroneInParcel myArea = (BO.DroneInParcel)value;
-            if (myArea == null)
-                return false;
-            return true;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    /// <summary>
+    /// converter: if it's null- won't be visible
+    /// </summary>
     public class ConvertToVisibility : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -55,12 +45,15 @@ namespace PL.Convert
             throw new NotImplementedException();
         }
     }
+    /// <summary>
+    /// converter: if it's define or supply- enable
+    /// </summary>
     public class ConvertStateToEnable : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var state =(BO.ParcelState) (value);
-            if (state ==  ParcelState.Define)
+            if (state ==  ParcelState.Define||state==ParcelState.supply)
                 return true;
             return false;
         }
@@ -70,6 +63,9 @@ namespace PL.Convert
             throw new NotImplementedException();
         }
     }
+    /// <summary>
+    /// converter: if it's null will be "coming soon" and not the value
+    /// </summary>
     public class ConvertNotArriving : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -84,6 +80,9 @@ namespace PL.Convert
             throw new NotImplementedException();
         }
     }
+    /// <summary>
+    /// converter: if there is parcel on the drone- will be visible
+    /// </summary>
     public class ConvertParcelDrone : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -99,6 +98,10 @@ namespace PL.Convert
             throw new NotImplementedException();
         }
     }
+
+    /// <summary>
+    /// converter: if there isn't a drone- will be visible
+    /// </summary>
     public class ConvertTextDrone : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -114,6 +117,9 @@ namespace PL.Convert
             throw new NotImplementedException();
         }
     }
+    /// <summary>
+    /// converter: if it's null will be visible
+    /// </summary>
     public class ConveryDisVisibility : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

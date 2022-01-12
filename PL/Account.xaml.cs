@@ -50,7 +50,7 @@ namespace PL
                 Random rand = new Random();
                 int password = rand.Next();
                 bl.AddUser(new BO.User() { isManager = false, UserName = customer.IdNumber, UserPassword = password.ToString() });
-                MessageBox.Show($"your pawwword is +{password}");
+                MessageBox.Show($"your paswword is: {password}");
                 this.Close();
             }
             catch (Exception ex)

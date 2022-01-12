@@ -191,7 +191,7 @@ namespace BL
                     return (BO.CustomerOfParcel)dal.GetCustomer(id).CopyPropertiesToNew(typeof(BO.CustomerOfParcel));
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new AddingProblemException($"the customer with the id {id} is not exist");
             }

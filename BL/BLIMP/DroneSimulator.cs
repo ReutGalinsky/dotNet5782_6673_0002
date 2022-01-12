@@ -11,7 +11,7 @@ namespace BL
 {
     class DroneSimulator
     {
-        private const double SPEED = 2;
+        private const double SPEED = 3;
         private const int DELAY = 500;
         private DroneToList drone;
         private Parcel parcel1;
@@ -66,7 +66,7 @@ namespace BL
             {
                 Thread.Sleep(DELAY);
                 distance -= SPEED;
-                drone.Battery -=bl._available;
+                drone.Battery -=bl._available* SPEED;
                 reportProggress();
             }
             lock(bl) lock (bl.dal)
@@ -88,10 +88,10 @@ namespace BL
             var distance = drone.Location.DistanceTo(geter.Location);
             double batteryDown;
             if (parcel1.Weight == WeightCategories.Heavy)
-                batteryDown = bl._heavy;
+                batteryDown = bl._heavy* SPEED;
             else if (parcel1.Weight == WeightCategories.Light)
-                batteryDown = bl._light;
-            else batteryDown = bl._medium;
+                batteryDown = bl._light* SPEED;
+            else batteryDown = bl._medium* SPEED;
             while (distance > 0)
             {
                 Thread.Sleep(DELAY);
@@ -126,7 +126,7 @@ namespace BL
                         {
                             Thread.Sleep(DELAY);
                             distance -= SPEED;
-                            drone.Battery -=bl._available;
+                            drone.Battery -=bl._available* SPEED;
                             reportProggress();
                         }
                         drone.Location = closestStation.station.GetLocation();
@@ -148,7 +148,7 @@ namespace BL
                         {
                             Thread.Sleep(DELAY);
                             distance -= SPEED;
-                            drone.Battery -= bl._available;
+                            drone.Battery -= bl._available* SPEED;
                         }
                         drone.Location = station.station.GetLocation();
                         reportProggress();
@@ -188,7 +188,7 @@ namespace BL
                         }
                         return 1;
                     }
-                    catch (Exception ex)
+                    catch (Exception )
                     {
                         if (drone.Battery == 100) return 0;
                         return 2;

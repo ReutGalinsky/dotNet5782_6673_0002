@@ -41,7 +41,12 @@ namespace PL
                     return;
                 }
                 var User = bl.GetUser(user.Text);
-                if (User.UserPassword == password.Password && User.isManager == false)
+                if(User.isManager==true)
+                {
+                    MessageBox.Show($"the details are not of customer");
+
+                }
+                if (User.UserPassword == password.Password)
                 {
                     CustomerPage pagecustomer = new CustomerPage(bl, User.UserName);
                     pagecustomer.Show();
@@ -49,10 +54,10 @@ namespace PL
                 }
                 else
                 {
-                    MessageBox.Show($"there is no customer with the id of {User.UserName} and the entered password");
+                    MessageBox.Show($"the password is not correct, please try again");
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 MessageBox.Show($"there is no customer with the id of {user.Text}");
             }

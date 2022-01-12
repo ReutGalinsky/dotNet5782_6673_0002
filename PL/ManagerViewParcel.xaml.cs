@@ -51,21 +51,9 @@ namespace PL
             }
             catch (Exception)
             { MessageBox.Show("Error in loading the drone, please try again later"); }
-
-            Id.DataContext = parcel;
-            PriorityBox.DataContext = parcel;
-            WeightBox.DataContext = parcel;
-            Create.DataContext = parcel;
-            Match.DataContext = parcel;
-            Arrive.DataContext = parcel;
-            Collect.DataContext = parcel;
-            buttonb.DataContext = parcel;
-            Match.DataContext = parcel;
-            matchLabel.DataContext = parcel;
-            Collect.DataContext = parcel;
-            collectLabel.DataContext = parcel;
-            Arrive.DataContext = parcel;
-            arriveLabel.DataContext = parcel;
+            GridParcels.DataContext = parcel;
+            Latitude.DataContext = drone.Location;
+            Longitude.DataContext = drone.Location;
             GridSender.DataContext = sender;
             GridGeter.DataContext = geter;
             GridDrone.DataContext = parcel;

@@ -156,7 +156,8 @@ namespace BL
                 BO.Customer sender = GetCustomer(parcel.Sender);
                 BO.Customer geter = GetCustomer(parcel.Geter);
                 DO.BaseStation baseStation = ClosestStation(GetCustomer(parcel.Geter).Location);
-                battery = CalcutateBatteryPerDistance(drone.Location.DistanceTo(sender.Location) + geter.Location.DistanceTo(baseStation.GetLocation()), _available);
+                battery = CalcutateBatteryPerDistance(drone.Location.DistanceTo(sender.Location), _available);
+                battery += CalcutateBatteryPerDistance(geter.Location.DistanceTo(baseStation.GetLocation()), _available);
                 battery += parcel.Weight switch
                 {
                     BO.WeightCategories.Heavy => CalcutateBatteryPerDistance(sender.Location.DistanceTo(geter.Location), _heavy),

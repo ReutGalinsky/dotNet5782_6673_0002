@@ -98,7 +98,7 @@ namespace PL
         }
         public void convertToPo(PO.DronePO dronePo, BO.Drone d)
         {
-            dronePo.Battery = (int)d.Battery;
+            dronePo.Battery =(int) d.Battery;
             dronePo.IdNumber = d.IdNumber;
             dronePo.State = d.State;
             dronePo.MaxWeight = d.MaxWeight;
@@ -126,6 +126,8 @@ namespace PL
             if (worker!=null&&worker.IsBusy==true)
             {
                 MessageBox.Show("the window will be closed at the end of this action");
+                Manual.Content = "Loading...";
+                Manual.IsEnabled = false;
                 worker.CancelAsync();
             }
             else
@@ -140,7 +142,7 @@ namespace PL
                 bl.UpdatingDetailsOfDrone(drone.Model, drone.IdNumber);
                 MessageBox.Show($"the drone number {drone.IdNumber} updated successfully!");
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 MessageBox.Show($"the model {Model.Text} is illegal. please enter again", "Model Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -230,10 +232,9 @@ namespace PL
                     MessageBox.Show("pick");
                     Button_Click_1(sender, e);
                     Button_Click_1(sender, e);
-
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 MessageBox.Show("error");
             }

@@ -73,16 +73,16 @@
         <Border Background="Gray" CornerRadius="10" Opacity="0.5" Margin="24,0,16,35" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2"/>
 
         <TextBlock Text="Id number:" HorizontalAlignment="Center" IsEnabled="False"   FontWeight="Medium" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"  FontSize="24" FontFamily="Yu Gothic Medium" Width="135" />
-        <TextBox x:Name="Id" Background="{x:Null}"  Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30"  Grid.Row="2" Grid.Column="1" />
+        <TextBox x:Name="Id" Background="{x:Null}" IsEnabled="False"  Text="{Binding Path=IdNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="143" Height="30"  Grid.Row="2" Grid.Column="1" />
         <TextBlock Text="Name:" HorizontalAlignment="Center" 
                    FontWeight="Medium" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"  FontSize="24" FontFamily="Yu Gothic Medium" Width="138" />
-        <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="90" Height="30" Grid.Row="3" Grid.Column="1" Margin="0,0,0,16" />
+        <TextBox x:Name="Name" Background="{x:Null}"  Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="143" Height="30" Grid.Row="3" Grid.Column="1" Margin="0,4,0,0" />
         <TextBlock Text="Phone:" HorizontalAlignment="Center"  FontSize="24" FontFamily="Yu Gothic Medium"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" Width="138" />
-        <TextBox x:Name="Phone" Background="{x:Null}"  Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="4" Grid.Column="1" PreviewKeyDown="OnlyNumbers" />
+        <TextBox x:Name="Phone" Background="{x:Null}"  Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="143" Height="30" Grid.Row="4" Grid.Column="1" PreviewKeyDown="OnlyNumbers" />
         <TextBlock Text="Longitude:" HorizontalAlignment="Center"  FontSize="24" FontFamily="Yu Gothic Medium"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" Width="140" />
-        <TextBox x:Name="Longitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="5" Grid.Column="1" />
+        <TextBox x:Name="Longitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Longitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="143" Height="30" Grid.Row="5" Grid.Column="1" />
         <TextBlock Text="Latitude:" HorizontalAlignment="Center"  FontSize="24" FontFamily="Yu Gothic Medium"  FontWeight="Medium" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Width="142" />
-        <TextBox x:Name="Latitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" Grid.Row="6" Grid.Column="1" />
+        <TextBox x:Name="Latitude" Background="{x:Null}" IsEnabled="False" Text="{Binding Path=Latitude}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="143" Height="30" Grid.Row="6" Grid.Column="1" />
         <Button Content="Update" x:Name="UPDATE" Click="Update_Click" Foreground="White" FontSize="10" FontWeight="Medium" Grid.ColumnSpan="2" Margin="74,45,186,31" Grid.Row="6" Grid.RowSpan="2">
             <Button.Style>
                 <Style TargetType="Button">
@@ -125,7 +125,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Border Background="LightGray" CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="10,2,10,36" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Grid.RowSpan="4">
+        <Border Background="LightGray" CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="10,2,10,6" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="3" Grid.RowSpan="4">
             <Grid x:Name="ParcelGrid" Visibility="Collapsed">
                 <TextBlock Text="Id:" FontSize="14" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="15" Width="120" Margin="18,43,0,0" />
                 <TextBox x:Name="IdParcel" IsEnabled="False" Background="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Height="20" Margin="70,42,0,0"   />

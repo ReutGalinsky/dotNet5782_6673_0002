@@ -15,9 +15,9 @@
         <TextBlock HorizontalAlignment="Left" Margin="173,65,0,0" Text="Id number" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="39" FontSize="24" FontFamily="Yu Gothic Medium"/>
         <TextBox x:Name="Id" HorizontalAlignment="Left" IsEnabled="False" Margin="303,73,0,0" Text="{Binding Path=IdNumber}" TextWrapping="Wrap"  VerticalAlignment="Top" Width="214" Height="25"/>
         <TextBlock HorizontalAlignment="Left" Margin="192,110,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.151,0.677" FontSize="24" FontFamily="Yu Gothic Medium" Width="82" Height="30"/>
-        <TextBox x:Name="Phone" HorizontalAlignment="Left" IsEnabled="False" Text="{Binding Path=Phone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Height="25" Margin="302,162,0,0"/>
+        <TextBox x:Name="Phone" HorizontalAlignment="Left" IsEnabled="False" Text="{Binding Path=Phone, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Height="25" Margin="302,162,0,0"/>
         <TextBlock HorizontalAlignment="Left" Margin="188,155,0,0" Text="Phone" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Yu Gothic Medium" RenderTransformOrigin="0.261,0.537" Width="93" Height="35"/>
-        <TextBox x:Name="Name" HorizontalAlignment="Left" IsEnabled="False" Margin="303,117,0,0" Text="{Binding Path=Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="25"/>
+        <TextBox x:Name="Name" HorizontalAlignment="Left" IsEnabled="False" Margin="303,117,0,0" Text="{Binding Path=Name, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="25"/>
         <TextBlock HorizontalAlignment="Left" Margin="172,202,0,0" Text="Longitude" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Yu Gothic Medium" Width="130" Height="34"/>
         <TextBlock HorizontalAlignment="Left" Margin="184,247,0,0" Text="Latitude" TextWrapping="Wrap" VerticalAlignment="Top"   FontSize="24" FontFamily="Yu Gothic Medium" Width="103" Height="37"/>
         <TextBox x:Name="Longitude" HorizontalAlignment="Left" IsEnabled="False" Margin="303,208,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Height="25"/>
