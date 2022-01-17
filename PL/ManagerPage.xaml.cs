@@ -37,9 +37,13 @@ namespace PL
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            TypeOfUser typeOfUser = new TypeOfUser(bl);
-            typeOfUser.Show();
-            this.Close();
+            var dialogResult = MessageBox.Show($"are you sure?", "Log out", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                TypeOfUser typeOfUser = new TypeOfUser(bl);
+                typeOfUser.Show();
+                this.Close();
+            }
         }
         private void move(object sender, MouseButtonEventArgs e)
         {

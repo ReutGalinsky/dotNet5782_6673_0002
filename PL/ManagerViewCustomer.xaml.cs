@@ -36,10 +36,10 @@ namespace PL
             try
             {
                 listParcels.DataContext = bl.GetAllParcelsBy(x => x.Sender == i || x.Geter == i);
+                
             }
             catch (Exception)
             { MessageBox.Show("Error in loading the parcels, please try again later"); }
-
             ParcelGrid.DataContext = parcel;
         }
         private BLApi.IBL bl;
@@ -65,7 +65,7 @@ namespace PL
             try
             {
                 bl.UpdatingDetailsOfCustomer(customer.IdNumber, customer.Name, customer.Phone);
-                MessageBox.Show($"the base station number {customer.IdNumber} updated successfully!");
+                MessageBox.Show($"the customer with the id {customer.IdNumber} updated successfully!");
                 updateList(sender, e);
                 this.Close();
             }

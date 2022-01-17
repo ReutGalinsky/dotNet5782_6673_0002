@@ -65,23 +65,6 @@ namespace PL.Pages
             { MessageBox.Show("Error in loading the customers, please try again later"); }
 
         }
-        private void deleteCustomer(object sender, RoutedEventArgs e)
-        {
-            var dialogResult = MessageBox.Show($"are you sure?", "Delete Customer", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (dialogResult == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    BO.CustomerToList CustomerToDelte = ((sender as Button).DataContext) as BO.CustomerToList;
-                    bl.RemoveCustomer(CustomerToDelte.IdNumber);
-                    updated(sender, e);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Delete Customer", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
         private void idCheck(object sender, RoutedEventArgs e)
         {
             try

@@ -145,25 +145,10 @@ namespace BLApi
         /// <returns>collection of the correct customers</returns>
         public IEnumerable<CustomerToList> GetAllCustomersBy(Predicate<CustomerToList> c);
         /// <summary>
-        /// Deleting drone
+        /// Deleting parcel
         /// </summary>
-        /// <param name="number">the id of the wanted drone</param>
-        public void RemoveDrone(string number);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="number"></param>
+        /// <param name="number">the id of the parcel</param>
         public void RemoveParcel(string number);
-        /// <summary>
-        /// Deleting base station
-        /// </summary>
-        /// <param name="number">the id of the wanted station</param>
-        public void RemoveBaseStation(string number);
-        /// <summary>
-        /// Deleting customer
-        /// </summary>
-        /// <param name="number">the id of the wanted customer</param>
-        public void RemoveCustomer(string number);
         /// <summary>
         /// Deleting user
         /// </summary>

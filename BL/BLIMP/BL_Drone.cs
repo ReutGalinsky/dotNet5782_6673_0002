@@ -165,31 +165,6 @@ namespace BL
         }
         #endregion
 
-        #region RemoveDrone
-        [MethodImpl(MethodImplOptions.Synchronized)]
-
-        public void RemoveDrone(string number)
-        {
-            try
-            {
-                lock (dal)
-                {
-                    var drone = GetDrone(number);
-                    if (drone.State == DroneState.shipping)
-                        throw new DeletingException("can't delete drone that shipping");
-                    if (drone.State == DroneState.maintaince)
-                        DroneFromCharging(number);
-                    dal.DeleteDrone(number);
-                    Drones.RemoveAll(x => x.IdNumber == number);
-                }
-            }
-            catch(Exception e)
-            {
-                throw new DeletingException(e.Message, e);
-            }
-        }
-        #endregion
-
         #region Simulator
         public void Simulator(string id, Action updatePl, Func<bool> checkStop)
         {

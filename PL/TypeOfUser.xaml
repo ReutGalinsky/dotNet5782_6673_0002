@@ -76,7 +76,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <TextBlock Text="Welcome To Deli-Drone" Margin="107,85,0,90" FontWeight="Light" FontFamily="/Fonts/regular" HorizontalAlignment="Left" FontSize="50" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Grid.Column="1" Width="608"/>
+            <TextBlock Text="Welcome To Deli-Drone" Margin="87,61,0,114" FontWeight="Light" FontFamily="/Fonts/regular" HorizontalAlignment="Left" FontSize="50" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1" Width="608"/>
             <Button x:Name="stop" Click="Stop_Click" Visibility="Collapsed" Foreground="Transparent" Grid.Row="3" Grid.Column="3" Margin="2,6,30,31">
                 <Button.Content>
                     <iconPacks:PackIconMaterial Kind="StopCircle" Width="42" Foreground="Black" Height="34" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" />

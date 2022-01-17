@@ -29,7 +29,7 @@ namespace PL
                 parcel = bl.GetParcel(id);
             }
             catch (Exception)
-            { MessageBox.Show("Error in loading the parcel, please try again later"); }
+            { MessageBox.Show("Error in loading the parcel, please try again later");return; }
 
             Id.DataContext = parcel;
             SenderId.DataContext = parcel.SenderCustomer;

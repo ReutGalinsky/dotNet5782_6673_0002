@@ -24,21 +24,14 @@
   <Customer>
     <IdNumber>622</IdNumber>
     <Name>Rinat</Name>
-    <Phone>05478521</Phone>
+    <Phone>027894564</Phone>
     <Latitude>32.306</Latitude>
     <Longitude>34.889</Longitude>
   </Customer>
   <Customer>
-    <IdNumber>789</IdNumber>
-    <Name>Sharon</Name>
-    <Phone>024518641</Phone>
-    <Latitude>32.761</Latitude>
-    <Longitude>35.514</Longitude>
-  </Customer>
-  <Customer>
     <IdNumber>555</IdNumber>
     <Name>Noga</Name>
-    <Phone>057845121</Phone>
+    <Phone>028745958</Phone>
     <Latitude>31.764</Latitude>
     <Longitude>35.247</Longitude>
   </Customer>
@@ -48,5 +41,19 @@
     <Phone>05784421</Phone>
     <Latitude>32.778</Latitude>
     <Longitude>35.007</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>123</IdNumber>
+    <Name>Tcp</Name>
+    <Phone>0524876</Phone>
+    <Latitude>30</Latitude>
+    <Longitude>34.5</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>4123</IdNumber>
+    <Name>Tcp</Name>
+    <Phone>05525412</Phone>
+    <Latitude>30</Latitude>
+    <Longitude>35</Longitude>
   </Customer>
 </Array>

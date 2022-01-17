@@ -96,23 +96,6 @@ namespace PL.Pages
         {
             selected = (BO.BaseStationToList)StationsListView.SelectedItem;
         }
-        private void deleteStation(object sender, RoutedEventArgs e)
-        {
-            var dialogResult = MessageBox.Show($"are you sure?", "Delede Station", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (dialogResult == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    BO.BaseStationToList stationToDelete = ((sender as Button).DataContext) as BO.BaseStationToList;
-                    bl.RemoveBaseStation(stationToDelete.IdNumber);
-                    update(sender, e);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message + "\n you shuld try again later", "error", MessageBoxButton.OK, MessageBoxImage.Hand);
-                }
-            }
-        }
         private void GroupAmount(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsListView.ItemsSource);

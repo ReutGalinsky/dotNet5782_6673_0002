@@ -94,29 +94,6 @@ namespace BL
         }
         #endregion
 
-        #region RemoveCustomer
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public void RemoveCustomer(string number)
-        {
-            try
-            {
-                var customer = GetCustomer(number);
-                if (customer.FromCustomer.FirstOrDefault(x => x.State != ParcelState.supply) != null)
-                    throw new DeletingException("can't delete customer that sending");
-                if (customer.ToCustomer.FirstOrDefault(x => x.State != ParcelState.supply) != null)
-                    throw new DeletingException("can't delete customer that waiting to parcel");
-                lock (dal)
-                {
-                    dal.DeleteCustomer(number);
-                }
-            }
-            catch (Exception e)
-            {
-                throw new DeletingException(e.Message, e);
-            }
-        }
-        #endregion
-
         #region AddCustomer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(BO.Customer customerToAdd)

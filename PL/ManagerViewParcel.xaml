@@ -95,21 +95,21 @@
             <Grid x:Name="GridSender">
 
                 <TextBlock Text="Id number:" HorizontalAlignment="Left" IsEnabled="False"  FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="17,31,0,0" />
-                <TextBox x:Name="IdCustomer1" Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="18" Margin="100,31,0,0" />
+                <TextBox x:Name="IdCustomer1" Background="{x:Null}" IsEnabled="False" BorderBrush="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="18" Margin="100,33,0,0" />
                 <TextBlock Text="Name:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="28,74,0,0" RenderTransformOrigin="0.475,-0.213" />
-                <TextBox x:Name="Name" Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Height="22" Margin="100,0,0,49" />
+                <TextBox x:Name="Name" Background="{x:Null}" IsEnabled="False" BorderBrush="{x:Null}" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Height="22" Margin="100,0,0,48" />
                 <TextBlock Text="Phone:" HorizontalAlignment="Left" FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="27,114,0,0" />
-                <TextBox x:Name="Phone" Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="21" Margin="100,111,0,0" />
+                <TextBox x:Name="Phone" Background="{x:Null}" IsEnabled="False" BorderBrush="{x:Null}" Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="21" Margin="100,113,0,0" />
             </Grid>
         </Border>
         <Border Background="LightGray" CornerRadius="10" BorderBrush="Gray" Opacity="0.5" Margin="166,10,11,10" Grid.Column="2" RenderTransformOrigin="0.5,0.5" Grid.Row="10" Grid.RowSpan="3" Grid.ColumnSpan="2">
             <Grid x:Name="GridGeter">
                 <TextBlock Text="Id number:" HorizontalAlignment="Left" IsEnabled="False"  FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="17,31,0,0" />
-                <TextBox Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="18" Margin="100,31,0,0" />
+                <TextBox Background="{x:Null}" IsEnabled="False" BorderBrush="{x:Null}" Text="{Binding Path=IdNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="18" Margin="100,34,0,0" />
                 <TextBlock Text="Name:" HorizontalAlignment="Left"  FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="28,74,0,0" RenderTransformOrigin="0.475,-0.213" />
-                <TextBox Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Height="22" Margin="100,0,0,49" />
+                <TextBox Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False" Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Height="22" Margin="100,0,0,59" />
                 <TextBlock Text="Phone:" HorizontalAlignment="Left" FontWeight="Medium" VerticalAlignment="Top" Grid.Column="0" Margin="27,114,0,0" />
-                <TextBox Background="{x:Null}" BorderBrush="{x:Null}" Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="21" Margin="100,111,0,0" />
+                <TextBox Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False" Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="21" Margin="100,113,0,0" />
             </Grid>
 
         </Border>
@@ -152,7 +152,7 @@
             </iconPacks:PackIconMaterial.ToolTip>
         </iconPacks:PackIconMaterial>
 
-        
+
         <iconPacks:PackIconMaterial Kind="AccountArrowRight" Grid.Column="3" Margin="89,-165,0,0" Grid.Row="10">
             <iconPacks:PackIconMaterial.ToolTip>
                 <TextBlock Text="View Sender" FontFamily="Ink Free" ></TextBlock>

@@ -72,6 +72,13 @@ namespace PL
             else
                 ADD.IsEnabled = true;
         }
+
+        private void move(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+
+        }
     }
 }
 

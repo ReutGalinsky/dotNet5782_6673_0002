@@ -39,7 +39,7 @@
  Text="Max Weight: " />
                 <TextBlock Grid.Column="5"
  Text="{Binding Path=MaxWeight}" />
-                <Button Grid.Column="6" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteDrone">
+                <Button Grid.Column="6" Height="25" Width="25" BorderBrush="{x:Null}" Background="{x:Null}">
                     <Button.Content>
                         <Image Source="Images/מחיקה.jpg" Width="25" Height="25"></Image>
                     </Button.Content>
@@ -61,7 +61,7 @@
             </ListView.RenderTransform>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="auto">
+                    <GridViewColumn Width="100">
                         <GridViewColumn.Header>
                             <TextBlock Text="Number" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
@@ -72,7 +72,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Width="100">
+                    <GridViewColumn Width="150">
                         <GridViewColumn.Header>
                             <TextBlock Text="Model" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
@@ -84,7 +84,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Width="200">
+                    <GridViewColumn Width="150">
                         <GridViewColumn.Header>
                             <TextBlock Text="Max Weight" FontFamily="Yu Gothic Medium" ></TextBlock>
                         </GridViewColumn.Header>
@@ -114,21 +114,6 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=State}" HorizontalAlignment="Center" FontSize="12" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="70">
-                        <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="Delete"></iconPacks:PackIconMaterial>
-                        </GridViewColumn.Header>
-
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteDrone">
-                                    <Button.Content>
-                                        <iconPacks:PackIconMaterial Kind="Cancel"></iconPacks:PackIconMaterial>
-                                    </Button.Content>
-                                </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

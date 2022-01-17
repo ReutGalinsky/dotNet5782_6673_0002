@@ -14,7 +14,7 @@
         <ListView x:Name="CustomerListView" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Margin="22,72,51,66" RenderTransformOrigin="0.5,0.5" SelectionChanged="selectionChange" MouseDoubleClick="Action" Background="{x:Null}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="150">
+                    <GridViewColumn Width="200">
                         <GridViewColumn.Header>
                             <TextBlock Text="Number" FontFamily="Yu Gothic Medium"></TextBlock>
                         </GridViewColumn.Header>
@@ -25,7 +25,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn  Width="150">
+                    <GridViewColumn  Width="200">
                         <GridViewColumn.Header>
                             <TextBlock Text="Phone Number" FontFamily="Yu Gothic Medium"></TextBlock>
                         </GridViewColumn.Header>
@@ -37,27 +37,13 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Width="150">
+                    <GridViewColumn Width="200">
                         <GridViewColumn.Header>
                             <TextBlock Text="Name" FontFamily="Yu Gothic Medium"></TextBlock>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="170">
-                        <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="Delete"></iconPacks:PackIconMaterial>
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteCustomer">
-                                    <Button.Content>
-                                        <iconPacks:PackIconMaterial Kind="Cancel"></iconPacks:PackIconMaterial>
-                                    </Button.Content>
-                                </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

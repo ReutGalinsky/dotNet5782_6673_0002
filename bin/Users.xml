@@ -50,4 +50,14 @@
     <UserPassword>222222</UserPassword>
     <isManager>false</isManager>
   </User>
+  <User>
+    <UserName>123</UserName>
+    <UserPassword>1234567</UserPassword>
+    <isManager>false</isManager>
+  </User>
+  <User>
+    <UserName>4123</UserName>
+    <UserPassword>41234123</UserPassword>
+    <isManager>false</isManager>
+  </User>
 </Array>

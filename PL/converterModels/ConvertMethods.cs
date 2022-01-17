@@ -46,14 +46,16 @@ namespace PL.Convert
         }
     }
     /// <summary>
-    /// converter: if it's define or supply- enable
+    /// converter: if it's define - enable
     /// </summary>
     public class ConvertStateToEnable : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return false;
             var state =(BO.ParcelState) (value);
-            if (state ==  ParcelState.Define||state==ParcelState.supply)
+            if (state ==  ParcelState.Define)
                 return true;
             return false;
         }
@@ -88,6 +90,8 @@ namespace PL.Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var parcel = value as BO.Parcel;
+            if(parcel==null)
+                return Visibility.Collapsed;
             if (parcel.Drone!=null&&parcel.ArrivingDroneTime==null)
                 return Visibility.Visible;
             return Visibility.Collapsed;
@@ -107,6 +111,8 @@ namespace PL.Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var parcel = value as BO.Parcel;
+            if(parcel==null)
+                return Visibility.Collapsed;
             if (parcel.Drone == null || parcel.ArrivingDroneTime != null)
                 return Visibility.Visible;
             return Visibility.Collapsed;

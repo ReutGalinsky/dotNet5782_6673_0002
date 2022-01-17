@@ -38,7 +38,7 @@
  Text="availible slots: " />
                 <TextBlock Grid.Column="6"
  Text="{Binding Path=ChargeSlots}" />
-                <Button Grid.Column="8" Height="30" Width="30" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteStation">
+                <Button Grid.Column="8" Height="30" Width="30" BorderBrush="{x:Null}" Background="{x:Null}">
                     <Button.Content>
                         <Image Source="Images/מחיקה.jpg" Width="30" Height="30"></Image>
                     </Button.Content>
@@ -92,20 +92,6 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=FullChargeSlots}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="80">
-                        <GridViewColumn.Header>
-                            <iconPacks:PackIconMaterial Kind="Delete"></iconPacks:PackIconMaterial>
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteStation">
-                                    <Button.Content>
-                                        <iconPacks:PackIconMaterial Kind="Cancel"></iconPacks:PackIconMaterial>
-                                    </Button.Content>
-                                </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

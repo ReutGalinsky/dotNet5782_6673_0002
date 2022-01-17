@@ -9,27 +9,6 @@ namespace BL
 {
     internal partial class BL : BLApi.IBL
     {
-        #region RemoveBaseStation
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public void RemoveBaseStation(string number)
-        {
-            try
-            {
-                lock (dal)
-                {
-                    var baseStation = GetBaseStation(number);
-                    if (baseStation.Drones.Count() != 0)
-                        throw new DeletingException("can't delete base station with charged drones");
-                    dal.DeleteBaseStation(number);
-                }
-            }
-            catch (Exception e)
-            {
-                throw new DeletingException(e.Message, e);
-            }
-        }
-        #endregion
-
         #region AddBaseStation
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddBaseStation(BO.BaseStation baseStationToAdd)

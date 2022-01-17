@@ -4,10 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL.Pages"
+            xmlns:PL.Convert="clr-namespace:PL.Convert"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="700"
       Title="ManagerParcel">
+    <Page.Resources>
+        <PL.Convert:ConvertStateToEnable x:Key="ParcelToEnable"/>
+    </Page.Resources>
     <Grid>
         <Border Background="lightblue" Opacity="1" Margin="22,5,51,303" CornerRadius="10" RenderTransformOrigin="0.5,0.5"/>
 
@@ -79,13 +83,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="50">
+                    <GridViewColumn Width="70">
                         <GridViewColumn.Header>
                             <iconPacks:PackIconMaterial Kind="Delete"></iconPacks:PackIconMaterial>
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel">
+                                <Button Grid.Column="6" Height="25" Width="25" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Click="deleteParcel" IsEnabled="{Binding Path=ParcelState, Converter={StaticResource ParcelToEnable} }">
                                     <Button.Content>
                                         <iconPacks:PackIconMaterial Kind="Cancel"></iconPacks:PackIconMaterial>
                                     </Button.Content>

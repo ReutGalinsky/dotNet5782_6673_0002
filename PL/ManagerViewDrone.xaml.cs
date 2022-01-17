@@ -197,7 +197,7 @@ namespace PL
             {
                 bl.MatchingParcelToDrone(drone.IdNumber);
                 convertToPo(drone, bl.GetDrone(id));
-                MessageBox.Show("match");
+                MessageBox.Show("Successfuly matched");
                 Button_Click_1(sender, e);
                 Button_Click_1(sender, e);
             }
@@ -212,7 +212,7 @@ namespace PL
             {
                 bl.SupplyingParcelByDrone(drone.IdNumber);
                 convertToPo(drone, bl.GetDrone(id));
-                MessageBox.Show("supply");
+                MessageBox.Show("Successfuly supplied");
                 Button_Click_1(sender, e);
                 Button_Click_1(sender, e);
             }
@@ -229,7 +229,7 @@ namespace PL
                 {
                     bl.PickingParcelByDrone(drone.IdNumber);
                     convertToPo(drone, bl.GetDrone(id));
-                    MessageBox.Show("pick");
+                    MessageBox.Show("Successfuly picked");
                     Button_Click_1(sender, e);
                     Button_Click_1(sender, e);
                 }
@@ -245,7 +245,7 @@ namespace PL
             {
                 bl.DroneFromCharging(drone.IdNumber);
                 convertToPo(drone, bl.GetDrone(id));
-                MessageBox.Show("release charge");
+                MessageBox.Show("released charge");
                 Button_Click_1(sender, e);
                 Button_Click_1(sender, e);
             }
@@ -300,7 +300,6 @@ namespace PL
             }
             catch (Exception)
             { MessageBox.Show("Error in loading the drone, please try again later"); }
-
         }
         private void Complited(object sender, RunWorkerCompletedEventArgs e)
         {

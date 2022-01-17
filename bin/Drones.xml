@@ -6,19 +6,9 @@
     <MaxWeight>Light</MaxWeight>
   </Drone>
   <Drone>
-    <IdNumber>1234</IdNumber>
-    <Model>Pro 4</Model>
-    <MaxWeight>Middle</MaxWeight>
-  </Drone>
-  <Drone>
     <IdNumber>500</IdNumber>
-    <Model>Syma X8</Model>
+    <Model>Pro X8</Model>
     <MaxWeight>Middle</MaxWeight>
-  </Drone>
-  <Drone>
-    <IdNumber>150</IdNumber>
-    <Model>Syma X8SW-D</Model>
-    <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
     <IdNumber>871</IdNumber>
@@ -44,5 +34,10 @@
     <IdNumber>556</IdNumber>
     <Model>Pro x9</Model>
     <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>1</IdNumber>
+    <Model>Pro 10</Model>
+    <MaxWeight>Heavy</MaxWeight>
   </Drone>
 </Array>

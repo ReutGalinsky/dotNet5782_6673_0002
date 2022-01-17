@@ -48,23 +48,6 @@ namespace PL.Pages
                 showDrone.Show();
             }
         }
-        private void deleteDrone(object sender, RoutedEventArgs e)
-        {
-            var dialogResult = MessageBox.Show($"are you sure?", "Delede Drone", MessageBoxButton.YesNo);
-            if (dialogResult == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    BO.DroneToList DroneToDelte = ((sender as Button).DataContext) as BO.DroneToList;
-                    bl.RemoveDrone(DroneToDelte.IdNumber);
-                    updated(sender, e);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message,"error",MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
         private void reset()
         {
             DroneListView.Visibility = Visibility.Visible;
