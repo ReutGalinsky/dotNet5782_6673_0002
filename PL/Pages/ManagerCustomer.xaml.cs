@@ -57,6 +57,7 @@ namespace PL.Pages
                 var temp = from item in bl.GetCustomers()
                            orderby item.Name
                            select item;
+
                 foreach (BO.CustomerToList s in temp)
                     listCustomers.Add(s);
                 name.IsChecked = true;

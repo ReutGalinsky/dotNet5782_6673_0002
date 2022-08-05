@@ -11,7 +11,7 @@
         Background="Transparent"
         AllowsTransparency="True"
         Title="TypeOfUser" Height="500" Width="900">
-
+    
     <Border CornerRadius="20">
         <Grid Background="AliceBlue" >
             <Grid.ColumnDefinitions>

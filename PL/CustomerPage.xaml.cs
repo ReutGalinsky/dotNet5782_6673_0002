@@ -59,7 +59,6 @@ namespace PL
             var dialogResult = MessageBox.Show($"are you sure?", "Log out", MessageBoxButton.YesNo);
             if (dialogResult == MessageBoxResult.Yes)
             {
-
                 TypeOfUser typeOfUser = new TypeOfUser(bl);
                 typeOfUser.Show();
                 this.Close();

@@ -43,7 +43,7 @@ namespace PL
                 var User = bl.GetUser(user.Text);
                 if(User.isManager==true)
                 {
-                    MessageBox.Show($"the details are not of customer");
+                    MessageBox.Show($"There is no customer with the id of {user.Text}");
 
                 }
                 if (User.UserPassword == password.Password)
@@ -54,12 +54,12 @@ namespace PL
                 }
                 else
                 {
-                    MessageBox.Show($"the password is not correct, please try again");
+                    MessageBox.Show($"The password is not correct, please try again");
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
-                MessageBox.Show($"there is no customer with the id of {user.Text}");
+                MessageBox.Show($"There is no customer with the id of {user.Text}");
             }
 
         }
@@ -89,7 +89,6 @@ namespace PL
         }
         private void showPassword(object sender, RoutedEventArgs e)
         {
-
             textPassword.Visibility = Visibility.Collapsed;
             password.Visibility = Visibility.Visible;
             password.Password = textPassword.Text;

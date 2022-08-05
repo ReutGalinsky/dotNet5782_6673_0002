@@ -28,8 +28,7 @@ namespace PL
             }
             catch (Exception)
             { MessageBox.Show("Error in loading the station, please try again later"); }
-            foreach (var item in baseStation.Drones)
-                drones.Add(item);
+            baseStation.Drones.ForEach(x=>drones.Add(x));
             Id.DataContext = baseStation;
             Name.DataContext = baseStation;
             ChargeSlots.DataContext = baseStation;
@@ -59,8 +58,8 @@ namespace PL
             dronePo.MaxWeight = d.MaxWeight;
             dronePo.Model = d.Model;
             dronePo.NumberOfParcel = d.PassedParcel?.IdNumber;
-            dronePo.Latitude = LocationFormat.sexagesimalFormat(d.Location.Latitude, false);
-            dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true);
+            dronePo.Latitude = Tools.sexagesimalFormat(d.Location.Latitude, false);
+            dronePo.Longitude = Tools.sexagesimalFormat(d.Location.Longitude, true);
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {

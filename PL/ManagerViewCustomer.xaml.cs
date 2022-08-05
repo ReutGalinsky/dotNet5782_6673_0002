@@ -36,7 +36,6 @@ namespace PL
             try
             {
                 listParcels.DataContext = bl.GetAllParcelsBy(x => x.Sender == i || x.Geter == i);
-                
             }
             catch (Exception)
             { MessageBox.Show("Error in loading the parcels, please try again later"); }

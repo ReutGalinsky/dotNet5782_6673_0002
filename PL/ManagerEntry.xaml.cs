@@ -43,7 +43,7 @@ namespace PL
                 var User = bl.GetUser(user.Text);
                 if(User.isManager==false)
                 {
-                    MessageBox.Show($"this user is not manager, please try to sign as customer");
+                    MessageBox.Show($"There is no manager with the id of {user.Text}");
                     return;
                 }
                 if (User.UserPassword == password.Password)
@@ -54,12 +54,12 @@ namespace PL
                 }
                 else
                 {
-                    MessageBox.Show($"the password is not correct, please try again");
+                    MessageBox.Show($"The password is not correct, please try again");
                 }
             }
             catch (Exception )
             {
-                MessageBox.Show($"there is no manager with the id of {user.Text}");
+                MessageBox.Show($"There is no manager with the id of {user.Text}");
             }
         }
         private void move(object sender, MouseButtonEventArgs e)

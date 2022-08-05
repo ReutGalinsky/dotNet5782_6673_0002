@@ -24,59 +24,59 @@ namespace PL.Pages
         {
             InitializeComponent();
             bl = b;
-                Name.DataContext = baseStation;
-                Id.DataContext = baseStation;
-            }
-            private BLApi.IBL bl;
-            private BO.BaseStation baseStation = new BO.BaseStation();
-            public event EventHandler updateList;
-            private void Add_Click(object sender, RoutedEventArgs e)
+            Name.DataContext = baseStation;
+            Id.DataContext = baseStation;
+        }
+        private BLApi.IBL bl;
+        private BO.BaseStation baseStation = new BO.BaseStation();
+        public event EventHandler updateList;
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                try
+                int temp;
+                if (int.TryParse(ChargeSlots.Text, out temp) == false)
                 {
-                    int temp;
-                    if (int.TryParse(ChargeSlots.Text, out temp) == false)
-                    {
-                        MessageBox.Show("chargeSlots suppose to be integer");
-                        return;
-                    }
-                    baseStation.ChargeSlots = temp;
-                    double help;
-                    if (double.TryParse(Latitude.Text, out help) == false)
-                    {
-                        MessageBox.Show("Latitude suppose to be double");
-                        return;
-                    }
-                    baseStation.Location = new BO.Location();
-                    baseStation.Location.Latitude = help;
-                    if (double.TryParse(Longitude.Text, out help) == false)
-                    {
-                        MessageBox.Show("Longitude suppose to be double");
-                        return;
-                    }
-                    baseStation.Location.Longitude = help;
-                    bl.AddBaseStation(baseStation);
-                    updateList(sender, e);
+                    MessageBox.Show("chargeSlots suppose to be integer");
+                    return;
                 }
-                catch (Exception ex)//לטפל בחריגות
+                baseStation.ChargeSlots = temp;
+                double help;
+                if (double.TryParse(Latitude.Text, out help) == false)
                 {
-                    MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Latitude suppose to be double");
+                    return;
                 }
+                baseStation.Location = new BO.Location();
+                baseStation.Location.Latitude = help;
+                if (double.TryParse(Longitude.Text, out help) == false)
+                {
+                    MessageBox.Show("Longitude suppose to be double");
+                    return;
+                }
+                baseStation.Location.Longitude = help;
+                bl.AddBaseStation(baseStation);
+                updateList(sender, e);
             }
-            private void Onlynumbers(object sender, KeyEventArgs e)
+            catch (Exception ex)
             {
-                Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
+                MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-         
-            private void Focus(object sender, TextChangedEventArgs e)
-            {
-                if (baseStation.IdNumber == "" || Longitude.Text == "" || Latitude.Text == "" || baseStation.Name == "" || ChargeSlots.Text == "")
-                {
-                    ADD.IsEnabled = false;
-                }
-                else
-                    ADD.IsEnabled = true;
-            }
+        }
+        private void Onlynumbers(object sender, KeyEventArgs e)
+        {
+            Tools.TextBox_OnlyNumbers_PreviewKeyDown(sender, e);
+        }
 
-}
+        private void Focus(object sender, TextChangedEventArgs e)
+        {
+            if (baseStation.IdNumber == "" || Longitude.Text == "" || Latitude.Text == "" || baseStation.Name == "" || ChargeSlots.Text == "")
+            {
+                ADD.IsEnabled = false;
+            }
+            else
+                ADD.IsEnabled = true;
+        }
+
     }
+}

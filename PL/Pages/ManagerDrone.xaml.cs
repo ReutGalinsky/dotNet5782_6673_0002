@@ -37,7 +37,7 @@ namespace PL.Pages
         {
 
             selected = (BO.DroneToList)(sender as ListView).SelectedItem;
-            
+
         }
         private void Action(object sender, MouseButtonEventArgs e)
         {
@@ -55,14 +55,14 @@ namespace PL.Pages
             foreach (BO.DroneToList s in bl.GetDrones())
             {
                 s.Battery = (int)s.Battery;
-                listDrones.Add(s); 
+                listDrones.Add(s);
             }
         }
         private void parcel(object sender, RoutedEventArgs e)
         {
             BO.DroneToList parcelToView = ((sender as Button).DataContext) as BO.DroneToList;
-                ManagerViewParcel showParcel = new ManagerViewParcel(bl, parcelToView.NumberOfParcel);
-                showParcel.ShowDialog();
+            ManagerViewParcel showParcel = new ManagerViewParcel(bl, parcelToView.NumberOfParcel);
+            showParcel.ShowDialog();
         }
         private void checkedState(object sender, RoutedEventArgs e)
         {

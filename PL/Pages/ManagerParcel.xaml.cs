@@ -105,7 +105,7 @@ namespace PL.Pages
         private void GroupGeter(object sender, RoutedEventArgs e)
         {
             senderCheck.IsEnabled = false;
-            try 
+            try
             {
                 var groupedGeter = from item in bl.GetParcels()
                                    group item by item.Geter;
@@ -125,7 +125,7 @@ namespace PL.Pages
             try
             {
                 var groupedSender = from item in bl.GetParcels()
-                                   group item by item.Sender;
+                                    group item by item.Sender;
                 listParcels.Clear();
                 foreach (var group in groupedSender)
                     foreach (var item in group)
@@ -148,7 +148,7 @@ namespace PL.Pages
             view.GroupDescriptions.Add(groupPriority);
         }
         private void changeTime(object sender, SelectionChangedEventArgs e)
-        {   
+        {
             listParcels.Clear();
             try
             {
@@ -165,8 +165,8 @@ namespace PL.Pages
                 if (endDate.SelectedDate != null && startDate.SelectedDate == null)
                 {
                     var end = endDate.SelectedDate;
-                    end=end.Value.AddDays(1) ;
-                    end=end.Value.AddSeconds(-1);
+                    end = end.Value.AddDays(1);
+                    end = end.Value.AddSeconds(-1);
                     var tempList = from item in bl.GetParcels()
                                    let parcel = bl.GetParcel(item.IdNumber)
                                    where parcel.CreateParcelTime <= end

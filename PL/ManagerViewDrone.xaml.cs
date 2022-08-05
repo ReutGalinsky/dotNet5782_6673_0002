@@ -104,8 +104,8 @@ namespace PL
             dronePo.MaxWeight = d.MaxWeight;
             dronePo.Model = d.Model;
             dronePo.NumberOfParcel = d.PassedParcel?.IdNumber;
-            dronePo.Latitude = LocationFormat.sexagesimalFormat(d.Location.Latitude, false); 
-            dronePo.Longitude = LocationFormat.sexagesimalFormat(d.Location.Longitude, true);
+            dronePo.Latitude = Tools.sexagesimalFormat(d.Location.Latitude, false); 
+            dronePo.Longitude = Tools.sexagesimalFormat(d.Location.Longitude, true);
             if (drone.NumberOfParcel != null)
             {
                 CovertParcelTOPO(parcel, bl.GetAllParcelsBy(x => x.IdNumber == drone.NumberOfParcel).FirstOrDefault());

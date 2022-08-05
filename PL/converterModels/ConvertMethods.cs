@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
 using PL.PO;
 using BO;
@@ -12,7 +13,7 @@ using System.Windows;
 namespace PL.Convert
 {
  /// <summary>
- /// converter: if null won't be enable
+ /// converter: if the given field is null, the tool won't be enable
  /// </summary>
     public class ConvertParcelToEnable : IValueConverter
     {
@@ -29,7 +30,7 @@ namespace PL.Convert
         }
     }
     /// <summary>
-    /// converter: if it's null- won't be visible
+    /// converter: if the given field is null - the tool won't be visible
     /// </summary>
     public class ConvertToVisibility : IValueConverter
     {
@@ -46,7 +47,7 @@ namespace PL.Convert
         }
     }
     /// <summary>
-    /// converter: if it's define - enable
+    /// converter: if the given state is 'Define' -the tool will be enable
     /// </summary>
     public class ConvertStateToEnable : IValueConverter
     {
@@ -66,7 +67,7 @@ namespace PL.Convert
         }
     }
     /// <summary>
-    /// converter: if it's null will be "coming soon" and not the value
+    /// converter: if the field is null, the text will be "coming soon" and not the value
     /// </summary>
     public class ConvertNotArriving : IValueConverter
     {
@@ -83,7 +84,7 @@ namespace PL.Convert
         }
     }
     /// <summary>
-    /// converter: if there is parcel on the drone- will be visible
+    /// converter: if there is parcel on the drone-the tool will be visible
     /// </summary>
     public class ConvertParcelDrone : IValueConverter
     {
@@ -104,7 +105,7 @@ namespace PL.Convert
     }
 
     /// <summary>
-    /// converter: if there isn't a drone- will be visible
+    /// converter: if there isn't a drone- the tool will be visible
     /// </summary>
     public class ConvertTextDrone : IValueConverter
     {
@@ -124,7 +125,7 @@ namespace PL.Convert
         }
     }
     /// <summary>
-    /// converter: if it's null will be visible
+    /// converter: if the field is null, the tool will be visible
     /// </summary>
     public class ConveryDisVisibility : IValueConverter
     {
@@ -140,4 +141,5 @@ namespace PL.Convert
             throw new NotImplementedException();
         }
     }
+
 }

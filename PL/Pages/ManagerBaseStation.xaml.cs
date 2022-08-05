@@ -66,7 +66,7 @@ namespace PL.Pages
                 selected = null;
             }
         }
-        private void changeFilterCharge(object sender,SelectionChangedEventArgs e)
+        private void changeFilterCharge(object sender, SelectionChangedEventArgs e)
         {
             try
             {
@@ -112,4 +112,4 @@ namespace PL.Pages
 
 
 
-        
+
