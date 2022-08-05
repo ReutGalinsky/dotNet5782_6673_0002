@@ -2,28 +2,28 @@
 <Array xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>
     <IdNumber>315</IdNumber>
-    <Name>Hagit</Name>
+    <Name>Bibi</Name>
     <Phone>0547815246</Phone>
     <Latitude>31.887</Latitude>
     <Longitude>35.009</Longitude>
   </Customer>
   <Customer>
     <IdNumber>878</IdNumber>
-    <Name>Yosi </Name>
+    <Name>Bibi's wife</Name>
     <Phone>0557845</Phone>
     <Latitude>31.954</Latitude>
     <Longitude>34.775</Longitude>
   </Customer>
   <Customer>
     <IdNumber>696</IdNumber>
-    <Name>David</Name>
+    <Name>David Hamelech</Name>
     <Phone>0547854212</Phone>
     <Latitude>31.442</Latitude>
     <Longitude>34.575</Longitude>
   </Customer>
   <Customer>
     <IdNumber>622</IdNumber>
-    <Name>Rinat</Name>
+    <Name>Shanon</Name>
     <Phone>027894564</Phone>
     <Latitude>32.306</Latitude>
     <Longitude>34.889</Longitude>
@@ -37,23 +37,37 @@
   </Customer>
   <Customer>
     <IdNumber>222</IdNumber>
-    <Name>Avi</Name>
-    <Phone>05784421</Phone>
+    <Name>Avraham Avinu</Name>
+    <Phone>0578442177</Phone>
     <Latitude>32.778</Latitude>
     <Longitude>35.007</Longitude>
   </Customer>
   <Customer>
     <IdNumber>123</IdNumber>
-    <Name>Tcp</Name>
+    <Name>Osnat's Mother</Name>
     <Phone>0524876555</Phone>
     <Latitude>30</Latitude>
     <Longitude>34.5</Longitude>
   </Customer>
   <Customer>
     <IdNumber>4123</IdNumber>
-    <Name>Tcp</Name>
+    <Name>Yair Galinsky</Name>
     <Phone>05525412</Phone>
     <Latitude>30</Latitude>
     <Longitude>35</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>11235813</IdNumber>
+    <Name>fibonacci</Name>
+    <Phone>0567361739</Phone>
+    <Latitude>32.6</Latitude>
+    <Longitude>35.28</Longitude>
+  </Customer>
+  <Customer>
+    <IdNumber>13571113</IdNumber>
+    <Name>eratosthenes</Name>
+    <Phone>0487254263</Phone>
+    <Latitude>32.42</Latitude>
+    <Longitude>34.922</Longitude>
   </Customer>
 </Array>

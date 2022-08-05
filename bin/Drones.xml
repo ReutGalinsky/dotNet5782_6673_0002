@@ -27,7 +27,7 @@
   </Drone>
   <Drone>
     <IdNumber>9971</IdNumber>
-    <Model>K99</Model>
+    <Model>K10</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
   <Drone>
@@ -39,5 +39,10 @@
     <IdNumber>1</IdNumber>
     <Model>Pro 10</Model>
     <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <IdNumber>32381002</IdNumber>
+    <Model>Osnat Drone</Model>
+    <MaxWeight>Light</MaxWeight>
   </Drone>
 </Array>

@@ -12,7 +12,7 @@
         Title="CustomerShowParcel" Height="400" Width="550">
     <Window.Resources>
         <PL.Convert:ConvertNotArriving x:Key="myConverter"></PL.Convert:ConvertNotArriving>
-    </Window.Resources>
+     </Window.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="162*" />

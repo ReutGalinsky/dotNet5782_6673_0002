@@ -24,6 +24,7 @@ namespace PL
         {
             InitializeComponent();
             bl = BLApi.BLFactory.GetBl();
+
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {

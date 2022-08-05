@@ -26,6 +26,7 @@ namespace PL
             InitializeComponent();
             bl = b;
         }
+
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             try
