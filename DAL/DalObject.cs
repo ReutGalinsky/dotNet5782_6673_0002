@@ -34,7 +34,7 @@ namespace Dal
 
         public void AddDrone(Drone drone)
         {
-            if (DataSource.Drones.Exists(d => d.IdNumber == drone.IdNumber)==true)
+            if (DataSource.Drones.Exists(d => d.IdNumber == drone.IdNumber) == true)
                 throw new ExistingException($"the drone with the id:{drone.IdNumber} is already exist");
             DataSource.Drones.Add(drone);
         }
@@ -80,19 +80,14 @@ namespace Dal
 
         public void UpdateDrone(Drone toUpdate)
         {
-            for (int i = 0; i < DataSource.Drones.Count; i++)
-            {
-                if (DataSource.Drones[i].IdNumber == toUpdate.IdNumber)
-                {
-                    Drone drone = new Drone();
-                    drone.Model = toUpdate.Model;
-                    drone.MaxWeight = toUpdate.MaxWeight;
-                    drone.IdNumber = toUpdate.IdNumber;
-                    DataSource.Drones[i] = drone;
-                    return;
-                }
-            }
-            throw new NotExistingException($"the drone with the id:{toUpdate.IdNumber} is not exist");
+            Drone drone = (from droneItem in DataSource.Drones
+                           where droneItem.IdNumber == toUpdate.IdNumber
+                           select droneItem).FirstOrDefault();
+            if (drone.IdNumber == default(string))
+                throw new NotExistingException($"the drone with the id:{toUpdate.IdNumber} is not exist");
+            var indexOfStation = DataSource.Drones.IndexOf(drone);
+            DataSource.Drones[indexOfStation] = toUpdate;
+            
         }
         #endregion
 
@@ -161,18 +156,14 @@ namespace Dal
 
         public void UpdateDroneCharge(DroneCharge toUpdate)
         {
-            for (int i = 0; i < DataSource.Charges.Count; i++)
-            {
-                if (DataSource.Charges[i].DroneId == toUpdate.DroneId)
-                {
-                    DroneCharge droneCharge = new DroneCharge();
-                    droneCharge.DroneId = toUpdate.DroneId;
-                    droneCharge.StationId = toUpdate.StationId;
-                    DataSource.Charges[i] = droneCharge;
-                    return;
-                }
-            }
-            throw new NotExistingException($"the charge slot with the dorne id:{toUpdate.DroneId} is not existing");
+            DroneCharge droneCharge = (from charge in DataSource.Charges
+                                       where charge.DroneId == toUpdate.DroneId
+                                       select charge).FirstOrDefault();
+            if (droneCharge.DroneId == default(string))
+                throw new NotExistingException($"the charge slot with the dorne id:{toUpdate.DroneId} is not existing");
+            var indexOfStation = DataSource.Charges.IndexOf(droneCharge);
+            DataSource.Charges[indexOfStation] = toUpdate;
+            
         }
         #endregion
 
@@ -196,8 +187,8 @@ namespace Dal
         public string AddParcel(Parcel parcel)
         {
             parcel.IdNumber = DataSource.Config.RunningNumber++.ToString();
-            if (DataSource.Parcels.Exists(d => d.IdNumber == parcel.IdNumber)==true)
-                throw new ExistingException($"the parcel with the id:{parcel.IdNumber} is already exist");
+            if (DataSource.Parcels.Exists(d => d.IdNumber == parcel.IdNumber) == true)
+                throw new ExistingException($"the parcel with the id: {parcel.IdNumber} is already exist");
             DataSource.Parcels.Add(parcel);
             return parcel.IdNumber;
         }
@@ -243,26 +234,15 @@ namespace Dal
 
         public void UpdateParcel(Parcel toUpdate)
         {
-            for (int i = 0; i < DataSource.Parcels.Count; i++)
-            {
-                if (DataSource.Parcels[i].IdNumber == toUpdate.IdNumber)
-                {
-                    Parcel parcel = new Parcel();
-                    parcel.ArrivingDroneTime = toUpdate.ArrivingDroneTime;
-                    parcel.Geter = toUpdate.Geter;
-                    parcel.Sender = toUpdate.Sender;
-                    parcel.CollectingDroneTime = toUpdate.CollectingDroneTime;
-                    parcel.CreateParcelTime = toUpdate.CreateParcelTime;
-                    parcel.DroneId = toUpdate.DroneId;
-                    parcel.IdNumber = toUpdate.IdNumber;
-                    parcel.MatchForDroneTime = toUpdate.MatchForDroneTime;
-                    parcel.Priority = toUpdate.Priority;
-                    parcel.Weight = toUpdate.Weight;
-                    DataSource.Parcels[i] = parcel;
-                    return;
-                }
-            }
-            throw new NotExistingException($"the parcel with the id:{toUpdate.IdNumber} is not exist");
+            Parcel parcel = (from parcelItem in DataSource.Parcels
+                             where parcelItem.IdNumber == toUpdate.IdNumber
+                             select parcelItem).FirstOrDefault();
+            if (parcel.IdNumber == default(string))
+                throw new NotExistingException($"the parcel with the id:{toUpdate.IdNumber} is not exist");
+            var indexOfStation = DataSource.Parcels.IndexOf(parcel);
+            DataSource.Parcels[indexOfStation] = toUpdate;
+
+           
         }
         #endregion
 
@@ -285,7 +265,7 @@ namespace Dal
 
         public void AddBaseStation(BaseStation baseStation)
         {
-            if (DataSource. Stations.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber != null)
+            if (DataSource.Stations.FirstOrDefault(d => d.IdNumber == baseStation.IdNumber).IdNumber != null)
                 throw new ExistingException($"the baseStation with the id:{baseStation.IdNumber} is already exist");
             DataSource.Stations.Add(baseStation);
         }
@@ -331,21 +311,14 @@ namespace Dal
 
         public void UpdateBaseStation(BaseStation toUpdate)
         {
-            for (int i = 0; i < DataSource.Stations.Count; i++)
-            {
-                if (DataSource.Stations[i].IdNumber == toUpdate.IdNumber)
-                {
-                    BaseStation baseStation = new BaseStation();
-                    baseStation.ChargeSlots = toUpdate.ChargeSlots;
-                    baseStation.Name = toUpdate.Name;
-                    baseStation.IdNumber = toUpdate.IdNumber;
-                    baseStation.Longitude = toUpdate.Longitude;
-                    baseStation.Latitude = toUpdate.Latitude;
-                    DataSource.Stations[i] = baseStation;
-                    return;
-                }
-            }
-            throw new NotExistingException($"the baseStation with the id:{toUpdate.IdNumber} is not exist");
+            BaseStation baseStation = (from station in DataSource.Stations
+                                       where station.IdNumber == toUpdate.IdNumber
+                                       select station).FirstOrDefault();
+            if (baseStation.IdNumber == default(string))
+                throw new NotExistingException($"the baseStation with the id:{toUpdate.IdNumber} is not exist");
+            var indexOfStation = DataSource.Stations.IndexOf(baseStation);
+            DataSource.Stations[indexOfStation] = toUpdate;
+            
         }
         #endregion
 
@@ -414,21 +387,14 @@ namespace Dal
 
         public void UpdateCustomer(Customer toUpdate)
         {
-            for (int i = 0; i < DataSource.Customers.Count; i++)
-            {
-                if (DataSource.Customers[i].IdNumber == toUpdate.IdNumber)
-                {
-                    Customer customer = new Customer();
-                    customer.IdNumber = toUpdate.IdNumber;
-                    customer.Name = toUpdate.Name;
-                    customer.Phone = toUpdate.Phone;
-                    customer.Longitude = toUpdate.Longitude;
-                    customer.Latitude = toUpdate.Latitude;
-                    DataSource.Customers[i] = customer;
-                    return;
-                }
-            }
-            throw new NotExistingException($"the customer with the id:{toUpdate.IdNumber} is not exist");
+            Customer customer = (from customerItem in DataSource.Customers
+                                 where customerItem.IdNumber == toUpdate.IdNumber
+                                 select customerItem).FirstOrDefault();
+            if (customer.IdNumber == default(string))
+                throw new NotExistingException($"the customer with the id:{toUpdate.IdNumber} is not exist");
+            var indexOfStation = DataSource.Customers.IndexOf(customer);
+            DataSource.Customers[indexOfStation] = toUpdate;
+           
         }
         #endregion
 
@@ -450,7 +416,7 @@ namespace Dal
 
         public void AddUser(User user)
         {
-            if (DataSource.Users.Exists(d => d.UserName == user.UserName)==true)
+            if (DataSource.Users.Exists(d => d.UserName == user.UserName) == true)
                 throw new ExistingException($"the user with the name:{user.UserName} is already exist");
             DataSource.Users.Add(user);
 
@@ -485,19 +451,14 @@ namespace Dal
 
         public void UpdateUser(User toUpdate)
         {
-            for (int i = 0; i < DataSource.Users.Count; i++)
-            {
-                if (DataSource.Users[i].UserName == toUpdate.UserName)
-                {
-                    User user = new User();
-                    user.UserName = toUpdate.UserName;
-                    user.UserPassword = toUpdate.UserPassword;
-                    user.isManager = toUpdate.isManager;
-                    DataSource.Users[i] = user;
-                    return;
-                }
-            }
-            throw new NotExistingException($"the user with the name:{toUpdate.UserName} is not exist");
+            User user = (from userItem in DataSource.Users
+                         where userItem.UserName == toUpdate.UserName
+                         select userItem).FirstOrDefault();
+            if (user.UserName == default(string))
+                throw new NotExistingException($"the user with the name:{toUpdate.UserName} is not exist");
+            var indexOfStation = DataSource.Users.IndexOf(user);
+            DataSource.Users[indexOfStation] = toUpdate;
+            
         }
         #endregion
         #region GetUsers

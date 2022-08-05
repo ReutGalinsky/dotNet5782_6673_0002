@@ -62,7 +62,7 @@ namespace BL
             int tempInteger;
             if (int.TryParse(droneToAdd.IdNumber, out tempInteger) == false)
                 throw new AddingProblemException($"The id {droneToAdd.IdNumber} of the drone is illegal");
-            if(tempInteger==0)
+            if (tempInteger == 0)
                 throw new AddingProblemException($"The id {droneToAdd.IdNumber} of the drone is illegal");
 
             try //assumption: drone need to get charging when it's being added
@@ -120,7 +120,7 @@ namespace BL
                 }
                 return drone;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new GettingProblemException(e.Message, e);
             }
@@ -172,7 +172,7 @@ namespace BL
             {
                 DroneSimulator simulator = new DroneSimulator(this, id, updatePl, checkStop);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ConnectionException($"error in the simulator: {e.Message}");
             }
@@ -206,7 +206,7 @@ namespace BL
                     return temp;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             { throw new GettingProblemException(e.Message, e); }
         }
         #endregion
@@ -284,7 +284,7 @@ namespace BL
                     return drone;
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 throw new AddingProblemException($"the drone number {id} is not correct, can't running this program");
             }

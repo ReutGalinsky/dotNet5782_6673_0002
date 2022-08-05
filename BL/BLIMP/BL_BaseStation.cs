@@ -52,9 +52,9 @@ namespace BL
                     return list;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new GettingProblemException(ex.Message,ex);
+                throw new GettingProblemException(ex.Message, ex);
             }
         }
         #endregion   
@@ -75,14 +75,15 @@ namespace BL
             {
                 throw new UpdatingException(e.Message, e);
             }
+
             BO.BaseStation baseStation = (BO.BaseStation)tempBaseStation.CopyPropertiesToNew(typeof(BO.BaseStation));
             baseStation.Location = tempBaseStation.GetLocation();
 
             if (Name != "") baseStation.Name = Name;
             int tempInteger = 0;
-            if (numberOfCharge != "" && (int.TryParse(numberOfCharge, out tempInteger) == false)||tempInteger<0)
+            if (numberOfCharge != "" && (int.TryParse(numberOfCharge, out tempInteger) == false) || tempInteger < 0)
                 throw new UpdatingException($"{numberOfCharge} is an illegal number for charging drones");
-               if(baseStation.Drones!=null && baseStation.Drones.Count()>tempInteger)
+            if (baseStation.Drones != null && baseStation.Drones.Count() > tempInteger)
                 throw new UpdatingException($"{numberOfCharge} is an illegal number for this base station");
             baseStation.ChargeSlots = tempInteger;
 
@@ -136,7 +137,7 @@ namespace BL
                            select item;
                 return list;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new GettingProblemException(e.Message, e);
             }
@@ -152,7 +153,7 @@ namespace BL
 
         private BO.DroneInCharge GetDroneInCharge(string droneId)
         {
-            var drone=(BO.DroneInCharge)Drones.FirstOrDefault(x => x.IdNumber == droneId).CopyPropertiesToNew(typeof(BO.DroneInCharge));
+            var drone = (BO.DroneInCharge)Drones.FirstOrDefault(x => x.IdNumber == droneId).CopyPropertiesToNew(typeof(BO.DroneInCharge));
             if (drone == null)
                 throw new GettingProblemException($"the drone with the id: {droneId} is not existing");
             return drone;
@@ -170,12 +171,12 @@ namespace BL
             {
                 lock (dal)
                 {
-                    BO.BaseStationToList b = (BO.BaseStationToList)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(BO.BaseStationToList));
-                    b.FullChargeSlots = (from item in dal.GetDroneCharges() where (item.StationId == id) select item).Count();
-                    return b;
+                    BO.BaseStationToList baseStation = (BO.BaseStationToList)dal.GetBaseStation(id).CopyPropertiesToNew(typeof(BO.BaseStationToList));
+                    baseStation.FullChargeSlots = (from item in dal.GetDroneCharges() where (item.StationId == id) select item).Count();
+                    return baseStation;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new GettingProblemException(e.Message, e);
             }

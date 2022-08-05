@@ -28,24 +28,21 @@ namespace BL
                     .OrderByDescending(p => (int)p.Priority)
                     .ThenByDescending(p => (int)p.Weight)
                     .ThenBy(p => dal.GetCustomer(p.Sender).GetLocation().DistanceTo(drone.Location));
-                foreach (var parcel in parcelQueue)
+                var chosenParcel = (from parcel in parcelQueue
+                                    where drone.Battery > batteryUssage(drone, parcel)
+                                    select parcel).FirstOrDefault();
+                if (chosenParcel == null)
+                    throw new UpdatingException($"cant find proper parcel for the drone with id {droneId}");
+                lock (dal)
                 {
-                    var usagee = batteryUssage(drone, parcel);
-                    if (drone.Battery >= usagee)
-                    {
-                        lock (dal)
-                        {
-                            drone.State = DroneState.shipping;
-                            drone.NumberOfParcel = parcel.IdNumber;
-                            DO.Parcel parcelDO = dal.GetParcel(parcel.IdNumber);
-                            parcelDO.DroneId = drone.IdNumber;
-                            parcelDO.MatchForDroneTime = DateTime.Now;
-                            dal.UpdateParcel(parcelDO);
-                        }
-                        return;
-                    }
+                    drone.State = DroneState.shipping;
+                    drone.NumberOfParcel = chosenParcel.IdNumber;
+                    DO.Parcel parcelDO = dal.GetParcel(chosenParcel.IdNumber);
+                    parcelDO.DroneId = drone.IdNumber;
+                    parcelDO.MatchForDroneTime = DateTime.Now;
+                    dal.UpdateParcel(parcelDO);
                 }
-                throw new UpdatingException($"cant find proper parcel for the drone with id {droneId}");
+                
             }
             catch (Exception e)
             { throw new ConnectionException(e.Message, e); }
@@ -104,11 +101,11 @@ namespace BL
             }
             try
             {
-            if (droneBO.State != DroneState.shipping)
-                throw new ConnectionException($"the drone with the id {id} is not shipping");
-            BO.Parcel parcel = GetParcel(droneBO.PassedParcel.IdNumber);
-            if (!(parcel.CollectingDroneTime != null && parcel.ArrivingDroneTime == null))
-                throw new ConnectionException("the parcel is not picking yet");
+                if (droneBO.State != DroneState.shipping)
+                    throw new ConnectionException($"the drone with the id {id} is not shipping");
+                BO.Parcel parcel = GetParcel(droneBO.PassedParcel.IdNumber);
+                if (!(parcel.CollectingDroneTime != null && parcel.ArrivingDroneTime == null))
+                    throw new ConnectionException("the parcel is not picking yet");
                 lock (dal)
                 {
                     drone.Location = GetCustomer(parcel.GeterCustomer.IdNumber).Location.GetLocation();

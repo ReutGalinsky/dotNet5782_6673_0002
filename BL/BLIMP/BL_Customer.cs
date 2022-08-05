@@ -57,18 +57,22 @@ namespace BL
             {
                 lock (dal)
                 {
-                    var list = from item in dal.GetCustomers() select (BO.CustomerToList)item.CopyPropertiesToNew(typeof(BO.CustomerToList));
-                    foreach (var item in list)
-                    {
-                        item.ParcelOnTheWay = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.pick);
-                        item.ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.supply);
-                        item.ParcelGet = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.supply);
-                        item.ParcelSendAndNotGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.pick);
-                    }
-                    return list;
+                    var customers = from item in dal.GetCustomers()
+                                    select new BO.CustomerToList()
+                                    {
+                                        IdNumber = item.IdNumber,
+                                        Name = item.Name,
+                                        ParcelGet = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.supply),
+                                        Phone = item.Phone,
+                                        ParcelOnTheWay = GetCustomer(item.IdNumber).ToCustomer.Count(x => x.State == ParcelState.pick),
+                                        ParcelSendAndGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.supply),
+                                        ParcelSendAndNotGet = GetCustomer(item.IdNumber).FromCustomer.Count(x => x.State == ParcelState.pick)
+                                    };
+
+                    return customers;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             { throw new GettingProblemException(e.Message, e); }
         }
         #endregion
@@ -136,7 +140,7 @@ namespace BL
                            select item;
                 return list;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new GettingProblemException(e.Message, e);
             }
@@ -182,6 +186,5 @@ namespace BL
             }
         }
         #endregion
-
     }
 }

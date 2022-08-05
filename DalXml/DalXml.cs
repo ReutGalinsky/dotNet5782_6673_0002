@@ -14,7 +14,7 @@ using System.Runtime.CompilerServices;
 
 namespace Dal
 {
-    public class DalXml:DalApi.IDal
+    public class DalXml : DalApi.IDal
     {
         #region singleton
         class Nested
@@ -22,7 +22,7 @@ namespace Dal
             static Nested() { }
             internal static readonly IDal instance = new DalXml();
         }
-        private DalXml() 
+        private DalXml()
         {
         }
         public static IDal Instance
@@ -45,19 +45,19 @@ namespace Dal
         {
             XElement droneRoot = XmlMethods.LoadFromXml(dronePath);
             var droneToAdd = (from droneItem in droneRoot.Elements()
-                                  where (droneItem.Element("IdNumber").Value == drone.IdNumber)
-                                  select droneItem).FirstOrDefault();
+                              where (droneItem.Element("IdNumber").Value == drone.IdNumber)
+                              select droneItem).FirstOrDefault();
             if (droneToAdd != null)
                 throw new DO.ExistingException("The Drone already exist in the system");
-            XElement newDrone = new XElement("Drone"
-                , new XElement("IdNumber", drone.IdNumber),
+            XElement newDrone = new XElement("Drone",
+                new XElement("IdNumber", drone.IdNumber),
                 new XElement("Model", drone.Model),
                 new XElement("MaxWeight", drone.MaxWeight.ToString()));
             droneRoot.Add(newDrone);
-            XmlMethods.SaveToXml(dronePath,droneRoot);
+            XmlMethods.SaveToXml(dronePath, droneRoot);
         }
         #endregion
-        
+
         #region GetDrone
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -69,10 +69,10 @@ namespace Dal
                               select droneItem).FirstOrDefault();
             if (droneToAdd == null)
                 throw new DO.NotExistingException("The Drone not exist in the system");
-            DO.Drone drone= new Drone();
+            DO.Drone drone = new Drone();
             drone.IdNumber = droneToAdd.Element("IdNumber").Value;
             drone.Model = droneToAdd.Element("Model").Value;
-            drone.MaxWeight = (DO.WeightCategories)Enum.Parse(typeof(DO.WeightCategories),droneToAdd.Element("MaxWeight").Value);
+            drone.MaxWeight = (DO.WeightCategories)Enum.Parse(typeof(DO.WeightCategories), droneToAdd.Element("MaxWeight").Value);
             return drone;
         }
         #endregion
@@ -83,8 +83,12 @@ namespace Dal
         {
             XElement droneRoot = XmlMethods.LoadFromXml(dronePath);
             var droneToAdd = (from droneItem in droneRoot.Elements()
-                              select new DO.Drone { IdNumber=droneItem.Element("IdNumber").Value, Model= droneItem.Element("Model").Value, 
-                                  MaxWeight= (DO.WeightCategories)Enum.Parse(typeof(DO.WeightCategories), droneItem.Element("MaxWeight").Value )});
+                              select new DO.Drone
+                              {
+                                  IdNumber = droneItem.Element("IdNumber").Value,
+                                  Model = droneItem.Element("Model").Value,
+                                  MaxWeight = (DO.WeightCategories)Enum.Parse(typeof(DO.WeightCategories), droneItem.Element("MaxWeight").Value)
+                              });
             return droneToAdd;
         }
         #endregion
@@ -132,8 +136,8 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public IEnumerable<Drone> GetAllDronesBy(Predicate<Drone> condition)
-    {
-        XElement droneRoot = XmlMethods.LoadFromXml(dronePath);
+        {
+            XElement droneRoot = XmlMethods.LoadFromXml(dronePath);
             var droneToAdd = (from droneItem in droneRoot.Elements()
                               let drone = new DO.Drone() { IdNumber = droneItem.Element("IdNumber").Value, Model = droneItem.Element("Model").Value, MaxWeight = (DO.WeightCategories)Enum.Parse(typeof(DO.WeightCategories), droneItem.Element("MaxWeight").Value) }
                               where (condition(drone))
@@ -150,10 +154,10 @@ namespace Dal
         {
 
             var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath);
-            if(listCharges.Exists(x=>x.DroneId==dronecharge.DroneId)==true)
+            if (listCharges.Exists(x => x.DroneId == dronecharge.DroneId) == true)
                 throw new ExistingException($"the charge slot with the drone id:{dronecharge.DroneId} is already exist");
             listCharges.Add(dronecharge);
-            XmlMethods.SaveListToXMLSerializer<DroneCharge>(listCharges,chargePath);
+            XmlMethods.SaveListToXMLSerializer<DroneCharge>(listCharges, chargePath);
         }
         #endregion
 
@@ -162,7 +166,7 @@ namespace Dal
 
         public DroneCharge GetDroneCharge(string id)
         {
-            var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath).FirstOrDefault(x=>x.DroneId == id);
+            var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath).FirstOrDefault(x => x.DroneId == id);
             if (listCharges.DroneId == null)
                 throw new NotExistingException($"the charge slot with the drone id:{id} is not exist");
             return listCharges;
@@ -201,19 +205,15 @@ namespace Dal
         public void UpdateDroneCharge(DroneCharge toUpdate)
         {
             var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath);
-            for (int i = 0; i < listCharges.Count; i++)
-            {
-                if (listCharges[i].DroneId == toUpdate.DroneId)
-                {
-                    DroneCharge droneCharge = new DroneCharge();
-                    droneCharge.DroneId = toUpdate.DroneId;
-                    droneCharge.StationId = toUpdate.StationId;
-                    listCharges[i] = droneCharge;
-                    XmlMethods.SaveListToXMLSerializer<DroneCharge>(listCharges, chargePath);
-                    return;
-                }
-            }
-            throw new NotExistingException($"the charge slot with the dorne id:{toUpdate.DroneId} is not existing");
+            DroneCharge droneCharge = (from charge in listCharges
+                                       where charge.DroneId == toUpdate.DroneId
+                                       select charge).FirstOrDefault();
+            if (droneCharge.DroneId == default(string))
+                throw new NotExistingException($"the charge slot with the dorne id:{toUpdate.DroneId} is not existing");
+            var indexOfStation = listCharges.IndexOf(droneCharge);
+            listCharges[indexOfStation] = toUpdate;
+            XmlMethods.SaveListToXMLSerializer<DroneCharge>(listCharges, chargePath);
+
         }
         #endregion
 
@@ -241,15 +241,15 @@ namespace Dal
             var runningNumber = configureRoot.Element("RunningNumber");
             parcel.IdNumber = runningNumber.Value;
             var listParcels = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath);
-            
-            if (listParcels.Exists(d => d.IdNumber == parcel.IdNumber)==true)
+
+            if (listParcels.Exists(d => d.IdNumber == parcel.IdNumber) == true)
             {
                 throw new ExistingException($"the parcel with the id:{parcel.IdNumber} is already exist");
             }
             listParcels.Add(parcel);
             XmlMethods.SaveListToXMLSerializer<Parcel>(listParcels, parcelPath);
             int run = int.Parse(runningNumber.Value);
-            runningNumber.Value = (run+1).ToString();
+            runningNumber.Value = (run + 1).ToString();
             configureRoot.Save(configurePath);
             return parcel.IdNumber;
         }
@@ -273,7 +273,7 @@ namespace Dal
         {
             var listParcels = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath);
             var Parcels = from item in listParcels
-                               select item;
+                          select item;
             return Parcels;
         }
         #endregion
@@ -298,27 +298,16 @@ namespace Dal
         public void UpdateParcel(Parcel toUpdate)
         {
             var listParcels = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath);
-            for (int i = 0; i < listParcels.Count; i++)
-            {
-                if (listParcels[i].IdNumber == toUpdate.IdNumber)
-                {
-                    Parcel parcel = new Parcel();
-                    parcel.ArrivingDroneTime = toUpdate.ArrivingDroneTime;
-                    parcel.Geter = toUpdate.Geter;
-                    parcel.Sender = toUpdate.Sender;
-                    parcel.CollectingDroneTime = toUpdate.CollectingDroneTime;
-                    parcel.CreateParcelTime = toUpdate.CreateParcelTime;
-                    parcel.DroneId = toUpdate.DroneId;
-                    parcel.IdNumber = toUpdate.IdNumber;
-                    parcel.MatchForDroneTime = toUpdate.MatchForDroneTime;
-                    parcel.Priority = toUpdate.Priority;
-                    parcel.Weight = toUpdate.Weight;
-                    listParcels[i] = parcel;
-                    XmlMethods.SaveListToXMLSerializer<Parcel>(listParcels, parcelPath);
-                    return;
-                }
-            }
-            throw new NotExistingException($"the parcel with the id:{toUpdate.IdNumber} is not existing");
+            Parcel parcel = (from parcelItem in listParcels
+                             where parcelItem.IdNumber == toUpdate.IdNumber
+                             select parcelItem).FirstOrDefault();
+            if (parcel.IdNumber == default(string))
+                throw new NotExistingException($"the parcel with the id:{toUpdate.IdNumber} is not existing");
+            var indexOfStation = listParcels.IndexOf(parcel);
+            listParcels[indexOfStation] = toUpdate;
+            XmlMethods.SaveListToXMLSerializer<Parcel>(listParcels, parcelPath);
+
+            
         }
         #endregion
 
@@ -330,7 +319,7 @@ namespace Dal
             var listParcels = XmlMethods.LoadListFromXMLSerializer<Parcel>(parcelPath);
             var Parcels = from item in listParcels
                           where condition(item)
-                               select item;
+                          select item;
             return Parcels;
         }
         #endregion
@@ -343,7 +332,7 @@ namespace Dal
         public void AddBaseStation(BaseStation baseStation)
         {
             var listBaseStation = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
-            if (listBaseStation.Exists(d => d.IdNumber == baseStation.IdNumber)==true)
+            if (listBaseStation.Exists(d => d.IdNumber == baseStation.IdNumber) == true)
             {
                 throw new ExistingException($"the base station with the id:{baseStation.IdNumber} is exist");
             }
@@ -371,7 +360,7 @@ namespace Dal
         {
             var listBaseStations = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
             var BaseStations = from item in listBaseStations
-                          select item;
+                               select item;
             return BaseStations;
         }
         #endregion
@@ -397,22 +386,15 @@ namespace Dal
         public void UpdateBaseStation(BaseStation toUpdate)
         {
             var listBaseStations = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
-            for (int i = 0; i < listBaseStations.Count; i++)
-            {
-                if (listBaseStations[i].IdNumber == toUpdate.IdNumber)
-                {
-                    BaseStation baseStation = new BaseStation();
-                    baseStation.ChargeSlots = toUpdate.ChargeSlots;
-                    baseStation.Name = toUpdate.Name;
-                    baseStation.IdNumber = toUpdate.IdNumber;
-                    baseStation.Longitude = toUpdate.Longitude;
-                    baseStation.Latitude = toUpdate.Latitude;
-                    listBaseStations[i] = baseStation;
-                    XmlMethods.SaveListToXMLSerializer<BaseStation>(listBaseStations, baseStationPath);
-                    return;
-                }
-            }
-            throw new NotExistingException($"the base station with the id:{toUpdate.IdNumber} is not existing");
+            BaseStation baseStation = (from station in listBaseStations
+                                       where station.IdNumber == toUpdate.IdNumber
+                                       select station).FirstOrDefault();
+            if (baseStation.IdNumber == default(string))
+                throw new NotExistingException($"the base station with the id:{toUpdate.IdNumber} is not existing");
+            var indexOfStation = listBaseStations.IndexOf(baseStation);
+            listBaseStations[indexOfStation] = toUpdate;
+            XmlMethods.SaveListToXMLSerializer<BaseStation>(listBaseStations, baseStationPath);
+
         }
         #endregion
 
@@ -423,7 +405,7 @@ namespace Dal
             var listBaseStation = XmlMethods.LoadListFromXMLSerializer<BaseStation>(baseStationPath);
             var baseStations = from item in listBaseStation
                                where condition(item)
-                          select item;
+                               select item;
             return baseStations;
         }
         #endregion
@@ -439,7 +421,7 @@ namespace Dal
             if (listCustomers.FirstOrDefault(d => d.IdNumber == customer.IdNumber).IdNumber != null)
                 throw new ExistingException($"the charge slot with the drone id:{customer.IdNumber} is already exist");
             listCustomers.Add(customer);
-            XmlMethods.SaveListToXMLSerializer<Customer>(listCustomers, customerPath);    
+            XmlMethods.SaveListToXMLSerializer<Customer>(listCustomers, customerPath);
         }
         #endregion
 
@@ -462,7 +444,7 @@ namespace Dal
         {
             var listCustomers = XmlMethods.LoadListFromXMLSerializer<Customer>(customerPath);
             var Customer = from item in listCustomers
-                               select item;
+                           select item;
             return Customer;
         }
         #endregion
@@ -487,22 +469,16 @@ namespace Dal
         public void UpdateCustomer(Customer toUpdate)
         {
             var listCustomers = XmlMethods.LoadListFromXMLSerializer<Customer>(customerPath);
-            for (int i = 0; i < listCustomers.Count; i++)
-            {
-                if (listCustomers[i].IdNumber == toUpdate.IdNumber)
-                {
-                    Customer customer = new Customer();
-                    customer.IdNumber = toUpdate.IdNumber;
-                    customer.Name = toUpdate.Name;
-                    customer.Phone = toUpdate.Phone;
-                    customer.Longitude = toUpdate.Longitude;
-                    customer.Latitude = toUpdate.Latitude;
-                    listCustomers[i] = customer;
-                    XmlMethods.SaveListToXMLSerializer<Customer>(listCustomers, customerPath);
-                    return;
-                }
-            }
-            throw new NotExistingException($"the customer with the id:{toUpdate.IdNumber} is not existing");
+            Customer customer = (from customerItem in listCustomers
+                                 where customerItem.IdNumber == toUpdate.IdNumber
+                                 select customerItem).FirstOrDefault();
+            if (customer.IdNumber == default(string))
+                throw new NotExistingException($"the customer with the id:{toUpdate.IdNumber} is not existing");
+            var indexOfStation = listCustomers.IndexOf(customer);
+            listCustomers[indexOfStation] = toUpdate;
+            XmlMethods.SaveListToXMLSerializer<Customer>(listCustomers, customerPath);
+
+           
         }
         #endregion
 
@@ -513,8 +489,8 @@ namespace Dal
         {
             var listCustomers = XmlMethods.LoadListFromXMLSerializer<Customer>(customerPath);
             var customers = from item in listCustomers
-                               where condition(item)
-                               select item;
+                            where condition(item)
+                            select item;
             return customers;
         }
         #endregion
@@ -561,20 +537,15 @@ namespace Dal
         public void UpdateUser(User toUpdate)
         {
             var listUsers = XmlMethods.LoadListFromXMLSerializer<User>(userPath);
-            for (int i = 0; i < listUsers.Count; i++)
-            {
-                if (listUsers[i].UserName == toUpdate.UserName)
-                {
-                    User user = new User();
-                    user.UserName = toUpdate.UserName;
-                    user.UserPassword = toUpdate.UserPassword;
-                    user.isManager = toUpdate.isManager;
-                    listUsers[i] = user;
-                    XmlMethods.SaveListToXMLSerializer<User>(listUsers, userPath);
-                    return;
-                }
-            }
-            throw new NotExistingException($"the user with the user-name:{toUpdate.UserName} is not existing");
+            User user = (from userItem in listUsers
+                         where userItem.UserName == toUpdate.UserName
+                         select userItem).FirstOrDefault();
+            if (user.UserName == default(string))
+                throw new NotExistingException($"the customer with the id:{toUpdate.UserName} is not existing");
+            var indexOfStation = listUsers.IndexOf(user);
+            listUsers[indexOfStation] = toUpdate;
+            XmlMethods.SaveListToXMLSerializer<User>(listUsers, userPath);
+
         }
         #endregion
         #region GetUsers
@@ -595,8 +566,8 @@ namespace Dal
         {
             var listUsers = XmlMethods.LoadListFromXMLSerializer<User>(userPath);
             var user = from item in listUsers
-                            where condition(item)
-                            select item;
+                       where condition(item)
+                       select item;
             return user;
         }
         #endregion
@@ -611,7 +582,7 @@ namespace Dal
         {
             double[] arr = new double[5];
             XElement configureRoot = XmlMethods.LoadFromXml(configurePath);
-            arr[0]= double.Parse(configureRoot.Element("Available").Value);
+            arr[0] = double.Parse(configureRoot.Element("Available").Value);
             arr[1] = double.Parse(configureRoot.Element("Heavy").Value);
             arr[2] = double.Parse(configureRoot.Element("Light").Value);
             arr[3] = double.Parse(configureRoot.Element("Medium").Value);

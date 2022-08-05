@@ -12,29 +12,29 @@ namespace DO
     public struct Customer
     {
         /// <summary>
-        /// the id number of the customer
+        /// The id number of the customer
         /// </summary>
         public string IdNumber { get; set; }
         /// <summary>
-        /// the name of the customer
+        /// The name of the customer
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// the phone of the customer
+        /// The phone of the customer
         /// </summary>
         public string Phone { get; set; }
         /// <summary>
-        /// the latitude of the customer
+        /// The latitude of the customer
         /// </summary>
         public double Latitude { get; set; }
         /// <summary>
-        /// the longitude of the customer
+        /// The longitude of the customer
         /// </summary>
         public double Longitude { get; set; }
 
         public override string ToString()
         {
-            return string.Format($@"the customer {Name} with the id of {IdNumber}
+            return string.Format($@"The customer {Name} with the id of {IdNumber}
 phone num. {Phone}
 Address:
 Longitude: {Longitude} Latitude: {Latitude}");

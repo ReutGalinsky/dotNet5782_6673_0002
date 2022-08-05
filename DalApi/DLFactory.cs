@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
+//Not our code
+
 namespace DalApi
 {
     public static class DLFactory

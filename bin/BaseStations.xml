@@ -3,56 +3,56 @@
   <BaseStation>
     <IdNumber>17038</IdNumber>
     <Name>Tel Aviv- Savidor</Name>
-    <ChargeSlots>15</ChargeSlots>
+    <ChargeSlots>13</ChargeSlots>
     <Latitude>32.082</Latitude>
     <Longitude>34.798</Longitude>
   </BaseStation>
   <BaseStation>
     <IdNumber>2048</IdNumber>
     <Name>Rehovot</Name>
-    <ChargeSlots>5</ChargeSlots>
+    <ChargeSlots>2</ChargeSlots>
     <Latitude>31.882</Latitude>
     <Longitude>34.804</Longitude>
   </BaseStation>
   <BaseStation>
     <IdNumber>37358</IdNumber>
     <Name>Beer Sheva- University</Name>
-    <ChargeSlots>9</ChargeSlots>
+    <ChargeSlots>4</ChargeSlots>
     <Latitude>31.256</Latitude>
     <Longitude>34.796</Longitude>
   </BaseStation>
   <BaseStation>
     <IdNumber>10452</IdNumber>
     <Name>Eilat- 'Big Center'</Name>
-    <ChargeSlots>3</ChargeSlots>
+    <ChargeSlots>12</ChargeSlots>
     <Latitude>29.566</Latitude>
     <Longitude>34.959</Longitude>
   </BaseStation>
   <BaseStation>
     <IdNumber>5048</IdNumber>
     <Name>Jerusalem-Central Station</Name>
-    <ChargeSlots>15</ChargeSlots>
+    <ChargeSlots>12</ChargeSlots>
     <Latitude>31.787</Latitude>
     <Longitude>35.202</Longitude>
   </BaseStation>
   <BaseStation>
     <IdNumber>676</IdNumber>
     <Name>Ariel- University</Name>
-    <ChargeSlots>4</ChargeSlots>
+    <ChargeSlots>0</ChargeSlots>
     <Latitude>32.102</Latitude>
     <Longitude>35.208</Longitude>
   </BaseStation>
   <BaseStation>
     <IdNumber>2053</IdNumber>
     <Name>Beit She'an</Name>
-    <ChargeSlots>9</ChargeSlots>
+    <ChargeSlots>4</ChargeSlots>
     <Latitude>32.495</Latitude>
     <Longitude>34.505</Longitude>
   </BaseStation>
   <BaseStation>
     <IdNumber>654</IdNumber>
     <Name>Jerusalem</Name>
-    <ChargeSlots>6</ChargeSlots>
+    <ChargeSlots>2</ChargeSlots>
     <Latitude>30</Latitude>
     <Longitude>35</Longitude>
   </BaseStation>
