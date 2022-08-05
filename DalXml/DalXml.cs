@@ -572,6 +572,25 @@ namespace Dal
         }
         #endregion
 
+        #region Clear Drones Charges
+        public void ClearDroneCharges()
+        {
+            var listCharges = XmlMethods.LoadListFromXMLSerializer<DroneCharge>(chargePath);
+            var listBaseStations = from drone in listCharges
+                                   select GetBaseStation(drone.StationId);
+        
+            foreach (var station in listBaseStations)
+            {
+                var new_station= station;
+                new_station.ChargeSlots++;
+                UpdateBaseStation(new_station);
+            }
+            listCharges.Clear();
+            XmlMethods.SaveListToXMLSerializer<DroneCharge>(listCharges, chargePath);
+        }
+        #endregion
+
+
 
         //*******electricity********
 

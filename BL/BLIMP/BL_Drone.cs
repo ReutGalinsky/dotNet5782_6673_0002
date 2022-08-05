@@ -40,6 +40,7 @@ namespace BL
             _light = arr[2];
             _medium = arr[3];
             _speed = arr[4];
+            dal.ClearDroneCharges();
             foreach (var item in dal.GetDrones())
             {
                 try

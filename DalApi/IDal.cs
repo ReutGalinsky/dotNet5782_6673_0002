@@ -207,6 +207,11 @@ namespace DalApi
         /// <param name="condition">the condition</param>
         /// <returns>collection of the correct base stations</returns>
         public IEnumerable<BaseStation> GetAllBaseStationsBy(Predicate<BaseStation> condition);
-       
+        /// <summary>
+        /// Clearing the drones charge in case they remain
+        /// from the previous run.
+        /// </summary>
+        public void ClearDroneCharges() { }
+
     }
 }
