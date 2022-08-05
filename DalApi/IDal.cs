@@ -209,7 +209,7 @@ namespace DalApi
         public IEnumerable<BaseStation> GetAllBaseStationsBy(Predicate<BaseStation> condition);
         /// <summary>
         /// Clearing the drones charge in case they remain
-        /// from the previous run.
+        /// from previous run.
         /// </summary>
         public void ClearDroneCharges() { }
 

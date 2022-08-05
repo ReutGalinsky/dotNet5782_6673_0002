@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace PL
-{    public partial class Account : Window
+{
+    public partial class Account : Window
     {
         public Account(BLApi.IBL b)
         {
@@ -77,7 +78,6 @@ namespace PL
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-
         }
     }
 }

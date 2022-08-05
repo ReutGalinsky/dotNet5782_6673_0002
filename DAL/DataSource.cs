@@ -58,6 +58,7 @@ namespace Dal
             Customers.Add(new Customer() { IdNumber = "10", Latitude = 31.8, Longitude = 34.7, Name = "haim", Phone = "05021481" });
             Customers.Add(new Customer() { IdNumber = "11", Latitude = 29.6, Longitude = 34.8, Name = "david", Phone = "059465842" });
             Customers.Add(new Customer() { IdNumber = "12", Latitude = 30.6, Longitude = 34.8, Name = "ben", Phone = "05789541" });
+            Customers.Add(new Customer() { IdNumber = "11235813", Latitude = 30.6, Longitude = 34.8, Name = "ben", Phone = "05789541" });
             Parcels.Add(new Parcel()
             {
                 IdNumber = Config.RunningNumber++.ToString(),
@@ -119,8 +120,8 @@ namespace Dal
             Users.Add(new User()
             {
                 isManager = true,
-                UserName = "reut",
-                UserPassword = "reutreut",
+                UserName = "nurit",
+                UserPassword = "nuritnurit",
             }); Users.Add(new User()
             {
                 isManager = true,
@@ -129,8 +130,8 @@ namespace Dal
             }); Users.Add(new User()
             {
                 isManager = false,
-                UserName = "8",
-                UserPassword = "tcptcp",
+                UserName = "11235813",
+                UserPassword = "fibonacci",
             });
 
             #endregion

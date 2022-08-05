@@ -26,7 +26,7 @@ namespace PL.Pages
                 customer = bl.GetCustomer(i);
             }
             catch (Exception)
-            { MessageBox.Show("Error in loading the user, please try again later");return; }
+            { MessageBox.Show("Error in loading the user, please try again later"); return; }
             Id.DataContext = customer;
             Phone.DataContext = customer;
             Name.DataContext = customer;
@@ -40,9 +40,10 @@ namespace PL.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
-                {
+            {
                 if (Name.Text == customer.Name && Phone.Text == customer.Phone)
-                { MessageBox.Show("oops... it looks like you entered the same details");
+                {
+                    MessageBox.Show("oops... it looks like you entered the same details");
                     edit.Visibility = Visibility.Visible;
                     Name.IsEnabled = false;
                     Phone.IsEnabled = false;

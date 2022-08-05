@@ -28,11 +28,12 @@ namespace PL.Pages
             {
                 Geters.DataContext = bl.GetAllCustomersBy(x => x.IdNumber != i);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("Error in the customer's loading, please try again later");
             }
         }
+
         private BLApi.IBL bl;
         private string id;
         public event EventHandler updateList;
@@ -61,4 +62,4 @@ namespace PL.Pages
     }
 }
 
-    
+

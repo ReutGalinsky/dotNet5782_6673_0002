@@ -12,6 +12,7 @@ namespace BL
 {
     static class ToolsBl
     {
+        //-----------Imported Code (not our)-----------------
 
         //copy elements of BO to DO and vice versa
         public static void CopyPropertiesTo<T, S>(this S from, T to)
@@ -26,6 +27,8 @@ namespace BL
                     propTo.SetValue(to, value);//insert the value to the suitable property
             }
         }
+        //-----------Imported Code (not our)-----------------
+
         public static object CopyPropertiesToNew<S>(this S from, Type type)//get the typy we want to copy to 
         {
             object to = Activator.CreateInstance(type); // new object of the Type
@@ -94,6 +97,7 @@ namespace BL
 
             return new Location { Latitude = latitude, Longitude = longitude };
         }
+        //-----------Imported Code (not our)-----------------
 
         #region DistanceTo
         /// <summary>
@@ -114,6 +118,8 @@ namespace BL
             return distance * 1.609344;
         }
         #endregion
+        //-----------Imported Code (not our)-----------------
+
         internal static T Clone<T>(this T original)
         {
             T copyToObject = (T)Activator.CreateInstance(original.GetType());
