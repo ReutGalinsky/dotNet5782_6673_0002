@@ -36,13 +36,8 @@
 		<isManager>false</isManager>
 	</User>
 	<User>
-		<UserName>789</UserName>
-		<UserPassword>789789</UserPassword>
-		<isManager>false</isManager>
-	</User>
-	<User>
 		<UserName>555</UserName>
-		<UserPassword>1357745036</UserPassword>
+		<UserPassword>1357745</UserPassword>
 		<isManager>false</isManager>
 	</User>
 	<User>

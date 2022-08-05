@@ -33,7 +33,8 @@ namespace PL.Pages
                     parcels.Add(s);
             }
             catch (Exception)
-            { MessageBox.Show("Error in loading the parcels, please try again later"); }
+            { MessageBox.Show("Error in loading the parcels, please try again later"); 
+             }
             Delivery.DataContext = parcels;
             update += updated;
         }

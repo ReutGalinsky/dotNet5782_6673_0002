@@ -159,11 +159,91 @@
     <IdNumber>67</IdNumber>
     <Sender>222</Sender>
     <Geter>11235813</Geter>
+    <DroneId>2917</DroneId>
     <Weight>Light</Weight>
     <Priority>Regular</Priority>
     <CreateParcelTime>2022-08-05T16:40:12.8720731+03:00</CreateParcelTime>
+    <MatchForDroneTime>2022-08-05T18:02:40.7651104+03:00</MatchForDroneTime>
+    <CollectingDroneTime>2022-08-05T18:02:41.4658959+03:00</CollectingDroneTime>
+    <ArrivingDroneTime>2022-08-05T18:02:48.4029243+03:00</ArrivingDroneTime>
+  </Parcel>
+  <Parcel>
+    <IdNumber>68</IdNumber>
+    <Sender>13571113</Sender>
+    <Geter>622</Geter>
+    <Weight>Light</Weight>
+    <Priority>Regular</Priority>
+    <CreateParcelTime>2022-08-05T17:49:10.714642+03:00</CreateParcelTime>
     <MatchForDroneTime xsi:nil="true" />
     <CollectingDroneTime xsi:nil="true" />
     <ArrivingDroneTime xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <IdNumber>70</IdNumber>
+    <Sender>13571113</Sender>
+    <Geter>123</Geter>
+    <DroneId>500</DroneId>
+    <Weight>Middle</Weight>
+    <Priority>Emergency</Priority>
+    <CreateParcelTime>2022-08-05T17:50:09.2097117+03:00</CreateParcelTime>
+    <MatchForDroneTime>2022-08-05T18:01:06.5260203+03:00</MatchForDroneTime>
+    <CollectingDroneTime xsi:nil="true" />
+    <ArrivingDroneTime xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <IdNumber>71</IdNumber>
+    <Sender>4123</Sender>
+    <Geter>123</Geter>
+    <Weight>Light</Weight>
+    <Priority>Regular</Priority>
+    <CreateParcelTime>2022-08-05T17:50:57.6659155+03:00</CreateParcelTime>
+    <MatchForDroneTime xsi:nil="true" />
+    <CollectingDroneTime xsi:nil="true" />
+    <ArrivingDroneTime xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <IdNumber>72</IdNumber>
+    <Sender>123</Sender>
+    <Geter>222</Geter>
+    <Weight>Heavy</Weight>
+    <Priority>speed</Priority>
+    <CreateParcelTime>2022-08-05T17:51:47.7238268+03:00</CreateParcelTime>
+    <MatchForDroneTime xsi:nil="true" />
+    <CollectingDroneTime xsi:nil="true" />
+    <ArrivingDroneTime xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <IdNumber>73</IdNumber>
+    <Sender>555</Sender>
+    <Geter>4123</Geter>
+    <Weight>Light</Weight>
+    <Priority>Regular</Priority>
+    <CreateParcelTime>2022-08-05T17:56:01.2325367+03:00</CreateParcelTime>
+    <MatchForDroneTime xsi:nil="true" />
+    <CollectingDroneTime xsi:nil="true" />
+    <ArrivingDroneTime xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <IdNumber>74</IdNumber>
+    <Sender>555</Sender>
+    <Geter>315</Geter>
+    <Weight>Light</Weight>
+    <Priority>Regular</Priority>
+    <CreateParcelTime>2022-08-05T17:56:18.2620744+03:00</CreateParcelTime>
+    <MatchForDroneTime xsi:nil="true" />
+    <CollectingDroneTime xsi:nil="true" />
+    <ArrivingDroneTime xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <IdNumber>75</IdNumber>
+    <Sender>555</Sender>
+    <Geter>222</Geter>
+    <DroneId>2917</DroneId>
+    <Weight>Middle</Weight>
+    <Priority>speed</Priority>
+    <CreateParcelTime>2022-08-05T17:56:46.5405419+03:00</CreateParcelTime>
+    <MatchForDroneTime>2022-08-05T18:01:35.079668+03:00</MatchForDroneTime>
+    <CollectingDroneTime>2022-08-05T18:02:16.9398065+03:00</CollectingDroneTime>
+    <ArrivingDroneTime>2022-08-05T18:02:38.265837+03:00</ArrivingDroneTime>
   </Parcel>
 </Array>

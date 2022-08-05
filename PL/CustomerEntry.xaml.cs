@@ -45,7 +45,7 @@ namespace PL
                 if(User.isManager==true)
                 {
                     MessageBox.Show($"There is no customer with the id of {user.Text}");
-
+                    return;
                 }
                 if (User.UserPassword == password.Password)
                 {

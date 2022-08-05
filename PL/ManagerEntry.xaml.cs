@@ -43,7 +43,7 @@ namespace PL
                 var User = bl.GetUser(user.Text);
                 if(User.isManager==false)
                 {
-                    MessageBox.Show($"There is no manager with the id of {user.Text}");
+                    MessageBox.Show($"There is no manager with the name of {user.Text}");
                     return;
                 }
                 if (User.UserPassword == password.Password)
@@ -59,7 +59,7 @@ namespace PL
             }
             catch (Exception )
             {
-                MessageBox.Show($"There is no manager with the id of {user.Text}");
+                MessageBox.Show($"There is no manager with the name of {user.Text}");
             }
         }
         private void move(object sender, MouseButtonEventArgs e)

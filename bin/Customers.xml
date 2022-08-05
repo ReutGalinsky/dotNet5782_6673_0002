@@ -16,7 +16,7 @@
   </Customer>
   <Customer>
     <IdNumber>696</IdNumber>
-    <Name>David Hamelech</Name>
+    <Name>David chen</Name>
     <Phone>0547854212</Phone>
     <Latitude>31.442</Latitude>
     <Longitude>34.575</Longitude>
@@ -37,7 +37,7 @@
   </Customer>
   <Customer>
     <IdNumber>222</IdNumber>
-    <Name>Avraham Avinu</Name>
+    <Name>Avraham</Name>
     <Phone>0578442177</Phone>
     <Latitude>32.778</Latitude>
     <Longitude>35.007</Longitude>
